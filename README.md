@@ -8,11 +8,11 @@ First thing you will need is to install [Zephir](https://docs.zephir-lang.com/0.
 
 Now open your favourite terminal/console and clone the repo.
 ```bash
-git clone https://ironet.kytschi.com/kytschi/kytschBASIC.git
+git clone https://github.com/kytschi/kytschBASIC.git
 
 OR
 
-git clone ssh://git@ironet.kytschi.com:2222/kytschi/kytschBASIC.git
+git clone git@github.com:kytschi/kytschBASIC.git
 ```
 
 Building the kytschBASIC PHP module.
