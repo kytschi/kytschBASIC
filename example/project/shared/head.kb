@@ -1,0 +1,7 @@
+CHARSET "UTF-8"
+DESCRIPTION "This is a kytschBASIC example"
+KEYWORDS "kytschBASIC, BASIC, web BASIC"
+AUTHOR "Mike Welsh"
+VIEWPORT "width=device-width, initial-scale=1.0"
+FAVICON "/kytschi/imgs/favicon.ico","64x64"
+PALETTE "kytschi"

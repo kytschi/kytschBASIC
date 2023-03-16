@@ -1,0 +1,72 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "SELECT statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "SELECT","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "SELECT conditional statement."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT iLoop=10
+SPRINT WHILE iLoop>0
+	SPRINT SELECT iLoop
+		SPRINT CASE 2
+			SPRINT PRINT iLoop
+			SPRINT LINE BREAK
+		SPRINT CASE 4
+			SPRINT PRINT iLoop
+			SPRINT LINE BREAK
+	SPRINT END SELECT
+	SPRINT LET iLoop=iLoop-1
+SPRINT WEND
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24 kb-code-block"
+					iLoop=10
+					WHILE iLoop>0
+						SELECT iLoop
+							CASE 2
+								PRINT iLoop
+								LINE BREAK
+							CASE 4
+								PRINT iLoop
+								LINE BREAK
+						END SELECT
+						LET iLoop=iLoop-1
+					WEND
+				DIV CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/installation#configuration"
+						PRINT "configuration"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/IF"
+						PRINT "IF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/WHILE"
+						PRINT "WHILE"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

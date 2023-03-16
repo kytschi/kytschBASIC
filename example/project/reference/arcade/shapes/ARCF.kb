@@ -1,0 +1,241 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "ARCF statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "ARCF","heading-command basic"
+					LINE BREAK
+					PRINT "X, Y, START ANGLE, END ANGLE, RADIUS, STYLE","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "The ability to draw an filled arc on a bitmap and display it on screen as an image."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT INCLUDE arcade
+RGB 0,0,0
+BITMAP 0,0,640,480
+	RGB 255,0,0
+	ARCF 180,190,20,310,140
+
+	ARC 390,180,180,360,100
+	LINE 340,181,340,230
+	LINE 440,181,440,230
+	ARC 350,230,360,180,20
+	ARC 370,230,180,360,20
+	ARC 390,230,360,180,20
+	ARC 410,230,180,360,20
+	ARC 430,230,360,180,20
+
+	RGB 255,255,255
+	CIRCLEF 385,170,20
+	CIRCLEF 415,170,20
+
+	RGB 0,0,0
+	CIRCLEF 385,170,10
+	CIRCLEF 415,170,10
+BITMAP CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				RGB 0,0,0
+				BITMAP 0,0,640,480
+					RGB 255,0,0
+					ARCF 180,190,20,310,140
+
+					ARC 390,180,180,360,100
+					LINE 340,181,340,230
+					LINE 440,181,440,230
+					ARC 350,230,360,180,20
+					ARC 370,230,180,360,20
+					ARC 390,230,360,180,20
+					ARC 410,230,180,360,20
+					ARC 430,230,360,180,20
+
+					RGB 255,255,255
+					CIRCLEF 385,170,20
+					CIRCLEF 415,170,20
+
+					RGB 0,0,0
+					CIRCLEF 385,170,10
+					CIRCLEF 415,170,10
+				BITMAP CLOSE
+				HEADING 4
+					PRINT "Parameters"
+				HEADING CLOSE
+				TABLE
+					THEAD
+						TROW
+							THEADCELL "140px"
+								PRINT "Parameter"
+							THEADCELL CLOSE
+							THEADCELL "200px"
+								PRINT "Type"
+							THEADCELL CLOSE
+							THEADCELL
+								PRINT "Description"
+							THEADCELL CLOSE
+						TROW CLOSE
+					THEAD CLOSE
+					TBODY
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "X"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "X position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "Y"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Y position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "START ANGLE"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Start angle of the arc, can have negative values"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "END ANGLE"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "End angle of the arc, can have negative values"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "RADIUS"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Radius of the arc"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							THEADCELL ,"table-parameter",3
+								PRINT "Optional"
+							THEADCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "STYLE"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "PIE = 0 (default)"
+								LINE BREAK
+								PRINT "CHORD = 1"
+								LINE BREAK
+								PRINT "NOFILL = 2"
+								LINE BREAK
+								PRINT "EDGED = 4"
+							TCELL CLOSE
+						TROW CLOSE
+					TBODY CLOSE
+				TABLE CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAP"
+						PRINT "BITMAP"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAPFONT"
+						PRINT "BITMAPFONT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAPTEXT"
+						PRINT "BITMAPTEXT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BOX"
+						PRINT "BOX"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BOXF"
+						PRINT "BOXF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ELLIPSE"
+						PRINT "ELLIPSE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ELLIPSEF"
+						PRINT "ELLIPSEF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/globals"
+						PRINT "Globals"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/RGB"
+						PRINT "RGB"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/SCREEN"
+						PRINT "SCREEN"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

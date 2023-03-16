@@ -1,0 +1,52 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "LCASE statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "LCASE | LCASE$","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Transform a string to lowercase."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+LCASE "Hello World!"
+PRINT LCASE$("Hello World!")
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+hello world!
+hello world!
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/CPRINT"
+						PRINT "CPRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/PRINT"
+						PRINT "PRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/UCASE"
+						PRINT "UCASE"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

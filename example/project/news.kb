@@ -1,0 +1,24 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "The latest on kytschBASIC | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "News about "
+					PRINT "kytsch","kytsch"
+					PRINT "BASIC","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Todo"
+				SWRITE CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

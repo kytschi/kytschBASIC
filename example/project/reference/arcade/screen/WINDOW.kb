@@ -1,0 +1,231 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "WINDOW statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "WINDOW","heading-command basic"
+					LINE BREAK
+					PRINT "ID, TITLE, (X1,Y1)-(X2,Y2), TYPE, SCREEN ID","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Creates a window on screen."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT INCLUDE arcade
+RGB 0,0,0
+BITMAP 0,0,640,480
+	RGB 255,0,0
+
+	LINE 120,120,120,200
+	LINE 180,120,180,200
+	LINE 120,160,180,160
+
+	LINE 200,160,200,165
+	LINE 200,170,200,200
+
+	LINE 230,120,230,180
+	CIRCLE 230,195,10
+
+	CIRCLE 400,180,220
+
+	CIRCLE 425,150,40
+	CIRCLE 375,150,40
+
+	ARC 400,160,25,155,150
+BITMAP CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				RGB 0,0,0
+				BITMAP 0,0,640,480
+					RGB 255,0,0
+
+					LINE 120,120,120,200
+					LINE 180,120,180,200
+					LINE 120,160,180,160
+
+					LINE 200,160,200,165
+					LINE 200,170,200,200
+
+					LINE 230,120,230,180
+					CIRCLE 230,195,10
+
+					CIRCLE 400,180,220
+
+					CIRCLE 425,150,40
+					CIRCLE 375,150,40
+
+					ARC 400,160,25,155,150
+				BITMAP CLOSE
+				HEADING 4
+					PRINT "Parameters"
+				HEADING CLOSE
+				TABLE
+					THEAD
+						TROW
+							THEADCELL "140px"
+								PRINT "Parameter"
+							THEADCELL CLOSE
+							THEADCELL "200px"
+								PRINT "Type"
+							THEADCELL CLOSE
+							THEADCELL
+								PRINT "Description"
+							THEADCELL CLOSE
+						TROW CLOSE
+					THEAD CLOSE
+					TBODY
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "ID"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer/string"
+							TCELL CLOSE
+							TCELL
+								PRINT "ID to identify the window"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							THEADCELL ,"table-parameter",3
+								PRINT "Optional"
+							THEADCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "TITLE"
+							TCELL CLOSE
+							TCELL
+								PRINT "string"
+							TCELL CLOSE
+							TCELL
+								PRINT "Title of the window"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "X1"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "X1 position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "Y1"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Y1 position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "X2"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "X2 position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "Y2"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Y2 position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "TYPE"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Type of the window"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "SCREEN ID"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer/string"
+							TCELL CLOSE
+							TCELL
+								PRINT "ID of the screen the window is to be attached to"
+							TCELL CLOSE
+						TROW CLOSE
+					TBODY CLOSE
+				TABLE CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ARCF"
+						PRINT "ARCF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAPFONT"
+						PRINT "BITMAPFONT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAPTEXT"
+						PRINT "BITMAPTEXT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/globals"
+						PRINT "Globals"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/SCREEN"
+						PRINT "SCREEN"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

@@ -1,0 +1,59 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "Arcade | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "Arcade"
+				HEADING CLOSE
+				SWRITE
+					PRINT "To use the arcade library you need to include it. It is recommended that you include this in the HEAD."
+				SWRITE CLOSE
+				CPRINT
+HEAD
+SPRINT INCLUDE arcade
+HEAD CLOSE
+				CPRINT CLOSE
+				HEADING 3
+					LINE BREAK
+					PRINT "Example of what arcade can do"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Display width: "
+					DISPWIDTH
+					PRINT "px"
+					LINE BREAK
+					PRINT "Display height: "
+					DISPHEIGHT
+					PRINT "px"
+				SWRITE CLOSE
+				SCREEN "the-traveller",800,600
+					WINDOW "intro"
+						RGB 0,0,0
+						BITMAP 0,0,800,400
+							RGB 255,0,0
+							BITMAPFONT "$ROOT_FOLDER/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
+							BITMAPTEXT 220,150,32,0,75,"The Traveller"
+							BITMAPTEXT 235,320,18,0,75,"Press any key to start"
+						BITMAP CLOSE
+					WINDOW CLOSE
+					WINDOW "input"
+						RGB 0,0,0
+						BITMAP 0,0,800,200
+							RGB 255,0,0
+							LINE 0,0,800,0
+						BITMAP CLOSE
+					WINDOW CLOSE
+				SCREEN CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

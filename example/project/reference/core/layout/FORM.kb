@@ -1,0 +1,126 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "FORM statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "FORM","heading-command basic"
+					LINE BREAK
+					PRINT "ID, METHOD (default is GET), CLASS","heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Creating an HTML form."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+IF FGET["input_test"] THEN
+	PRINT "You submitted this,"
+	LINE BREAK
+	PRINT FGET["input_test"]
+END IF
+FORM "form_test"
+	SWRITE
+		LINE BREAK
+		TABLE "table-border"
+			TBODY
+				TROW
+					TCELL
+						PRINT "Name"
+					TCELL CLOSE
+					TCELL
+						FORM INPUT "input_test", "form-input", "Enter your name"
+					TCELL CLOSE
+				TROW CLOSE
+				TROW
+					TCELL
+						WHITESPACE
+					TCELL CLOSE
+					TCELL
+						FORM SUBMIT "btn_test", "submit"
+					TCELL CLOSE
+				TROW CLOSE
+			TBODY CLOSE
+		TABLE CLOSE
+	SWRITE CLOSE
+FORM CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24 kb-code-block"
+IF FGET["input_test"] THEN
+	PRINT "You submitted this,"
+	LINE BREAK
+	PRINT FGET["input_test"]
+END IF
+FORM "form_test"
+	SWRITE
+		LINE BREAK
+		TABLE "table-border"
+			TBODY
+				TROW
+					TCELL
+						PRINT "Name"
+					TCELL CLOSE
+					TCELL
+						FORM INPUT "input_test", "form-input", "Enter your name"
+					TCELL CLOSE
+				TROW CLOSE
+				TROW
+					TCELL
+						WHITESPACE
+					TCELL CLOSE
+					TCELL
+						FORM SUBMIT "btn_test", "submit"
+					TCELL CLOSE
+				TROW CLOSE
+			TBODY CLOSE
+		TABLE CLOSE
+	SWRITE CLOSE
+FORM CLOSE
+				DIV CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/DIV"
+						PRINT "DIV"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/FGET"
+						PRINT "FGET"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/FPOST"
+						PRINT "FPOST"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/FOOTER"
+						PRINT "FOOTER"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/HEADER"
+						PRINT "HEADER"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/parameters"
+						PRINT "parameters"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

@@ -1,0 +1,69 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "BODY statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "BODY","heading-command basic"
+					LINE BREAK
+					PRINT "CLASS, ID","heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Creating the HTML body."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+BODY
+	SWRITE
+		PRINT "Creating the HTML body."
+	SWRITE CLOSE
+BODY CLOSE
+END
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+&lt;body&gt;
+	&lt;p&gt;
+		Creating the HTML body.
+	&lt;/p&gt;
+&lt;/body&gt;
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/DIV"
+						PRINT "DIV"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/FOOTER"
+						PRINT "FOOTER"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/HEADER"
+						PRINT "HEADER"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/parameters"
+						PRINT "parameters"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

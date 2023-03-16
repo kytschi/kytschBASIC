@@ -1,0 +1,39 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "HEADING statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "HEADING","heading-command basic"
+					LINE BREAK
+					PRINT "SIZE","heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Output a heading tag."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT REM Output a heading tag to the screen. Note the END statement.
+HEADING 1
+	This is a heading of size 1
+HEADING CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+&lt;h1&gt;This is a heading of size 1&lt;/h1&gt;
+				CPRINT CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

@@ -1,0 +1,198 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "BOX statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "BOX","heading-command basic"
+					LINE BREAK
+					PRINT "X1, Y1, X2, Y2","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "The ability to draw a box on a bitmap and display it on screen as an image."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT INCLUDE arcade
+RGB 0,0,0
+BITMAP 0,0,640,480
+	RGB 255,0,0
+	BOX 200,220,340,340
+
+	RGB 255,0,0,90
+	BOX 240,180,380,300
+
+	RGB 255,0,0,95
+	BOX 280,140,420,260
+
+	RGB 255,0,0,98
+	BOX 320,100,460,220
+
+	RGB 255,0,0,99
+	BOX 360,60,500,180
+BITMAP CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				RGB 0,0,0
+				BITMAP 0,0,640,480
+					RGB 255,0,0
+					BOX 200,220,340,340
+
+					RGB 255,0,0,90
+					BOX 240,180,380,300
+
+					RGB 255,0,0,95
+					BOX 280,140,420,260
+
+					RGB 255,0,0,98
+					BOX 320,100,460,220
+
+					RGB 255,0,0,99
+					BOX 360,60,500,180
+				BITMAP CLOSE
+				HEADING 4
+					PRINT "Parameters"
+				HEADING CLOSE
+				TABLE
+					THEAD
+						TROW
+							THEADCELL "140px"
+								PRINT "Parameter"
+							THEADCELL CLOSE
+							THEADCELL "200px"
+								PRINT "Type"
+							THEADCELL CLOSE
+							THEADCELL
+								PRINT "Description"
+							THEADCELL CLOSE
+						TROW CLOSE
+					THEAD CLOSE
+					TBODY
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "X1"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "X1 or the start X position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "Y1"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Y1 or the start Y position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "X2"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "X2 or the end X position"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "Y2"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "Y2 or the end Y position"
+							TCELL CLOSE
+						TROW CLOSE
+					TBODY CLOSE
+				TABLE CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ARCF"
+						PRINT "ARCF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAP"
+						PRINT "BITMAP"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAPFONT"
+						PRINT "BITMAPFONT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAPTEXT"
+						PRINT "BITMAPTEXT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BOXF"
+						PRINT "BOXF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ELLIPSE"
+						PRINT "ELLIPSE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ELLIPSEF"
+						PRINT "ELLIPSEF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/globals"
+						PRINT "Globals"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/RGB"
+						PRINT "RGB"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/SCREEN"
+						PRINT "SCREEN"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

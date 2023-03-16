@@ -1,0 +1,52 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "UCASE statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "UCASE | UCASE$","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Transform a string to uppercase."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+UCASE "Hello World!"
+PRINT UCASE$("Hello World!")
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+HELLO WORLD!
+HELLO WORLD!
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/CPRINT"
+						PRINT "CPRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/PRINT"
+						PRINT "PRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LCASE"
+						PRINT "LCASE"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

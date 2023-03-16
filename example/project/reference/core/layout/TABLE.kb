@@ -1,0 +1,163 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "TABLE statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "TABLE","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Creating a table."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+TABLE
+	THEAD
+		TROW
+			THEADCELL
+				PRINT "Table header 1"
+			THEADCELL CLOSE
+			THEADCELL
+				PRINT "Table header 2"
+			THEADCELL CLOSE
+		TROW CLOSE
+	THEAD CLOSE
+	TBODY
+		TROW
+			TCELL
+				PRINT "Table cell 1"
+			TCELL CLOSE
+			TCELL
+				PRINT "Table cell 2"
+			TCELL CLOSE
+		TROW CLOSE
+	TBODY CLOSE
+	TFOOT
+		TROW
+			TCELL
+				PRINT "Table footer cell 1"
+			TCELL CLOSE
+			TCELL
+				PRINT "Table footer cell 2"
+			TCELL CLOSE
+		TROW CLOSE
+	TFOOT CLOSE
+TABLE CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				TABLE
+					THEAD
+						TROW
+							THEADCELL
+								PRINT "Table header 1"
+							THEADCELL CLOSE
+							THEADCELL
+								PRINT "Table header 2"
+							THEADCELL CLOSE
+						TROW CLOSE
+					THEAD CLOSE
+					TBODY
+						TROW
+							TCELL
+								PRINT "Table cell 1"
+							TCELL CLOSE
+							TCELL
+								PRINT "Table cell 2"
+							TCELL CLOSE
+						TROW CLOSE
+					TBODY CLOSE
+					TFOOT
+						TROW
+							TCELL
+								PRINT "Table footer cell 1"
+							TCELL CLOSE
+							TCELL
+								PRINT "Table footer cell 2"
+							TCELL CLOSE
+						TROW CLOSE
+					TFOOT CLOSE
+				TABLE CLOSE
+				HEADING 4
+					PRINT "Source"
+				HEADING CLOSE
+				CPRINT
+&lt;table&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;
+				&lt;span&gt;Table header 1&lt;/span&gt;
+			&lt;/th&gt;
+			&lt;th&gt;
+				&lt;span&gt;Table header 2&lt;/span&gt;
+			&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				&lt;span&gt;Table cell 1&lt;/span&gt;
+			&lt;/td&gt;
+			&lt;td&gt;
+				&lt;span&gt;Table cell 2&lt;/span&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+	&lt;tfoot&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				&lt;span&gt;Table footer cell 1&lt;/span&gt;
+			&lt;/td&gt;
+			&lt;td&gt;
+				&lt;span&gt;Table footer cell 2&lt;/span&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tfoot&gt;
+&lt;/table&gt;
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TBODY"
+						PRINT "TBODY"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TCELL"
+						PRINT "TCELL"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TFOOT"
+						PRINT "TFOOT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/THEAD"
+						PRINT "THEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/THEADCELL"
+						PRINT "THEADCELL"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TROW"
+						PRINT "TROW"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

@@ -1,0 +1,116 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "INSTR statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "INSTR$","heading-command basic"
+					LINE BREAK
+					PRINT "HAYSTACK, NEEDLE, START(optional)","heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "This function will find part of a string and return the position."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+PRINT INSTR$("kytschBASIC", "BAS")
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+7
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/ASC"
+						PRINT "ASC"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CENTRE"
+						PRINT "CENTRE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CHR"
+						PRINT "CHR"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/INT"
+						PRINT "INT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LCASE"
+						PRINT "LCASE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LEFT"
+						PRINT "LEFT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LEN"
+						PRINT "LEN"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LSET"
+						PRINT "LSET"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/PRINT"
+						PRINT "PRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/REPLACE"
+						PRINT "REPLACE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/RSET"
+						PRINT "RSET"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/STR"
+						PRINT "STR"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/STRING"
+						PRINT "STRING"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/STRIPLEAD"
+						PRINT "STRIPLEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/STRIPTRAIL"
+						PRINT "STRIPTRAIL"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/UCASE"
+						PRINT "UCASE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/UNLEFT"
+						PRINT "UNLEFT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/UNRIGHT"
+						PRINT "UNRIGHT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/VAL"
+						PRINT "VAL"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

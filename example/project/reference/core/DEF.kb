@@ -1,0 +1,101 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "DEF statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "DEF","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Defining a variable of various types."
+				SWRITE CLOSE
+				SWRITE "basic h3"
+					PRINT "string"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Defining a string and using the variable"
+				SWRITE CLOSE
+				SWRITE "h3"
+					Example
+				SWRITE CLOSE
+				CPRINT
+DEF test$="kytschBASIC is awesome!"
+PRINT test$
+				CPRINT CLOSE
+				SWRITE "h3"
+					PRINT "Output"
+				SWRITE CLOSE
+				CPRINT
+&lt;span&gt;kytschBASIC is awesome!&lt;/span&gt;
+				CPRINT CLOSE
+
+				SWRITE "basic h3"
+					PRINT "integer"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Defining an integer and using the variable"
+				SWRITE CLOSE
+				SWRITE "h3"
+					PRINT "Example"
+				SWRITE CLOSE
+				CPRINT
+DEF test%=1337
+PRINT test%
+				CPRINT CLOSE
+				SWRITE "h3"
+					PRINT "Output"
+				SWRITE CLOSE
+				CPRINT
+&lt;span&gt;1337&lt;/span&gt;
+				CPRINT CLOSE
+
+				SWRITE "basic h3"
+					PRINT "double"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Defining a double and using the variable"
+				SWRITE CLOSE
+				SWRITE "h3"
+					Example
+				SWRITE CLOSE
+				CPRINT
+DEF test#=1337.11
+PRINT test#
+				CPRINT CLOSE
+				SWRITE "h3"
+					PRINT "Output"
+				SWRITE CLOSE
+				CPRINT
+&lt;span&gt;1337.11&lt;/span&gt;
+				CPRINT CLOSE
+
+				SWRITE "basic h3"
+					PRINT "double to two decimal places"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Filtering a double to two decimal places"
+				SWRITE CLOSE
+				SWRITE "h3"
+					PRINT "Example"
+				SWRITE CLOSE
+				CPRINT
+DEF test#=1337.1337
+PRINT test#;2DP
+				CPRINT CLOSE
+				SWRITE "h3"
+					PRINT "Output"
+				SWRITE CLOSE
+				CPRINT
+&lt;span&gt;1337.13&lt;/span&gt;
+				CPRINT CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

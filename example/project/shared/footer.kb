@@ -1,0 +1,23 @@
+FOOTER
+	DIV "kb-row", "footer-content"
+		DIV "kb-col kb-col-12"
+			PRINT "Powered by "
+			PRINT "kytsch","kytsch"
+			PRINT "BASIC","basic"
+			PRINT "&nbsp;"
+			VERSION
+			SWRITE
+				PRINT "Page loaded in approx "
+				BENCHMARK
+			SWRITE CLOSE
+		DIV CLOSE
+		DIV "kb-col kb-col-12 text-right"
+			SWRITE
+				PRINT "Created by Mike Welsh"
+			SWRITE CLOSE
+			LINK "https://kytschi.com","Checkout Kytschi",,"_blank"
+				PRINT "Checkout Kytschi"
+			LINK CLOSE
+		DIV CLOSE
+	DIV CLOSE
+FOOTER CLOSE

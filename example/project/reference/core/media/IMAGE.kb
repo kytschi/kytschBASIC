@@ -1,0 +1,35 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "IMAGE statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "IMAGE","heading-command basic"
+					LINE BREAK
+					PRINT "FILE, LABEL, CLASS, ID","heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Render an image to the screen."
+				SWRITE CLOSE
+				HEADING 3
+					Example
+				HEADING CLOSE
+				CPRINT
+SPRINT REM Loading the GIF of that evil looking dude.
+IMAGE "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
+				CPRINT CLOSE
+				HEADING 4
+					Output
+				HEADING CLOSE
+IMAGE "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

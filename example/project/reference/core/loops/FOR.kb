@@ -1,0 +1,52 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "FOR statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "FOR","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Create a for loop."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT FOR iLoop=1 to 10
+	PRINT iLoop
+	PRINT "&amp;nbsp;"
+SPRINT NEXT iLoop
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24 kb-code-block"
+					FOR iLoop=1 to 10
+						PRINT iLoop
+						PRINT "&nbsp;"
+					NEXT iLoop
+				DIV CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/installation#configuration"
+						PRINT "configuration"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/WHILE"
+						PRINT "WHILE"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

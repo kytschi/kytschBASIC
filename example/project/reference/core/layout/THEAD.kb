@@ -1,0 +1,84 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "THEAD statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "THEAD","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Creating the table's header."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+THEAD
+	TROW
+		THEADCELL
+			PRINT "Table header 1"
+		THEADCELL CLOSE
+		THEADCELL
+			PRINT "Table header 2"
+		THEADCELL CLOSE
+	TROW CLOSE
+THEAD CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+&lt;thead&gt;
+	&lt;tr&gt;
+		&lt;th&gt;
+			&lt;span&gt;Table header 1&lt;/span&gt;
+		&lt;/th&gt;
+		&lt;th&gt;
+			&lt;span&gt;Table header 2&lt;/span&gt;
+		&lt;/th&gt;
+	&lt;/tr&gt;
+&lt;/thead&gt;
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TABLE"
+						PRINT "TABLE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TBODY"
+						PRINT "TBODY"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TCELL"
+						PRINT "TCELL"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TFOOT"
+						PRINT "TFOOT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/THEADCELL"
+						PRINT "THEADCELL"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TROW"
+						PRINT "TROW"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

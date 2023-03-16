@@ -1,0 +1,47 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "SPRINT statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "SPRINT","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Will ignore the execution of the statement and just print it to the screen. This is handy when you want to show your lovely code for others to see."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT PRINT "I want to see the statement without executing it"
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+PRINT "I want to see the statement without executing it"
+				CPRINT CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/REM"
+						PRINT "REM"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CPRINT"
+						PRINT "CPRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/PRINT"
+						PRINT "PRINT"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

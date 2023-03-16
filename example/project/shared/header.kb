@@ -1,0 +1,313 @@
+HEADER
+	HEADING 1
+		PRINT "kytsch","kytsch"
+		PRINT "BASIC","basic"
+	HEADING CLOSE
+	MENU
+		LINK "/","Go to the homepage","nav-link"
+			PRINT "Home"
+		LINK CLOSE
+		LINK "/about","Go to the about page","nav-link"
+			PRINT "About"
+		LINK CLOSE
+		LINK "https://ironet.kytschi.com/kytschi/kytschBASIC","View the source","nav-link","_blank"
+			PRINT "Download"
+		LINK CLOSE
+		LINK "/installation","Read about the installation","nav-link"
+			PRINT "Installation"
+		LINK CLOSE
+		LINK "/parameters","Go to parameters page","nav-link"
+			PRINT "Parameters"
+		LINK CLOSE
+		LINK "/globals","Go to globals page","nav-link"
+			PRINT "Globals"
+		LINK CLOSE
+		LINK "/arcade","Go to page on arcade library","nav-link"
+			PRINT "Arcade"
+		LINK CLOSE
+		LINK "/news","What's in the news","nav-link"
+			PRINT "News"
+		LINK CLOSE
+		SWRITE "nav-link"
+			PRINT "Reference"
+		SWRITE CLOSE
+		LINK "/reference/ABS","Find out about the ABS command","nav-link"
+			PRINT "ABS"
+		LINK CLOSE
+		LINK "/reference/ACOS","Find out about the ACOS command","nav-link"
+			PRINT "ACOS"
+		LINK CLOSE
+		LINK "/reference/ASIN","Find out about the ASIN command","nav-link"
+			PRINT "ASIN"
+		LINK CLOSE
+		LINK "/reference/ATAN","Find out about the ATAN command","nav-link"
+			PRINT "ATAN"
+		LINK CLOSE
+		LINK "/reference/ARC","Find out about the ARC command","nav-link"
+			PRINT "ARC"
+		LINK CLOSE
+		LINK "/reference/ARCF","Find out about the ARCF command","nav-link"
+			PRINT "ARCF"
+		LINK CLOSE
+		LINK "/reference/ASC","Find out about the ASC command","nav-link"
+			PRINT "ASC"
+		LINK CLOSE
+		LINK "/reference/BIN","Find out about the BIN command","nav-link"
+			PRINT "BIN"
+		LINK CLOSE
+		LINK "/reference/BITMAP","Find out about the BITMAP command","nav-link"
+			PRINT "BITMAP"
+		LINK CLOSE
+		LINK "/reference/BITMAPFONT","Find out about the BITMAPFONT command","nav-link"
+			PRINT "BITMAPFONT"
+		LINK CLOSE
+		LINK "/reference/BITMAPTEXT","Find out about the BITMAPTEXT command","nav-link"
+			PRINT "BITMAPTEXT"
+		LINK CLOSE
+		LINK "/reference/BODY","Find out about the BODY command","nav-link"
+			PRINT "BODY"
+		LINK CLOSE
+		LINK "/reference/BOX","Find out about the BOX command","nav-link"
+			PRINT "BOX"
+		LINK CLOSE
+		LINK "/reference/BOXF","Find out about the BOXF command","nav-link"
+			PRINT "BOXF"
+		LINK CLOSE
+		LINK "/reference/CASE","Find out about the CASE command","nav-link"
+			PRINT "CASE"
+		LINK CLOSE
+		LINK "/reference/CENTRE","Find out about the CENTRE command","nav-link"
+			PRINT "CENTRE"
+		LINK CLOSE
+		LINK "/reference/CHR","Find out about the CHR command","nav-link"
+			PRINT "CHR"
+		LINK CLOSE
+		LINK "/reference/CIRCLE","Find out about the CIRCLE command","nav-link"
+			PRINT "CIRCLE"
+		LINK CLOSE
+		LINK "/reference/CIRCLEF","Find out about the CIRCLEF command","nav-link"
+			PRINT "CIRCLEF"
+		LINK CLOSE
+		LINK "/reference/COPY-SHAPE","Find out about the COPY SHARE command","nav-link"
+			PRINT "COPY SHAPE"
+		LINK CLOSE
+		LINK "/reference/COS","Find out about the COS command","nav-link"
+			PRINT "COS"
+		LINK CLOSE
+		LINK "/reference/CPRINT","Find out about the CPRINT command","nav-link"
+			PRINT "CPRINT"
+		LINK CLOSE
+		LINK "/reference/DATA","Find out about the DATA command","nav-link"
+			PRINT "DATA"
+		LINK CLOSE
+		LINK "/reference/DOPEN","Find out about the DOPEN command","nav-link"
+			PRINT "DREAD"
+		LINK CLOSE
+		LINK "/reference/DSELECT","Find out about the DSELECT command","nav-link"
+			PRINT "DSELECT"
+		LINK CLOSE
+		LINK "/reference/DSORT","Find out about the DSORT command","nav-link"
+			PRINT "DSORT"
+		LINK CLOSE
+		LINK "/reference/DWHERE","Find out about the DWHERE command","nav-link"
+			PRINT "DWHERE"
+		LINK CLOSE
+		LINK "/reference/DREAD","Find out about the DREAD command","nav-link"
+			PRINT "DREAD"
+		LINK CLOSE
+		LINK "/reference/ELLIPSE","Find out about the ELLIPSE command","nav-link"
+			PRINT "ELLIPSE"
+		LINK CLOSE
+		LINK "/reference/ELLIPSEF","Find out about the ELLIPSEF command","nav-link"
+			PRINT "ELLIPSEF"
+		LINK CLOSE
+		LINK "/reference/FAVICON","Find out about the FAVICON command","nav-link"
+			PRINT "FAVICON"
+		LINK CLOSE
+		LINK "/reference/FRAC","Find out about the FRAC command","nav-link"
+			PRINT "FRAC"
+		LINK CLOSE
+		LINK "/reference/FGET","Find out about the FGET command","nav-link"
+			PRINT "FGET"
+		LINK CLOSE
+		LINK "/reference/FORM","Find out about the FORM command","nav-link"
+			PRINT "FORM"
+		LINK CLOSE
+		LINK "/reference/FPOST","Find out about the FPOST command","nav-link"
+			PRINT "FPOST"
+		LINK CLOSE
+		LINK "/reference/FOOTER","Find out about the FOOTER command","nav-link"
+			PRINT "FOOTER"
+		LINK CLOSE
+		LINK "/reference/FOR","Find out about the FOR command","nav-link"
+			PRINT "FOR"
+		LINK CLOSE
+		LINK "/reference/HCOS","Find out about the HCOS command","nav-link"
+			PRINT "HCOS"
+		LINK CLOSE
+		LINK "/reference/HEAD","Find out about the HEAD command","nav-link"
+			PRINT "HEAD"
+		LINK CLOSE
+		LINK "/reference/HEADER","Find out about the HEADER command","nav-link"
+			PRINT "HEADER"
+		LINK CLOSE
+		LINK "/reference/HEADING","Find out about the HEADING command","nav-link"
+			PRINT "HEADING"
+		LINK CLOSE
+		LINK "/reference/HEX","Find out about the HEX command","nav-link"
+			PRINT "HEX"
+		LINK CLOSE
+		LINK "/reference/HSIN","Find out about the HSIN command","nav-link"
+			PRINT "HSIN"
+		LINK CLOSE
+		LINK "/reference/HTAN","Find out about the HTAN command","nav-link"
+			PRINT "HTAN"
+		LINK CLOSE
+		LINK "/reference/IF","Find out about the IF command","nav-link"
+			PRINT "IF"
+		LINK CLOSE
+		LINK "/reference/IMAGE","Find out about the IMAGE command","nav-link"
+			PRINT "IMAGE"
+		LINK CLOSE
+		LINK "/reference/INT","Find out about the INT command","nav-link"
+			PRINT "INT"
+		LINK CLOSE
+		LINK "/reference/INSTR","Find out about the INSTR command","nav-link"
+			PRINT "INSTR"
+		LINK CLOSE
+		LINK "/reference/LCASE","Find out about the LCASE command","nav-link"
+			PRINT "LCASE"
+		LINK CLOSE
+		LINK "/reference/LEFT","Find out about the LEFT command","nav-link"
+			PRINT "LEFT"
+		LINK CLOSE
+		LINK "/reference/LEN","Find out about the LEN command","nav-link"
+			PRINT "LEN"
+		LINK CLOSE
+		LINK "/reference/LET","Find out about the LET command","nav-link"
+			PRINT "LET"
+		LINK CLOSE
+		LINK "/reference/LINE","Find out about the LINE command","nav-link"
+			PRINT "LINE"
+		LINK CLOSE
+		LINK "/reference/LINE-BREAK","Find out about the LINE BREAK command","nav-link"
+			PRINT "LINE BREAK"
+		LINK CLOSE
+		LINK "/reference/LINK","Find out about the LINK command","nav-link"
+			PRINT "LINK"
+		LINK CLOSE
+		LINK "/reference/LOG","Find out about the LOG command","nav-link"
+			PRINT "LOG"
+		LINK CLOSE
+		LINK "/reference/LOG10","Find out about the LOG10 command","nav-link"
+			PRINT "LOG10"
+		LINK CLOSE
+		LINK "/reference/LSET","Find out about the LSET command","nav-link"
+			PRINT "LSET"
+		LINK CLOSE
+		LINK "/reference/MID","Find out about the MID command","nav-link"
+			PRINT "MID"
+		LINK CLOSE
+		LINK "/reference/PRINT","Find out about the PRINT command","nav-link"
+			PRINT "PRINT"
+		LINK CLOSE
+		LINK "/reference/REM","Find out about the REM command","nav-link"
+			PRINT "REM"
+		LINK CLOSE
+		LINK "/reference/REPLACE","Find out about the REPLACE command","nav-link"
+			PRINT "REPLACE"
+		LINK CLOSE
+		LINK "/reference/RGB","Find out about the RGB command","nav-link"
+			PRINT "RGB"
+		LINK CLOSE
+		LINK "/reference/RIGHT","Find out about the DSORT command","nav-link"
+			PRINT "RIGHT"
+		LINK CLOSE
+		LINK "/reference/RND","Find out about the RIGHT command","nav-link"
+			PRINT "RND"
+		LINK CLOSE
+		LINK "/reference/RSET","Find out about the RSET command","nav-link"
+			PRINT "RSET"
+		LINK CLOSE
+		LINK "/reference/SCREEN","Find out about the SCREEN command","nav-link"
+			PRINT "SCREEN"
+		LINK CLOSE
+		LINK "/reference/SELECT","Find out about the SELECT command","nav-link"
+			PRINT "SELECT"
+		LINK CLOSE
+		LINK "/reference/SGN","Find out about the SGN command","nav-link"
+			PRINT "SGN"
+		LINK CLOSE
+		LINK "/reference/SIN","Find out about the SIN command","nav-link"
+			PRINT "SIN"
+		LINK CLOSE
+		LINK "/reference/SPRINT","Find out about the SPRINT command","nav-link"
+			PRINT "SPRINT"
+		LINK CLOSE
+		LINK "/reference/SQR","Find out about the SQR command","nav-link"
+			PRINT "SQR"
+		LINK CLOSE
+		LINK "/reference/STR","Find out about the STR command","nav-link"
+			PRINT "STR"
+		LINK CLOSE
+		LINK "/reference/STRING","Find out about the STRING command","nav-link"
+			PRINT "STRING"
+		LINK CLOSE
+		LINK "/reference/STRIPLEAD","Find out about the STRIPLEAD command","nav-link"
+			PRINT "STRIPLEAD"
+		LINK CLOSE
+		LINK "/reference/STRIPTRAIL","Find out about the STRIPTRAIL command","nav-link"
+			PRINT "STRIPTRAIL"
+		LINK CLOSE
+		LINK "/reference/TAN","Find out about the TAN command","nav-link"
+			PRINT "TAN"
+		LINK CLOSE
+		LINK "/reference/TABLE","Find out about the TABLE command","nav-link"
+			PRINT "TABLE"
+		LINK CLOSE
+		LINK "/reference/TBODY","Find out about the TBODY command","nav-link"
+			PRINT "TBODY"
+		LINK CLOSE
+		LINK "/reference/TCELL","Find out about the TCELL command","nav-link"
+			PRINT "TCELL"
+		LINK CLOSE
+		LINK "/reference/TFOOT","Find out about the TFOOT command","nav-link"
+			PRINT "TFOOT"
+		LINK CLOSE
+		LINK "/reference/THEAD","Find out about the THEAD command","nav-link"
+			PRINT "THEAD"
+		LINK CLOSE
+		LINK "/reference/THEADCELL","Find out about the THEADCELL command","nav-link"
+			PRINT "THEADCELL"
+		LINK CLOSE
+		LINK "/reference/TROW","Find out about the TROW command","nav-link"
+			PRINT "TROW"
+		LINK CLOSE
+		LINK "/reference/UCASE","Find out about the UCASE command","nav-link"
+			PRINT "UCASE"
+		LINK CLOSE
+		LINK "/reference/UNLEFT","Find out about the UNLEFT command","nav-link"
+			PRINT "UNLEFT"
+		LINK CLOSE
+		LINK "/reference/UNRIGHT","Find out about the UNRIGHT command","nav-link"
+			PRINT "UNRIGHT"
+		LINK CLOSE
+		LINK "/reference/VAL","Find out about the VAL command","nav-link"
+			PRINT "VAL"
+		LINK CLOSE
+		LINK "/reference/WHILE","Find out about the WHILE command","nav-link"
+			PRINT "WHILE"
+		LINK CLOSE
+		LINK "/reference/WINDOW","Find out about the WINDOW command","nav-link"
+			PRINT "WINDOW"
+		LINK CLOSE
+	MENU CLOSE
+HEADER CLOSE
+
+DIV ,"mobile"
+	SWRITE
+		PRINT "Put down that phone!"
+		LINE BREAK
+		PRINT "Please view me on real computer."
+	SWRITE CLOSE
+DIV CLOSE

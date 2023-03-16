@@ -1,0 +1,138 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "Installing kytschBASIC | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "Installing "
+					PRINT "kytsch","kytsch"
+					PRINT "BASIC","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "First thing you will need is to install"
+					LINK "https://docs.zephir-lang.com/0.12/en/installation","Checkout Zephir",,"_blank"
+						Zephir
+					LINK CLOSE
+					LINE BREAK
+					PRINT "Now open your favourite terminal/console and clone the repo."
+				SWRITE CLOSE
+				CPRINT
+git clone https://ironet.kytschi.com/kytschi/kytschBASIC.git
+
+OR
+
+git clone ssh://git@ironet.kytschi.com:2222/kytschi/kytschBASIC.git
+				CPRINT CLOSE
+
+				SWRITE
+					PRINT "Building the kytschBASIC PHP module."
+				SWRITE CLOSE
+				CPRINT
+cd kytschBASIC/kytschbasic
+zephir build
+				CPRINT CLOSE
+
+				SWRITE
+					PRINT "Enable the kytschBASIC module. You can copy the sample ini file from the `php` folder in this repo. Remember to do this as root or a user with administrator permissions."
+				SWRITE CLOSE
+				CPRINT
+cp kytschBASIC/php/kytschBASIC.ini /etc/php/7.4/mods-available/
+				CPRINT CLOSE
+				SWRITE
+					PRINT "And don't forget to restart the PHP service."
+				SWRITE CLOSE
+
+				SWRITE
+					PRINT "Next setup an index.php on your webserver of choice and tell it to load the kytschBASIC compiler."
+				SWRITE CLOSE
+				CPRINT
+&lt;?php
+use KytschBASIC\Compiler;
+
+(new Compiler(__DIR__ . '/../kytschbasic-config.json'))->run();
+				CPRINT CLOSE
+
+				SWRITE
+					PRINT "NOTICE","basic"
+					PRINT " we are loading in the configuration file. See "
+					LINK "#configuration"
+						PRINT "configuration"
+					LINK CLOSE
+					PRINT " for more information on how to setup the configuration file. "
+				SWRITE CLOSE
+
+				SWRITE
+					PRINT "For an example website checkout the source code for this one."
+					LINK "https://ironet.kytschi.com/kytschi/kytschBASIC/src/master/example",,,"_blank"
+						PRINT "kytschBASIC example"
+					LINK CLOSE
+				SWRITE CLOSE
+
+				LINK ,,"no-link",,"configuration"
+					HEADING 3
+						PRINT "Configuration","basic"
+					HEADING CLOSE
+				LINK CLOSE
+				SWRITE
+					PRINT "kytschBASIC configuration is handled via a JSON config file. From there you can define the database connection, the routes, etc."
+					LINK "https://ironet.kytschi.com/kytschi/kytschBASIC/src/master/kytschbasic-config.example.json",,,"_blank"
+						PRINT "kytschBASIC example config"
+					LINK CLOSE
+				SWRITE CLOSE
+				SWRITE "h3"
+					PRINT "Database"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "The configuration for the database connection if needed. You can define more than one."
+				SWRITE CLOSE
+				CPRINT
+"db":[
+	{
+		"name":"kytschBASIC", 		<-- Name of the connection
+		"type": "mysql", 					<-- Connection type
+		"host": "127.0.0.1",			<-- Host IP
+		"port": 3306,							<-- Host port
+		"dbname": "kytschBASIC",	<-- Name of the database
+		"user": "user",						<-- Username that has access
+		"password": "password"		<-- Password of the user
+	}
+]
+				CPRINT CLOSE
+
+				SWRITE "h3"
+					PRINT "Routes"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "The routes allow you to define what kytschBASIC template is to be loaded for a specific URL or route."
+				SWRITE CLOSE
+				CPRINT
+"router":[
+	{
+		"url": "/",											<-- The URL/route that corresponds to the template.
+		"template": "project/index.kb"	<-- The kytschBASIC template. Be sure to include its folder if its in one.
+	},
+	{
+		"url": "/about",
+		"template": "project/about.kb"
+	},
+	{
+		"url": "/installation",
+		"template": "project/installation.kb"
+	},
+	{
+		"url": "/news",
+		"template": "project/news.kb"
+	}
+]
+				CPRINT CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

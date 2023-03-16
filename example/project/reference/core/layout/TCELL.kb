@@ -1,0 +1,72 @@
+LANG "en"
+HEAD
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "TCELL statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "TCELL","heading-command basic"
+					LINE BREAK
+					PRINT "WIDTH, CLASS, COLSPAN, ID","heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Creating a table cell."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+TCELL
+	PRINT "Table cell 1"
+TCELL CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				CPRINT
+&lt;td&gt;
+	&lt;span&gt;Table cell 1&lt;/span&gt;
+&lt;/td&gt;
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TABLE"
+						PRINT "TABLE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TBODY"
+						PRINT "TBODY"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TFOOT"
+						PRINT "TFOOT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/THEAD"
+						PRINT "THEAD"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/THEADCELL"
+						PRINT "THEADCELL"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/TROW"
+						PRINT "TROW"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END

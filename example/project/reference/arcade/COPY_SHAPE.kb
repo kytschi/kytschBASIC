@@ -1,0 +1,138 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "$ROOT_FOLDER/project/shared/head"
+	NAME "COPY SHAPE statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "$ROOT_FOLDER/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				SWRITE
+					PRINT "COPY SHAPE","heading-command basic"
+					LINE BREAK
+					PRINT "CURRENT SHAPE, NEW SHAPE","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "The ability to copy a shape."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT INCLUDE arcade
+RGB 0,0,0
+BITMAP 0,0,640,480
+	SPRINT REM Create an almost transparent circle
+	RGB 255,0,0,98
+	CIRCLE 280,220,40
+
+	SPRINT REM Copy the freshly drawn circle and create a new one
+	COPY SHAPE 0,1
+
+	SPRINT REM Move the copied circle's X and Y
+	MOVE SHAPE 360,300
+
+	SPRINT REM Set the transparency of the shape
+	SET TRANSPARENCY 0
+
+	REM Draw the newly copied shape
+	DRAW SHAPE
+BITMAP CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+				RGB 0,0,0
+				BITMAP 0,0,640,480
+					REM Create an almost transparent circle
+					RGB 255,0,0,98
+					CIRCLE 280,220,40
+
+					REM Copy the freshly drawn circle and create a new one
+					COPY SHAPE 0,1
+
+					REM Move the copied circle's X and Y
+					MOVE SHAPE 360,300
+
+					REM Set the transparency of the shape
+					SET TRANSPARENCY 0
+
+					REM Draw the newly copied shape
+					DRAW SHAPE
+				BITMAP CLOSE
+				HEADING 4
+					PRINT "Parameters"
+				HEADING CLOSE
+				TABLE
+					THEAD
+						TROW
+							THEADCELL "140px"
+								PRINT "Parameter"
+							THEADCELL CLOSE
+							THEADCELL "200px"
+								PRINT "Type"
+							THEADCELL CLOSE
+							THEADCELL
+								PRINT "Description"
+							THEADCELL CLOSE
+						TROW CLOSE
+					THEAD CLOSE
+					TBODY
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "0"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "The current shape"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "1"
+							TCELL CLOSE
+							TCELL
+								PRINT "integer"
+							TCELL CLOSE
+							TCELL
+								PRINT "The new shape"
+							TCELL CLOSE
+						TROW CLOSE
+					TBODY CLOSE
+				TABLE CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/ARCF"
+						PRINT "ARCF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/BITMAP"
+						PRINT "BITMAP"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "$ROOT_FOLDER/project/shared/footer"
+BODY CLOSE
+END
