@@ -1,0 +1,417 @@
+[
+	{
+		"url": "/test",
+		"template": "project/test.kb"
+	},
+	{
+		"url": "/",
+		"template": "project/index.kb"
+	},
+	{
+		"url": "/about",
+		"template": "project/about.kb"
+	},
+	{
+		"url": "/installation",
+		"template": "project/installation.kb"
+	},
+	{
+		"url": "/parameters",
+		"template": "project/parameters.kb"
+	},
+	{
+		"url": "/globals",
+		"template": "project/globals.kb"
+	},
+	{
+		"url": "/arcade",
+		"template": "project/arcade/index.kb"
+	},
+	{
+		"url": "/news",
+		"template": "project/news.kb"
+	},
+
+	{
+		"url": "/reference/CPRINT",
+		"template": "project/reference/core/CPRINT.kb"
+	},
+	{
+		"url": "/reference/LINE-BREAK",
+		"template": "project/reference/core/LINE_BREAK.kb"
+	},
+
+	{
+		"url": "/reference/FGET",
+		"template": "project/reference/core/variables/FGET.kb"
+	},
+	{
+		"url": "/reference/FPOST",
+		"template": "project/reference/core/variables/FPOST.kb"
+	},
+	{
+		"url": "/reference/LET",
+		"template": "project/reference/core/variables/LET.kb"
+	},
+
+	{
+		"url": "/reference/REM",
+		"template": "project/reference/core/REM.kb"
+	},
+	{
+		"url": "/reference/SPRINT",
+		"template": "project/reference/core/SPRINT.kb"
+	},
+
+	{
+		"url": "/reference/IF",
+		"template": "project/reference/core/conditional/IF.kb"
+	},
+	{
+		"url": "/reference/FOR",
+		"template": "project/reference/core/loops/FOR.kb"
+	},
+	{
+		"url": "/reference/WHILE",
+		"template": "project/reference/core/loops/WHILE.kb"
+	},
+	{
+		"url": "/reference/SELECT",
+		"template": "project/reference/core/conditional/SELECT.kb"
+	},
+	{
+		"url": "/reference/CASE",
+		"template": "project/reference/core/conditional/CASE.kb"
+	},
+
+	{
+		"url": "/reference/DATA",
+		"template": "project/reference/core/database/DATA.kb"
+	},
+	{
+		"url": "/reference/DOPEN",
+		"template": "project/reference/core/database/DOPEN.kb"
+	},
+	{
+		"url": "/reference/DREAD",
+		"template": "project/reference/core/database/DREAD.kb"
+	},
+	{
+		"url": "/reference/DSELECT",
+		"template": "project/reference/core/database/DSELECT.kb"
+	},
+	{
+		"url": "/reference/DSORT",
+		"template": "project/reference/core/database/DSORT.kb"
+	},
+	{
+		"url": "/reference/DWHERE",
+		"template": "project/reference/core/database/DWHERE.kb"
+	},
+
+	{
+		"url": "/reference/FAVICON",
+		"template": "project/reference/core/media/FAVICON.kb"
+	},
+	{
+		"url": "/reference/IMAGE",
+		"template": "project/reference/core/media/IMAGE.kb"
+	},
+
+	{
+		"url": "/reference/BODY",
+		"template": "project/reference/core/layout/BODY.kb"
+	},
+	{
+		"url": "/reference/FORM",
+		"template": "project/reference/core/layout/FORM.kb"
+	},
+	{
+		"url": "/reference/FOOTER",
+		"template": "project/reference/core/layout/FOOTER.kb"
+	},
+	{
+		"url": "/reference/HEAD",
+		"template": "project/reference/core/layout/HEAD.kb"
+	},
+	{
+		"url": "/reference/HEADER",
+		"template": "project/reference/core/layout/HEADER.kb"
+	},
+	{
+		"url": "/reference/TABLE",
+		"template": "project/reference/core/layout/TABLE.kb"
+	},
+	{
+		"url": "/reference/TBODY",
+		"template": "project/reference/core/layout/TBODY.kb"
+	},
+	{
+		"url": "/reference/TCELL",
+		"template": "project/reference/core/layout/TCELL.kb"
+	},
+	{
+		"url": "/reference/TFOOT",
+		"template": "project/reference/core/layout/TFOOT.kb"
+	},
+	{
+		"url": "/reference/THEAD",
+		"template": "project/reference/core/layout/THEAD.kb"
+	},
+	{
+		"url": "/reference/THEADCELL",
+		"template": "project/reference/core/layout/THEADCELL.kb"
+	},
+	{
+		"url": "/reference/TROW",
+		"template": "project/reference/core/layout/TROW.kb"
+	},
+
+	{
+		"url": "/reference/LINK",
+		"template": "project/reference/core/navigation/LINK.kb"
+	},
+
+	{
+		"url": "/reference/ARC",
+		"template": "project/reference/arcade/shapes/ARC.kb"
+	},
+	{
+		"url": "/reference/ARCF",
+		"template": "project/reference/arcade/shapes/ARCF.kb"
+	},
+	{
+		"url": "/reference/BITMAP",
+		"template": "project/reference/arcade/BITMAP.kb"
+	},
+	{
+		"url": "/reference/BITMAPFONT",
+		"template": "project/reference/arcade/text/BITMAPFONT.kb"
+	},
+	{
+		"url": "/reference/BITMAPTEXT",
+		"template": "project/reference/arcade/text/BITMAPTEXT.kb"
+	},
+	{
+		"url": "/reference/BOX",
+		"template": "project/reference/arcade/shapes/BOX.kb"
+	},
+	{
+		"url": "/reference/BOXF",
+		"template": "project/reference/arcade/shapes/BOXF.kb"
+	},
+	{
+		"url": "/reference/CIRCLE",
+		"template": "project/reference/arcade/shapes/CIRCLE.kb"
+	},
+	{
+		"url": "/reference/CIRCLEF",
+		"template": "project/reference/arcade/shapes/CIRCLEF.kb"
+	},
+	{
+		"url": "/reference/COPY-SHAPE",
+		"template": "project/reference/arcade/COPY_SHAPE.kb"
+	},
+	{
+		"url": "/reference/ELLIPSE",
+		"template": "project/reference/arcade/shapes/ELLIPSE.kb"
+	},
+	{
+		"url": "/reference/ELLIPSEF",
+		"template": "project/reference/arcade/shapes/ELLIPSEF.kb"
+	},
+	{
+		"url": "/reference/LINE",
+		"template": "project/reference/arcade/shapes/LINE.kb"
+	},
+	{
+		"url": "/reference/RGB",
+		"template": "project/reference/arcade/colors/RGB.kb"
+	},
+	{
+		"url": "/reference/SCREEN",
+		"template": "project/reference/arcade/screen/SCREEN.kb"
+	},
+	{
+		"url": "/reference/WINDOW",
+		"template": "project/reference/arcade/screen/WINDOW.kb"
+	},
+
+	{
+		"url": "/reference/ABS",
+		"template": "project/reference/core/maths/ABS.kb"
+	},
+	{
+		"url": "/reference/ACOS",
+		"template": "project/reference/core/maths/ACOS.kb"
+	},
+	{
+		"url": "/reference/ACOS",
+		"template": "project/reference/core/maths/ACOS.kb"
+	},
+	{
+		"url": "/reference/ASIN",
+		"template": "project/reference/core/maths/ASIN.kb"
+	},
+	{
+		"url": "/reference/ATAN",
+		"template": "project/reference/core/maths/ATAN.kb"
+	},
+	{
+		"url": "/reference/BIN",
+		"template": "project/reference/core/maths/BIN.kb"
+	},
+	{
+		"url": "/reference/COS",
+		"template": "project/reference/core/maths/COS.kb"
+	},
+	{
+		"url": "/reference/EXP",
+		"template": "project/reference/core/maths/EXP.kb"
+	},
+	{
+		"url": "/reference/FRAC",
+		"template": "project/reference/core/maths/FRAC.kb"
+	},
+	{
+		"url": "/reference/HCOS",
+		"template": "project/reference/core/maths/HCOS.kb"
+	},
+	{
+		"url": "/reference/HEX",
+		"template": "project/reference/core/maths/HEX.kb"
+	},
+	{
+		"url": "/reference/HSIN",
+		"template": "project/reference/core/maths/HSIN.kb"
+	},
+	{
+		"url": "/reference/HTAN",
+		"template": "project/reference/core/maths/HTAN.kb"
+	},
+	{
+		"url": "/reference/LOG",
+		"template": "project/reference/core/maths/LOG.kb"
+	},
+	{
+		"url": "/reference/LOG10",
+		"template": "project/reference/core/maths/LOG10.kb"
+	},
+	{
+		"url": "/reference/RND",
+		"template": "project/reference/core/maths/RND.kb"
+	},
+	{
+		"url": "/reference/SGN",
+		"template": "project/reference/core/maths/SGN.kb"
+	},
+	{
+		"url": "/reference/SIN",
+		"template": "project/reference/core/maths/SIN.kb"
+	},
+	{
+		"url": "/reference/SQR",
+		"template": "project/reference/core/maths/SQR.kb"
+	},
+	{
+		"url": "/reference/TAN",
+		"template": "project/reference/core/maths/TAN.kb"
+	},
+
+	{
+		"url": "/reference/ASC",
+		"template": "project/reference/core/text/ASC.kb"
+	},
+	{
+		"url": "/reference/CENTRE",
+		"template": "project/reference/core/text/CENTRE.kb"
+	},
+	{
+		"url": "/reference/CHR",
+		"template": "project/reference/core/text/CHR.kb"
+	},
+	{
+		"url": "/reference/HEADING",
+		"template": "project/reference/core/text/HEADING.kb"
+	},
+	{
+		"url": "/reference/INT",
+		"template": "project/reference/core/text/INT.kb"
+	},
+	{
+		"url": "/reference/INSTR",
+		"template": "project/reference/core/text/INSTR.kb"
+	},
+	{
+		"url": "/reference/LCASE",
+		"template": "project/reference/core/text/LCASE.kb"
+	},
+	{
+		"url": "/reference/LEFT",
+		"template": "project/reference/core/text/LEFT.kb"
+	},
+	{
+		"url": "/reference/LEN",
+		"template": "project/reference/core/text/LEN.kb"
+	},
+	{
+		"url": "/reference/LSET",
+		"template": "project/reference/core/text/LSET.kb"
+	},
+	{
+		"url": "/reference/MID",
+		"template": "project/reference/core/text/MID.kb"
+	},
+	{
+		"url": "/reference/PRINT",
+		"template": "project/reference/core/text/PRINT.kb"
+	},
+	{
+		"url": "/reference/REPLACE",
+		"template": "project/reference/core/text/REPLACE.kb"
+	},
+	{
+		"url": "/reference/RIGHT",
+		"template": "project/reference/core/text/RIGHT.kb"
+	},
+	{
+		"url": "/reference/RSET",
+		"template": "project/reference/core/text/RSET.kb"
+	},
+	{
+		"url": "/reference/STR",
+		"template": "project/reference/core/text/STR.kb"
+	},
+	{
+		"url": "/reference/STRING",
+		"template": "project/reference/core/text/STRING.kb"
+	},
+	{
+		"url": "/reference/STRIPLEAD",
+		"template": "project/reference/core/text/STRIPLEAD.kb"
+	},
+	{
+		"url": "/reference/STRIPTRAIL",
+		"template": "project/reference/core/text/STRIPTRAIL.kb"
+	},
+	{
+		"url": "/reference/SWRITE",
+		"template": "project/reference/core/text/SWRITE.kb"
+	},
+	{
+		"url": "/reference/UCASE",
+		"template": "project/reference/core/text/UCASE.kb"
+	},
+	{
+		"url": "/reference/UNRIGHT",
+		"template": "project/reference/core/text/UNRIGHT.kb"
+	},
+	{
+		"url": "/reference/UNLEFT",
+		"template": "project/reference/core/text/UNLEFT.kb"
+	},
+	{
+		"url": "/reference/VAL",
+		"template": "project/reference/core/text/VAL.kb"
+	}
+]
