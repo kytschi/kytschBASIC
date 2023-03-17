@@ -49,10 +49,15 @@ class Compiler
 			this->loadConfig(config_dir);
 		}
 
-		let this->globals["$ROOT_FOLDER"] = getcwd();
-		let this->globals["$ROOT_FOLDER_URL"] = _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"];
-		let this->globals["$ARCADE_API"] = "kytschBASIC-arcade-internal-api";
-		let this->globals["$ARCADE_API_URL"] = this->globals["$ROOT_FOLDER_URL"] . "/" . this->globals["$ARCADE_API"];
+		let this->globals["_VALID"] = [];
+		let this->globals["_VALID"]["captcha"] = false;
+
+		let this->globals["_POST"] = _POST;
+		let this->globals["_GET"] = _GET;
+		let this->globals["_ROOT"] = getcwd();
+		let this->globals["_RURL"] = _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"];
+		let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api";
+		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];
 
 		//Session::start(this->config);
 	}
@@ -121,13 +126,14 @@ class Compiler
 		}
 */
 		var route, err;
+
 		for route in this->config["routes"] {
 			if (!isset(route->url)) {
 				(new Exception("router URL not defined in the config"))->fatal();
 			}
-
+			
 			if (route->url == url["path"]) {
-				var output = (new Parser())->parse(
+				var parsed = (new Parser())->parse(
 					getcwd() . "/" . route->template,
 					this->config,
 					this->globals,
@@ -136,8 +142,13 @@ class Compiler
 				);
 				
 				try {
-					let output = "<?php echo '<!DOCTYPE html>';" . output;
-					file_put_contents(this->globals["$ROOT_FOLDER"] . "/compiled.php", output);
+					var output;
+
+					let output = "<?php ";
+					let output = output . "define(\"_VALID\", unserialize('" . serialize(this->globals["_VALID"]) . "'));";
+					let output = output . "echo '<!DOCTYPE html>';";
+					let output = output . parsed;
+					file_put_contents(this->globals["_ROOT"] . "/compiled.php", output);
 					echo eval("?>" . output);
 				} catch \ParseError, err {
 					(new Exception(err->getMessage(), err->getCode()))->fatal();
@@ -149,11 +160,5 @@ class Compiler
 		}
 
 		(new Exception("Page not found", 404))->fatal();
-
-		
-		echo "<html><body><p>Page not found</p>";
-		echo "<hr/>";
-		echo "<p>kytschBASIC<br/>";
-		echo this->version . "</p></body></html>";
 	}
 }

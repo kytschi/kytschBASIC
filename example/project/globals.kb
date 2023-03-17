@@ -1,11 +1,11 @@
 LANG "en"
 HEAD
-	LOAD "$ROOT_FOLDER/project/shared/head"
+	LOAD "_ROOT/project/shared/head"
 	NAME "Parameters on commands | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
-		LOAD "$ROOT_FOLDER/project/shared/header"
+		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				HEADING 2
@@ -15,7 +15,7 @@ BODY
 					PRINT "There are global variables available within kytschBASIC. For example:"
 				SWRITE CLOSE
 				CPRINT
-BITMAPFONT "$ROOT_FOLDER/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
+BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 				CPRINT CLOSE
 				TABLE
 					THEAD
@@ -31,7 +31,7 @@ BITMAPFONT "$ROOT_FOLDER/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 					TBODY
 						TROW
 							TCELL
-								PRINT "$ROOT_FOLDER"
+								PRINT "_ROOT"
 							TCELL CLOSE
 							TCELL
 								PRINT "The root folder where the source of the project is held"
@@ -42,6 +42,6 @@ BITMAPFONT "$ROOT_FOLDER/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 			DIV CLOSE
 		DIV CLOSE
 	MAIN CLOSE
-	LOAD "$ROOT_FOLDER/project/shared/footer"
+	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END

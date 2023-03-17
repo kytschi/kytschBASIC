@@ -1,11 +1,11 @@
 LANG "en"
 HEAD
-	LOAD "$ROOT_FOLDER/project/shared/head"
+	LOAD "_ROOT/project/shared/head"
 	NAME "FORM statment | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
-		LOAD "$ROOT_FOLDER/project/shared/header"
+		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				SWRITE
@@ -20,10 +20,10 @@ BODY
 					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
-IF FGET["input_test"] THEN
+IFNTE _GET["input_test"] THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT FGET["input_test"]
+	PRINT _GET["input_test"]
 END IF
 FORM "form_test"
 	SWRITE
@@ -55,10 +55,10 @@ FORM CLOSE
 					PRINT "Output"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24 kb-code-block"
-IF FGET["input_test"] THEN
+IFNTE _GET["input_test"] THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT FGET["input_test"]
+	PRINT _GET["input_test"]
 END IF
 FORM "form_test"
 	SWRITE
@@ -86,6 +86,12 @@ FORM "form_test"
 	SWRITE CLOSE
 FORM CLOSE
 				DIV CLOSE
+				HEADING 3
+					PRINT "Adding a CAPTCHA to the form"
+				HEADING CLOSE
+				CPRINT
+FORM CAPTCHA "captcha"
+				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
 				HEADING CLOSE
@@ -121,6 +127,6 @@ FORM CLOSE
 			DIV CLOSE
 		DIV CLOSE
 	MAIN CLOSE
-	LOAD "$ROOT_FOLDER/project/shared/footer"
+	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END

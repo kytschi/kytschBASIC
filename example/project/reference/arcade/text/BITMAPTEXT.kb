@@ -1,12 +1,12 @@
 LANG "en"
 HEAD
 	INCLUDE arcade
-	LOAD "$ROOT_FOLDER/project/shared/head"
+	LOAD "_ROOT/project/shared/head"
 	NAME "BITMAPTEXT statment | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
-		LOAD "$ROOT_FOLDER/project/shared/header"
+		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				SWRITE
@@ -28,7 +28,7 @@ SCREEN "the-traveller",800,600
 		RGB 0,0,0
 		BITMAP 0,0,800,400
 			RGB 255,0,0
-			BITMAPFONT "$ROOT_FOLDER/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
+			BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 			BITMAPTEXT 220,150,32,0,75,"The Traveller"
 			BITMAPTEXT 235,320,18,0,75,"Press any key to start"
 		BITMAP CLOSE
@@ -50,7 +50,7 @@ SCREEN CLOSE
 						RGB 0,0,0
 						BITMAP 0,0,800,400
 							RGB 255,0,0
-							BITMAPFONT "$ROOT_FOLDER/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
+							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 							BITMAPTEXT 220,150,32,0,75,"The Traveller"
 							BITMAPTEXT 235,320,18,0,75,"Press any key to start"
 						BITMAP CLOSE
@@ -153,6 +153,6 @@ SCREEN CLOSE
 			DIV CLOSE
 		DIV CLOSE
 	MAIN CLOSE
-	LOAD "$ROOT_FOLDER/project/shared/footer"
+	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END

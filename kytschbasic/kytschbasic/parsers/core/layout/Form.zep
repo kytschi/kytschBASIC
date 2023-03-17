@@ -71,7 +71,7 @@ class Form extends Command
 		if (isset(args[0])) {
 			let arg = Args::clean(args[0]);
 			if (!empty(arg)) {
-				let params .= " name=\"" . arg . "\"";
+				let params .= " name=\"" . arg . "\"" . " value=\"" . arg . "\"";
 			}
 		}
 

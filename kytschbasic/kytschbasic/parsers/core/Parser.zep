@@ -153,6 +153,13 @@ class Parser extends Command
 		// Clean the command of the tabs and the returns.
 		var cleaned = str_replace(["\t", "\n", "    "], "", command);
 
+		// Trigger a redirect.
+		if (self::match(cleaned, "GOTO")) {
+			var url = trim(trim(str_replace("GOTO ","", command)), "\"");
+			let this->output = this->output . "header('Location: " . url . "');";
+			return true;
+		}
+
 		// Output a line break or a new line.
 		if (self::match(cleaned, "BENCHMARK")) {
 			let this->output = this->output . self::output("<script type=\"text/javascript\">let kb_start_time = " . this->start_time . ";window.onload = function () {document.getElementById(\"kb-benchmark\").innerHTML = ((Date.now() - kb_start_time) / 1000).toFixed(3) + \"s\";}</script><span id=\"kb-benchmark\"></span>");
@@ -195,6 +202,11 @@ class Parser extends Command
 			return true;
 		}
 
+		// Check to see the command is CPRINT for code printing.
+		if (this->processCPrint(cleaned, command)) {
+			return true;
+		}
+
 		// Output a line break or a new line.
 		if (self::match(cleaned, "LINE BREAK")) {
 			let this->output = this->output . self::output("<br/>");
@@ -226,11 +238,6 @@ class Parser extends Command
 			return true;
 		}
 				
-		// Check to see the command is CPRINT for code printing.
-		if (this->processCPrint(cleaned, command)) {
-			return true;
-		}
-
 		 // Parse the HEADING statement.
 		let parsed = Heading::parse(cleaned, this->event_manager, this->globals);
 		if (parsed != null) {
@@ -340,7 +347,33 @@ class Parser extends Command
 				return true;
 			}
 
-			throw new \Exception("Invalid ELSEIF statement");
+			throw new Exception("Invalid ELSEIF statement");
+		} elseif (self::match(line, "ELSE")) {
+			let this->output = this->output . "} else {";
+			return true;
+		} elseif (self::match(line, "IFNTE")) {
+			let args = self::parseSpaceArgs(line, "IFNTE");
+			
+			if (count(args) > 2) {				
+				if (args[1] == "THEN") {
+					this->processIfThen(args);
+				} elseif(isset(args[3])) {
+					if (args[3] == "THEN") {
+						this->processIfThen(args, 4);
+					} 
+				}
+				return true;
+			} elseif (count(args) >= 1 && count(args) <= 2) {
+				let args[0] = "!empty($" . args[0] . ")";
+
+				if (substr_count(args[0], "=") == 1) {
+					let args[0] = str_replace("=", "==", args[0]);
+				}
+				let this->output = this->output . "if(" . args[0] . ") {";
+				return true;
+			}
+
+			throw new Exception("Invalid IFNTE statement");
 		} elseif (self::match(line, "IF")) {
 			let args = self::parseSpaceArgs(line, "IF");
 			
@@ -354,23 +387,7 @@ class Parser extends Command
 				}
 				return true;
 			} elseif (count(args) >= 1 && count(args) <= 2) {
-				if (self::match(args[0], "FGET")) {
-					var param = str_replace(["FGET[\"", "\"]"], "", args[0]);
-					if (isset(_GET[param])) {
-						let args[0] = "\"" . _GET[param] . "\"";
-					} else {
-						let args[0] = "\"\"";
-					}
-				} elseif (self::match(args[0], "FPOST")) {
-					var param = str_replace(["FPOST[\"", "\"]"], "", args[0]);
-					if (isset(_POST[param])) {
-						let args[0] = "\"" . _GET[param] . "\"";
-					} else {
-						let args[0] = "\"\"";
-					}
-				} else {
-					let args[0] = "$" . args[0];
-				}
+				let args[0] = args[0];
 
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
@@ -379,7 +396,7 @@ class Parser extends Command
 				return true;
 			}
 
-			throw new \Exception("Invalid IF statement");
+			throw new Exception("Invalid IF statement");
 		}
 
 		return false;

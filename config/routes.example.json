@@ -42,16 +42,12 @@
 	},
 
 	{
-		"url": "/reference/FGET",
-		"template": "project/reference/core/variables/FGET.kb"
-	},
-	{
-		"url": "/reference/FPOST",
-		"template": "project/reference/core/variables/FPOST.kb"
-	},
-	{
 		"url": "/reference/LET",
 		"template": "project/reference/core/variables/LET.kb"
+	},
+	{
+		"url": "/reference/DUMP",
+		"template": "project/reference/core/variables/DUMP.kb"
 	},
 
 	{
@@ -64,8 +60,16 @@
 	},
 
 	{
+		"url": "/reference/GOTO",
+		"template": "project/reference/core/conditional/GOTO.kb"
+	},
+	{
 		"url": "/reference/IF",
 		"template": "project/reference/core/conditional/IF.kb"
+	},
+	{
+		"url": "/reference/IFNTE",
+		"template": "project/reference/core/conditional/IFNTE.kb"
 	},
 	{
 		"url": "/reference/FOR",
@@ -89,6 +93,10 @@
 		"template": "project/reference/core/database/DATA.kb"
 	},
 	{
+		"url": "/reference/DLIMIT",
+		"template": "project/reference/core/database/DLIMIT.kb"
+	},
+	{
 		"url": "/reference/DOPEN",
 		"template": "project/reference/core/database/DOPEN.kb"
 	},
@@ -99,6 +107,10 @@
 	{
 		"url": "/reference/DSELECT",
 		"template": "project/reference/core/database/DSELECT.kb"
+	},
+	{
+		"url": "/reference/DSET",
+		"template": "project/reference/core/database/DSET.kb"
 	},
 	{
 		"url": "/reference/DSORT",

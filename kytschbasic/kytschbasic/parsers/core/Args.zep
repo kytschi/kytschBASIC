@@ -175,8 +175,8 @@ class Args
 		string str,
 		array globals = []
 	) {
-		if (strpos(str, "$ROOT_FOLDER") !== false) {
-			let str = str_replace("$ROOT_FOLDER", globals["$ROOT_FOLDER"], str);
+		if (strpos(str, "_ROOT") !== false) {
+			let str = str_replace("_ROOT", globals["_ROOT"], str);
 		}
 
 		return str;

@@ -1,11 +1,11 @@
 LANG "en"
 HEAD
-	LOAD "$ROOT_FOLDER/project/shared/head"
+	LOAD "_ROOT/project/shared/head"
 	NAME "MID statment | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
-		LOAD "$ROOT_FOLDER/project/shared/header"
+		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				SWRITE
@@ -115,6 +115,6 @@ BAS
 			DIV CLOSE
 		DIV CLOSE
 	MAIN CLOSE
-	LOAD "$ROOT_FOLDER/project/shared/footer"
+	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END

@@ -100,6 +100,9 @@ HEADER
 		LINK "/reference/DATA","Find out about the DATA command","nav-link"
 			PRINT "DATA"
 		LINK CLOSE
+		LINK "/reference/DLIMIT","Find out about the DLIMIT command","nav-link"
+			PRINT "DLIMIT"
+		LINK CLOSE
 		LINK "/reference/DOPEN","Find out about the DOPEN command","nav-link"
 			PRINT "DREAD"
 		LINK CLOSE
@@ -112,14 +115,11 @@ HEADER
 		LINK "/reference/DSORT","Find out about the DSORT command","nav-link"
 			PRINT "DSORT"
 		LINK CLOSE
+		LINK "/reference/DUMP","Find out about the DUMP command","nav-link"
+			PRINT "DUMP"
+		LINK CLOSE
 		LINK "/reference/DWHERE","Find out about the DWHERE command","nav-link"
 			PRINT "DWHERE"
-		LINK CLOSE
-		LINK "/reference/DREAD","Find out about the DREAD command","nav-link"
-			PRINT "DREAD"
-		LINK CLOSE
-		LINK "/reference/DLIMIT","Find out about the DLIMIT command","nav-link"
-			PRINT "DLIMIT"
 		LINK CLOSE
 		LINK "/reference/ELLIPSE","Find out about the ELLIPSE command","nav-link"
 			PRINT "ELLIPSE"
@@ -133,20 +133,17 @@ HEADER
 		LINK "/reference/FRAC","Find out about the FRAC command","nav-link"
 			PRINT "FRAC"
 		LINK CLOSE
-		LINK "/reference/FGET","Find out about the FGET command","nav-link"
-			PRINT "FGET"
-		LINK CLOSE
 		LINK "/reference/FORM","Find out about the FORM command","nav-link"
 			PRINT "FORM"
-		LINK CLOSE
-		LINK "/reference/FPOST","Find out about the FPOST command","nav-link"
-			PRINT "FPOST"
 		LINK CLOSE
 		LINK "/reference/FOOTER","Find out about the FOOTER command","nav-link"
 			PRINT "FOOTER"
 		LINK CLOSE
 		LINK "/reference/FOR","Find out about the FOR command","nav-link"
 			PRINT "FOR"
+		LINK CLOSE
+		LINK "/reference/GOTO","Find out about the GOTO command","nav-link"
+			PRINT "GOTO"
 		LINK CLOSE
 		LINK "/reference/HCOS","Find out about the HCOS command","nav-link"
 			PRINT "HCOS"
@@ -171,6 +168,9 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/IF","Find out about the IF command","nav-link"
 			PRINT "IF"
+		LINK CLOSE
+		LINK "/reference/IFNTE","Find out about the IFNTE command","nav-link"
+			PRINT "IFNTE"
 		LINK CLOSE
 		LINK "/reference/IMAGE","Find out about the IMAGE command","nav-link"
 			PRINT "IMAGE"

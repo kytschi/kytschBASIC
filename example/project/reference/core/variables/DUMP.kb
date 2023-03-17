@@ -1,26 +1,24 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FAVICON statment | kytschBASIC"
+	NAME "DUMP statment | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
 		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
-				SWRITE
-					PRINT "FAVICON","heading-command basic"
-					LINE BREAK
-					PRINT "FILE, SIZES","heading-args"
-				SWRITE CLOSE
-				SWRITE
-					PRINT "Add a favicon to the site."
-				SWRITE CLOSE
-				HEADING 3
-					Example
+				HEADING 2
+					PRINT "DUMP","basic"
 				HEADING CLOSE
+				SWRITE
+					PRINT "This allows you to dump a variable onscreen for inspection"
+				SWRITE CLOSE
+				SWRITE "h3"
+					PRINT "Example"
+				SWRITE CLOSE
 				CPRINT
-FAVICON "/kytschi/imgs/favicon.ico","64x64"
+DUMP _POST
 				CPRINT CLOSE
 			DIV CLOSE
 		DIV CLOSE

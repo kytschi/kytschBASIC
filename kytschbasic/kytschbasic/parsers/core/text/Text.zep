@@ -286,23 +286,7 @@ class Text extends Command
 		
 		if (isset(args[0])) {
 			let value = args[0];
-
-			if (self::match(value, "FGET")) {
-				var param = str_replace(["FGET[\"", "\"]"], "", value);
-				if (isset(_GET[param])) {
-					let value = "\"" . _GET[param] . "\"";
-				} else {
-					let value = "\"\"";
-				}
-			} elseif (self::match(value, "FPOST")) {
-				var param = str_replace(["FPOST[\"", "\"]"], "", value);
-				if (isset(_POST[param])) {
-					let value = "\"" . _POST[param] . "\"";
-				} else {
-					let value = "\"\"";
-				}
-			}
-
+			
 			if (substr(value,0,1) == "\"") {
 				let value = "echo '" . self::safe(trim(value, "\"")) . "';";
 			} else {
