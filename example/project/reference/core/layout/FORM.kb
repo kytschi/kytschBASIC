@@ -11,7 +11,7 @@ BODY
 				SWRITE
 					PRINT "FORM","heading-command basic"
 					LINE BREAK
-					PRINT "ID, METHOD (default is GET), CLASS","heading-args"
+					PRINT "ID, METHOD (default is GET), ACTION, CLASS","heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Creating an HTML form."

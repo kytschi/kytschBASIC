@@ -106,6 +106,9 @@ HEADER
 		LINK "/reference/DSELECT","Find out about the DSELECT command","nav-link"
 			PRINT "DSELECT"
 		LINK CLOSE
+		LINK "/reference/DSET","Find out about the DSET command","nav-link"
+			PRINT "DSET"
+		LINK CLOSE
 		LINK "/reference/DSORT","Find out about the DSORT command","nav-link"
 			PRINT "DSORT"
 		LINK CLOSE
@@ -114,6 +117,9 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/DREAD","Find out about the DREAD command","nav-link"
 			PRINT "DREAD"
+		LINK CLOSE
+		LINK "/reference/DLIMIT","Find out about the DLIMIT command","nav-link"
+			PRINT "DLIMIT"
 		LINK CLOSE
 		LINK "/reference/ELLIPSE","Find out about the ELLIPSE command","nav-link"
 			PRINT "ELLIPSE"

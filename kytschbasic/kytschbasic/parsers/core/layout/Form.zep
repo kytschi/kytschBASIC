@@ -42,8 +42,12 @@ class Form extends Command
 			return self::output("</form>");
 		} elseif (self::match(command, "FORM INPUT")) {
 			return self::processInput(command, event_manager, globals);
+		} elseif (self::match(command, "FORM TEXTAREA")) {
+			return self::processTextarea(command, event_manager, globals);
 		} elseif (self::match(command, "FORM SUBMIT")) {
 			return self::processButton(command, event_manager, globals, "submit");
+		} elseif (self::match(command, "FORM CAPTCHA")) {
+			return self::processCaptcha(command, event_manager, globals, config);
 		} elseif (substr(command, 0, 4) == "FORM") {
 			return self::processForm(command, event_manager, globals);
 		}
@@ -100,6 +104,104 @@ class Form extends Command
 		return self::output("<button " . params . ">" . label . "</button>");
 	}
 
+	private static function processCaptcha(
+		string command,
+		event_manager,
+		array globals,
+		var config = null
+	) {
+		var colour, red, green, blue, width, height, image, keyspace, pieces, max, trans_colour;
+		let colour = "000000";
+
+        if (strlen(colour) == 6) {
+            let red = hexdec(substr(colour, 0, 2));
+            let green = hexdec(substr(colour, 2, 2));
+            let blue = hexdec(substr(colour, 4, 2));
+        } elseif (strlen(colour) == 3) {
+            let red = hexdec(substr(colour, 0, 1));
+            let green = hexdec(substr(colour, 1, 1));
+            let blue = hexdec(substr(colour, 3, 1));
+        } else {
+            let red = 0;
+            let green = 0;
+            let blue = 0;
+        }
+
+        let width = 340;
+        let height = 100;
+
+        let image = imagecreatetruecolor(width, height);
+        imagesavealpha(image, true);
+
+        let trans_colour = imagecolorallocatealpha(image, 0, 0, 0, 127);
+        imagefill(image, 0, 0, trans_colour);
+
+        let keyspace = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+        let pieces = [];
+        let max = count(keyspace) - 1;
+
+		var i, captcha, font_colour, image_data, line_color, letter = "", encrypted;
+
+		let i = 7;
+		while i {
+            if (random_int(0, 1)) {
+                let letter = keyspace[random_int(0, max)];
+            } else {
+                let letter = strtolower(keyspace[random_int(0, max)]);
+            }
+            let pieces[] = letter;
+			let i -= 1;
+        }
+
+        let captcha = implode("", pieces);
+
+        let font_colour = imagecolorallocate(image, red, green, blue);
+        imagefttext(
+           	image,
+            38,
+            0,
+            15,
+            65,
+            font_colour,
+            getcwd() . "/" . ltrim(config["assets"]->captcha_font, "/"),
+            captcha
+        );		
+
+		let i = 20;
+		while i {
+            let line_color = imagecolorallocatealpha(image, red, green, blue, rand(10, 100));
+            imageline(image, rand(0, width), rand(0, height), rand(0, width), rand(0, height), line_color);
+			let i -= 1;
+        }
+
+        ob_start();
+        imagepng(image);
+        let image_data = ob_get_contents();
+        ob_end_clean();
+
+        mt_srand(mt_rand(100000, 999999));
+		
+		var iv;
+		let iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length("AES-128-CBC"));
+
+        let encrypted = openssl_encrypt(
+            "_KBCAPTCHA=" . captcha . "=" . mt_rand(0, 99999999),
+            "aes128",
+            captcha,
+			0,
+			iv
+        ) . base64_encode(iv);
+		
+        imagedestroy(image);
+
+		return self::output(
+			"<div class=\"kb-captcha-img\"><img src=\"data:image/png;base64," . base64_encode(image_data) . "\" alt=\"captcha\"/></div>" .
+			"<input name=\"captcha\" class=\"kb-captcha-input\" required/>" .
+			"<input name=\"_KBCAPTCHA\" type=\"hidden\" value=\"" . encrypted . "\"/>"
+		);
+	}
+
 	private static function processInput(
 		string command,
 		event_manager,
@@ -146,6 +248,52 @@ class Form extends Command
 		return self::output("<input " . params . ">");
 	}
 
+	private static function processTextarea(
+		string command,
+		event_manager,
+		array globals
+	) {
+		let self::id = self::genID("kb-textarea");
+
+		var args, arg, params="";
+		let args = Args::parseShort(strtoupper("form textarea"), command);
+
+		if (isset(args[0])) {
+			let arg = Args::clean(args[0]);
+			if (!empty(arg)) {
+				let params .= " name=\"" . arg . "\"";
+			}
+		}
+
+		if (isset(args[1])) {
+			let arg = Args::clean(args[1]);
+			if (!empty(arg)) {
+				let self::_class = arg;
+				let params .= " class=\"" . self::_class . "\"";
+			}
+		}
+
+		if (isset(args[2])) {
+			let arg = Args::clean(args[2]);
+			if (!empty(arg)) {
+				let params .= " placeholder=\"" . arg . "\"";
+			}
+		}
+
+		if (isset(args[3])) {
+			let arg = Args::clean(args[3]);
+			if (!empty(arg)) {
+				let self::id = arg;
+			}
+		}
+
+		let params = params . " id=\"" . self::id . "\"";
+
+		let params = params . Args::leftOver(4, args);
+
+		return self::output("<textarea " . params . "></textarea>");
+	}
+
 	private static function processForm(
 		string command,
 		event_manager,
@@ -178,6 +326,13 @@ class Form extends Command
 
 		if (isset(args[2])) {
 			let arg = Args::clean(args[2]);
+			if (!empty(arg)) {
+				let params .= " action=\"" . arg . "\"";
+			}
+		}
+
+		if (isset(args[3])) {
+			let arg = Args::clean(args[3]);
 			if (!empty(arg)) {
 				let self::_class = arg;
 				let params .= " class=\"" . self::_class . "\"";

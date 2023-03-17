@@ -28,10 +28,10 @@ WINDOW "intro",,(200,0)
 					PRINT "Setting HTML parameters on commands"
 				HEADING CLOSE
 				SWRITE
-					"You can pass any parameter you like along with the command but note that only those valid ones to the corresponding HTML tag will be picked up by browser and used. The rest will be outputted. HTML parameters always come after the command parameters."
+					PRINT "You can pass any parameter you like along with the command but note that only those valid ones to the corresponding HTML tag will be picked up by browser and used. The rest will be outputted. HTML parameters always come after the command parameters."
 				SWRITE CLOSE
 				SWRITE
-					Lets use the WINDOW example above and set its class.
+					PRINT "Lets use the WINDOW example above and set its class."
 				SWRITE CLOSE
 				CPRINT
 WINDOW "intro",,(200,0),,,class$="some-class",data-id$="some-id"
@@ -42,7 +42,7 @@ WINDOW "intro",,(200,0),,,class$="some-class",data-id$="some-id"
 				PRINT "It is important that the parameter count matches that of what the command is expecting!","heading-command basic"
 				SWRITE
 					PRINT "For more information on HTML tags and what they do please visit "
-					LINK newto$="https://www.w3schools.com/TAgs/default.asp"
+					LINK "https://www.w3schools.com/TAgs/default.asp",,"_blank"
 						PRINT "W3 Schools"
 					LINK CLOSE
 					PRINT " or using your favourtie search engine look up html tags."

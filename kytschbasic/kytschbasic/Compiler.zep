@@ -64,6 +64,7 @@ class Compiler
 	{
 		var err, config, filename;
 		var configs = [
+			"assets",
 			"cache",
 			"database",
 			"routes",
