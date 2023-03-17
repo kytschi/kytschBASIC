@@ -27,7 +27,7 @@ namespace KytschBASIC\Exceptions;
 class Exception extends \Exception
 {
     public code;
-    private version;
+    public version;
 
 	public function __construct(string message, int code = 500, string version = "0.0.7 alpha")
 	{

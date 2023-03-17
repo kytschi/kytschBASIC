@@ -82,8 +82,9 @@ class Command
 			return splits;
 		}
 
+		// Ignore the stuff between quotes
 		let line = preg_replace_callback(
-			"/(\"[^\",]+),([^\"]+\")/",
+			"/\"[^\"']+\"|[^,]+/",
 			function (matches) use (comma_code) {
 				return str_replace(",", comma_code, matches[0]);
 			},

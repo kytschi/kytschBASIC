@@ -24,8 +24,8 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
+use KytschBASIC\Exceptions\DatabaseException;
 use KytschBASIC\Parsers\Core\Command;
-use KytschBASIC\Parsers\Core\Session;
 
 class Database extends Command
 {
@@ -62,7 +62,7 @@ class Database extends Command
 	private static function close()
 	{
 		if (empty(self::database)) {
-			throw new \Exception("no database selected to read");
+			throw new DatabaseException("no database selected to read");
 		}
 
 		var dsn = "", connection, statement;
@@ -74,7 +74,7 @@ class Database extends Command
 		}
 
 		if (empty(self::database_config->dbname)) {
-			throw new \Exception("no database defined in the config");
+			throw new DatabaseException("no database defined in the config");
 		}
 		let dsn .= "dbname=" . self::database_config->dbname . ";";
 				
@@ -93,28 +93,27 @@ class Database extends Command
 		let statement = connection->prepare(self::data_sql);
 		statement->execute();
 
-		Session::write(self::data_var, statement->fetchAll());
 		let self::data_line = false;
-
-		return true;
+				
+		return "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=unserialize('" . serialize(statement->fetchAll()) . "');";
 	}
 
 	public static function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
-		config
+		var config = null
 	) {
 		var err;
 
 		try {
 			if (self::match(line, "DATA CLOSE")) {
 				return self::close();
-			} elseif (self::match(line, "DATA")) {
+			} elseif (self::match(line, "DATA") && !self::match(line, "DATA CLOSE")) {
 				var args = self::parseArgs("DATA", line);
 
 				if (empty(args[0])) {
-					throw new \Exception("DATA variable name missing");
+					throw new DatabaseException("DATA variable name missing");
 				}
 
 				let self::data_var = trim(args[0]);
@@ -128,7 +127,7 @@ class Database extends Command
 				}
 
 				if (empty(config["database"])) {
-					throw new \Exception("db settings not found in the config");
+					throw new DatabaseException("db settings not found in the config");
 				}
 
 				for db_config in config["database"] {
@@ -139,7 +138,7 @@ class Database extends Command
 				}
 
 				if (empty(self::database_config)) {
-					throw new \Exception("no db settings not found in the config for " . open);
+					throw new DatabaseException("no db settings not found in the config for " . open);
 				}
 
 				return true;
@@ -151,12 +150,12 @@ class Database extends Command
 				}
 
 				if (empty(self::database)) {
-					throw new \Exception("no database selected to read");
+					throw new DatabaseException("no database selected to read");
 				}
 				return true;
 			} elseif (self::match(line, "DSELECT")) {
 				if (empty(self::database)) {
-					throw new \Exception("no database selected to read");
+					throw new DatabaseException("no database selected to read");
 				}
 
 				var args = self::parseArgs("DSELECT", line);
@@ -166,7 +165,7 @@ class Database extends Command
 				return true;
 			} elseif (self::match(line, "DWHERE")) {
 				if (empty(self::database)) {
-					throw new \Exception("no database selected to read");
+					throw new DatabaseException("no database selected to read");
 				}
 
 				var args = self::parseArgs("DWHERE", line);
@@ -177,7 +176,7 @@ class Database extends Command
 				return true;
 			} elseif (self::match(line, "DSORT")) {
 				if (empty(self::database)) {
-					throw new \Exception("no database selected to read");
+					throw new DatabaseException("no database selected to read");
 				}
 
 				var args = self::parseArgs("DSORT", line);
@@ -186,12 +185,36 @@ class Database extends Command
 				}
 
 				return true;
-			} elseif (self::data_line) {
+			} elseif (self::match(line, "DLIMIT")) {
+				if (empty(self::database)) {
+					throw new DatabaseException("no database selected to read");
+				}
+
+				var args = self::parseArgs("DLIMIT", line);
+				if (isset(args[0])) {
+					let self::data_sql = self::data_sql . " LIMIT " . intval(self::cleanArg(args[0]));
+				}
+
+				return true;
+			} elseif (self::match(line, "DSET")) {
+				if (empty(self::database)) {
+					throw new DatabaseException("no database selected to set to data with");
+				}
+
+				var args = self::parseArgs("DSET", line);
+				if (isset(args[0])) {
+					let self::data_sql = "UPDATE " . self::database . " SET " . self::cleanArg(args[0]);
+				}
+
+				return true;
+			} /*elseif (self::data_line) {
 				 //Building the SQL for the data connection instead of parsing.
 				return true;
-			}
+			}*/
 
-			return false;
+			return null;
+		} catch DatabaseException, err {
+		    err->fatal();
 		} catch \RuntimeException|\Exception, err {
 			var message;
 

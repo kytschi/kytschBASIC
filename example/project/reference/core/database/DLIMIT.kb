@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "$ROOT_FOLDER/project/shared/head"
-	NAME "DATA statment | kytschBASIC"
+	NAME "DLIMIT statment | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
@@ -9,16 +9,17 @@ BODY
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				HEADING 2
-					PRINT "DATA","basic"
+					PRINT "DLIMIT","basic"
 				HEADING CLOSE
 				SWRITE
-					PRINT "Used to connect to a database to run queries and pull data back for use."
+					PRINT "Limit the results of a database query."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
-SPRINT DATA menu#
+SPRINT REM Define the database connection and assign the results to the menu& variable.
+SPRINT DATA, menu#
 	SPRINT REM Open the database connection from the config file labelled kytschBASIC.
 	SPRINT DOPEN "kytschBASIC"
 
@@ -33,12 +34,15 @@ SPRINT DATA menu#
 
 	SPRINT REM Sort the results by their name alphabetically.
 	SPRINT DSORT "name ASC"
-SPRINT DATA CLOSE
+
+	SPRINT REM Limit the result.
+	SPRINT DLIMIT "1"
+SPRINT END DATA
 
 SPRINT REM Loop through the results stored in menu& variable.
 SPRINT FOR item& IN menu#
 	SWRITE
-		PRINT item&["id"]
+		PRINT item&["id]
 		SPRINT LINE BREAK
 		PRINT item&["name"]
 	SWRITE CLOSE
@@ -47,39 +51,28 @@ SPRINT END FOR
 				HEADING 4
 					PRINT "Output"
 				HEADING CLOSE
-				DIV "kb-col kb-col-24 kb-code-block"
-DATA menu#
-	REM Open the database connection from the config file labelled kytschBASIC.
-	DOPEN "kytschBASIC"
-
-	REM Read from the menu table in the database.
-	DREAD "menu"
-
-	REM Select all entries from the menu table.
-	DSELECT "*"
-
-	REM Condition the select to those that aren't deleted.
-	DWHERE "deleted_at IS NULL"
-
-	REM Sort the results by their name alphabetically.
-	DSORT "name ASC"
-DATA CLOSE
-
-REM Loop through the results stored in menu& variable.
-FOR item& IN menu#
-	SWRITE
-		PRINT item&["id"]
-		LINE BREAK
-		PRINT item&["name"]
-	SWRITE CLOSE
-FOR CLOSE
-				DIV CLOSE
+				CPRINT
+&lt;span&gt;2&lt;/span&gt;
+&lt;span>About&lt;/span&gt;
+&lt;br/&gt;
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Sort directions"
+				HEADING CLOSE
+				CPRINT
+ASC is ascending, i.e. A-Z
+DESC is descending, i.e. Z-A
+				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24", "see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/DATA"
+						PRINT "DATA"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
 					LINK "/reference/DOPEN"
@@ -94,12 +87,12 @@ FOR CLOSE
 						PRINT "DSELECT"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/reference/DSORT"
-						PRINT "DSORT"
-					LINK CLOSE
-					PRINT "&comma;&nbsp;"
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/DSORT"
+						PRINT "DSORT"
 					LINK CLOSE
 				DIV CLOSE
 			DIV CLOSE

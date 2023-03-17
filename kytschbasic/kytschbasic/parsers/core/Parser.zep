@@ -212,15 +212,20 @@ class Parser extends Command
 		}
 
 		// Check to see the command is DATA for accessing the database.
-		if (Database::parse(
+		let parsed = Database::parse(
 			cleaned,
 			this->event_manager,
 			this->globals,
 			this->config
-		)) {
+		);
+		
+		if (parsed != null) {
+			if (is_string(parsed)) {
+				let this->output = this->output . parsed;
+			}
 			return true;
 		}
-		
+				
 		// Check to see the command is CPRINT for code printing.
 		if (this->processCPrint(cleaned, command)) {
 			return true;

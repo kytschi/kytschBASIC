@@ -283,7 +283,7 @@ class Text extends Command
 		let line = Maths::commands(line, true);
 
 		let args = self::parseArgs("PRINT", line);
-
+		
 		if (isset(args[0])) {
 			let value = args[0];
 

@@ -54,7 +54,7 @@ class Compiler
 		let this->globals["$ARCADE_API"] = "kytschBASIC-arcade-internal-api";
 		let this->globals["$ARCADE_API_URL"] = this->globals["$ROOT_FOLDER_URL"] . "/" . this->globals["$ARCADE_API"];
 
-		Session::start(this->config);
+		//Session::start(this->config);
 	}
 
 	/**
@@ -135,7 +135,7 @@ class Compiler
 				);
 				
 				try {
-					let output = "<?php " . output;
+					let output = "<?php echo '<!DOCTYPE html>';" . output;
 					file_put_contents(this->globals["$ROOT_FOLDER"] . "/compiled.php", output);
 					echo eval("?>" . output);
 				} catch \ParseError, err {
