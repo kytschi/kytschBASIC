@@ -85,7 +85,7 @@ class Database extends Command
 		}
 
 		var output;
-		let output = "$connection = new \\PDO(
+		let output = "<?php $connection = new \\PDO(
 			'" . dsn . "',
 			'" . (!empty(self::database_config->user) ? self::database_config->user : "") . "',
 			'" . (!empty(self::database_config->password) ? self::database_config->password : "") . "'
@@ -95,7 +95,7 @@ class Database extends Command
 		let output = output . "$statement->execute();";
 
 		let self::data_line = false;
-		let output = output . "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=$statement->fetchAll();";
+		let output = output . "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=$statement->fetchAll();?>";
 				
 		return output;
 	}

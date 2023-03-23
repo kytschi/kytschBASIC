@@ -39,7 +39,7 @@ class Compiler
 
 	private start_time;
 
-	private version = "0.0.7 alpha";
+	private version = "0.0.8 alpha";
 
 	public function __construct(string config_dir)
 	{
@@ -189,11 +189,11 @@ class Compiler
 					var output;
 
 					let output = "<?php ";
-					let output = output . "define(\"_VALID\", unserialize('" . serialize(this->globals["_VALID"]) . "'));";
-					let output = output . "echo '<!DOCTYPE html>';";
+					let output = output . "define(\"_VALID\", unserialize('" . serialize(this->globals["_VALID"]) . "'));?>";
+					let output = output . "<!DOCTYPE html>";
 					let output = output . parsed;
 					file_put_contents(this->globals["_ROOT"] . "/compiled.php", output);
-					echo eval("?>" . output);
+					require (this->globals["_ROOT"] . "/compiled.php");
 				} catch \ParseError, err {
 					(new Exception(err->getMessage(), err->getCode()))->fatal();
 				} catch \RuntimeException|\Exception, err {

@@ -194,8 +194,8 @@ pre, .kb-code-block {
     padding: 40px;
     color: #cacaca;
     background: #060606;
-    -moz-tab-size: 2;
-    tab-size: 2;
+    -moz-tab-size: 4;
+    tab-size: 4;
 	overflow-x: hidden;
 }
 

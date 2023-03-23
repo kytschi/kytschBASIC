@@ -38,14 +38,14 @@ class ForLoop extends Command
 		var args;
 		
 		if (self::match(line, "FOR CLOSE")) {
-			return "}";
+			return "<?php } ?>";
 		} elseif (self::match(line, "FOR")) {
 			let args = self::parseSpaceArgs(line, "FOR");
 			
 			if (count(args) == 3) {
 				if (strtolower(args[1]) == "in") {
 					var param = str_replace(["&", "$", "%"], "", args[0]);
-					return "foreach ($_SESSION['" . args[2] . "'] as $" . param . ") {";
+					return "<?php foreach ($_SESSION['" . args[2] . "'] as $" . param . ") { ?>";
 				}
 			}
 
@@ -60,15 +60,15 @@ class ForLoop extends Command
 
 			var step = 1;			
 
-			return "$" . splits[0] . " = " . intval(splits[1]) .
-			";while($" . splits[0] . " <= " . intval(args[2]) . ") {$" . splits[0] . "_step = " . step . ";";
+			return "<?php $" . splits[0] . " = " . intval(splits[1]) .
+			";while($" . splits[0] . " <= " . intval(args[2]) . ") {$" . splits[0] . "_step = " . step . ";?>";
 		} elseif (self::match(line, "NEXT")) {
 			let args = self::parseSpaceArgs(line);
 			if (count(args) == 1) {
 				throw new \Exception("NEXT command with no value");
 			}
 
-			return "$" . args[1] . " += $" . args[1] . "_step;}";
+			return "<?php $" . args[1] . " += $" . args[1] . "_step;}?>";
 		}
 
 		return null;

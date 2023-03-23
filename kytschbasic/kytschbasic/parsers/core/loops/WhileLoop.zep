@@ -35,9 +35,9 @@ class WhileLoop extends Command
 		var config = null
 	) {
 		if (self::match(line, "WHILE")) {
-			return "while(" . self::parseEquation(line, "WHILE") . ") {";
+			return "<?php while(" . self::parseEquation(line, "WHILE") . ") { ?>";
 		} elseif (self::match(line, "WEND")) {
-			return "}";
+			return "<?php } ?>";
 		}
 
 		return null;

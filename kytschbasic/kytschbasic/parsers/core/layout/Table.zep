@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Table
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
+ * @copyright   2023 Mike Welsh
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -40,19 +40,19 @@ class Table extends Command
 		var config = null
 	) {
 		if (substr(line, 0, 11) == "TABLE CLOSE") {
-			return self::output("</table>");
+			return "</table>";
 		} elseif (substr(line, 0, 5) == "TABLE") {
 			return self::processTag("TABLE", "table", line, event_manager, globals);
 		} elseif (substr(line, 0, 11) == "TBODY CLOSE") {
-			return self::output("</tbody>");
+			return "</tbody>";
 		} elseif (substr(line, 0, 5) == "TBODY") {
 			return self::processTag("TBODY", "tbody", line, event_manager, globals);
 		} elseif (substr(line, 0, 11) == "TCELL CLOSE") {
-			return self::output("</td>");
+			return "</td>";
 		} elseif (substr(line, 0, 5) == "TCELL") {
 			return self::processCell("TCELL", "td", line, event_manager, globals);
 		} elseif (substr(line, 0, 11) == "TFOOT CLOSE") {
-			return self::output("</tfoot>");
+			return "</tfoot>";
 		} elseif (substr(line, 0, 5) == "TFOOT") {
 			return self::processTag("TFOOT", "tfoot", line, event_manager, globals);
 		} elseif (substr(line, 0, 15) == "THEADCELL CLOSE") {
@@ -60,11 +60,11 @@ class Table extends Command
 		} elseif (substr(line, 0, 9) == "THEADCELL") {
 			return self::processCell("THEADCELL", "th", line, event_manager, globals);
 		} elseif (substr(line, 0, 11) == "THEAD CLOSE") {
-			return self::output("</thead>");
+			return "</thead>";
 		} elseif (substr(line, 0, 5) == "THEAD") {
 			return self::processTag("THEAD", "thead", line, event_manager, globals);
 		} elseif (substr(line, 0, 10) == "TROW CLOSE") {
-			return self::output("</tr>");
+			return "</tr>";
 		} elseif (substr(line, 0, 4) == "TROW") {
 			return self::processTag("TROW", "tr", line, event_manager, globals);
 		}
@@ -118,7 +118,7 @@ class Table extends Command
 
 		let params = params . Args::leftOver(3, args);
 
-		return self::output("<" . tag . " " . params . ">");
+		return "<" . tag . " " . params . ">";
 	}
 
 	private static function processTag(
@@ -152,6 +152,6 @@ class Table extends Command
 
 		let params = params . Args::leftOver(2, args);
 
-		return self::output("<" . tag . " " . params . ">");
+		return "<" . tag . " " . params . ">";
 	}
 }

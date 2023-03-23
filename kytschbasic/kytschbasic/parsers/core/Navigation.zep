@@ -43,11 +43,11 @@ class Navigation extends Command
 		var config = null
 	) {
 		if (self::match(line, "LINK CLOSE")) {
-			return self::output("</a>");
+			return "</a>";
 		} elseif (self::match(line, "LINK")) {
 			return self::processLink(line, event_manager, globals);
 		} elseif (self::match(line, "MENU CLOSE")) {
-			return self::output("</nav>");
+			return "</nav>";
 		} elseif (self::match(line, "MENU")) {
 			return self::processNav(line, event_manager, globals);
 		}
@@ -108,7 +108,7 @@ class Navigation extends Command
 
 		let params = params . self::leftOverArgs(5, args);
 
-		return self::output("<a" . params . ">");
+		return "<a" . params . ">";
 	}
 
 	private static function processNav(
@@ -140,6 +140,6 @@ class Navigation extends Command
 
 		let params = params . self::leftOverArgs(2, args);
 
-		return self::output("<nav" . params . ">");
+		return "<nav" . params . ">";
 	}
 }

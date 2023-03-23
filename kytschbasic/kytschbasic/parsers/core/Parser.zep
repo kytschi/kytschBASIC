@@ -111,7 +111,7 @@ class Parser extends Command
 			}
 
 			// Read the template lines.
-			var commands = file(template);
+			var commands = file(template, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 			if (empty(commands)) {
 				return;
 			}
@@ -143,7 +143,7 @@ class Parser extends Command
 
 			return this->output;
 		} catch Exception, err {
-		    err->fatal();
+		    err->fatal(template, this->line);
 		} catch \RuntimeException|\Exception, err {
 			var newErr;
 			let newErr = new Exception(err->getMessage(), err->getCode());
@@ -159,37 +159,14 @@ class Parser extends Command
 		// Clean the command of the tabs and the returns.
 		var cleaned = str_replace(["\t", "\n", "    "], "", command);
 
-		// Trigger a redirect.
-		if (self::match(cleaned, "GOTO")) {
-			var url = trim(trim(str_replace("GOTO ","", command)), "\"");
-			let this->output = this->output . "header('Location: " . Args::clean(url) . "');";
-			return true;
-		}
-
-		if (self::match(cleaned, "MAIL CLOSE")) {
-			let this->mail = false;
-			this->sendMail();
-			return true;
-		} elseif (self::match(cleaned, "MAIL")) {
-			let this->mail = true;
-			let this->mail_options["message"] = "";
-			this->createMail(cleaned);
-			return true;
-		}
-
 		// Output a line break or a new line.
 		if (self::match(cleaned, "BENCHMARK")) {
 			let this->output = this->output . self::output("<script type=\"text/javascript\">let kb_start_time = " . this->start_time . ";window.onload = function () {document.getElementById(\"kb-benchmark\").innerHTML = ((Date.now() - kb_start_time) / 1000).toFixed(3) + \"s\";}</script><span id=\"kb-benchmark\"></span>");
 			return true;
 		}
 
-		if (self::match(cleaned, "VERSION")) {
-			this->writeOutput(self::output("<span class=\"kb-version\">" . this->version . "</span>"));
-			return true;
-		}
-
 		// SPRINT will ignore the command processing and just output the command as a string.
-		if (self::match(cleaned, "SPRINT")) {
+		if (self::match(cleaned, "SPRINT")) {			
 			this->writeOutput(self::output(str_replace("SPRINT ","", command), true));
 			return true;
 		}
@@ -219,14 +196,37 @@ class Parser extends Command
 			return true;
 		}
 
+		// Output a line break or a new line.
+		if (self::match(cleaned, "LINE BREAK")) {
+			this->writeOutput(self::output("<br/>"));
+			return true;
+		}
+
 		// Check to see the command is CPRINT for code printing.
 		if (this->processCPrint(cleaned, command)) {
 			return true;
 		}
 
-		// Output a line break or a new line.
-		if (self::match(cleaned, "LINE BREAK")) {
-			this->writeOutput(self::output("<br/>"));
+		if (self::match(cleaned, "VERSION")) {
+			this->writeOutput(self::output("<span class=\"kb-version\">" . this->version . "</span>"));
+			return true;
+		}
+
+		// Trigger a redirect.
+		if (self::match(cleaned, "GOTO")) {
+			var url = trim(trim(str_replace("GOTO ","", command)), "\"");
+			let this->output = this->output . "header('Location: " . Args::clean(url) . "');";
+			return true;
+		}
+
+		if (self::match(cleaned, "MAIL CLOSE")) {
+			let this->mail = false;
+			this->sendMail();
+			return true;
+		} elseif (self::match(cleaned, "MAIL")) {
+			let this->mail = true;
+			let this->mail_options["message"] = "";
+			this->createMail(cleaned);
 			return true;
 		}
 		

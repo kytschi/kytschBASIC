@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Layout
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
+ * @copyright   2023 Mike Welsh
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -39,23 +39,23 @@ class Layout extends Command
 		var config = null
 	) {
 		if (substr(command, 0, 9) == "DIV CLOSE") {
-			return self::output("</div>");
+			return "</div>";
 		} elseif (substr(command, 0, 3) == "DIV") {
 			return self::processTag("div", command, event_manager, globals);
 		} elseif (substr(command, 0, 10) == "BODY CLOSE") {
-			return self::output("</body>");
+			return "</body>";
 		} elseif (substr(command, 0, 4) == "BODY") {
 			return self::processTag("body", command, event_manager, globals);
 		} elseif (substr(command, 0, 12) == "FOOTER CLOSE") {
-			return self::output("</footer>");
+			return "</footer>";
 		} elseif (substr(command, 0, 6) == "FOOTER") {
 			return self::processTag("footer", command, event_manager, globals);
 		} elseif (substr(command, 0, 12) == "HEADER CLOSE") {
-			return self::output("</header>");
+			return "</header>";
 		} elseif (substr(command, 0, 6) == "HEADER") {
 			return self::processTag("header", command, event_manager, globals);
 		} elseif (substr(command, 0, 10) == "MAIN CLOSE") {
-			return self::output("</main>");
+			return "</main>";
 		} elseif (substr(command, 0, 4) == "MAIN") {
 			return self::processTag("main", command, event_manager, globals);
 		}
@@ -93,6 +93,6 @@ class Layout extends Command
 
 		let params = params . Args::leftOver(2, args);
 
-		return self::output("<" . tag . " " . params . ">");
+		return "<" . tag . " " . params . ">";
 	}
 }

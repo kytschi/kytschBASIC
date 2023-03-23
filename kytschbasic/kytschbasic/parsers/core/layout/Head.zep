@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Head
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
+ * @copyright   2023 Mike Welsh
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -39,9 +39,9 @@ class Head extends Command
 		var args;
 
 		if (self::match(line, "HEAD CLOSE")) {
-			return self::output("</head>");
+			return "</head>";
 		} elseif (self::match(line, "HEAD") && !self::match(line, "HEADI")) {
-			return self::output("<head>");
+			return "<head>";
 		} elseif (self::match(line, "PALETTE")) {
 			let args = Args::parseShort("PALETTE", line);
 			if (isset(args[0])) {
@@ -54,58 +54,56 @@ class Head extends Command
 					}
 				}
 
-				let str = str . "\">";
-
-				return self::output(str);
+				return str . "\">";				
 			}
 
 			return "";
 		} elseif (self::match(line, "NAME")) {
 			let args = Args::parseShort("NAME", line);
 			if (isset(args[0])) {
-				return self::output("<title>" . self::cleanArg(args[0]) . "</title>");
+				return "<title>" . self::cleanArg(args[0]) . "</title>";
 			}
 
 			return "";
 		} elseif (self::match(line, "LANG")) {
 			let args = Args::parseShort("LANG", line);
 			if (isset(args[0])) {
-				return self::output("<html lang=\"" . self::cleanArg(args[0]) . "\">");
+				return "<html lang=\"" . self::cleanArg(args[0]) . "\">";
 			}
 
 			return "";
 		} elseif (self::match(line, "CHARSET")) {
 			let args = Args::parseShort("CHARSET", line);
 			if (isset(args[0])) {
-				return self::output("<meta charset=\"" . self::cleanArg(args[0]) . "\">");
+				return "<meta charset=\"" . self::cleanArg(args[0]) . "\">";
 			}
 
 			return "";
 		} elseif (self::match(line, "DESCRIPTION")) {
 			let args = Args::parseShort("DESCRIPTION", line);
 			if (isset(args[0])) {
-				return self::output("<meta name=\"description\" content=\"" . self::cleanArg(args[0]) . "\">");
+				return "<meta name=\"description\" content=\"" . self::cleanArg(args[0]) . "\">";
 			}
 
 			return "";
 		} elseif (self::match(line, "KEYWORDS")) {
 			let args = Args::parseShort("KEYWORDS", line);
 			if (isset(args[0])) {
-				return self::output("<meta name=\"keywords\" content=\"" . self::cleanArg(args[0]) . "\">");
+				return "<meta name=\"keywords\" content=\"" . self::cleanArg(args[0]) . "\">";
 			}
 
 			return "";
 		} elseif (self::match(line, "AUTHOR")) {
 			let args = Args::parseShort("AUTHOR", line);
 			if (isset(args[0])) {
-				return self::output("<meta name=\"author\" content=\"" . self::cleanArg(args[0]) . "\">");
+				return "<meta name=\"author\" content=\"" . self::cleanArg(args[0]) . "\">";
 			}
 
 			return "";
 		} elseif (self::match(line, "VIEWPORT")) {
 			let args = Args::parseShort("VIEWPORT", line);
 			if (isset(args[0])) {
-				return self::output("<meta name=\"viewport\" content=\"" . self::cleanArg(args[0]) . "\">");
+				return "<meta name=\"viewport\" content=\"" . self::cleanArg(args[0]) . "\">";
 			}
 
 			return "";
@@ -116,8 +114,7 @@ class Head extends Command
 				if (isset(args[1])) {
 					let output = output . " sizes=\"" . self::cleanArg(args[1]) . "\"";
 				}
-				let output = output . ">";
-				return self::output(output);
+				return output . ">";
 			}
 
 			return "";

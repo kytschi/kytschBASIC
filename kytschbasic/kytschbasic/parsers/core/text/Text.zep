@@ -256,11 +256,11 @@ class Text extends Command
 		} elseif (self::match(line, "UCASE")) {
 			return strtoupper(trim(str_replace("UCASE", "", line), "\""));
 		} elseif (self::match(line, "TAB")) {
-			return self::output("&nbsp;&nbsp;&nbsp;&nbsp;" . trim(str_replace("TAB", "", line), "\""));
+			return "&nbsp;&nbsp;&nbsp;&nbsp;" . trim(str_replace("TAB", "", line), "\"");
 		} elseif (self::match(line, "PRINT")) {
 			return self::processPrint(line, event_manager, globals);
 		} elseif (self::match(line, "SWRITE CLOSE")) {
-			return self::output("</p>");
+			return "</p>";
 		} elseif (self::match(line, "SWRITE")) {
 			return self::processSWrite(line, event_manager, globals);
 		} elseif (self::match(line, "WHITESPACE")) {
@@ -289,9 +289,8 @@ class Text extends Command
 
 			if (substr(value,0,1) == "\"") {
 				let value = Args::clean(value);
-				let value = "echo '" . self::safe(value) . "';";
 			} else {
-				let value = "echo $" . self::parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . ";";
+				let value = "<?= $" . self::parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . "; ?>";
 			}
 		}
 
@@ -313,7 +312,7 @@ class Text extends Command
 		let params = params . " id=\"" . self::id . "\"";
 		let params = params . self::leftOverArgs(2, args);
 
-		return "echo '<span" . params . ">';" . value . "echo '</span>';";
+		return "<span" . params . ">" . value . "</span>";
 	}
 
 
@@ -349,7 +348,7 @@ class Text extends Command
 		let params = params . " id=\"" . self::id . "\"";
 		let params = params . self::leftOverArgs(2, args);
 
-		return self::output("<p" . params . ">");
+		return "<p" . params . ">";
 	}
 
 	private static function processWhitespace(
@@ -373,6 +372,6 @@ class Text extends Command
 			let iLoop += 1;
 		}
 
-		return self::output(output);
+		return output;
 	}
 }

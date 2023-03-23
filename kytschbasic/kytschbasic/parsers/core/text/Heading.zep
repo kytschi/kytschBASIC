@@ -51,8 +51,8 @@ class Heading extends Command
 			let args = Args::parseShort("HEADING", command);
 
 			if (empty(args)) {
-				let self::end = self::output("</h1>");
-				return self::output("<h1>");
+				let self::end = "</h1>";
+				return "<h1>";
 			}
 
 			if (isset(args[0])) {
@@ -80,7 +80,7 @@ class Heading extends Command
 
 			let params = params . Args::leftOver(1, args);
 
-			return self::output("<h" . self::size . params . ">");
+			return "<h" . self::size . params . ">";
 		}
 
 		return null;

@@ -37,7 +37,7 @@ class Arrays extends Command
 		if (self::match(line, "DIM")) {
 			var args = self::parseArgs("DIM", line);
 			var splits = explode("(", args[0]);
-			return "$" . str_replace(["$", "%", "#"], "", splits[0]) . "=[];";
+			return "<php $" . str_replace(["$", "%", "#"], "", splits[0]) . "=[]; ?>";
 		}
 
 		return null;

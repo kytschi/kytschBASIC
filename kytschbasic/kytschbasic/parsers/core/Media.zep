@@ -86,7 +86,7 @@ class Media extends Command
 				}
 			}
 
-			return self::output(return_string . " id=\"" . self::id . "\">");
+			return return_string . " id=\"" . self::id . "\">";
 		}
 
 		return null;

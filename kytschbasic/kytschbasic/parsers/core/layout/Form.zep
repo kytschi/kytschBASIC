@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Form
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
+ * @copyright   2023 Mike Welsh
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -39,13 +39,13 @@ class Form extends Command
 		var config = null
 	) {
 		if (self::match(command, "FORM CLOSE")) {
-			return self::output("</form>");
+			return "</form>";
 		} elseif (self::match(command, "FORM INPUT")) {
 			return self::processInput(command, event_manager, globals);
 		} elseif (self::match(command, "FORM TEXTAREA")) {
 			return self::processTextarea(command, event_manager, globals);
 		} elseif (self::match(command, "FORM SUBMIT CLOSE")) {
-			return self::output("</button>");
+			return "</button>";
 		} elseif (self::match(command, "FORM SUBMIT")) {
 			return self::processButton(command, event_manager, globals, "submit");
 		} elseif (self::match(command, "FORM CAPTCHA")) {
@@ -107,7 +107,7 @@ class Form extends Command
 			let html .= label . "</button>";
 		}
 
-		return self::output(html);
+		return html;
 	}
 
 	private static function processCaptcha(
@@ -201,11 +201,9 @@ class Form extends Command
 		
         imagedestroy(image);
 
-		return self::output(
-			"<div class=\"kb-captcha-img\"><img src=\"data:image/png;base64," . base64_encode(image_data) . "\" alt=\"captcha\"/></div>" .
+		return "<div class=\"kb-captcha-img\"><img src=\"data:image/png;base64," . base64_encode(image_data) . "\" alt=\"captcha\"/></div>" .
 			"<input name=\"kb-captcha\" class=\"kb-captcha-input\" required/>" .
-			"<input name=\"_KBCAPTCHA\" type=\"hidden\" value=\"" . encrypted . "\"/>"
-		);
+			"<input name=\"_KBCAPTCHA\" type=\"hidden\" value=\"" . encrypted . "\"/>";
 	}
 
 	private static function processInput(
@@ -262,7 +260,7 @@ class Form extends Command
 
 		let params = params . Args::leftOver(4, args);
 
-		return self::output("<input " . params . ">");
+		return "<input " . params . ">";
 	}
 
 	private static function processTextarea(
@@ -317,7 +315,7 @@ class Form extends Command
 		let params = params . " id=\"" . self::id . "\"";
 		let params = params . Args::leftOver(4, args);
 
-		return self::output("<textarea " . params . ">" . text . "</textarea>");
+		return "<textarea " . params . ">" . text . "</textarea>";
 	}
 
 	private static function processForm(
@@ -369,6 +367,6 @@ class Form extends Command
 
 		let params .= Args::leftOver(3, args);
 
-		return self::output("<form " . params . ">");
+		return "<form " . params . ">";
 	}
 }

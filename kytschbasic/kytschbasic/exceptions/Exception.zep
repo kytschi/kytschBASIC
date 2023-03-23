@@ -56,7 +56,7 @@ class Exception extends \Exception
      * Fatal error just lets us dumb the error out faster and kill the site
      * so we can't go any futher.
      */
-    public function fatal()
+    public function fatal(string template = "", int line = 0)
     {
         switch (this->code) {
             case 404:
@@ -68,6 +68,9 @@ class Exception extends \Exception
         }
         
         echo this;
+        if (template && line) {
+            echo "<br/><p><strong>Trace</strong><br/>Source <strong>" . template . "</strong> at line <strong>" . line . "</strong></p>";
+        }
         die();
     }
 

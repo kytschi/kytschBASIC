@@ -10,7 +10,7 @@ HEADER
 		LINK "/about","Go to the about page","nav-link"
 			PRINT "About"
 		LINK CLOSE
-		LINK "https://ironet.kytschi.com/kytschi/kytschBASIC","View the source","nav-link","_blank"
+		LINK "https://github.com/kytschi/kytschBASIC","View the source","nav-link","_blank"
 			PRINT "Download"
 		LINK CLOSE
 		LINK "/installation","Read about the installation","nav-link"

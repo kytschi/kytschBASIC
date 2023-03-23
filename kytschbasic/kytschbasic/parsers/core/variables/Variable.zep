@@ -40,10 +40,10 @@ class Variable extends Command
 
 			let line = implode("=", array_slice(args, 1, count(args) - 1));
 
-			return "$" . str_replace(["$", "%", "#"], "", args[0]) . "=" . self::parseEquation(line) . ";";
+			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . self::parseEquation(line) . "; ?>";
 		} elseif (self::match(line, "DUMP")) {
 			var args = self::parseArgs("DUMP", line);
-			return "echo \"<pre>\";var_dump($" . args[0] . ");echo \"</pre>\";";
+			return "<pre><?=var_dump($" . args[0] . ");?></pre>";
 		}
 
 		return null;

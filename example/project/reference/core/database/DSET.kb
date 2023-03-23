@@ -18,11 +18,11 @@ BODY
 					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
-SPRINT REM Define the database connection and assign the results to the menu& variable.
-SPRINT DATA, menu&
+SPRINT REM Define the database connection and assign the results to the menu# variable.
+SPRINT DATA, menu#
 	SPRINT REM Open the database connection from the config file labelled kytschBASIC.
 	SPRINT DOPEN "kytschBASIC"
-
+	
 	SPRINT REM Read from the menu table in the database.
 	SPRINT DREAD "menu"
 

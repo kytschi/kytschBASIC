@@ -62,11 +62,11 @@ class Command
 
 	public static function output(string code, bool withbr = false)
 	{
-		if (withbr) {
+		/*if (withbr) {
 			let code = code . "<br/>";
-		}
+		}*/
 
-		return "echo '" . self::safe(code) . "';\n";
+		return code . "\n";
 	}
 
 	public static function parseArgs(
@@ -205,6 +205,6 @@ class Command
 
 	public static function safe(string line)
 	{
-		return str_replace("'", "&#39;", line);
+		return str_replace("\"", "&#34;", str_replace("'", "&#39;", line));
 	}
 }
