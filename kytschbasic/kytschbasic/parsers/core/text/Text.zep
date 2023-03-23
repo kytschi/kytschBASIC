@@ -286,9 +286,10 @@ class Text extends Command
 		
 		if (isset(args[0])) {
 			let value = args[0];
-			
+
 			if (substr(value,0,1) == "\"") {
-				let value = "echo '" . self::safe(trim(value, "\"")) . "';";
+				let value = Args::clean(value);
+				let value = "echo '" . self::safe(value) . "';";
 			} else {
 				let value = "echo $" . self::parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . ";";
 			}

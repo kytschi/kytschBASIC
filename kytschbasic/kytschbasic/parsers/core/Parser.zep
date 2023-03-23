@@ -27,6 +27,7 @@ namespace KytschBASIC\Parsers\Core;
 use KytschBASIC\Arcade;
 use KytschBASIC\Events\EventManager;
 use KytschBASIC\Exceptions\Exception;
+use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Database;
 use KytschBASIC\Parsers\Core\Load;
@@ -62,6 +63,9 @@ class Parser extends Command
 
 	private output = "";
 
+	private mail = false;
+	private mail_options = [];
+
 	private select_started = 0;
 
 	/**
@@ -96,6 +100,8 @@ class Parser extends Command
 		let this->version = version;
 		let this->template = template;
 		let this->start_time = start_time;
+		let this->mail_options["from"] = "dev@kytschi.com";
+		let this->mail_options["subject"] = "kytschBASIC email";
 
 		var err;
 
@@ -156,7 +162,18 @@ class Parser extends Command
 		// Trigger a redirect.
 		if (self::match(cleaned, "GOTO")) {
 			var url = trim(trim(str_replace("GOTO ","", command)), "\"");
-			let this->output = this->output . "header('Location: " . url . "');";
+			let this->output = this->output . "header('Location: " . Args::clean(url) . "');";
+			return true;
+		}
+
+		if (self::match(cleaned, "MAIL CLOSE")) {
+			let this->mail = false;
+			this->sendMail();
+			return true;
+		} elseif (self::match(cleaned, "MAIL")) {
+			let this->mail = true;
+			let this->mail_options["message"] = "";
+			this->createMail(cleaned);
 			return true;
 		}
 
@@ -167,13 +184,13 @@ class Parser extends Command
 		}
 
 		if (self::match(cleaned, "VERSION")) {
-			let this->output = this->output . self::output("<span class=\"kb-version\">" . this->version . "</span>");
+			this->writeOutput(self::output("<span class=\"kb-version\">" . this->version . "</span>"));
 			return true;
 		}
 
 		// SPRINT will ignore the command processing and just output the command as a string.
 		if (self::match(cleaned, "SPRINT")) {
-			let this->output = this->output . self::output(str_replace("SPRINT ","", command), true);
+			this->writeOutput(self::output(str_replace("SPRINT ","", command), true));
 			return true;
 		}
 
@@ -194,7 +211,7 @@ class Parser extends Command
 						let this->arcade = new Arcade(this->event_manager, this->globals);
 					}
 
-					let this->output = this->output . arcade_output;
+					this->writeOutput(arcade_output);
 					break;
 				default:
 					break;
@@ -209,7 +226,7 @@ class Parser extends Command
 
 		// Output a line break or a new line.
 		if (self::match(cleaned, "LINE BREAK")) {
-			let this->output = this->output . self::output("<br/>");
+			this->writeOutput(self::output("<br/>"));
 			return true;
 		}
 		
@@ -233,7 +250,7 @@ class Parser extends Command
 		
 		if (parsed != null) {
 			if (is_string(parsed)) {
-				let this->output = this->output . parsed;
+				this->writeOutput(parsed);
 			}
 			return true;
 		}
@@ -241,19 +258,21 @@ class Parser extends Command
 		 // Parse the HEADING statement.
 		let parsed = Heading::parse(cleaned, this->event_manager, this->globals);
 		if (parsed != null) {
-			let this->output = this->output . parsed;
+			this->writeOutput(parsed);
 			return true;
 		}
 
 		// Parse the LOAD statement.
 		let parsed = Load::parse(cleaned, this->event_manager, this->globals);
 		if (parsed != null) {
-			let this->output = this->output . (new self())->parse(
-				Args::processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
-				this->config,
-				this->globals,
-				this->version,
-				this->start_time
+			this->writeOutput(
+				(new self())->parse(
+					Args::processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
+					this->config,
+					this->globals,
+					this->version,
+					this->start_time
+				)
 			);
 			return true;
 		}
@@ -262,7 +281,7 @@ class Parser extends Command
 		for parser in this->available {
 			let parsed = {parser}::parse(cleaned, this->event_manager, this->globals, this->config);
 			if (parsed != null) {
-				let this->output = this->output . parsed;
+				this->writeOutput(parsed);
 				return true;
 			}
 		}
@@ -275,18 +294,96 @@ class Parser extends Command
 			);
 
 			if (returned[0]) {
-				let this->output = returned[1];
+				this->writeOutput(returned[1]);
 				return true;
 			}
 		}
 
 		// END will end the page building.
 		if (cleaned == "END") {
-			let this->output = this->output . self::output("</html>");
+			this->writeOutput(self::output("</html>"));
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Write to the output to later display to screen or to somewhere else.
+	 */
+	private function writeOutput(string to_write)
+	{	
+		if (this->mail) {
+			let this->mail_options["message"] .= to_write;
+		} else {
+			let this->output = this->output . to_write;
+		}
+	}
+
+	/**
+	 * Create the mail options.
+	 */
+	private function createMail(string line)
+	{
+		var args, arg;
+		let args = self::parseArgs("MAIL", line);
+
+		if (isset(args[0])) {
+			let arg = Args::clean(args[0]);
+			if (!empty(arg)) {
+				let this->mail_options["to"] = arg;
+			}
+		}
+
+		if (isset(args[1])) {
+			let arg = Args::clean(args[1]);
+			if (!empty(arg)) {
+				let this->mail_options["subject"] = arg;
+			}
+		}
+
+		if (isset(args[2])) {
+			let arg = Args::clean(args[2]);
+			if (!empty(arg)) {
+				let this->mail_options["from"] = arg;
+			}
+		}
+	}
+
+	/**
+	 * Send the mail using the built up options.
+	 */
+	private function sendMail()
+	{
+		if (empty(this->mail_options)) {
+			throw new Exception("No mail options defined");
+		}
+
+		if (!isset(this->mail_options["to"])) {
+			throw new Exception("Invalid to setting for MAIL");
+		}
+
+		var additional_headers = [];
+
+		let additional_headers["from"] = this->mail_options["from"];
+		
+		if (!mail(
+			this->mail_options["to"],
+			this->mail_options["subject"],
+			this->mail_options["message"],
+			additional_headers
+		)) {
+			var err, msg;
+
+			let msg = "Failed to send the mail";
+
+			let err = error_get_last();
+			if (isset(err["message"])) {
+				let msg .= ", " . err["message"];
+			}
+			
+			throw new Exception(msg);
+		}
 	}
 
 	/**

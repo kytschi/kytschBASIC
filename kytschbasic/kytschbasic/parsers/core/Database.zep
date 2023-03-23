@@ -65,7 +65,7 @@ class Database extends Command
 			throw new DatabaseException("no database selected to read");
 		}
 
-		var dsn = "", connection, statement;
+		var dsn = "";
 
 		if (isset(self::database_config->type)) {
 			let dsn .= self::database_config->type . ":";
@@ -84,18 +84,20 @@ class Database extends Command
 			let dsn .= "host=127.0.0.1;";
 		}
 
-		let connection = new \PDO(
-			dsn,
-			!empty(self::database_config->user) ? self::database_config->user : "",
-			!empty(self::database_config->password) ? self::database_config->password : ""
-		);
+		var output;
+		let output = "$connection = new \\PDO(
+			'" . dsn . "',
+			'" . (!empty(self::database_config->user) ? self::database_config->user : "") . "',
+			'" . (!empty(self::database_config->password) ? self::database_config->password : "") . "'
+		);";
 
-		let statement = connection->prepare(self::data_sql);
-		statement->execute();
+		let output = output . "$statement = $connection->prepare(\"" . str_replace("\"", "'", self::data_sql) . "\");";
+		let output = output . "$statement->execute();";
 
 		let self::data_line = false;
+		let output = output . "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=$statement->fetchAll();";
 				
-		return "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=unserialize('" . serialize(statement->fetchAll()) . "');";
+		return output;
 	}
 
 	public static function parse(
@@ -158,20 +160,17 @@ class Database extends Command
 					throw new DatabaseException("no database selected to read");
 				}
 
-				var args = self::parseArgs("DSELECT", line);
-				if (isset(args[0])) {
-					let self::data_sql = "SELECT " . self::cleanArg(args[0]) . " FROM " . self::database;
-				}
+				let line = str_replace("DSELECT ", "", line);
+				let self::data_sql = "SELECT " . self::cleanArg(line) . " FROM " . self::database;
+				
 				return true;
 			} elseif (self::match(line, "DWHERE")) {
 				if (empty(self::database)) {
 					throw new DatabaseException("no database selected to read");
 				}
 
-				var args = self::parseArgs("DWHERE", line);
-				if (isset(args[0])) {
-					let self::data_sql = self::data_sql .  " WHERE " . self::cleanArg(args[0]);
-				}
+				let line = str_replace("DWHERE ", "", line);
+				let self::data_sql = str_replace("INSERT INTO", "UPDATE", self::data_sql) .  " WHERE " . self::cleanArg(line);
 
 				return true;
 			} elseif (self::match(line, "DSORT")) {
@@ -179,10 +178,8 @@ class Database extends Command
 					throw new DatabaseException("no database selected to read");
 				}
 
-				var args = self::parseArgs("DSORT", line);
-				if (isset(args[0])) {
-					let self::data_sql = self::data_sql . " ORDER BY " . self::cleanArg(args[0]);
-				}
+				let line = str_replace("DSORT ", "", line);
+				let self::data_sql = self::data_sql . " ORDER BY " . self::cleanArg(line);
 
 				return true;
 			} elseif (self::match(line, "DLIMIT")) {
@@ -190,10 +187,8 @@ class Database extends Command
 					throw new DatabaseException("no database selected to read");
 				}
 
-				var args = self::parseArgs("DLIMIT", line);
-				if (isset(args[0])) {
-					let self::data_sql = self::data_sql . " LIMIT " . intval(self::cleanArg(args[0]));
-				}
+				let line = str_replace("DLIMIT ", "", line);
+				let self::data_sql = self::data_sql . " LIMIT " . intval(self::cleanArg(line));
 
 				return true;
 			} elseif (self::match(line, "DSET")) {
@@ -201,10 +196,8 @@ class Database extends Command
 					throw new DatabaseException("no database selected to set to data with");
 				}
 
-				var args = self::parseArgs("DSET", line);
-				if (isset(args[0])) {
-					let self::data_sql = "UPDATE " . self::database . " SET " . self::cleanArg(args[0]);
-				}
+				let line = str_replace("DSET ", "", line);
+				let self::data_sql = "INSERT INTO " . self::database . " SET " . Args::clean(line, config);
 
 				return true;
 			} /*elseif (self::data_line) {

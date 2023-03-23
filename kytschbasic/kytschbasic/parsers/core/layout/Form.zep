@@ -44,6 +44,8 @@ class Form extends Command
 			return self::processInput(command, event_manager, globals);
 		} elseif (self::match(command, "FORM TEXTAREA")) {
 			return self::processTextarea(command, event_manager, globals);
+		} elseif (self::match(command, "FORM SUBMIT CLOSE")) {
+			return self::output("</button>");
 		} elseif (self::match(command, "FORM SUBMIT")) {
 			return self::processButton(command, event_manager, globals, "submit");
 		} elseif (self::match(command, "FORM CAPTCHA")) {
@@ -63,7 +65,7 @@ class Form extends Command
 	) {
 		let self::id = self::genID("kb-button");
 
-		var args, arg, params="", label="button";
+		var args, arg, params="", label="", html;
 		let args = Args::parseShort(strtoupper("form submit"), command);
 
 		let params .= " type=\"" . type . "\"";
@@ -100,8 +102,12 @@ class Form extends Command
 		let params .= " id=\"" . self::id . "\"";
 
 		let params .= Args::leftOver(4, args);
+		let html = "<button " . params . ">";
+		if (label != "") {
+			let html .= label . "</button>";
+		}
 
-		return self::output("<button " . params . ">" . label . "</button>");
+		return self::output(html);
 	}
 
 	private static function processCaptcha(
@@ -186,7 +192,7 @@ class Form extends Command
 		let iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length("AES-128-CBC"));
 
         let encrypted = openssl_encrypt(
-            "_KBCAPTCHA=" . captcha . "=" . mt_rand(0, 99999999),
+            "_KBCAPTCHA=" . captcha . "=" . (time() + 1 * 60),
             "aes128",
             captcha,
 			0,
@@ -197,7 +203,7 @@ class Form extends Command
 
 		return self::output(
 			"<div class=\"kb-captcha-img\"><img src=\"data:image/png;base64," . base64_encode(image_data) . "\" alt=\"captcha\"/></div>" .
-			"<input name=\"captcha\" class=\"kb-captcha-input\" required/>" .
+			"<input name=\"kb-captcha\" class=\"kb-captcha-input\" required/>" .
 			"<input name=\"_KBCAPTCHA\" type=\"hidden\" value=\"" . encrypted . "\"/>"
 		);
 	}
@@ -216,6 +222,10 @@ class Form extends Command
 			let arg = Args::clean(args[0]);
 			if (!empty(arg)) {
 				let params .= " name=\"" . arg . "\"";
+
+				if (isset(_REQUEST[arg])) {
+					let params .= " value=\"" . _REQUEST[arg] . "\"";
+				}
 			}
 		}
 
@@ -238,6 +248,13 @@ class Form extends Command
 			let arg = Args::clean(args[3]);
 			if (!empty(arg)) {
 				let self::id = arg;
+			}
+		}
+
+		if (isset(args[4])) {
+			let arg = Args::clean(args[4]);
+			if (!empty(arg)) {
+				let params .= " required=\"required\"";
 			}
 		}
 
@@ -255,13 +272,16 @@ class Form extends Command
 	) {
 		let self::id = self::genID("kb-textarea");
 
-		var args, arg, params="";
+		var args, arg, params="", text = "";
 		let args = Args::parseShort(strtoupper("form textarea"), command);
 
 		if (isset(args[0])) {
 			let arg = Args::clean(args[0]);
 			if (!empty(arg)) {
 				let params .= " name=\"" . arg . "\"";
+				if (isset(_REQUEST[arg])) {
+					let text = _REQUEST[arg];
+				}
 			}
 		}
 
@@ -287,11 +307,17 @@ class Form extends Command
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		if (isset(args[4])) {
+			let arg = Args::clean(args[4]);
+			if (!empty(arg)) {
+				let params .= " required=\"required\"";
+			}
+		}
 
+		let params = params . " id=\"" . self::id . "\"";
 		let params = params . Args::leftOver(4, args);
 
-		return self::output("<textarea " . params . "></textarea>");
+		return self::output("<textarea " . params . ">" . text . "</textarea>");
 	}
 
 	private static function processForm(

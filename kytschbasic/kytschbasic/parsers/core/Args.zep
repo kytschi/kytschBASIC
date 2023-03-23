@@ -24,6 +24,8 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
+use KytschBASIC\Exceptions\ConfigException;
+
 class Args
 {
 	public static function add(args, string html)
@@ -41,9 +43,106 @@ class Args
 		return html;
 	}
 
-	public static function clean(string arg)
+	public static function clean(string arg, var config = null)
 	{
-		return trim(trim(arg), "\"");
+		let arg = trim(trim(arg), "\"");
+
+		var vars, iLoop, param, splits, key, replace;
+
+		preg_match_all("|_POST[^\]]+\]|U", arg, vars);
+		if (count(vars[0])) {
+			let iLoop = count(vars[0]);
+			while iLoop {
+				let iLoop -= 1;
+
+				let param = urldecode(vars[0][iLoop]);
+				let splits = explode("\"", param);
+				let key = trim(splits[1], "\"");
+
+				let replace = "";
+				if (isset(_POST[key])) {
+					let replace = _POST[key];
+				}
+								
+				let arg = str_replace(param, replace, arg);
+			}
+		}
+
+		preg_match_all("|_GET[^\]]+\]|U", arg, vars);
+		if (count(vars[0])) {
+			let iLoop = count(vars[0]);
+			while iLoop {
+				let iLoop -= 1;
+
+				let param = urldecode(vars[0][iLoop]);
+				let splits = explode("\"", param);
+								
+				let replace = "";
+				if (isset(_GET[key])) {
+					let replace = _GET[key];
+				}
+								
+				let arg = str_replace(param, replace, arg);
+			}
+		}
+
+		preg_match_all("|_REQUEST[^\]]+\]|U", arg, vars);
+		if (count(vars[0])) {
+			let iLoop = count(vars[0]);
+			while iLoop {
+				let iLoop -= 1;
+
+				let param = urldecode(vars[0][iLoop]);
+				let splits = explode("\"", param);
+								
+				let replace = "";
+				if (isset(_REQUEST[key])) {
+					let replace = _REQUEST[key];
+				}
+								
+				let arg = str_replace(param, replace, arg);
+			}
+		}
+
+		preg_match_all("|ENCRYPT[^\)]+\)|U", arg, vars);
+		if (count(vars[0])) {
+			let iLoop = count(vars[0]);
+			while iLoop {
+				let iLoop -= 1;
+
+				let param = str_replace("ENCRYPT(", "", (vars[0][iLoop]));
+												
+				let replace = "";
+				if (empty(config["security"])) {
+					throw new ConfigException("security config is missing");
+				} elseif (!property_exists(config["security"], "public_key")) {
+					throw new ConfigException("public key is missing from the security config");
+				}
+				
+				// Temp surpress the warnings about the IV.
+				var errors = false;
+				if (ini_get("display_errors")) {
+					ini_set("display_errors", "0");
+					let errors = true;
+				}
+
+				// Encrypt the data using the supplied public key.
+				let replace = openssl_encrypt(
+					rtrim(param, ")"),
+					"aes128",
+					file_get_contents(getcwd() . config["security"]->public_key)
+				);
+
+				// Restore warning output.
+				if (errors) {
+					ini_set("display_errors", "1");
+				}
+								
+				let arg = str_replace("ENCRYPT(" . param, replace, arg);
+			}
+		}
+
+		return arg;
 	}
 
 	public static function leftOver(int start, args)

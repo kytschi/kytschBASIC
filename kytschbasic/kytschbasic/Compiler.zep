@@ -50,7 +50,7 @@ class Compiler
 		}
 
 		let this->globals["_VALID"] = [];
-		let this->globals["_VALID"]["captcha"] = false;
+		let this->globals["_VALID"]["captcha"] = this->validateCaptcha();
 
 		let this->globals["_POST"] = _POST;
 		let this->globals["_GET"] = _GET;
@@ -73,6 +73,7 @@ class Compiler
 			"cache",
 			"database",
 			"routes",
+			"security",
 			"session"
 		];
 
@@ -107,6 +108,49 @@ class Compiler
 				this->version
 			);
 		}
+	}
+
+	private function validateCaptcha()
+	{
+		if (!isset(_REQUEST["kb-captcha"])) {
+			return false;
+		}
+
+		var splits, iv, encrypted, token;
+		let splits = explode("=", _REQUEST["_KBCAPTCHA"]);
+		
+		let encrypted = splits[0];
+		unset(splits[0]);
+
+		let iv = base64_decode(implode("=", splits));
+
+		let token = openssl_decrypt(
+            encrypted,
+            "aes128",
+            _REQUEST["kb-captcha"],
+            0,
+			iv
+        );
+
+        if (!token) {
+            return false;
+        }
+
+        let splits = explode("=", token);
+
+        if (splits[0] != "_KBCAPTCHA") {
+            return false;
+        }
+
+        if (splits[1] != _REQUEST["kb-captcha"]) {
+            return false;
+        }
+
+		if (time() > splits[2]) {
+            return false;
+        }
+
+        return true;
 	}
 
 	public function run()
