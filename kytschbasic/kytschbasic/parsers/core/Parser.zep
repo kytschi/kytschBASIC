@@ -161,13 +161,13 @@ class Parser extends Command
 
 		// Output a line break or a new line.
 		if (self::match(cleaned, "BENCHMARK")) {
-			let this->output = this->output . self::output("<script type=\"text/javascript\">let kb_start_time = " . this->start_time . ";window.onload = function () {document.getElementById(\"kb-benchmark\").innerHTML = ((Date.now() - kb_start_time) / 1000).toFixed(3) + \"s\";}</script><span id=\"kb-benchmark\"></span>");
+			let this->output = this->output . "<script type=\"text/javascript\">let kb_start_time = " . this->start_time . ";window.onload = function () {document.getElementById(\"kb-benchmark\").innerHTML = ((Date.now() - kb_start_time) / 1000).toFixed(3) + \"s\";}</script><span id=\"kb-benchmark\"></span>";
 			return true;
 		}
 
 		// SPRINT will ignore the command processing and just output the command as a string.
 		if (self::match(cleaned, "SPRINT")) {			
-			this->writeOutput(self::output(str_replace("SPRINT ","", command), true));
+			this->writeOutput(str_replace("SPRINT ","", command), true);
 			return true;
 		}
 
@@ -198,7 +198,7 @@ class Parser extends Command
 
 		// Output a line break or a new line.
 		if (self::match(cleaned, "LINE BREAK")) {
-			this->writeOutput(self::output("<br/>"));
+			this->writeOutput("<br/>");
 			return true;
 		}
 
@@ -208,14 +208,14 @@ class Parser extends Command
 		}
 
 		if (self::match(cleaned, "VERSION")) {
-			this->writeOutput(self::output("<span class=\"kb-version\">" . this->version . "</span>"));
+			this->writeOutput("<span class=\"kb-version\">" . this->version . "</span>");
 			return true;
 		}
 
 		// Trigger a redirect.
 		if (self::match(cleaned, "GOTO")) {
 			var url = trim(trim(str_replace("GOTO ","", command)), "\"");
-			let this->output = this->output . "header('Location: " . Args::clean(url) . "');";
+			let this->output = this->output . "<?php header('Location: " . Args::clean(url) . "'); ?>";
 			return true;
 		}
 
@@ -301,7 +301,7 @@ class Parser extends Command
 
 		// END will end the page building.
 		if (cleaned == "END") {
-			this->writeOutput(self::output("</html>"));
+			this->writeOutput("</html>");
 			return true;
 		}
 
@@ -393,13 +393,13 @@ class Parser extends Command
 	private function processCPrint(string cleaned, string command)
 	{
 		if (self::match(cleaned, "CPRINT CLOSE")) {
-			let this->output = this->output . self::output("</code></pre>");
+			let this->output = this->output . "</code></pre>";
 			let this->cprinting = false;
 			return true;
 		}
 
 		if (self::match(cleaned, "CPRINT")) {
-			let this->output = this->output . self::output("<pre><code>");
+			let this->output = this->output . "<pre><code>";
 			let this->cprinting = true;
 			return true;
 		}
@@ -408,7 +408,7 @@ class Parser extends Command
 		 * Code printing so just output the command instead of parsing.
 		 */
 		if (this->cprinting) {
-			let this->output = this->output . self::output(command, true);
+			let this->output = this->output . command;
 			return true;
 		}
 
@@ -422,7 +422,7 @@ class Parser extends Command
 		var args;
 				
 		if (self::match(line, "END IF")) {
-			let this->output = this->output . "}";
+			let this->output = this->output . "<?php } ?>";
 			return true;
 		} elseif (self::match(line, "ELSEIF")) {
 			let args = self::parseSpaceArgs(line, "ELSEIF");
@@ -440,13 +440,13 @@ class Parser extends Command
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				let this->output = this->output . "} elseif($" . args[0] . ") {";
+				let this->output = this->output . "<?php } elseif($" . args[0] . ") { ?>";
 				return true;
 			}
 
 			throw new Exception("Invalid ELSEIF statement");
 		} elseif (self::match(line, "ELSE")) {
-			let this->output = this->output . "} else {";
+			let this->output = this->output . "<?php } else { ?>";
 			return true;
 		} elseif (self::match(line, "IFNTE")) {
 			let args = self::parseSpaceArgs(line, "IFNTE");
@@ -466,7 +466,7 @@ class Parser extends Command
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				let this->output = this->output . "if(" . args[0] . ") {";
+				let this->output = this->output . "<?php if(" . args[0] . ") { ?>";
 				return true;
 			}
 
@@ -489,7 +489,7 @@ class Parser extends Command
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				let this->output = this->output . "if(" . args[0] . ") {";
+				let this->output = this->output . "<?php if(" . args[0] . ") { ?>";
 				return true;
 			}
 
@@ -526,7 +526,7 @@ class Parser extends Command
 
 		if (line) {
 			if (!this->processCommand(line)) {
-				let this->output = this->output . Maths::commands(Text::commands(line));
+				let this->output = this->output . "<?php " . Maths::commands(Text::commands(line)) . "?>";
 			}
 		}
 	}
@@ -568,7 +568,7 @@ class Parser extends Command
 			let args = self::parseSpaceArgs(line, "SELECT");
 			
 			if (count(args) == 1) {
-				let this->output = this->output . "switch($" . args[0] . ") {";
+				let this->output = this->output . "<?php switch($" . args[0] . ") { ?>";
 				return true;
 			}
 
