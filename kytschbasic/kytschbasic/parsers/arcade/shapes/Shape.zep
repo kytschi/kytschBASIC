@@ -24,6 +24,7 @@
  */
 namespace KytschBASIC\Parsers\Arcade\Shapes;
 
+use KytschBASIC\Parsers\Arcade\Colors\Rgb;
 use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
 
@@ -42,6 +43,13 @@ class Shape
 	protected static green=0;
 	protected static blue=0;
 	protected static transparency=0;
+
+	public static function genColour()
+	{	
+		var output;
+		let output = Rgb::code();
+		return output . "<?php $KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue, " . self::transparency . ");?>";
+	}
 
 	public function getBlue()
 	{

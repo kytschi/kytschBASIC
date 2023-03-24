@@ -1,0 +1,41 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "BENCHMARK statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "_ROOT/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "BENCHMARK","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "This command can be used to see the execution time of the code."
+				SWRITE CLOSE
+				SWRITE
+					PRINT "This command relies on JavaScript so please be aware."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT SWRITE
+	SPRINT PRINT "Page loaded in approx "
+	SPRINT BENCHMARK
+SPRINT SWRITE CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE
+SWRITE
+	PRINT "Page loaded in approx "
+	BENCHMARK
+SWRITE CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "_ROOT/project/shared/footer"
+BODY CLOSE
+END

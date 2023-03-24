@@ -25,6 +25,7 @@
 namespace KytschBASIC\Parsers\Arcade;
 
 use KytschBASIC\Parsers\Arcade\Colors\Color;
+use KytschBASIC\Parsers\Arcade\Colors\Rgb;
 use KytschBASIC\Parsers\Arcade\Shapes\Arc;
 use KytschBASIC\Parsers\Arcade\Shapes\Arcf;
 use KytschBASIC\Parsers\Arcade\Shapes\Circle;
@@ -52,23 +53,13 @@ class Bitmap extends Command
 		var config = null
 	) {
 		if (self::match(command, "BITMAPTEXT")) {
-			let self::image = BitmapText::draw(command, self::image, event_manager, globals);
-			return "";
+			return BitmapText::draw(command, event_manager, globals, config);
 		} elseif (self::match(command, "BITMAPFONT")) {
-			return BitmapFont::parse(command, event_manager, globals);
+			return BitmapFont::parse(command, event_manager, globals, config);
 		} elseif (self::match(command, "BITMAP CLOSE")) {
-			var bin;
-
-			ob_start();
-			imagepng(self::image);
-			let bin = ob_get_clean();
-			imagedestroy(self::image);
-
-			let self::image = null;
-
-			return self::output("<img src=\"data:image/png;base64," . base64_encode(bin) . "\">");
+			return "<?php ob_start();imagepng($KBIMAGE);$img = ob_get_contents();ob_end_clean(); ?><img src=\"data:image/png;base64,<?= base64_encode($img); ?>\">";
 		} elseif (self::match(command, "BITMAP")) {
-			var args, x=0, y=0, width=320, height=240, red=0, green=0, blue=0, transparency=100, rgb;
+			var args, x=0, y=0, width=320, height=240, transparency=100;
 			let args = Args::parseShort("BITMAP", command);
 
 			if (isset(args[0])) {
@@ -91,61 +82,40 @@ class Bitmap extends Command
 				let transparency = intval(args[4]);
 			}
 
-			let rgb = Session::read("RGB#");
-
-			if (rgb) {
-				let red = intval(rgb[0]);
-				let green = intval(rgb[1]);
-				let blue = intval(rgb[2]);
-			}
-
-			let self::image = imagecreatetruecolor(width, height);
-			imagealphablending(self::image, true);
-			//imagesavealpha(self::image, true);
-			imageantialias(self::image, false);
-
-			var background;
-			let background = imagecolorallocatealpha(self::image, red, green, blue, transparency);
-			imagefill(self::image, x, y, background);
-
-			return "";
-		} elseif (self::match(command, "LINE") && self::image != null) {
-			let self::image = Line::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "BOXF") && self::image != null) {
-			let self::image = Boxf::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "BOX") && self::image != null) {
+			var output;
+			let output = Rgb::code();
+			let output = output . "<?php $KBIMAGE = imagecreatetruecolor(" . width . "," .  height . ");imagealphablending($KBIMAGE, true);imageantialias($KBIMAGE, false);";
+			let output = output . "$background = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue," . transparency . ");";
+			return output . "imagefill($KBIMAGE, " . x . "," . y . ", $background);?>";
+		} elseif (self::match(command, "LINE")) {
+			return Line::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "BOXF")) {
+			return Boxf::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "BOX")) {
 			let self::image = Box::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (self::match(command, "ELLIPSEF") && self::image != null) {
-			let self::image = Ellipsef::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "ELLIPSE") && self::image != null) {
-			let self::image = Ellipse::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "CIRCLEF") && self::image != null) {
-			let self::image = Circlef::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "CIRCLE") && self::image != null) {
-			let self::image = Circle::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "COPY SHAPE") && self::image != null) {
+		} elseif (self::match(command, "ELLIPSEF")) {
+			return Ellipsef::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "ELLIPSE")) {
+			return Ellipse::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "CIRCLEF")) {
+			return Circlef::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "CIRCLE")) {
+			return Circle::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "COPY SHAPE")) {
 			let self::shape = Session::getLastCreate();
 			return "";
-		} elseif (self::match(command, "DRAW SHAPE") && self::image != null) {
+		} elseif (self::match(command, "DRAW SHAPE")) {
 			let self::image = self::shape->copyShape(self::image);
 			return "";
-		} elseif (self::match(command, "MOVE SHAPE") && self::image != null) {
+		} elseif (self::match(command, "MOVE SHAPE")) {
 			self::shape->move(Args::parseShort("MOVE SHAPE", command), event_manager, globals);
 			return "";
-		} elseif (self::match(command, "ARCF") && self::image != null) {
-			let self::image = Arcf::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "ARC") && self::image != null) {
-			let self::image = Arc::draw(command, self::image, event_manager, globals);
-			return "";
-		} elseif (self::match(command, "SET TRANSPARENCY") && self::image != null) {
+		} elseif (self::match(command, "ARCF")) {
+			return Arcf::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "ARC")) {
+			return Arc::draw(command, event_manager, globals, config);
+		} elseif (self::match(command, "SET TRANSPARENCY")) {
 			self::shape->setTransparency(Args::parseShort("SET TRANSPARENCY", command), event_manager, globals);
 			return "";
 		}
@@ -153,7 +123,8 @@ class Bitmap extends Command
 		return Color::parse(
 			command,			
 			event_manager,
-			globals
+			globals,
+			config
 		);
 	}
 }

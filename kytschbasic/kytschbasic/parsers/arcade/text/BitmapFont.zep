@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Arcade\Text\BitmapFont
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
- * @version     0.0.1
+ * @copyright   2023 Mike Welsh
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -32,11 +32,11 @@ class BitmapFont
 	public static function parse(
 		string command,		
 		event_manager = null,
-		array globals = []
+		array globals = [],
+		var config = null
 	) {
 		let command = trim(trim(str_replace("BITMAPFONT ", "", command), "\""));
-		Session::write("BITMAPFONT#", command);
-
-		return "";
+		
+		return "<?php $KBBITMAPFONT=\"" . Args::processGlobals(command, globals) . "\";?>";
 	}
 }

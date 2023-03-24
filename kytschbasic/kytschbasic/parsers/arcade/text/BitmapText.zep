@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Arcade\Text\BitmapText
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
- * @version     0.0.1
+ * @copyright   2023 Mike Welsh
+ * @version     0.0.3
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -34,11 +34,11 @@ class BitmapText extends Shape
 
 	public static function draw(
 		string command,
-		var image,
 		event_manager = null,
-		array globals = []
+		array globals = [],
+		var config = null
 	) {
-		var args, rgb, colour, font, text;
+		var args, text;
 		let args = Args::parseShort("BITMAPTEXT", command);
 
 		if (isset(args[0])) {
@@ -72,25 +72,8 @@ class BitmapText extends Shape
 			let text = trim(args[5], "\"");
 		}
 
-		let rgb = Session::read("RGB#");
-		if (rgb) {
-			let self::red = intval(rgb[0]);
-			let self::green = intval(rgb[1]);
-			let self::blue = intval(rgb[2]);
-		}
-
-		let font = Session::read("BITMAPFONT#");
-		if (empty(font)) {
-			throw new \Exception("No BITMAPFONT defined");
-		}
-		
-		let font = Args::processGlobals(font, globals);
-
-		let colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imagefttext(image, self::size, self::start_angle, self::x, self::y, colour, font, text);
-
-		Session::addLastCreate(new self());
-
-		return image;
+		var output;
+		let output = self::genColour();
+		return output . "<?php imagefttext($KBIMAGE, " . self::size . "," . self::start_angle . "," . self::x . "," . self::y . ", $KBCOLOUR, $KBBITMAPFONT, \"" . text . "\");?>";
 	}
 }

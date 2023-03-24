@@ -41,11 +41,11 @@ class Ellipse extends Shape
 
 	public static function draw(
 		string command,
-		var image,
 		event_manager = null,
-		array globals = []
+		array globals = [],
+		var config = null
 	) {
-		var args, colour, rgb;
+		var args;
 		let args = Args::parseShort("ELLIPSE", command);
 
 		if (isset(args[0])) {
@@ -64,21 +64,9 @@ class Ellipse extends Shape
 			let self::height = intval(args[3]);
 		}
 
-		let rgb = Session::read("RGB#");
-
-		if (rgb) {
-			let self::red = intval(rgb[0]);
-			let self::green = intval(rgb[1]);
-			let self::blue = intval(rgb[2]);
-			let self::transparency = Args::transparency(rgb[3]);
-		}
-
-		let colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imageellipse(image, self::x, self::y, self::width, self::height, colour);
-
-		Session::addLastCreate(new self());
-
-		return image;
+		var output;
+		let output = self::genColour();
+		return output . "<?php imageellipse($KBIMAGE, " . self::x . "," . self::y . "," . self::width . "," . self::height . ", $KBCOLOUR);?>";
 	}
 
 	public function getWidth()

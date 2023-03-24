@@ -1,0 +1,41 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "INCLUDE statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "_ROOT/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "INCLUDE","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "This command will let you include libraries."
+				SWRITE CLOSE
+				SWRITE
+					PRINT "It is a good idea to add the INCLUDE into the HEAD."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+HEAD
+	SPRINT INCLUDE arcade
+HEAD CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/arcade"
+						PRINT "arcade"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "_ROOT/project/shared/footer"
+BODY CLOSE
+END

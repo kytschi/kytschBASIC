@@ -41,11 +41,11 @@ class Circle extends Shape
 
 	public static function draw(
 		string command,
-		var image,
 		event_manager = null,
-		array globals = []
+		array globals = [],
+		var config = null
 	) {
-		var args, colour, rgb;
+		var args;
 		let args = Args::parseShort("CIRCLE", command);
 
 		if (isset(args[0])) {
@@ -60,20 +60,8 @@ class Circle extends Shape
 			let self::radius = intval(args[2]);
 		}
 
-		let rgb = Session::read("RGB#");
-
-		if (rgb) {
-			let self::red = intval(rgb[0]);
-			let self::green = intval(rgb[1]);
-			let self::blue = intval(rgb[2]);
-			let self::transparency = Args::transparency(rgb[3]);
-		}
-
-		let colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imagearc(image, self::x, self::y, self::radius, self::radius,  0, 360, colour);
-
-		Session::addLastCreate(new self());
-
-		return image;
+		var output;
+		let output = self::genColour();
+		return output . "<?php imagearc($KBIMAGE, " . self::x . "," . self::y . "," . self::radius . "," . self::radius . ", 0, 360, $KBCOLOUR);?>";
 	}
 }

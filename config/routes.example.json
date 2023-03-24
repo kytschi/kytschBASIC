@@ -37,6 +37,14 @@
 		"template": "project/reference/core/CPRINT.kb"
 	},
 	{
+		"url": "/reference/BENCHMARK",
+		"template": "project/reference/core/BENCHMARK.kb"
+	},
+	{
+		"url": "/reference/INCLUDE",
+		"template": "project/reference/core/INCLUDE.kb"
+	},
+	{
 		"url": "/reference/LINE-BREAK",
 		"template": "project/reference/core/LINE_BREAK.kb"
 	},

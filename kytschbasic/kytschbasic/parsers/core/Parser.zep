@@ -282,13 +282,9 @@ class Parser extends Command
 
 		// If the arcade lib is loaded check for arcade commands.
 		if (this->arcade) {
-			var returned = this->arcade->processCommand(
-				cleaned,
-				this->output
-			);
-
-			if (returned[0]) {
-				this->writeOutput(returned[1]);
+			let parsed = this->arcade->processCommand(cleaned, this->event_manager, this->globals, this->config);
+			if (parsed != null) {
+				this->writeOutput(parsed);
 				return true;
 			}
 		}

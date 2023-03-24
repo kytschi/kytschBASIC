@@ -43,9 +43,9 @@ class Arcf extends Shape
 
 	public static function draw(
 		string command,
-		var image,
 		event_manager = null,
-		array globals = []
+		array globals = [],
+		var config = null
 	) {
 		/*
 		 * Styles
@@ -54,7 +54,7 @@ class Arcf extends Shape
 		 * IMG_ARC_NOFILL = 2
 		 * IMG_ARC_EDGED = 4
 		 */
-		var args, colour, rgb;
+		var args;
 		let args = Args::parseShort("ARCF", command);
 
 		if (isset(args[0])) {
@@ -81,21 +81,9 @@ class Arcf extends Shape
 			let self::style = intval(args[5]);
 		}
 
-		let rgb = Session::read("RGB#");
-
-		if (rgb) {
-			let self::red = intval(rgb[0]);
-			let self::green = intval(rgb[1]);
-			let self::blue = intval(rgb[2]);
-			let self::transparency = Args::transparency(rgb[3]);
-		}
-
-		let colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imagefilledarc(image, self::x, self::y, self::radius, self::radius, self::start_angle, self::end_angle, colour, self::style);
-
-		Session::addLastCreate(new self());
-
-		return image;
+		var output;
+		let output = self::genColour();
+		return output . "<?php imagefilledarc($KBIMAGE, " . self::x . "," . self::y . "," . self::radius . "," . self::radius . "," . self::start_angle . "," . self::end_angle . ", $KBCOLOUR, " . self::style . ");?>";
 	}
 
 	public function getStyle()

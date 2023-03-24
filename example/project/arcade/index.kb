@@ -25,13 +25,12 @@ HEAD CLOSE
 					PRINT "Example of what arcade can do"
 				HEADING CLOSE
 				SWRITE
-					PRINT "Display width: "
+					PRINT "Display width in pixels: "
 					DISPWIDTH
-					PRINT "px"
-					LINE BREAK
-					PRINT "Display height: "
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Display height in pixels: "
 					DISPHEIGHT
-					PRINT "px"
 				SWRITE CLOSE
 				SCREEN "the-traveller",800,600
 					WINDOW "intro"

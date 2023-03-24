@@ -52,6 +52,9 @@ HEADER
 		LINK "/reference/ASC","Find out about the ASC command","nav-link"
 			PRINT "ASC"
 		LINK CLOSE
+		LINK "/reference/BENCHMARK","Find out about the BENCHMARK command","nav-link"
+			PRINT "BENCHMARK"
+		LINK CLOSE
 		LINK "/reference/BIN","Find out about the BIN command","nav-link"
 			PRINT "BIN"
 		LINK CLOSE
@@ -174,6 +177,9 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/IMAGE","Find out about the IMAGE command","nav-link"
 			PRINT "IMAGE"
+		LINK CLOSE
+		LINK "/reference/INCLUDE","Find out about the INCLUDE command","nav-link"
+			PRINT "INCLUDE"
 		LINK CLOSE
 		LINK "/reference/INT","Find out about the INT command","nav-link"
 			PRINT "INT"

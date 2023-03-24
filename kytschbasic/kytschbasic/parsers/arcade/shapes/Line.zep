@@ -24,6 +24,7 @@
  */
 namespace KytschBASIC\Parsers\Arcade\Shapes;
 
+use KytschBASIC\Parsers\Arcade\Colors\Rgb;
 use KytschBASIC\Parsers\Arcade\Shapes\Shape;
 use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
@@ -46,11 +47,11 @@ class Line extends Shape
 
 	public static function draw(
 		string command,
-		var image,
 		event_manager = null,
-		array globals = []
+		array globals = [],
+		var config = null
 	) {
-		var args, colour, rgb;
+		var args;
 		let args = Args::parseShort("LINE", command);
 
 		if (isset(args[0])) {
@@ -69,21 +70,9 @@ class Line extends Shape
 			let self::y2 = intval(args[3]);
 		}
 
-		let rgb = Session::read("RGB#");
-
-		if (rgb) {
-			let self::red = intval(rgb[0]);
-			let self::green = intval(rgb[1]);
-			let self::blue = intval(rgb[2]);
-			let self::transparency = Args::transparency(rgb[3]);
-		}
-
-		let colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imageline(image, self::x1, self::y1, self::x2, self::y2, colour);
-
-		Session::addLastCreate(new self());
-
-		return image;
+		var output;
+		let output = self::genColour();
+		return output . "<?php imageline($KBIMAGE, " . self::x1 . "," . self::y1 . "," . self::x2 . "," . self::y2 . ", $KBCOLOUR);?>";
 	}
 
 	public function getX1()
