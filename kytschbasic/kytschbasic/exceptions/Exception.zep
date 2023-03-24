@@ -27,14 +27,12 @@ namespace KytschBASIC\Exceptions;
 class Exception extends \Exception
 {
     public code;
-    public version;
-
-	public function __construct(string message, int code = 500, string version = "0.0.7 alpha")
+    
+	public function __construct(string message, int code = 500)
 	{
         //Trigger the parent construct.
         parent::__construct(message, code);
 
-        let this->version = version;
         let this->code = code;
     }
 
@@ -47,7 +45,7 @@ class Exception extends \Exception
 
         let message = this->gfx(this->getCode()) . 
             "<p>&nbsp;&nbsp;<strong>" . this->getMessage() . "</strong><br/>" . 
-            "&nbsp;&nbsp;<small><muted>kytschBASIC " . this->version . "</muted></small></p>";
+            "&nbsp;&nbsp;<small><muted>kytschBASIC " . constant("VERSION") . "</muted></small></p>";
 
         return message;
     }
@@ -69,7 +67,7 @@ class Exception extends \Exception
         
         echo this;
         if (template && line) {
-            echo "<br/><p><strong>Trace</strong><br/>Source <strong>" . template . "</strong> at line <strong>" . line . "</strong></p>";
+            echo "<p>&nbsp;&nbsp;<strong>Trace</strong><br/>&nbsp;&nbsp;Source <strong>" . str_replace(getcwd(), "", template) . "</strong> at line <strong>" . line . "</strong></p>";
         }
         die();
     }

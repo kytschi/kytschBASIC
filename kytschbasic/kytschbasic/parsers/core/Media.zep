@@ -40,7 +40,7 @@ class Media extends Command
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 5) == "IMAGE") {
+		if (self::match(command, "IMAGE")) {
 			var args = Args::parseShort("IMAGE", command);
 
 			var arg, return_string = "<img";

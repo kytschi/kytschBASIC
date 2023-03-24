@@ -47,9 +47,9 @@ class Window extends Command
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 12) == "WINDOW CLOSE") {
+		if (self::match(command, "WINDOW CLOSE")) {
 			return self::output("</div>");
-		} elseif (substr(command, 0, 6) == "WINDOW") {
+		} elseif (self::match(command, "WINDOW")) {
 			var args;
 			let args = Args::parseShort("WINDOW", command);
 			if (isset(args[0])) {

@@ -24,7 +24,9 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
-class Load
+use KytschBASIC\Parsers\Core\Command;
+
+class Load extends Command
 {
 	public static function parse(
 		string command,
@@ -32,7 +34,7 @@ class Load
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 5) == "LOAD ") {
+		if (self::match(command, "LOAD ")) {
 			return trim(str_replace("LOAD ", "", command), "\"");
 		}
 

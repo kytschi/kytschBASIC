@@ -65,7 +65,7 @@ class Database extends Command
 			throw new DatabaseException("no database selected to read");
 		}
 
-		var dsn = "";
+		var dsn = "", output;
 
 		if (isset(self::database_config->type)) {
 			let dsn .= self::database_config->type . ":";
@@ -83,21 +83,13 @@ class Database extends Command
 		} else {
 			let dsn .= "host=127.0.0.1;";
 		}
-
-		var output;
-		let output = "<?php $connection = new \\PDO(
-			'" . dsn . "',
-			'" . (!empty(self::database_config->user) ? self::database_config->user : "") . "',
-			'" . (!empty(self::database_config->password) ? self::database_config->password : "") . "'
-		);";
-
+		
+		let output = "<?php $connection = new \\PDO('" . dsn . "','" . (!empty(self::database_config->user) ? self::database_config->user : "") . "','" . (!empty(self::database_config->password) ? self::database_config->password : "") . "');";
 		let output = output . "$statement = $connection->prepare(\"" . str_replace("\"", "'", self::data_sql) . "\");";
 		let output = output . "$statement->execute();";
 
 		let self::data_line = false;
-		let output = output . "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=$statement->fetchAll();?>";
-				
-		return output;
+		return output . "$" . str_replace(["$", "%", "#", "&"], "", self::data_var) . "=$statement->fetchAll();?>";
 	}
 
 	public static function parse(
@@ -209,17 +201,7 @@ class Database extends Command
 		} catch DatabaseException, err {
 		    err->fatal();
 		} catch \RuntimeException|\Exception, err {
-			var message;
-
-			let message = "Failed to connect to the database (" .
-				self::database_config->dbname . ")" .
-				", " . err->getMessage();
-
-			if (err->getMessage() == "invalid data source name") {
-				let message = message . " (" . self::database . ")";
-			}
-
-		    throw new \Exception(message);
+		    throw new \Exception("Failed to connect to the database (" . self::database_config->dbname . ")" . ", " . err->getMessage());
 		}
 	}
 }

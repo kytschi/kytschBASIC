@@ -59,7 +59,6 @@ class Parser extends Command
 	private loops_data = [];
 
 	private start_time;
-	private version = "";
 
 	private output = "";
 
@@ -92,12 +91,10 @@ class Parser extends Command
 		string template,
 		var config,
 		array globals,
-		string version,
 		var start_time
 	) {
 		let this->config = config;
-		let this->globals = globals;
-		let this->version = version;
+		let this->globals = globals;		
 		let this->template = template;
 		let this->start_time = start_time;
 		let this->mail_options["from"] = "dev@kytschi.com";
@@ -111,7 +108,7 @@ class Parser extends Command
 			}
 
 			// Read the template lines.
-			var commands = file(template, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			var commands = file(template);
 			if (empty(commands)) {
 				return;
 			}
@@ -126,18 +123,16 @@ class Parser extends Command
 			var command = "";
 
 			for command in commands {
-				let command = trim(command);
+				let this->line += 1;
 
 				if (command == "") {
 					continue;
 				}
 
-				let this->line += 1;
-
 				// Process any events.
 				let command = this->event_manager->process(command);
 				if (!this->processCommand(command)) {
-					let this->output = this->output . self::parseEquation(command) . ";";
+					let this->output = this->output . self::parseEquation(command);
 				}
 			}
 
@@ -148,7 +143,7 @@ class Parser extends Command
 			var newErr;
 			let newErr = new Exception(err->getMessage(), err->getCode());
 
-			echo newErr->fatal();
+			echo newErr->fatal(template, this->line);
 		}
     }
 
@@ -157,7 +152,7 @@ class Parser extends Command
 		var parser = "", parsed = "";
 
 		// Clean the command of the tabs and the returns.
-		var cleaned = str_replace(["\t", "\n", "    "], "", command);
+		var cleaned = trim(command);
 
 		// Output a line break or a new line.
 		if (self::match(cleaned, "BENCHMARK")) {
@@ -167,7 +162,7 @@ class Parser extends Command
 
 		// SPRINT will ignore the command processing and just output the command as a string.
 		if (self::match(cleaned, "SPRINT")) {			
-			this->writeOutput(str_replace("SPRINT ","", command), true);
+			this->writeOutput(str_replace("SPRINT ","", command));
 			return true;
 		}
 
@@ -208,7 +203,7 @@ class Parser extends Command
 		}
 
 		if (self::match(cleaned, "VERSION")) {
-			this->writeOutput("<span class=\"kb-version\">" . this->version . "</span>");
+			this->writeOutput("<span class=\"kb-version\">" . constant("VERSION") . "</span>");
 			return true;
 		}
 
@@ -270,7 +265,6 @@ class Parser extends Command
 					Args::processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
 					this->config,
 					this->globals,
-					this->version,
 					this->start_time
 				)
 			);

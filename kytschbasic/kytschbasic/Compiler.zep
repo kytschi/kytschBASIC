@@ -49,6 +49,8 @@ class Compiler
 			this->loadConfig(config_dir);
 		}
 
+		define("VERSION", this->version);
+
 		let this->globals["_VALID"] = [];
 		let this->globals["_VALID"]["captcha"] = this->validateCaptcha();
 
@@ -85,8 +87,7 @@ class Compiler
 				if (!file_exists(filename)) {
 					throw new Exception(
 						"config not found, looking for " . config . ".json",
-						400,
-						this->version
+						400
 					);
 				}
 
@@ -94,8 +95,7 @@ class Compiler
 				if (empty(this->config)) {
 					throw new Exception(
 						"failed to decode the JSON",
-						400,
-						this->version
+						400
 					);
 				}
 			}
@@ -104,8 +104,7 @@ class Compiler
 		} catch \RuntimeException|\Exception, err {
 		    throw new Exception(
 				"Failed to load the config, " . err->getMessage(),
-				err->getCode(),
-				this->version
+				err->getCode()
 			);
 		}
 	}
@@ -181,7 +180,6 @@ class Compiler
 					getcwd() . "/" . route->template,
 					this->config,
 					this->globals,
-					this->version,
 					this->start_time
 				);
 				

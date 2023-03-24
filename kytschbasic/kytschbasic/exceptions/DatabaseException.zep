@@ -28,15 +28,11 @@ use KytschBASIC\Exceptions\Exception;
 
 class DatabaseException extends Exception
 {
-    public code;
-    public version;
-
-	public function __construct(string message, int code = 500, string version = "0.0.7 alpha")
+	public function __construct(string message, int code = 500)
 	{
         //Trigger the parent construct.
         parent::__construct(message, code);
-
-        let this->version = version;
+        
         let this->code = code;
     }
 }

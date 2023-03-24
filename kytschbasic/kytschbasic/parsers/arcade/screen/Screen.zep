@@ -38,9 +38,9 @@ class Screen extends Command
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 12) == "SCREEN CLOSE") {
+		if (self::match(command, "SCREEN CLOSE")) {
 			return self::output("</div>");
-		} elseif (substr(command, 0, 6) == "SCREEN") {
+		} elseif (self::match(command, "SCREEN")) {
 			var args = Args::parseShort("SCREEN", command);
 
 			if (isset(args[0])) {

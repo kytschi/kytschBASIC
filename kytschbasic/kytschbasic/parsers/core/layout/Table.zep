@@ -34,39 +34,39 @@ class Table extends Command
 	protected static width = "";
 
 	public static function parse(
-		string line,
+		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (substr(line, 0, 11) == "TABLE CLOSE") {
+		if (self::match(command, "TABLE CLOSE")) {
 			return "</table>";
-		} elseif (substr(line, 0, 5) == "TABLE") {
-			return self::processTag("TABLE", "table", line, event_manager, globals);
-		} elseif (substr(line, 0, 11) == "TBODY CLOSE") {
+		} elseif (self::match(command, "TABLE")) {
+			return self::processTag("TABLE", "table", command, event_manager, globals);
+		} elseif (self::match(command, "TBODY CLOSE")) {
 			return "</tbody>";
-		} elseif (substr(line, 0, 5) == "TBODY") {
-			return self::processTag("TBODY", "tbody", line, event_manager, globals);
-		} elseif (substr(line, 0, 11) == "TCELL CLOSE") {
+		} elseif (self::match(command, "TBODY")) {
+			return self::processTag("TBODY", "tbody", command, event_manager, globals);
+		} elseif (self::match(command, "TCELL CLOSE")) {
 			return "</td>";
-		} elseif (substr(line, 0, 5) == "TCELL") {
-			return self::processCell("TCELL", "td", line, event_manager, globals);
-		} elseif (substr(line, 0, 11) == "TFOOT CLOSE") {
+		} elseif (self::match(command, "TCELL")) {
+			return self::processCell("TCELL", "td", command, event_manager, globals);
+		} elseif (self::match(command, "TFOOT CLOSE")) {
 			return "</tfoot>";
-		} elseif (substr(line, 0, 5) == "TFOOT") {
-			return self::processTag("TFOOT", "tfoot", line, event_manager, globals);
-		} elseif (substr(line, 0, 15) == "THEADCELL CLOSE") {
+		} elseif (self::match(command, "TFOOT")) {
+			return self::processTag("TFOOT", "tfoot", command, event_manager, globals);
+		} elseif (self::match(command, "THEADCELL CLOSE")) {
 			return self::output("</th>");
-		} elseif (substr(line, 0, 9) == "THEADCELL") {
-			return self::processCell("THEADCELL", "th", line, event_manager, globals);
-		} elseif (substr(line, 0, 11) == "THEAD CLOSE") {
+		} elseif (self::match(command, "THEADCELL")) {
+			return self::processCell("THEADCELL", "th", command, event_manager, globals);
+		} elseif (self::match(command, "THEAD CLOSE")) {
 			return "</thead>";
-		} elseif (substr(line, 0, 5) == "THEAD") {
-			return self::processTag("THEAD", "thead", line, event_manager, globals);
-		} elseif (substr(line, 0, 10) == "TROW CLOSE") {
+		} elseif (self::match(command, "THEAD")) {
+			return self::processTag("THEAD", "thead", command, event_manager, globals);
+		} elseif (self::match(command, "TROW CLOSE")) {
 			return "</tr>";
-		} elseif (substr(line, 0, 4) == "TROW") {
-			return self::processTag("TROW", "tr", line, event_manager, globals);
+		} elseif (self::match(command, "TROW")) {
+			return self::processTag("TROW", "tr", command, event_manager, globals);
 		}
 
 		return null;

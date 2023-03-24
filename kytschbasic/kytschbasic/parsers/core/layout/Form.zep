@@ -50,7 +50,7 @@ class Form extends Command
 			return self::processButton(command, event_manager, globals, "submit");
 		} elseif (self::match(command, "FORM CAPTCHA")) {
 			return self::processCaptcha(command, event_manager, globals, config);
-		} elseif (substr(command, 0, 4) == "FORM") {
+		} elseif (self::match(command, "FORM")) {
 			return self::processForm(command, event_manager, globals);
 		}
 

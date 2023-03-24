@@ -31,7 +31,7 @@ BODY
 				HEADING 2
 					PRINT "Welcome to "
 					PRINT "kytsch","kytsch"
-					PRINT "BASIC","basic"
+					PRINT "BASIC","basic"					
 				HEADING CLOSE
 				SWRITE
 					PRINT "An 80s language by an 80s kid for the modern world!"
@@ -45,7 +45,7 @@ BODY
 				SWRITE
 					PRINT "The project is still in its early days but you can check it out at the link below."
 				SWRITE CLOSE
-				LINK "https://ironet.kytschi.com/kytschi/kytschBASIC","Checkout the source code",,"_blank"
+				LINK "https://github.com/kytschi/kytschBASIC","Checkout the source code",,"_blank"
 					PRINT "Git repo"
 				LINK CLOSE
 			DIV CLOSE

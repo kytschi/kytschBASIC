@@ -51,12 +51,12 @@ class Bitmap extends Command
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 10) == "BITMAPTEXT") {
+		if (self::match(command, "BITMAPTEXT")) {
 			let self::image = BitmapText::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 10) == "BITMAPFONT") {
+		} elseif (self::match(command, "BITMAPFONT")) {
 			return BitmapFont::parse(command, event_manager, globals);
-		} elseif (substr(command, 0, 12) == "BITMAP CLOSE") {
+		} elseif (self::match(command, "BITMAP CLOSE")) {
 			var bin;
 
 			ob_start();
@@ -67,7 +67,7 @@ class Bitmap extends Command
 			let self::image = null;
 
 			return self::output("<img src=\"data:image/png;base64," . base64_encode(bin) . "\">");
-		} elseif (substr(command, 0, 6) == "BITMAP") {
+		} elseif (self::match(command, "BITMAP")) {
 			var args, x=0, y=0, width=320, height=240, red=0, green=0, blue=0, transparency=100, rgb;
 			let args = Args::parseShort("BITMAP", command);
 
@@ -109,43 +109,43 @@ class Bitmap extends Command
 			imagefill(self::image, x, y, background);
 
 			return "";
-		} elseif (substr(command, 0, 4) == "LINE" && self::image != null) {
+		} elseif (self::match(command, "LINE") && self::image != null) {
 			let self::image = Line::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 4) == "BOXF" && self::image != null) {
+		} elseif (self::match(command, "BOXF") && self::image != null) {
 			let self::image = Boxf::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 3) == "BOX" && self::image != null) {
+		} elseif (self::match(command, "BOX") && self::image != null) {
 			let self::image = Box::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 8) == "ELLIPSEF" && self::image != null) {
+		} elseif (self::match(command, "ELLIPSEF") && self::image != null) {
 			let self::image = Ellipsef::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 7) == "ELLIPSE" && self::image != null) {
+		} elseif (self::match(command, "ELLIPSE") && self::image != null) {
 			let self::image = Ellipse::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 7) == "CIRCLEF" && self::image != null) {
+		} elseif (self::match(command, "CIRCLEF") && self::image != null) {
 			let self::image = Circlef::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 6) == "CIRCLE" && self::image != null) {
+		} elseif (self::match(command, "CIRCLE") && self::image != null) {
 			let self::image = Circle::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 10) == "COPY SHAPE" && self::image != null) {
+		} elseif (self::match(command, "COPY SHAPE") && self::image != null) {
 			let self::shape = Session::getLastCreate();
 			return "";
-		} elseif (substr(command, 0, 10) == "DRAW SHAPE" && self::image != null) {
+		} elseif (self::match(command, "DRAW SHAPE") && self::image != null) {
 			let self::image = self::shape->copyShape(self::image);
 			return "";
-		} elseif (substr(command, 0, 10) == "MOVE SHAPE" && self::image != null) {
+		} elseif (self::match(command, "MOVE SHAPE") && self::image != null) {
 			self::shape->move(Args::parseShort("MOVE SHAPE", command), event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 4) == "ARCF" && self::image != null) {
+		} elseif (self::match(command, "ARCF") && self::image != null) {
 			let self::image = Arcf::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 3) == "ARC" && self::image != null) {
+		} elseif (self::match(command, "ARC") && self::image != null) {
 			let self::image = Arc::draw(command, self::image, event_manager, globals);
 			return "";
-		} elseif (substr(command, 0, 16) == "SET TRANSPARENCY" && self::image != null) {
+		} elseif (self::match(command, "SET TRANSPARENCY") && self::image != null) {
 			self::shape->setTransparency(Args::parseShort("SET TRANSPARENCY", command), event_manager, globals);
 			return "";
 		}

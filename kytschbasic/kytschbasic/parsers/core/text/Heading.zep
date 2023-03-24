@@ -41,9 +41,9 @@ class Heading extends Command
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 13) == "HEADING CLOSE") {
+		if (self::match(command, "HEADING CLOSE")) {
 			return self::end;
-		} elseif (substr(command, 0, 7) == "HEADING") {
+		} elseif (self::match(command, "HEADING")) {
 			var args, arg, params="";
 
 			let self::id = self::genID("kb-heading");

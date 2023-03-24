@@ -24,7 +24,9 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
-class Session
+use KytschBASIC\Parsers\Core\Command;
+
+class Session extends Command
 {
 	public static function addLastCreate(shape)
 	{
@@ -49,7 +51,7 @@ class Session
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 5) == "SESSION GET ") {
+		if (self::match(command, "SESSION GET ")) {
 			return trim(str_replace("SESSION GET ", "", command), "\"");
 		}
 

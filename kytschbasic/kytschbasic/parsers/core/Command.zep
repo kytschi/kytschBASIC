@@ -57,6 +57,7 @@ class Command
 
 	public static function match(line, command)
 	{
+		let line = str_replace(["\t"], "", line);
 		return (substr(line, 0, strlen(command)) == command) ? true : false;
 	}
 

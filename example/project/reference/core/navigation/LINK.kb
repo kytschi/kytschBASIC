@@ -26,7 +26,7 @@ LINK "/about"
 LINK CLOSE
 
 SPRINT REM Open the link in a new tab/window
-LINK "https://ironet.kytschi.com/kytschi/kytschBASIC",,,"_blank"
+LINK "https://github.com/kytschi/kytschBASIC",,,"_blank"
 	Download
 LINK CLOSE
 
@@ -49,7 +49,7 @@ SPRINT END FOR
 				HEADING CLOSE
 				CPRINT
 &lt;a href="/about"&gt;About&lt;/a&gt;
-&lt;a href="/https://ironet.kytschi.com/kytschi/kytschBASIC" _target="blank"&gt;About&lt;/a&gt;
+&lt;a href="/https://github.com/kytschi/kytschBASIC" _target="blank"&gt;About&lt;/a&gt;
 
 &lt;a href="/home"&gt;Home&lt;/a&gt;
 &lt;a href="/about"&gt;About&lt;/a&gt;

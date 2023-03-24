@@ -22,11 +22,11 @@ BODY
 					PRINT "Now open your favourite terminal/console and clone the repo."
 				SWRITE CLOSE
 				CPRINT
-git clone https://ironet.kytschi.com/kytschi/kytschBASIC.git
+git clone https://github.com/kytschi/kytschBASIC.git
 
 OR
 
-git clone ssh://git@ironet.kytschi.com:2222/kytschi/kytschBASIC.git
+git clone git@github.com:kytschi/kytschBASIC.git
 				CPRINT CLOSE
 
 				SWRITE
@@ -68,7 +68,7 @@ use KytschBASIC\Compiler;
 
 				SWRITE
 					PRINT "For an example website checkout the source code for this one."
-					LINK "https://ironet.kytschi.com/kytschi/kytschBASIC/src/master/example",,,"_blank"
+					LINK "https://github.com/kytschi/kytschBASIC/tree/master/example",,,"_blank"
 						PRINT "kytschBASIC example"
 					LINK CLOSE
 				SWRITE CLOSE
@@ -79,9 +79,9 @@ use KytschBASIC\Compiler;
 					HEADING CLOSE
 				LINK CLOSE
 				SWRITE
-					PRINT "kytschBASIC configuration is handled via a JSON config file. From there you can define the database connection, the routes, etc."
-					LINK "https://ironet.kytschi.com/kytschi/kytschBASIC/src/master/kytschbasic-config.example.json",,,"_blank"
-						PRINT "kytschBASIC example config"
+					PRINT "kytschBASIC configuration is handled via JSON config files. From there you can define the database connection, the routes, etc."
+					LINK "https://github.com/kytschi/kytschBASIC/tree/master/config",,,"_blank"
+						PRINT "kytschBASIC example configs"
 					LINK CLOSE
 				SWRITE CLOSE
 				SWRITE "h3"

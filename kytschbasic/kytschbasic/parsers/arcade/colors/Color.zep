@@ -26,9 +26,10 @@ namespace KytschBASIC\Parsers\Arcade\Colors;
 
 use KytschBASIC\Parsers\Arcade\Colors\Rgb;
 use KytschBASIC\Parsers\Core\Args;
+use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 
-class Color
+class Color extends Command
 {
 	public static function parse(
 		string command,
@@ -36,7 +37,7 @@ class Color
 		array globals = [],
 		var config = null
 	) {
-		if (substr(command, 0, 3) == "RGB") {
+		if (self::match(command, "RGB")) {
 			return Rgb::parse(command, event_manager, globals);
 		}
 

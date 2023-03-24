@@ -25,7 +25,6 @@
 namespace KytschBASIC\Parsers\Arcade\Screen;
 
 use KytschBASIC\Helpers\Cookie;
-
 use KytschBASIC\Parsers\Core\Command;
 
 class Display extends Command
@@ -38,7 +37,7 @@ class Display extends Command
 	) {
 		var display, return_value = 0;
 
-		if (substr(command, 0, 10) == "DISPHEIGHT") {
+		if (self::match(command, "DISPHEIGHT")) {
 			let display = Cookie::get("display");
 
 			if (display) {
@@ -48,7 +47,7 @@ class Display extends Command
 			}
 
 			return self::output(return_value);
-		} elseif (substr(command, 0, 9) == "DISPWIDTH") {
+		} elseif (self::match(command, "DISPWIDTH")) {
 			let display = Cookie::get("display");
 
 			if (display) {

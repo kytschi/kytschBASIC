@@ -20,7 +20,7 @@ BODY
 					PRINT "The project is still in its early days but you can check it out at the link below."
 				SWRITE CLOSE
 				SWRITE
-					LINK "https://ironet.kytschi.com/kytschi/kytschBASIC","Link to the source","","_blank"
+					LINK "https://github.com/kytschi/kytschBASIC","Link to the source","","_blank"
 						PRINT "Link to repo"
 					LINK CLOSE
 				SWRITE CLOSE
