@@ -41,6 +41,10 @@
 		"template": "project/reference/core/BENCHMARK.kb"
 	},
 	{
+		"url": "/reference/VERSION",
+		"template": "project/reference/core/VERSION.kb"
+	},
+	{
 		"url": "/reference/INCLUDE",
 		"template": "project/reference/core/INCLUDE.kb"
 	},
@@ -54,10 +58,23 @@
 		"template": "project/reference/core/variables/LET.kb"
 	},
 	{
+		"url": "/reference/DEF",
+		"template": "project/reference/core/variables/DEF.kb"
+	},
+	{
 		"url": "/reference/DUMP",
 		"template": "project/reference/core/variables/DUMP.kb"
 	},
 
+	{
+		"url": "/reference/MAIL",
+		"template": "project/reference/core/mail/MAIL.kb"
+	},
+	
+	{
+		"url": "/reference/GOTO",
+		"template": "project/reference/core/conditional/GOTO.kb"
+	},
 	{
 		"url": "/reference/REM",
 		"template": "project/reference/core/REM.kb"
@@ -67,10 +84,6 @@
 		"template": "project/reference/core/SPRINT.kb"
 	},
 
-	{
-		"url": "/reference/GOTO",
-		"template": "project/reference/core/conditional/GOTO.kb"
-	},
 	{
 		"url": "/reference/IF",
 		"template": "project/reference/core/conditional/IF.kb"
@@ -139,12 +152,25 @@
 	},
 
 	{
-		"url": "/reference/BODY",
-		"template": "project/reference/core/layout/BODY.kb"
+		"url": "/reference/FORM",
+		"template": "project/reference/core/form/FORM.kb"
 	},
 	{
-		"url": "/reference/FORM",
-		"template": "project/reference/core/layout/FORM.kb"
+		"url": "/reference/FORM-CAPTCHA",
+		"template": "project/reference/core/form/FORM_CAPTCHA.kb"
+	},
+	{
+		"url": "/reference/FORM-INPUT",
+		"template": "project/reference/core/form/FORM_INPUT.kb"
+	},
+	{
+		"url": "/reference/FORM-TEXTAREA",
+		"template": "project/reference/core/form/FORM_TEXTAREA.kb"
+	},
+
+	{
+		"url": "/reference/BODY",
+		"template": "project/reference/core/layout/BODY.kb"
 	},
 	{
 		"url": "/reference/FOOTER",
