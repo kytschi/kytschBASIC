@@ -133,6 +133,15 @@ header {
     position: relative;
 }
 
+.kb-captcha-img {
+    width: 100%;
+    background-color: #fff;
+}
+
+.kb-captcha-img img {
+    min-width: 60%;
+}
+
 main {
     flex: 1;
     display: flex;

@@ -103,6 +103,9 @@ HEADER
 		LINK "/reference/DATA","Find out about the DATA command","nav-link"
 			PRINT "DATA"
 		LINK CLOSE
+		LINK "/reference/DEF","Find out about the DEF command","nav-link"
+			PRINT "DEF"
+		LINK CLOSE
 		LINK "/reference/DLIMIT","Find out about the DLIMIT command","nav-link"
 			PRINT "DLIMIT"
 		LINK CLOSE
@@ -138,6 +141,15 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/FORM","Find out about the FORM command","nav-link"
 			PRINT "FORM"
+		LINK CLOSE
+		LINK "/reference/FORM-CAPTCHA","Find out about the FORM CAPTCHA command","nav-link"
+			PRINT "FORM CAPTCHA"
+		LINK CLOSE
+		LINK "/reference/FORM-INPUT","Find out about the FORM INPUT command","nav-link"
+			PRINT "FORM INPUT"
+		LINK CLOSE
+		LINK "/reference/FORM-TEXTAREA","Find out about the FORM TEXTAREA command","nav-link"
+			PRINT "FORM TEXTAREA"
 		LINK CLOSE
 		LINK "/reference/FOOTER","Find out about the FOOTER command","nav-link"
 			PRINT "FOOTER"
@@ -216,6 +228,9 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/LSET","Find out about the LSET command","nav-link"
 			PRINT "LSET"
+		LINK CLOSE
+		LINK "/reference/MAIL","Find out about the MAIL command","nav-link"
+			PRINT "MAIL"
 		LINK CLOSE
 		LINK "/reference/MID","Find out about the MID command","nav-link"
 			PRINT "MID"
@@ -306,6 +321,9 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/VAL","Find out about the VAL command","nav-link"
 			PRINT "VAL"
+		LINK CLOSE
+		LINK "/reference/VERSION","Find out about the VERSION command","nav-link"
+			PRINT "VERSION"
 		LINK CLOSE
 		LINK "/reference/WHILE","Find out about the WHILE command","nav-link"
 			PRINT "WHILE"

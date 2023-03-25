@@ -18,7 +18,7 @@ BODY
 					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
-SPRINT iLoop=10
+SPRINT DEF iLoop$=10
 SPRINT WHILE iLoop>0
 	SPRINT SELECT iLoop
 		SPRINT CASE 2
@@ -35,7 +35,7 @@ SPRINT WEND
 					PRINT "Output"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24 kb-code-block"
-					iLoop=10
+					DEF iLoop$=10
 					WHILE iLoop>0
 						SELECT iLoop
 							CASE 2

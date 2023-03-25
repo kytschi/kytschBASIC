@@ -1,0 +1,39 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "MAIL statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "_ROOT/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "MAIL","basic"
+					LINE BREAK
+					PRINT "TO EMAIL, SUBJECT, FROM EMAIL","heading-args"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Ability to send an email. Only sendmail is supported at present so you will need that installed also."
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Anything inbetween the "
+					PRINT "MAIL", "basic"
+					PRINT " and "
+					PRINT "MAIL CLOSE", "basic"
+					PRINT " commands will be used as the email body."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+SPRINT MAIL "mike@kytschi.com", "Quick email", "hello@kytschi.com"
+SPRINT     PRINT "You suck!"
+SPRINT MAIL CLOSE
+				CPRINT CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "_ROOT/project/shared/footer"
+BODY CLOSE
+END

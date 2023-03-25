@@ -15,6 +15,9 @@ BODY
 				SWRITE
 					PRINT "To use the arcade library you need to include it. It is recommended that you include this in the HEAD."
 				SWRITE CLOSE
+				SWRITE
+					PRINT "PLEASE NOTE! Arcade uses COOKIES for storing stuff like screen dimensions. It does not store any personal information just stuff to help the graphics building."
+				SWRITE CLOSE
 				CPRINT
 HEAD
 SPRINT INCLUDE arcade

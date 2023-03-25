@@ -96,32 +96,32 @@ FORM CAPTCHA "captcha"
 					PRINT "See also"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24", "see-also"
-					LINK "/reference/DIV"
-						PRINT "DIV"
+					LINK "/reference/FORM-INPUT"
+						PRINT "FORM INPUT"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/reference/FGET"
-						PRINT "FGET"
+					LINK "/reference/FORM-CAPTCHA"
+						PRINT "FORM CAPTCHA"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/reference/FPOST"
-						PRINT "FPOST"
+					LINK "/reference/FORM-TEXTAREA"
+						PRINT "FORM TEXTAREA"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/reference/FOOTER"
-						PRINT "FOOTER"
+					LINK "/reference/FORM-SUBMIT"
+						PRINT "FORM SUBMIT"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/reference/HEAD"
-						PRINT "HEAD"
+					LINK "/reference/_GET"
+						PRINT "_GET"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/reference/HEADER"
-						PRINT "HEADER"
+					LINK "/reference/_POST"
+						PRINT "_POST"
 					LINK CLOSE
 					PRINT "&comma;&nbsp;"
-					LINK "/parameters"
-						PRINT "parameters"
+					LINK "/reference/_REQUEST"
+						PRINT "_REQUEST"
 					LINK CLOSE
 				DIV CLOSE
 			DIV CLOSE

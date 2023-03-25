@@ -1,0 +1,40 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "GOTO statment | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "_ROOT/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "GOTO","basic"
+				HEADING CLOSE
+				SWRITE
+					PRINT "Redirect to another URL"
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE
+				CPRINT
+GOTO "/home"
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE
+				DIV "kb-col kb-col-24", "see-also"
+					LINK "/reference/PRINT"
+						PRINT "PRINT"
+					LINK CLOSE
+					PRINT "&comma;&nbsp;"
+					LINK "/reference/SWRITE"
+						PRINT "SWRITE"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "_ROOT/project/shared/footer"
+BODY CLOSE
+END

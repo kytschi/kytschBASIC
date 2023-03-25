@@ -479,7 +479,7 @@ class Parser extends Command
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				let this->output = this->output . "<?php if(" . args[0] . ") { ?>";
+				let this->output = this->output . "<?php if($" . args[0] . ") { ?>";
 				return true;
 			}
 
@@ -512,7 +512,7 @@ class Parser extends Command
 			let if_statement = str_replace("=", "==", if_statement);
 		}
 
-		let this->output = this->output . command . "($" . if_statement . ") {";
+		let this->output = this->output . "<?php " . command . "($" . if_statement . ") { ?>";
 
 		if (line) {
 			if (!this->processCommand(line)) {
@@ -529,25 +529,25 @@ class Parser extends Command
 				
 		if (self::match(line, "END SELECT")) {
 			if (this->select_started > 1) {
-				let this->output = this->output . "break;";
+				let this->output = this->output . "<?php break; ?>";
 			}
 			let this->select_started = 0;
-			let this->output = this->output . "}";
+			let this->output = this->output . "<?php } ?>";
 			return true;
 		} elseif (self::match(line, "DEFAULT")) {
 			if (this->select_started > 1) {
-				let this->output = this->output . "break;";
+				let this->output = this->output . "<?php break; ?>";
 			}
-			let this->output = this->output . "default:";
+			let this->output = this->output . "<?php default: ?>";
 			return true;
 		} elseif (self::match(line, "CASE")) {
 			let args = self::parseSpaceArgs(line, "CASE");
 			
 			if (count(args) == 1) {
 				if (this->select_started > 1) {
-					let this->output = this->output . "break;";
+					let this->output = this->output . "<?php break; ?>";
 				}
-				let this->output = this->output . "case " . args[0] . ":";
+				let this->output = this->output . "<?php case " . args[0] . ": ?>";
 				let this->select_started = this->select_started + 1;
 				return true;
 			}

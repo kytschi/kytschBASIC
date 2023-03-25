@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Core\Variables\Variable
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
- * @version     0.0.1
+ * @copyright   2023 Mike Welsh
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -36,6 +36,13 @@ class Variable extends Command
 	) {
 		if (self::match(line, "LET")) {
 			var args = self::parseArgs("LET", line);
+			let args = explode("=", args[0]);
+
+			let line = implode("=", array_slice(args, 1, count(args) - 1));
+
+			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . self::parseEquation(line) . "; ?>";
+		} elseif (self::match(line, "DEF")) {
+			var args = self::parseArgs("DEF", line);
 			let args = explode("=", args[0]);
 
 			let line = implode("=", array_slice(args, 1, count(args) - 1));

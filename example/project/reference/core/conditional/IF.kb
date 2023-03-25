@@ -21,10 +21,13 @@ BODY
 SPRINT FOR iLoop=1 to 10
 	SPRINT IF iLoop=2 THEN
 		PRINT iLoop
+		PRINT ", "
 	SPRINT ELSEIF iLoop=4 THEN
         PRINT iLoop
+		PRINT ", "
 	SPRINT ELSEIF iLoop=6 THEN
         PRINT iLoop
+		PRINT ", "
 	SPRINT END IF
 SPRINT NEXT iLoop
 SPRINT LINE BREAK
@@ -42,8 +45,10 @@ SPRINT NEXT iLoop
 					FOR iLoop=1 to 10
 						IF iLoop=2 THEN
 							PRINT iLoop
+							PRINT ", "
 						ELSEIF iLoop=4 THEN
 							PRINT iLoop
+							PRINT ", "
 						ELSEIF iLoop=6 THEN
 							PRINT iLoop
 						END IF
