@@ -1,6 +1,7 @@
 <?php
 
 use KytschBASIC\Compiler;
+use KytschBASIC\Exceptions\Exception as KytschException;
 
 try {
     (new Compiler(__DIR__ . '/../config'))->run();
