@@ -28,14 +28,15 @@ use KytschBASIC\Parsers\Core\Args;
 
 class Rgb
 {
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		var args, red=0, green=0, blue=0, transparency=0;
-		let args = Args::parseShort("RGB", command);
+		var args, red=0, green=0, blue=0, transparency=0, controller;
+		let controller = new Args();
+		let args = controller->parseShort("RGB", command);
 
 		if (isset(args[0])) {
 			let red = intval(args[0]);
@@ -56,7 +57,7 @@ class Rgb
 		return "<?php $RGB=[" . red . "," . green . "," .  blue . "," . transparency . "];?>";
 	}
 
-	public static function code()
+	public function code()
 	{
 		return "<?php $red = 0; $green = 0; $blue = 0; if ($RGB) {$red = intval($RGB[0]);$green = intval($RGB[1]);$blue = intval($RGB[2]);}?>";
 	}

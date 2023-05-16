@@ -26,19 +26,19 @@ namespace KytschBASIC\Parsers\Core;
 
 class Command
 {
-	public static function cleanArg(
+	public function cleanArg(
 		string arg,
 		bool slashes = true
 	) {
 		return slashes ? addslashes(trim(trim(arg), "\"")) : trim(trim(arg), "\"");
 	}
 
-	public static function genID(string id)
+	public function genID(string id)
 	{
 		return id . "-" . hrtime(true);
 	}
 
-	public static function leftOverArgs(int start, args)
+	public function leftOverArgs(int start, args)
 	{
 		var bits, value, params = "";
 		let args = array_slice(args, start, count(args) - start);
@@ -49,19 +49,19 @@ class Command
 				continue;
 			}
 
-			let params = params . " " . bits[0] . "=\"" . self::cleanArg(bits[1]) . "\"";
+			let params = params . " " . bits[0] . "=\"" . this->cleanArg(bits[1]) . "\"";
 		}
 
 		return params;
 	}
 
-	public static function match(line, command)
+	public function match(line, command)
 	{
 		let line = str_replace(["\t"], "", line);
 		return (substr(line, 0, strlen(command)) == command) ? true : false;
 	}
 
-	public static function output(string code, bool withbr = false)
+	public function output(string code, bool withbr = false)
 	{
 		/*if (withbr) {
 			let code = code . "<br/>";
@@ -70,7 +70,7 @@ class Command
 		return code . "\n";
 	}
 
-	public static function parseArgs(
+	public function parseArgs(
 		string command,
 		string line
 	) {
@@ -108,7 +108,7 @@ class Command
 		return splits;
 	}
 
-	public static function parseEquation(
+	public function parseEquation(
 		string line,
 		string command = ""
 	) {
@@ -130,7 +130,7 @@ class Command
 			let line  = str_replace(command . " ", "", line);
 		}
 
-		let line = self::cleanArg(line, false);
+		let line = this->cleanArg(line, false);
 		let line = str_replace(")", "]", str_replace(["$(", "%(", "#(", "("], "[", line));
 		
 		let vars = preg_split("/=|==|<=|>=|>|</", line);
@@ -154,7 +154,7 @@ class Command
 				let line = str_replace("+", ".", line);
 			}
 			
-			let line = self::replaceVars(line);
+			let line = this->replaceVars(line);
 			
 		} else {
 			let vars = preg_split("/-/", line);
@@ -169,7 +169,7 @@ class Command
 					}
 				}
 			} else {
-				let line = self::replaceVars(line);
+				let line = this->replaceVars(line);
 			}
 		}
 		
@@ -181,7 +181,7 @@ class Command
 		return str_replace("$$", "$", line);
 	}
 
-	public static function parseSpaceArgs(
+	public function parseSpaceArgs(
 		string line,
 		string command = ""
 	) {
@@ -191,7 +191,7 @@ class Command
 		return explode(" ", line);
 	}
 
-	private static function replaceVars(string line)
+	private function replaceVars(string line)
 	{
 		var vars, variable;
 
@@ -207,7 +207,7 @@ class Command
 		return str_replace("$$", "$", line);
 	}
 
-	public static function safe(string line)
+	public function safe(string line)
 	{
 		return str_replace("\"", "&#34;", str_replace("'", "&#39;", line));
 	}

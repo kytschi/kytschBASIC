@@ -29,14 +29,16 @@ use KytschBASIC\Parsers\Core\Session;
 
 class BitmapFont
 {
-	public static function parse(
+	public function parse(
 		string command,		
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
+		var controller;
+		let controller = new Args();
 		let command = trim(trim(str_replace("BITMAPFONT ", "", command), "\""));
 		
-		return "<?php $KBBITMAPFONT=\"" . Args::processGlobals(command, globals) . "\";?>";
+		return "<?php $KBBITMAPFONT=\"" . controller->processGlobals(command, globals) . "\";?>";
 	}
 }

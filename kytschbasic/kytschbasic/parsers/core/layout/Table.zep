@@ -29,128 +29,130 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Table extends Command
 {
-	protected static id = "";
-	protected static _class = "";
-	protected static width = "";
+	protected id = "";
+	protected _class = "";
+	protected width = "";
 
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "TABLE CLOSE")) {
+		if (this->match(command, "TABLE CLOSE")) {
 			return "</table>";
-		} elseif (self::match(command, "TABLE")) {
-			return self::processTag("TABLE", "table", command, event_manager, globals);
-		} elseif (self::match(command, "TBODY CLOSE")) {
+		} elseif (this->match(command, "TABLE")) {
+			return this->processTag("TABLE", "table", command, event_manager, globals);
+		} elseif (this->match(command, "TBODY CLOSE")) {
 			return "</tbody>";
-		} elseif (self::match(command, "TBODY")) {
-			return self::processTag("TBODY", "tbody", command, event_manager, globals);
-		} elseif (self::match(command, "TCELL CLOSE")) {
+		} elseif (this->match(command, "TBODY")) {
+			return this->processTag("TBODY", "tbody", command, event_manager, globals);
+		} elseif (this->match(command, "TCELL CLOSE")) {
 			return "</td>";
-		} elseif (self::match(command, "TCELL")) {
-			return self::processCell("TCELL", "td", command, event_manager, globals);
-		} elseif (self::match(command, "TFOOT CLOSE")) {
+		} elseif (this->match(command, "TCELL")) {
+			return this->processCell("TCELL", "td", command, event_manager, globals);
+		} elseif (this->match(command, "TFOOT CLOSE")) {
 			return "</tfoot>";
-		} elseif (self::match(command, "TFOOT")) {
-			return self::processTag("TFOOT", "tfoot", command, event_manager, globals);
-		} elseif (self::match(command, "THEADCELL CLOSE")) {
-			return self::output("</th>");
-		} elseif (self::match(command, "THEADCELL")) {
-			return self::processCell("THEADCELL", "th", command, event_manager, globals);
-		} elseif (self::match(command, "THEAD CLOSE")) {
+		} elseif (this->match(command, "TFOOT")) {
+			return this->processTag("TFOOT", "tfoot", command, event_manager, globals);
+		} elseif (this->match(command, "THEADCELL CLOSE")) {
+			return this->output("</th>");
+		} elseif (this->match(command, "THEADCELL")) {
+			return this->processCell("THEADCELL", "th", command, event_manager, globals);
+		} elseif (this->match(command, "THEAD CLOSE")) {
 			return "</thead>";
-		} elseif (self::match(command, "THEAD")) {
-			return self::processTag("THEAD", "thead", command, event_manager, globals);
-		} elseif (self::match(command, "TROW CLOSE")) {
+		} elseif (this->match(command, "THEAD")) {
+			return this->processTag("THEAD", "thead", command, event_manager, globals);
+		} elseif (this->match(command, "TROW CLOSE")) {
 			return "</tr>";
-		} elseif (self::match(command, "TROW")) {
-			return self::processTag("TROW", "tr", command, event_manager, globals);
+		} elseif (this->match(command, "TROW")) {
+			return this->processTag("TROW", "tr", command, event_manager, globals);
 		}
 
 		return null;
 	}
 
-	private static function processCell(
+	private function processCell(
 		string command,
 		string tag,
 		string line,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-" . tag);
+		let this->id = this->genID("kb-" . tag);
 
-		var args, arg, params="";
-		let args = Args::parseShort(command, line);
+		var args, arg, params="", controller;
+		let controller = new Args();
+		let args = controller->parseShort(command, line);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
-				let self::width = arg;
-				let params = params . " width=\"" . self::width . "\"";
+				let this->width = arg;
+				let params = params . " width=\"" . this->width . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params . " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params . " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = Args::clean(args[2]);
+			let arg = controller->clean(args[2]);
 			if (!empty(arg)) {
 				let params = params . " colspan=\"" . intval(arg) . "\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = Args::clean(args[3]);
+			let arg = controller->clean(args[3]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		let params = params . " id=\"" . this->id . "\"";
 
-		let params = params . Args::leftOver(3, args);
+		let params = params . controller->leftOver(3, args);
 
 		return "<" . tag . " " . params . ">";
 	}
 
-	private static function processTag(
+	private function processTag(
 		string command,
 		string tag,
 		string line,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-" . tag);
+		let this->id = this->genID("kb-" . tag);
 
-		var args, arg, params="";
-		let args = Args::parseShort(command, line);
+		var args, arg, params="", controller;
+		let controller = new Args();
+		let args = controller->parseShort(command, line);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params . " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params . " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		let params = params . " id=\"" . this->id . "\"";
 
-		let params = params . Args::leftOver(2, args);
+		let params = params . controller->leftOver(2, args);
 
 		return "<" . tag . " " . params . ">";
 	}

@@ -29,116 +29,116 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Navigation extends Command
 {
-	protected static id = "";
-	protected static _class = "";
+	protected id = "";
+	protected _class = "";
 
-	protected static link = "";
-	protected static target = "";
-	protected static title = "";
+	protected link = "";
+	protected target = "";
+	protected title = "";
 
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(line, "LINK CLOSE")) {
+		if (this->match(line, "LINK CLOSE")) {
 			return "</a>";
-		} elseif (self::match(line, "LINK")) {
-			return self::processLink(line, event_manager, globals);
-		} elseif (self::match(line, "MENU CLOSE")) {
+		} elseif (this->match(line, "LINK")) {
+			return this->processLink(line, event_manager, globals);
+		} elseif (this->match(line, "MENU CLOSE")) {
 			return "</nav>";
-		} elseif (self::match(line, "MENU")) {
-			return self::processNav(line, event_manager, globals);
+		} elseif (this->match(line, "MENU")) {
+			return this->processNav(line, event_manager, globals);
 		}
 
 		return null;
 	}
 
-	private static function processLink(
+	private function processLink(
 		string line,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-a");
+		let this->id = this->genID("kb-a");
 
 		var args, arg, params="";
-		let args = self::parseArgs("LINK", line);
+		let args = this->parseArgs("LINK", line);
 
 		if (isset(args[0])) {
-			let arg = self::cleanArg(args[0]);
+			let arg = this->cleanArg(args[0]);
 			if (!empty(arg)) {
-				let self::link = arg;
-				let params = params . " href=\"" . self::link . "\"";
+				let this->link = arg;
+				let params = params . " href=\"" . this->link . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = self::cleanArg(args[1]);
+			let arg = this->cleanArg(args[1]);
 			if (!empty(arg)) {
-				let self::title = arg;
-				let params = params . " title=\"" . self::title . "\"";
+				let this->title = arg;
+				let params = params . " title=\"" . this->title . "\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = self::cleanArg(args[2]);
+			let arg = this->cleanArg(args[2]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params . " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params . " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = self::cleanArg(args[3]);
+			let arg = this->cleanArg(args[3]);
 			if (!empty(arg)) {
-				let self::target = arg;
-				let params = params . " target=\"" . self::target . "\"";
+				let this->target = arg;
+				let params = params . " target=\"" . this->target . "\"";
 			}
 		}
 
 		if (isset(args[4])) {
-			let arg = self::cleanArg(args[4]);
+			let arg = this->cleanArg(args[4]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		let params = params . " id=\"" . this->id . "\"";
 
-		let params = params . self::leftOverArgs(5, args);
+		let params = params . this->leftOverArgs(5, args);
 
 		return "<a" . params . ">";
 	}
 
-	private static function processNav(
+	private function processNav(
 		string line,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-nav");
+		let this->id = this->genID("kb-nav");
 
 		var args, arg, params="";
-		let args = self::parseArgs("MENU", line);
+		let args = this->parseArgs("MENU", line);
 
 		if (isset(args[0])) {
-			let arg = self::cleanArg(args[0]);
+			let arg = this->cleanArg(args[0]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params . " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params . " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = self::cleanArg(args[1]);
+			let arg = this->cleanArg(args[1]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		let params = params . " id=\"" . this->id . "\"";
 
-		let params = params . self::leftOverArgs(2, args);
+		let params = params . this->leftOverArgs(2, args);
 
 		return "<nav" . params . ">";
 	}

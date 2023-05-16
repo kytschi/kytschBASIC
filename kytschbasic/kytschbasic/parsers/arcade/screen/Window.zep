@@ -30,36 +30,37 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Window extends Command
 {
-	protected static id;
-	protected static screen_id;
+	protected id;
+	protected screen_id;
 
-	protected static x1;
-	protected static y1;
-	protected static x2;
-	protected static y2;
+	protected x1;
+	protected y1;
+	protected x2;
+	protected y2;
 
-	protected static title;
-	protected static type;
+	protected title;
+	protected type;
 
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "WINDOW CLOSE")) {
-			return self::output("</div>");
-		} elseif (self::match(command, "WINDOW")) {
-			var args;
-			let args = Args::parseShort("WINDOW", command);
+		if (this->match(command, "WINDOW CLOSE")) {
+			return this->output("</div>");
+		} elseif (this->match(command, "WINDOW")) {
+			var args, controller;
+			let controller = new Args();
+			let args = controller->parseShort("WINDOW", command);
 			if (isset(args[0])) {
-				let self::id = trim(args[0], "\"");
+				let this->id = trim(args[0], "\"");
 			} else {
-				let self::id = self::genID("kb-window");
+				let this->id = this->genID("kb-window");
 			}
 
 			if (isset(args[1])) {
-				let self::title = trim(args[1], "\"");
+				let this->title = trim(args[1], "\"");
 			}
 
 			if (isset(args[2])) {
@@ -70,58 +71,61 @@ class Window extends Command
 				if (isset(splits[0])) {
 					let coords = explode(",", splits[0]);
 					if (isset(coords[0])) {
-						let self::x1 = intval(coords[0]);
+						let this->x1 = intval(coords[0]);
 					}
 
 					if (isset(coords[1])) {
-						let self::y1 = intval(coords[1]);
+						let this->y1 = intval(coords[1]);
 					}
 				}
 
 				if (isset(splits[1])) {
 					let coords = explode(",", splits[1]);
 					if (isset(coords[0])) {
-						let self::x2 = intval(coords[0]);
+						let this->x2 = intval(coords[0]);
 					}
 
 					if (isset(coords[1])) {
-						let self::y2 = intval(coords[1]);
+						let this->y2 = intval(coords[1]);
 					}
 				}
 			}
 
 			if (isset(args[3])) {
-				let self::type = trim(args[3], "\"");
+				let this->type = trim(args[3], "\"");
 			}
 
 			if (isset(args[4])) {
-				let self::screen_id = trim(args[4], "\"");
+				let this->screen_id = trim(args[4], "\"");
 			}
 
-			self::save();
+			this->save();
 
 			var params;
-			let params = "id=\"" . self::id . "\"";
-			if (self::title) {
-				let params = params . " title=\"" . self::title . "\"";
+			let params = "id=\"" . this->id . "\"";
+			if (this->title) {
+				let params = params . " title=\"" . this->title . "\"";
 			}
 
-			return self::output("<div " . params . ">");
+			return this->output("<div " . params . ">");
 		}
 
 		return null;
 	}
 
-	public static function save()
+	public function save()
 	{
-		var windows = Session::read("windows");
+		var controller;
+		let controller = new Session();
+
+		var windows = controller->read("windows");
 
 		if (!is_array(windows)) {
 			let windows = [];
 		}
 
-		let windows[self::id] = new self();
+		let windows[this->id] = new self();
 
-		Session::write("windows", windows);
+		controller->write("windows", windows);
 	}
 }

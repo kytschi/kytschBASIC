@@ -26,15 +26,15 @@ namespace KytschBASIC\Helpers;
 
 class Cookie
 {
-	private static cookie_name = "kb_HLPR";
+	private cookie_name = "kb_HLPR";
 
-	private static function getCookie()
+	private function getCookie()
 	{
-		if (!array_key_exists(self::cookie_name, _COOKIE)) {
+		if (!array_key_exists(this->cookie_name, _COOKIE)) {
 			return null;
 		}
 
-		var cookie = _COOKIE[self::cookie_name];
+		var cookie = _COOKIE[this->cookie_name];
 		if (cookie) {
 			let cookie = json_decode(str_replace("\\\"", "\"", trim(cookie, "\"")));
 		} else {
@@ -44,9 +44,9 @@ class Cookie
 		return cookie;
 	}
 
-	public static function get(string name)
+	public function get(string name)
 	{
-		var cookie = self::getCookie();
+		var cookie = this->getCookie();
 
 		if (isset(cookie->{name})) {
 			return cookie->{name};

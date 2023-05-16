@@ -30,43 +30,47 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Screen extends Command
 {
-	protected static id;
+	protected id;
 
-	public static function parse(
+	public function parse(
 		string command,		
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "SCREEN CLOSE")) {
-			return self::output("</div>");
-		} elseif (self::match(command, "SCREEN")) {
-			var args = Args::parseShort("SCREEN", command);
+		if (this->match(command, "SCREEN CLOSE")) {
+			return this->output("</div>");
+		} elseif (this->match(command, "SCREEN")) {
+			var controller;
+			let controller = new Args();
+			var args = controller->parseShort("SCREEN", command);
 
 			if (isset(args[0])) {
-				let self::id = trim(args[0], "\"");
+				let this->id = trim(args[0], "\"");
 			} else {
-				let self::id = self::genID("kb-screen");
+				let this->id = this->genID("kb-screen");
 			}
 
-			self::save();
+			this->save();
 
-			return self::output("<div id=\"" . self::id . "\">");
+			return this->output("<div id=\"" . this->id . "\">");
 		}
 
 		return null;
 	}
 
-	public static function save()
+	public function save()
 	{
-		var screens = Session::read("screens");
+		var controller;
+		let controller = new Session();
+		var screens = controller->read("screens");
 
 		if (!is_array(screens)) {
 			let screens = [];
 		}
 
-		let screens[self::id] = new self();
+		let screens[this->id] = new self();
 
-		Session::write("screens", screens);
+		controller->write("screens", screens);
 	}
 }

@@ -31,14 +31,16 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Color extends Command
 {
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "RGB")) {
-			return Rgb::parse(command, event_manager, globals);
+		if (this->match(command, "RGB")) {
+			var rgb;
+			let rgb = new Rgb();
+			return rgb->parse(command, event_manager, globals);
 		}
 
 		return null;

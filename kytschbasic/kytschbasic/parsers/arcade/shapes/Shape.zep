@@ -30,93 +30,94 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Shape
 {
-	protected static x=0;
-	protected static y=0;
+	protected x=0;
+	protected y=0;
 
-	protected static width=0;
-	protected static height=0;
+	protected width=0;
+	protected height=0;
 
-	protected static radius=10;
-	protected static start_angle=10;
-	protected static end_angle=10;
-	protected static red=0;
-	protected static green=0;
-	protected static blue=0;
-	protected static transparency=0;
+	protected radius=10;
+	protected start_angle=10;
+	protected end_angle=10;
+	protected red=0;
+	protected green=0;
+	protected blue=0;
+	protected transparency=0;
 
-	public static function genColour()
+	public function genColour()
 	{	
-		var output;
-		let output = Rgb::code();
-		return output . "<?php $KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue, " . self::transparency . ");?>";
+		var output, controller;
+		let controller = new Rgb();
+		let output = controller->code();
+		return output . "<?php $KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue, " . this->transparency . ");?>";
 	}
 
 	public function getBlue()
 	{
-		return self::blue;
+		return this->blue;
 	}
 
 	public function getEndAngle()
 	{
-		return self::end_angle;
+		return this->end_angle;
 	}
 
 	public function getGreen()
 	{
-		return self::green;
+		return this->green;
 	}
 
 	public function getRadius()
 	{
-		return self::radius;
+		return this->radius;
 	}
 
 	public function getRed()
 	{
-		return self::red;
+		return this->red;
 	}
 
 	public function getTransparency()
 	{
-		return self::transparency;
+		return this->transparency;
 	}
 
 	public function getStartAngle()
 	{
-		return self::start_angle;
+		return this->start_angle;
 	}
 
 	public function getX()
 	{
-		return self::x;
+		return this->x;
 	}
 
 	public function getY()
 	{
-		return self::y;
+		return this->y;
 	}
 
-	public static function move(
+	public function move(
 		var args,
 		event_manager = null,
 		array globals = []
 	) {
 		if (isset(args[0])) {
-			let self::x = intval(args[0]);
+			let this->x = intval(args[0]);
 		}
 
 		if (isset(args[1])) {
-			let self::y = intval(args[1]);
+			let this->y = intval(args[1]);
 		}
 	}
 
-	public static function setTransparency(
+	public function setTransparency(
 		var args,
 		event_manager = null,
 		array globals = []
 	) {
 		if (isset(args[0])) {
-			let self::transparency = intval(args[0]);
+			let this->transparency = intval(args[0]);
 		}
 	}
 }

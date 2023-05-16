@@ -28,15 +28,15 @@ use KytschBASIC\Parsers\Core\Command;
 
 class WhileLoop extends Command
 {
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(line, "WHILE")) {
-			return "<?php while(" . self::parseEquation(line, "WHILE") . ") { ?>";
-		} elseif (self::match(line, "WEND")) {
+		if (this->match(line, "WHILE")) {
+			return "<?php while(" . this->parseEquation(line, "WHILE") . ") { ?>";
+		} elseif (this->match(line, "WEND")) {
 			return "<?php } ?>";
 		}
 

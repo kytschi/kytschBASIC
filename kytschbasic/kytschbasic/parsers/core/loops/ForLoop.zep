@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Session;
 
 class ForLoop extends Command
 {
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
@@ -37,10 +37,10 @@ class ForLoop extends Command
 	) {
 		var args;
 		
-		if (self::match(line, "FOR CLOSE")) {
+		if (this->match(line, "FOR CLOSE")) {
 			return "<?php } ?>";
-		} elseif (self::match(line, "FOR")) {
-			let args = self::parseSpaceArgs(line, "FOR");
+		} elseif (this->match(line, "FOR")) {
+			let args = this->parseSpaceArgs(line, "FOR");
 			
 			if (count(args) == 3) {
 				if (strtolower(args[1]) == "in") {
@@ -62,8 +62,8 @@ class ForLoop extends Command
 
 			return "<?php $" . splits[0] . " = " . intval(splits[1]) .
 			";while($" . splits[0] . " <= " . intval(args[2]) . ") {$" . splits[0] . "_step = " . step . ";?>";
-		} elseif (self::match(line, "NEXT")) {
-			let args = self::parseSpaceArgs(line);
+		} elseif (this->match(line, "NEXT")) {
+			let args = this->parseSpaceArgs(line);
 			if (count(args) == 1) {
 				throw new \Exception("NEXT command with no value");
 			}

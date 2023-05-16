@@ -43,24 +43,28 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Bitmap extends Command
 {
-	private static image = null;
-	private static shape = null;
+	private image = null;
+	private shape = null;
 
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "BITMAPTEXT")) {
-			return BitmapText::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "BITMAPFONT")) {
-			return BitmapFont::parse(command, event_manager, globals, config);
-		} elseif (self::match(command, "BITMAP CLOSE")) {
+		var controller;
+		if (this->match(command, "BITMAPTEXT")) {
+			let controller = new BitmapText();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "BITMAPFONT")) {
+			let controller = new BitmapFont();
+			return controller->parse(command, event_manager, globals, config);
+		} elseif (this->match(command, "BITMAP CLOSE")) {
 			return "<?php ob_start();imagepng($KBIMAGE);$img = ob_get_contents();ob_end_clean(); ?><img src=\"data:image/png;base64,<?= base64_encode($img); ?>\">";
-		} elseif (self::match(command, "BITMAP")) {
+		} elseif (this->match(command, "BITMAP")) {
 			var args, x=0, y=0, width=320, height=240, transparency=100;
-			let args = Args::parseShort("BITMAP", command);
+			let controller = new Args();
+			let args = controller->parseShort("BITMAP", command);
 
 			if (isset(args[0])) {
 				let x = intval(args[0]);
@@ -83,44 +87,59 @@ class Bitmap extends Command
 			}
 
 			var output;
-			let output = Rgb::code();
+			let controller = new Rgb();
+			let output = controller->code();
 			let output = output . "<?php $KBIMAGE = imagecreatetruecolor(" . width . "," .  height . ");imagealphablending($KBIMAGE, true);imageantialias($KBIMAGE, false);";
 			let output = output . "$background = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue," . transparency . ");";
 			return output . "imagefill($KBIMAGE, " . x . "," . y . ", $background);?>";
-		} elseif (self::match(command, "LINE")) {
-			return Line::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "BOXF")) {
-			return Boxf::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "BOX")) {
-			let self::image = Box::draw(command, self::image, event_manager, globals);
+		} elseif (this->match(command, "LINE")) {
+			let controller = new Line();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "BOXF")) {
+			let controller = new Boxf();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "BOX")) {
+			let controller = new Box();
+			let this->image = controller->draw(command, this->image, event_manager, globals);
 			return "";
-		} elseif (self::match(command, "ELLIPSEF")) {
-			return Ellipsef::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "ELLIPSE")) {
-			return Ellipse::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "CIRCLEF")) {
-			return Circlef::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "CIRCLE")) {
-			return Circle::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "COPY SHAPE")) {
-			let self::shape = Session::getLastCreate();
+		} elseif (this->match(command, "ELLIPSEF")) {
+			let controller = new Ellipsef();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "ELLIPSE")) {
+			let controller = new Ellipse();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "CIRCLEF")) {
+			let controller = new Circlef();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "CIRCLE")) {
+			let controller = new Circle();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "COPY SHAPE")) {
+			let controller = new Session();
+			let this->shape = controller->getLastCreate();
 			return "";
-		} elseif (self::match(command, "DRAW SHAPE")) {
-			let self::image = self::shape->copyShape(self::image);
+		} elseif (this->match(command, "DRAW SHAPE")) {
+			let this->image = this->shape->copyShape(this->image);
 			return "";
-		} elseif (self::match(command, "MOVE SHAPE")) {
-			self::shape->move(Args::parseShort("MOVE SHAPE", command), event_manager, globals);
+		} elseif (this->match(command, "MOVE SHAPE")) {
+			let controller = new Args();
+			this->shape->move(controller->parseShort("MOVE SHAPE", command), event_manager, globals);
 			return "";
-		} elseif (self::match(command, "ARCF")) {
-			return Arcf::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "ARC")) {
-			return Arc::draw(command, event_manager, globals, config);
-		} elseif (self::match(command, "SET TRANSPARENCY")) {
-			self::shape->setTransparency(Args::parseShort("SET TRANSPARENCY", command), event_manager, globals);
+		} elseif (this->match(command, "ARCF")) {
+			let controller = new Arcf();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "ARC")) {
+			let controller = new Arc();
+			return controller->draw(command, event_manager, globals, config);
+		} elseif (this->match(command, "SET TRANSPARENCY")) {
+			let controller = new Args();
+			this->shape->setTransparency(controller->parseShort("SET TRANSPARENCY", command), event_manager, globals);
 			return "";
 		}
 
-		return Color::parse(
+		let controller = new Color();
+
+		return controller->parse(
 			command,			
 			event_manager,
 			globals,

@@ -1,8 +1,13 @@
+@font-face {
+    font-family: 'FreeMono';
+    src: url("../fonts/choc.otf") format("opentype");
+}
+
 html, body {
     background-color: #101010;
     color: #bababa;
-    font-family: Lato,'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-size: 11pt;
+    font-family: "FreeMono", Arial, Helvetica, sans-serif;
+    font-size: 14pt;
     height: 100vh;
     width: 100%;
     min-width: 1024px;
@@ -180,7 +185,7 @@ main {
 }
 
 nav {
-    padding-left: 30px;
+    padding-top: 10px;
 }
 
 nav a:hover {
@@ -191,8 +196,7 @@ nav a:hover {
 .nav-link {
     float: left;
     width: 100%;
-    padding: 10px 10px;
-    font-size: 12pt;
+    padding: 10px 0px;
 }
 
 p {
@@ -206,6 +210,10 @@ pre, .kb-code-block {
     -moz-tab-size: 4;
     tab-size: 4;
 	overflow-x: hidden;
+    font-family: "FreeMono", Arial, Helvetica, sans-serif !important;
+}
+code {
+    font-family: "FreeMono", Arial, Helvetica, sans-serif !important;
 }
 
 table {

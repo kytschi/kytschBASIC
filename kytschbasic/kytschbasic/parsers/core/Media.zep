@@ -29,64 +29,66 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Media extends Command
 {
-	protected static id = "";
-	protected static _class = "";
-	protected static alt = "";
-	protected static src = "";
+	protected id = "";
+	protected _class = "";
+	protected alt = "";
+	protected src = "";
 
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "IMAGE")) {
-			var args = Args::parseShort("IMAGE", command);
+		var controller;
+		let controller = new Args();
+		if (this->match(command, "IMAGE")) {
+			var args = controller->parseShort("IMAGE", command);
 
 			var arg, return_string = "<img";
 
-			let self::id = self::genID("kb-img");
+			let this->id = this->genID("kb-img");
 
 			if (isset(args[0])) {
-				let arg = Args::clean(args[0]);
+				let arg = controller->clean(args[0]);
 				if (!empty(arg)) {
-					let self::src = arg;
+					let this->src = arg;
 				
 					if (!empty(config["cache"])) {
 						if (empty(config["cache"]->enabled)) {
-							let self::src = self::src . "?no-cache=" . microtime();
+							let this->src = this->src . "?no-cache=" . microtime();
 						}
 					}
 
-					let return_string = return_string . " src=\"" . self::src . "\"";
+					let return_string = return_string . " src=\"" . this->src . "\"";
 				}
 			}
 
 			if (isset(args[1])) {
-				let arg = Args::clean(args[1]);
+				let arg = controller->clean(args[1]);
 				if (!empty(arg)) {
-					let self::alt = arg;
-					let return_string = return_string . " alt=\"" . self::alt . "\"";
+					let this->alt = arg;
+					let return_string = return_string . " alt=\"" . this->alt . "\"";
 				}
 			}
 
 			if (isset(args[2])) {
-				let arg = Args::clean(args[2]);
+				let arg = controller->clean(args[2]);
 				if (!empty(arg)) {
-					let self::_class = arg;
-					let return_string = return_string . " class=\"" . self::_class . "\"";
+					let this->_class = arg;
+					let return_string = return_string . " class=\"" . this->_class . "\"";
 				}
 			}
 
 			if (isset(args[3])) {
-				let arg = Args::clean(args[3]);
+				let arg = controller->clean(args[3]);
 				if (!empty(arg)) {
-					let self::id = arg;
+					let this->id = arg;
 
 				}
 			}
 
-			return return_string . " id=\"" . self::id . "\">";
+			return return_string . " id=\"" . this->id . "\">";
 		}
 
 		return null;

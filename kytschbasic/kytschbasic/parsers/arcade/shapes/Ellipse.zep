@@ -33,49 +33,50 @@ class Ellipse extends Shape
 	public function copyShape(
 		var image
 	) {
-		var colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imageellipse(image, self::x, self::y, self::width, self::height, colour);
+		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
+		imageellipse(image, this->x, this->y, this->width, this->height, colour);
 
 		return image;
 	}
 
-	public static function draw(
+	public function draw(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		var args;
-		let args = Args::parseShort("ELLIPSE", command);
+		var args, controller;
+		let controller = new Args();
+		let args = controller->parseShort("ELLIPSE", command);
 
 		if (isset(args[0])) {
-			let self::x = intval(args[0]);
+			let this->x = intval(args[0]);
 		}
 
 		if (isset(args[1])) {
-			let self::y = intval(args[1]);
+			let this->y = intval(args[1]);
 		}
 
 		if (isset(args[2])) {
-			let self::width = intval(args[2]);
+			let this->width = intval(args[2]);
 		}
 
 		if (isset(args[3])) {
-			let self::height = intval(args[3]);
+			let this->height = intval(args[3]);
 		}
 
 		var output;
-		let output = self::genColour();
-		return output . "<?php imageellipse($KBIMAGE, " . self::x . "," . self::y . "," . self::width . "," . self::height . ", $KBCOLOUR);?>";
+		let output = this->genColour();
+		return output . "<?php imageellipse($KBIMAGE, " . this->x . "," . this->y . "," . this->width . "," . this->height . ", $KBCOLOUR);?>";
 	}
 
 	public function getWidth()
 	{
-		return self::width;
+		return this->width;
 	}
 
 	public function getHeight()
 	{
-		return self::height;
+		return this->height;
 	}
 }

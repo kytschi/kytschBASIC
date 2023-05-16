@@ -28,28 +28,28 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Variable extends Command
 {
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(line, "LET")) {
-			var args = self::parseArgs("LET", line);
+		if (this->match(line, "LET")) {
+			var args = this->parseArgs("LET", line);
 			let args = explode("=", args[0]);
 
 			let line = implode("=", array_slice(args, 1, count(args) - 1));
 
-			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . self::parseEquation(line) . "; ?>";
-		} elseif (self::match(line, "DEF")) {
-			var args = self::parseArgs("DEF", line);
+			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . this->parseEquation(line) . "; ?>";
+		} elseif (this->match(line, "DEF")) {
+			var args = this->parseArgs("DEF", line);
 			let args = explode("=", args[0]);
 
 			let line = implode("=", array_slice(args, 1, count(args) - 1));
 
-			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . self::parseEquation(line) . "; ?>";
-		} elseif (self::match(line, "DUMP")) {
-			var args = self::parseArgs("DUMP", line);
+			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . this->parseEquation(line) . "; ?>";
+		} elseif (this->match(line, "DUMP")) {
+			var args = this->parseArgs("DUMP", line);
 			return "<pre><?=var_dump($" . args[0] . ");?></pre>";
 		}
 

@@ -29,69 +29,70 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Layout extends Command
 {
-	protected static id = "";
-	protected static _class = "";
+	protected id = "";
+	protected _class = "";
 
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "DIV CLOSE")) {
+		if (this->match(command, "DIV CLOSE")) {
 			return "</div>";
-		} elseif (self::match(command, "DIV")) {
-			return self::processTag("div", command, event_manager, globals);
-		} elseif (self::match(command, "BODY CLOSE")) {
+		} elseif (this->match(command, "DIV")) {
+			return this->processTag("div", command, event_manager, globals);
+		} elseif (this->match(command, "BODY CLOSE")) {
 			return "</body>";
-		} elseif (self::match(command, "BODY")) {
-			return self::processTag("body", command, event_manager, globals);
-		} elseif (self::match(command, "FOOTER CLOSE")) {
+		} elseif (this->match(command, "BODY")) {
+			return this->processTag("body", command, event_manager, globals);
+		} elseif (this->match(command, "FOOTER CLOSE")) {
 			return "</footer>";
-		} elseif (self::match(command, "FOOTER")) {
-			return self::processTag("footer", command, event_manager, globals);
-		} elseif (self::match(command, "HEADER CLOSE")) {
+		} elseif (this->match(command, "FOOTER")) {
+			return this->processTag("footer", command, event_manager, globals);
+		} elseif (this->match(command, "HEADER CLOSE")) {
 			return "</header>";
-		} elseif (self::match(command, "HEADER")) {
-			return self::processTag("header", command, event_manager, globals);
-		} elseif (self::match(command, "MAIN CLOSE")) {
+		} elseif (this->match(command, "HEADER")) {
+			return this->processTag("header", command, event_manager, globals);
+		} elseif (this->match(command, "MAIN CLOSE")) {
 			return "</main>";
-		} elseif (self::match(command, "MAIN")) {
-			return self::processTag("main", command, event_manager, globals);
+		} elseif (this->match(command, "MAIN")) {
+			return this->processTag("main", command, event_manager, globals);
 		}
 
 		return null;
 	}
 
-	private static function processTag(
+	private function processTag(
 		string tag,
 		string command,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-" . tag);
+		let this->id = this->genID("kb-" . tag);
 
-		var args, arg, params="";
-		let args = Args::parseShort(strtoupper(tag), command);
+		var args, arg, params="", controller;
+		let controller = new Args();
+		let args = controller->parseShort(strtoupper(tag), command);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params . " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params . " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		let params = params . " id=\"" . this->id . "\"";
 
-		let params = params . Args::leftOver(2, args);
+		let params = params . controller->leftOver(2, args);
 
 		return "<" . tag . " " . params . ">";
 	}

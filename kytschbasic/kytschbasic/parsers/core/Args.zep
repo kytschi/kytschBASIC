@@ -28,7 +28,7 @@ use KytschBASIC\Exceptions\ConfigException;
 
 class Args
 {
-	public static function add(args, string html)
+	public function add(args, string html)
 	{
 		if (empty(args)) {
 			return html;
@@ -43,7 +43,7 @@ class Args
 		return html;
 	}
 
-	public static function clean(string arg, var config = null)
+	public function clean(string arg, var config = null)
 	{
 		let arg = trim(trim(arg), "\"");
 
@@ -145,7 +145,7 @@ class Args
 		return arg;
 	}
 
-	public static function leftOver(int start, args)
+	public function leftOver(int start, args)
 	{
 		var bits, value, params = "";
 		let args = array_slice(args, start, count(args) - start);
@@ -156,13 +156,13 @@ class Args
 				continue;
 			}
 
-			let params = params . " " . bits[0] . "=\"" . self::clean(bits[1]) . "\"";
+			let params = params . " " . bits[0] . "=\"" . this->clean(bits[1]) . "\"";
 		}
 
 		return params;
 	}
 
-	public static function parse(
+	public function parse(
 		string command,
 		string line,
 		array globals = []
@@ -218,13 +218,13 @@ class Args
 				continue;
 			}
 
-			let args[bits[0]] = self::processGlobals(bits[1], globals);
+			let args[bits[0]] = this->processGlobals(bits[1], globals);
 		}
 
 		return args;
 	}
 
-	public static function parseShort(
+	public function parseShort(
 		string command,
 		string line
 	) {
@@ -258,19 +258,19 @@ class Args
 		return splits;
 	}
 
-	public static function process(
+	public function process(
 		string command,
 		string line,
 		string tag,
 		array globals = []
 	) {
-		return self::add(
-			self::parse(command, line, globals),
+		return this->add(
+			this->parse(command, line, globals),
 			"<" . tag
 		) . ">";
 	}
 
-	public static function processGlobals(
+	public function processGlobals(
 		string str,
 		array globals = []
 	) {
@@ -281,18 +281,18 @@ class Args
 		return str;
 	}
 
-	public static function transparency(value)
+	public function transparency(value)
 	{
 		var percent;
 		let percent = intval(value) / 100;
 		if (percent != 0) {
-			return percent * 127;
+			return intval(percent * 127);
 		} else {
 			return 0;
 		}
 	}
 
-	public static function value(
+	public function value(
 		string command,
 		string line
 	) {

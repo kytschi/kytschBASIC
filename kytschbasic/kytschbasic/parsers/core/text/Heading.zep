@@ -29,58 +29,61 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Heading extends Command
 {
-	protected static id = "";
-	protected static _class = "";
+	protected id = "";
+	protected _class = "";
 
-	private static end = "";
-	private static size = 1;
+	private end = "";
+	private size = 1;
 
-	public static function parse(
+	public function parse(
 		string command,		
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "HEADING CLOSE")) {
-			return self::end;
-		} elseif (self::match(command, "HEADING")) {
+		var controller;
+		let controller = new Args();
+
+		if (this->match(command, "HEADING CLOSE")) {
+			return this->end;
+		} elseif (this->match(command, "HEADING")) {
 			var args, arg, params="";
 
-			let self::id = self::genID("kb-heading");
+			let this->id = this->genID("kb-heading");
 
-			let args = Args::parseShort("HEADING", command);
+			let args = controller->parseShort("HEADING", command);
 
 			if (empty(args)) {
-				let self::end = "</h1>";
+				let this->end = "</h1>";
 				return "<h1>";
 			}
 
 			if (isset(args[0])) {
-				let self::size = intval(Args::clean(args[0]));
+				let this->size = intval(controller->clean(args[0]));
 			}
 
 			if (isset(args[1])) {
-				let arg = Args::clean(args[1]);
+				let arg = controller->clean(args[1]);
 				if (!empty(arg)) {
-					let self::_class = arg;
-					let params = params . " class=\"" . self::_class . "\"";
+					let this->_class = arg;
+					let params = params . " class=\"" . this->_class . "\"";
 				}
 			}
 
 			if (isset(args[2])) {
-				let arg = Args::clean(args[2]);
+				let arg = controller->clean(args[2]);
 				if (!empty(arg)) {
-					let self::id = arg;
+					let this->id = arg;
 				}
 			}
 
-			let params = params . " id=\"" . self::id . "\"";
+			let params = params . " id=\"" . this->id . "\"";
 
-			let self::end = self::output("</h" . self::size . ">");
+			let this->end = this->output("</h" . this->size . ">");
 
-			let params = params . Args::leftOver(1, args);
+			let params = params . controller->leftOver(1, args);
 
-			return "<h" . self::size . params . ">";
+			return "<h" . this->size . params . ">";
 		}
 
 		return null;

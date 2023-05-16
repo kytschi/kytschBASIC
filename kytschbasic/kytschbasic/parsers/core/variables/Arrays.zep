@@ -28,14 +28,14 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Arrays extends Command
 {
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(line, "DIM")) {
-			var args = self::parseArgs("DIM", line);
+		if (this->match(line, "DIM")) {
+			var args = this->parseArgs("DIM", line);
 			var splits = explode("(", args[0]);
 			return "<php $" . str_replace(["$", "%", "#"], "", splits[0]) . "=[]; ?>";
 		}

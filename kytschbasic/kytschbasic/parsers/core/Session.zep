@@ -28,9 +28,9 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Session extends Command
 {
-	public static function addLastCreate(shape)
+	public function addLastCreate(shape)
 	{
-		self::write("LAST_CREATE", shape);
+		this->write("LAST_CREATE", shape);
 	}
 
 	public static function clear(string name)
@@ -40,25 +40,25 @@ class Session extends Command
 		}
 	}
 
-	public static function getLastCreate()
+	public function getLastCreate()
 	{
-		return self::read("LAST_CREATE");
+		return this->read("LAST_CREATE");
 	}
 
-	public static function parse(
+	public function parse(
 		string command,		
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "SESSION GET ")) {
+		if (this->match(command, "SESSION GET ")) {
 			return trim(str_replace("SESSION GET ", "", command), "\"");
 		}
 
 		return null;
 	}
 
-	public static function read(string name)
+	public function read(string name)
 	{
 		var data = null;
 
@@ -69,7 +69,7 @@ class Session extends Command
 		return data;
 	}
 
-	public static function start(config)
+	public function start(config)
 	{
 		if(headers_sent() && session_id()) {
 			return;
@@ -97,7 +97,7 @@ class Session extends Command
 		session_start(args);
 	}
 
-	public static function write(string name, data)
+	public function write(string name, data)
 	{
 		let _SESSION[name] = data;
 	}

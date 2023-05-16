@@ -31,67 +31,68 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Line extends Shape
 {
-	protected static x1=0;
-	protected static y1=0;
-	protected static x2=0;
-	protected static y2=0;
+	protected x1=0;
+	protected y1=0;
+	protected x2=0;
+	protected y2=0;
 
 	public function copyShape(
 		var image
 	) {
-		var colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imageline(image, self::x1, self::y1, self::x2, self::y2, colour);
+		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
+		imageline(image, this->x1, this->y1, this->x2, this->y2, colour);
 
 		return image;
 	}
 
-	public static function draw(
+	public function draw(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		var args;
-		let args = Args::parseShort("LINE", command);
+		var args, controller;
+		let controller = new Args();
+		let args = controller->parseShort("LINE", command);
 
 		if (isset(args[0])) {
-			let self::x1 = intval(args[0]);
+			let this->x1 = intval(args[0]);
 		}
 
 		if (isset(args[1])) {
-			let self::y1 = intval(args[1]);
+			let this->y1 = intval(args[1]);
 		}
 
 		if (isset(args[2])) {
-			let self::x2 = intval(args[2]);
+			let this->x2 = intval(args[2]);
 		}
 
 		if (isset(args[3])) {
-			let self::y2 = intval(args[3]);
+			let this->y2 = intval(args[3]);
 		}
 
 		var output;
-		let output = self::genColour();
-		return output . "<?php imageline($KBIMAGE, " . self::x1 . "," . self::y1 . "," . self::x2 . "," . self::y2 . ", $KBCOLOUR);?>";
+		let output = this->genColour();
+		return output . "<?php imageline($KBIMAGE, " . this->x1 . "," . this->y1 . "," . this->x2 . "," . this->y2 . ", $KBCOLOUR);?>";
 	}
 
 	public function getX1()
 	{
-		return self::x1;
+		return this->x1;
 	}
 
 	public function getX2()
 	{
-		return self::x2;
+		return this->x2;
 	}
 
 	public function getY1()
 	{
-		return self::y1;
+		return this->y1;
 	}
 
 	public function getY2()
 	{
-		return self::y2;
+		return this->y2;
 	}
 }

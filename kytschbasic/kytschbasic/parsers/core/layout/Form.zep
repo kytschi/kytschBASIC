@@ -29,79 +29,80 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Form extends Command
 {
-	protected static id = "";
-	protected static _class = "";
+	protected id = "";
+	protected _class = "";
 
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "FORM CLOSE")) {
+		if (this->match(command, "FORM CLOSE")) {
 			return "</form>";
-		} elseif (self::match(command, "FORM INPUT")) {
-			return self::processInput(command, event_manager, globals);
-		} elseif (self::match(command, "FORM TEXTAREA")) {
-			return self::processTextarea(command, event_manager, globals);
-		} elseif (self::match(command, "FORM SUBMIT CLOSE")) {
+		} elseif (this->match(command, "FORM INPUT")) {
+			return this->processInput(command, event_manager, globals);
+		} elseif (this->match(command, "FORM TEXTAREA")) {
+			return this->processTextarea(command, event_manager, globals);
+		} elseif (this->match(command, "FORM SUBMIT CLOSE")) {
 			return "</button>";
-		} elseif (self::match(command, "FORM SUBMIT")) {
-			return self::processButton(command, event_manager, globals, "submit");
-		} elseif (self::match(command, "FORM CAPTCHA")) {
-			return self::processCaptcha(command, event_manager, globals, config);
-		} elseif (self::match(command, "FORM")) {
-			return self::processForm(command, event_manager, globals);
+		} elseif (this->match(command, "FORM SUBMIT")) {
+			return this->processButton(command, event_manager, globals, "submit");
+		} elseif (this->match(command, "FORM CAPTCHA")) {
+			return this->processCaptcha(command, event_manager, globals, config);
+		} elseif (this->match(command, "FORM")) {
+			return this->processForm(command, event_manager, globals);
 		}
 
 		return null;
 	}
 
-	private static function processButton(
+	private function processButton(
 		string command,
 		event_manager,
 		array globals,
 		string type = "button"
 	) {
-		let self::id = self::genID("kb-button");
+		let this->id = this->genID("kb-button");
 
-		var args, arg, params="", label="", html;
-		let args = Args::parseShort(strtoupper("form submit"), command);
+		var args, arg, params="", label="", html, controller;
+		let controller = new Args();
+		let args = controller->parseShort(strtoupper("form submit"), command);
 
 		let params .= " type=\"" . type . "\"";
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
 				let params .= " name=\"" . arg . "\"" . " value=\"" . arg . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
 				let label = arg;
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = Args::clean(args[2]);
+			let arg = controller->clean(args[2]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params .= " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params .= " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = Args::clean(args[3]);
+			let arg = controller->clean(args[3]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params .= " id=\"" . self::id . "\"";
+		let params .= " id=\"" . this->id . "\"";
 
-		let params .= Args::leftOver(4, args);
+		let params .= controller->leftOver(4, args);
 		let html = "<button " . params . ">";
 		if (label != "") {
 			let html .= label . "</button>";
@@ -110,7 +111,7 @@ class Form extends Command
 		return html;
 	}
 
-	private static function processCaptcha(
+	private function processCaptcha(
 		string command,
 		event_manager,
 		array globals,
@@ -206,18 +207,19 @@ class Form extends Command
 			"<input name=\"_KBCAPTCHA\" type=\"hidden\" value=\"" . encrypted . "\"/>";
 	}
 
-	private static function processInput(
+	private function processInput(
 		string command,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-input");
+		let this->id = this->genID("kb-input");
 
-		var args, arg, params="";
-		let args = Args::parseShort(strtoupper("form input"), command);
+		var args, arg, params="", controller;
+		let controller = new Args();
+		let args = controller->parseShort(strtoupper("form input"), command);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
 				let params .= " name=\"" . arg . "\"";
 
@@ -228,53 +230,54 @@ class Form extends Command
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params .= " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params .= " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = Args::clean(args[2]);
+			let arg = controller->clean(args[2]);
 			if (!empty(arg)) {
 				let params .= " placeholder=\"" . arg . "\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = Args::clean(args[3]);
+			let arg = controller->clean(args[3]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
 		if (isset(args[4])) {
-			let arg = Args::clean(args[4]);
+			let arg = controller->clean(args[4]);
 			if (!empty(arg)) {
 				let params .= " required=\"required\"";
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
+		let params = params . " id=\"" . this->id . "\"";
 
-		let params = params . Args::leftOver(4, args);
+		let params = params . controller->leftOver(4, args);
 
 		return "<input " . params . ">";
 	}
 
-	private static function processTextarea(
+	private function processTextarea(
 		string command,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-textarea");
+		let this->id = this->genID("kb-textarea");
 
-		var args, arg, params="", text = "";
-		let args = Args::parseShort(strtoupper("form textarea"), command);
+		var args, arg, params="", text = "", controller;
+		let controller = new Args();
+		let args = controller->parseShort(strtoupper("form textarea"), command);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
 				let params .= " name=\"" . arg . "\"";
 				if (isset(_REQUEST[arg])) {
@@ -284,59 +287,59 @@ class Form extends Command
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params .= " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params .= " class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = Args::clean(args[2]);
+			let arg = controller->clean(args[2]);
 			if (!empty(arg)) {
 				let params .= " placeholder=\"" . arg . "\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = Args::clean(args[3]);
+			let arg = controller->clean(args[3]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
 		if (isset(args[4])) {
-			let arg = Args::clean(args[4]);
+			let arg = controller->clean(args[4]);
 			if (!empty(arg)) {
 				let params .= " required=\"required\"";
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
-		let params = params . Args::leftOver(4, args);
+		let params = params . " id=\"" . this->id . "\"";
+		let params = params . controller->leftOver(4, args);
 
 		return "<textarea " . params . ">" . text . "</textarea>";
 	}
 
-	private static function processForm(
+	private function processForm(
 		string command,
 		event_manager,
 		array globals
 	) {
-		let self::id = self::genID("kb-form");
+		let this->id = this->genID("kb-form");
 
-		var args, arg, params="";
-		let args = Args::parseShort(strtoupper("form"), command);
+		var args, arg, params="", controller;
+		let args = controller->parseShort(strtoupper("form"), command);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
 				if (!in_array(["get", "post"], strtolower(arg))) {
 					let params .= " method=\"" . strtolower(arg) . "\"";
@@ -349,23 +352,23 @@ class Form extends Command
 		}
 
 		if (isset(args[2])) {
-			let arg = Args::clean(args[2]);
+			let arg = controller->clean(args[2]);
 			if (!empty(arg)) {
 				let params .= " action=\"" . arg . "\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = Args::clean(args[3]);
+			let arg = controller->clean(args[3]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params .= " class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params .= " class=\"" . this->_class . "\"";
 			}
 		}
 
-		let params .= " id=\"" . self::id . "\"";
+		let params .= " id=\"" . this->id . "\"";
 
-		let params .= Args::leftOver(3, args);
+		let params .= controller->leftOver(3, args);
 
 		return "<form " . params . ">";
 	}

@@ -33,35 +33,36 @@ class Circlef extends Shape
 	public function copyShape(
 		var image
 	) {
-		var colour = imagecolorallocatealpha(image, self::red, self::green, self::blue, self::transparency);
-		imagefilledellipse(image, self::x, self::y, self::radius, self::radius, colour);
+		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
+		imagefilledellipse(image, this->x, this->y, this->radius, this->radius, colour);
 
 		return image;
 	}
 
-	public static function draw(
+	public function draw(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		var args;
-		let args = Args::parseShort("CIRCLEF", command);
+		var args, controller;
+		let controller = new Args();
+		let args = controller->parseShort("CIRCLEF", command);
 
 		if (isset(args[0])) {
-			let self::x = intval(args[0]);
+			let this->x = intval(args[0]);
 		}
 
 		if (isset(args[1])) {
-			let self::y = intval(args[1]);
+			let this->y = intval(args[1]);
 		}
 
 		if (isset(args[2])) {
-			let self::radius = intval(args[2]);
+			let this->radius = intval(args[2]);
 		}
 
 		var output;
-		let output = self::genColour();
-		return output . "<?php imagefilledellipse($KBIMAGE, " . self::x . "," . self::y . "," . self::radius . "," . self::radius . ", $KBCOLOUR); ?>";
+		let output = this->genColour();
+		return output . "<?php imagefilledellipse($KBIMAGE, " . this->x . "," . this->y . "," . this->radius . "," . this->radius . ", $KBCOLOUR); ?>";
 	}
 }

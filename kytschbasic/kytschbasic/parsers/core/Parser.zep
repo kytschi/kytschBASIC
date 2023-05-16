@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Parsers\Core\Parser
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
- * @version     0.0.1
+ * @copyright   2023 Mike Welsh
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2023 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -106,7 +106,7 @@ class Parser extends Command
 			if (!file_exists(template)) {
 				throw new Exception("Template, " . template . ", not found");
 			}
-
+			
 			// Read the template lines.
 			var commands = file(template);
 			if (empty(commands)) {
@@ -130,9 +130,9 @@ class Parser extends Command
 				}
 
 				// Process any events.
-				let command = this->event_manager->process(command);
+				let command = this->event_manager->process(command);				
 				if (!this->processCommand(command)) {
-					let this->output = this->output . self::parseEquation(command);
+					let this->output = this->output . this->parseEquation(command);
 				}
 			}
 
@@ -149,30 +149,31 @@ class Parser extends Command
 
 	private function processCommand(string command)
 	{
-		var parser = "", parsed = "";
+		var parser = "", parsed = "", args, controller;
+		let args = new Args();
 
 		// Clean the command of the tabs and the returns.
 		var cleaned = trim(command);
 
 		// Output a line break or a new line.
-		if (self::match(cleaned, "BENCHMARK")) {
+		if (this->match(cleaned, "BENCHMARK")) {
 			let this->output = this->output . "<script type=\"text/javascript\">let kb_start_time = " . this->start_time . ";window.onload = function () {document.getElementById(\"kb-benchmark\").innerHTML = ((Date.now() - kb_start_time) / 1000).toFixed(3) + \"s\";}</script><span id=\"kb-benchmark\"></span>";
 			return true;
 		}
 
 		// SPRINT will ignore the command processing and just output the command as a string.
-		if (self::match(cleaned, "SPRINT")) {			
+		if (this->match(cleaned, "SPRINT")) {			
 			this->writeOutput(str_replace("SPRINT ","", command));
 			return true;
 		}
 
 		// REM will ignore the command processing as it is a kytschBASIC comment.
-		if (self::match(cleaned, "REM")) {
+		if (this->match(cleaned, "REM")) {
 			return true;
 		}
 
 		// INCLUDE to include a library.
-		if (self::match(cleaned, "INCLUDE")) {
+		if (this->match(cleaned, "INCLUDE")) {
 			var lib = trim(str_replace("INCLUDE ","", command));
 			switch (lib) {
 				case "arcade":
@@ -192,7 +193,7 @@ class Parser extends Command
 		}
 
 		// Output a line break or a new line.
-		if (self::match(cleaned, "LINE BREAK")) {
+		if (this->match(cleaned, "LINE BREAK")) {
 			this->writeOutput("<br/>");
 			return true;
 		}
@@ -202,23 +203,23 @@ class Parser extends Command
 			return true;
 		}
 
-		if (self::match(cleaned, "VERSION")) {
+		if (this->match(cleaned, "VERSION")) {
 			this->writeOutput("<span class=\"kb-version\">" . constant("VERSION") . "</span>");
 			return true;
 		}
 
 		// Trigger a redirect.
-		if (self::match(cleaned, "GOTO")) {
+		if (this->match(cleaned, "GOTO")) {
 			var url = trim(trim(str_replace("GOTO ","", command)), "\"");
-			let this->output = this->output . "<?php header('Location: " . Args::clean(url) . "'); ?>";
+			let this->output = this->output . "<?php header('Location: " . args->clean(url) . "'); ?>";
 			return true;
 		}
 
-		if (self::match(cleaned, "MAIL CLOSE")) {
+		if (this->match(cleaned, "MAIL CLOSE")) {
 			let this->mail = false;
 			this->sendMail();
 			return true;
-		} elseif (self::match(cleaned, "MAIL")) {
+		} elseif (this->match(cleaned, "MAIL")) {
 			let this->mail = true;
 			let this->mail_options["message"] = "";
 			this->createMail(cleaned);
@@ -236,7 +237,8 @@ class Parser extends Command
 		}
 
 		// Check to see the command is DATA for accessing the database.
-		let parsed = Database::parse(
+		let controller = new Database();
+		let parsed = controller->parse(
 			cleaned,
 			this->event_manager,
 			this->globals,
@@ -250,19 +252,21 @@ class Parser extends Command
 			return true;
 		}
 				
-		 // Parse the HEADING statement.
-		let parsed = Heading::parse(cleaned, this->event_manager, this->globals);
+		// Parse the HEADING statement.
+		let controller = new Heading();
+		let parsed = controller->parse(cleaned, this->event_manager, this->globals);
 		if (parsed != null) {
 			this->writeOutput(parsed);
 			return true;
 		}
 
 		// Parse the LOAD statement.
-		let parsed = Load::parse(cleaned, this->event_manager, this->globals);
+		let controller = new Load();
+		let parsed = controller->parse(cleaned, this->event_manager, this->globals);
 		if (parsed != null) {
 			this->writeOutput(
 				(new self())->parse(
-					Args::processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
+					args->processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
 					this->config,
 					this->globals,
 					this->start_time
@@ -271,9 +275,11 @@ class Parser extends Command
 			return true;
 		}
 
+		var cls;
 		// Parser the command with available parsers.
 		for parser in this->available {
-			let parsed = {parser}::parse(cleaned, this->event_manager, this->globals, this->config);
+			let cls = new {parser}();
+			let parsed = cls->parse(cleaned, this->event_manager, this->globals, this->config);
 			if (parsed != null) {
 				this->writeOutput(parsed);
 				return true;
@@ -315,25 +321,26 @@ class Parser extends Command
 	 */
 	private function createMail(string line)
 	{
-		var args, arg;
-		let args = self::parseArgs("MAIL", line);
+		var args, arg, controller;
+		let controller = new Args();
+		let args = this->parseArgs("MAIL", line);
 
 		if (isset(args[0])) {
-			let arg = Args::clean(args[0]);
+			let arg = controller->clean(args[0]);
 			if (!empty(arg)) {
 				let this->mail_options["to"] = arg;
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = Args::clean(args[1]);
+			let arg = controller->clean(args[1]);
 			if (!empty(arg)) {
 				let this->mail_options["subject"] = arg;
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = Args::clean(args[2]);
+			let arg = controller->clean(args[2]);
 			if (!empty(arg)) {
 				let this->mail_options["from"] = arg;
 			}
@@ -382,13 +389,13 @@ class Parser extends Command
 	 */
 	private function processCPrint(string cleaned, string command)
 	{
-		if (self::match(cleaned, "CPRINT CLOSE")) {
+		if (this->match(cleaned, "CPRINT CLOSE")) {
 			let this->output = this->output . "</code></pre>";
 			let this->cprinting = false;
 			return true;
 		}
 
-		if (self::match(cleaned, "CPRINT")) {
+		if (this->match(cleaned, "CPRINT")) {
 			let this->output = this->output . "<pre><code>";
 			let this->cprinting = true;
 			return true;
@@ -411,11 +418,11 @@ class Parser extends Command
 	 private function processIfStatement(var line) {
 		var args;
 				
-		if (self::match(line, "END IF")) {
+		if (this->match(line, "END IF")) {
 			let this->output = this->output . "<?php } ?>";
 			return true;
-		} elseif (self::match(line, "ELSEIF")) {
-			let args = self::parseSpaceArgs(line, "ELSEIF");
+		} elseif (this->match(line, "ELSEIF")) {
+			let args = this->parseSpaceArgs(line, "ELSEIF");
 			
 			if (count(args) > 2) {
 				if (args[1] == "THEN") {
@@ -435,11 +442,11 @@ class Parser extends Command
 			}
 
 			throw new Exception("Invalid ELSEIF statement");
-		} elseif (self::match(line, "ELSE")) {
+		} elseif (this->match(line, "ELSE")) {
 			let this->output = this->output . "<?php } else { ?>";
 			return true;
-		} elseif (self::match(line, "IFNTE")) {
-			let args = self::parseSpaceArgs(line, "IFNTE");
+		} elseif (this->match(line, "IFNTE")) {
+			let args = this->parseSpaceArgs(line, "IFNTE");
 			
 			if (count(args) > 2) {				
 				if (args[1] == "THEN") {
@@ -461,8 +468,8 @@ class Parser extends Command
 			}
 
 			throw new Exception("Invalid IFNTE statement");
-		} elseif (self::match(line, "IF")) {
-			let args = self::parseSpaceArgs(line, "IF");
+		} elseif (this->match(line, "IF")) {
+			let args = this->parseSpaceArgs(line, "IF");
 			
 			if (count(args) > 2) {				
 				if (args[1] == "THEN") {
@@ -516,7 +523,10 @@ class Parser extends Command
 
 		if (line) {
 			if (!this->processCommand(line)) {
-				let this->output = this->output . "<?php " . Maths::commands(Text::commands(line)) . "?>";
+				var maths, text;
+				let maths = new Maths();
+				let text = new Text();
+				let this->output = this->output . "<?php " . maths->commands(text->commands(line)) . "?>";
 			}
 		}
 	}
@@ -527,21 +537,21 @@ class Parser extends Command
 	 private function processSelectStatement(var line) {
 		var args;
 				
-		if (self::match(line, "END SELECT")) {
+		if (this->match(line, "END SELECT")) {
 			if (this->select_started > 1) {
 				let this->output = this->output . "<?php break; ?>";
 			}
 			let this->select_started = 0;
 			let this->output = this->output . "<?php } ?>";
 			return true;
-		} elseif (self::match(line, "DEFAULT")) {
+		} elseif (this->match(line, "DEFAULT")) {
 			if (this->select_started > 1) {
 				let this->output = this->output . "<?php break; ?>";
 			}
 			let this->output = this->output . "<?php default: ?>";
 			return true;
-		} elseif (self::match(line, "CASE")) {
-			let args = self::parseSpaceArgs(line, "CASE");
+		} elseif (this->match(line, "CASE")) {
+			let args = this->parseSpaceArgs(line, "CASE");
 			
 			if (count(args) == 1) {
 				if (this->select_started > 1) {
@@ -553,9 +563,9 @@ class Parser extends Command
 			}
 
 			throw new \Exception("Invalid CASE statement");
-		} elseif (self::match(line, "SELECT")) {
+		} elseif (this->match(line, "SELECT")) {
 			let this->select_started = 1;
-			let args = self::parseSpaceArgs(line, "SELECT");
+			let args = this->parseSpaceArgs(line, "SELECT");
 			
 			if (count(args) == 1) {
 				let this->output = this->output . "<?php switch($" . args[0] . ") { ?>";

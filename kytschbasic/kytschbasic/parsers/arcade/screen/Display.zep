@@ -29,16 +29,17 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Display extends Command
 {
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		var display, return_value = 0;
+		var display, return_value = 0, controller;
+		let controller = new Cookie();
 
-		if (self::match(command, "DISPHEIGHT")) {
-			let display = Cookie::get("display");
+		if (this->match(command, "DISPHEIGHT")) {
+			let display = controller->get("display");
 
 			if (display) {
 				if (isset(display[1])) {
@@ -46,9 +47,9 @@ class Display extends Command
 				}
 			}
 
-			return self::output(return_value);
-		} elseif (self::match(command, "DISPWIDTH")) {
-			let display = Cookie::get("display");
+			return this->output(return_value);
+		} elseif (this->match(command, "DISPWIDTH")) {
+			let display = controller->get("display");
 
 			if (display) {
 				if (isset(display[0])) {
@@ -56,7 +57,7 @@ class Display extends Command
 				}
 			}
 
-			return self::output(return_value);
+			return this->output(return_value);
 		}
 
 		return null;

@@ -30,23 +30,24 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Head extends Command
 {
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		var args;
+		var args, controller;
+		let controller = new Args();
 
-		if (self::match(line, "HEAD CLOSE")) {
+		if (this->match(line, "HEAD CLOSE")) {
 			return "</head>";
-		} elseif (self::match(line, "HEAD") && !self::match(line, "HEADI")) {
+		} elseif (this->match(line, "HEAD") && !this->match(line, "HEADI")) {
 			return "<head>";
-		} elseif (self::match(line, "PALETTE")) {
-			let args = Args::parseShort("PALETTE", line);
+		} elseif (this->match(line, "PALETTE")) {
+			let args = controller->parseShort("PALETTE", line);
 			if (isset(args[0])) {
 				var str = "";
-				let str = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . self::cleanArg(args[0]) . "/css/palette.css";
+				let str = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . this->cleanArg(args[0]) . "/css/palette.css?t=1";
 				
 				if (!empty(config["cache"])) {
 					if (empty(config["cache"]->enabled)) {
@@ -58,61 +59,61 @@ class Head extends Command
 			}
 
 			return "";
-		} elseif (self::match(line, "NAME")) {
-			let args = Args::parseShort("NAME", line);
+		} elseif (this->match(line, "NAME")) {
+			let args = controller->parseShort("NAME", line);
 			if (isset(args[0])) {
-				return "<title>" . self::cleanArg(args[0]) . "</title>";
+				return "<title>" . this->cleanArg(args[0]) . "</title>";
 			}
 
 			return "";
-		} elseif (self::match(line, "LANG")) {
-			let args = Args::parseShort("LANG", line);
+		} elseif (this->match(line, "LANG")) {
+			let args = controller->parseShort("LANG", line);
 			if (isset(args[0])) {
-				return "<html lang=\"" . self::cleanArg(args[0]) . "\">";
+				return "<html lang=\"" . this->cleanArg(args[0]) . "\">";
 			}
 
 			return "";
-		} elseif (self::match(line, "CHARSET")) {
-			let args = Args::parseShort("CHARSET", line);
+		} elseif (this->match(line, "CHARSET")) {
+			let args = controller->parseShort("CHARSET", line);
 			if (isset(args[0])) {
-				return "<meta charset=\"" . self::cleanArg(args[0]) . "\">";
+				return "<meta charset=\"" . this->cleanArg(args[0]) . "\">";
 			}
 
 			return "";
-		} elseif (self::match(line, "DESCRIPTION")) {
-			let args = Args::parseShort("DESCRIPTION", line);
+		} elseif (this->match(line, "DESCRIPTION")) {
+			let args = controller->parseShort("DESCRIPTION", line);
 			if (isset(args[0])) {
-				return "<meta name=\"description\" content=\"" . self::cleanArg(args[0]) . "\">";
+				return "<meta name=\"description\" content=\"" . this->cleanArg(args[0]) . "\">";
 			}
 
 			return "";
-		} elseif (self::match(line, "KEYWORDS")) {
-			let args = Args::parseShort("KEYWORDS", line);
+		} elseif (this->match(line, "KEYWORDS")) {
+			let args = controller->parseShort("KEYWORDS", line);
 			if (isset(args[0])) {
-				return "<meta name=\"keywords\" content=\"" . self::cleanArg(args[0]) . "\">";
+				return "<meta name=\"keywords\" content=\"" . this->cleanArg(args[0]) . "\">";
 			}
 
 			return "";
-		} elseif (self::match(line, "AUTHOR")) {
-			let args = Args::parseShort("AUTHOR", line);
+		} elseif (this->match(line, "AUTHOR")) {
+			let args = controller->parseShort("AUTHOR", line);
 			if (isset(args[0])) {
-				return "<meta name=\"author\" content=\"" . self::cleanArg(args[0]) . "\">";
+				return "<meta name=\"author\" content=\"" . this->cleanArg(args[0]) . "\">";
 			}
 
 			return "";
-		} elseif (self::match(line, "VIEWPORT")) {
-			let args = Args::parseShort("VIEWPORT", line);
+		} elseif (this->match(line, "VIEWPORT")) {
+			let args = controller->parseShort("VIEWPORT", line);
 			if (isset(args[0])) {
-				return "<meta name=\"viewport\" content=\"" . self::cleanArg(args[0]) . "\">";
+				return "<meta name=\"viewport\" content=\"" . this->cleanArg(args[0]) . "\">";
 			}
 
 			return "";
-		} elseif (self::match(line, "FAVICON")) {
-			let args = Args::parseShort("FAVICON", line);
+		} elseif (this->match(line, "FAVICON")) {
+			let args = controller->parseShort("FAVICON", line);
 			if (isset(args[0])) {
-				var output = "<link rel=\"icon\" href=\"" . self::cleanArg(Args::processGlobals(args[0], globals)) . "\"";
+				var output = "<link rel=\"icon\" href=\"" . this->cleanArg(controller->processGlobals(args[0], globals)) . "\"";
 				if (isset(args[1])) {
-					let output = output . " sizes=\"" . self::cleanArg(args[1]) . "\"";
+					let output = output . " sizes=\"" . this->cleanArg(args[1]) . "\"";
 				}
 				return output . ">";
 			}

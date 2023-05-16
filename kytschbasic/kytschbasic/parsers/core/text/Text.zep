@@ -32,10 +32,10 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Text extends Command
 {
-	protected static id = "";
-	protected static _class = "";
+	protected id = "";
+	protected _class = "";
 
-	public static function commands(
+	public function commands(
 		string command,
 		boolean add_qoutes = false
 	) {
@@ -245,113 +245,116 @@ class Text extends Command
 		return command;
 	}
 
-	public static function parse(
+	public function parse(
 		string line,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(line, "LCASE")) {
+		if (this->match(line, "LCASE")) {
 			return strtolower(trim(str_replace("LCASE", "", line), "\""));
-		} elseif (self::match(line, "UCASE")) {
+		} elseif (this->match(line, "UCASE")) {
 			return strtoupper(trim(str_replace("UCASE", "", line), "\""));
-		} elseif (self::match(line, "TAB")) {
+		} elseif (this->match(line, "TAB")) {
 			return "&nbsp;&nbsp;&nbsp;&nbsp;" . trim(str_replace("TAB", "", line), "\"");
-		} elseif (self::match(line, "PRINT")) {
-			return self::processPrint(line, event_manager, globals);
-		} elseif (self::match(line, "SWRITE CLOSE")) {
+		} elseif (this->match(line, "PRINT")) {
+			return this->processPrint(line, event_manager, globals);
+		} elseif (this->match(line, "SWRITE CLOSE")) {
 			return "</p>";
-		} elseif (self::match(line, "SWRITE")) {
-			return self::processSWrite(line, event_manager, globals);
-		} elseif (self::match(line, "WHITESPACE")) {
-			return self::processWhitespace(line, event_manager, globals);
+		} elseif (this->match(line, "SWRITE")) {
+			return this->processSWrite(line, event_manager, globals);
+		} elseif (this->match(line, "WHITESPACE")) {
+			return this->processWhitespace(line, event_manager, globals);
 		}
 
 		return null;
 	}
 
-	private static function processPrint(
+	private function processPrint(
 		line,
 		event_manager,
 		array globals
 	) {
-		var args, arg, params="", value="";
+		var args, arg, params="", value="", command;
 
-		let self::id = self::genID("kb-span");
+		let this->id = this->genID("kb-span");
 
-		let line = self::commands(line, true);
-		let line = Maths::commands(line, true);
+		let line = this->commands(line, true);
+		let command = new Maths();
+		let line = command->commands(line, true);
 
-		let args = self::parseArgs("PRINT", line);
+		let args = this->parseArgs("PRINT", line);
+		let command = new Args();
 		
 		if (isset(args[0])) {
 			let value = args[0];
 
 			if (substr(value,0,1) == "\"") {
-				let value = Args::clean(value);
+				let value = command->clean(value);
 			} else {
-				let value = "<?= $" . self::parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . "; ?>";
+				let value = "<?= $" . this->parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . "; ?>";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = self::cleanArg(args[1]);
+			let arg = this->cleanArg(args[1]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params ." class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params ." class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = self::cleanArg(args[2]);
+			let arg = this->cleanArg(args[2]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
-		let params = params . self::leftOverArgs(2, args);
+		let params = params . " id=\"" . this->id . "\"";
+		let params = params . this->leftOverArgs(2, args);
 
 		return "<span" . params . ">" . value . "</span>";
 	}
 
 
-	private static function processSWrite(
+	private function processSWrite(
 		command,
 		event_manager,
 		array globals
 	) {
-		var args, arg, params="";
+		var args, arg, params="", controller;
 
-		let self::id = self::genID("kb-p");
+		let this->id = this->genID("kb-p");
 
-		let command = self::commands(command, true);
-		let command = Maths::commands(command, true);
+		let command = this->commands(command, true);
+		let controller = new Maths();
+		let command = controller->commands(command, true);
 
-		let args = self::parseArgs("SWRITE", command);
+		let args = this->parseArgs("SWRITE", command);
 
 		if (isset(args[0])) {
-			let arg = self::cleanArg(args[0]);
+			let arg = this->cleanArg(args[0]);
 			if (!empty(arg)) {
-				let self::_class = arg;
-				let params = params ." class=\"" . self::_class . "\"";
+				let this->_class = arg;
+				let params = params ." class=\"" . this->_class . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = self::cleanArg(args[1]);
+			let arg = this->cleanArg(args[1]);
 			if (!empty(arg)) {
-				let self::id = arg;
+				let this->id = arg;
 			}
 		}
 
-		let params = params . " id=\"" . self::id . "\"";
-		let params = params . self::leftOverArgs(2, args);
+		let params = params . " id=\"" . this->id . "\"";
+		let params = params . this->leftOverArgs(2, args);
 
 		return "<p" . params . ">";
 	}
 
-	private static function processWhitespace(
+	private function processWhitespace(
 		command,
 		event_manager,
 		array globals
@@ -359,7 +362,7 @@ class Text extends Command
 		var count=1,output="", args, arg;
 
 		if (isset(args[0])) {
-			let arg = self::cleanArg(args[0]);
+			let arg = this->cleanArg(args[0]);
 			if (!empty(arg)) {
 				let count = intval(arg);
 			}

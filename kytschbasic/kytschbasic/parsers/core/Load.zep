@@ -28,13 +28,13 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Load extends Command
 {
-	public static function parse(
+	public function parse(
 		string command,
 		event_manager = null,
 		array globals = [],
 		var config = null
 	) {
-		if (self::match(command, "LOAD ")) {
+		if (this->match(command, "LOAD ")) {
 			return trim(str_replace("LOAD ", "", command), "\"");
 		}
 

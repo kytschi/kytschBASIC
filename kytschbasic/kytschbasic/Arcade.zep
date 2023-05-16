@@ -84,11 +84,12 @@ class Arcade extends Command
 		array globals = [],
 		var config = null
 	) {
-		var parser, parsed;
+		var parser, parsed, controller;
 
 		// Parser the command with available arcade parsers.
 		for parser in this->available {
-			let parsed = {parser}::parse(command, event_manager, globals, config);
+			let controller = new {parser}();
+			let parsed = controller->parse(command, event_manager, globals, config);
 			if (parsed != null) {
 				return parsed;
 			}
