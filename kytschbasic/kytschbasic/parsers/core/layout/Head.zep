@@ -47,7 +47,7 @@ class Head extends Command
 			let args = controller->parseShort("PALETTE", line);
 			if (isset(args[0])) {
 				var str = "";
-				let str = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . this->cleanArg(args[0]) . "/css/palette.css?t=1";
+				let str = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . this->cleanArg(args[0]) . "/css/palette.css";
 				
 				if (!empty(config["cache"])) {
 					if (empty(config["cache"]->enabled)) {
