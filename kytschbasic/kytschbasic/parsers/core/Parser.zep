@@ -33,13 +33,13 @@ use KytschBASIC\Parsers\Core\Database;
 use KytschBASIC\Parsers\Core\Load;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Session;
-use KytschBASIC\Parsers\Core\Text\Heading;
 use KytschBASIC\Parsers\Core\Text\Text;
 
 class Parser extends Command
 {
 	private config;
 	private globals = [];
+	private parsers = [];
 	private arcade;
 
 	/**
@@ -52,6 +52,7 @@ class Parser extends Command
 	private template;
 	private template_dir;
 
+	private database;
 	private event_manager;
 	private event_line_break = false;
 
@@ -76,6 +77,7 @@ class Parser extends Command
 		"KytschBASIC\\Parsers\\Core\\Loops\\WhileLoop",
 		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
+		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Form",
 		"KytschBASIC\\Parsers\\Core\\Loops\\ForLoop",
@@ -118,6 +120,12 @@ class Parser extends Command
 			}
 
 			let this->event_manager = new EventManager();
+			let this->database = new Database();
+
+			var parser;
+			for parser in this->available {
+				let this->parsers[parser] = new {parser}();
+			}
 
 			// Process the commands.
 			var command = "";
@@ -237,8 +245,7 @@ class Parser extends Command
 		}
 
 		// Check to see the command is DATA for accessing the database.
-		let controller = new Database();
-		let parsed = controller->parse(
+		let parsed = this->database->parse(
 			cleaned,
 			this->event_manager,
 			this->globals,
@@ -249,14 +256,6 @@ class Parser extends Command
 			if (is_string(parsed)) {
 				this->writeOutput(parsed);
 			}
-			return true;
-		}
-				
-		// Parse the HEADING statement.
-		let controller = new Heading();
-		let parsed = controller->parse(cleaned, this->event_manager, this->globals);
-		if (parsed != null) {
-			this->writeOutput(parsed);
 			return true;
 		}
 
@@ -275,11 +274,9 @@ class Parser extends Command
 			return true;
 		}
 
-		var cls;
 		// Parser the command with available parsers.
-		for parser in this->available {
-			let cls = new {parser}();
-			let parsed = cls->parse(cleaned, this->event_manager, this->globals, this->config);
+		for parser in this->parsers {
+			let parsed = parser->parse(cleaned, this->event_manager, this->globals, this->config);
 			if (parsed != null) {
 				this->writeOutput(parsed);
 				return true;
