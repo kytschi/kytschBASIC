@@ -36,24 +36,11 @@ class Line extends Shape
 	protected x2=0;
 	protected y2=0;
 
-	public function copyShape(
-		var image
-	) {
-		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
-		imageline(image, this->x1, this->y1, this->x2, this->y2, colour);
-
-		return image;
-	}
-
-	public function draw(
-		string command,
-		event_manager = null,
-		array globals = [],
-		var config = null
-	) {
+	public function build()
+	{
 		var args, controller;
 		let controller = new Args();
-		let args = controller->parseShort("LINE", command);
+		let args = controller->parseShort("LINE", this->command);
 
 		if (isset(args[0])) {
 			let this->x1 = intval(args[0]);
@@ -71,9 +58,21 @@ class Line extends Shape
 			let this->y2 = intval(args[3]);
 		}
 
-		var output;
-		let output = this->genColour();
-		return output . "<?php imageline($KBIMAGE, " . this->x1 . "," . this->y1 . "," . this->x2 . "," . this->y2 . ", $KBCOLOUR);?>";
+		let this->colour = this->genColour();
+	}
+
+	public function copyShape(
+		var image
+	) {
+		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
+		imageline(image, this->x1, this->y1, this->x2, this->y2, colour);
+
+		return image;
+	}
+
+	public function draw()
+	{
+		return this->colour . "<?php imageline($KBIMAGE, " . this->x1 . "," . this->y1 . "," . this->x2 . "," . this->y2 . ", $KBCOLOUR);?>";
 	}
 
 	public function getX1()

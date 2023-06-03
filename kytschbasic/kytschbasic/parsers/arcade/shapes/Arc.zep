@@ -30,24 +30,11 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Arc extends Shape
 {
-	public function copyShape(
-		var image
-	) {
-		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
-		imagearc(image, this->x, this->y, this->radius, this->radius, this->start_angle, this->end_angle, colour);
-
-		return image;
-	}
-
-	public function draw(
-		string command,
-		event_manager = null,
-		array globals = [],
-		var config = null
-	) {
+	public function build()
+	{
 		var args, controller;
 		let controller = new Args();
-		let args = controller->parseShort("ARC", command);
+		let args = controller->parseShort("ARC", this->command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
@@ -69,8 +56,11 @@ class Arc extends Shape
 			let this->radius = intval(args[4]);
 		}
 
-		var output;
-		let output = this->genColour();
-		return output . "<?php imagearc($KBIMAGE, " . this->x . "," . this->y . "," . this->radius . "," . this->radius . "," . this->start_angle . "," . this->end_angle . ", $KBCOLOUR);?>";
+		let this->colour = this->genColour();
+	}
+
+	public function draw()
+	{
+		return this->colour . "<?php imagearc($KBIMAGE, " . this->x . "," . this->y . "," . this->radius . "," . this->radius . "," . this->start_angle . "," . this->end_angle . ", $KBCOLOUR);?>";
 	}
 }

@@ -43,13 +43,42 @@ class Shape
 	protected green=0;
 	protected blue=0;
 	protected transparency=0;
+	protected colour = "";
+
+	protected command = "";
+	protected event_manager = null;
+	protected globals = [];
+	protected config = null;
+
+	public function __construct(
+		string command,
+		event_manager = null,
+		array globals = [],
+		var config = null
+	) {
+		let this->command = command;
+		let this->event_manager = event_manager;
+		let this->globals = globals;
+		let this->config = config;
+
+		this->build();
+	}
+
+	public function build()
+	{
+		return null;
+	}
 
 	public function genColour()
 	{	
 		var output, controller;
 		let controller = new Rgb();
 		let output = controller->code();
-		return output . "<?php $KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue, " . this->transparency . ");?>";
+
+		return output .
+			"<?php $KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue, " .
+			this->transparency .
+			");?>";
 	}
 
 	public function getBlue()
@@ -67,6 +96,11 @@ class Shape
 		return this->green;
 	}
 
+	public function getHeight()
+	{
+		return this->height;
+	}
+
 	public function getRadius()
 	{
 		return this->radius;
@@ -77,14 +111,19 @@ class Shape
 		return this->red;
 	}
 
+	public function getStartAngle()
+	{
+		return this->start_angle;
+	}
+
 	public function getTransparency()
 	{
 		return this->transparency;
 	}
 
-	public function getStartAngle()
+	public function getWidth()
 	{
-		return this->start_angle;
+		return this->width;
 	}
 
 	public function getX()
@@ -97,11 +136,12 @@ class Shape
 		return this->y;
 	}
 
-	public function move(
-		var args,
-		event_manager = null,
-		array globals = []
-	) {
+	public function move(string command)
+	{
+		var controller, args;
+		let controller = new Args();
+		let args = controller->parseShort("MOVE SHAPE", command);
+
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
 		}
@@ -111,11 +151,12 @@ class Shape
 		}
 	}
 
-	public function setTransparency(
-		var args,
-		event_manager = null,
-		array globals = []
-	) {
+	public function setTransparency(string command)
+	{
+		var controller, args;
+		let controller = new Args();
+		let args = controller->parseShort("SET TRANSPARENCY", command);
+
 		if (isset(args[0])) {
 			let this->transparency = intval(args[0]);
 		}

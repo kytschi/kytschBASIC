@@ -24,6 +24,7 @@
  */
 namespace KytschBASIC\Parsers\Arcade;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Arcade\Colors\Color;
 use KytschBASIC\Parsers\Arcade\Colors\Rgb;
 use KytschBASIC\Parsers\Arcade\Shapes\Arc;
@@ -44,7 +45,7 @@ use KytschBASIC\Parsers\Core\Session;
 class Bitmap extends Command
 {
 	private image = null;
-	private shape = null;
+	private copy = null;
 
 	public function parse(
 		string command,
@@ -54,8 +55,8 @@ class Bitmap extends Command
 	) {
 		var controller;
 		if (this->match(command, "BITMAPTEXT")) {
-			let controller = new BitmapText();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new BitmapText(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "BITMAPFONT")) {
 			let controller = new BitmapFont();
 			return controller->parse(command, event_manager, globals, config);
@@ -93,47 +94,43 @@ class Bitmap extends Command
 			let output = output . "$background = imagecolorallocatealpha($KBIMAGE, $red, $green, $blue," . transparency . ");";
 			return output . "imagefill($KBIMAGE, " . x . "," . y . ", $background);?>";
 		} elseif (this->match(command, "LINE")) {
-			let controller = new Line();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Line(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "BOXF")) {
-			let controller = new Boxf();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Boxf(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "BOX")) {
-			let controller = new Box();
-			let this->image = controller->draw(command, this->image, event_manager, globals);
+			let controller = new Box(command, this->image, event_manager, globals);
+			let this->image = controller->draw();
 			return "";
 		} elseif (this->match(command, "ELLIPSEF")) {
-			let controller = new Ellipsef();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Ellipsef(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "ELLIPSE")) {
-			let controller = new Ellipse();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Ellipse(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "CIRCLEF")) {
-			let controller = new Circlef();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Circlef(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "CIRCLE")) {
-			let controller = new Circle();
-			return controller->draw(command, event_manager, globals, config);
+			let this->image = new Circle(command, event_manager, globals, config);
+			return this->image->draw();
 		} elseif (this->match(command, "COPY SHAPE")) {
-			let controller = new Session();
-			let this->shape = controller->getLastCreate();
+			//let this->copy = clone this->image;
 			return "";
 		} elseif (this->match(command, "DRAW SHAPE")) {
-			let this->image = this->shape->copyShape(this->image);
-			return "";
+			return this->image->draw();
 		} elseif (this->match(command, "MOVE SHAPE")) {
-			let controller = new Args();
-			this->shape->move(controller->parseShort("MOVE SHAPE", command), event_manager, globals);
+			this->image->move(command);
 			return "";
 		} elseif (this->match(command, "ARCF")) {
-			let controller = new Arcf();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Arcf(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "ARC")) {
-			let controller = new Arc();
-			return controller->draw(command, event_manager, globals, config);
+			let controller = new Arc(command, event_manager, globals, config);
+			return controller->draw();
 		} elseif (this->match(command, "SET TRANSPARENCY")) {
-			let controller = new Args();
-			this->shape->setTransparency(controller->parseShort("SET TRANSPARENCY", command), event_manager, globals);
+			this->image->setTransparency(command);
 			return "";
 		}
 

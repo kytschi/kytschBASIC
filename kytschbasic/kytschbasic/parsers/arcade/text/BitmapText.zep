@@ -31,16 +31,13 @@ use KytschBASIC\Parsers\Core\Session;
 class BitmapText extends Shape
 {
 	protected size;
+	private text = "";
 
-	public function draw(
-		string command,
-		event_manager = null,
-		array globals = [],
-		var config = null
-	) {
-		var args, text, controller;
+	public function build()
+	{
+		var args, controller;
 		let controller = new Args();
-		let args = controller->parseShort("BITMAPTEXT", command);
+		let args = controller->parseShort("BITMAPTEXT", this->command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
@@ -62,19 +59,23 @@ class BitmapText extends Shape
 			if (intval(args[4])) {
 				let this->transparency = controller->transparency(args[4]);
 			} else {
-				let text = trim(args[4], "\"");
+				let this->text = trim(args[4], "\"");
 			}
 		}
 
 		if (count(args) > 6) {
 			let args = array_slice(args, 5, count(args) - 5);
-			let text = trim(implode(",", args), "\"");
+			let this->text = trim(implode(",", args), "\"");
 		} elseif (isset(args[5])) {
-			let text = trim(args[5], "\"");
+			let this->text = trim(args[5], "\"");
 		}
 
-		var output;
-		let output = this->genColour();
-		return output . "<?php imagefttext($KBIMAGE, " . this->size . "," . this->start_angle . "," . this->x . "," . this->y . ", $KBCOLOUR, $KBBITMAPFONT, \"" . text . "\");?>";
+		let this->colour = this->genColour();
+	}
+
+	public function draw()
+	{
+		this->build();
+		return this->colour . "<?php imagefttext($KBIMAGE, " . this->size . "," . this->start_angle . "," . this->x . "," . this->y . ", $KBCOLOUR, $KBBITMAPFONT, \"" . this->text . "\");?>";
 	}
 }

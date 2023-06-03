@@ -80,13 +80,19 @@ class Session extends Command
 		let name = "kytschBASIC";
 		let lifetime = 86400;
 
-		if (!empty(config["session"])) {
-			if(!empty(config["session"]->name)) {
-				let name = config["session"]->name;
-			}
+		if (isset(config["sesssion"])) {
+			if (!empty(config["session"])) {
+				if (isset(config["sesssion"]->name)) {
+					if(!empty(config["session"]->name)) {
+						let name = config["session"]->name;
+					}
+				}
 
-			if(!empty(config["session"]->lifetime)) {
-				let lifetime = config["session"]->lifetime;
+				if (isset(config["sesssion"]->lifetime)) {
+					if(!empty(config["session"]->lifetime)) {
+						let lifetime = config["session"]->lifetime;
+					}
+				}
 			}
 		}
 
@@ -94,7 +100,9 @@ class Session extends Command
 		let args["name"] = name;
 		let args["cookie_lifetime"] = lifetime;
 
-		session_start(args);
+		if (session_status() === 1) {
+			session_start(args);
+		}
 	}
 
 	public function write(string name, data)

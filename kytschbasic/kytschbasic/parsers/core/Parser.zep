@@ -32,7 +32,6 @@ use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Database;
 use KytschBASIC\Parsers\Core\Load;
 use KytschBASIC\Parsers\Core\Maths;
-use KytschBASIC\Parsers\Core\Session;
 use KytschBASIC\Parsers\Core\Text\Text;
 
 class Parser extends Command
@@ -285,7 +284,7 @@ class Parser extends Command
 
 		// If the arcade lib is loaded check for arcade commands.
 		if (this->arcade) {
-			let parsed = this->arcade->processCommand(cleaned, this->event_manager, this->globals, this->config);
+			let parsed = this->arcade->parse(cleaned);
 			if (parsed != null) {
 				this->writeOutput(parsed);
 				return true;

@@ -32,21 +32,8 @@ class Arcf extends Shape
 {
 	protected style = 0;
 
-	public function copyShape(
-		var image
-	) {
-		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
-		imagefilledarc(image, this->x, this->y, this->radius, this->radius, this->start_angle, this->end_angle, colour, this->style);
-
-		return image;
-	}
-
-	public function draw(
-		string command,
-		event_manager = null,
-		array globals = [],
-		var config = null
-	) {
+	public function build()
+	{
 		/*
 		 * Styles
 		 * IMG_ARC_PIE = 0
@@ -54,37 +41,40 @@ class Arcf extends Shape
 		 * IMG_ARC_NOFILL = 2
 		 * IMG_ARC_EDGED = 4
 		 */
-		var args, controller;
-		let controller = new Args();
-		let args = controller->parseShort("ARCF", command);
+		 var args, controller;
+		 let controller = new Args();
+		 let args = controller->parseShort("ARCF", this->command);
+ 
+		 if (isset(args[0])) {
+			 let this->x = intval(args[0]);
+		 }
+ 
+		 if (isset(args[1])) {
+			 let this->y = intval(args[1]);
+		 }
+ 
+		 if (isset(args[2])) {
+			 let this->start_angle = intval(args[2]);
+		 }
+ 
+		 if (isset(args[3])) {
+			 let this->end_angle = intval(args[3]);
+		 }
+ 
+		 if (isset(args[4])) {
+			 let this->radius = intval(args[4]);
+		 }
+ 
+		 if (isset(args[5])) {
+			 let this->style = intval(args[5]);
+		 }
+ 
+		 let this->colour = this->genColour();
+	}
 
-		if (isset(args[0])) {
-			let this->x = intval(args[0]);
-		}
-
-		if (isset(args[1])) {
-			let this->y = intval(args[1]);
-		}
-
-		if (isset(args[2])) {
-			let this->start_angle = intval(args[2]);
-		}
-
-		if (isset(args[3])) {
-			let this->end_angle = intval(args[3]);
-		}
-
-		if (isset(args[4])) {
-			let this->radius = intval(args[4]);
-		}
-
-		if (isset(args[5])) {
-			let this->style = intval(args[5]);
-		}
-
-		var output;
-		let output = this->genColour();
-		return output . "<?php imagefilledarc($KBIMAGE, " . this->x . "," . this->y . "," . this->radius . "," . this->radius . "," . this->start_angle . "," . this->end_angle . ", $KBCOLOUR, " . this->style . ");?>";
+	public function draw()
+	{
+		return this->colour . "<?php imagefilledarc($KBIMAGE, " . this->x . "," . this->y . "," . this->radius . "," . this->radius . "," . this->start_angle . "," . this->end_angle . ", $KBCOLOUR, " . this->style . ");?>";
 	}
 
 	public function getStyle()

@@ -30,24 +30,11 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Circle extends Shape
 {
-	public function copyShape(
-		var image
-	) {
-		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
-		imagearc(image, this->x, this->y, this->radius, this->radius,  0, 360, colour);
-
-		return image;
-	}
-
-	public function draw(
-		string command,
-		event_manager = null,
-		array globals = [],
-		var config = null
-	) {
+	public function build()
+	{
 		var args, controller;
 		let controller = new Args();
-		let args = controller->parseShort("CIRCLE", command);
+		let args = controller->parseShort("CIRCLE", this->command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
@@ -61,8 +48,17 @@ class Circle extends Shape
 			let this->radius = intval(args[2]);
 		}
 
-		var output;
-		let output = this->genColour();
-		return output . "<?php imagearc($KBIMAGE, " . this->x . "," . this->y . "," . this->radius . "," . this->radius . ", 0, 360, $KBCOLOUR);?>";
+		let this->colour = this->genColour();
+	}
+
+	public function draw()
+	{
+		return this->colour .
+			"<?php imagearc($KBIMAGE, " .
+			this->x . "," .
+			this->y . "," .
+			this->radius . "," .
+			this->radius .
+			", 0, 360, $KBCOLOUR);?>";
 	}
 }

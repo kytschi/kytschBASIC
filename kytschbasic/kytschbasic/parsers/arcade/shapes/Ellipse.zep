@@ -30,24 +30,11 @@ use KytschBASIC\Parsers\Core\Session;
 
 class Ellipse extends Shape
 {
-	public function copyShape(
-		var image
-	) {
-		var colour = imagecolorallocatealpha(image, this->red, this->green, this->blue, this->transparency);
-		imageellipse(image, this->x, this->y, this->width, this->height, colour);
-
-		return image;
-	}
-
-	public function draw(
-		string command,
-		event_manager = null,
-		array globals = [],
-		var config = null
-	) {
+	public function build()
+	{
 		var args, controller;
 		let controller = new Args();
-		let args = controller->parseShort("ELLIPSE", command);
+		let args = controller->parseShort("ELLIPSE", this->command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
@@ -65,18 +52,11 @@ class Ellipse extends Shape
 			let this->height = intval(args[3]);
 		}
 
-		var output;
-		let output = this->genColour();
-		return output . "<?php imageellipse($KBIMAGE, " . this->x . "," . this->y . "," . this->width . "," . this->height . ", $KBCOLOUR);?>";
+		let this->colour = this->genColour();
 	}
 
-	public function getWidth()
+	public function draw()
 	{
-		return this->width;
-	}
-
-	public function getHeight()
-	{
-		return this->height;
+		return this->colour . "<?php imageellipse($KBIMAGE, " . this->x . "," . this->y . "," . this->width . "," . this->height . ", $KBCOLOUR);?>";
 	}
 }
