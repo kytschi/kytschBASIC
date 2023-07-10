@@ -186,8 +186,6 @@ class Form extends Command
 			0,
 			iv
         ) . base64_encode(iv);
-		
-        imagedestroy(image);
 
 		return "<div class=\"kb-captcha-img\"><img src=\"data:image/png;base64," . base64_encode(image_data) . "\" alt=\"captcha\"/></div>" .
 			"<input name=\"kb-captcha\" class=\"kb-captcha-input\" required/>" .
