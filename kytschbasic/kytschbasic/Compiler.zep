@@ -53,7 +53,7 @@ class Compiler
 
 		let this->globals["_VALID"] = [];
 		let this->globals["_VALID"]["captcha"] = this->validateCaptcha();
-
+		
 		let this->globals["_POST"] = _POST;
 		let this->globals["_GET"] = _GET;
 		let this->globals["_ROOT"] = getcwd();
@@ -120,9 +120,9 @@ class Compiler
 		
 		let encrypted = splits[0];
 		unset(splits[0]);
-
-		let iv = base64_decode(implode("=", splits));
-
+		
+		let iv = base64_decode(ltrim(implode("=", splits), "="));
+		
 		let token = openssl_decrypt(
             encrypted,
             "aes128",

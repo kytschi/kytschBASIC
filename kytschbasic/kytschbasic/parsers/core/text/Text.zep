@@ -292,7 +292,11 @@ class Text extends Command
 			if (substr(value,0,1) == "\"") {
 				let value = command->clean(value);
 			} else {
-				let value = "<?= $" . this->parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . "; ?>";
+				var sym = "$";
+				if (substr(value, 0, 6) == "_VALID") {
+					let sym = "";
+				}
+				let value = "<?= " . sym . this->parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . "; ?>";
 			}
 		}
 
