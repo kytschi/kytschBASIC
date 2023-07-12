@@ -122,6 +122,10 @@ class Compiler
 		unset(splits[0]);
 		
 		let iv = base64_decode(ltrim(implode("=", splits), "="));
+
+		if (empty(iv)) {
+			return false;
+		}
 		
 		let token = openssl_decrypt(
             encrypted,

@@ -120,10 +120,15 @@ class Args
 				}
 				
 				// Temp surpress the warnings about the IV.
-				var errors = false;
+				var errors = false, log_errors = false;
 				if (ini_get("display_errors")) {
 					ini_set("display_errors", "0");
 					let errors = true;
+				}
+
+				if (ini_get("log_errors")) {
+					ini_set("log_errors", "0");
+					let log_errors = true;
 				}
 
 				// Encrypt the data using the supplied public key.
@@ -136,6 +141,10 @@ class Args
 				// Restore warning output.
 				if (errors) {
 					ini_set("display_errors", "1");
+				}
+
+				if (log_errors) {
+					ini_set("log_errors", "1");
 				}
 								
 				let arg = str_replace("ENCRYPT(" . param, replace, arg);
