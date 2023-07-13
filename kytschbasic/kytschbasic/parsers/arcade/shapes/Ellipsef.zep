@@ -57,6 +57,6 @@ class Ellipsef extends Shape
 
 	public function draw()
 	{
-		return this->colour . "<?php imagefilledellipse($KBIMAGE, " . this->x . "," . this->y . "," . this->width . "," . this->height . ", $KBCOLOUR);?>;";
+		return this->colour . "<?php imagefilledellipse($KBIMAGE, " . this->x . "," . this->y . "," . this->width . "," . this->height . ", $KBCOLOUR);?>";
 	}
 }

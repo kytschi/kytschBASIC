@@ -139,7 +139,7 @@ class Parser extends Command
 				// Process any events.
 				let command = this->event_manager->process(command);				
 				if (!this->processCommand(command)) {
-					let this->output = this->output . this->parseEquation(command);
+					let this->output = this->output . "<?php " . this->parseEquation(command) . ";?>";
 				}
 			}
 
