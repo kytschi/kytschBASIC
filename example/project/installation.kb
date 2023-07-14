@@ -14,11 +14,12 @@ BODY
 					PRINT "BASIC","basic"
 				HEADING CLOSE
 				SWRITE
-					PRINT "First thing you will need is to install"
+					PRINT "First thing you will need is to install "
 					LINK "https://docs.zephir-lang.com/0.12/en/installation","Checkout Zephir",,"_blank"
-						Zephir
+						PRINT "Zephir"
 					LINK CLOSE
-					LINE BREAK
+				SWRITE CLOSE
+				SWRITE
 					PRINT "Now open your favourite terminal/console and clone the repo."
 				SWRITE CLOSE
 				CPRINT
