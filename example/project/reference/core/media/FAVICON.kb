@@ -17,7 +17,7 @@ BODY
 					PRINT "Add a favicon to the site."
 				SWRITE CLOSE
 				HEADING 3
-					Example
+					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
 FAVICON "/kytschi/imgs/favicon.ico","64x64"

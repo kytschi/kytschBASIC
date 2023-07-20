@@ -17,14 +17,14 @@ BODY
 					PRINT "Render an image to the screen."
 				SWRITE CLOSE
 				HEADING 3
-					Example
+					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
 SPRINT REM Loading the GIF of that evil looking dude.
 IMAGE "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
 				CPRINT CLOSE
 				HEADING 4
-					Output
+					PRINT "Output"
 				HEADING CLOSE
 IMAGE "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
 			DIV CLOSE
