@@ -14,7 +14,7 @@ BODY
 					PRINT "WIDTH, CLASS, COLSPAN, ID","heading-args"
 				SWRITE CLOSE
 				SWRITE
-					Creating a table header cell.
+					PRINT "Creating a table header cell."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"

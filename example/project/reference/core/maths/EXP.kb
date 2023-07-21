@@ -27,7 +27,7 @@ PRINT EXP(5.7)
 298.86740096706
 				CPRINT CLOSE
 				HEADING 4
-					See also
+					PRINT "See also"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24", "see-also"
 					LINK "/reference/ABS"

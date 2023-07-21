@@ -133,6 +133,9 @@ HEADER
 		LINK "/reference/ELLIPSEF","Find out about the ELLIPSEF command","nav-link"
 			PRINT "ELLIPSEF"
 		LINK CLOSE
+		LINK "/reference/EXP","Find out about the EXP command","nav-link"
+			PRINT "EXP"
+		LINK CLOSE
 		LINK "/reference/FAVICON","Find out about the FAVICON command","nav-link"
 			PRINT "FAVICON"
 		LINK CLOSE

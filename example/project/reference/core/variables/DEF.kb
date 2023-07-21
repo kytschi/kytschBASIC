@@ -21,7 +21,7 @@ BODY
 					PRINT "Defining a string and using the variable"
 				SWRITE CLOSE
 				SWRITE "h3"
-					Example
+					PRINT "Example"
 				SWRITE CLOSE
 				CPRINT
 DEF test$="kytschBASIC is awesome!"
@@ -61,7 +61,7 @@ PRINT test%
 					PRINT "Defining a double and using the variable"
 				SWRITE CLOSE
 				SWRITE "h3"
-					Example
+					PRINT "Example"
 				SWRITE CLOSE
 				CPRINT
 DEF test#=1337.11
