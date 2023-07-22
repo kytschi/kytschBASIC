@@ -172,36 +172,38 @@ class Compiler
 			return;
 		}
 */
-		var route, err;
-
-		for route in this->config["routes"] {
-			if (!isset(route->url)) {
-				(new Exception("router URL not defined in the config"))->fatal();
-			}
+		if (isset(url["path"])) {
+			var route, err;
 			
-			if (route->url == url["path"]) {
-				var parsed = (new Parser())->parse(
-					getcwd() . "/" . route->template,
-					this->config,
-					this->globals,
-					this->start_time
-				);
-				
-				try {
-					var output;
-
-					let output = "<?php ";
-					let output = output . "define(\"_VALID\", unserialize('" . serialize(this->globals["_VALID"]) . "'));?>";
-					let output = output . "<!DOCTYPE html>";
-					let output = output . parsed;
-					file_put_contents(this->globals["_ROOT"] . "/compiled.php", output);
-					require (this->globals["_ROOT"] . "/compiled.php");
-				} catch \ParseError, err {
-					(new Exception(err->getMessage(), err->getCode()))->fatal();
-				} catch \RuntimeException|\Exception, err {
-					(new Exception(err->getMessage(), err->getCode()))->fatal();
+			for route in this->config["routes"] {
+				if (!isset(route->url)) {
+					(new Exception("router URL not defined in the config"))->fatal();
 				}
-				return;
+				
+				if (route->url == url["path"]) {
+					var parsed = (new Parser())->parse(
+						getcwd() . "/" . route->template,
+						this->config,
+						this->globals,
+						this->start_time
+					);
+					
+					try {
+						var output;
+
+						let output = "<?php ";
+						let output = output . "define(\"_VALID\", unserialize('" . serialize(this->globals["_VALID"]) . "'));?>";
+						let output = output . "<!DOCTYPE html>";
+						let output = output . parsed;
+						file_put_contents(this->globals["_ROOT"] . "/compiled.php", output);
+						require (this->globals["_ROOT"] . "/compiled.php");
+					} catch \ParseError, err {
+						(new Exception(err->getMessage(), err->getCode()))->fatal();
+					} catch \RuntimeException|\Exception, err {
+						(new Exception(err->getMessage(), err->getCode()))->fatal();
+					}
+					return;
+				}
 			}
 		}
 
