@@ -265,14 +265,23 @@ class Parser extends Command
 		let controller = new Load();
 		let parsed = controller->parse(cleaned, this->event_manager, this->globals);
 		if (parsed != null) {
-			this->writeOutput(
-				(new self())->parse(
-					args->processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
-					this->config,
-					this->globals,
-					this->start_time
-				)
-			);
+			var ext;
+			let ext = pathinfo(parsed, PATHINFO_EXTENSION);
+			switch (ext) {
+				case "js":
+					this->writeOutput("<script src='" . parsed . "'></script>");
+					break;
+				default:
+					this->writeOutput(
+						(new self())->parse(
+							args->processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
+							this->config,
+							this->globals,
+							this->start_time
+						)
+					);
+					break;
+			}			
 			return true;
 		}
 
