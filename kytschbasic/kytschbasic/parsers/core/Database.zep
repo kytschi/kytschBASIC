@@ -163,7 +163,7 @@ class Database extends Command
 				}
 
 				let line = str_replace("DWHERE ", "", line);
-				let this->data_sql = str_replace("INSERT INTO", "UPDATE", this->data_sql) .  " WHERE " . this->cleanArg(line);
+				let this->data_sql = str_replace("INSERT INTO", "UPDATE", this->data_sql) .  " WHERE " . this->cleanArg(line, false);
 
 				return true;
 			} elseif (this->match(line, "DSORT")) {

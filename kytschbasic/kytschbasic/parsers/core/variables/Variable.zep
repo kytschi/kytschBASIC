@@ -50,7 +50,7 @@ class Variable extends Command
 			return "<?php $" . str_replace(["$", "%", "#"], "", args[0]) . "=" . this->parseEquation(line) . "; ?>";
 		} elseif (this->match(line, "DUMP")) {
 			var args = this->parseArgs("DUMP", line);
-			return "<pre><?=var_dump($" . args[0] . ");?></pre>";
+			return "<pre><?=var_dump($" . str_replace(["$", "%", "#", "&"], "", args[0]) . ");?></pre>";
 		}
 
 		return null;
