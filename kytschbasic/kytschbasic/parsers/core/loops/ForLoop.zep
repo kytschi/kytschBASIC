@@ -37,7 +37,7 @@ class ForLoop extends Command
 	) {
 		var args;
 		
-		if (this->match(line, "FOR CLOSE")) {
+		if (this->match(line, "END FOR")) {
 			return "<?php } ?>";
 		} elseif (this->match(line, "FOR")) {
 			let args = this->parseSpaceArgs(line, "FOR");
