@@ -191,6 +191,11 @@ class Command
 		return explode(" ", line);
 	}
 
+	public function parseVar(string line)
+	{
+		return "$" . str_replace(["&", "$", "%", "#"], "", line);
+	}
+
 	private function replaceVars(string line)
 	{
 		var vars, variable;

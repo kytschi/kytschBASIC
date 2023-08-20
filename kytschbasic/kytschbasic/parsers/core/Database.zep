@@ -118,7 +118,7 @@ class Database extends Command
 				var open, db_config;
 				var args = this->parseArgs("DOPEN", line);
 				if (isset(args[0])) {
-					let open = this->cleanArg(args[0]);
+					let open = this->cleanArg(args[0], false);
 				}
 
 				if (empty(config["database"])) {
@@ -141,7 +141,7 @@ class Database extends Command
 				var args = this->parseArgs("DREAD", line);
 
 				if (isset(args[0])) {
-					let this->database = this->cleanArg(args[0]);
+					let this->database = this->cleanArg(args[0], false);
 				}
 
 				if (empty(this->database)) {
@@ -154,7 +154,7 @@ class Database extends Command
 				}
 
 				let line = str_replace("DSELECT ", "", line);
-				let this->data_sql = "SELECT " . this->cleanArg(line) . " FROM " . this->database;
+				let this->data_sql = "SELECT " . this->cleanArg(line, false) . " FROM " . this->database;
 				
 				return true;
 			} elseif (this->match(line, "DWHERE")) {
@@ -172,7 +172,16 @@ class Database extends Command
 				}
 
 				let line = str_replace("DSORT ", "", line);
-				let this->data_sql = this->data_sql . " ORDER BY " . this->cleanArg(line);
+				let this->data_sql = this->data_sql . " ORDER BY " . this->cleanArg(line, false);
+
+				return true;
+			} elseif (this->match(line, "DJOIN")) {
+				if (empty(this->database)) {
+					throw new DatabaseException("no database selected to read");
+				}
+
+				let line = str_replace("DJOIN ", "", line);
+				let this->data_sql = this->data_sql . " JOIN " . this->cleanArg(line, false);
 
 				return true;
 			} elseif (this->match(line, "DLIMIT")) {
@@ -181,7 +190,7 @@ class Database extends Command
 				}
 
 				let line = str_replace("DLIMIT ", "", line);
-				let this->data_sql = this->data_sql . " LIMIT " . intval(this->cleanArg(line));
+				let this->data_sql = this->data_sql . " LIMIT " . intval(this->cleanArg(line, false));
 
 				return true;
 			} elseif (this->match(line, "DSET")) {
@@ -193,10 +202,7 @@ class Database extends Command
 				let this->data_sql = "INSERT INTO " . this->database . " SET " . controller->clean(line, config);
 
 				return true;
-			} /*elseif (this->data_line) {
-				 //Building the SQL for the data connection instead of parsing.
-				return true;
-			}*/
+			}
 
 			return null;
 		} catch DatabaseException, err {

@@ -44,8 +44,8 @@ class ForLoop extends Command
 			
 			if (count(args) == 3) {
 				if (strtolower(args[1]) == "in") {
-					var param = str_replace(["&", "$", "%", "#"], "", args[0]);
-					return "<?php foreach ($" . str_replace(["&", "$", "%", "#"], "", args[2]) . " as $" . param . ") { ?>";
+					var param = this->parseVar(args[0]);
+					return "<?php foreach (" . this->parseVar(args[2]) . " as " . param . ") { ?>";
 				}
 			}
 

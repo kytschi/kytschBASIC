@@ -50,7 +50,11 @@ class Media extends Command
 			let this->id = this->genID("kb-img");
 
 			if (isset(args[0])) {
-				let arg = controller->clean(args[0]);
+				if (strpos(args[0], "\"") === 0) {
+					let arg = controller->clean(args[0]);
+				} else {
+					let arg = "<?= " . this->parseVar(args[0]) . ";?>";
+				}
 				if (!empty(arg)) {
 					let this->src = arg;
 				
