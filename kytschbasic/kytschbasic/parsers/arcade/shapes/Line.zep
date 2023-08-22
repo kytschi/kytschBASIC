@@ -26,7 +26,6 @@ namespace KytschBASIC\Parsers\Arcade\Shapes;
 
 use KytschBASIC\Parsers\Arcade\Colors\Rgb;
 use KytschBASIC\Parsers\Arcade\Shapes\Shape;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
 
 class Line extends Shape
@@ -38,9 +37,8 @@ class Line extends Shape
 
 	public function build()
 	{
-		var args, controller;
-		let controller = new Args();
-		let args = controller->parseShort("LINE", this->command);
+		var args;
+		let args = this->parseArgs("LINE", this->command);
 
 		if (isset(args[0])) {
 			let this->x1 = intval(args[0]);

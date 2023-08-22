@@ -43,14 +43,14 @@ class Media extends Command
 		var controller;
 		let controller = new Args();
 		if (this->match(command, "IMAGE")) {
-			var args = controller->parseShort("IMAGE", command);
+			var args = this->parseArgs("IMAGE", command);
 
 			var arg, return_string = "<img";
 
 			let this->id = this->genID("kb-img");
 
 			if (isset(args[0])) {
-				if (strpos(args[0], "\"") === 0) {
+				if (!this->isVar(args[0])) {
 					let arg = controller->clean(args[0]);
 				} else {
 					let arg = "<?= " . this->parseVar(args[0]) . ";?>";
@@ -69,7 +69,11 @@ class Media extends Command
 			}
 
 			if (isset(args[1])) {
-				let arg = controller->clean(args[1]);
+				if (!this->isVar(args[1])) {
+					let arg = controller->clean(args[1]);
+				} else {
+					let arg = "<?= " . this->parseVar(args[1]) . ";?>";
+				}
 				if (!empty(arg)) {
 					let this->alt = arg;
 					let return_string = return_string . " alt=\"" . this->alt . "\"";
@@ -77,7 +81,11 @@ class Media extends Command
 			}
 
 			if (isset(args[2])) {
-				let arg = controller->clean(args[2]);
+				if (!this->isVar(args[2])) {
+					let arg = controller->clean(args[2]);
+				} else {
+					let arg = "<?= " . this->parseVar(args[2]) . ";?>";
+				}
 				if (!empty(arg)) {
 					let this->_class = arg;
 					let return_string = return_string . " class=\"" . this->_class . "\"";
@@ -85,7 +93,11 @@ class Media extends Command
 			}
 
 			if (isset(args[3])) {
-				let arg = controller->clean(args[3]);
+				if (!this->isVar(args[3])) {
+					let arg = controller->clean(args[3]);
+				} else {
+					let arg = "<?= " . this->parseVar(args[3]) . ";?>";
+				}
 				if (!empty(arg)) {
 					let this->id = arg;
 

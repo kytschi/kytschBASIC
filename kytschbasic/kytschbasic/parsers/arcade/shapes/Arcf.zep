@@ -25,7 +25,6 @@
 namespace KytschBASIC\Parsers\Arcade\Shapes;
 
 use KytschBASIC\Parsers\Arcade\Shapes\Shape;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
 
 class Arcf extends Shape
@@ -41,9 +40,8 @@ class Arcf extends Shape
 		 * IMG_ARC_NOFILL = 2
 		 * IMG_ARC_EDGED = 4
 		 */
-		 var args, controller;
-		 let controller = new Args();
-		 let args = controller->parseShort("ARCF", this->command);
+		 var args;
+		 let args = this->parseArgs("ARCF", this->command);
  
 		 if (isset(args[0])) {
 			 let this->x = intval(args[0]);

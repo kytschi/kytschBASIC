@@ -24,10 +24,10 @@
  */
 namespace KytschBASIC\Parsers\Arcade\Text;
 
-use KytschBASIC\Parsers\Core\Args;
+use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 
-class BitmapFont
+class BitmapFont extends Command
 {
 	public function parse(
 		string command,		
@@ -35,10 +35,8 @@ class BitmapFont
 		array globals = [],
 		var config = null
 	) {
-		var controller;
-		let controller = new Args();
 		let command = trim(trim(str_replace("BITMAPFONT ", "", command), "\""));
 		
-		return "<?php $KBBITMAPFONT=\"" . controller->processGlobals(command, globals) . "\";?>";
+		return "<?php $KBBITMAPFONT=\"" . this->parseGlobals(globals, command) . "\";?>";
 	}
 }

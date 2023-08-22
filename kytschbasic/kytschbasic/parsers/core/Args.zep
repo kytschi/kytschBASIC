@@ -227,7 +227,7 @@ class Args
 				continue;
 			}
 
-			let args[bits[0]] = this->processGlobals(bits[1], globals);
+			let args[bits[0]] = bits[1];
 		}
 
 		return args;
@@ -277,28 +277,6 @@ class Args
 			this->parse(command, line, globals),
 			"<" . tag
 		) . ">";
-	}
-
-	public function processGlobals(
-		string str,
-		array globals = []
-	) {
-		if (strpos(str, "_ROOT") !== false) {
-			let str = str_replace("_ROOT", globals["_ROOT"], str);
-		}
-
-		return str;
-	}
-
-	public function transparency(value)
-	{
-		var percent;
-		let percent = intval(value) / 100;
-		if (percent != 0) {
-			return intval(percent * 127);
-		} else {
-			return 0;
-		}
 	}
 
 	public function value(

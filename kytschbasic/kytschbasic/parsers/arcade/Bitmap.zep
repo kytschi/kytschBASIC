@@ -38,7 +38,6 @@ use KytschBASIC\Parsers\Arcade\Shapes\Box;
 use KytschBASIC\Parsers\Arcade\Shapes\Boxf;
 use KytschBASIC\Parsers\Arcade\Text\BitmapFont;
 use KytschBASIC\Parsers\Arcade\Text\BitmapText;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 
@@ -64,8 +63,7 @@ class Bitmap extends Command
 			return "<?php ob_start();imagepng($KBIMAGE);$img = ob_get_contents();ob_end_clean(); ?><img src=\"data:image/png;base64,<?= base64_encode($img); ?>\">";
 		} elseif (this->match(command, "BITMAP")) {
 			var args, x=0, y=0, width=320, height=240, transparency=100;
-			let controller = new Args();
-			let args = controller->parseShort("BITMAP", command);
+			let args = this->parseArgs("BITMAP", command);
 
 			if (isset(args[0])) {
 				let x = intval(args[0]);

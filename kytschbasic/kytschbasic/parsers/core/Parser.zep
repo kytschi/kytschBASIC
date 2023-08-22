@@ -274,7 +274,7 @@ class Parser extends Command
 				default:
 					this->writeOutput(
 						(new self())->parse(
-							args->processGlobals(rtrim(ltrim(parsed, "/"), ".kb"), this->globals) . ".kb",
+							this->parseGlobals(this->globals, rtrim(ltrim(parsed, "/"), ".kb")) . ".kb",
 							this->config,
 							this->globals,
 							this->start_time
@@ -424,7 +424,7 @@ class Parser extends Command
 	 * Process the any IF statements.
 	 */
 	 private function processIfStatement(var line) {
-		var args, sym = "$";
+		var args;
 				
 		if (this->match(line, "END IF")) {
 			let this->output = this->output . "<?php } ?>";
@@ -445,10 +445,12 @@ class Parser extends Command
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				if (substr(args[0], 0, 6) == "_VALID") {
-					let sym = "";
+				if (!this->isVar(args[0])) {
+					let args[0] = this->cleanArg(args[0]);
+				} else {
+					let args[0] = this->parseVar(args[0]);
 				}
-				let this->output = this->output . "<?php } elseif(" . sym . args[0] . ") { ?>";
+				let this->output = this->output . "<?php } elseif(" . args[0] . ") { ?>";
 				return true;
 			}
 
@@ -469,22 +471,23 @@ class Parser extends Command
 				}
 				return true;
 			} elseif (count(args) >= 1 && count(args) <= 2) {
-				if (substr(args[0], 0, 6) == "_VALID") {
-					let sym = "";
-				}
-				let args[0] = "!empty(" . sym . args[0] . ")";
-
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				let this->output = this->output . "<?php if(" . args[0] . ") { ?>";
+
+				if (!this->isVar(args[0])) {
+					let args[0] = this->cleanArg(args[0]);
+				} else {
+					let args[0] = this->parseVar(args[0]);
+				}
+				let this->output = this->output . "<?php if(!empty(" . args[0] . ")) { ?>";
 				return true;
 			}
 
 			throw new Exception("Invalid IFNTE statement");
 		} elseif (this->match(line, "IF")) {
 			let args = this->parseSpaceArgs(line, "IF");
-			
+
 			if (count(args) > 2) {				
 				if (args[1] == "THEN") {
 					this->processIfThen(args);
@@ -500,11 +503,14 @@ class Parser extends Command
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-				
-				if (substr(args[0], 0, 6) == "_VALID") {
-					let sym = "";
+
+				if (!this->isVar(args[0])) {
+					let args[0] = this->cleanArg(args[0]);
+				} else {
+					let args[0] = this->parseVar(args[0]);
 				}
-				let this->output = this->output . "<?php if(" . sym . args[0] . ") { ?>";
+
+				let this->output = this->output . "<?php if(" . args[0] . ") { ?>";
 				return true;
 			}
 
@@ -519,7 +525,7 @@ class Parser extends Command
 		var start = 2,
 		boolean else_if = false
 	) {
-		var if_statement, command = "if", sym = "$";
+		var if_statement, command = "if";
 
 		if (else_if) {
 			let command = "} elseif";
@@ -537,11 +543,13 @@ class Parser extends Command
 			let if_statement = str_replace("=", "==", if_statement);
 		}
 
-		if (substr(if_statement, 0, 6) == "_VALID") {
-			let sym = "";
+		if (!this->isVar(if_statement)) {
+			let if_statement = this->cleanArg(if_statement);
+		} else {
+			let if_statement = this->parseVar(if_statement);
 		}
 
-		let this->output = this->output . "<?php " . command . "(" . sym . if_statement . ") { ?>";
+		let this->output = this->output . "<?php " . command . "(" . if_statement . ") { ?>";
 
 		if (line) {
 			if (!this->processCommand(line)) {

@@ -25,7 +25,6 @@
 namespace KytschBASIC\Parsers\Arcade\Colors;
 
 use KytschBASIC\Parsers\Arcade\Colors\Rgb;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 

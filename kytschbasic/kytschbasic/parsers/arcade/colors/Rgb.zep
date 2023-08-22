@@ -24,9 +24,9 @@
  */
 namespace KytschBASIC\Parsers\Arcade\Colors;
 
-use KytschBASIC\Parsers\Core\Args;
+use KytschBASIC\Parsers\Core\Command;
 
-class Rgb
+class Rgb extends Command
 {
 	public function parse(
 		string command,
@@ -34,9 +34,8 @@ class Rgb
 		array globals = [],
 		var config = null
 	) {
-		var args, red=0, green=0, blue=0, transparency=0, controller;
-		let controller = new Args();
-		let args = controller->parseShort("RGB", command);
+		var args, red=0, green=0, blue=0, transparency=0;
+		let args = this->parseArgs("RGB", command);
 
 		if (isset(args[0])) {
 			let red = intval(args[0]);

@@ -40,9 +40,9 @@ class Database extends Command
 	private data_var = "";
 
 	/**
-	 * If the DATA line is being processed.
+	 * If the DATA binds.
 	 */
-	private data_line = false;
+	private data_bind = [];
 
 	/**
 	 * Holds the DATA SQL that'll get built from parsing.
@@ -59,7 +59,7 @@ class Database extends Command
 	 */
 	private database_config = null;
 
-	private function close()
+	private function close(array globals = [])
 	{
 		if (empty(this->database)) {
 			throw new DatabaseException("no database selected to read");
@@ -85,10 +85,9 @@ class Database extends Command
 		}
 		
 		let output = "<?php $connection = new \\PDO('" . dsn . "','" . (!empty(this->database_config->user) ? this->database_config->user : "") . "','" . (!empty(this->database_config->password) ? this->database_config->password : "") . "');";
-		let output = output . "$statement = $connection->prepare(\"" . str_replace("\"", "'", this->data_sql) . "\");";
-		let output = output . "$statement->execute();";
+		let output = output . "$statement = $connection->prepare(\"" . this->parseGlobals(globals, str_replace("\"", "'", this->data_sql)) . "\");";
+		let output = output . "$statement->execute((array)json_decode('" . json_encode(this->data_bind) . "'));";
 
-		let this->data_line = false;
 		return output . "$" . str_replace(["$", "%", "#", "&"], "", this->data_var) . "=$statement->fetchAll();?>";
 	}
 
@@ -103,7 +102,7 @@ class Database extends Command
 
 		try {
 			if (this->match(line, "DATA CLOSE")) {
-				return this->close();
+				return this->close(globals);
 			} elseif (this->match(line, "DATA") && !this->match(line, "DATA CLOSE")) {
 				var args = this->parseArgs("DATA", line);
 
@@ -112,7 +111,6 @@ class Database extends Command
 				}
 
 				let this->data_var = trim(args[0]);
-				let this->data_line = true;
 				return true;
 			} elseif (this->match(line, "DOPEN")) {
 				var open, db_config;
@@ -148,6 +146,25 @@ class Database extends Command
 					throw new DatabaseException("no database selected to read");
 				}
 				return true;
+			} elseif (this->match(line, "DBIND")) {
+				var args, arg, splits;
+				let args = this->parseArgs("DBIND", line);
+				if (empty(this->database)) {
+					throw new DatabaseException("no database selected to read");
+				}
+
+				for arg in args {
+					let splits = explode("=", arg);
+					if (!empty(splits[0]) && !empty(splits[0])) {
+						if (!this->isVar(splits[1])) {
+							let this->data_bind[splits[0]] = splits[1];
+						} else {
+							let this->data_bind[splits[0]] = "'." . this->parseVar(splits[1]) . ".'";
+						}
+					}
+				}
+				
+				return true;
 			} elseif (this->match(line, "DSELECT")) {
 				if (empty(this->database)) {
 					throw new DatabaseException("no database selected to read");
@@ -163,7 +180,9 @@ class Database extends Command
 				}
 
 				let line = str_replace("DWHERE ", "", line);
-				let this->data_sql = str_replace("INSERT INTO", "UPDATE", this->data_sql) .  " WHERE " . this->cleanArg(line, false);
+				let this->data_sql = str_replace("INSERT INTO", "UPDATE", this->data_sql) .
+					" WHERE " .
+					this->cleanArg(line, false);
 
 				return true;
 			} elseif (this->match(line, "DSORT")) {

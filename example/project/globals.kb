@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "Parameters on commands | kytschBASIC"
+	NAME "Global variables | kytschBASIC"
 HEAD CLOSE
 BODY
 	MAIN
@@ -35,6 +35,62 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 							TCELL CLOSE
 							TCELL
 								PRINT "The root folder where the source of the project is held"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_VALID["captcha"]"
+							TCELL CLOSE
+							TCELL
+								PRINT "Confirm the captcha supplied is a valid one"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_POST"
+							TCELL CLOSE
+							TCELL
+								PRINT "The POST data array"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_GET"
+							TCELL CLOSE
+							TCELL
+								PRINT "The GET data array"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_RURL"
+							TCELL CLOSE
+							TCELL
+								PRINT "The ROOT URL, for example https://kytschbasic.org"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_URL"
+							TCELL CLOSE
+							TCELL
+								PRINT "The page URL including any variables passed over"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_PATH"
+							TCELL CLOSE
+							TCELL
+								PRINT "The page path from the URL, for example /globals"
+							TCELL CLOSE
+						TROW CLOSE
+						TROW
+							TCELL
+								PRINT "_PATH"
+							TCELL CLOSE
+							TCELL
+								PRINT "The page path from the URL, for example /globals"
 							TCELL CLOSE
 						TROW CLOSE
 					TBODY CLOSE

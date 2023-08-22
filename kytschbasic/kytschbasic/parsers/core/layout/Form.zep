@@ -67,7 +67,7 @@ class Form extends Command
 
 		var args, arg, params="", label="", html, controller;
 		let controller = new Args();
-		let args = controller->parseShort(strtoupper("form submit"), command);
+		let args = this->parseArgs(strtoupper("form submit"), command);
 
 		let params .= " type=\"" . type . "\"";
 
@@ -201,7 +201,7 @@ class Form extends Command
 
 		var args, arg, params="", controller;
 		let controller = new Args();
-		let args = controller->parseShort(strtoupper("form input"), command);
+		let args = this->parseArgs(strtoupper("form input"), command);
 
 		if (isset(args[0])) {
 			let arg = controller->clean(args[0]);
@@ -259,7 +259,7 @@ class Form extends Command
 
 		var args, arg, params="", text = "", controller;
 		let controller = new Args();
-		let args = controller->parseShort(strtoupper("form textarea"), command);
+		let args = this->parseArgs(strtoupper("form textarea"), command);
 
 		if (isset(args[0])) {
 			let arg = controller->clean(args[0]);
@@ -315,7 +315,7 @@ class Form extends Command
 
 		var args, arg, params="", controller;
 		let controller = new Args();
-		let args = controller->parseShort(strtoupper("form"), command);
+		let args = this->parseArgs(strtoupper("form"), command);
 
 		if (isset(args[0])) {
 			let arg = controller->clean(args[0]);

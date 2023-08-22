@@ -24,7 +24,6 @@
  */
 namespace KytschBASIC\Parsers\Arcade\Screen;
 
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 
@@ -50,9 +49,8 @@ class Window extends Command
 		if (this->match(command, "WINDOW CLOSE")) {
 			return this->output("</div>");
 		} elseif (this->match(command, "WINDOW")) {
-			var args, controller;
-			let controller = new Args();
-			let args = controller->parseShort("WINDOW", command);
+			var args;
+			let args = this->parseArgs("WINDOW", command);
 			if (isset(args[0])) {
 				let this->id = trim(args[0], "\"");
 			} else {

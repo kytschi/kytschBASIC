@@ -25,10 +25,10 @@
 namespace KytschBASIC\Parsers\Arcade\Shapes;
 
 use KytschBASIC\Parsers\Arcade\Colors\Rgb;
-use KytschBASIC\Parsers\Core\Args;
+use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 
-class Shape
+class Shape extends Command
 {
 	protected x=0;
 	protected y=0;
@@ -138,9 +138,8 @@ class Shape
 
 	public function move(string command)
 	{
-		var controller, args;
-		let controller = new Args();
-		let args = controller->parseShort("MOVE SHAPE", command);
+		var args;
+		let args = this->parseArgs("MOVE SHAPE", command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
@@ -153,12 +152,22 @@ class Shape
 
 	public function setTransparency(string command)
 	{
-		var controller, args;
-		let controller = new Args();
-		let args = controller->parseShort("SET TRANSPARENCY", command);
+		var args;
+		let args = this->parseArgs("SET TRANSPARENCY", command);
 
 		if (isset(args[0])) {
 			let this->transparency = intval(args[0]);
+		}
+	}
+
+	public function transparency(value)
+	{
+		var percent;
+		let percent = intval(value) / 100;
+		if (percent != 0) {
+			return intval(percent * 127);
+		} else {
+			return 0;
 		}
 	}
 }

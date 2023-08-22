@@ -30,7 +30,7 @@ class Command
 		string arg,
 		bool slashes = true
 	) {
-		return slashes ? addslashes(trim(trim(arg), "\"")) : trim(trim(arg), "\"");
+		return slashes ? htmlentities(trim(trim(arg), "\"")) : trim(trim(arg), "\"");
 	}
 
 	public function genID(string id)
@@ -40,13 +40,20 @@ class Command
 
 	public function isVar(string line)
 	{
-		if (
-			strpos(line, "&[\"") !== false ||
-			strpos(line, "#[\"") !== false ||
-			strpos(line, "$[\"") !== false ||
-			strpos(line, "%[\"") !== false
-		) {
-			return true;
+		var check, checks = [
+			"&[",
+			"#[",
+			"$[",
+			"%[",
+			"_GET[",
+			"_POST[",
+			"_REQUEST["
+		];
+
+		for check in checks {
+			if (strpos(line, check) !== false) {
+				return true;
+			}
 		}
 
 		return false;
@@ -193,6 +200,25 @@ class Command
 
 		let line = str_replace("$\"", "\"", line);
 		return str_replace("$$", "$", line);
+	}
+
+	public function parseGlobals(array $globals, string line)
+	{
+		if (empty(globals)) {
+			return;
+		}
+
+		var key, value, subkey, subvalue;
+		for key, value in globals {
+			if (is_array(value)) {
+				for subkey, subvalue in value {
+					let line = str_replace(subkey, subvalue, line);
+				}
+			} else {
+				let line = str_replace(key, value, line);
+			}
+		}
+		return line;
 	}
 
 	public function parseSpaceArgs(

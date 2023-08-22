@@ -103,6 +103,9 @@ HEADER
 		LINK "/reference/DATA","Find out about the DATA command","nav-link"
 			PRINT "DATA"
 		LINK CLOSE
+		LINK "/reference/DBIND","Find out about the DBIND command","nav-link"
+			PRINT "DBIND"
+		LINK CLOSE
 		LINK "/reference/DEF","Find out about the DEF command","nav-link"
 			PRINT "DEF"
 		LINK CLOSE

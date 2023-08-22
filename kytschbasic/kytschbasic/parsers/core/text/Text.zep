@@ -287,29 +287,30 @@ class Text extends Command
 		let command = new Args();
 		
 		if (isset(args[0])) {
-			let value = args[0];
-
-			if (substr(value,0,1) == "\"") {
-				let value = command->clean(value);
+			if (!this->isVar(args[0])) {
+				let value = this->cleanArg(args[0]);
 			} else {
-				var sym = "$";
-				if (substr(value, 0, 6) == "_VALID") {
-					let sym = "";
-				}
-				let value = "<?= " . sym . this->parseEquation(str_replace(["$", "%", "#", "&"], "", value)) . "; ?>";
+				let value = "<?= " . this->parseVar(args[0]) . ";?>";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = this->cleanArg(args[1]);
+			if (!this->isVar(args[1])) {
+				let arg = this->cleanArg(args[1]);
+			} else {
+				let arg = "<?= " . this->parseVar(args[1]) . ";?>";
+			}
 			if (!empty(arg)) {
-				let this->_class = arg;
-				let params = params ." class=\"" . this->_class . "\"";
+				let params = params ." class=\"" . arg . "\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = this->cleanArg(args[2]);
+			if (!this->isVar(args[2])) {
+				let arg = this->cleanArg(args[2]);
+			} else {
+				let arg = "<?= " . this->parseVar(args[2]) . ";?>";
+			}
 			if (!empty(arg)) {
 				let this->id = arg;
 			}
@@ -338,15 +339,22 @@ class Text extends Command
 		let args = this->parseArgs("SWRITE", command);
 
 		if (isset(args[0])) {
-			let arg = this->cleanArg(args[0]);
+			if (!this->isVar(args[0])) {
+				let arg = this->cleanArg(args[0]);
+			} else {
+				let arg = "<?= " . this->parseVar(args[0]) . ";?>";
+			}
 			if (!empty(arg)) {
-				let this->_class = arg;
-				let params = params ." class=\"" . this->_class . "\"";
+				let params = params ." class=\"" . arg . "\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = this->cleanArg(args[1]);
+			if (!this->isVar(args[1])) {
+				let arg = this->cleanArg(args[1]);
+			} else {
+				let arg = "<?= " . this->parseVar(args[1]) . ";?>";
+			}
 			if (!empty(arg)) {
 				let this->id = arg;
 			}

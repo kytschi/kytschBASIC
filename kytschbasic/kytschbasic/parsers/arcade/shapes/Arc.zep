@@ -25,16 +25,14 @@
 namespace KytschBASIC\Parsers\Arcade\Shapes;
 
 use KytschBASIC\Parsers\Arcade\Shapes\Shape;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
 
 class Arc extends Shape
 {
 	public function build()
 	{
-		var args, controller;
-		let controller = new Args();
-		let args = controller->parseShort("ARC", this->command);
+		var args;
+		let args = this->parseArgs("ARC", this->command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);

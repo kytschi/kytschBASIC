@@ -83,7 +83,7 @@ class Table extends Command
 
 		var args, arg, params="", controller;
 		let controller = new Args();
-		let args = controller->parseShort(command, line);
+		let args = this->parseArgs(command, line);
 
 		if (isset(args[0])) {
 			let arg = controller->clean(args[0]);
@@ -133,7 +133,7 @@ class Table extends Command
 
 		var args, arg, params="", controller;
 		let controller = new Args();
-		let args = controller->parseShort(command, line);
+		let args = this->parseArgs(command, line);
 
 		if (isset(args[0])) {
 			let arg = controller->clean(args[0]);

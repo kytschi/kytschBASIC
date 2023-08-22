@@ -24,7 +24,6 @@
  */
 namespace KytschBASIC\Parsers\Arcade\Screen;
 
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Session;
 
@@ -41,9 +40,7 @@ class Screen extends Command
 		if (this->match(command, "SCREEN CLOSE")) {
 			return this->output("</div>");
 		} elseif (this->match(command, "SCREEN")) {
-			var controller;
-			let controller = new Args();
-			var args = controller->parseShort("SCREEN", command);
+			var args = this->parseArgs("SCREEN", command);
 
 			if (isset(args[0])) {
 				let this->id = trim(args[0], "\"");

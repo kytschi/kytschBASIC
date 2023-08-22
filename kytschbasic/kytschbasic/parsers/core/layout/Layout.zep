@@ -73,7 +73,7 @@ class Layout extends Command
 
 		var args, arg, params="", controller;
 		let controller = new Args();
-		let args = controller->parseShort(strtoupper(tag), command);
+		let args = this->parseArgs(strtoupper(tag), command);
 
 		if (isset(args[0])) {
 			let arg = controller->clean(args[0]);

@@ -25,7 +25,6 @@
 namespace KytschBASIC\Parsers\Arcade\Shapes;
 
 use KytschBASIC\Parsers\Arcade\Shapes\Shape;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
 
 class Box extends Shape
@@ -37,9 +36,8 @@ class Box extends Shape
 
 	public function build()
 	{
-		var args, controller;
-		let controller = new Args();
-		let args = controller->parseShort("BOX", this->command);
+		var args;		
+		let args = this->parseArgs("BOX", this->command);
 
 		if (isset(args[0])) {
 			let this->x1 = intval(args[0]);

@@ -25,7 +25,6 @@
 namespace KytschBASIC\Parsers\Arcade\Text;
 
 use KytschBASIC\Parsers\Arcade\Shapes\Shape;
-use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Session;
 
 class BitmapText extends Shape
@@ -35,9 +34,8 @@ class BitmapText extends Shape
 
 	public function build()
 	{
-		var args, controller;
-		let controller = new Args();
-		let args = controller->parseShort("BITMAPTEXT", this->command);
+		var args;
+		let args = this->parseArgs("BITMAPTEXT", this->command);
 
 		if (isset(args[0])) {
 			let this->x = intval(args[0]);
@@ -57,7 +55,7 @@ class BitmapText extends Shape
 
 		if (isset(args[4])) {
 			if (intval(args[4])) {
-				let this->transparency = controller->transparency(args[4]);
+				let this->transparency = this->transparency(args[4]);
 			} else {
 				let this->text = trim(args[4], "\"");
 			}

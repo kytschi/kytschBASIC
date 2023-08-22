@@ -51,7 +51,7 @@ class Heading extends Command
 
 			let this->id = this->genID("kb-heading");
 
-			let args = controller->parseShort("HEADING", command);
+			let args = this->parseArgs("HEADING", command);
 
 			if (empty(args)) {
 				let this->end = "</h1>";
