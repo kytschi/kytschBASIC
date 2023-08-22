@@ -62,49 +62,50 @@ class Navigation extends Command
 	) {
 		let this->id = this->genID("kb-a");
 
-		var args, arg, params="";
+		var args, params="";
 		let args = this->parseArgs("LINK", line);
 
 		if (isset(args[0])) {
-			let arg = this->cleanArg(args[0]);
-			if (!empty(arg)) {
-				let this->link = arg;
-				let params = params . " href=\"" . this->link . "\"";
+			if (!this->isVar(args[0])) {
+				let params = params . " href=\"" . this->cleanArg(args[0]) . "\"";
+			} else {
+				let params = params . " href=\"<?= " . this->parseVar(args[0]) . ";?>\"";
 			}
 		}
 
 		if (isset(args[1])) {
-			let arg = this->cleanArg(args[1]);
-			if (!empty(arg)) {
-				let this->title = arg;
-				let params = params . " title=\"" . this->title . "\"";
+			if (!this->isVar(args[1])) {
+				let params = params . " title=\"" . this->cleanArg(args[1]) . "\"";
+			} else {
+				let params = params . " title=\"<?= " . this->parseVar(args[1]) . ";?>\"";
 			}
 		}
 
 		if (isset(args[2])) {
-			let arg = this->cleanArg(args[2]);
-			if (!empty(arg)) {
-				let this->_class = arg;
-				let params = params . " class=\"" . this->_class . "\"";
+			if (!this->isVar(args[2])) {
+				let params = params . " class=\"" . this->cleanArg(args[2]) . "\"";
+			} else {
+				let params = params . " class=\"<?= " . this->parseVar(args[2]) . ";?>\"";
 			}
 		}
 
 		if (isset(args[3])) {
-			let arg = this->cleanArg(args[3]);
-			if (!empty(arg)) {
-				let this->target = arg;
-				let params = params . " target=\"" . this->target . "\"";
+			if (!this->isVar(args[3])) {
+				let params = params . " target=\"" . this->cleanArg(args[3]) . "\"";
+			} else {
+				let params = params . " target=\"<?= " . this->parseVar(args[3]) . ";?>\"";
 			}
 		}
 
 		if (isset(args[4])) {
-			let arg = this->cleanArg(args[4]);
-			if (!empty(arg)) {
-				let this->id = arg;
+			if (!this->isVar(args[4])) {
+				let params = params . " id=\"" . this->cleanArg(args[4]) . "\"";
+			} else {
+				let params = params . " id=\"<?= " . this->parseVar(args[4]) . ";?>\"";
 			}
+		} else {
+			let params = params . " id=\"" . this->id . "\"";
 		}
-
-		let params = params . " id=\"" . this->id . "\"";
 
 		let params = params . this->leftOverArgs(5, args);
 

@@ -118,6 +118,18 @@
 		"template": "project/reference/core/database/DLIMIT.kb"
 	},
 	{
+		"url": "/reference/DJOIN",
+		"template": "project/reference/core/database/DJOIN.kb"
+	},
+	{
+		"url": "/reference/DLJOIN",
+		"template": "project/reference/core/database/DLJOIN.kb"
+	},
+	{
+		"url": "/reference/DRJOIN",
+		"template": "project/reference/core/database/DRJOIN.kb"
+	},
+	{
 		"url": "/reference/DOPEN",
 		"template": "project/reference/core/database/DOPEN.kb"
 	},

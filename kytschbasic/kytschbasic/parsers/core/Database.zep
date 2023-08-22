@@ -184,6 +184,24 @@ class Database extends Command
 				let this->data_sql = this->data_sql . " JOIN " . this->cleanArg(line, false);
 
 				return true;
+			} elseif (this->match(line, "DLJOIN")) {
+				if (empty(this->database)) {
+					throw new DatabaseException("no database selected to read");
+				}
+
+				let line = str_replace("DLJOIN ", "", line);
+				let this->data_sql = this->data_sql . " LEFT JOIN " . this->cleanArg(line, false);
+
+				return true;
+			} elseif (this->match(line, "DRJOIN")) {
+				if (empty(this->database)) {
+					throw new DatabaseException("no database selected to read");
+				}
+
+				let line = str_replace("DRJOIN ", "", line);
+				let this->data_sql = this->data_sql . " RIGHT JOIN " . this->cleanArg(line, false);
+
+				return true;
 			} elseif (this->match(line, "DLIMIT")) {
 				if (empty(this->database)) {
 					throw new DatabaseException("no database selected to read");

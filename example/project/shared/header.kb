@@ -106,6 +106,15 @@ HEADER
 		LINK "/reference/DEF","Find out about the DEF command","nav-link"
 			PRINT "DEF"
 		LINK CLOSE
+		LINK "/reference/DJOIN","Find out about the DJOIN command","nav-link"
+			PRINT "DJOIN"
+		LINK CLOSE
+		LINK "/reference/DLJOIN","Find out about the DLJOIN command","nav-link"
+			PRINT "DLJOIN"
+		LINK CLOSE
+		LINK "/reference/DRJOIN","Find out about the DRJOIN command","nav-link"
+			PRINT "DRJOIN"
+		LINK CLOSE
 		LINK "/reference/DLIMIT","Find out about the DLIMIT command","nav-link"
 			PRINT "DLIMIT"
 		LINK CLOSE

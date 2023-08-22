@@ -38,6 +38,20 @@ class Command
 		return id . "-" . hrtime(true);
 	}
 
+	public function isVar(string line)
+	{
+		if (
+			strpos(line, "&[\"") !== false ||
+			strpos(line, "#[\"") !== false ||
+			strpos(line, "$[\"") !== false ||
+			strpos(line, "%[\"") !== false
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public function leftOverArgs(int start, args)
 	{
 		var bits, value, params = "";
@@ -85,7 +99,7 @@ class Command
 
 		// Ignore the stuff between quotes
 		let line = preg_replace_callback(
-			"/(\"[^\",]+),([^\"]+\")/",
+			"/(\"[^\",]+)([^\"]+\")/",
 			function (matches) use (comma_code) {
 				if (in_array(matches[0], ["\"],\"", "\"], \""])) {
 					return matches[0];
@@ -193,7 +207,7 @@ class Command
 
 	public function parseVar(string line)
 	{
-		return "$" . str_replace(["&", "$", "%", "#"], "", line);
+		return "$" . str_replace("\"", "'", str_replace(["&", "$", "%", "#"], "", line));
 	}
 
 	private function replaceVars(string line)
