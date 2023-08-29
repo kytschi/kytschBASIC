@@ -84,11 +84,11 @@ class Database extends Command
 			let dsn .= "host=127.0.0.1;";
 		}
 		
-		let output = "<?php $connection = new \\PDO('" . dsn . "','" . (!empty(this->database_config->user) ? this->database_config->user : "") . "','" . (!empty(this->database_config->password) ? this->database_config->password : "") . "');";
+		let output = "<?php try{$connection = new \\PDO('" . dsn . "','" . (!empty(this->database_config->user) ? this->database_config->user : "") . "','" . (!empty(this->database_config->password) ? this->database_config->password : "") . "');";
 		let output = output . "$statement = $connection->prepare(\"" . this->parseGlobals(globals, str_replace("\"", "'", this->data_sql)) . "\");";
 		let output = output . "$statement->execute((array)json_decode('" . json_encode(this->data_bind) . "'));";
 
-		return output . "$" . str_replace(["$", "%", "#", "&"], "", this->data_var) . "=$statement->fetchAll();?>";
+		return output . "$" . str_replace(["$", "%", "#", "&"], "", this->data_var) . "=$statement->fetchAll();} catch(\\PDOException $err) {new KytschBASIC\\Exceptions\\Exception($err->getMessage(), 500);}?>";
 	}
 
 	public function parse(

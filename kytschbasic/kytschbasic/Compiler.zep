@@ -56,6 +56,7 @@ class Compiler
 			let err = error_get_last();
 			if (err) {
 				(new Exception(err["message"]))->fatal();
+				die();
 			}
 		});
 
