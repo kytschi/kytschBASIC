@@ -423,7 +423,7 @@ class Parser extends Command
 	/**
 	 * Process the any IF statements.
 	 */
-	 private function processIfStatement(var line) {
+	private function processIfStatement(var line) {
 		var args;
 				
 		if (this->match(line, "END IF")) {

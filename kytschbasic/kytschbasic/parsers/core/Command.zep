@@ -56,6 +56,22 @@ class Command
 			}
 		}
 
+		let checks = [
+			"&",
+			"#",
+			"$",
+			"%",
+			"_GET",
+			"_POST",
+			"_REQUEST"
+		];
+
+		for check in checks {
+			if (substr(line, strlen(line) - strlen(check), strlen(check)) == check) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
