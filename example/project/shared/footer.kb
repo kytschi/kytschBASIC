@@ -4,7 +4,7 @@ FOOTER
 			PRINT "Powered by "
 			PRINT "kytsch","kytsch"
 			PRINT "BASIC","basic"
-			PRINT "&nbsp;"
+			PRINT " "
 			VERSION
 			SWRITE
 				PRINT "Page loaded in approx "

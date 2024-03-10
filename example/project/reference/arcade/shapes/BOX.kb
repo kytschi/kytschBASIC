@@ -133,59 +133,59 @@ BITMAP CLOSE
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/BITMAP"
 						PRINT "BITMAP"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/BITMAPFONT"
 						PRINT "BITMAPFONT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/BITMAPTEXT"
 						PRINT "BITMAPTEXT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/BOXF"
 						PRINT "BOXF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/CIRCLE"
 						PRINT "CIRCLE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/CIRCLEF"
 						PRINT "CIRCLEF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/ELLIPSE"
 						PRINT "ELLIPSE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/ELLIPSEF"
 						PRINT "ELLIPSEF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/globals"
 						PRINT "Globals"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/LINE"
 						PRINT "LINE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/RGB"
 						PRINT "RGB"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/SCREEN"
 						PRINT "SCREEN"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/WINDOW"
 						PRINT "WINDOW"
 					LINK CLOSE

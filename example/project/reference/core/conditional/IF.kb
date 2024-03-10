@@ -21,13 +21,13 @@ BODY
 SPRINT FOR iLoop=1 to 10
 	SPRINT IF iLoop=2 THEN
 		PRINT iLoop
-		PRINT ", "
+		PRINT " | "
 	SPRINT ELSEIF iLoop=4 THEN
         PRINT iLoop
-		PRINT ", "
+		PRINT " | "
 	SPRINT ELSEIF iLoop=6 THEN
         PRINT iLoop
-		PRINT ", "
+		PRINT " | "
 	SPRINT END IF
 SPRINT NEXT iLoop
 SPRINT LINE BREAK
@@ -42,22 +42,22 @@ SPRINT NEXT iLoop
 					PRINT "Output"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24 kb-code-block"
-					FOR iLoop=1 to 10
-						IF iLoop=2 THEN
-							PRINT iLoop
-							PRINT ", "
-						ELSEIF iLoop=4 THEN
-							PRINT iLoop
-							PRINT ", "
-						ELSEIF iLoop=6 THEN
-							PRINT iLoop
+					FOR iLoop%=1 to 10
+						IF iLoop%=2 THEN
+							PRINT iLoop%
+							PRINT " | "
+						ELSEIF iLoop%=4 THEN
+							PRINT iLoop%
+							PRINT " | "
+						ELSEIF iLoop%=6 THEN
+							PRINT iLoop%
 						END IF
-					NEXT iLoop
+					NEXT iLoop%
 					LINE BREAK
-					FOR iLoop=1 to 10
-						IF iLoop=2 THEN PRINT iLoop
-						ELSEIF iLoop=4 THEN PRINT iLoop
-						ELSEIF iLoop=6 THEN PRINT iLoop
+					FOR iLoop%=1 to 10
+						IF iLoop%=2 THEN PRINT iLoop%
+						ELSEIF iLoop%=4 THEN PRINT iLoop%
+						ELSEIF iLoop%=6 THEN PRINT iLoop%
 						END IF
 					NEXT iLoop
 				DIV CLOSE
@@ -68,7 +68,7 @@ SPRINT NEXT iLoop
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
 					LINK CLOSE

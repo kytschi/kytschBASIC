@@ -43,11 +43,11 @@ HEAD CLOSE
 					LINK "/reference/BODY"
 						PRINT "BODY"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/FOOTER"
 						PRINT "FOOTER"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/HEADER"
 						PRINT "HEADER"
 					LINK CLOSE

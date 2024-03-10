@@ -93,27 +93,27 @@ FORM CLOSE
 					LINK "/reference/FORM"
 						PRINT "FORM"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/FORM-CAPTCHA"
 						PRINT "FORM CAPTCHA"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/FORM-INPUT"
 						PRINT "FORM INPUT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/FORM-SUBMIT"
 						PRINT "FORM SUBMIT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/_GET"
 						PRINT "_GET"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/_POST"
 						PRINT "_POST"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
 					LINK CLOSE

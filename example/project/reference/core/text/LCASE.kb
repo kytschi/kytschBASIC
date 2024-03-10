@@ -35,11 +35,11 @@ hello world!
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/UCASE"
 						PRINT "UCASE"
 					LINK CLOSE

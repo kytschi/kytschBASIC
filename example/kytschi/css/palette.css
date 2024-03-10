@@ -4,8 +4,8 @@
 }
 
 html, body {
-    background-color: #101010;
-    color: #bababa;
+    background-color: #fff;
+    color: #000;
     font-family: "FreeMono", Arial, Helvetica, sans-serif;
     font-size: 14pt;
     height: 100vh;
@@ -27,7 +27,7 @@ body {
 a {
     text-decoration: none;
     background-color: transparent;
-    color: #cb7832;
+    color: #000;
 }
 
 a:hover {
@@ -47,7 +47,7 @@ footer {
     height: 55px;
     width: 100%;
     flex: 0 0 auto;
-    background-color: #000;
+    background-color: #fff;
     border-top:1px solid #111;
 }
 
@@ -77,6 +77,7 @@ h1 {
 }
 
 h2 {
+    color: #d14;
     font-size: 16pt !important;
     font-weight: bold;
 }
@@ -93,12 +94,12 @@ h2 {
 }
 
 .heading-required {
-    color: #a30303 !important;
+    color: #d14 !important;
     font-weight: normal;
 }
 
 .kytsch {
-    color: #bababa;
+    color: #000;
     font-weight: normal;
 }
 
@@ -109,14 +110,21 @@ h2 {
 
 h3, h4, .h3 {
     font-size: 14pt;
-    font-weight: normal;
+    font-weight: bold;
+    color: #d14 !important;
+}
+
+.important {
+    font-weight: bold;
 }
 
 header {
-    flex: none;
+    display: flex;
+    flex-direction: column;
     width: 240px;
+    height: 100%;
     border-right: 1px solid #111;
-    background-color: #080808;
+    background-color: #fff;
 }
 
 .kb-col {
@@ -185,11 +193,17 @@ main {
 }
 
 nav {
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding-top: 10px;
+    width: 100%;
+    height: calc(100vh + 68px);
 }
 
 nav a:hover {
     cursor: pointer;
+    color: #d14;
     text-decoration: underline;
 }
 
@@ -205,7 +219,7 @@ p {
 
 pre, .kb-code-block {
     padding: 40px;
-    color: #cacaca;
+    color: #fff;
     background: #060606;
     -moz-tab-size: 4;
     tab-size: 4;

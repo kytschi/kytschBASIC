@@ -34,7 +34,7 @@ IMAGE, "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/SPRINT"
 						PRINT "SPRINT"
 					LINK CLOSE

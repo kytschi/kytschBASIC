@@ -31,11 +31,11 @@ END IF
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/IF"
 						PRINT "IF"
 					LINK CLOSE

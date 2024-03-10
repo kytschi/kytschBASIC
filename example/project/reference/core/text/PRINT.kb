@@ -37,19 +37,19 @@ PRINT "Hello World! I've parameters too!","heading-args"
 					LINK "/parameters"
 						PRINT "Parameters"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/LCASE"
 						PRINT "LCASE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/SWRITE"
 						PRINT "SWRITE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/UCASE"
 						PRINT "UCASE"
 					LINK CLOSE

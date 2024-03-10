@@ -1,0 +1,31 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "Issues | kytschBASIC"
+HEAD CLOSE
+BODY
+	MAIN
+		LOAD "_ROOT/project/shared/header"
+		DIV "kb-row", "main-content"
+			DIV "kb-col kb-col-24", "main-content-col"
+				HEADING 2
+					PRINT "Issues"
+				HEADING CLOSE
+				SWRITE
+					PRINT "There are number of known issues currently with the following symbols in strings used in the PRINT command for exammple"
+CPRINT
+& $ % #
+CPRINT CLOSE
+				SWRITE CLOSE
+				SWRITE
+					PRINT "The problem is down to the introduction of the proper variable symbols most notiable the ampersand symbol and the way I'm parsing the strings."
+				SWRITE CLOSE
+				SWRITE
+					PRINT "I get this this a pain but for now try and avoid using them."
+				SWRITE CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	MAIN CLOSE
+	LOAD "_ROOT/project/shared/footer"
+BODY CLOSE
+END

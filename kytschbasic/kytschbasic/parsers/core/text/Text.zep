@@ -285,7 +285,7 @@ class Text extends Command
 
 		let args = this->parseArgs("PRINT", line);
 		let command = new Args();
-		
+
 		if (isset(args[0])) {
 			if (!this->isVar(args[0])) {
 				let value = this->cleanArg(args[0]);

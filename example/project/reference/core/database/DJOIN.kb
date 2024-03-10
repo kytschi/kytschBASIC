@@ -53,31 +53,31 @@ SPRINT END FOR
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DATA"
 						PRINT "DATA"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DLJOIN"
 						PRINT "DLJOIN"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DRJOIN"
 						PRINT "DRJOIN"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DOPEN"
 						PRINT "DOPEN"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DREAD"
 						PRINT "DREAD"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DSORT"
 						PRINT "DSORT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
 					LINK CLOSE

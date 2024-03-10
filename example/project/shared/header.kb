@@ -16,7 +16,7 @@ HEADER
 		LINK "/installation","Read about the installation","nav-link"
 			PRINT "Installation"
 		LINK CLOSE
-		LINK "/parameters","Go to parameters page","nav-link"
+		LINK "/parameters#link-parameters","Go to parameters page","nav-link",,'link-parameters'
 			PRINT "Parameters"
 		LINK CLOSE
 		LINK "/globals","Go to globals page","nav-link"
@@ -28,7 +28,10 @@ HEADER
 		LINK "/news","What's in the news","nav-link"
 			PRINT "News"
 		LINK CLOSE
-		SWRITE "nav-link"
+		LINK "/issues","Some of the known issues","nav-link"
+			PRINT "Issues"
+		LINK CLOSE
+		SWRITE "nav-link h3"
 			PRINT "Reference"
 		SWRITE CLOSE
 		LINK "/reference/ABS","Find out about the ABS command","nav-link"

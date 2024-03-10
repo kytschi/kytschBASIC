@@ -70,27 +70,27 @@ DESC is descending, i.e. Z-A
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DATA"
 						PRINT "DATA"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DOPEN"
 						PRINT "DOPEN"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DREAD"
 						PRINT "DREAD"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DSELECT"
 						PRINT "DSELECT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DSORT"
 						PRINT "DSORT"
 					LINK CLOSE

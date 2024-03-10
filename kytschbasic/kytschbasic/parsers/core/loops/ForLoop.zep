@@ -58,17 +58,19 @@ class ForLoop extends Command
 				throw new \Exception("Invalid FOR loop structure");
 			}
 
+			let splits[0] = this->parseVar(splits[0]);
+
 			var step = 1;			
 
-			return "<?php $" . splits[0] . " = " . intval(splits[1]) .
-			";while($" . splits[0] . " <= " . intval(args[2]) . ") {$" . splits[0] . "_step = " . step . ";?>";
+			return "<?php " . splits[0] . " = " . intval(splits[1]) .
+			";while(" . splits[0] . " <= " . intval(args[2]) . ") {" . splits[0] . "_step = " . step . ";?>";
 		} elseif (this->match(line, "NEXT")) {
 			let args = this->parseSpaceArgs(line);
 			if (count(args) == 1) {
 				throw new \Exception("NEXT command with no value");
 			}
 
-			return "<?php $" . args[1] . " += $" . args[1] . "_step;}?>";
+			return "<?php " . this->parseVar(args[1]) . " += " . this->parseVar(args[1]) . "_step;}?>";
 		}
 
 		return null;

@@ -43,15 +43,15 @@ SPRINT WEND
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/FOR"
 						PRINT "FOR"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/WHILE"
 						PRINT "WHILE"
 					LINK CLOSE

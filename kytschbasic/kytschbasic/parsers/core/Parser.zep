@@ -498,12 +498,10 @@ class Parser extends Command
 				}
 				return true;
 			} elseif (count(args) >= 1 && count(args) <= 2) {
-				let args[0] = args[0];
-
 				if (substr_count(args[0], "=") == 1) {
 					let args[0] = str_replace("=", "==", args[0]);
 				}
-
+				
 				if (!this->isVar(args[0])) {
 					let args[0] = this->cleanArg(args[0]);
 				} else {

@@ -39,7 +39,7 @@ class Compiler
 
 	private start_time;
 
-	private version = "0.0.9 alpha";
+	private version = "0.0.10 alpha";
 
 	public function __construct(string config_dir)
 	{

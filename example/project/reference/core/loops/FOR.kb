@@ -39,7 +39,7 @@ SPRINT NEXT iLoop
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/WHILE"
 						PRINT "WHILE"
 					LINK CLOSE

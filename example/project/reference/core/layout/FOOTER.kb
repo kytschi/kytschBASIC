@@ -48,19 +48,19 @@ END
 					LINK "/reference/BODY"
 						PRINT "BODY"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/DIV"
 						PRINT "DIV"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/HEADER"
 						PRINT "HEADER"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/parameters"
 						PRINT "parameters"
 					LINK CLOSE

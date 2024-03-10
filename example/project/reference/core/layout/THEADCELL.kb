@@ -39,27 +39,27 @@ THEADCELL CLOSE
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/TABLE"
 						PRINT "TABLE"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/TBODY"
 						PRINT "TBODY"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/TCELL"
 						PRINT "TCELL"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/TFOOT"
 						PRINT "TFOOT"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/THEAD"
 						PRINT "THEAD"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/TROW"
 						PRINT "TROW"
 					LINK CLOSE

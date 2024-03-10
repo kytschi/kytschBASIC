@@ -34,12 +34,12 @@ WINDOW "intro",,(200,0)
 					PRINT "Lets use the WINDOW example above and set its class."
 				SWRITE CLOSE
 				CPRINT
-WINDOW "intro",,(200,0),,,class$="some-class",data-id$="some-id"
+WINDOW "intro",,(200,0),,,class="some-class",data-id="some-id"
 				CPRINT CLOSE
 				SWRITE
-					PRINT "HTML specific parameters start with the parameter name, then $=, and then you set its value."
+					PRINT "HTML specific parameters start with the parameter name, then =, and then you set its value."
 				SWRITE CLOSE
-				PRINT "It is important that the parameter count matches that of what the command is expecting!","heading-command basic"
+				PRINT "It is important that the parameter count matches that of what the command is expecting!","important"
 				SWRITE
 					PRINT "For more information on HTML tags and what they do please visit "
 					LINK "https://www.w3schools.com/TAgs/default.asp",,"_blank"

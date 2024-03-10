@@ -31,6 +31,10 @@
 		"url": "/news",
 		"template": "project/news.kb"
 	},
+	{
+		"url": "/issues",
+		"template": "project/issues.kb"
+	},
 
 	{
 		"url": "/reference/CPRINT",

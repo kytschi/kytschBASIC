@@ -113,19 +113,19 @@ BITMAP CLOSE
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/BITMAP"
 						PRINT "BITMAP"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/CIRCLEF"
 						PRINT "CIRCLEF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/LINE"
 						PRINT "LINE"
 					LINK CLOSE

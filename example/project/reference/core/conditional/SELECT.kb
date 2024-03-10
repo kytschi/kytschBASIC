@@ -55,11 +55,11 @@ SPRINT WEND
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/IF"
 						PRINT "IF"
 					LINK CLOSE
-					PRINT "&comma;&nbsp;"
+					PRINT " | "
 					LINK "/reference/WHILE"
 						PRINT "WHILE"
 					LINK CLOSE
