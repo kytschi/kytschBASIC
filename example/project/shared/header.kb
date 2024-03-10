@@ -143,7 +143,7 @@ HEADER
 			PRINT "DWHERE"
 		LINK CLOSE
 		LINK "/reference/ELLIPSE#refELLIPSE","Find out about the ELLIPSE command","nav-link",,"refELLIPSE"
-			PRINT "ELLIPSE#ref"
+			PRINT "ELLIPSE"
 		LINK CLOSE
 		LINK "/reference/ELLIPSEF#refELLIPSEF","Find out about the ELLIPSEF command","nav-link",,"refELLIPSEF"
 			PRINT "ELLIPSEF"
