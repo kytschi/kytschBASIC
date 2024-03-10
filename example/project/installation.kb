@@ -4,8 +4,8 @@ HEAD
 	NAME "Installing kytschBASIC | kytschBASIC"
 HEAD CLOSE
 BODY
+	LOAD "_ROOT/project/shared/header"
 	MAIN
-		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				HEADING 2
@@ -133,7 +133,7 @@ use KytschBASIC\Compiler;
 				CPRINT CLOSE
 			DIV CLOSE
 		DIV CLOSE
+		LOAD "_ROOT/project/shared/footer"
 	MAIN CLOSE
-	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END

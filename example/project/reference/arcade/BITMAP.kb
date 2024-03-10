@@ -5,8 +5,8 @@ HEAD
 	NAME "BITMAP statment | kytschBASIC"
 HEAD CLOSE
 BODY
+LOAD "_ROOT/project/shared/header"
 	MAIN
-		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				SWRITE
@@ -200,7 +200,7 @@ BITMAP CLOSE
 				DIV CLOSE
 			DIV CLOSE
 		DIV CLOSE
-	MAIN CLOSE
 	LOAD "_ROOT/project/shared/footer"
+	MAIN CLOSE
 BODY CLOSE
 END

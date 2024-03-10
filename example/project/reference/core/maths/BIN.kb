@@ -4,8 +4,8 @@ HEAD
 	NAME "BIN statment | kytschBASIC"
 HEAD CLOSE
 BODY
+	LOAD "_ROOT/project/shared/header"
 	MAIN
-		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				HEADING 2
@@ -105,7 +105,7 @@ PRINT BIN$(133713371337)
 				DIV CLOSE
 			DIV CLOSE
 		DIV CLOSE
+		LOAD "_ROOT/project/shared/footer"
 	MAIN CLOSE
-	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END

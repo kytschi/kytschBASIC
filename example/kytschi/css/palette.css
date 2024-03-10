@@ -31,7 +31,13 @@ a {
 }
 
 a:hover {
+    color: #d14;
     text-decoration: underline;
+}
+
+a:focus, a:active {
+    color: #d14;
+    border: 0;
 }
 
 .no-link:hover {
@@ -43,10 +49,9 @@ a:hover {
 }
 
 footer {
-    padding-top: 15px;
-    height: 55px;
-    width: 100%;
-    flex: 0 0 auto;
+    padding: 15px 15px;
+    width: calc(100% - 30px);
+    display: block;
     background-color: #fff;
     border-top:1px solid #111;
 }
@@ -58,13 +63,6 @@ footer p {
 
 .form-input {
     width: 100%;
-}
-
-#footer-content {
-    padding: 5px 15px 0 15px;
-    width: 100%;
-    height: calc(100% - 90px);
-    display: block;
 }
 
 h1 {
@@ -119,6 +117,7 @@ h3, h4, .h3 {
 }
 
 header {
+    position: fixed;
     display: flex;
     flex-direction: column;
     width: 240px;
@@ -158,8 +157,9 @@ header {
 main {
     flex: 1;
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    flex-direction: column;
+    width: calc(100% - 240px);
+    margin-left: 240px;
 }
 
 #main-content {
@@ -198,7 +198,7 @@ nav {
     overflow-x: hidden;
     padding-top: 10px;
     width: 100%;
-    height: calc(100vh + 68px);
+    height: 100vh;
 }
 
 nav a:hover {

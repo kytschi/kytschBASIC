@@ -4,8 +4,8 @@ HEAD
 	NAME "DATA statment | kytschBASIC"
 HEAD CLOSE
 BODY
+	LOAD "_ROOT/project/shared/header"
 	MAIN
-		LOAD "_ROOT/project/shared/header"
 		DIV "kb-row", "main-content"
 			DIV "kb-col kb-col-24", "main-content-col"
 				HEADING 2
@@ -18,7 +18,7 @@ BODY
 					PRINT "Example"
 				HEADING CLOSE
 				CPRINT
-SPRINT DATA menu#
+SPRINT DATA menu&
 	SPRINT REM Open the database connection from the config file labelled kytschBASIC.
 	SPRINT DOPEN "kytschBASIC"
 
@@ -36,7 +36,7 @@ SPRINT DATA menu#
 SPRINT DATA CLOSE
 
 SPRINT REM Loop through the results stored in menu& variable.
-SPRINT FOR item& IN menu#
+SPRINT FOR item& IN menu&
 	SWRITE
 		PRINT item&["id"]
 		SPRINT LINE BREAK
@@ -48,7 +48,7 @@ SPRINT END FOR
 					PRINT "Output"
 				HEADING CLOSE
 				DIV "kb-col kb-col-24 kb-code-block"
-DATA menu#
+DATA menu&
 	REM Open the database connection from the config file labelled kytschBASIC.
 	DOPEN "kytschBASIC"
 
@@ -66,13 +66,13 @@ DATA menu#
 DATA CLOSE
 
 REM Loop through the results stored in menu& variable.
-FOR item& IN menu#
+FOR item& IN menu&
 	SWRITE
 		PRINT item&["id"]
 		LINE BREAK
 		PRINT item&["name"]
 	SWRITE CLOSE
-FOR CLOSE
+END FOR 
 				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
@@ -104,7 +104,7 @@ FOR CLOSE
 				DIV CLOSE
 			DIV CLOSE
 		DIV CLOSE
+		LOAD "_ROOT/project/shared/footer"
 	MAIN CLOSE
-	LOAD "_ROOT/project/shared/footer"
 BODY CLOSE
 END
