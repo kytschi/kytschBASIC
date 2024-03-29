@@ -3,10 +3,11 @@
  *
  * @package     KytschBASIC\Compiler
  * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
- * @version     0.0.1
+ * @copyright   2024 Mike Welsh <hello@kytschi.com>
+ * @link 		https://kytschbasic.org
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2024 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -26,7 +27,6 @@ namespace KytschBASIC;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Parser;
-use KytschBASIC\Parsers\Core\Session;
 
 class Compiler
 {
@@ -38,8 +38,9 @@ class Compiler
 	private globals = [];
 
 	private start_time;
+	private newline = "\n";
 
-	private version = "0.0.10 alpha";
+	private version = "0.0.11 alpha";
 
 	public function __construct(string config_dir)
 	{
@@ -65,20 +66,24 @@ class Compiler
 		var url;
 		let url = parse_url(_SERVER["REQUEST_URI"]);
 
-		let this->globals["_VALID"] = [];
+		define("_ROOT", getcwd());
+
+		/*let this->globals["_VALID"] = [];
 		let this->globals["_VALID"]["captcha"] = this->validateCaptcha();
-		
+				
 		let this->globals["_ROOT"] = getcwd();
 		let this->globals["_RURL"] = _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"];
 		let this->globals["_URL"] = _SERVER["REQUEST_URI"];
 		let this->globals["_PATH"] = url["path"];
 		let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api";
-		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];
+		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/
+
+		//define("VERSION", this->version);
 
 		//Session::start(this->config);
 	}
 
-	/**
+	/*
 	 * Load the config file.
 	 */
 	public function loadConfig(string config_dir)
@@ -123,71 +128,22 @@ class Compiler
 		}
 	}
 
-	private function validateCaptcha()
-	{
-		if (!isset(_REQUEST["kb-captcha"])) {
-			return false;
-		}
-
-		var splits, iv, encrypted, token;
-		let splits = explode("=", _REQUEST["_KBCAPTCHA"]);
-		
-		let encrypted = splits[0];
-		unset(splits[0]);
-		
-		let iv = base64_decode(ltrim(implode("=", splits), "="));
-
-		if (empty(iv)) {
-			return false;
-		}
-		
-		let token = openssl_decrypt(
-            encrypted,
-            "aes128",
-            _REQUEST["kb-captcha"],
-            0,
-			iv
-        );
-
-        if (!token) {
-            return false;
-        }
-
-        let splits = explode("=", token);
-
-        if (splits[0] != "_KBCAPTCHA") {
-            return false;
-        }
-
-        if (splits[1] != _REQUEST["kb-captcha"]) {
-            return false;
-        }
-
-		if (time() > splits[2]) {
-            return false;
-        }
-
-        return true;
-	}
-
 	private function compile(route)
 	{
-		var err, output;
+		var err, output = "";
 
 		var parsed = (new Parser())->parse(
-			getcwd() . "/" . route->template,
-			this->config,
-			this->globals,
+			constant("_ROOT") . "/" . route->template,
 			this->start_time
 		);
 		
 		try {
-			let output = "<?php ";
-			let output = output . "$_VALID=unserialize('" . serialize(this->globals["_VALID"]) . "');?>";
-			let output = output . "<!DOCTYPE html>";
+			//let output = "<?php ";
+			//let output = output . "$_VALID=unserialize('" . serialize(this->globals["_VALID"]) . "');?>";
+			let output = output . "<!DOCTYPE html>" . this->newline;
 			let output = output . parsed;
-			file_put_contents(this->globals["_ROOT"] . "/compiled.php", output);
-			require (this->globals["_ROOT"] . "/compiled.php");
+			file_put_contents(constant("_ROOT") . "/compiled.php", output);
+			require (constant("_ROOT") . "/compiled.php");
 		} catch \RuntimeException|\Exception, err {
 			(new Exception(err->getMessage(), err->getCode()))->fatal();
 		}
@@ -203,14 +159,7 @@ class Compiler
 		var url, fallback;
 		let url = parse_url(_SERVER["REQUEST_URI"]);
 		let fallback = null;
-/*
-		if (strpos(url["path"], this->globals["$ARCADE_API"]) !== false) {
-			var arcade;
-			let arcade = new Arcade(this->globals);
-			arcade->run();
-			return;
-		}
-*/
+
 		if (isset(url["path"])) {
 			var route;
 			
