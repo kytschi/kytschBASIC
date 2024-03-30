@@ -42,6 +42,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
 		"KytschBASIC\\Parsers\\Core\\Variables",
 		"KytschBASIC\\Parsers\\Core\\Navigation",
+		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
 		"KytschBASIC\\Parsers\\Core\\Load"
 	];
 
