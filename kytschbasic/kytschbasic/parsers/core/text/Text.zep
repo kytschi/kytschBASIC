@@ -33,7 +33,11 @@ class Text extends Command
 	{
 		if (command == "PRINT") {
 			return this->processPrint(args);
-		} 
+		} elseif (command == "SWRITE CLOSE") {
+			return "</p>";
+		} elseif (command == "SWRITE") {
+			return this->processSWrite(command);
+		}
 
 		return null;
 	}
@@ -42,25 +46,37 @@ class Text extends Command
 	{
 		var args, params="", value="";
 
-		let args = explode("\",", line);
-		let value = args[0];
-
-		if (substr(value, 0, 1) == "\"") {
-			let value = "'" . trim(value, "\"") . "'";
-		} else {
-			let value = (new Maths())->parse(args[0]);
-		}
+		let args = this->args(line);
+		let value = this->setArg(args[0], false);
 
 		if (isset(args[1])) {
-			let params .= " class=\"" . trim(args[1], "\"") . "\"";	
+			let params .= " class='" . this->setArg(args[1]) . "'";
 		}
 
 		if (isset(args[2])) {
-			let params .= " id=\"" . trim(args[2], "\"") . "\"";	
+			let params .= " id='" . this->setArg(args[2]) . "'";
 		} else {
-			let params .= " id=\"" . this->genID("kb-span") . "\"";
+			let params .= " id='" . this->genID("kb-span") . "'";
 		}
 		
-		return "<?= '<span" . params . ">' . (" . value . ") . '</span>'; ?>";
+		return "<?= \"<span" . params . ">\" . (" . value . ") . \"</span>\";?>";
+	}
+
+	private function processSWrite(string line)
+	{
+		var args, params="";
+
+		let args = explode("\",", line);
+		if (isset(args[0])) {
+			let params .= " class=\"" . trim(args[0], "\"") . "\"";	
+		}
+
+		if (isset(args[1])) {
+			let params .= " id=\"" . trim(args[1], "\"") . "\"";	
+		} else {
+			let params .= " id=\"" . this->genID("kb-p") . "\"";
+		}
+		
+		return "<p" . params . ">";
 	}
 }

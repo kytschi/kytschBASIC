@@ -2,8 +2,8 @@
  * Parser
  *
  * @package     KytschBASIC\Parsers\Core\Parser
- * @author 		Mike Welsh
- * @copyright   2024 Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschi.com>
+ * @copyright   2024 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.3
  *
@@ -36,13 +36,16 @@ class Parser
 	 * Available parsers.
 	 */
 	private available = [
-		"KytschBASIC\\Parsers\\Core\\Text\\Text"
+		"KytschBASIC\\Parsers\\Core\\Text\\Text",
+		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
+		"KytschBASIC\\Parsers\\Core\\Variables",
+		"KytschBASIC\\Parsers\\Core\\Load"
 	];
 
 	/*
 	 * Build the template by parsing the commands.
 	 */
-	public function parse(string template, var start_time)
+	public function parse(string template)
 	{
 		var err, command = "", args = "", parsed = "", parser, parsers = [], commands, output = "";
 
@@ -70,11 +73,11 @@ class Parser
 
 				let parser = explode(" ", trim(command));
 				let command = parser[0];
-				unset(parser[0]);
+				array_shift(parser);
 				if (isset(parser[0])) {
 					if (parser[0] == "CLOSE") {
 						let command .= " CLOSE";
-						unset(parser[0]);
+						array_shift(parser);
 					}
 				}
 				let args = implode(" ", parser);

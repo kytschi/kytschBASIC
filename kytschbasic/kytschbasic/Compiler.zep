@@ -2,8 +2,8 @@
  * Compiler
  *
  * @package     KytschBASIC\Compiler
- * @author 		Mike Welsh
- * @copyright   2024 Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschi.com>
+ * @copyright   2024 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2
  *
@@ -44,7 +44,7 @@ class Compiler
 
 	public function __construct(string config_dir)
 	{
-		let this->start_time = microtime(true) * 1000;
+		define("START_TIME", microtime(true) * 1000);
 
 		if (config_dir) {
 			this->loadConfig(config_dir);
@@ -67,18 +67,15 @@ class Compiler
 		let url = parse_url(_SERVER["REQUEST_URI"]);
 
 		define("_ROOT", getcwd());
+		define("_RURL", _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"]);
+		define("_URL", _SERVER["REQUEST_URI"]);
+		define("_PATH", url["path"]);
 
 		/*let this->globals["_VALID"] = [];
 		let this->globals["_VALID"]["captcha"] = this->validateCaptcha();
 				
-		let this->globals["_ROOT"] = getcwd();
-		let this->globals["_RURL"] = _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"];
-		let this->globals["_URL"] = _SERVER["REQUEST_URI"];
-		let this->globals["_PATH"] = url["path"];
 		let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api";
 		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/
-
-		//define("VERSION", this->version);
 
 		//Session::start(this->config);
 	}
@@ -88,7 +85,7 @@ class Compiler
 	 */
 	public function loadConfig(string config_dir)
 	{
-		var err, config, filename;
+		var item, config = [], filename;
 		var configs = [
 			"assets",
 			"cache",
@@ -98,32 +95,32 @@ class Compiler
 			"session"
 		];
 
-		let this->config = [];
-
 		try {
-			for config in configs {
-				let filename = config_dir . "/" . config . ".json";
+			for item in configs {
+				let filename = config_dir . "/" . item . ".json";
 				if (!file_exists(filename)) {
 					throw new Exception(
-						"config not found, looking for " . config . ".json",
+						"config not found, looking for " . item . ".json",
 						400
 					);
 				}
 
-				let this->config[config] = json_decode(file_get_contents(filename));
-				if (empty(this->config)) {
+				let config[item] = json_decode(file_get_contents(filename));
+				if (empty(config[item])) {
 					throw new Exception(
 						"failed to decode the JSON",
 						400
 					);
 				}
 			}
-		} catch Exception, err {
-		    err->fatal();
-		} catch \RuntimeException|\Exception, err {
+
+			define("CONFIG", config);
+		} catch Exception, item {
+		    item->fatal();
+		} catch \RuntimeException|\Exception, item {
 		    throw new Exception(
-				"Failed to load the config, " . err->getMessage(),
-				err->getCode()
+				"Failed to load the config, " . item->getMessage(),
+				item->getCode()
 			);
 		}
 	}
@@ -132,10 +129,7 @@ class Compiler
 	{
 		var err, output = "";
 
-		var parsed = (new Parser())->parse(
-			constant("_ROOT") . "/" . route->template,
-			this->start_time
-		);
+		var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
 		
 		try {
 			//let output = "<?php ";
@@ -152,7 +146,10 @@ class Compiler
 
 	public function run()
 	{
-		if (empty(this->config["routes"])) {
+		var config;
+		let config = constant("CONFIG");
+
+		if (empty(config["routes"])) {
 			throw new \Exception("routes not defined in the config");
 		}
 
@@ -163,7 +160,7 @@ class Compiler
 		if (isset(url["path"])) {
 			var route;
 			
-			for route in this->config["routes"] {
+			for route in config["routes"] {
 				if (!isset(route->url)) {
 					(new Exception("route URL not defined in the config"))->fatal();
 				}

@@ -2,8 +2,9 @@
  * Maths parser
  *
  * @package     KytschBASIC\Parsers\Core\Maths
- * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
+ * @author 		Mike Welsh <hello@kytschi.com>
+ * @copyright   2024 Mike Welsh
+ * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
  * Copyright 2022 Mike Welsh
@@ -28,6 +29,15 @@ class Maths
 {
 	public static function parse(string command)
 	{
+		var splits, val;
+		
+		let splits = preg_split("/\*|\+|\-|\//", command, 0, 2);
+		for val in splits {
+			if (!is_numeric(val) && substr(val, 0, 1) != "$") {
+				let command = str_replace(val, "$" . val, command);
+			}
+		}
+
 		return command;
 	}
 }

@@ -1,9 +1,9 @@
 /**
- * Command parser
+ * Load parser
  *
- * @package     KytschBASIC\Parsers\Core\Command
+ * @package     KytschBASIC\Parsers\Core\Load
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2022 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
@@ -25,21 +25,34 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
-use KytschBASIC\Parsers\Core\Variables;
+use KytschBASIC\Parsers\Core\Command;
+use KytschBASIC\Parsers\Core\Parser;
 
-class Command extends Variables
+class Load extends Command
 {
-	public function genID(string id)
+	public function parse(string command, string args)
 	{
-		return id . "-" . hrtime(true);
-	}
+		if (command == "LOAD") {
+			var ext;
 
-	public function setArg(string arg, bool trim_string = true)
-	{
-		if (substr(arg, 0, 1) != "\"") {
-			return this->clean(arg);
-		} else {
-			return this->constants(trim_string ? trim(arg, "\"") : arg);
+			if (substr(args, 0, 1) != "\"") {
+				let args = this->clean(args);
+			} else {
+				let args = this->constants(args) . "\"";
+			}
+
+			let ext = pathinfo(args, PATHINFO_EXTENSION);
+			switch (ext) {
+				case "js":
+					let ext = "<script src=" . args . "></script>";
+				default:
+					let ext = (new Parser())->parse(trim(args, "\"") . ".kb");
+					break;
+			}
+
+			return ext;
 		}
+
+		return null;
 	}
 }
