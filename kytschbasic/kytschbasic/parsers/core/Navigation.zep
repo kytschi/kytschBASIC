@@ -1,12 +1,13 @@
 /**
- * Text parser
+ * Navigation parser
  *
- * @package     KytschBASIC\Parsers\Core\Text
- * @author 		Mike Welsh
- * @copyright   2022 Mike Welsh
+ * @package     KytschBASIC\Parsers\Core\Navigation
+ * @author 		Mike Welsh <hello@kytschi.com>
+ * @copyright   2024 Mike Welsh
+ * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2024 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -22,47 +23,59 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Parsers\Core\Text;
+namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Parsers\Core\Command;
-use KytschBASIC\Parsers\Core\Maths;
 
-class Text extends Command
+class Navigation extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "PRINT") {
-			return this->processPrint(args);
-		} elseif (command == "SWRITE CLOSE") {
-			return "</p>";
-		} elseif (command == "SWRITE") {
-			return this->processSWrite(args);
+		if (command == "LINK CLOSE") {
+			return "</a>";
+		} elseif (command == "LINK") {
+			return this->processLink(args);
+		} elseif (command == "MENU CLOSE") {
+			return "</nav>";
+		} elseif (command == "MENU") {
+			return this->processNav(args);
 		}
 
 		return null;
 	}
 
-	private function processPrint(string line)
+	private function processLink(string line)
 	{
-		var args, params="", value="";
+		var args, params="";
 
 		let args = this->args(line);
-		let value = this->setArg(args[0], false);
+		
+		if (isset(args[0])) {
+			let params .= " href='" . this->setArg(args[0]) . "'";
+		}
 
 		if (isset(args[1])) {
-			let params .= " class='" . this->setArg(args[1]) . "'";
+			let params .= " title='" . this->setArg(args[1]) . "'";
 		}
 
 		if (isset(args[2])) {
-			let params .= " id='" . this->setArg(args[2]) . "'";
+			let params .= " class='" . this->setArg(args[2]) . "'";
+		}
+
+		if (isset(args[3])) {
+			let params .= " target='" . this->setArg(args[3]) . "'";
+		}
+
+		if (isset(args[4])) {
+			let params .= " id='" . this->setArg(args[4]) . "'";
 		} else {
-			let params .= " id='" . this->genID("kb-span") . "'";
+			let params .= " id='" . this->genID("kb-a") . "'";
 		}
 		
-		return "<?= \"<span" . params . ">\" . (" . value . ") . \"</span>\";?>";
+		return "<?= \"<a" . params . ">\"; ?>";
 	}
 
-	private function processSWrite(string line)
+	private function processNav(string line)
 	{
 		var args, params="";
 
@@ -78,6 +91,6 @@ class Text extends Command
 			let params .= " id='" . this->genID("kb-span") . "'";
 		}
 		
-		return "<?= \"<p" . params . ">\"; ?>";
+		return "<?= \"<nav" . params . ">\"; ?>";
 	}
 }

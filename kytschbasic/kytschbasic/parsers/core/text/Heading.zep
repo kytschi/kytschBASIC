@@ -1,7 +1,7 @@
 /**
- * Text parser
+ * Heading parser
  *
- * @package     KytschBASIC\Parsers\Core\Text
+ * @package     KytschBASIC\Parsers\Core\Text\Heading
  * @author 		Mike Welsh
  * @copyright   2022 Mike Welsh
  * @version     0.0.1
@@ -24,30 +24,34 @@
  */
 namespace KytschBASIC\Parsers\Core\Text;
 
+use KytschBASIC\Parsers\Core\Args;
 use KytschBASIC\Parsers\Core\Command;
-use KytschBASIC\Parsers\Core\Maths;
 
-class Text extends Command
+class Heading extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "PRINT") {
-			return this->processPrint(args);
-		} elseif (command == "SWRITE CLOSE") {
-			return "</p>";
-		} elseif (command == "SWRITE") {
-			return this->processSWrite(args);
+		if (command == "HEADING CLOSE") {
+			return this->processHeading(args, true);
+		} elseif (command == "HEADING") {
+			return this->processHeading(args);
 		}
 
 		return null;
 	}
 
-	private function processPrint(string line)
+	private function processHeading(string line, bool close = false)
 	{
-		var args, params="", value="";
+		var args, params="", size = 1;
 
 		let args = this->args(line);
-		let value = this->setArg(args[0], false);
+
+		if (isset(args[0])) {
+			let size = this->setArg(args[0], false);
+		}
+		if (close) {
+			return "<?= \"</h" . size . ">\"; ?>";
+		}
 
 		if (isset(args[1])) {
 			let params .= " class='" . this->setArg(args[1]) . "'";
@@ -56,28 +60,9 @@ class Text extends Command
 		if (isset(args[2])) {
 			let params .= " id='" . this->setArg(args[2]) . "'";
 		} else {
-			let params .= " id='" . this->genID("kb-span") . "'";
-		}
-		
-		return "<?= \"<span" . params . ">\" . (" . value . ") . \"</span>\";?>";
-	}
-
-	private function processSWrite(string line)
-	{
-		var args, params="";
-
-		let args = this->args(line);
-		
-		if (isset(args[0])) {
-			let params .= " class='" . this->setArg(args[0]) . "'";
+			let params .= " id='" . this->genID("kb-heading") . "'";
 		}
 
-		if (isset(args[1])) {
-			let params .= " id='" . this->setArg(args[1]) . "'";
-		} else {
-			let params .= " id='" . this->genID("kb-span") . "'";
-		}
-		
-		return "<?= \"<p" . params . ">\"; ?>";
+		return "<?= \"<h" . size . params . ">\"; ?>";
 	}
 }

@@ -36,10 +36,14 @@ class Command extends Variables
 
 	public function setArg(string arg, bool trim_string = true)
 	{
+		if (is_numeric(arg)) {
+			return arg;
+		}
+
 		if (substr(arg, 0, 1) != "\"") {
 			return this->clean(arg);
-		} else {
-			return this->constants(trim_string ? trim(arg, "\"") : arg);
 		}
+
+		return this->constants(trim_string ? trim(arg, "\"") : arg);
 	}
 }

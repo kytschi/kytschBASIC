@@ -29,7 +29,7 @@ use KytschBASIC\Exceptions\Exception;
 
 class Parser
 {
-	private line = 0;
+	private line_no = 0;
 	private newline = "\n";
 
 	/*
@@ -37,8 +37,11 @@ class Parser
 	 */
 	private available = [
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
+		"KytschBASIC\\Parsers\\Core\\Layout\\Layout",
+		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
 		"KytschBASIC\\Parsers\\Core\\Variables",
+		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Load"
 	];
 
@@ -47,7 +50,7 @@ class Parser
 	 */
 	public function parse(string template)
 	{
-		var err, command = "", args = "", parsed = "", parser, parsers = [], commands, output = "";
+		var err, command = "", args = "", line = "", parser, parsers = [], commands, output = "", cprint = false;
 
 		try {
 			if (!file_exists(template)) {
@@ -64,14 +67,14 @@ class Parser
 				let parsers[parser] = new {parser}();
 			}
 
-			for command in commands {
-				let this->line += 1;
+			for line in commands {
+				let this->line_no += 1;
 
-				if (command == "") {
+				if (line == "") {
 					continue;
 				}
 
-				let parser = explode(" ", trim(command));
+				let parser = explode(" ", trim(line));
 				let command = parser[0];
 				array_shift(parser);
 				if (isset(parser[0])) {
@@ -82,10 +85,27 @@ class Parser
 				}
 				let args = implode(" ", parser);
 
+				if (command == "CPRINT") {
+					let cprint = true;
+					let output .= "<pre><code>" . this->newline;
+					continue;
+				} elseif (command == "CPRINT CLOSE") {
+					let cprint = false;
+					let output .= "</code></pre>" . this->newline;
+					continue;
+				} elseif (command == "REM") {
+					continue;
+				}
+
+				if (cprint) {
+					let output .= line . this->newline;
+					continue;
+				}
+
 				for parser in parsers {
-					let parsed = parser->parse(command, args);
-					if (!empty(parsed)) {
-						let output .= parsed . this->newline;
+					let line = parser->parse(command, args);
+					if (!empty(line)) {
+						let output .= line . this->newline;
 						break;
 					}
 				}
@@ -93,12 +113,12 @@ class Parser
 
 			return output;
 		} catch Exception, err {
-		    err->fatal(template, this->line);
+		    err->fatal(template, this->line_no);
 		} catch \RuntimeException|\Exception, err {
 			var newErr;
 			let newErr = new Exception(err->getMessage(), err->getCode());
 
-			echo newErr->fatal(template, this->line);
+			echo newErr->fatal(template, this->line_no);
 		}
     }
 }

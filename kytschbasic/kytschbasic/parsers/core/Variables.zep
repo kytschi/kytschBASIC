@@ -31,6 +31,10 @@ class Variables
 {
 	public function args(string line)
 	{
+		if (empty(line)) {
+			return [];
+		}
+
 		var args, arg, key, replace;
 
 		let replace = md5(time());
