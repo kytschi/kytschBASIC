@@ -1,9 +1,9 @@
 /**
- * Command parser
+ * COLOR parser
  *
- * @package     KytschBASIC\Parsers\Core\Command
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Colors\Color
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2022 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
@@ -23,28 +23,50 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Parsers\Core;
+namespace KytschBASIC\Libs\Arcade\Parsers\Colors;
 
-use KytschBASIC\Parsers\Core\Maths;
-use KytschBASIC\Parsers\Core\Variables;
+use KytschBASIC\Parsers\Core\Command;
 
-class Command extends Variables
+class Color extends Command
 {
-	public function genID(string id)
+	public function parse(string command, string args)
 	{
-		return id . "-" . hrtime(true);
+		if (command == "RGB") {
+			return this->parseRgb(args);
+		}
+
+		return null;
 	}
 
-	public function setArg(string arg, bool trim_string = true)
+	public function parseRgb(args)
 	{
-		if (is_numeric(arg)) {
-			return arg;
+		var output = "<?php $KBRGB=[";
+		let args = this->args(args);
+				
+		if (isset(args[0])) {
+			let output .= intval(args[0]) . ",";
+		} else {
+			let output .= "0,";
 		}
 
-		if (substr(arg, 0, 1) != "\"") {
-			return this->clean(arg);
+		if (isset(args[1])) {
+			let output .= intval(args[1]) . ",";
+		} else {
+			let output .= "0,";
 		}
 
-		return this->constants(trim_string ? trim(arg, "\"") : arg);
+		if (isset(args[2])) {
+			let output .= intval(args[2]) . ",";
+		} else {
+			let output .= "0,";
+		}
+
+		if (isset(args[3])) {
+			let output .= intval(args[3]) . ",";
+		} else {
+			let output .= "100,";
+		}
+
+		return rtrim(output, ",") . "];?>";
 	}
 }

@@ -25,6 +25,8 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
+use KytschBASIC\Exceptions\Exception;
+use KytschBASIC\Libs\Arcade\Arcade;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Parser;
 
@@ -33,26 +35,52 @@ class Load extends Command
 	public function parse(string command, string args)
 	{
 		if (command == "LOAD") {
-			var ext;
-
-			if (substr(args, 0, 1) != "\"") {
-				let args = this->clean(args);
-			} else {
-				let args = this->constants(args) . "\"";
-			}
-
-			let ext = pathinfo(args, PATHINFO_EXTENSION);
-			switch (ext) {
-				case "js":
-					let ext = "<script src=" . args . "></script>";
-				default:
-					let ext = (new Parser())->parse(trim(args, "\"") . ".kb");
-					break;
-			}
-
-			return ext;
+			return this->parseLoad(args);
+		} elseif (command == "INCLUDE") {
+			return this->parseInclude(args);
 		}
 
 		return null;
+	}
+
+	private function parseInclude(string lib)
+	{
+		var output = "";
+
+		switch (lib) {
+			case "arcade":
+				let output = (new Arcade())->build();
+
+				/*if (output) {
+					let this->arcade = new Arcade();
+				}*/
+				break;
+			default:
+				throw new Exception("Invalid library to include");
+		}
+
+		return output;
+	}
+
+	private function parseLoad(string args)
+	{
+		var ext;
+
+		if (substr(args, 0, 1) != "\"") {
+			let args = this->clean(args);
+		} else {
+			let args = this->constants(args) . "\"";
+		}
+
+		let ext = pathinfo(args, PATHINFO_EXTENSION);
+		switch (ext) {
+			case "js":
+				let ext = "<script src=" . args . "></script>";
+			default:
+				let ext = (new Parser())->parse(trim(args, "\"") . ".kb");
+				break;
+		}
+
+		return ext;
 	}
 }

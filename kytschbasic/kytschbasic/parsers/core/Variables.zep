@@ -54,18 +54,27 @@ class Variables
 		return args;
 	}
 
-	public function clean(string line)
+	public function clean(string line, bool equals = false)
 	{
-		var args, arg;
+		var args, arg, maths = "", key;
 
-		let args = this->args(line);
+		if (equals) {
+			let args = explode("=", line);
+		} else {
+			let args = this->args(line);
+		}
 		let line = "";
 		
-		for arg in args {
-			let line .= "$" . str_replace(["$", "%", "#"], "", arg) . ".";
+		for key, arg in args {
+			let maths = Maths::parse(arg);
+			if (maths) {
+				let line .= maths;
+			} else {
+				let line .= str_replace(["$", "%", "#"], "", arg) . (equals && !key ? "=" : ".");
+			}
 		}
 
-		return (new Maths())->parse(rtrim(line, "."));
+		return Maths::equation(rtrim(line, "."));
 	}
 
 	public function constants(string line)
@@ -88,11 +97,28 @@ class Variables
 	{
 		if (command == "LET") {
 			return this->processLet(args);
+		} elseif (command == "BENCHMARK") {
+			return this->processBenchmark();
 		}
+	}
+
+	private function processBenchmark()
+	{
+		return "<script type=\"text/javascript\">
+		if (typeof(kb_start_time) == 'undefined') {
+			let kb_start_time = " . constant("START_TIME") .";
+			window.onload = () => {
+				for (let item of document.getElementsByClassName(\"kb-benchmark\")) {
+					item.innerHTML = ((Date.now() - kb_start_time) / 1000).toFixed(3) + \"s\";
+				}
+			}
+		}
+		</script>
+		<span class=\"kb-benchmark\"></span>";
 	}
 
 	private function processLet(string line)
 	{
-		return "<?php " . this->clean(line) . "; ?>";
+		return "<?php $" . this->clean(line, true) . "; ?>";
 	}
 }

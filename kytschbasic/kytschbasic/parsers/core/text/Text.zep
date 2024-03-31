@@ -37,6 +37,10 @@ class Text extends Command
 			return "</p>";
 		} elseif (command == "SWRITE") {
 			return this->processSWrite(args);
+		} elseif (command == "LINE BREAK") {
+			return "<br/>";
+		} elseif (command == "ASC") {
+			return ord(trim(args, "\""));
 		}
 
 		return null;

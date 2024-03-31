@@ -36,6 +36,10 @@ class Parser
 	 * Available parsers.
 	 */
 	private available = [
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Layout",
 		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
@@ -51,7 +55,7 @@ class Parser
 	 */
 	public function parse(string template)
 	{
-		var err, command = "", args = "", line = "", parser, parsers = [], commands, output = "", cprint = false;
+		var err, command = "", args = "", line = "", parser, commands, output = "", cprint = false;
 
 		try {
 			if (!file_exists(template)) {
@@ -62,11 +66,7 @@ class Parser
 			let commands = file(template);
 			if (empty(commands)) {
 				return;
-			}
-
-			for parser in this->available {
-				let parsers[parser] = new {parser}();
-			}
+			}		
 
 			for line in commands {
 				let this->line_no += 1;
@@ -82,6 +82,9 @@ class Parser
 					if (parser[0] == "CLOSE") {
 						let command .= " CLOSE";
 						array_shift(parser);
+					} elseif (parser[0] == "BREAK") {
+						let command .= " BREAK";
+						array_shift(parser);
 					}
 				}
 				let args = implode(" ", parser);
@@ -94,17 +97,15 @@ class Parser
 					let cprint = false;
 					let output .= "</code></pre>" . this->newline;
 					continue;
+				} elseif (cprint || command == "SPRINT") {
+					let output .= str_replace("SPRINT ", "", line) . this->newline;
+					continue;
 				} elseif (command == "REM") {
 					continue;
 				}
 
-				if (cprint) {
-					let output .= line . this->newline;
-					continue;
-				}
-
-				for parser in parsers {
-					let line = parser->parse(command, args);
+				for parser in this->available {
+					let line = (new {parser}())->parse(command, args);
 					if (!empty(line)) {
 						let output .= line . this->newline;
 						break;
