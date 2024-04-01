@@ -33,7 +33,7 @@ class Parser
 	private line_no = 0;
 	private newline = "\n";
 	private has_case = false;
-	
+		
 	/*
 	 * Available parsers.
 	 */
@@ -46,8 +46,9 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Select",
-		"KytschBASIC\\Parsers\\Core\\Conditional\\WhileLoop",
+		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
 		"KytschBASIC\\Parsers\\Core\\Load",
+		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",

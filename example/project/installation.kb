@@ -80,9 +80,9 @@ use KytschBASIC\Compiler;
 					HEADING CLOSE 3
 				LINK CLOSE
 				SWRITE
-					PRINT "kytschBASIC configuration is handled via JSON config files. From there you can define the database connection, the routes, etc."
+					PRINT "kytschBASIC configuration is handled via JSON config files. From there you can define the database connection, the routes, etc. "
 					LINK "https://github.com/kytschi/kytschBASIC/tree/master/config";;;"_blank"
-						PRINT "kytschBASIC example configs"
+						PRINT "See kytschBASIC example configs for more information"
 					LINK CLOSE
 				SWRITE CLOSE
 				SWRITE "h3"
@@ -92,7 +92,7 @@ use KytschBASIC\Compiler;
 					PRINT "The configuration for the database connection if needed. You can define more than one."
 				SWRITE CLOSE
 				CPRINT
-"db":[
+[
 	{
 		"name":"kytschBASIC", 		<-- Name of the connection
 		"type": "mysql", 					<-- Connection type
@@ -112,7 +112,7 @@ use KytschBASIC\Compiler;
 					PRINT "The routes allow you to define what kytschBASIC template is to be loaded for a specific URL or route."
 				SWRITE CLOSE
 				CPRINT
-"router":[
+[
 	{
 		"url": "/",											<-- The URL/route that corresponds to the template.
 		"template": "project/index.kb"	<-- The kytschBASIC template. Be sure to include its folder if its in one.

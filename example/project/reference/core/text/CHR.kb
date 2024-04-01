@@ -19,14 +19,14 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				HEADING CLOSE 3
 				CPRINT
-PRINT CHR$(65)
+PRINT CHR 65
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
 				HEADING CLOSE 4
-				CPRINT
-A
-				CPRINT CLOSE
+				DIV "kb-col kb-col-24 kb-code-block"
+					PRINT CHR 65
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
 				HEADING CLOSE 4

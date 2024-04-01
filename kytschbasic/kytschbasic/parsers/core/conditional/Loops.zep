@@ -1,13 +1,13 @@
 /**
- * While Loop parser
+ * Loops parser
  *
- * @package     KytschBASIC\Parsers\Core\Conditional\WhileLoop
+ * @package     KytschBASIC\Parsers\Core\Conditional\Loops
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2024 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2024 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -25,18 +25,31 @@
  */
 namespace KytschBASIC\Parsers\Core\Conditional;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
-class WhileLoop extends Command
+class Loops extends Command
 {
 	public function parse(string command, args)
 	{
 		if (command == "WHILE") {
 			return "<?php while(" . this->clean(args) . ") { ?>";
-		} elseif (command == "WEND") {
+		} elseif (command == "WEND" || command == "FEND") {
 			return "<?php } ?>";
+		} elseif (command == "FOR") {
+			return this->processFor(args);
 		}
 
 		return null;
+	}
+
+	private function processFor(args)
+	{
+		let args = explode(" IN ", args);
+		if (count(args) < 1) {
+			throw new Exception("Invalid for loop");
+		}
+
+		return "<?php foreach(" . this->clean(args[1]) . " as &" . this->clean(args[0]) . ") {?>";
 	}
 }

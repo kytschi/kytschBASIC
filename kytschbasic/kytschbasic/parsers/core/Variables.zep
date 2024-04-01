@@ -31,6 +31,8 @@ use KytschBASIC\Parsers\Core\Text\Text;
 
 class Variables
 {
+	public types = ["$", "%", "#", "&"];
+
 	public function args(string line)
 	{
 		if (empty(line)) {
@@ -71,7 +73,7 @@ class Variables
 				if (is_numeric(arg)) {
 					let line .= arg . ".";
 				} else {
-					let line .= "$" . str_replace(["$", "%", "#"], "", arg) . ".";
+					let line .= "$" . str_replace(this->types, "", arg) . ".";
 				}
 			}
 		}
@@ -128,7 +130,7 @@ class Variables
 			throw new Exception("Invalid LET");
 		}
 
-		let line = "$" . str_replace(["$", "%", "#"], "", args[0]) . "=";
+		let line = "$" . str_replace(this->types, "", args[0]) . "=";
 
 		let args[1] = (new Text())->commands(args[1]);
 

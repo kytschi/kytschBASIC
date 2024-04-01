@@ -43,7 +43,9 @@ class Text extends Command
 			return ord(trim(splits, "\""));
 		} elseif (command == "CENTRE") {
 			return this->processCentre(splits);
-		}
+		} elseif (command == "CHR") {
+			return "\"" . chr(intval(splits)) . "\"";
+		} 
 
 		return args;
 	}

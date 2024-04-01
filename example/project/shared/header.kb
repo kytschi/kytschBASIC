@@ -103,9 +103,6 @@ HEADER
 		LINK "/reference/CPRINT#refCPRINT";"Find out about the CPRINT command";"nav-link";;"refCPRINT"
 			PRINT "CPRINT"
 		LINK CLOSE
-		LINK "/reference/DATA#refDATA";"Find out about the DATA command";"nav-link";;"refDATA"
-			PRINT "DATA"
-		LINK CLOSE
 		LINK "/reference/DBIND#refDBIND";"Find out about the DBIND command";"nav-link";;"refDBIND"
 			PRINT "DBIND"
 		LINK CLOSE
@@ -125,6 +122,9 @@ HEADER
 			PRINT "DLIMIT"
 		LINK CLOSE
 		LINK "/reference/DOPEN#refDOPEN";"Find out about the DOPEN command";"nav-link";;"refDOPEN"
+			PRINT "DOPEN"
+		LINK CLOSE
+		LINK "/reference/DREAD#refDREAD";"Find out about the DREAD command";"nav-link";;"refDREAD"
 			PRINT "DREAD"
 		LINK CLOSE
 		LINK "/reference/DSELECT#refDSELECT";"Find out about the DSELECT command";"nav-link";;"refDSELECT"

@@ -18,47 +18,51 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				HEADING CLOSE 3
 				CPRINT
-REM Define the database connection and assign the results to the menu& variable.
-SPRINT DATA menu&
-	REM Open the database connection from the config file labelled kytschBASIC.
-	SPRINT DOPEN "kytschBASIC"
+REM Open the database connection from the config file labelled kytschBASIC.
+DOPEN "kytschBASIC"
 
-	REM Read from the menu table in the database.
-	SPRINT DREAD "menu"
+REM Read from the menu table in the database.
+DREAD "menu"
 
-	REM Select all entries from the menu table.
-	SPRINT DSELECT "*"
+REM Select all entries from the menu table.
+DSELECT "*"
 
-	REM Condition the select to those that aren't deleted.
-	SPRINT DWHERE "deleted_at != NULL"
+REM Condition the select to those that aren't deleted.
+DWHERE "deleted_at IS NULL"
 
-	REM Sort the results by their name alphabetically.
-	SPRINT DSORT "name ASC"
-SPRINT END DATA
+REM Sort the results by their name alphabetically.
+DSORT "name ASC"
+
+REM Execute the query and fetch the results storing them in an array called menu.
+DFETCH menu&
 
 REM Loop through the results stored in menu& variable.
-SPRINT FOR item& IN menu&
+FOR item& IN menu&
 	SWRITE
-		PRINT item&["id]
-		SPRINT LINE BREAK
+		PRINT item&["id"]
+		LINE BREAK
 		PRINT item&["name"]
 	SWRITE CLOSE
-SPRINT END FOR
+FEND
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
 				HEADING CLOSE 4
-				CPRINT
-&lt;span&gt;2&lt;/span&gt;
-&lt;span>About&lt;/span&gt;
-&lt;br/&gt;
-&lt;span&gt;1&lt;/span&gt;
-&lt;span>Home&lt;/span&gt;
-&lt;br/&gt;
-&lt;span&gt;3&lt;/span&gt;
-&lt;span>Installation&lt;/span&gt;
-&lt;br/&gt;
-				CPRINT CLOSE
+				DIV "kb-col kb-col-24 kb-code-block"
+				DOPEN "kytschBASIC"
+				DREAD "menu"
+				DSELECT "*"
+				DWHERE "deleted_at IS NULL"
+				DSORT "name ASC"
+				DFETCH menu&
+				FOR item& IN menu&
+					SWRITE
+						PRINT item&["id"]
+						LINE BREAK
+						PRINT item&["name"]
+					SWRITE CLOSE
+				FEND
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
 				HEADING CLOSE 4

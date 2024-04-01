@@ -114,10 +114,6 @@
 	},
 
 	{
-		"url": "/reference/DATA",
-		"template": "project/reference/core/database/DATA.kb"
-	},
-	{
 		"url": "/reference/DBIND",
 		"template": "project/reference/core/database/DBIND.kb"
 	},
