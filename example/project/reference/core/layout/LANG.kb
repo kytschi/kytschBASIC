@@ -6,19 +6,19 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "LANG","heading-command basic"
+					PRINT "LANG";"heading-command basic"
 					LINE BREAK
-					PRINT "LANGUAGE TYPE","heading-args"
+					PRINT "LANGUAGE TYPE";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Starting the HTML page off and setting the language type. This should always be the first command executed."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 LANG "en"
 BODY
@@ -30,7 +30,7 @@ END
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;body&gt;
 	&lt;p&gt;
@@ -40,8 +40,8 @@ END
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/DIV"
 						PRINT "DIV"
 					LINK CLOSE

@@ -7,72 +7,72 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "BITMAP","heading-command basic"
+					PRINT "BITMAP";"heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, WIDTH, HEIGHT","heading-args"
+					PRINT "X; Y; WIDTH; HEIGHT";"heading-args"
 					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
+					PRINT "Requires arcade library";"heading-required"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "The ability to draw a bitmap and display it on screen as an image."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SPRINT INCLUDE arcade
-RGB 0,0,0
-BITMAP 0,0,640,480
-	RGB 255,0,0
+INCLUDE arcade
+RGB 0;0;0
+BITMAP 0;0;640;480
+	RGB 255;0;0
 
-	LINE 120,120,120,200
-	LINE 180,120,180,200
-	LINE 120,160,180,160
+	LINE 120;120;120;200
+	LINE 180;120;180;200
+	LINE 120;160;180;160
 
-	LINE 200,160,200,165
-	LINE 200,170,200,200
+	LINE 200;160;200;165
+	LINE 200;170;200;200
 
-	LINE 230,120,230,180
-	CIRCLE 230,195,10
+	LINE 230;120;230;180
+	CIRCLE 230;195;10
 
-	CIRCLE 400,180,220
+	CIRCLE 400;180;220
 
-	CIRCLE 425,150,40
-	CIRCLE 375,150,40
+	CIRCLE 425;150;40
+	CIRCLE 375;150;40
 
-	ARC 400,160,25,155,150
+	ARC 400;160;150;25;155
 BITMAP CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				RGB 0,0,0
-				BITMAP 0,0,640,480
-					RGB 255,0,0
+				HEADING CLOSE 4
+				RGB 0;0;0
+				BITMAP 0;0;640;480
+					RGB 255;0;0
 
-					LINE 120,120,120,200
-					LINE 180,120,180,200
-					LINE 120,160,180,160
+					LINE 120;120;120;200
+					LINE 180;120;180;200
+					LINE 120;160;180;160
 
-					LINE 200,160,200,165
-					LINE 200,170,200,200
+					LINE 200;160;200;165
+					LINE 200;170;200;200
 
-					LINE 230,120,230,180
-					CIRCLE 230,195,10
+					LINE 230;120;230;180
+					CIRCLE 230;195;10
 
-					CIRCLE 400,180,220
+					CIRCLE 400;180;220
 
-					CIRCLE 425,150,40
-					CIRCLE 375,150,40
+					CIRCLE 425;150;40
+					CIRCLE 375;150;40
 
-					ARC 400,160,25,155,150
+					ARC 400;160;150;25;155
 				BITMAP CLOSE
 				HEADING 4
 					PRINT "Parameters"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				TABLE
 					THEAD
 						TROW
@@ -89,7 +89,7 @@ BITMAP CLOSE
 					THEAD CLOSE
 					TBODY
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "X"
 							TCELL CLOSE
 							TCELL
@@ -100,7 +100,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "Y"
 							TCELL CLOSE
 							TCELL
@@ -111,7 +111,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "WIDTH"
 							TCELL CLOSE
 							TCELL
@@ -122,7 +122,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "HEIGHT"
 							TCELL CLOSE
 							TCELL
@@ -136,8 +136,8 @@ BITMAP CLOSE
 				TABLE CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					LINK CLOSE

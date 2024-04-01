@@ -6,30 +6,30 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "ASC","basic"
-				HEADING CLOSE
+					PRINT "ASC";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Returns the ASCII value of the first characters in the string."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-PRINT ASC("A")
+PRINT ASC "A"
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				CPRINT
-65
-				CPRINT CLOSE
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24 kb-code-block"
+					PRINT ASC "A"
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/CENTRE"
 						PRINT "CENTRE"
 					LINK CLOSE

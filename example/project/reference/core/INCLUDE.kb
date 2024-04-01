@@ -6,11 +6,11 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "INCLUDE","basic"
-				HEADING CLOSE
+					PRINT "INCLUDE";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "This command will let you include libraries."
 				SWRITE CLOSE
@@ -19,16 +19,16 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 HEAD
-	SPRINT INCLUDE arcade
+	INCLUDE arcade
 HEAD CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/arcade"
 						PRINT "arcade"
 					LINK CLOSE

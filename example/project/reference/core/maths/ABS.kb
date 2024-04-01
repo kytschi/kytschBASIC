@@ -6,30 +6,30 @@ HEAD CLOSE
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "ABS","basic"
-				HEADING CLOSE
+					PRINT "ABS";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Returns the absolute value."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-PRINT ABS(-250)
+PRINT ABS -250
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				CPRINT
-250
-				CPRINT CLOSE
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24 kb-code-block"
+					PRINT ABS -250
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ACOS"
 						PRINT "ACOS"
 					LINK CLOSE

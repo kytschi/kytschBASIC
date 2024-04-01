@@ -7,65 +7,65 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "BITMAPFONT","heading-command basic"
+					PRINT "BITMAPFONT";"heading-command basic"
 					LINE BREAK
 					PRINT "FONT"
 					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
+					PRINT "Requires arcade library";"heading-required"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "The ability to use a font when writing on a bitmap."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SCREEN "the-traveller",800,600
+SCREEN "the-traveller";800;600
 	WINDOW "intro"
-		RGB 0,0,0
-		BITMAP 0,0,800,400
-			RGB 255,0,0
+		RGB 0;0;0
+		BITMAP 0;0;800;400
+			RGB 255;0;0
 			BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-			BITMAPTEXT 220,150,32,0,75,"The Traveller"
-			BITMAPTEXT 235,320,18,0,75,"Press any key to start"
+			BITMAPTEXT "The Traveller";32;0;220;150
+			BITMAPTEXT "Press any key to start";18;0;235;320
 		BITMAP CLOSE
 	WINDOW CLOSE
 	WINDOW "input"
-		RGB 0,0,0
-		BITMAP 0,0,800,200
-			RGB 255,0,0
-			LINE 0,0,800,0
+		RGB 0;0;0
+		BITMAP 0;0;800;200
+			RGB 255;0;0
+			LINE 0;0;800;0
 		BITMAP CLOSE
 	WINDOW CLOSE
 SCREEN CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				SCREEN "the-traveller",800,600
+				HEADING CLOSE 4
+				SCREEN "the-traveller";800;600
 					WINDOW "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
+						RGB 0;0;0
+						BITMAP 0;0;800;400
+							RGB 255;0;0
 							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-							BITMAPTEXT 220,150,32,0,75,"The Traveller"
-							BITMAPTEXT 235,320,18,0,75,"Press any key to start"
+							BITMAPTEXT "The Traveller";32;0;220;150
+							BITMAPTEXT "Press any key to start";18;0;235;320
 						BITMAP CLOSE
 					WINDOW CLOSE
 					WINDOW "input"
-						RGB 0,0,0
-						BITMAP 0,0,800,200
-							RGB 255,0,0
-							LINE 0,0,800,0
+						RGB 0;0;0
+						BITMAP 0;0;800;200
+							RGB 255;0;0
+							LINE 0;0;800;0
 						BITMAP CLOSE
 					WINDOW CLOSE
 				SCREEN CLOSE
 				HEADING 4
 					PRINT "Parameters"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				TABLE
 					THEAD
 						TROW
@@ -82,7 +82,7 @@ SCREEN CLOSE
 					THEAD CLOSE
 					TBODY
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "FONT"
 							TCELL CLOSE
 							TCELL
@@ -96,8 +96,8 @@ SCREEN CLOSE
 				TABLE CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					LINK CLOSE

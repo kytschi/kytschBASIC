@@ -6,33 +6,35 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "RND","basic"
-				HEADING CLOSE
+					PRINT "RND";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Random number selector."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-PRINT RND(3, 5)
+REM a random number between 3 and 5
+PRINT RND 3;5
+REM a random number between 1 and 10
 PRINT RND
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT RND(3, 5)
+					PRINT RND 3;5
 					LINE BREAK
-					PRINT RND()
+					PRINT RND
 				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
 					LINK CLOSE

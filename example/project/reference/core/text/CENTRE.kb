@@ -6,32 +6,32 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "CENTRE$","heading-command basic"
+					PRINT "CENTRE$";"heading-command basic"
 					LINE BREAK
-					PRINT "STRING, LENGTH","heading-args"
+					PRINT "STRING, LENGTH";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "This function will return part of the string based on a length but will start from the centre of the string."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-PRINT CENTRE$("AAABBBAAA", 3)
+PRINT CENTRE "AAABBBAAA";3
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				CPRINT
-BBB
-				CPRINT CLOSE
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24 kb-code-block"
+					PRINT CENTRE "AAABBBAAA";3
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					LINK CLOSE

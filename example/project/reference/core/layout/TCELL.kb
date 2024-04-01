@@ -6,19 +6,19 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "TCELL","heading-command basic"
+					PRINT "TCELL";"heading-command basic"
 					LINE BREAK
-					PRINT "WIDTH, CLASS, COLSPAN, ID","heading-args"
+					PRINT "WIDTH, CLASS, COLSPAN, ID";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Creating a table cell."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 TCELL
 	PRINT "Table cell 1"
@@ -26,7 +26,7 @@ TCELL CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;td&gt;
 	&lt;span&gt;Table cell 1&lt;/span&gt;
@@ -34,8 +34,8 @@ TCELL CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					LINK CLOSE

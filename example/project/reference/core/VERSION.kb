@@ -6,19 +6,19 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "VERSION","basic"
-				HEADING CLOSE
+					PRINT "VERSION";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "This command will display the current version of kytsch"
-					PRINT "BASIC","basic"
+					PRINT "BASIC";"basic"
 					PRINT " on screen"
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 SPRINT SWRITE
 	SPRINT VERSION
@@ -26,7 +26,7 @@ SPRINT SWRITE CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 SWRITE
 	VERSION
 SWRITE CLOSE

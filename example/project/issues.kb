@@ -6,22 +6,17 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Issues"
-				HEADING CLOSE
+				HEADING CLOSE 2
 				SWRITE
-					PRINT "There are number of known issues currently with the following symbols in strings used in the PRINT command for exammple"
+					PRINT "When using commands like PRINT and you are wanting to output a string with double quotes inside you'll "
+					PRINT "face errors. To avoid this use character ecaping as shown in the example below."
 CPRINT
-& $ % #
+PRINT "This is how you \"escape\" characters"
 CPRINT CLOSE
-				SWRITE CLOSE
-				SWRITE
-					PRINT "The problem is down to the introduction of the proper variable symbols most notiable the ampersand symbol and the way I'm parsing the strings."
-				SWRITE CLOSE
-				SWRITE
-					PRINT "I get this this a pain but for now try and avoid using them."
 				SWRITE CLOSE
 			DIV CLOSE
 		DIV CLOSE

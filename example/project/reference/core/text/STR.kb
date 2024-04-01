@@ -6,32 +6,32 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "STR$","heading-command basic"
+					PRINT "STR$";"heading-command basic"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Converts to a string."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 PRINT STR$("Hi World!")
 PRINT STR$(26)
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 Hi World!
 26
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					LINK CLOSE

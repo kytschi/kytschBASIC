@@ -6,26 +6,26 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "LINE BREAK","basic"
-				HEADING CLOSE
+					PRINT "LINE BREAK";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Used output a carriage return or newline on screen."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SPRINT REM Really need to break these lines up.
+REM Really need to break these lines up.
 PRINT "This is my first line"
 SPRINT LINE BREAK
 PRINT "And this to be my second line"
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;span&gt;This is my first line&lt;/span&gt;
 &lt;br/&gt;
@@ -33,8 +33,8 @@ PRINT "And this to be my second line"
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
 					LINK CLOSE

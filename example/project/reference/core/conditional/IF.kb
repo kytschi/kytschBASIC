@@ -6,17 +6,17 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "IF","basic"
-				HEADING CLOSE
+					PRINT "IF";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "IF conditional statement."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 SPRINT FOR iLoop=1 to 10
 	SPRINT IF iLoop=2 THEN
@@ -40,7 +40,7 @@ SPRINT NEXT iLoop
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					FOR iLoop%=1 to 10
 						IF iLoop%=2 THEN
@@ -63,8 +63,8 @@ SPRINT NEXT iLoop
 				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE

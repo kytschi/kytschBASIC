@@ -6,17 +6,17 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "WHILE","basic"
-				HEADING CLOSE
+					PRINT "WHILE";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Create a while loop."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 SPRINT iLoop=10
 SPRINT WHILE iLoop>0
@@ -27,7 +27,7 @@ SPRINT WEND
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					iLoop=10
 					WHILE iLoop>0
@@ -38,8 +38,8 @@ SPRINT WEND
 				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE

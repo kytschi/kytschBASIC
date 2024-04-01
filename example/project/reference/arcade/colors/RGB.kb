@@ -7,57 +7,57 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "RGB","heading-command basic"
+					PRINT "RGB";"heading-command basic"
 					LINE BREAK
-					PRINT "RED, GREEN, BLUE, TRANSPARENCY","heading-args"
+					PRINT "RED; GREEN; BLUE; TRANSPARENCY";"heading-args"
 					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
+					PRINT "Requires arcade library";"heading-required"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Set an RGB colour."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-RGB 0,0,0
-BITMAP 0,0,640,480
-	RGB 255,0,0,99
-	CIRCLEF 320,220,220
+RGB 0;0;0
+BITMAP 0;0;640;480
+	RGB 255;0;0;99
+	CIRCLEF 320;220;220
 
-	RGB 255,0,0,98
-	CIRCLEF 320,220,160
+	RGB 255;0;0;98
+	CIRCLEF 320;220;160
 
-	RGB 255,0,0,95
-	CIRCLEF 320,220,100
+	RGB 255;0;0;95
+	CIRCLEF 320;220;100
 
-	RGB 255,0,0,90
-	CIRCLEF 320,220,40
+	RGB 255;0;0;90
+	CIRCLEF 320;220;40
 BITMAP CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				RGB 0,0,0
-				BITMAP 0,0,640,480
-					RGB 255,0,0,99
-					CIRCLEF 320,220,220
+				HEADING CLOSE 4
+				RGB 0;0;0
+				BITMAP 0;0;640;480
+					RGB 255;0;0;99
+					CIRCLEF 320;220;220
 
-					RGB 255,0,0,98
-					CIRCLEF 320,220,160
+					RGB 255;0;0;98
+					CIRCLEF 320;220;160
 
-					RGB 255,0,0,95
-					CIRCLEF 320,220,100
+					RGB 255;0;0;95
+					CIRCLEF 320;220;100
 
-					RGB 255,0,0,90
-					CIRCLEF 320,220,40
+					RGB 255;0;0;90
+					CIRCLEF 320;220;40
 				BITMAP CLOSE
 				HEADING 4
 					PRINT "Parameters"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				TABLE
 					THEAD
 						TROW
@@ -74,7 +74,7 @@ BITMAP CLOSE
 					THEAD CLOSE
 					TBODY
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "RED"
 							TCELL CLOSE
 							TCELL
@@ -85,7 +85,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "GREEN"
 							TCELL CLOSE
 							TCELL
@@ -96,7 +96,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "BLUE"
 							TCELL CLOSE
 							TCELL
@@ -107,12 +107,12 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							THEADCELL ,"table-parameter",3
+							THEADCELL ;"table-parameter";3
 								PRINT "Optional"
 							THEADCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "TRANSPARENCY"
 							TCELL CLOSE
 							TCELL
@@ -126,8 +126,8 @@ BITMAP CLOSE
 				TABLE CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					LINK CLOSE

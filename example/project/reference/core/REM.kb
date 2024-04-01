@@ -6,31 +6,31 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "REM","basic"
-				HEADING CLOSE
+					PRINT "REM";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Used for internal kytschBASIC comments. They will be ignored at runtime."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SPRINT REM Loading the GIF of that evil looking dude.
+REM Loading the GIF of that evil looking dude.
 IMAGE, "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Source"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;img src="/kytschi/imgs/plotting.gif" alt="Image of a guy plotting" class="plotting-image"&gt;
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
 					LINK CLOSE

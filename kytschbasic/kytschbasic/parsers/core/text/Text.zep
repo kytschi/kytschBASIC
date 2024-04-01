@@ -30,8 +30,28 @@ use KytschBASIC\Parsers\Core\Maths;
 
 class Text extends Command
 {
+	public function commands(args)
+	{
+		var command = "", splits = [];
+
+		let splits = explode(" ", trim(args));
+		let command = splits[0];
+		array_shift(splits);
+		let splits = implode(" ", splits);
+
+		if (command == "ASC") {
+			return ord(trim(splits, "\""));
+		} elseif (command == "CENTRE") {
+			return this->processCentre(splits);
+		}
+
+		return args;
+	}
+
 	public function parse(string command, string args)
 	{
+		let args = this->commands(args);
+
 		if (command == "PRINT") {
 			return this->processPrint(args);
 		} elseif (command == "SWRITE CLOSE") {
@@ -40,11 +60,27 @@ class Text extends Command
 			return this->processSWrite(args);
 		} elseif (command == "LINE BREAK") {
 			return "<br/>";
-		} elseif (command == "ASC") {
-			return ord(trim(args, "\""));
 		}
 
 		return null;
+	}
+
+	private function processCentre(args)
+	{
+		var value="";
+
+		let args = this->args(args);
+		let value = this->setArg(args[0]);
+
+		if (isset(args[1])) {
+			let value = substr(
+				value,
+				(strlen(value) / 2) - 1,
+				intval(args[1])
+			);
+		}
+
+		return "\"" . value . "\"";
 	}
 
 	private function processPrint(args)

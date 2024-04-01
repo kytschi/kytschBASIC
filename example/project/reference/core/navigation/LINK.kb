@@ -6,31 +6,31 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "LINK","heading-command basic"
+					PRINT "LINK";"heading-command basic"
 					LINE BREAK
-					PRINT "URL, LABEL, CLASS, TARGET, ID","heading-args"
+					PRINT "URL, LABEL, CLASS, TARGET, ID";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Generating a link to another page or resource."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SPRINT REM Goto internal link.
+REM Goto internal link.
 LINK "/about"
 	About
 LINK CLOSE
 
-SPRINT REM Open the link in a new tab/window
+REM Open the link in a new tab/window
 LINK "https://github.com/kytschi/kytschBASIC",,,"_blank"
 	Download
 LINK CLOSE
 
-SPRINT REM Read the menu from the database, loop through and build the links.
+REM Read the menu from the database, loop through and build the links.
 SPRINT DATA, menu&
 	SPRINT OPEN "kytschBASIC"
 	SPRINT READ "menu"
@@ -46,7 +46,7 @@ SPRINT END FOR
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Source"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;a href="/about"&gt;About&lt;/a&gt;
 &lt;a href="/https://github.com/kytschi/kytschBASIC" _target="blank"&gt;About&lt;/a&gt;
@@ -57,7 +57,7 @@ SPRINT END FOR
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Target"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				TABLE
 					THEAD
 						TROW
@@ -71,7 +71,7 @@ SPRINT END FOR
 					THEAD CLOSE
 					TBODY
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "_self"
 							TCELL CLOSE
 							TCELL
@@ -79,7 +79,7 @@ SPRINT END FOR
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "_blank"
 							TCELL CLOSE
 							TCELL
@@ -87,7 +87,7 @@ SPRINT END FOR
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "_parent"
 							TCELL CLOSE
 							TCELL
@@ -95,7 +95,7 @@ SPRINT END FOR
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "_top"
 							TCELL CLOSE
 							TCELL

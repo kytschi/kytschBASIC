@@ -6,27 +6,27 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Parameters on commands"
-				HEADING CLOSE
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Parameters are set after the command and are set in a specific order. For example:"
 				SWRITE CLOSE
 				CPRINT
-WINDOW "intro",,(200,0)
+WINDOW "intro";;(200,0)
 				CPRINT CLOSE
 				SWRITE
 					PRINT "The WINDOW commands parameters are as follows,"
 				SWRITE CLOSE
-				PRINT "ID, TITLE, (X1,Y1)-(X2,Y2), TYPE, SCREEN ID","heading-args"
+				PRINT "ID; TITLE; (X1,Y1)-(X2,Y2); TYPE; SCREEN ID";"heading-args"
 				SWRITE
 					PRINT "Notice how we didn't want to set the TITLE, just the ID and the X1 and Y1 of the command. But we still leave the TITLE parameter in even though it is blank."
 				SWRITE CLOSE
 				HEADING 4
 					PRINT "Setting HTML parameters on commands"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				SWRITE
 					PRINT "You can pass any parameter you like along with the command but note that only those valid ones to the corresponding HTML tag will be picked up by browser and used. The rest will be outputted. HTML parameters always come after the command parameters."
 				SWRITE CLOSE
@@ -34,47 +34,20 @@ WINDOW "intro",,(200,0)
 					PRINT "Lets use the WINDOW example above and set its class."
 				SWRITE CLOSE
 				CPRINT
-WINDOW "intro",,(200,0),,,class="some-class",data-id="some-id"
+WINDOW "intro";;(200,0);;;class="some-class";data-id="some-id"
 				CPRINT CLOSE
 				SWRITE
-					PRINT "HTML specific parameters start with the parameter name, then =, and then you set its value."
+					PRINT "HTML specific parameters start with the parameter name, then = and then you set its value."
 				SWRITE CLOSE
-				PRINT "It is important that the parameter count matches that of what the command is expecting!","important"
+				PRINT "It is important that the parameter count matches that of what the command is expecting!";"important"
 				SWRITE
 					PRINT "For more information on HTML tags and what they do please visit "
-					LINK "https://www.w3schools.com/TAgs/default.asp",,"_blank"
-						PRINT "W3 Schools"
+					LINK "https://developer.mozilla.org/en-US/docs/Web/HTML/Element";;"_blank"
+						PRINT "Mdn web docs"
 					LINK CLOSE
-					PRINT " or using your favourtie search engine look up html tags."
+					PRINT " or using your favourite search engine look up html tags."
 					LINE BREAK
 				SWRITE CLOSE
-				HEADING 4
-					PRINT "Problems with commas"
-				HEADING CLOSE
-				SWRITE
-					PRINT "Due to parameters being seperated by commas you may run into issue with trying to PRINT a single comma or a space and a comma for example."
-				SWRITE CLOSE
-				SWRITE
-					PRINT "If this happens swap out the comma for the HTML entity equivalent shown belown."
-				SWRITE CLOSE
-				TABLE
-					TROW
-						TCELL
-							PRINT "HTML CODE"
-						TCELL CLOSE
-						TCELL
-							PRINT "&amp;#44;"
-						TCELL CLOSE
-					TROW CLOSE
-					TROW
-						TCELL
-							PRINT "HTML ENTITY"
-						TCELL CLOSE
-						TCELL
-							PRINT "&amp;comma;"
-						TCELL CLOSE
-					TROW CLOSE
-				TABLE CLOSE
 			DIV CLOSE
 		DIV CLOSE
 	LOAD "_ROOT/project/shared/footer"

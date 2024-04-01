@@ -6,30 +6,30 @@ HEAD CLOSE
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "ATAN","basic"
-				HEADING CLOSE
+					PRINT "ATAN";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Return the arc tangent of a float value."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-PRINT ATAN(0.5)
+PRINT ATAN 0.5
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				CPRINT
-0.46364760900081
-				CPRINT CLOSE
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24 kb-code-block"
+					PRINT ATAN 0.5
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
 					LINK CLOSE

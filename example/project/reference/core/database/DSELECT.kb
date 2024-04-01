@@ -6,37 +6,37 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "DSELECT","basic"
-				HEADING CLOSE
+					PRINT "DSELECT";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Specify which columns you want to pull back from the database table."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SPRINT REM Define the database connection and assign the results to the menu& variable.
+REM Define the database connection and assign the results to the menu& variable.
 SPRINT DATA menu&
-	SPRINT REM Open the database connection from the config file labelled kytschBASIC.
+	REM Open the database connection from the config file labelled kytschBASIC.
 	SPRINT DOPEN "kytschBASIC"
 
-	SPRINT REM Read from the menu table in the database.
+	REM Read from the menu table in the database.
 	SPRINT DREAD "menu"
 
-	SPRINT REM Select all entries from the menu table.
+	REM Select all entries from the menu table.
 	SPRINT DSELECT "*"
 
-	SPRINT REM Condition the select to those that aren't deleted.
+	REM Condition the select to those that aren't deleted.
 	SPRINT DWHERE "deleted_at != NULL"
 
-	SPRINT REM Sort the results by their name alphabetically.
+	REM Sort the results by their name alphabetically.
 	SPRINT DSORT "name ASC"
 SPRINT END DATA
 
-SPRINT REM Loop through the results stored in menu& variable.
+REM Loop through the results stored in menu& variable.
 SPRINT FOR item& IN menu&
 	SWRITE
 		PRINT item&["id]
@@ -47,7 +47,7 @@ SPRINT END FOR
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;span&gt;2&lt;/span&gt;
 &lt;span>About&lt;/span&gt;
@@ -61,8 +61,8 @@ SPRINT END FOR
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					LINK CLOSE

@@ -6,13 +6,13 @@ HEAD CLOSE
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Welcome to "
-					PRINT "kytsch","kytsch"
-					PRINT "BASIC","basic"
-				HEADING CLOSE
+					PRINT "kytsch";"kytsch"
+					PRINT "BASIC";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "An 80s language by an 80s kid for the modern world!"
 				SWRITE CLOSE
@@ -26,26 +26,26 @@ HEAD CLOSE
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Welcome to "
-					PRINT "kytsch","kytsch"
-					PRINT "BASIC","basic"					
-				HEADING CLOSE
+					PRINT "kytsch";"kytsch"
+					PRINT "BASIC";"basic"					
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "An 80s language by an 80s kid for the modern world!"
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "What is kytschBASIC all about?"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				SWRITE
 					PRINT "kytschBASIC is a PHP module that will allow you to write BASIC code to render flat html."
 				SWRITE CLOSE
 				SWRITE
 					PRINT "The project is still in its early days but you can check it out at the link below."
 				SWRITE CLOSE
-				LINK "https://github.com/kytschi/kytschBASIC","Checkout the source code",,"_blank"
+				LINK "https://github.com/kytschi/kytschBASIC";"Checkout the source code";;"_blank"
 					PRINT "Git repo"
 				LINK CLOSE
 			DIV CLOSE

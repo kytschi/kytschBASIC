@@ -6,32 +6,32 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "UNRIGHT$","heading-command basic"
+					PRINT "UNRIGHT$";"heading-command basic"
 					LINE BREAK
-					PRINT "STRING, LENGTH","heading-args"
+					PRINT "STRING, LENGTH";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "This function will remove rightmost characters based on a length."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 PRINT UNRIGHT$("Hi World!", 7)
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 Hi
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					LINK CLOSE

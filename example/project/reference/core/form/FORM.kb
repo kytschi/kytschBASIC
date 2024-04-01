@@ -6,19 +6,19 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "FORM","heading-command basic"
+					PRINT "FORM";"heading-command basic"
 					LINE BREAK
-					PRINT "ID, METHOD (default is GET), ACTION, CLASS","heading-args"
+					PRINT "ID, METHOD (default is GET), ACTION, CLASS";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Creating an HTML form."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 IFNTE _GET["input_test"] THEN
 	PRINT "You submitted this,"
@@ -53,7 +53,7 @@ FORM CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				DIV "kb-col kb-col-24 kb-code-block"
 IFNTE _GET["input_test"] THEN
 	PRINT "You submitted this,"
@@ -88,14 +88,14 @@ FORM CLOSE
 				DIV CLOSE
 				HEADING 3
 					PRINT "Adding a CAPTCHA to the form"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 FORM CAPTCHA "captcha"
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/FORM-INPUT"
 						PRINT "FORM INPUT"
 					LINK CLOSE

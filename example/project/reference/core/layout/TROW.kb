@@ -6,17 +6,17 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "TROW","basic"
-				HEADING CLOSE
+					PRINT "TROW";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Creating a table row."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 
 TROW
@@ -30,7 +30,7 @@ TROW CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 &lt;tr&gt;
 	&lt;td&gt;
@@ -43,8 +43,8 @@ TROW CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					LINK CLOSE

@@ -219,12 +219,14 @@ p {
 
 pre, .kb-code-block {
     padding: 40px;
-    color: #fff;
+    color: #ffc228;
+    font-weight: bold;
     background: #060606;
     -moz-tab-size: 4;
     tab-size: 4;
 	overflow-x: hidden;
     font-family: "FreeMono", Arial, Helvetica, sans-serif !important;
+    line-height: 1em;
 }
 code {
     font-family: "FreeMono", Arial, Helvetica, sans-serif !important;

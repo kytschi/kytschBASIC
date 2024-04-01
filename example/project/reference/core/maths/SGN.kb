@@ -6,34 +6,34 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "SGN","basic"
-				HEADING CLOSE
+					PRINT "SGN";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Return the sign of a number."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-PRINT SGN(-250)
-PRINT SGN(0)
-PRINT SGN(250)
+PRINT SGN -250
+PRINT SGN 0
+PRINT SGN 250
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
-				CPRINT
--1
-0
-1
-				CPRINT CLOSE
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24 kb-code-block"
+					PRINT SGN -250
+					PRINT SGN 0
+					PRINT SGN 250
+				DIV CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
 					LINK CLOSE

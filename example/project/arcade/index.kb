@@ -7,11 +7,11 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Arcade"
-				HEADING CLOSE
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "To use the arcade library you need to include it. It is recommended that you include this in the HEAD."
 				SWRITE CLOSE
@@ -20,13 +20,13 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE CLOSE
 				CPRINT
 HEAD
-SPRINT INCLUDE arcade
+INCLUDE arcade
 HEAD CLOSE
 				CPRINT CLOSE
 				HEADING 3
 					LINE BREAK
 					PRINT "Example of what arcade can do"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				SWRITE
 					PRINT "Display width in pixels: "
 					DISPWIDTH

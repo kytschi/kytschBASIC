@@ -27,6 +27,7 @@ namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Maths;
+use KytschBASIC\Parsers\Core\Text\Text;
 
 class Variables
 {
@@ -127,7 +128,10 @@ class Variables
 			throw new Exception("Invalid LET");
 		}
 
-		let line = "$" . args[0] . "=";
+		let line = "$" . str_replace(["$", "%", "#"], "", args[0]) . "=";
+
+		let args[1] = (new Text())->commands(args[1]);
+
 		let maths = Maths::parse(args[1]);
 		if (maths) {
 			let line .= maths;

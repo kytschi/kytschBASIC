@@ -6,32 +6,32 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "INSTR$","heading-command basic"
+					PRINT "INSTR$";"heading-command basic"
 					LINE BREAK
-					PRINT "HAYSTACK, NEEDLE, START(optional)","heading-args"
+					PRINT "HAYSTACK, NEEDLE, START(optional)";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "This function will find part of a string and return the position."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 PRINT INSTR$("kytschBASIC", "BAS")
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				CPRINT
 7
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					LINK CLOSE

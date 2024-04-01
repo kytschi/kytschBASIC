@@ -6,13 +6,13 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "News about "
-					PRINT "kytsch","kytsch"
-					PRINT "BASIC","basic"
-				HEADING CLOSE
+					PRINT "kytsch";"kytsch"
+					PRINT "BASIC";"basic"
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "Todo"
 				SWRITE CLOSE

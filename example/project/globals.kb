@@ -6,11 +6,11 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Global variables"
-				HEADING CLOSE
+				HEADING CLOSE 2
 				SWRITE
 					PRINT "There are global variables available within kytschBASIC. For example:"
 				SWRITE CLOSE
@@ -31,7 +31,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 					TBODY
 						TROW
 							TCELL
-								PRINT "_ROOT"
+								PRINT "&#95;ROOT"
 							TCELL CLOSE
 							TCELL
 								PRINT "The root folder where the source of the project is held"
@@ -39,7 +39,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_VALID["captcha"]"
+								PRINT "&#95;VALID['captcha']"
 							TCELL CLOSE
 							TCELL
 								PRINT "Confirm the captcha supplied is a valid one"
@@ -47,7 +47,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_POST"
+								PRINT "&#95;POST"
 							TCELL CLOSE
 							TCELL
 								PRINT "The POST data array"
@@ -55,7 +55,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_GET"
+								PRINT "&#95;GET"
 							TCELL CLOSE
 							TCELL
 								PRINT "The GET data array"
@@ -63,7 +63,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_RURL"
+								PRINT "&#95;RURL"
 							TCELL CLOSE
 							TCELL
 								PRINT "The ROOT URL, for example https://kytschbasic.org"
@@ -71,7 +71,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_URL"
+								PRINT "&#95;URL"
 							TCELL CLOSE
 							TCELL
 								PRINT "The page URL including any variables passed over"
@@ -79,7 +79,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_PATH"
+								PRINT "&#95;PATH"
 							TCELL CLOSE
 							TCELL
 								PRINT "The page path from the URL, for example /globals"
@@ -87,7 +87,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 						TROW CLOSE
 						TROW
 							TCELL
-								PRINT "_PATH"
+								PRINT "&#95;PATH"
 							TCELL CLOSE
 							TCELL
 								PRINT "The page path from the URL, for example /globals"

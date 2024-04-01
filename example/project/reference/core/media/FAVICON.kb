@@ -6,19 +6,19 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "FAVICON","heading-command basic"
+					PRINT "FAVICON";"heading-command basic"
 					LINE BREAK
-					PRINT "FILE, SIZES","heading-args"
+					PRINT "FILE, SIZES";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Add a favicon to the site."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
 FAVICON "/kytschi/imgs/favicon.ico","64x64"
 				CPRINT CLOSE

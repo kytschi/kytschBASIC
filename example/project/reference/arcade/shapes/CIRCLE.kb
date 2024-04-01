@@ -7,23 +7,23 @@ HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row", "main-content"
-			DIV "kb-col kb-col-24", "main-content-col"
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "CIRCLE","heading-command basic"
+					PRINT "CIRCLE";"heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, RADIUS","heading-args"
+					PRINT "X, Y, RADIUS";"heading-args"
 					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
+					PRINT "Requires arcade library";"heading-required"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "The ability to draw a circle on a bitmap and display it on screen as an image."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE
+				HEADING CLOSE 3
 				CPRINT
-SPRINT INCLUDE arcade
+INCLUDE arcade
 RGB 0,0,0
 BITMAP 0,0,640,480
 	RGB 255,0,0,40
@@ -62,7 +62,7 @@ BITMAP CLOSE
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				RGB 0,0,0
 				BITMAP 0,0,640,480
 					RGB 255,0,0,40
@@ -100,7 +100,7 @@ BITMAP CLOSE
 				BITMAP CLOSE
 				HEADING 4
 					PRINT "Parameters"
-				HEADING CLOSE
+				HEADING CLOSE 4
 				TABLE
 					THEAD
 						TROW
@@ -117,7 +117,7 @@ BITMAP CLOSE
 					THEAD CLOSE
 					TBODY
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "X"
 							TCELL CLOSE
 							TCELL
@@ -128,7 +128,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "Y"
 							TCELL CLOSE
 							TCELL
@@ -139,7 +139,7 @@ BITMAP CLOSE
 							TCELL CLOSE
 						TROW CLOSE
 						TROW
-							TCELL ,"table-parameter"
+							TCELL ;"table-parameter"
 								PRINT "RADIUS"
 							TCELL CLOSE
 							TCELL
@@ -153,8 +153,8 @@ BITMAP CLOSE
 				TABLE CLOSE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE
-				DIV "kb-col kb-col-24", "see-also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					LINK CLOSE
