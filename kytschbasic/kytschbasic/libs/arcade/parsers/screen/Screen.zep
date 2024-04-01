@@ -1,7 +1,7 @@
 /**
- * LINE parser
+ * SCREEN parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Line
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Screen
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2022 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -23,51 +23,32 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Libs\Arcade\Parsers\Shapes;
+namespace KytschBASIC\Libs\Arcade\Parsers\Screen;
 
 use KytschBASIC\Parsers\Core\Command;
 
-class Line extends Command
+class Screen extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "LINE") {
-			return this->parseLine(args);
+		if (command == "SCREEN") {
+			return this->parseScreen(args);
+		} elseif (command == "SCREEN CLOSE") {
+			return "</div>";
 		}
 	}
 
-	public function parseLine(args)
+	public function parseScreen(args)
 	{
-		var output = "<?php ";
+		var params = "";
 		let args = this->args(args);
 
-		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imageline($KBIMAGE, ";
-
 		if (isset(args[0])) {
-			let output .= args[0] . ",";
+			let params .= " id='" . this->setArg(args[0]) . "'";
 		} else {
-			let output .= "0,";
+			let params .= " id='" . this->genID("kb-screen") . "'";
 		}
-
-		if (isset(args[1])) {
-			let output .= args[1] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[2])) {
-			let output .= args[2] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[3])) {
-			let output .= args[3] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		return output . " $KBCOLOUR);?>";
+		
+		return "<div" . params . ">";
 	}
 }

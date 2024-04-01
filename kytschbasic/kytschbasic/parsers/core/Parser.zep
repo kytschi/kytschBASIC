@@ -26,20 +26,18 @@
 namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
+use KytschBASIC\Parsers\Core\Command;
 
 class Parser
 {
 	private line_no = 0;
 	private newline = "\n";
-
+	private has_case = false;
+	
 	/*
 	 * Available parsers.
 	 */
 	private available = [
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Layout",
 		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
@@ -47,7 +45,17 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Variables",
 		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
-		"KytschBASIC\\Parsers\\Core\\Load"
+		"KytschBASIC\\Parsers\\Core\\Conditional\\Select",
+		"KytschBASIC\\Parsers\\Core\\Conditional\\WhileLoop",
+		"KytschBASIC\\Parsers\\Core\\Load",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Circle",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Window"
 	];
 
 	/*
@@ -102,6 +110,20 @@ class Parser
 					continue;
 				} elseif (command == "REM") {
 					continue;
+				} elseif (command == "CASE") {
+					if (this->has_case) {
+						let output .= "<?php break; ?>" . this->newline;
+						let this->has_case = false;
+					}
+					let output .= "<?php case " . (new Command())->clean(args) . ": ?>" . this->newline;
+					let this->has_case = true;
+				} elseif (command == "DEFAULT") {
+					if (this->has_case) {
+						let output .= "<?php break; ?>" . this->newline;
+						let this->has_case = false;
+					}
+					let output .= "<?php default: ?>" . this->newline;
+					let this->has_case = true;
 				}
 
 				for parser in this->available {

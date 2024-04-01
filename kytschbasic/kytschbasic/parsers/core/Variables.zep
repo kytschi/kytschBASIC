@@ -25,6 +25,7 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Maths;
 
 class Variables
@@ -54,26 +55,26 @@ class Variables
 		return args;
 	}
 
-	public function clean(string line, bool equals = false)
+	public function clean(string line)
 	{
-		var args, arg, maths = "", key;
+		var args, arg, maths = "";
 
-		if (equals) {
-			let args = explode("=", line);
-		} else {
-			let args = this->args(line);
-		}
+		let args = this->args(line);
 		let line = "";
 		
-		for key, arg in args {
+		for arg in args {
 			let maths = Maths::parse(arg);
 			if (maths) {
 				let line .= maths;
 			} else {
-				let line .= str_replace(["$", "%", "#"], "", arg) . (equals && !key ? "=" : ".");
+				if (is_numeric(arg)) {
+					let line .= arg . ".";
+				} else {
+					let line .= "$" . str_replace(["$", "%", "#"], "", arg) . ".";
+				}
 			}
 		}
-
+		
 		return Maths::equation(rtrim(line, "."));
 	}
 
@@ -119,6 +120,21 @@ class Variables
 
 	private function processLet(string line)
 	{
-		return "<?php $" . this->clean(line, true) . "; ?>";
+		var args, maths = "";
+		let args = explode("=", line);
+
+		if (empty(args[1])) {
+			throw new Exception("Invalid LET");
+		}
+
+		let line = "$" . args[0] . "=";
+		let maths = Maths::parse(args[1]);
+		if (maths) {
+			let line .= maths;
+		} else {
+			let line .= Maths::equation(args[1]);
+		}		
+
+		return "<?php " . line . "; ?>";
 	}
 }

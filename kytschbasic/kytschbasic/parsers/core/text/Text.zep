@@ -2,8 +2,9 @@
  * Text parser
  *
  * @package     KytschBASIC\Parsers\Core\Text
- * @author 		Mike Welsh
+ * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2022 Mike Welsh
+ * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
  * Copyright 2022 Mike Welsh
@@ -46,11 +47,11 @@ class Text extends Command
 		return null;
 	}
 
-	private function processPrint(string line)
+	private function processPrint(args)
 	{
-		var args, params="", value="";
+		var params="", value="";
 
-		let args = this->args(line);
+		let args = this->args(args);
 		let value = this->setArg(args[0], false);
 
 		if (isset(args[1])) {
@@ -66,11 +67,11 @@ class Text extends Command
 		return "<?= \"<span" . params . ">\" . (" . value . ") . \"</span>\";?>";
 	}
 
-	private function processSWrite(string line)
+	private function processSWrite(args)
 	{
-		var args, params="";
+		var params="";
 
-		let args = this->args(line);
+		let args = this->args(args);
 		
 		if (isset(args[0])) {
 			let params .= " class='" . this->setArg(args[0]) . "'";

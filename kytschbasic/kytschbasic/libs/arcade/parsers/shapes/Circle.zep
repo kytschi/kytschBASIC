@@ -1,7 +1,7 @@
 /**
- * LINE parser
+ * CIRCLE parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Line
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Circle
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2022 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -27,47 +27,41 @@ namespace KytschBASIC\Libs\Arcade\Parsers\Shapes;
 
 use KytschBASIC\Parsers\Core\Command;
 
-class Line extends Command
+class Circle extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "LINE") {
-			return this->parseLine(args);
+		if (command == "CIRCLE") {
+			return this->parseCircle(args);
 		}
 	}
 
-	public function parseLine(args)
+	public function parseCircle(args)
 	{
 		var output = "<?php ";
 		let args = this->args(args);
 
 		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imageline($KBIMAGE, ";
+		let output .= "imagearc($KBIMAGE, ";
 
 		if (isset(args[0])) {
-			let output .= args[0] . ",";
+			let output .= args[0] . ", ";
 		} else {
-			let output .= "0,";
+			let output .= "0, ";
 		}
 
 		if (isset(args[1])) {
-			let output .= args[1] . ",";
+			let output .= args[1] . ", ";
 		} else {
-			let output .= "0,";
+			let output .= "0, ";
 		}
 
 		if (isset(args[2])) {
-			let output .= args[2] . ",";
+			let output .= args[2] . ", " . args[2] . ", ";
 		} else {
-			let output .= "0,";
+			let output .= "0, 0, ";
 		}
 
-		if (isset(args[3])) {
-			let output .= args[3] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		return output . " $KBCOLOUR);?>";
+		return output . "0, 360, $KBCOLOUR);?>";
 	}
 }

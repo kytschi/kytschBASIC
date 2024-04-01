@@ -1,7 +1,7 @@
 /**
- * LINE parser
+ * Select and Case parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Line
+ * @package     KytschBASIC\Parsers\Core\Conditional\Select
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2022 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -23,51 +23,20 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Libs\Arcade\Parsers\Shapes;
+namespace KytschBASIC\Parsers\Core\Conditional;
 
 use KytschBASIC\Parsers\Core\Command;
 
-class Line extends Command
+class Select extends Command
 {
-	public function parse(string command, string args)
+	public function parse(string command, args)
 	{
-		if (command == "LINE") {
-			return this->parseLine(args);
-		}
-	}
-
-	public function parseLine(args)
-	{
-		var output = "<?php ";
-		let args = this->args(args);
-
-		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imageline($KBIMAGE, ";
-
-		if (isset(args[0])) {
-			let output .= args[0] . ",";
-		} else {
-			let output .= "0,";
+		if (command == "SELECT") {
+			return "<?php switch(" . this->clean(args) . ") { ?>";
+		} elseif (command == "ENDSELECT") {
+			return "<?php } ?>";
 		}
 
-		if (isset(args[1])) {
-			let output .= args[1] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[2])) {
-			let output .= args[2] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[3])) {
-			let output .= args[3] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		return output . " $KBCOLOUR);?>";
+		return null;
 	}
 }

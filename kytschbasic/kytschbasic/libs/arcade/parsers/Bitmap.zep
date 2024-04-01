@@ -39,19 +39,15 @@ class Bitmap extends Command
 			return this->parseBitmap(args);
 		} elseif (command == "BITMAP CLOSE") {
 			return "<?php ob_start();imagepng($KBIMAGE);$img = ob_get_contents();ob_end_clean(); ?><img src=\"data:image/png;base64,<?= base64_encode($img); ?>\">";
+		} elseif (command == "BITMAPFONT") {
+			return this->parseBitmapFont(args);
+		} elseif (command == "BITMAPTEXT") {
+			return this->parseBitmapText(args);
 		}
 
 		/*var controller;
 		if (this->match(command, "BITMAPTEXT")) {
 			let controller = new BitmapText(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "BITMAPFONT")) {
-			let controller = new BitmapFont();
-			return controller->parse(command, event_manager, globals, config);
-		} elseif (this->match(command, "BITMAP CLOSE")) {
-			return "<?php ob_start();imagepng($KBIMAGE);$img = ob_get_contents();ob_end_clean(); ?><img src=\"data:image/png;base64,<?= base64_encode($img); ?>\">";
-		} elseif (this->match(command, "LINE")) {
-			let controller = new Line(command, event_manager, globals, config);
 			return controller->draw();
 		} elseif (this->match(command, "BOXF")) {
 			let controller = new Boxf(command, event_manager, globals, config);
@@ -69,9 +65,6 @@ class Bitmap extends Command
 		} elseif (this->match(command, "CIRCLEF")) {
 			let controller = new Circlef(command, event_manager, globals, config);
 			return controller->draw();
-		} elseif (this->match(command, "CIRCLE")) {
-			let this->image = new Circle(command, event_manager, globals, config);
-			return this->image->draw();
 		} elseif (this->match(command, "COPY SHAPE")) {
 			//let this->copy = clone this->image;
 			return "";
@@ -80,25 +73,11 @@ class Bitmap extends Command
 		} elseif (this->match(command, "MOVE SHAPE")) {
 			this->image->move(command);
 			return "";
-		} elseif (this->match(command, "ARCF")) {
-			let controller = new Arcf(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "ARC")) {
-			let controller = new Arc(command, event_manager, globals, config);
-			return controller->draw();
 		} elseif (this->match(command, "SET TRANSPARENCY")) {
 			this->image->setTransparency(command);
 			return "";
 		}
-
-		let controller = new Color();
-
-		return controller->parse(
-			command,			
-			event_manager,
-			globals,
-			config
-		);*/
+*/
 	}
 
 	private function parseBitmap(args)
@@ -126,5 +105,49 @@ class Bitmap extends Command
 		let output .= "imagealphablending($KBIMAGE, true);imageantialias($KBIMAGE, false);";
 		let output .= "$KBBKGRND = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
 		return output . "imagefill($KBIMAGE, " . x . "," . y . ", $KBBKGRND);?>";
+	}
+
+	private function parseBitmapFont(args)
+	{
+		return "<?php $KBBITMAPFONT=\"" . this->setArg(args) . "\";?>";
+	}
+
+	private function parseBitmapText(args)
+	{
+		var output = "<?php ", value;
+
+		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
+		let output .= "imagefttext($KBIMAGE, ";
+
+		let args = this->args(args);
+		let value = this->setArg(args[0], false);
+
+		if (isset(args[1])) {
+			let output .= args[1] . ", ";
+		} else {
+			let output .= "12, ";
+		}
+
+		if (isset(args[2])) {
+			let output .= args[2] . ", ";
+		} else {
+			let output .= "0, ";
+		}
+
+		if (isset(args[3])) {
+			let output .= args[3] . ", ";
+		} else {
+			let output .= "0, ";
+		}
+
+		if (isset(args[4])) {
+			let output .= args[4] . ", ";
+		} else {
+			let output .= "0, ";
+		}
+
+		let output .= "$KBCOLOUR, $KBBITMAPFONT, ";
+
+		return output . value . "); ?>";
 	}
 }

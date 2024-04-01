@@ -29,14 +29,18 @@ class Maths
 {
 	public static function equation(string command)
 	{
+		if (substr(command, 0, 1) == "\"") {
+			return command;
+		}
+
 		var splits, val;
 		
-		let splits = preg_split("/\*|\+|\-|\//", command, 0, 2);
+		let splits = preg_split("/\*|\+|\-|\>|\>=|\<|\<-|\==|\//", command, 0, 2);
 
 		if (count(splits) == 1) {
 			return command;
 		}
-
+		
 		for val in splits {
 			if (!is_numeric(val) && substr(val, 0, 1) != "$") {
 				let command = str_replace(val, "$" . val, command);
