@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Circle
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2024 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2024 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -33,35 +33,23 @@ class Circle extends Command
 	{
 		if (command == "CIRCLE") {
 			return this->parseCircle(args);
+		} elseif (command == "CIRCLEF") {
+			return this->parseCircle(args, true);
 		}
 	}
 
-	public function parseCircle(args)
+	public function parseCircle(args, bool filled = false)
 	{
-		var output = "<?php ";
 		let args = this->args(args);
 
-		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imagearc($KBIMAGE, ";
-
-		if (isset(args[0])) {
-			let output .= args[0] . ", ";
-		} else {
-			let output .= "0, ";
-		}
-
-		if (isset(args[1])) {
-			let output .= args[1] . ", ";
-		} else {
-			let output .= "0, ";
-		}
-
-		if (isset(args[2])) {
-			let output .= args[2] . ", " . args[2] . ", ";
-		} else {
-			let output .= "0, 0, ";
-		}
-
-		return output . "0, 360, $KBCOLOUR);?>";
+		return "<?php $KBSHAPES[] = [
+			'colour' => $KBRGB,
+			'shape' => '" . (filled ? "imagefilledellipse" : "imagearc") . "',
+			'x' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
+			'y' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
+			'radius' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
+			'width' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
+			'height' => " . (isset(args[3]) ? intval(args[3]) : 10) . ",
+		]; ?>";
 	}
 }

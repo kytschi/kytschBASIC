@@ -1,13 +1,13 @@
 /**
- * ARC parser
+ * Ellipse parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Arc
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Ellipse
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2023 Mike Welsh
+ * @copyright   2024 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.2
+ * @version     0.0.1
  *
- * Copyright 2023 Mike Welsh
+ * Copyright 2024 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -27,30 +27,28 @@ namespace KytschBASIC\Libs\Arcade\Parsers\Shapes;
 
 use KytschBASIC\Parsers\Core\Command;
 
-class Arc extends Command
+class Ellipse extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "ARC") {
-			return this->parseArc(args);
-		} elseif (command == "ARCF") {
-			return this->parseArc(args, true);
+		if (command == "ELLIPSE") {
+			return this->parseEllipse(args);
+		} elseif (command == "ELLIPSEF") {
+			return this->parseEllipse(args, true);
 		}
 	}
 
-	public function parseArc(args, bool filled = false)
+	public function parseEllipse(args, bool filled = false)
 	{
 		let args = this->args(args);
 
 		return "<?php $KBSHAPES[] = [
 			'colour' => $KBRGB,
-			'shape' => '" . (filled ? "imagefilledarc" : "imagearc") . "',
+			'shape' => '" . (filled ? "imagefilledellipse" : "imageellipse") . "',
 			'x' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
 			'y' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
-			'radius' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
-			's_angle' => " . (isset(args[3]) ? intval(args[3]) : 0) . ",
-			'e_angle' => " . (isset(args[4]) ? intval(args[4]) : 0) . ",
-			'style' => " . (isset(args[5]) ? args[5] : "IMG_ARC_NOFILL") . ",
+			'width' => " . (isset(args[2]) ? intval(args[2]) : 50) . ",
+			'height' => " . (isset(args[3]) ? intval(args[3]) : 50) . ",
 		]; ?>";
 	}
 }

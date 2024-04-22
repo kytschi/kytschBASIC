@@ -38,51 +38,54 @@ class Bitmap extends Command
 		if (command == "BITMAP") {
 			return this->parseBitmap(args);
 		} elseif (command == "BITMAP CLOSE") {
-			return "<?php ob_start();imagepng($KBIMAGE);$img = ob_get_contents();ob_end_clean(); ?><img src=\"data:image/png;base64,<?= base64_encode($img); ?>\">";
+			return "<?php
+			foreach ($KBSHAPES as $KBSHAPE) {
+				switch($KBSHAPE['shape']) {
+					case 'imagearc':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imagearc($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['radius'], $KBSHAPE['radius'], $KBSHAPE['s_angle'], $KBSHAPE['e_angle'], $KBCOLOUR);
+						break;
+					case 'imageellipse':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imageellipse($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['width'], $KBSHAPE['height'], $KBCOLOUR);
+						break;
+					case 'imagefilledarc':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imagefilledarc($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['radius'], $KBSHAPE['radius'], $KBSHAPE['s_angle'], $KBSHAPE['e_angle'], $KBCOLOUR, $KBSHAPE['style']);
+						break;
+					case 'imagefilledrectangle':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imagefilledrectangle($KBBITMAP, $KBSHAPE['x1'], $KBSHAPE['y1'], $KBSHAPE['x2'], $KBSHAPE['y2'], $KBCOLOUR);
+						break;
+					case 'imagefilledellipse':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imagefilledellipse($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['width'], $KBSHAPE['height'], $KBCOLOUR);
+						break;
+					case 'imageline':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imageline($KBBITMAP, $KBSHAPE['x1'], $KBSHAPE['y1'], $KBSHAPE['x2'], $KBSHAPE['y2'], $KBCOLOUR);
+						break;
+					case 'imagerectangle':
+						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
+						imagerectangle($KBBITMAP, $KBSHAPE['x1'], $KBSHAPE['y1'], $KBSHAPE['x2'], $KBSHAPE['y2'], $KBCOLOUR);
+						break;
+				}
+			}
+			ob_start();
+			imagepng($KBBITMAP);
+			$KBBITMAP = ob_get_contents();
+			ob_end_clean(); ?>
+			<img src=\"data:image/png;base64,<?= base64_encode($KBBITMAP); ?>\">";
 		} elseif (command == "BITMAPFONT") {
 			return this->parseBitmapFont(args);
 		} elseif (command == "BITMAPTEXT") {
 			return this->parseBitmapText(args);
 		}
-
-		/*var controller;
-		if (this->match(command, "BITMAPTEXT")) {
-			let controller = new BitmapText(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "BOXF")) {
-			let controller = new Boxf(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "BOX")) {
-			let controller = new Box(command, this->image, event_manager, globals);
-			let this->image = controller->draw();
-			return "";
-		} elseif (this->match(command, "ELLIPSEF")) {
-			let controller = new Ellipsef(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "ELLIPSE")) {
-			let controller = new Ellipse(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "CIRCLEF")) {
-			let controller = new Circlef(command, event_manager, globals, config);
-			return controller->draw();
-		} elseif (this->match(command, "COPY SHAPE")) {
-			//let this->copy = clone this->image;
-			return "";
-		} elseif (this->match(command, "DRAW SHAPE")) {
-			return this->image->draw();
-		} elseif (this->match(command, "MOVE SHAPE")) {
-			this->image->move(command);
-			return "";
-		} elseif (this->match(command, "SET TRANSPARENCY")) {
-			this->image->setTransparency(command);
-			return "";
-		}
-*/
 	}
 
 	private function parseBitmap(args)
 	{
-		var x=0, y=0, width=320, height=240, output = "";
+		var x=0, y=0, width=320, height=240;
 		let args = this->args(args);
 
 		if (isset(args[0])) {
@@ -101,10 +104,18 @@ class Bitmap extends Command
 			let height = intval(args[3]);
 		}
 
-		let output = "<?php $KBIMAGE = imagecreatetruecolor(" . width . "," .  height . ");";
-		let output .= "imagealphablending($KBIMAGE, true);imageantialias($KBIMAGE, false);";
-		let output .= "$KBBKGRND = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		return output . "imagefill($KBIMAGE, " . x . "," . y . ", $KBBKGRND);?>";
+		return "<?php 
+		$KBSHAPES = [];
+		$KBBITMAPWIDTH=" . width . ";
+		$KBBITMAPHEIGHT=" . height . ";
+		$KBBITMAPX=" . x . ";
+		$KBBITMAPY=" . y . ";
+		$KBBITMAP = imagecreatetruecolor($KBBITMAPWIDTH, $KBBITMAPHEIGHT);
+		imagealphablending($KBBITMAP, true);
+		imageantialias($KBBITMAP, false);
+		$KBBKGRND = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);
+		imagefill($KBBITMAP, $KBBITMAPX, $KBBITMAPY, $KBBKGRND);
+		?>";
 	}
 
 	private function parseBitmapFont(args)

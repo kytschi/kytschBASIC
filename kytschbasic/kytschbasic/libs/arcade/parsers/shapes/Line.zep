@@ -38,36 +38,15 @@ class Line extends Command
 
 	public function parseLine(args)
 	{
-		var output = "<?php ";
 		let args = this->args(args);
 
-		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imageline($KBIMAGE, ";
-
-		if (isset(args[0])) {
-			let output .= args[0] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[1])) {
-			let output .= args[1] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[2])) {
-			let output .= args[2] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		if (isset(args[3])) {
-			let output .= args[3] . ",";
-		} else {
-			let output .= "0,";
-		}
-
-		return output . " $KBCOLOUR);?>";
+		return "<?php $KBSHAPES[] = [
+			'colour' => $KBRGB,
+			'shape' => 'imageline',
+			'x1' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
+			'y1' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
+			'x2' => " . (isset(args[2]) ? intval(args[2]) : 20) . ",
+			'y2' => " . (isset(args[3]) ? intval(args[3]) : 20) . ",
+		]; ?>";
 	}
 }
