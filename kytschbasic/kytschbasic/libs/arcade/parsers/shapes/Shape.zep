@@ -35,7 +35,7 @@ class Shape extends Command
 		if (command == "COPYSHAPE") {
 			return this->parseCopy(args);
 		} elseif (command == "DRAWSHAPE") {
-			return this->parseDraw(args);
+			return true;
 		} elseif (command == "MOVESHAPE") {
 			return this->parseMove(args);
 		}
@@ -43,22 +43,7 @@ class Shape extends Command
 
 	private function parseCopy(args)
 	{
-		return "<?php
-		$KBIMAGECOPY = imagecreatetruecolor($KBBITMAPWIDTH, $KBBITMAPHEIGHT);
-		imagealphablending($KBIMAGECOPY, true);
-		imageantialias($KBIMAGECOPY, false);
-		$KBBKALPHA = imagecolorallocatealpha($KBIMAGECOPY, 0, 0, 0, 127);
-		imagefill($KBIMAGECOPY, 0, 0, imagecolortransparent($KBIMAGECOPY, $KBBKALPHA));
-		?>";
-	}
-
-	private function parseDraw(args)
-	{
-		return "<?php
-		imagecopymerge($KBIMAGECOPY, $KBBITMAP, $KBIMAGEMOVEX, $KBIMAGEMOVEY, 0, 0, $KBBITMAPWIDTH, $KBBITMAPHEIGHT, 100);
-		imagecopymerge($KBBITMAP, $KBIMAGECOPY, 0, 0, 0, 0, $KBBITMAPWIDTH, $KBBITMAPHEIGHT, 100);
-		imagedestroy($KBIMAGECOPY);
-		?>";
+		return "<?php $KBSHAPES[] = $KBSHAPES[count($KBSHAPES) - 1]; ?>";
 	}
 
 	private function parseMove(args)
@@ -66,8 +51,8 @@ class Shape extends Command
 		let args = this->args(args);
 
 		return "<?php
-		$KBIMAGEMOVEX=" . intval(isset(args[0]) ? args[0] : 0) . ";
-		$KBIMAGEMOVEY=" . intval(isset(args[1]) ? args[1] : 0) . ";
+		$KBSHAPES[count($KBSHAPES) - 1]['x']=" . intval(isset(args[0]) ? args[0] : 0) . ";
+		$KBSHAPES[count($KBSHAPES) - 1]['y']=" . intval(isset(args[1]) ? args[1] : 0) . ";
 		?>";
 	}
 }

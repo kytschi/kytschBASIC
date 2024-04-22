@@ -47,9 +47,10 @@ class Circle extends Command
 			'shape' => '" . (filled ? "imagefilledellipse" : "imagearc") . "',
 			'x' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
 			'y' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
-			'radius' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
 			'width' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
-			'height' => " . (isset(args[3]) ? intval(args[3]) : 10) . ",
+			'height' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
+			's_angle' => 0,
+			'e_angle' => 360,
 		]; ?>";
 	}
 }

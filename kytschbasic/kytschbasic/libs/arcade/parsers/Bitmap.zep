@@ -43,7 +43,7 @@ class Bitmap extends Command
 				switch($KBSHAPE['shape']) {
 					case 'imagearc':
 						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
-						imagearc($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['radius'], $KBSHAPE['radius'], $KBSHAPE['s_angle'], $KBSHAPE['e_angle'], $KBCOLOUR);
+						imagearc($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['width'], $KBSHAPE['height'], $KBSHAPE['s_angle'], $KBSHAPE['e_angle'], $KBCOLOUR);
 						break;
 					case 'imageellipse':
 						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
@@ -51,7 +51,7 @@ class Bitmap extends Command
 						break;
 					case 'imagefilledarc':
 						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
-						imagefilledarc($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['radius'], $KBSHAPE['radius'], $KBSHAPE['s_angle'], $KBSHAPE['e_angle'], $KBCOLOUR, $KBSHAPE['style']);
+						imagefilledarc($KBBITMAP, $KBSHAPE['x'], $KBSHAPE['y'], $KBSHAPE['width'], $KBSHAPE['height'], $KBSHAPE['s_angle'], $KBSHAPE['e_angle'], $KBCOLOUR, $KBSHAPE['style']);
 						break;
 					case 'imagefilledrectangle':
 						$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBSHAPE['colour'][0], $KBSHAPE['colour'][1], $KBSHAPE['colour'][2], $KBSHAPE['colour'][3]);
@@ -127,8 +127,8 @@ class Bitmap extends Command
 	{
 		var output = "<?php ", value;
 
-		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBIMAGE, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imagefttext($KBIMAGE, ";
+		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
+		let output .= "imagefttext($KBBITMAP, ";
 
 		let args = this->args(args);
 		let value = this->setArg(args[0], false);

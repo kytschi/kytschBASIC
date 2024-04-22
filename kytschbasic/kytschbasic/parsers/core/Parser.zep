@@ -132,7 +132,9 @@ class Parser
 				for parser in this->available {
 					let line = (new {parser}())->parse(command, args);
 					if (!empty(line)) {
-						let output .= line . this->newline;
+						if (is_string(line)) {
+							let output .= line . this->newline;
+						}
 						break;
 					}
 				}
