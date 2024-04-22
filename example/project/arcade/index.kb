@@ -35,21 +35,21 @@ HEAD CLOSE
 					PRINT "Display height in pixels: "
 					DISPHEIGHT
 				SWRITE CLOSE
-				SCREEN "the-traveller",800,600
+				SCREEN "the-traveller";800;600
 					WINDOW "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
+						RGB 0;0;0
+						BITMAP 0;0;800;400
+							RGB 255;0;0
 							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-							BITMAPTEXT 220,150,32,0,75,"The Traveller"
-							BITMAPTEXT 235,320,18,0,75,"Press any key to start"
+							BITMAPTEXT "The Traveller";32;0;220;150
+							BITMAPTEXT "Press any key to start";18;0;235;320
 						BITMAP CLOSE
 					WINDOW CLOSE
 					WINDOW "input"
-						RGB 0,0,0
-						BITMAP 0,0,800,200
-							RGB 255,0,0
-							LINE 0,0,800,0
+						RGB 0;0;0
+						BITMAP 0;0;800;200
+							RGB 255;0;0
+							LINE 0;0;800;0
 						BITMAP CLOSE
 					WINDOW CLOSE
 				SCREEN CLOSE
