@@ -50,22 +50,24 @@ class Loops extends Command
 			throw new Exception("Invalid for loop");
 		}
 
-		var variable = "", step;
+		var variable = "", step, dir = " <= ";
 		let variable = explode("=", args[0]);
 		let variable = variable[0];
 
 		let step = explode(" STEP ", args[1]);
 		if (count(step) > 1) {
 			let args[1] = step[0];
-			if (strpos(step[1], "-") === false) {
-				let step = " += 1";	
-			} else {
+			let step[1] = intval(step[1]);
+			if (step[1] < 0) {
+				let dir = " >= ";
 				let step = " -= " . trim(step[1], "-");
+			} else {
+				let step = " += " . step[1];
 			}
 		} else {
 			let step = " += 1";
 		}
 
-		return "<?php for (" . this->clean(args[0]) . "; " . this->clean(variable) . " <= " . this->clean(args[1]) . "; " . this->clean(variable) . step . ") { ?>";
+		return "<?php for (" . this->clean(args[0]) . "; " . this->clean(variable) . dir . this->clean(args[1]) . "; " . this->clean(variable) . step . ") { ?>";
 	}
 }

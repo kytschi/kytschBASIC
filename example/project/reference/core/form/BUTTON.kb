@@ -28,7 +28,7 @@ SWRITE
 				TCELL
 					PRINT "Name"
 				TCELL CLOSE
-				TCELL
+				TCELL ;; 2
 					TEXTINPUT "input_test"; "form-input"; "Enter your name"
 				TCELL CLOSE
 			TROW CLOSE
@@ -61,7 +61,7 @@ SWRITE CLOSE
 									TCELL
 										PRINT "Name"
 									TCELL CLOSE
-									TCELL
+									TCELL ;; 2
 										TEXTINPUT "input_test"; "form-input"; "Enter your name"
 									TCELL CLOSE
 								TROW CLOSE

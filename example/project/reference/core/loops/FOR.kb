@@ -21,7 +21,7 @@ LOAD "_ROOT/project/shared/header"
 SPRINT FOR iLoop=1 TO 10
 	PRINT iLoop
 	PRINT "&amp;nbsp;"
-SPRINT NEXT iLoop
+SPRINT NEXT
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
@@ -30,7 +30,7 @@ SPRINT NEXT iLoop
 					FOR iLoop=1 TO 10
 						PRINT iLoop
 						PRINT "&nbsp;"
-					NEXT iLoop
+					NEXT
 				DIV CLOSE
 				HEADING 4
 					PRINT "See also"

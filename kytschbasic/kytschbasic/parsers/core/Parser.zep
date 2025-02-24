@@ -143,6 +143,8 @@ class Parser
 			return this->processIf(line, "if", args, true);
 		} elseif (command == "ELSEIF") {
 			return this->processIf(line, "elseif", args);
+		} elseif (command == "ELSE") {
+			return "<?php else: ?>";
 		} elseif (command == "BUTTON") {
 			return this->processButton(args);
 		}  elseif (command == "BUTTON CLOSE") {
