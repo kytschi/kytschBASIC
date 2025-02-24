@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Compiler
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.2
+ * @version     0.0.12 alpha
  *
- * Copyright 2024 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -40,7 +40,7 @@ class Compiler
 	private start_time;
 	private newline = "\n";
 
-	private version = "0.0.11 alpha";
+	private version = "0.0.12 alpha";
 
 	public function __construct(string config_dir)
 	{

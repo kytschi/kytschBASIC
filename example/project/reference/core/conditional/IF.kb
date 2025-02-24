@@ -18,48 +18,48 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				HEADING CLOSE 3
 				CPRINT
-SPRINT FOR iLoop=1 to 10
-	SPRINT IF iLoop=2 THEN
+FOR iLoop=1 TO 10
+	IF iLoop=2 THEN
 		PRINT iLoop
 		PRINT " | "
-	SPRINT ELSEIF iLoop=4 THEN
+	ELSEIF iLoop=4 THEN
         PRINT iLoop
 		PRINT " | "
-	SPRINT ELSEIF iLoop=6 THEN
+	ELSEIF iLoop=6 THEN
         PRINT iLoop
 		PRINT " | "
-	SPRINT END IF
-SPRINT NEXT iLoop
-SPRINT LINE BREAK
-SPRINT FOR iLoop=1 to 10
-	SPRINT IF iLoop=2 THEN PRINT iLoop
-	SPRINT ELSEIF iLoop=4 THEN PRINT iLoop
-	SPRINT ELSEIF iLoop=6 THEN PRINT iLoop
-	SPRINT END IF
-SPRINT NEXT iLoop
+	END IF
+NEXT
+LINE BREAK
+FOR iLoop=1 TO 10
+	IF iLoop=2 THEN PRINT iLoop
+	ELSEIF iLoop=4 THEN PRINT iLoop
+	ELSEIF iLoop=6 THEN PRINT iLoop
+	END IF
+NEXT
 				CPRINT CLOSE
 				HEADING 4
 					PRINT "Output"
 				HEADING CLOSE 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					FOR iLoop%=1 to 10
-						IF iLoop%=2 THEN
+					FOR iLoop%=1 TO 10
+						IF iLoop==2 THEN
 							PRINT iLoop%
 							PRINT " | "
-						ELSEIF iLoop%=4 THEN
+						ELSEIF iLoop==4 THEN
 							PRINT iLoop%
 							PRINT " | "
-						ELSEIF iLoop%=6 THEN
+						ELSEIF iLoop==6 THEN
 							PRINT iLoop%
 						END IF
-					NEXT iLoop%
+					NEXT
 					LINE BREAK
-					FOR iLoop%=1 to 10
-						IF iLoop%=2 THEN PRINT iLoop%
-						ELSEIF iLoop%=4 THEN PRINT iLoop%
-						ELSEIF iLoop%=6 THEN PRINT iLoop%
+					FOR iLoop%=1 TO 10
+						IF iLoop==2 THEN PRINT iLoop%
+						ELSEIF iLoop==4 THEN PRINT iLoop%
+						ELSEIF iLoop==6 THEN PRINT iLoop%
 						END IF
-					NEXT iLoop
+					NEXT
 				DIV CLOSE
 				HEADING 4
 					PRINT "See also"

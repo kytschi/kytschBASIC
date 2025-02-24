@@ -1,11 +1,10 @@
 /**
- * Select parser
+ * Cookie helper
  *
- * @package     KytschBASIC\Parsers\Core\Conditional\Select
- * @author 		Mike Welsh <hello@kytschi.com>
+ * @package     KytschBASIC\Helpers\Cookie
+ * @author 		Mike Welsh
  * @copyright   2025 Mike Welsh
- * @link 		https://kytschbasic.org
- * @version     0.0.2
+ * @version     0.0.1
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -23,21 +22,37 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Parsers\Core\Conditional;
+namespace KytschBASIC\Helpers;
 
-use KytschBASIC\Parsers\Core\Command;
-
-class Select extends Command
+class Cookie
 {
-	private open_case = false;
+	private cookie_name = "kb_HLPR";
 
-	public function parse(string command, args)
+	private function getCookie()
 	{
-		if (command == "SELECT") {
-			return "<?php switch (" . this->clean(args) . ") { ?>";
-		} elseif (command == "ENDSELECT") {
-			return "<?php } ?>";
+		if (!array_key_exists(this->cookie_name, _COOKIE)) {
+			return null;
 		}
+
+		var cookie, data;
+		let cookie = _COOKIE[this->cookie_name];
+		if (cookie) {
+			let data = json_decode(str_replace("\\\"", "\"", trim(cookie, "\"")));
+		} else {
+			let data = json_decode("{display:[0,0]}");
+		}
+
+		return data;
+	}
+
+	public function get(string name)
+	{
+		var cookie = this->getCookie();
+
+		if (isset(cookie->{name})) {
+			return cookie->{name};
+		}
+
 		return null;
 	}
 }

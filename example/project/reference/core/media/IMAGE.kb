@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "IMAGE";"heading-command basic"
 					LINE BREAK
-					PRINT "FILE, LABEL, CLASS, ID";"heading-args"
+					PRINT "FILE; LABEL; CLASS; ID";"heading-args"
 				SWRITE CLOSE
 				SWRITE
 					PRINT "Render an image to the screen."

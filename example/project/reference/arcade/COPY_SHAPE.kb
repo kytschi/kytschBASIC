@@ -26,8 +26,8 @@ LOAD "_ROOT/project/shared/header"
 INCLUDE arcade
 RGB 0;0;0
 BITMAP 0;0;640;480
-	REM Create an almost transparent circle
-	RGB 255;0;0;98
+	REM Create a circle
+	RGB 255;0;0
 	CIRCLE 280;220;40
 
 	REM Copy the freshly drawn circle and create a new one
@@ -45,8 +45,8 @@ BITMAP CLOSE
 				HEADING CLOSE 4
 				RGB 0;0;0
 				BITMAP 0;0;640;480
-					REM Create an almost transparent circle
-					RGB 255;0;0;98
+					REM Create a circle
+					RGB 255;0;0
 					CIRCLE 280;220;40
 
 					REM Copy the freshly drawn circle and create a new one
