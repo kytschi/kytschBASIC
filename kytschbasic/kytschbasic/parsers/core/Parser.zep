@@ -27,6 +27,7 @@ namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
+use KytschBASIC\Parsers\Core\Variables;
 
 class Parser
 {
@@ -40,6 +41,7 @@ class Parser
 	 */
 	private available = [
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
+		"KytschBASIC\\Parsers\\Core\\Input\\Form",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Layout",
 		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
@@ -137,8 +139,14 @@ class Parser
 			return str_replace("SPRINT ", "", line) . this->newline;
 		} elseif (command == "IF") {
 			return this->processIf(line, "if", args);
+		} elseif (command == "IFNTE") {
+			return this->processIf(line, "if", args, true);
 		} elseif (command == "ELSEIF") {
 			return this->processIf(line, "elseif", args);
+		} elseif (command == "BUTTON") {
+			return this->processButton(args);
+		}  elseif (command == "BUTTON CLOSE") {
+			return "<?= \"</button>\"; ?>";
 		} elseif (command == "CASE") {
 			if (this->has_case) {
 				let output .= "<?php break; ?>" . this->newline;
@@ -173,11 +181,56 @@ class Parser
 		return output;
 	}
 
-	private function processIf(line, string command = "if", args)
+	private function processButton(args, string type = "button")
+	{
+		var output = "", command;
+
+		if (strpos(args, "SUBMIT ") !== false) {
+			let args = str_replace("SUBMIT ", "", args);
+			let type = "submit";
+		}
+
+		let command = new Command();
+		
+		let args = command->args(args);
+
+		let output = "<?= \"<button type='" . type . "'";
+		
+		if (isset(args[0]) && !empty(args[0])) {
+			let output .= " name='" . command->setArg(args[0]) . "'";
+		} else {
+			let output .= " name='" . command->genID("kb-btn-submit") . "'";
+		}
+
+		if (isset(args[1]) && !empty(args[1])) {
+			let output .= " class='" . command->setArg(args[1]) . "'";
+		}
+
+		if (isset(args[2]) && !empty(args[2])) {
+			let output .= " id='" . command->setArg(args[2]) . "'";
+		}
+
+		if (isset(args[3]) && !empty(args[3])) {
+			let output .= "><span>" . command->setArg(args[3]) . "</span></button>";
+		} else {
+			let output .= ">";
+		}
+
+		return output . "\"; ?>";
+		
+	}
+
+	private function processIf(line, string command = "if", args, bool not_empty = false)
 	{
 		var output = "", parser;
 		let args = explode(" THEN", args);
-		let output = "<?php " . command . " (" . (new Command())->clean(args[0]) . "): ?>";
+		let output = "<?php " . command . " (";
+		if (not_empty) {
+			let output .= "!empty(" . (new Command())->clean(args[0]) . ")";
+		} else {
+			let output .= (new Command())->clean(args[0]);
+		}
+		let output .= "): ?>";
 
 		if (count(args) > 1) {
 			if (!empty(trim(args[1]))) {

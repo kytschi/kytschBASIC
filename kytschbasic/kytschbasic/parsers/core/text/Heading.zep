@@ -46,18 +46,18 @@ class Heading extends Command
 
 		let args = this->args(line);
 
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			let size = this->setArg(args[0], false);
 		}
 		if (close) {
 			return "<?= \"</h" . size . ">\"; ?>";
 		}
 
-		if (isset(args[1])) {
+		if (isset(args[1]) && !empty(args[1])) {
 			let params .= " class='" . this->setArg(args[1]) . "'";
 		}
 
-		if (isset(args[2])) {
+		if (isset(args[2]) && !empty(args[2])) {
 			let params .= " id='" . this->setArg(args[2]) . "'";
 		} else {
 			let params .= " id='" . this->genID("kb-heading") . "'";

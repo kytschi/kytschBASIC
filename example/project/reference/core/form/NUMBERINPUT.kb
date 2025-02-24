@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FORM TEXTAREA statment | kytschBASIC"
+	NAME "NUMBERINPUT statment | kytschBASIC"
 HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,12 +9,12 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "FORM TEXTAREA";"heading-command basic"
+					PRINT "NUMBERINPUT";"heading-command basic"
 					LINE BREAK
-					PRINT "NAME, CLASS, PLACEHOLDER TEXT, ID, REQUIRED";"heading-args"
+					PRINT "NAME; CLASS; PLACEHOLDER TEXT; ID; REQUIRED";"heading-args"
 				SWRITE CLOSE
 				SWRITE
-					PRINT "Create a form textarea."
+					PRINT "Create a form input of the number type."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					TCELL CLOSE
 					TCELL
-						FORM TEXTAREA "input_test", "form-input", "Enter your name"
+						NUMBERINPUT "input_test"; "form-input"; "Enter your name"
 					TCELL CLOSE
 				TROW CLOSE
 				TROW
@@ -43,7 +43,7 @@ FORM "form_test"
 						WHITESPACE
 					TCELL CLOSE
 					TCELL
-						FORM SUBMIT "btn_test", "submit"
+						BUTTON SUBMIT "btn_test";;; "submit"
 					TCELL CLOSE
 				TROW CLOSE
 			TBODY CLOSE
@@ -67,10 +67,10 @@ FORM "form_test"
 			TBODY
 				TROW
 					TCELL
-						PRINT "Message"
+						PRINT "Name"
 					TCELL CLOSE
 					TCELL
-						FORM TEXTAREA "input_test", "form-input", "Enter your message"
+						NUMBERINPUT "input_test"; "form-input"; "Enter your name"
 					TCELL CLOSE
 				TROW CLOSE
 				TROW
@@ -78,7 +78,7 @@ FORM "form_test"
 						WHITESPACE
 					TCELL CLOSE
 					TCELL
-						FORM SUBMIT "btn_test", "submit"
+						BUTTON SUBMIT "btn_test";;; "submit"
 					TCELL CLOSE
 				TROW CLOSE
 			TBODY CLOSE
@@ -94,16 +94,24 @@ FORM CLOSE
 						PRINT "FORM"
 					LINK CLOSE
 					PRINT " | "
-					LINK "/reference/FORM-CAPTCHA"
-						PRINT "FORM CAPTCHA"
+					LINK "/reference/CAPTCHA"
+						PRINT "CAPTCHA"
 					LINK CLOSE
 					PRINT " | "
-					LINK "/reference/FORM-INPUT"
-						PRINT "FORM INPUT"
+					LINK "/reference/TEXTINPUT"
+						PRINT "TEXTINPUT"
 					LINK CLOSE
 					PRINT " | "
-					LINK "/reference/FORM-SUBMIT"
-						PRINT "FORM SUBMIT"
+					LINK "/reference/TEXTAREA"
+						PRINT "FORM TEXTAREA"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/BUTTON"
+						PRINT "BUTTON"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/BUTTON-SUBMIT"
+						PRINT "BUTTON SUBMIT"
 					LINK CLOSE
 					PRINT " | "
 					LINK "/reference/_GET"

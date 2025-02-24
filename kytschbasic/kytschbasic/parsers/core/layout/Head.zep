@@ -62,7 +62,7 @@ class Head extends Command
 	{
 		var args;
 		let args = explode("\";", line);
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			return "<meta charset=\"" . this->setArg(args[0]) . "\">";
 		}
 		
@@ -75,7 +75,7 @@ class Head extends Command
 		let args = explode("\";", line);
 		let line = "";
 
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			let line = "<link rel=\"icon\" href=\"" . this->setArg(args[0]) . "\"";
 		}
 		
@@ -90,7 +90,7 @@ class Head extends Command
 	{
 		var args;
 		let args = explode("\";", line);
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			return "<meta name=\"" . type . "\" content=\"" . this->setArg(args[0]) . "\">";
 		}
 		
@@ -101,7 +101,7 @@ class Head extends Command
 	{
 		var args;
 		let args = explode("\";", line);
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			return "<html lang=\"" . this->setArg(args[0]) . "\">";
 		}
 
@@ -112,7 +112,7 @@ class Head extends Command
 	{
 		var args;
 		let args = explode("\";", line);
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			return "<title>" . this->setArg(args[0]) . "</title>";
 		}
 
@@ -126,7 +126,7 @@ class Head extends Command
 
 		let args = explode("\";", line);
 		
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			let args[0] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . this->setArg(args[0]) . "/css/palette.css";
 						
 			if (!empty(config["cache"])) {

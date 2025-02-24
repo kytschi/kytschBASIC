@@ -64,11 +64,11 @@ class Layout extends Command
 
 		let args = this->args(line);
 		
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			let params .= " class='" . this->setArg(args[0]) . "'";
 		}
 
-		if (isset(args[1])) {
+		if (isset(args[1]) && !empty(args[1])) {
 			let params .= " id='" . this->setArg(args[1]) . "'";
 		} else {
 			let params .= " id='" . this->genID("kb-" . tag) . "'";

@@ -50,23 +50,23 @@ class Navigation extends Command
 
 		let args = this->args(line);
 		
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			let params .= " href='" . this->setArg(args[0]) . "'";
 		}
 
-		if (isset(args[1])) {
+		if (isset(args[1]) && !empty(args[1])) {
 			let params .= " title='" . this->setArg(args[1]) . "'";
 		}
 
-		if (isset(args[2])) {
+		if (isset(args[2]) && !empty(args[2])) {
 			let params .= " class='" . this->setArg(args[2]) . "'";
 		}
 
-		if (isset(args[3])) {
+		if (isset(args[3]) && !empty(args[3])) {
 			let params .= " target='" . this->setArg(args[3]) . "'";
 		}
 
-		if (isset(args[4])) {
+		if (isset(args[4]) && !empty(args[4])) {
 			let params .= " id='" . this->setArg(args[4]) . "'";
 		} else {
 			let params .= " id='" . this->genID("kb-a") . "'";
@@ -81,11 +81,11 @@ class Navigation extends Command
 
 		let args = this->args(line);
 		
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0])) {
 			let params .= " class='" . this->setArg(args[0]) . "'";
 		}
 
-		if (isset(args[1])) {
+		if (isset(args[1]) && !empty(args[1])) {
 			let params .= " id='" . this->setArg(args[1]) . "'";
 		} else {
 			let params .= " id='" . this->genID("kb-span") . "'";

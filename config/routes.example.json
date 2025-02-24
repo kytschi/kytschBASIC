@@ -172,16 +172,28 @@
 		"template": "project/reference/core/form/FORM.kb"
 	},
 	{
-		"url": "/reference/FORM-CAPTCHA",
-		"template": "project/reference/core/form/FORM_CAPTCHA.kb"
+		"url": "/reference/CAPTCHA",
+		"template": "project/reference/core/form/CAPTCHA.kb"
 	},
 	{
-		"url": "/reference/FORM-INPUT",
-		"template": "project/reference/core/form/FORM_INPUT.kb"
+		"url": "/reference/TEXTINPUT",
+		"template": "project/reference/core/form/TEXTINPUT.kb"
 	},
 	{
-		"url": "/reference/FORM-TEXTAREA",
-		"template": "project/reference/core/form/FORM_TEXTAREA.kb"
+		"url": "/reference/TEXTAREA",
+		"template": "project/reference/core/form/TEXTAREA.kb"
+	},
+	{
+		"url": "/reference/NUMBERINPUT",
+		"template": "project/reference/core/form/NUMBERINPUT.kb"
+	},
+	{
+		"url": "/reference/BUTTON-SUBMIT",
+		"template": "project/reference/core/form/BUTTON_SUBMIT.kb"
+	},
+	{
+		"url": "/reference/BUTTON",
+		"template": "project/reference/core/form/BUTTON.kb"
 	},
 
 	{

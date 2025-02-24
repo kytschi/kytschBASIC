@@ -1,0 +1,130 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "BUTTON statment | kytschBASIC"
+HEAD CLOSE
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row";"main-content"
+			DIV "kb-col kb-col-24";"main-content-col"
+				SWRITE
+					PRINT "BUTTON";"heading-command basic"
+					LINE BREAK
+					PRINT "NAME; CLASS; ID; LABEL";"heading-args"
+				SWRITE CLOSE
+				SWRITE
+					PRINT "Create a button."
+				SWRITE CLOSE
+				HEADING 3
+					PRINT "Example"
+				HEADING CLOSE 3
+				CPRINT
+SWRITE
+	LINE BREAK
+	TABLE "table-border"
+		TBODY
+			TROW
+				TCELL
+					PRINT "Name"
+				TCELL CLOSE
+				TCELL
+					TEXTINPUT "input_test"; "form-input"; "Enter your name"
+				TCELL CLOSE
+			TROW CLOSE
+			TROW
+				TCELL
+					WHITESPACE
+				TCELL CLOSE
+				TCELL
+					BUTTON "btn_test";;; "button"
+				TCELL CLOSE
+				TCELL
+					BUTTON "btn_test2"
+						PRINT "button2"
+					BUTTON CLOSE
+				TCELL CLOSE
+			TROW CLOSE
+		TBODY CLOSE
+	TABLE CLOSE
+SWRITE CLOSE
+				CPRINT CLOSE
+				HEADING 4
+					PRINT "Output"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24 kb-code-block"
+					SWRITE
+						LINE BREAK
+						TABLE "table-border"
+							TBODY
+								TROW
+									TCELL
+										PRINT "Name"
+									TCELL CLOSE
+									TCELL
+										TEXTINPUT "input_test"; "form-input"; "Enter your name"
+									TCELL CLOSE
+								TROW CLOSE
+								TROW
+									TCELL
+										WHITESPACE
+									TCELL CLOSE
+									TCELL
+										BUTTON "btn_test";;; "button"
+									TCELL CLOSE
+									TCELL
+										BUTTON "btn_test2"
+											PRINT "button2"
+										BUTTON CLOSE
+									TCELL CLOSE
+								TROW CLOSE
+							TBODY CLOSE
+						TABLE CLOSE
+					SWRITE CLOSE
+				DIV CLOSE
+				HEADING 4
+					PRINT "See also"
+				HEADING CLOSE 4
+				DIV "kb-col kb-col-24";"see-also"
+					LINK "/reference/FORM"
+						PRINT "FORM"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/CAPTCHA"
+						PRINT "CAPTCHA"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/TEXTAREA"
+						PRINT "TEXTAREA"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/NUMBERINPUT"
+						PRINT "NUMBERINPUT"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/TEXTINPUT"
+						PRINT "TEXTINPUT"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/BUTTON-SUBMIT"
+						PRINT "BUTTON SUBMIT"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/_GET"
+						PRINT "_GET"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/_POST"
+						PRINT "_POST"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/_REQUEST"
+						PRINT "_REQUEST"
+					LINK CLOSE
+				DIV CLOSE
+			DIV CLOSE
+		DIV CLOSE
+	LOAD "_ROOT/project/shared/footer"
+	MAIN CLOSE
+BODY CLOSE
+END

@@ -79,6 +79,15 @@ HEADER
 		LINK "/reference/BOXF#refBOXF";"Find out about the BOXF command";"nav-link";;"refBOXF"
 			PRINT "BOXF"
 		LINK CLOSE
+		LINK "/reference/BUTTON#refBUTTON";"Find out about the BUTTON command";"nav-link";;"refBUTTON"
+			PRINT "BUTTON"
+		LINK CLOSE
+		LINK "/reference/BUTTON-SUBMIT#refBUTTONSUBMIT";"Find out about the BUTTON SUBMIT command";"nav-link";;"refBUTTONSUBMIT"
+			PRINT "BUTTON SUBMIT"
+		LINK CLOSE
+		LINK "/reference/CAPTCHA#refCAPTCHA";"Find out about the CAPTCHA command";"nav-link";;"refCAPTCHA"
+			PRINT "CAPTCHA"
+		LINK CLOSE
 		LINK "/reference/CASE#refCASE";"Find out about the CASE command";"nav-link";;"refCASE"
 			PRINT "CASE"
 		LINK CLOSE
@@ -159,15 +168,6 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/FORM#refFORM";"Find out about the FORM command";"nav-link";;"refFORM"
 			PRINT "FORM"
-		LINK CLOSE
-		LINK "/reference/FORM-CAPTCHA#refFORMCAPTCHA";"Find out about the FORM CAPTCHA command";"nav-link";;"refFORMCAPTCHA"
-			PRINT "FORM CAPTCHA"
-		LINK CLOSE
-		LINK "/reference/FORM-INPUT#refFORMINPUT";"Find out about the FORM INPUT command";"nav-link";;"refFORMINPUT"
-			PRINT "FORM INPUT"
-		LINK CLOSE
-		LINK "/reference/FORM-TEXTAREA#refFORMTEXTAREA";"Find out about the FORM TEXTAREA command";"nav-link";;"refFORMTEXTAREA"
-			PRINT "FORM TEXTAREA"
 		LINK CLOSE
 		LINK "/reference/FOOTER#refFOOTER";"Find out about the FOOTER command";"nav-link";;"refFOOTER"
 			PRINT "FOOTER"
@@ -315,6 +315,12 @@ HEADER
 		LINK CLOSE
 		LINK "/reference/TCELL#refTCELL";"Find out about the TCELL command";"nav-link";;"refTCELL"
 			PRINT "TCELL"
+		LINK CLOSE
+		LINK "/reference/TEXTAREA#refTEXTAREA";"Find out about the TEXTAREA command";"nav-link";;"refTEXTAREA"
+			PRINT "FORM TEXTAREA"
+		LINK CLOSE
+		LINK "/reference/TEXTINPUT#refTEXTINPUT";"Find out about the TEXTINPUT command";"nav-link";;"refTEXTINPUT"
+			PRINT "TEXTINPUT"
 		LINK CLOSE
 		LINK "/reference/TFOOT#refTFOOT";"Find out about the TFOOT command";"nav-link";;"refTFOOT"
 			PRINT "TFOOT"

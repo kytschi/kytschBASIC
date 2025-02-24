@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FORM statment | kytschBASIC"
+	NAME "BUTTON SUBMIT statment | kytschBASIC"
 HEAD CLOSE
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,12 +9,12 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "FORM";"heading-command basic"
+					PRINT "BUTTON SUBMIT";"heading-command basic"
 					LINE BREAK
-					PRINT "ID; METHOD (default is GET); ACTION; CLASS";"heading-args"
+					PRINT "NAME; CLASS; ID; LABEL";"heading-args"
 				SWRITE CLOSE
 				SWRITE
-					PRINT "Creating an HTML form."
+					PRINT "Create a form submit button."
 				SWRITE CLOSE
 				HEADING 3
 					PRINT "Example"
@@ -44,6 +44,11 @@ FORM "form_test"
 					TCELL CLOSE
 					TCELL
 						BUTTON SUBMIT "btn_test";;; "submit"
+					TCELL CLOSE
+					TCELL
+						BUTTON SUBMIT "btn_test"
+							PRINT "submit"
+						BUTTON CLOSE
 					TCELL CLOSE
 				TROW CLOSE
 			TBODY CLOSE
@@ -80,24 +85,23 @@ FORM "form_test"
 					TCELL
 						BUTTON SUBMIT "btn_test";;; "submit"
 					TCELL CLOSE
+					TCELL
+						BUTTON SUBMIT "btn_test"
+							PRINT "submit"
+						BUTTON CLOSE
+					TCELL CLOSE
 				TROW CLOSE
 			TBODY CLOSE
 		TABLE CLOSE
 	SWRITE CLOSE
 FORM CLOSE
 				DIV CLOSE
-				HEADING 3
-					PRINT "Adding a CAPTCHA to the form"
-				HEADING CLOSE 3
-				CPRINT
-CAPTCHA "captcha"
-				CPRINT CLOSE
 				HEADING 4
 					PRINT "See also"
 				HEADING CLOSE 4
 				DIV "kb-col kb-col-24";"see-also"
-					LINK "/reference/TEXTINPUT"
-						PRINT "TEXTINPUT"
+					LINK "/reference/FORM"
+						PRINT "FORM"
 					LINK CLOSE
 					PRINT " | "
 					LINK "/reference/CAPTCHA"
@@ -108,16 +112,16 @@ CAPTCHA "captcha"
 						PRINT "TEXTAREA"
 					LINK CLOSE
 					PRINT " | "
-					LINK "/reference/NUMBERINPUT"
-						PRINT "NUMBERINPUT"
-					LINK CLOSE
-					PRINT " | "
 					LINK "/reference/BUTTON"
 						PRINT "BUTTON"
 					LINK CLOSE
 					PRINT " | "
-					LINK "/reference/BUTTON-SUBMIT"
-						PRINT "BUTTON SUBMIT"
+					LINK "/reference/NUMBERINPUT"
+						PRINT "NUMBERINPUT"
+					LINK CLOSE
+					PRINT " | "
+					LINK "/reference/TEXTINPUT"
+						PRINT "TEXTINPUT"
 					LINK CLOSE
 					PRINT " | "
 					LINK "/reference/_GET"
