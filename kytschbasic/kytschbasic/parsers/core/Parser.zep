@@ -90,25 +90,23 @@ class Parser
 				
 				if (line == "") {
 					continue;
-				} elseif (trim(line) == "END IF" && !this->cprint) {
-					let output .= "<?php endif; ?>";
-					continue;
 				}
 
 				let parser = explode(" ", trim(line));
 				let command = parser[0];
 				array_shift(parser);
+
 				if (isset(parser[0])) {
-					if (parser[0] == "CLOSE") {
-						let command .= " CLOSE";
+					if (command == "END") {
+						let command .= " " . parser[0];
 						array_shift(parser);
 					} elseif (parser[0] == "BREAK") {
 						let command .= " BREAK";
 						array_shift(parser);
 					}
 				}
+				
 				let args = implode(" ", parser);
-
 				let output .= this->processCommand(line, command, args);
 			}
 
@@ -130,13 +128,13 @@ class Parser
 		if (command == "CPRINT") {
 			let this->cprint = true;
 			return "<pre><code>" . this->newline;
-		} elseif (command == "CPRINT CLOSE") {
+		} elseif (command == "END CPRINT") {
 			let this->cprint = false;
 			return "</code></pre>" . this->newline;
-		} elseif (command == "REM") {
-			return;
 		} elseif (this->cprint || command == "SPRINT") {
 			return str_replace("SPRINT ", "", line) . this->newline;
+		} elseif (command == "REM") {
+			return;
 		} elseif (command == "IF") {
 			return this->processIf(line, "if", args);
 		} elseif (command == "IFNTE") {
@@ -145,9 +143,11 @@ class Parser
 			return this->processIf(line, "elseif", args);
 		} elseif (command == "ELSE") {
 			return "<?php else: ?>";
+		} elseif (trim(command) == "END IF") {
+			return "<?php endif; ?>";
 		} elseif (command == "BUTTON") {
 			return this->processButton(args);
-		}  elseif (command == "BUTTON CLOSE") {
+		}  elseif (command == "END BUTTON") {
 			return "<?= \"</button>\"; ?>";
 		} elseif (command == "CASE") {
 			if (this->has_case) {

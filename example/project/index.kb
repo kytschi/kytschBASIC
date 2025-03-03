@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "index.kb | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,17 +12,17 @@ BODY
 					PRINT "Welcome to "
 					PRINT "kytsch";"kytsch"
 					PRINT "BASIC";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "An 80s language by an 80s kid for the modern world!"
-				SWRITE CLOSE
+				END SWRITE
 				PRINT "A quick example :-)"
 				CPRINT
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "Welcome | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -32,32 +32,32 @@ BODY
 					PRINT "Welcome to "
 					PRINT "kytsch";"kytsch"
 					PRINT "BASIC";"basic"					
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "An 80s language by an 80s kid for the modern world!"
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "What is kytschBASIC all about?"
-				HEADING CLOSE 3
+				END HEADING 3
 				SWRITE
 					PRINT "kytschBASIC is a PHP module that will allow you to write BASIC code to render flat html."
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "The project is still in its early days but you can check it out at the link below."
-				SWRITE CLOSE
+				END SWRITE
 				LINK "https://github.com/kytschi/kytschBASIC";"Checkout the source code";;"_blank"
 					PRINT "Git repo"
-				LINK CLOSE
-			DIV CLOSE
-		DIV CLOSE
+				END LINK
+			END DIV
+		END DIV
 		LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END
-				CPRINT CLOSE
-			DIV CLOSE
-		DIV CLOSE
+				END CPRINT
+			END DIV
+		END DIV
 		LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

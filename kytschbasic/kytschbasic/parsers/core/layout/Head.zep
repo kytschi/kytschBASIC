@@ -31,7 +31,7 @@ class Head extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "HEAD CLOSE") {
+		if (command == "END HEAD") {
 			return "</head>";
 		} elseif (command == "HEAD" && command != "HEADI") {
 			return "<head>";

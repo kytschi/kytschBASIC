@@ -31,11 +31,11 @@ class Navigation extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "LINK CLOSE") {
+		if (command == "END LINK") {
 			return "</a>";
 		} elseif (command == "LINK") {
 			return this->processLink(args);
-		} elseif (command == "MENU CLOSE") {
+		} elseif (command == "END MENU") {
 			return "</nav>";
 		} elseif (command == "MENU") {
 			return this->processNav(args);
@@ -49,7 +49,7 @@ class Navigation extends Command
 		var args, params="";
 
 		let args = this->args(line);
-		
+				
 		if (isset(args[0]) && !empty(args[0])) {
 			let params .= " href='" . this->setArg(args[0]) . "'";
 		}

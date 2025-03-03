@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "PRINT statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,51 +12,51 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "PRINT";"heading-command basic"
 					LINE BREAK
 					PRINT "STRING, CLASS, ID";"heading-args"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Outputting to the screen."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 PRINT "Hello World!"
 PRINT "Hello World! I've parameters too!";"heading-args"
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 &lt;span&gt;Hello World!&lt;/span&gt;
 &lt;span class="heading-args"&gt;Hello World! I've arugments too!&lt;/span&gt;
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/parameters"
 						PRINT "Parameters"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LCASE"
 						PRINT "LCASE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/SWRITE"
 						PRINT "SWRITE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/UCASE"
 						PRINT "UCASE"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

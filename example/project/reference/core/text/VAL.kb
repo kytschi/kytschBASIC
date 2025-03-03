@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "VAL statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,107 +10,107 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
 					PRINT "VAL";"heading-command basic"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Convert a string to a number."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 PRINT VAL("Hi World!")
 PRINT VAL("26")
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 0
 26
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CENTRE"
 						PRINT "CENTRE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CHR"
 						PRINT "CHR"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/INT"
 						PRINT "INT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/INSTR"
 						PRINT "INSTR"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LCASE"
 						PRINT "LCASE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LEFT"
 						PRINT "LEFT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LEN"
 						PRINT "LEN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LSET"
 						PRINT "LSET"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/MID"
 						PRINT "MID"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/REPLACE"
 						PRINT "REPLACE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/RIGHT"
 						PRINT "RIGHT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/RSET"
 						PRINT "RSET"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/STR"
 						PRINT "STR"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/STRIPLEAD"
 						PRINT "STRIPLEAD"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/STRIPTRAIL"
 						PRINT "STRIPTRAIL"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/UCASE"
 						PRINT "UCASE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/UNLEFT"
 						PRINT "UNLEFT"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

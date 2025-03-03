@@ -33,17 +33,31 @@ class Loops extends Command
 	public function parse(string command, args)
 	{
 		if (command == "WHILE") {
-			return "<?php while (" . this->clean(args) . ") { ?>";
+			return "<?php while (" . this->clean(args, false) . ") { ?>";
 		} elseif (command == "WEND" || command == "NEXT") {
 			return "<?php } ?>";
 		} elseif (command == "FOR") {
-			return this->processFor(args);
+			if (strpos(args, " IN ") !== false) {
+				return this->processForIn(args);
+			} else {
+				return this->processForTo(args);
+			}
 		}
 
 		return null;
 	}
 
-	private function processFor(args)
+	private function processForIn(args)
+	{
+		let args = explode(" IN ", args);
+		if (count(args) < 1) {
+			throw new Exception("Invalid for loop");
+		}
+
+		return "<?php foreach (" . this->clean(args[1], false) . " as " . this->clean(args[0], false) . ") { ?>";
+	}
+
+	private function processForTo(args)
 	{
 		let args = explode(" TO ", args);
 		if (count(args) < 1) {
@@ -68,6 +82,6 @@ class Loops extends Command
 			let step = " += 1";
 		}
 
-		return "<?php for (" . this->clean(args[0]) . "; " . this->clean(variable) . dir . this->clean(args[1]) . "; " . this->clean(variable) . step . ") { ?>";
+		return "<?php for (" . this->clean(args[0], false) . "; " . this->clean(variable, false) . dir . this->clean(args[1], false) . "; " . this->clean(variable, false) . step . ") { ?>";
 	}
 }

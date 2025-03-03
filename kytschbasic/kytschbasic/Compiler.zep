@@ -134,7 +134,7 @@ class Compiler
 		
 		try {
 			let output = "<?php ";
-			let output = output . "$_VALID=unserialize('" . serialize(this->globals["_VALID"]) . "');?>";
+			let output = output . "$_VALID = unserialize('" . serialize(this->globals["_VALID"]) . "');?>";
 			let output = output . "<!DOCTYPE html>" . this->newline;
 			let output = output . parsed;
 			file_put_contents(constant("_ROOT") . "/compiled.php", output);

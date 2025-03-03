@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Database
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -30,132 +30,97 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Database extends Command
 {
-	/*private function close(array globals = [])
-	{
-		if (empty(this->database)) {
-			throw new DatabaseException("no database selected to read");
-		}
-
-		var dsn = "", output;
-
-		if (isset(this->database_config->type)) {
-			let dsn .= this->database_config->type . ":";
-		} else {
-			let dsn .= "mysql:";
-		}
-
-		if (empty(this->database_config->dbname)) {
-			throw new DatabaseException("no database defined in the config");
-		}
-		let dsn .= "dbname=" . this->database_config->dbname . ";";
-				
-		if (!empty(this->database_config->host)) {
-			let dsn .= "host=" . this->database_config->host . ";";
-		} else {
-			let dsn .= "host=127.0.0.1;";
-		}
-		
-		let output = "<?php try{$connection = new \\PDO('" . dsn . "','" . (!empty(this->database_config->user) ? this->database_config->user : "") . "','" . (!empty(this->database_config->password) ? this->database_config->password : "") . "');";
-		let output = output . "$statement = $connection->prepare(\"" . this->parseGlobals(globals, str_replace("\"", "'", this->data_sql)) . "\");";
-		let output = output . "$statement->execute((array)json_decode('" . json_encode(this->data_bind) . "'));";
-
-		return output . "$" . str_replace(["$", "%", "#", "&"], "", this->data_var) . "=$statement->fetchAll();} catch(\\PDOException $err) {new KytschBASIC\\Exceptions\\Exception($err->getMessage(), 500);}?>";
-	}*/
-
 	public function parse(string command, string args)
 	{
-		if (command == "DOPEN") {
-			return this->parseDOpen(args);
-		} elseif (command == "DFETCH") {
-			return this->parseDFetch(args);
-		} elseif (command == "DREAD") {
-			return this->parseDRead(args);
-		} elseif (command == "DSELECT") {
-			return this->parseDSelect(args);
-		} elseif (command == "DWHERE") {
-			return this->parseDWhere(args);
-		} elseif (command == "DSORT") {
-			return this->parseDSort(args);
-		}
-		/*var err, controller;
-		let controller = new Args();
+		var err;
 
 		try {
-			elseif (command == "DBIND") {
-				var args, arg, splits;
-				let args = this->parseArgs("DBIND", line);
-				if (empty(this->database)) {
-					throw new DatabaseException("no database selected to read");
-				}
-
-				for arg in args {
-					let splits = explode("=", arg);
-					if (!empty(splits[0]) && !empty(splits[0])) {
-						if (!this->isVar(splits[1])) {
-							let this->data_bind[splits[0]] = splits[1];
-						} else {
-							let this->data_bind[splits[0]] = "'." . this->parseVar(splits[1]) . ".'";
-						}
-					}
-				}
-				
-				return true;
+			if (command == "DOPEN") {
+				return this->parseOpen(args);
+			} elseif (command == "DFETCH") {
+				return this->parseFetch(args);
+			} elseif (command == "DREAD") {
+				return this->parseRead(args);
+			} elseif (command == "DSELECT") {
+				return this->parseSelect(args);
+			} elseif (command == "DWHERE") {
+				return this->parseWhere(args);
+			} elseif (command == "DSORT") {
+				return this->parseSort(args);
+			} elseif (command == "DBIND") {
+				return this->parseBind(args);
 			} elseif (command == "DJOIN") {
-				if (empty(this->database)) {
-					throw new DatabaseException("no database selected to read");
-				}
-
-				let line = str_replace("DJOIN ", "", line);
-				let this->data_sql = this->data_sql . " JOIN " . this->cleanArg(line, false);
-
-				return true;
+				return this->parseJoin(args);
 			} elseif (command == "DLJOIN") {
-				if (empty(this->database)) {
-					throw new DatabaseException("no database selected to read");
-				}
-
-				let line = str_replace("DLJOIN ", "", line);
-				let this->data_sql = this->data_sql . " LEFT JOIN " . this->cleanArg(line, false);
-
-				return true;
+				return this->parseLeftJoin(args);
 			} elseif (command == "DRJOIN") {
-				if (empty(this->database)) {
-					throw new DatabaseException("no database selected to read");
-				}
-
-				let line = str_replace("DRJOIN ", "", line);
-				let this->data_sql = this->data_sql . " RIGHT JOIN " . this->cleanArg(line, false);
-
-				return true;
+				return this->parseRightJoin(args);
 			} elseif (command == "DLIMIT") {
-				if (empty(this->database)) {
-					throw new DatabaseException("no database selected to read");
-				}
-
-				let line = str_replace("DLIMIT ", "", line);
-				let this->data_sql = this->data_sql . " LIMIT " . intval(this->cleanArg(line, false));
-
-				return true;
+				return this->parseLimit(args);
 			} elseif (command == "DSET") {
-				if (empty(this->database)) {
-					throw new DatabaseException("no database selected to set to data with");
-				}
-
-				let line = str_replace("DSET ", "", line);
-				let this->data_sql = "INSERT INTO " . this->database . " SET " . controller->clean(line, config);
-
-				return true;
+				return this->parseSet(args);
+			} elseif (command == "DEXEC") {
+				return this->parseExecute();
+			} elseif (command == "END DATA") {
+				return "";
 			}
-
-			return null;
+			
 		} catch DatabaseException, err {
 		    err->fatal();
 		} catch \RuntimeException|\Exception, err {
-		    throw new \Exception("Failed to connect to the database (" . this->database_config->dbname . ")" . ", " . err->getMessage());
-		}*/
+		    throw new \Exception("Database error" . ", " . err->getMessage());
+		}
 	}
 
-	private function parseDOpen(args)
+	private function parseBind(args)
+	{
+		var arg, splits, output = "<?php ";
+		let args = this->args(args);
+		
+		for arg in args {
+			let splits = explode("=", arg);
+			if (!empty(splits[0]) && !empty(splits[0])) {
+				let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = \"" . this->setArg(trim(splits[1])) . "\";";
+			}
+		}
+		
+		return output . " ?>";
+	}
+
+	private function parseExecute()
+	{
+		return "<?php
+$KBDBSTATEMENT = $KBDBCONN->prepare(
+	$KBDBSELECT . ($KBDBSELECT ? ' FROM ' : '') . $KBDBTABLE . $KBDBSET . $KBDBJOIN . $KBDBWHERE . $KBDBSORT . $KBDBLIMIT
+);
+$KBDBSTATEMENT->execute($KBDBBIND); ?>";
+	}
+
+	private function parseFetch(args)
+	{
+		let args = this->args(args);
+		return this->parseExecute() . "\n<?php " . this->clean(args[0], false) . " = $KBDBSTATEMENT->fetchAll(); ?>";
+	}
+
+	private function parseJoin(args)
+	{
+		let args = this->args(args);
+		return "<?php $KBDBJOIN .= \" JOIN " . this->setArg(args[0]) . "\"; ?>";
+	}
+
+	private function parseLeftJoin(args)
+	{
+		let args = this->args(args);
+		return "<?php $KBDBJOIN .= \" LEFT JOIN " . this->setArg(args[0]) . "\"; ?>";
+	}
+
+	private function parseLimit(args)
+	{
+		let args = this->args(args);
+		return "<?php $KBDBLIMIT = \" LIMIT " . this->setArg(args[0]) . "\"; ?>";
+	}
+
+	private function parseOpen(args)
 	{
 		var config, configs, dsn = "", item;
 		let configs = constant("CONFIG");
@@ -196,41 +161,45 @@ class Database extends Command
 			let dsn .= "host=127.0.0.1;";
 		}
 
-		return "<?php $KBDBBIND=[]; $KBDBCONN = new \\PDO('" . dsn . "','" .
-			(!empty(config->user) ? config->user : "") . "','" .
+		return "<?php $KBDBBIND = []; $KBDBSELECT = ''; $KBDBUPDATE = ''; $KBDBTABLE = ''; $KBDBWHERE = ''; $KBDBJOIN = ''; $KBDBSORT = ''; $KBDBLIMIT = ''; $KBDBSET = '';
+			$KBDBCONN = new \\PDO('" . dsn . "', '" .
+			(!empty(config->user) ? config->user : "") . "', '" .
 			(!empty(config->password) ? config->password : "") . "');?>";
 	}
 
-	private function parseDFetch(args)
+	private function parseRead(args)
 	{
 		let args = this->args(args);
-		return "<?php
-		$KBDBSTATEMENT = $KBDBCONN->prepare($KBDBSELECT . $KBDBTABLE . $KBDBWHERE . $KBDBSORT);
-		$KBDBSTATEMENT->execute($KBDBBIND);" .
-		this->setArg(args[0]) . "=$KBDBSTATEMENT->fetchAll();?>";
+		return "<?php $KBDBTABLE = \"" . this->setArg(args[0]) . "\"; ?>";
 	}
 
-	private function parseDRead(args)
+	private function parseRightJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBTABLE=\" FROM " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" RIGHT JOIN " . this->setArg(args[0]) . "\"; ?>";
 	}
 
-	private function parseDSelect(args)
+	private function parseSelect(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBSELECT=\"SELECT " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBSELECT = \"SELECT " . this->setArg(args[0]) . "\"; ?>";
 	}
 
-	private function parseDSort(args)
+	private function parseSet(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBSORT=\" ORDER BY " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET " . this->setArg(args[0]) . "\"; ?>";
 	}
 
-	private function parseDWhere(args)
+	private function parseSort(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBWHERE=\" WHERE " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBSORT = \" ORDER BY " . this->setArg(args[0]) . "\"; ?>";
+	}
+
+	private function parseWhere(args)
+	{
+		let args = this->args(args);
+		return "<?php $KBDBWHERE = \" WHERE " . this->setArg(args[0]) . "\"; ?>";
 	}
 }

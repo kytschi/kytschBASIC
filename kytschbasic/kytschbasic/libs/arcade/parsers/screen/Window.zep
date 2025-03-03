@@ -33,7 +33,7 @@ class Window extends Command
 	{
 		if (command == "WINDOW") {
 			return this->parseWindow(args);
-		} elseif (command == "WINDOW CLOSE") {
+		} elseif (command == "END WINDOW") {
 			return "</div>";
 		}
 	}

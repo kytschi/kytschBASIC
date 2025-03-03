@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "Installing kytschBASIC | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,85 +12,85 @@ BODY
 					PRINT "Installing "
 					PRINT "kytsch";"kytsch"
 					PRINT "BASIC";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "First thing you will need is to install "
 					LINK "https://docs.zephir-lang.com/0.12/en/installation";"Checkout Zephir";;"_blank"
 						PRINT "Zephir"
-					LINK CLOSE
-				SWRITE CLOSE
+					END LINK
+				END SWRITE
 				SWRITE
 					PRINT "Now open your favourite terminal/console and clone the repo."
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 git clone https://github.com/kytschi/kytschBASIC.git
 
 OR
 
 git clone git@github.com:kytschi/kytschBASIC.git
-				CPRINT CLOSE
+				END CPRINT
 
 				SWRITE
 					PRINT "Building the kytschBASIC PHP module."
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 cd kytschBASIC/kytschbasic
 zephir build
-				CPRINT CLOSE
+				END CPRINT
 
 				SWRITE
 					PRINT "Enable the kytschBASIC module. You can copy the sample ini file from the `php` folder in this repo. Remember to do this as root or a user with administrator permissions."
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 cp kytschBASIC/php/kytschBASIC.ini /etc/php/7.4/mods-available/
-				CPRINT CLOSE
+				END CPRINT
 				SWRITE
 					PRINT "And don't forget to restart the PHP service."
-				SWRITE CLOSE
+				END SWRITE
 
 				SWRITE
 					PRINT "Next setup an index.php on your webserver of choice and tell it to load the kytschBASIC compiler."
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 &lt;?php
 use KytschBASIC\Compiler;
 
 (new Compiler(__DIR__ . '/../kytschbasic-config.json'))->run();
-				CPRINT CLOSE
+				END CPRINT
 
 				SWRITE
 					PRINT "NOTICE";"basic"
 					PRINT " we are loading in the configuration file. See "
 					LINK "#configuration"
 						PRINT "configuration"
-					LINK CLOSE
+					END LINK
 					PRINT " for more information on how to setup the configuration file. "
-				SWRITE CLOSE
+				END SWRITE
 
 				SWRITE
 					PRINT "For an example website checkout the source code for this one."
 					LINK "https://github.com/kytschi/kytschBASIC/tree/master/example";;;"_blank"
 						PRINT "kytschBASIC example"
-					LINK CLOSE
-				SWRITE CLOSE
+					END LINK
+				END SWRITE
 
 				LINK ;;"no-link";;"configuration"
 					HEADING 3
 						PRINT "Configuration";"basic"
-					HEADING CLOSE 3
-				LINK CLOSE
+					END HEADING 3
+				END LINK
 				SWRITE
 					PRINT "kytschBASIC configuration is handled via JSON config files. From there you can define the database connection, the routes, etc. "
 					LINK "https://github.com/kytschi/kytschBASIC/tree/master/config";;;"_blank"
 						PRINT "See kytschBASIC example configs for more information"
-					LINK CLOSE
-				SWRITE CLOSE
+					END LINK
+				END SWRITE
 				SWRITE "h3"
 					PRINT "Database"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "The configuration for the database connection if needed. You can define more than one."
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 [
 	{
@@ -103,14 +103,14 @@ use KytschBASIC\Compiler;
 		"password": "password"		<-- Password of the user
 	}
 ]
-				CPRINT CLOSE
+				END CPRINT
 
 				SWRITE "h3"
 					PRINT "Routes"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "The routes allow you to define what kytschBASIC template is to be loaded for a specific URL or route."
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 [
 	{
@@ -130,10 +130,10 @@ use KytschBASIC\Compiler;
 		"template": "project/news.kb"
 	}
 ]
-				CPRINT CLOSE
-			DIV CLOSE
-		DIV CLOSE
+				END CPRINT
+			END DIV
+		END DIV
 		LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "CAPTCHA statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,13 +10,13 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
 					PRINT "CAPTCHA";"heading-command basic"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Create a form captcha."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 IFNTE _GET["input_test"] THEN
 	IF _VALID["captcha"] THEN
@@ -35,35 +35,35 @@ FORM "form_test"
 				TROW
 					TCELL
 						PRINT "Name"
-					TCELL CLOSE
+					END TCELL
 					TCELL
 						TEXTINPUT "input_test"; "form-input"; "Enter your name"
-					TCELL CLOSE
-				TROW CLOSE
+					END TCELL
+				END TROW
 				TROW
 					TCELL
 						PRINT "Captcha"
-					TCELL CLOSE
+					END TCELL
 					TCELL
 						CAPTCHA
-					TCELL CLOSE
-				TROW CLOSE
+					END TCELL
+				END TROW
 				TROW
 					TCELL
 						WHITESPACE
-					TCELL CLOSE
+					END TCELL
 					TCELL
 						BUTTON SUBMIT "btn_test";;; "submit"
-					TCELL CLOSE
-				TROW CLOSE
-			TBODY CLOSE
-		TABLE CLOSE
-	SWRITE CLOSE
-FORM CLOSE
-				CPRINT CLOSE
+					END TCELL
+				END TROW
+			END TBODY
+		END TABLE
+	END SWRITE
+NEXTM
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 IFNTE _GET["input_test"] THEN
 	IF _VALID["captcha"] THEN
@@ -82,79 +82,79 @@ FORM "form_test"
 				TROW
 					TCELL
 						PRINT "Name"
-					TCELL CLOSE
+					END TCELL
 					TCELL
 						TEXTINPUT "input_test"; "form-input"; "Enter your name"
-					TCELL CLOSE
-				TROW CLOSE
+					END TCELL
+				END TROW
 				TROW
 					TCELL
 						PRINT "Captcha"
-					TCELL CLOSE
+					END TCELL
 					TCELL
 						CAPTCHA
-					TCELL CLOSE
-				TROW CLOSE
+					END TCELL
+				END TROW
 				TROW
 					TCELL
 						WHITESPACE
-					TCELL CLOSE
+					END TCELL
 					TCELL
 						BUTTON SUBMIT "btn_test";;; "submit"
-					TCELL CLOSE
-				TROW CLOSE
-			TBODY CLOSE
-		TABLE CLOSE
-	SWRITE CLOSE
-FORM CLOSE
-				DIV CLOSE
+					END TCELL
+				END TROW
+			END TBODY
+		END TABLE
+	END SWRITE
+NEXTM
+				END DIV
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/FORM"
 						PRINT "FORM"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CAPTCHA"
 						PRINT "CAPTCHA"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/NUMBERINPUT"
 						PRINT "NUMBERINPUT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TEXTINPUT"
 						PRINT "TEXTINPUT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TEXTAREA"
 						PRINT "TEXTAREA"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BUTTON"
 						PRINT "BUTTON"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BUTTON-SUBMIT"
 						PRINT "BUTTON SUBMIT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/_GET"
 						PRINT "_GET"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/_POST"
 						PRINT "_POST"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

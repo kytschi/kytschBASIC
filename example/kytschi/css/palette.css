@@ -231,6 +231,9 @@ pre, .kb-code-block {
 code {
     font-family: "FreeMono", Arial, Helvetica, sans-serif !important;
 }
+.kb-code-block a {
+    color: #ffc228;
+}
 
 table {
 	border-spacing: 0px;

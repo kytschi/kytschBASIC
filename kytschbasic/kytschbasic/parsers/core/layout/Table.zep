@@ -32,31 +32,31 @@ class Table extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "TABLE CLOSE") {
+		if (command == "END TABLE") {
 			return "</table>";
 		} elseif (command == "TABLE") {
 			return this->processTag("table", args);
-		} elseif (command == "TBODY CLOSE") {
+		} elseif (command == "END TBODY") {
 			return "</tbody>";
 		} elseif (command == "TBODY") {
 			return this->processTag("tbody", args);
-		} elseif (command == "TCELL CLOSE") {
+		} elseif (command == "END TCELL") {
 			return "</td>";
 		} elseif (command == "TCELL") {
 			return this->processCell("td", args);
-		} elseif (command == "TFOOT CLOSE") {
+		} elseif (command == "END TFOOT") {
 			return "</tfoot>";
 		} elseif (command == "TFOOT") {
 			return this->processTag("tfoot", args);
-		} elseif (command == "THEADCELL CLOSE") {
+		} elseif (command == "END THEADCELL") {
 			return "</th>";
 		} elseif (command == "THEADCELL") {
 			return this->processCell("th", args);
-		} elseif (command == "THEAD CLOSE") {
+		} elseif (command == "TEND HEAD") {
 			return "</thead>";
 		} elseif (command == "THEAD") {
 			return this->processTag("thead", args);
-		} elseif (command == "TROW CLOSE") {
+		} elseif (command == "END TROW") {
 			return "</tr>";
 		} elseif (command == "TROW") {
 			return this->processTag("tr", args);

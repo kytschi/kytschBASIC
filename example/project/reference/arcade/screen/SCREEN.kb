@@ -3,7 +3,7 @@ HEAD
 	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "SCREEN statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -15,13 +15,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "ID, X,Y";"heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library";"heading-required"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Creates a screen."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 INCLUDE arcade
 SCREEN "the-traveller";800;600
@@ -32,20 +32,20 @@ SCREEN "the-traveller";800;600
 			BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 			BITMAPTEXT 220;150;32;0;75;"The Traveller"
 			BITMAPTEXT 235;320;18;0;75;"Press any key to start"
-		BITMAP CLOSE
-	WINDOW CLOSE
+		END BITMAP
+	END WINDOW
 	WINDOW "input"
 		RGB 0;0;0
 		BITMAP 0;0;800;200
 			RGB 255;0;0
 			LINE 0;0;800;0
-		BITMAP CLOSE
-	WINDOW CLOSE
-SCREEN CLOSE
-				CPRINT CLOSE
+		END BITMAP
+	END WINDOW
+END SCREEN
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				SCREEN "the-traveller";800;600
 					WINDOW "intro"
 						RGB 0;0;0
@@ -54,117 +54,117 @@ SCREEN CLOSE
 							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 							BITMAPTEXT 220;150;32;0;75;"The Traveller"
 							BITMAPTEXT 235;320;18;0;75;"Press any key to start"
-						BITMAP CLOSE
-					WINDOW CLOSE
+						END BITMAP
+					END WINDOW
 					WINDOW "input"
 						RGB 0;0;0
 						BITMAP 0;0;800;200
 							RGB 255;0;0
 							LINE 0;0;800;0
-						BITMAP CLOSE
-					WINDOW CLOSE
-				SCREEN CLOSE
+						END BITMAP
+					END WINDOW
+				END SCREEN
 				HEADING 4
 					PRINT "Parameters"
-				HEADING CLOSE 4
+				END HEADING 4
 				TABLE
 					THEAD
 						TROW
 							THEADCELL "140px"
 								PRINT "Parameter"
-							THEADCELL CLOSE
+							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
-							THEADCELL CLOSE
+							END THEADCELL
 							THEADCELL
 								PRINT "Description"
-							THEADCELL CLOSE
-						TROW CLOSE
-					THEAD CLOSE
+							END THEADCELL
+						END TROW
+					TEND HEAD
 					TBODY
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "ID"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "integer/string"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "ID to identify the window"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							THEADCELL ;"table-parameter",3
 								PRINT "Optional"
-							THEADCELL CLOSE
-						TROW CLOSE
+							END THEADCELL
+						END TROW
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "X"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "integer"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "X position"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "Y"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "integer"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "Y position"
-							TCELL CLOSE
-						TROW CLOSE
-					TBODY CLOSE
-				TABLE CLOSE
+							END TCELL
+						END TROW
+					END TBODY
+				END TABLE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CIRCLE"
 						PRINT "CIRCLE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CIRCLEF"
 						PRINT "CIRCLEF"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BITMAPFONT"
 						PRINT "BITMAPFONT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BITMAPTEXT"
 						PRINT "BITMAPTEXT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/globals"
 						PRINT "Globals"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LINE"
 						PRINT "LINE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/WINDOW"
 						PRINT "WINDOW"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

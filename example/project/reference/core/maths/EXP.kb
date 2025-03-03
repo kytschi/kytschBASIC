@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "EXP statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,101 +10,101 @@ BODY
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "EXP";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "Returns the e raised to the power of the number supplied."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 PRINT EXP 5.7
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT EXP 5.7
-				DIV CLOSE
+				END DIV
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ACOS"
 						PRINT "ACOS"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ASIN"
 						PRINT "ASIN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ATAN"
 						PRINT "ATAN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BIN"
 						PRINT "BIN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/COS"
 						PRINT "COS"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/FRAC"
 						PRINT "FRAC"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HCOS"
 						PRINT "HCOS"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HEX"
 						PRINT "HEX"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HSIN"
 						PRINT "HSIN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HTAN"
 						PRINT "HTAN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LOG"
 						PRINT "LOG"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LOG10"
 						PRINT "LOG10"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/RND"
 						PRINT "RND"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/SGN"
 						PRINT "SGN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/SIN"
 						PRINT "SIN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/SQR"
 						PRINT "SQR"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TAN"
 						PRINT "TAN"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 		LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

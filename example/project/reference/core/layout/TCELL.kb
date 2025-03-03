@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "TCELL statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,61 +12,61 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "TCELL";"heading-command basic"
 					LINE BREAK
 					PRINT "WIDTH, CLASS, COLSPAN, ID";"heading-args"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Creating a table cell."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 TCELL
 	PRINT "Table cell 1"
-TCELL CLOSE
-				CPRINT CLOSE
+END TCELL
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 &lt;td&gt;
 	&lt;span&gt;Table cell 1&lt;/span&gt;
 &lt;/td&gt;
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TABLE"
 						PRINT "TABLE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TBODY"
 						PRINT "TBODY"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TFOOT"
 						PRINT "TFOOT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/THEAD"
 						PRINT "THEAD"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/THEADCELL"
 						PRINT "THEADCELL"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TROW"
 						PRINT "TROW"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "SWRITE statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,49 +10,49 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "SWRITE";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "Outputting to the screen as a paragraph."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 SWRITE
 	Hello World!
 	I am a paragraph.
-SWRITE CLOSE
-				CPRINT CLOSE
+END SWRITE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 Hello World!
 I am a paragraph.
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LCASE"
 						PRINT "LCASE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/UCASE"
 						PRINT "UCASE"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

@@ -31,23 +31,23 @@ class Layout extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "DIV CLOSE") {
+		if (command == "END DIV") {
 			return "</div>";
 		} elseif (command == "DIV") {
 			return this->processTag("div", args);
-		} elseif (command == "BODY CLOSE") {
+		} elseif (command == "END BODY") {
 			return "</body>";
 		} elseif (command == "BODY") {
 			return this->processTag("body", args);
-		} elseif (command == "FOOTER CLOSE") {
+		} elseif (command == "END FOOTER") {
 			return "</footer>";
 		} elseif (command == "FOOTER") {
 			return this->processTag("footer", args);
-		} elseif (command == "HEADER CLOSE") {
+		} elseif (command == "END HEADER") {
 			return "</header>";
 		} elseif (command == "HEADER") {
 			return this->processTag("header", args);
-		} elseif (command == "MAIN CLOSE") {
+		} elseif (command == "END MAIN") {
 			return "</main>";
 		} elseif (command == "MAIN") {
 			return this->processTag("main", args);

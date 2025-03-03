@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "Global variables | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,94 +10,94 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "Global variables"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "There are global variables available within kytschBASIC. For example:"
-				SWRITE CLOSE
+				END SWRITE
 				CPRINT
 BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-				CPRINT CLOSE
+				END CPRINT
 				TABLE
 					THEAD
 						TROW
 							THEADCELL "140px"
 								PRINT "Parameter"
-							THEADCELL CLOSE
+							END THEADCELL
 							THEADCELL
 								PRINT "Description"
-							THEADCELL CLOSE
-						TROW CLOSE
-					THEAD CLOSE
+							END THEADCELL
+						END TROW
+					TEND HEAD
 					TBODY
 						TROW
 							TCELL
 								PRINT "&#95;ROOT"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The root folder where the source of the project is held"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;VALID['captcha']"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "Confirm the captcha supplied is a valid one"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;POST"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The POST data array"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;GET"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The GET data array"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;RURL"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The ROOT URL, for example https://kytschbasic.org"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;URL"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The page URL including any variables passed over"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;PATH"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The page path from the URL, for example /globals"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL
 								PRINT "&#95;PATH"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The page path from the URL, for example /globals"
-							TCELL CLOSE
-						TROW CLOSE
-					TBODY CLOSE
-				TABLE CLOSE
-			DIV CLOSE
-		DIV CLOSE
+							END TCELL
+						END TROW
+					END TBODY
+				END TABLE
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

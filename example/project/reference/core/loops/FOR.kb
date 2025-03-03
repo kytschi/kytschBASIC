@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "FOR statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,43 +10,43 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "FOR";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "Create a for loop."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 SPRINT FOR iLoop=1 TO 10
 	PRINT iLoop
 	PRINT "&amp;nbsp;"
 SPRINT NEXT
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					FOR iLoop=1 TO 10
 						PRINT iLoop
 						PRINT "&nbsp;"
 					NEXT
-				DIV CLOSE
+				END DIV
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/WHILE"
 						PRINT "WHILE"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

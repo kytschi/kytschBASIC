@@ -56,7 +56,7 @@ class Text extends Command
 
 		if (command == "PRINT") {
 			return this->processPrint(args);
-		} elseif (command == "SWRITE CLOSE") {
+		} elseif (command == "END SWRITE") {
 			return "</p>";
 		} elseif (command == "SWRITE") {
 			return this->processSWrite(args);
@@ -102,7 +102,7 @@ class Text extends Command
 			let params .= " id='" . this->genID("kb-span") . "'";
 		}
 		
-		return "<?= \"<span" . params . ">\" . (" . value . ") . \"</span>\";?>";
+		return "<?= \"<span" . params . ">" . trim(value, "\"") . "</span>\";?>";
 	}
 
 	private function processSWrite(args)

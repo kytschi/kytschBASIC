@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "IF statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,13 +10,13 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "IF";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "IF conditional statement."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 FOR iLoop=1 TO 10
 	IF iLoop=2 THEN
@@ -37,10 +37,10 @@ FOR iLoop=1 TO 10
 	ELSEIF iLoop=6 THEN PRINT iLoop
 	END IF
 NEXT
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					FOR iLoop%=1 TO 10
 						IF iLoop==2 THEN
@@ -60,22 +60,22 @@ NEXT
 						ELSEIF iLoop==6 THEN PRINT iLoop%
 						END IF
 					NEXT
-				DIV CLOSE
+				END DIV
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

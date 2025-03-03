@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "DLJOIN statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,81 +10,117 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "DLJOIN";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "To left join tables within a query."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
-REM Define the database connection and assign the results to the menu& variable.
-SPRINT DATA menu&
+DATA
 	REM Open the database connection from the config file labelled kytschBASIC.
-	SPRINT DOPEN "kytschBASIC"
+	DOPEN "kytschBASIC"
 
 	REM Read from the menu table in the database.
-	SPRINT DREAD "menu"
+	DREAD "menu"
 
 	REM Select all entries from the menu table.
-	SPRINT DSELECT "menu.*, IF(pages.url != '', pages.url, menu.external_link) AS url"
+	DSELECT "menu.*, IF(pages.path != '', pages.path, menu.external_link) AS url"
 
 	REM Join the menu table with pages.
-	SPRINT DLJOIN "pages ON pages.id=menu.page_id AND pages.deleted_at IS NULL"
+	DLJOIN "pages ON pages.id=menu.page_id AND pages.deleted_at IS NULL"
 
 	REM Condition the select to those that aren't deleted.
-	SPRINT DWHERE "menu.deleted_at != NULL"
+	DWHERE "menu.deleted_at IS NULL"
 
 	REM Sort the results by their name alphabetically.
-	SPRINT DSORT "menu.name ASC"
-SPRINT END DATA
+	DSORT "menu.name ASC"
+
+	REM Fetch the results and assign them to menu variable.
+	DFETCH menu&
+END DATA
 
 REM Loop through the results stored in menu& variable.
-SPRINT FOR item& IN menu&
-	SPRINT LINK item&["url"],item&["tooltip"]
-		SPRINT PRINT item&["name"]			
-	SPRINT LINK CLOSE
-SPRINT END FOR
-				CPRINT CLOSE
+FOR item& IN menu&
+	LINK item&["url"]; item&["tooltip"]
+		PRINT item&["name"]			
+	END LINK
+NEXT
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+DATA
+	REM Open the database connection from the config file labelled kytschBASIC.
+	DOPEN "kytschBASIC"
+
+	REM Read from the menu table in the database.
+	DREAD "menu"
+
+	REM Select all entries from the menu table.
+	DSELECT "menu.*, IF(pages.path != '', pages.path, menu.external_link) AS url"
+
+	REM Join the menu table with pages.
+	DLJOIN "pages ON pages.id=menu.page_id AND pages.deleted_at IS NULL"
+
+	REM Condition the select to those that aren't deleted.
+	DWHERE "menu.deleted_at IS NULL"
+
+	REM Sort the results by their name alphabetically.
+	DSORT "menu.name ASC"
+
+	REM Fetch the results and assign them to menu variable.
+	DFETCH menu&
+END DATA
+
+REM Loop through the results stored in menu& variable.
+FOR item& IN menu&
+	LINK item&["url"]; item&["tooltip"]
+		PRINT item&["name"]			
+	END LINK
+NEXT
+				END DIV
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DATA"
 						PRINT "DATA"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DJOIN"
 						PRINT "DJOIN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DRJOIN"
 						PRINT "DRJOIN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DOPEN"
 						PRINT "DOPEN"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DREAD"
 						PRINT "DREAD"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DSORT"
 						PRINT "DSORT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

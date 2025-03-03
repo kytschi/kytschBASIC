@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "HEADER statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,26 +12,26 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "HEADER";"heading-command basic"
 					LINE BREAK
 					PRINT "CLASS, ID";"heading-args"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Creating the HTML header."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 BODY
 	HEADER
 		SWRITE
 			PRINT "Creating the HTML header."
-		SWRITE CLOSE
-	HEADER CLOSE
-BODY CLOSE
+		END SWRITE
+	END HEADER
+END BODY
 END
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 &lt;body&gt;
 	&lt;header&gt;
@@ -40,34 +40,34 @@ END
 		&lt;/p&gt;
 	&lt;/header&gt;
 &lt;/body&gt;
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/BODY"
 						PRINT "BODY"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/DIV"
 						PRINT "DIV"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/FOOTER"
 						PRINT "FOOTER"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/parameters"
 						PRINT "parameters"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

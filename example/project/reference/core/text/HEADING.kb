@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "HEADING statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,28 +12,28 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "HEADING";"heading-command basic"
 					LINE BREAK
 					PRINT "SIZE";"heading-args"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Output a heading tag."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 REM Output a heading tag to the screen. Note the END statement.
 HEADING 1
 	PRINT "This is a heading of size 1"
-HEADING CLOSE 1
-				CPRINT CLOSE
+END HEADING 1
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 &lt;h1&gt;&lt;span&gt;This is a heading of size 1&lt;/span&gt;&lt;/h1&gt;
-				CPRINT CLOSE
-			DIV CLOSE
-		DIV CLOSE
+				END CPRINT
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

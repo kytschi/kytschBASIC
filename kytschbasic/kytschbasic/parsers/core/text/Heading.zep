@@ -31,7 +31,7 @@ class Heading extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "HEADING CLOSE") {
+		if (command == "END HEADING") {
 			return this->processHeading(args, true);
 		} elseif (command == "HEADING") {
 			return this->processHeading(args);

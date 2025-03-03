@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "About | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,21 +12,21 @@ BODY
 					PRINT "About "
 					PRINT "kytsch";"kytsch"
 					PRINT "BASIC";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "kytschBASIC is a PHP module that will allow you to write BASIC code to render flat html. kytschBASIC is heavily inspired by Amiga BASIC a language I loved on a machine that is still amazing."
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "The project is still in its early days but you can check it out at the link below."
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					LINK "https://github.com/kytschi/kytschBASIC";"Link to the source";;"_blank"
 						PRINT "Link to repo"
-					LINK CLOSE
-				SWRITE CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END SWRITE
+			END DIV
+		END DIV
 		LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

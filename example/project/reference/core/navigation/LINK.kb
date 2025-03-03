@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "LINK statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -11,102 +11,89 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "LINK";"heading-command basic"
 					LINE BREAK
-					PRINT "URL, LABEL, CLASS, TARGET, ID";"heading-args"
-				SWRITE CLOSE
+					PRINT "URL; LABEL; CLASS; TARGET; ID";"heading-args"
+				END SWRITE
 				SWRITE
 					PRINT "Generating a link to another page or resource."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 REM Goto internal link.
 LINK "/about"
-	About
-LINK CLOSE
+	PRINT "About"
+END LINK
 
 REM Open the link in a new tab/window
-LINK "https://github.com/kytschi/kytschBASIC",,,"_blank"
-	Download
-LINK CLOSE
-
-REM Read the menu from the database, loop through and build the links.
-SPRINT DATA, menu&
-	SPRINT OPEN "kytschBASIC"
-	SPRINT READ "menu"
-	SPRINT SELECT "*"
-	SPRINT WHERE "status='active' AND deleted_at IS NULL"
-	SPRINT SORT "sort"
-SPRINT END DATA
-SPRINT FOR item& IN menu&
-	LINK item&["path"],,"nav-link"
-		PRINT item&["name"]
-	LINK CLOSE
-SPRINT END FOR
-				CPRINT CLOSE
+LINK "https://github.com/kytschi/kytschBASIC";;;"_blank"
+	PRINT "Download"
+END LINK
+				END CPRINT
 				HEADING 4
-					PRINT "Source"
-				HEADING CLOSE 4
-				CPRINT
-&lt;a href="/about"&gt;About&lt;/a&gt;
-&lt;a href="/https://github.com/kytschi/kytschBASIC" _target="blank"&gt;About&lt;/a&gt;
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+					LINK "/about";
+						PRINT "About"
+					END LINK
 
-&lt;a href="/home"&gt;Home&lt;/a&gt;
-&lt;a href="/about"&gt;About&lt;/a&gt;
-&lt;a href="/installation"&gt;Installation&lt;/a&gt;
-				CPRINT CLOSE
+					LINK "https://github.com/kytschi/kytschBASIC";;;"_blank"
+						PRINT "Download"
+					END LINK
+				END DIV
 				HEADING 4
 					PRINT "Target"
-				HEADING CLOSE 4
+				END HEADING 4
 				TABLE
 					THEAD
 						TROW
 							THEADCELL "140px"
 								PRINT "Type"
-							THEADCELL CLOSE
+							END THEADCELL
 							THEADCELL
 								PRINT "Description"
-							THEADCELL CLOSE
-						TROW CLOSE
-					THEAD CLOSE
+							END THEADCELL
+						END TROW
+					TEND HEAD
 					TBODY
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "_self"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "Open in the current browsing context. (Default)"
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "_blank"
-							TCELL CLOSE
+							END TCELL
 							TCELL
-								PRINT "Opens a new tab, but users can configure browsers to open a new window instead"
-							TCELL CLOSE
-						TROW CLOSE
+								PRINT "Opens a new tab, but users can configure browsers to open a new window instead."
+							END TCELL
+						END TROW
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "_parent"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "The parent browsing context of the current one. If no parent, behaves as _self."
-							TCELL CLOSE
-						TROW CLOSE
+							END TCELL
+						END TROW
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "_top"
-							TCELL CLOSE
+							END TCELL
 							TCELL
-								PRINT "The topmost browsing context (the "highest" context that's an ancestor of the current one). If no ancestors, behaves as _self."
-							TCELL CLOSE
-						TROW CLOSE
-					TBODY CLOSE
-				TABLE CLOSE
-			DIV CLOSE
-		DIV CLOSE
+								PRINT "The top most browsing context (the \"highest\" context that's an ancestor of the current one). If no ancestors, behaves as _self."
+							END TCELL
+						END TROW
+					END TBODY
+				END TABLE
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

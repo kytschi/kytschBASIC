@@ -33,7 +33,7 @@ class Screen extends Command
 	{
 		if (command == "SCREEN") {
 			return this->parseScreen(args);
-		} elseif (command == "SCREEN CLOSE") {
+		} elseif (command == "END SCREEN") {
 			return "</div>";
 		}
 	}

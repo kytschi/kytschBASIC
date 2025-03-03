@@ -3,7 +3,7 @@ HEAD
 	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "BITMAPFONT statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -15,13 +15,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "FONT"
 					LINE BREAK
 					PRINT "Requires arcade library";"heading-required"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "The ability to use a font when writing on a bitmap."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 SCREEN "the-traveller";800;600
 	WINDOW "intro"
@@ -31,20 +31,20 @@ SCREEN "the-traveller";800;600
 			BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 			BITMAPTEXT "The Traveller";32;0;220;150
 			BITMAPTEXT "Press any key to start";18;0;235;320
-		BITMAP CLOSE
-	WINDOW CLOSE
+		END BITMAP
+	END WINDOW
 	WINDOW "input"
 		RGB 0;0;0
 		BITMAP 0;0;800;200
 			RGB 255;0;0
 			LINE 0;0;800;0
-		BITMAP CLOSE
-	WINDOW CLOSE
-SCREEN CLOSE
-				CPRINT CLOSE
+		END BITMAP
+	END WINDOW
+END SCREEN
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				SCREEN "the-traveller";800;600
 					WINDOW "intro"
 						RGB 0;0;0
@@ -53,106 +53,106 @@ SCREEN CLOSE
 							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 							BITMAPTEXT "The Traveller";32;0;220;150
 							BITMAPTEXT "Press any key to start";18;0;235;320
-						BITMAP CLOSE
-					WINDOW CLOSE
+						END BITMAP
+					END WINDOW
 					WINDOW "input"
 						RGB 0;0;0
 						BITMAP 0;0;800;200
 							RGB 255;0;0
 							LINE 0;0;800;0
-						BITMAP CLOSE
-					WINDOW CLOSE
-				SCREEN CLOSE
+						END BITMAP
+					END WINDOW
+				END SCREEN
 				HEADING 4
 					PRINT "Parameters"
-				HEADING CLOSE 4
+				END HEADING 4
 				TABLE
 					THEAD
 						TROW
 							THEADCELL "140px"
 								PRINT "Parameter"
-							THEADCELL CLOSE
+							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
-							THEADCELL CLOSE
+							END THEADCELL
 							THEADCELL
 								PRINT "Description"
-							THEADCELL CLOSE
-						TROW CLOSE
-					THEAD CLOSE
+							END THEADCELL
+						END TROW
+					TEND HEAD
 					TBODY
 						TROW
 							TCELL ;"table-parameter"
 								PRINT "FONT"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "string"
-							TCELL CLOSE
+							END TCELL
 							TCELL
 								PRINT "Font to load"
-							TCELL CLOSE
-						TROW CLOSE
-					TBODY CLOSE
-				TABLE CLOSE
+							END TCELL
+						END TROW
+					END TBODY
+				END TABLE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BITMAP"
 						PRINT "BITMAP"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BITMAPTEXT"
 						PRINT "BITMAPTEXT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BOX"
 						PRINT "BOX"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BOXF"
 						PRINT "BOXF"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CIRCLE"
 						PRINT "CIRCLE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CIRCLEF"
 						PRINT "CIRCLEF"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ELLIPSE"
 						PRINT "ELLIPSE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/ELLIPSEF"
 						PRINT "ELLIPSEF"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/globals"
 						PRINT "Globals"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/LINE"
 						PRINT "LINE"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/RGB"
 						PRINT "RGB"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

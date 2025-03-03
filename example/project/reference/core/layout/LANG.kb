@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "LANG statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,59 +12,59 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "LANG";"heading-command basic"
 					LINE BREAK
 					PRINT "LANGUAGE TYPE";"heading-args"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Starting the HTML page off and setting the language type. This should always be the first command executed."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 LANG "en"
 BODY
 	SWRITE
 		PRINT "Creating the HTML body."
-	SWRITE CLOSE
-BODY CLOSE
+	END SWRITE
+END BODY
 END
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 &lt;body&gt;
 	&lt;p&gt;
 		Creating the HTML body.
 	&lt;/p&gt;
 &lt;/body&gt;
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/DIV"
 						PRINT "DIV"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/FOOTER"
 						PRINT "FOOTER"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/HEADER"
 						PRINT "HEADER"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/parameters"
 						PRINT "parameters"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

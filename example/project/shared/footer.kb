@@ -9,15 +9,15 @@ FOOTER
 			SWRITE
 				PRINT "Page loaded in approx "
 				BENCHMARK
-			SWRITE CLOSE
-		DIV CLOSE
+			END SWRITE
+		END DIV
 		DIV "kb-col kb-col-12 text-right"
 			SWRITE
 				PRINT "Created by Mike Welsh"
-			SWRITE CLOSE
+			END SWRITE
 			LINK "https://kytschi.com";"Checkout Kytschi";;"_blank"
 				PRINT "Checkout Kytschi"
-			LINK CLOSE
-		DIV CLOSE
-	DIV CLOSE
-FOOTER CLOSE
+			END LINK
+		END DIV
+	END DIV
+END FOOTER

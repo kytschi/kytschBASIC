@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "CPRINT statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -10,55 +10,55 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "CPRINT";"basic"
-				HEADING CLOSE 2
+				END HEADING 2
 				SWRITE
 					PRINT "Handy way if you want to show your lovely code for others to see. It will automatically wrap the code in an HTML &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 SPRINT CPRINT
 SPRINT PRINT "I want to see the statement without executing it"
-SPRINT CPRINT CLOSE
-				CPRINT CLOSE
+SPRINT END CPRINT
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				CPRINT
 PRINT "I want to see the statement without executing it"
-				CPRINT CLOSE
+				END CPRINT
 				HEADING 4
 					PRINT "Note"
-				HEADING CLOSE 4
+				END HEADING 4
 				SWRITE
 					PRINT "kytschBASIC will execute GLOBAL statements, such as the loops, before triggering CPRINT and anything within the statement."
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "If you do not want those GLOBAL statements executed use "
 					LINK "/reference/SPRINT"
 						PRINT "SPRINT"
-					LINK CLOSE
-				SWRITE CLOSE
+					END LINK
+				END SWRITE
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/REM"
 						PRINT "REM"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/SPRINT"
 						PRINT "SPRINT"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

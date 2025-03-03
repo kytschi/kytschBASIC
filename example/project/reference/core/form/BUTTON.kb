@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
 	NAME "BUTTON statment | kytschBASIC"
-HEAD CLOSE
+END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
@@ -12,13 +12,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "BUTTON";"heading-command basic"
 					LINE BREAK
 					PRINT "NAME; CLASS; ID; LABEL";"heading-args"
-				SWRITE CLOSE
+				END SWRITE
 				SWRITE
 					PRINT "Create a button."
-				SWRITE CLOSE
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
-				HEADING CLOSE 3
+				END HEADING 3
 				CPRINT
 SWRITE
 	LINE BREAK
@@ -27,31 +27,31 @@ SWRITE
 			TROW
 				TCELL
 					PRINT "Name"
-				TCELL CLOSE
+				END TCELL
 				TCELL ;; 2
 					TEXTINPUT "input_test"; "form-input"; "Enter your name"
-				TCELL CLOSE
-			TROW CLOSE
+				END TCELL
+			END TROW
 			TROW
 				TCELL
 					WHITESPACE
-				TCELL CLOSE
+				END TCELL
 				TCELL
 					BUTTON "btn_test";;; "button"
-				TCELL CLOSE
+				END TCELL
 				TCELL
 					BUTTON "btn_test2"
 						PRINT "button2"
-					BUTTON CLOSE
-				TCELL CLOSE
-			TROW CLOSE
-		TBODY CLOSE
-	TABLE CLOSE
-SWRITE CLOSE
-				CPRINT CLOSE
+					END BUTTON
+				END TCELL
+			END TROW
+		END TBODY
+	END TABLE
+END SWRITE
+				END CPRINT
 				HEADING 4
 					PRINT "Output"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					SWRITE
 						LINE BREAK
@@ -60,71 +60,71 @@ SWRITE CLOSE
 								TROW
 									TCELL
 										PRINT "Name"
-									TCELL CLOSE
+									END TCELL
 									TCELL ;; 2
 										TEXTINPUT "input_test"; "form-input"; "Enter your name"
-									TCELL CLOSE
-								TROW CLOSE
+									END TCELL
+								END TROW
 								TROW
 									TCELL
 										WHITESPACE
-									TCELL CLOSE
+									END TCELL
 									TCELL
 										BUTTON "btn_test";;; "button"
-									TCELL CLOSE
+									END TCELL
 									TCELL
 										BUTTON "btn_test2"
 											PRINT "button2"
-										BUTTON CLOSE
-									TCELL CLOSE
-								TROW CLOSE
-							TBODY CLOSE
-						TABLE CLOSE
-					SWRITE CLOSE
-				DIV CLOSE
+										END BUTTON
+									END TCELL
+								END TROW
+							END TBODY
+						END TABLE
+					END SWRITE
+				END DIV
 				HEADING 4
 					PRINT "See also"
-				HEADING CLOSE 4
+				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/FORM"
 						PRINT "FORM"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/CAPTCHA"
 						PRINT "CAPTCHA"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TEXTAREA"
 						PRINT "TEXTAREA"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/NUMBERINPUT"
 						PRINT "NUMBERINPUT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/TEXTINPUT"
 						PRINT "TEXTINPUT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/BUTTON-SUBMIT"
 						PRINT "BUTTON SUBMIT"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/_GET"
 						PRINT "_GET"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/_POST"
 						PRINT "_POST"
-					LINK CLOSE
+					END LINK
 					PRINT " | "
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
-					LINK CLOSE
-				DIV CLOSE
-			DIV CLOSE
-		DIV CLOSE
+					END LINK
+				END DIV
+			END DIV
+		END DIV
 	LOAD "_ROOT/project/shared/footer"
-	MAIN CLOSE
-BODY CLOSE
+	END MAIN
+END BODY
 END

@@ -58,7 +58,7 @@ class Variables
 		return args;
 	}
 
-	public function clean(string line)
+	public function clean(string line, bool inline_string = true)
 	{
 		var args, arg, maths = "";
 
@@ -73,7 +73,7 @@ class Variables
 				if (is_numeric(arg)) {
 					let line .= arg . ".";
 				} else {
-					let line .= "$" . str_replace(this->types, "", arg) . ".";
+					let line .= (inline_string ? "{" : "") . "$" . trim(str_replace(this->types, "", arg)) . (inline_string ? "}" : "");
 				}
 			}
 		}
@@ -101,6 +101,10 @@ class Variables
 	{
 		if (command == "LET") {
 			return this->processLet(args);
+		} elseif (command == "DEF") {
+			return this->processDef(args);
+		} elseif (command == "2DP") {
+			return "<?php " . $this->clean(args, false) . " = number_format(" . $this->clean(args, false) . ", 2, '.', ''); ?>";
 		} elseif (command == "BENCHMARK") {
 			return this->processBenchmark();
 		}
@@ -119,6 +123,29 @@ class Variables
 		}
 		</script>
 		<span class=\"kb-benchmark\"></span>";
+	}
+
+	private function processDef(string line)
+	{
+		var splits;
+
+		if (strpos(line, "%=") !== false) {
+			let splits = explode("%=", line);
+			if (count(splits) > 1) {
+				return "<?php $" . splits[0] . " = intval(" . this->clean(splits[1], false) . "); ?>";
+			} else {
+				throw new Exception("Invalid DEF");
+			}
+		} elseif (strpos(line, "#=") !== false) {
+			let splits = explode("#=", line);
+			if (count(splits) > 1) {
+				return "<?php $" . splits[0] . " = (double)" . this->clean(splits[1], false) . "; ?>";
+			} else {
+				throw new Exception("Invalid DEF");
+			}
+		} else {
+			return "<?php " . this->clean(line, false) . "; ?>";
+		}		
 	}
 
 	private function processLet(string line)

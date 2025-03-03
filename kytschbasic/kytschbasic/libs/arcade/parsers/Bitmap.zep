@@ -37,7 +37,7 @@ class Bitmap extends Command
 	{
 		if (command == "BITMAP") {
 			return this->parseBitmap(args);
-		} elseif (command == "BITMAP CLOSE") {
+		} elseif (command == "END BITMAP") {
 			return "<?php
 			foreach ($KBSHAPES as $KBSHAPE) {
 				switch($KBSHAPE['shape']) {
