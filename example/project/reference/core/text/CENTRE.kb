@@ -9,9 +9,9 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "CENTRE$";"heading-command basic"
+					PRINT "CENTRE";"heading-command basic"
 					LINE BREAK
-					PRINT "STRING, LENGTH";"heading-args"
+					PRINT "STRING; LENGTH";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will return part of the string based on a length but will start from the centre of the string."
@@ -20,7 +20,10 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT CENTRE "AAABBBAAA";3
+PRINT CENTRE "AAABBBAAA"; 3
+
+REM You can still assign the standard attributes of the PRINT command.
+PRINT CENTRE "AAABBBAAA"; 3; "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"

@@ -39,7 +39,9 @@ class Navigation extends Command
 			return "</nav>";
 		} elseif (command == "MENU") {
 			return this->processNav(args);
-		}
+		} elseif (command == "GOTO") {
+			return "<?php header(\"Location: " . this->setArg(args) . "\"); ?>";
+		} 
 
 		return null;
 	}

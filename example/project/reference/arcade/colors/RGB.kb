@@ -71,7 +71,7 @@ END BITMAP
 								PRINT "Description"
 							END THEADCELL
 						END TROW
-					TEND HEAD
+					END THEAD
 					TBODY
 						TROW
 							TCELL ;"table-parameter"

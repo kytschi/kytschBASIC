@@ -59,7 +59,7 @@ FORM "form_test"
 			END TBODY
 		END TABLE
 	END SWRITE
-NEXTM
+END FORM
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -106,7 +106,7 @@ FORM "form_test"
 			END TBODY
 		END TABLE
 	END SWRITE
-NEXTM
+END FORM
 				END DIV
 				HEADING 4
 					PRINT "See also"

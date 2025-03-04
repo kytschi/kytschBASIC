@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "SCREEN";"heading-command basic"
 					LINE BREAK
-					PRINT "ID, X,Y";"heading-args"
+					PRINT "ID; X; Y";"heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library";"heading-required"
 				END SWRITE
@@ -30,8 +30,8 @@ SCREEN "the-traveller";800;600
 		BITMAP 0;0;800;400
 			RGB 255;0;0
 			BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-			BITMAPTEXT 220;150;32;0;75;"The Traveller"
-			BITMAPTEXT 235;320;18;0;75;"Press any key to start"
+			BITMAPTEXT "The Traveller";32;0;220;150
+			BITMAPTEXT "Press any key to start";18;0;235;320
 		END BITMAP
 	END WINDOW
 	WINDOW "input"
@@ -52,8 +52,8 @@ END SCREEN
 						BITMAP 0;0;800;400
 							RGB 255;0;0
 							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-							BITMAPTEXT 220;150;32;0;75;"The Traveller"
-							BITMAPTEXT 235;320;18;0;75;"Press any key to start"
+							BITMAPTEXT "The Traveller";32;0;220;150
+							BITMAPTEXT "Press any key to start";18;0;235;320
 						END BITMAP
 					END WINDOW
 					WINDOW "input"
@@ -80,7 +80,7 @@ END SCREEN
 								PRINT "Description"
 							END THEADCELL
 						END TROW
-					TEND HEAD
+					END THEAD
 					TBODY
 						TROW
 							TCELL ;"table-parameter"
@@ -94,7 +94,7 @@ END SCREEN
 							END TCELL
 						END TROW
 						TROW
-							THEADCELL ;"table-parameter",3
+							THEADCELL ;"table-parameter";3
 								PRINT "Optional"
 							END THEADCELL
 						END TROW

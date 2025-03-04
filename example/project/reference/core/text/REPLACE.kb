@@ -9,9 +9,9 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "REPLACE$";"heading-command basic"
+					PRINT "REPLACE";"heading-command basic"
 					LINE BREAK
-					PRINT "SEARCH, FIND, REPLACE";"heading-args"
+					PRINT "SEARCH; FIND; REPLACE";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will replace part of a string with another."
@@ -20,14 +20,17 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT REPLACE$("Hi World!", "Hi", "Hello")
+PRINT REPLACE "Hi World!"; "Hi"; "Hello"
+
+REM You can still assign the standard attributes of the PRINT command.
+PRINT REPLACE "Hi World!"; "Hi"; "Hello"; "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-Hello World!
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT REPLACE "Hi World!"; "Hi"; "Hello"
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

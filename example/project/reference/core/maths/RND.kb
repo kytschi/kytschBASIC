@@ -10,6 +10,8 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
 					PRINT "RND";"basic"
+					LINE BREAK
+					PRINT "FROM; TO";"heading-args"
 				END HEADING 2
 				SWRITE
 					PRINT "Random number selector."

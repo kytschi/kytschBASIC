@@ -11,10 +11,11 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "LOG";"heading-command basic"
 					LINE BREAK
-					PRINT "FLOAT, BASE";"heading-args"
+					PRINT "FLOAT; BASE";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This returns the natural (base e) logarithm of a float."
+					LINE BREAK
 					PRINT "Base e is default."
 				END SWRITE
 				HEADING 3
@@ -22,6 +23,7 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT LOG 10
+LINE BREAK
 PRINT LOG 10;2
 				END CPRINT
 				HEADING 4
@@ -29,6 +31,7 @@ PRINT LOG 10;2
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT LOG 10
+					LINE BREAK
 					PRINT LOG 10;2
 				END DIV
 				HEADING 4

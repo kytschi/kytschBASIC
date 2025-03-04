@@ -18,14 +18,17 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT INT(23.45)
+PRINT INT 23.45
+
+REM You can still assign the standard attributes of the PRINT command.
+PRINT INT 23.45; "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-23
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT INT 23.45
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

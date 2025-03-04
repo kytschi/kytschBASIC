@@ -100,11 +100,13 @@ class Variables
 	public function parse(string command, string args)
 	{
 		if (command == "LET") {
-			return this->processLet(args);
+			return this->processDef(args, true);
 		} elseif (command == "DEF") {
 			return this->processDef(args);
 		} elseif (command == "2DP") {
 			return "<?php " . $this->clean(args, false) . " = number_format(" . $this->clean(args, false) . ", 2, '.', ''); ?>";
+		} elseif (command == "DUMP") {
+			return "<?php var_dump(" . $this->clean(args, false) . "); ?>";
 		} elseif (command == "BENCHMARK") {
 			return this->processBenchmark();
 		}
@@ -125,7 +127,7 @@ class Variables
 		<span class=\"kb-benchmark\"></span>";
 	}
 
-	private function processDef(string line)
+	private function processDef(string line, bool let_var = false)
 	{
 		var splits;
 
@@ -134,40 +136,17 @@ class Variables
 			if (count(splits) > 1) {
 				return "<?php $" . splits[0] . " = intval(" . this->clean(splits[1], false) . "); ?>";
 			} else {
-				throw new Exception("Invalid DEF");
+				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
 		} elseif (strpos(line, "#=") !== false) {
 			let splits = explode("#=", line);
 			if (count(splits) > 1) {
 				return "<?php $" . splits[0] . " = (double)" . this->clean(splits[1], false) . "; ?>";
 			} else {
-				throw new Exception("Invalid DEF");
+				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
 		} else {
 			return "<?php " . this->clean(line, false) . "; ?>";
 		}		
-	}
-
-	private function processLet(string line)
-	{
-		var args, maths = "";
-		let args = explode("=", line);
-
-		if (empty(args[1])) {
-			throw new Exception("Invalid LET");
-		}
-
-		let line = "$" . str_replace(this->types, "", args[0]) . "=";
-
-		let args[1] = (new Text())->commands(args[1]);
-
-		let maths = Maths::parse(args[1]);
-		if (maths) {
-			let line .= maths;
-		} else {
-			let line .= Maths::equation(args[1]);
-		}		
-
-		return "<?php " . line . "; ?>";
 	}
 }

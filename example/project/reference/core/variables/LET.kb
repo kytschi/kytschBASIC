@@ -28,11 +28,12 @@ LET test$="kytschBASIC is awesome!"
 PRINT test$
 				END CPRINT
 				SWRITE "h3"
-					PRINT "Source"
+					PRINT "Output"
 				END SWRITE
-				CPRINT
-&lt;span&gt;kytschBASIC is awesome!&lt;/span&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					LET test$="kytschBASIC is awesome!"
+					PRINT test$
+				END DIV
 
 				SWRITE "basic h3"
 					PRINT "integer"
@@ -46,16 +47,14 @@ PRINT test$
 				CPRINT
 LET test%=1337
 PRINT test%
-LET test=7331
-PRINT test
 				END CPRINT
 				SWRITE "h3"
-					PRINT "Source"
+					PRINT "Output"
 				END SWRITE
-				CPRINT
-&lt;span&gt;1337&lt;/span&gt;
-&lt;span&gt;7331&lt;/span&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					LET test%=1337
+					PRINT test%
+				END DIV
 
 				SWRITE "basic h3"
 					PRINT "double"
@@ -71,11 +70,12 @@ LET test#=1337.11
 PRINT test#
 				END CPRINT
 				SWRITE "h3"
-					PRINT "Source"
+					PRINT "Output"
 				END SWRITE
-				CPRINT
-&lt;span&gt;1337.11&lt;/span&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					LET test#=1337.11
+					PRINT test#
+				END DIV
 
 				SWRITE "basic h3"
 					PRINT "double to two decimal places"
@@ -88,14 +88,17 @@ PRINT test#
 				END SWRITE
 				CPRINT
 LET test#=1337.1337
-PRINT test#;2DP
+2DP test#
+PRINT test#
 				END CPRINT
 				SWRITE "h3"
-					PRINT "Source"
+					PRINT "Output"
 				END SWRITE
-				CPRINT
-&lt;span&gt;1337.13&lt;/span&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					LET test#=1337.1337
+					2DP test#
+					PRINT test#
+				END DIV
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

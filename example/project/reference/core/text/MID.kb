@@ -9,9 +9,9 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "MID$";"heading-command basic"
+					PRINT "MID";"heading-command basic"
 					LINE BREAK
-					PRINT "STRING, START, LENGTH";"heading-args"
+					PRINT "STRING; START; LENGTH";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will return the characters from a string based on a start position and a length."
@@ -20,14 +20,17 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT MID$("kytschBASIC", 7, 3)
+PRINT MID "kytschBASIC"; 7; 5
+
+REM You can still assign the standard attributes of the PRINT command.
+PRINT MID "kytschBASIC"; 7; 5; "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-BAS
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT MID "kytschBASIC"; 7; 5
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

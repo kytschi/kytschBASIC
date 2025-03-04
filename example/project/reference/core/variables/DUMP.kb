@@ -18,8 +18,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DUMP _POST
+DEF test$="HELLO"
+DUMP test$
 				END CPRINT
+				DIV "kb-code-block"
+					DEF test$="HELLO"
+					DUMP test$
+				END DIV
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

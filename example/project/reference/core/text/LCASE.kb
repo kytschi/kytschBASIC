@@ -9,7 +9,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "LCASE | LCASE$";"basic"
+					PRINT "LCASE";"basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Transform a string to lowercase."
@@ -18,16 +18,14 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-LCASE "Hello World!"
-PRINT LCASE$("Hello World!")
+PRINT LCASE "Hello World!"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-hello world!
-hello world!
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT LCASE "Hello World!"
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

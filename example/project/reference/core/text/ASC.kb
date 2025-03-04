@@ -19,6 +19,9 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT ASC "A"
+
+REM You can still assign the standard attributes of the PRINT command.
+PRINT ASC "A"; "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"

@@ -27,7 +27,7 @@ BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
 								PRINT "Description"
 							END THEADCELL
 						END TROW
-					TEND HEAD
+					END THEAD
 					TBODY
 						TROW
 							TCELL

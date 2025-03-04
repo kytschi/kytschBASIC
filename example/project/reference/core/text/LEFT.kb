@@ -9,7 +9,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "LEFT$";"heading-command basic"
+					PRINT "LEFT";"heading-command basic"
 					LINE BREAK
 					PRINT "STRING, LENGTH";"heading-args"
 				END SWRITE
@@ -20,14 +20,14 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT LEFT$("kytschBASIC", 6)
+PRINT LEFT "kytschBASIC"; 6
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-kytsch
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT LEFT "kytschBASIC"; 6
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

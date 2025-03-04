@@ -28,7 +28,7 @@ TABLE
 				PRINT "Table header 2"
 			END THEADCELL
 		END TROW
-	TEND HEAD
+	END THEAD
 	TBODY
 		TROW
 			TCELL
@@ -64,7 +64,7 @@ END TABLE
 								PRINT "Table header 2"
 							END THEADCELL
 						END TROW
-					TEND HEAD
+					END THEAD
 					TBODY
 						TROW
 							TCELL

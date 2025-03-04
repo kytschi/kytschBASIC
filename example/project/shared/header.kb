@@ -241,7 +241,7 @@ HEADER
 		LINK "/reference/LOG#refLOG";"Find out about the LOG command";"nav-link";;"refLOG"
 			PRINT "LOG"
 		END LINK
-		LINK "/reference/LOG10#refLOG10";"Find out about the LOG10 command";"nav-link";;"refrefLOG10"
+		LINK "/reference/LOG10#refLOG10";"Find out about the LOG10 command";"nav-link";;"refLOG10"
 			PRINT "LOG10"
 		END LINK
 		LINK "/reference/LSET#refLSET";"Find out about the LSET command";"nav-link";;"refLSET"

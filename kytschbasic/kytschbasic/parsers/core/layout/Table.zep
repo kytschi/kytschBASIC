@@ -52,7 +52,7 @@ class Table extends Command
 			return "</th>";
 		} elseif (command == "THEADCELL") {
 			return this->processCell("th", args);
-		} elseif (command == "TEND HEAD") {
+		} elseif (command == "END THEAD") {
 			return "</thead>";
 		} elseif (command == "THEAD") {
 			return this->processTag("thead", args);

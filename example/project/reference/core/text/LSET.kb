@@ -9,13 +9,13 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "LSET$";"heading-command basic"
+					PRINT "LSET";"heading-command basic"
 					LINE BREAK
-					PRINT "STRING, LENGTH";"heading-args"
+					PRINT "STRING; LENGTH";"heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "This function returns a string of characters at a specific length. The STRING will be placed at"
-					PRINT "beginning of the return. If String$ is shorter than LENGTH the right hand side is padded with spaces."
+					PRINT "This function returns a string of characters at a specific length. The STRING will be placed at "
+					PRINT "end of the return. If String is shorter than LENGTH the left hand side is padded with spaces."
 					LINE BREAK
 					PRINT "If it is longer, it will be truncated."
 				END SWRITE
@@ -23,16 +23,18 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT LSET$("Hello World!", 5)
-PRINT LSET$("Hi", 5)
+PRINT LSET "Hello World!"; 5
+LINE BREAK
+PRINT LSET "Hi"; 5
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-Hello
-Hi&nbsp;&nbsp;&nbsp;
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT LSET "Hello World!"; 5
+					LINE BREAK
+					PRINT LSET "Hi"; 5
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

@@ -27,7 +27,7 @@ THEAD
 			PRINT "Table header 2"
 		END THEADCELL
 	END TROW
-TEND HEAD
+END THEAD
 				END CPRINT
 				HEADING 4
 					PRINT "Output"

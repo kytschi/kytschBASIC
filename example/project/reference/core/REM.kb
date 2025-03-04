@@ -19,14 +19,14 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 REM Loading the GIF of that evil looking dude.
-IMAGE, "/kytschi/imgs/plotting.gif","Image of a guy plotting","plotting-image"
+IMAGE "/kytschi/imgs/plotting.gif"; "Image of a guy plotting"; "plotting-image"
 				END CPRINT
 				HEADING 4
-					PRINT "Source"
+					PRINT "Output"
 				END HEADING 4
-				CPRINT
-&lt;img src="/kytschi/imgs/plotting.gif" alt="Image of a guy plotting" class="plotting-image"&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					IMAGE "/kytschi/imgs/plotting.gif"; "Image of a guy plotting"; "plotting-image"
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

@@ -18,10 +18,10 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-SPRINT FOR iLoop=1 TO 10
+FOR iLoop=1 TO 10
 	PRINT iLoop
-	PRINT "&amp;nbsp;"
-SPRINT NEXT
+	PRINT ", "
+NEXT
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -29,7 +29,7 @@ SPRINT NEXT
 				DIV "kb-col kb-col-24 kb-code-block"
 					FOR iLoop=1 TO 10
 						PRINT iLoop
-						PRINT "&nbsp;"
+						PRINT ", "
 					NEXT
 				END DIV
 				HEADING 4

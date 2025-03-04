@@ -31,7 +31,7 @@ class Form extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "NEXTM") {
+		if (command == "END FORM") {
 			return "</form>";
 		} elseif (command == "FORM") {
 			return this->processForm(args);
