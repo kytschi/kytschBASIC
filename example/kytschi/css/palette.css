@@ -1,12 +1,18 @@
 @font-face {
-    font-family: 'FreeMono';
-    src: url("../fonts/choc.otf") format("opentype");
+    font-family: 'Mono';
+    src: url("../fonts/RobotoMono.ttf") format("truetype");
 }
+
+@font-face {
+    font-family: 'Body';
+    src: url("../fonts/IBMPlexSans.ttf") format("truetype");
+}
+
 
 html, body {
     background-color: #fff;
     color: #000;
-    font-family: "FreeMono", Arial, Helvetica, sans-serif;
+    font-family: "Body", Arial, Helvetica, sans-serif;
     font-size: 14pt;
     height: 100vh;
     width: 100%;
@@ -71,13 +77,13 @@ h1 {
     padding: 30px;
     margin: 0;
     color: #d14;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 h2 {
     color: #d14;
     font-size: 16pt !important;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .heading-command {
@@ -108,7 +114,7 @@ h2 {
 
 h3, h4, .h3 {
     font-size: 14pt;
-    font-weight: bold;
+    font-weight: normal;
     color: #d14 !important;
 }
 
@@ -225,11 +231,11 @@ pre, .kb-code-block {
     -moz-tab-size: 4;
     tab-size: 4;
 	overflow-x: hidden;
-    font-family: "FreeMono", Arial, Helvetica, sans-serif !important;
+    font-family: "Mono", Arial, Helvetica, sans-serif !important;
     line-height: 1em;
 }
 code {
-    font-family: "FreeMono", Arial, Helvetica, sans-serif !important;
+    font-family: "Mono", Arial, Helvetica, sans-serif !important;
 }
 .kb-code-block a {
     color: #ffc228;

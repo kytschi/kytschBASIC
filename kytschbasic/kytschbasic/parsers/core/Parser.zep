@@ -133,7 +133,13 @@ class Parser
 		} elseif (command == "END CPRINT") {
 			let this->cprint = false;
 			return "</code></pre>" . this->newline;
-		} elseif (this->cprint || command == "SPRINT") {
+		} 
+
+		if (this->cprint) {
+			return line;
+		}
+		
+		if (command == "SPRINT") {
 			return str_replace("SPRINT ", "", line) . this->newline;
 		} elseif (command == "REM") {
 			return;
@@ -171,10 +177,8 @@ class Parser
 
 		for parser in this->available {
 			let line = (new {parser}())->parse(command, args);
-			if (!empty(line)) {
-				if (is_string(line)) {
-					let output .= line . this->newline;
-				}
+			if (line !== null) {
+				let output .= line . this->newline;
 				break;
 			}
 		}

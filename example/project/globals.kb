@@ -15,7 +15,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "There are global variables available within kytschBASIC. For example:"
 				END SWRITE
 				CPRINT
-BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
+BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
 				END CPRINT
 				TABLE
 					THEAD

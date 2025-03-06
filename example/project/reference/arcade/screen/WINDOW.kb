@@ -29,9 +29,9 @@ SCREEN "the-traveller";800;600
 		RGB 0;0;0
 		BITMAP 0;0;800;400
 			RGB 255;0;0
-			BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-			BITMAPTEXT 220;150;32;0;75;"The Traveller"
-			BITMAPTEXT 235;320;18;0;75;"Press any key to start"
+			BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
+			BITMAPTEXT "The Traveller";32;0;220;150
+			BITMAPTEXT "Press any key to start";18;0;235;320
 		END BITMAP
 	END WINDOW
 	WINDOW "input"
@@ -51,9 +51,9 @@ END SCREEN
 						RGB 0;0;0
 						BITMAP 0;0;800;400
 							RGB 255;0;0
-							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
-							BITMAPTEXT 220;150;32;0;75;"The Traveller"
-							BITMAPTEXT 235;320;18;0;75;"Press any key to start"
+							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
+							BITMAPTEXT "The Traveller";32;0;220;150
+							BITMAPTEXT "Press any key to start";18;0;235;320
 						END BITMAP
 					END WINDOW
 					WINDOW "input"

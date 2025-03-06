@@ -23,9 +23,9 @@ SPRINT PRINT "I want to see the statement without executing it"
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-PRINT "I want to see the statement without executing it"
-				END CPRINT
+				DIV "kb-col kb-col-24 kb-code-block"
+					SPRINT PRINT "I want to see the statement without executing it"
+				END DIV
 				DIV "kb-col kb-col-24";"see-also"
 					LINK "/reference/REM"
 						PRINT "REM"

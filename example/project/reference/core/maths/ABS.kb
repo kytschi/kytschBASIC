@@ -19,12 +19,19 @@ BODY
 				END HEADING 3
 				CPRINT
 PRINT ABS -250
+LINE BREAK
+
+DEF var#=ABS -50
+PRINT var#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT ABS -250
+					LINE BREAK
+					DEF var#=ABS -50
+					PRINT var#
 				END DIV
 				HEADING 4
 					PRINT "See also"

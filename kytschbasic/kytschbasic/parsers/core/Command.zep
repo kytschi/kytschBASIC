@@ -25,7 +25,6 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
-use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Variables;
 
 class Command extends Variables
@@ -46,7 +45,7 @@ class Command extends Variables
 		if (substr(arg, 0, 1) != "\"") {
 			return this->clean(arg);
 		}
-
+		
 		return this->constants(trim_string ? trim(arg, "\"") : arg);
 	}
 }

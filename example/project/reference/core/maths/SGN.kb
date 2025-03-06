@@ -19,7 +19,9 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT SGN -250
+LINE BREAK
 PRINT SGN 0
+LINE BREAK
 PRINT SGN 250
 				END CPRINT
 				HEADING 4
@@ -27,7 +29,9 @@ PRINT SGN 250
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT SGN -250
+					LINE BREAK
 					PRINT SGN 0
+					LINE BREAK
 					PRINT SGN 250
 				END DIV
 				HEADING 4

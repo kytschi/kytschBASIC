@@ -40,7 +40,7 @@ END HEAD
 						RGB 0;0;0
 						BITMAP 0;0;800;400
 							RGB 255;0;0
-							BITMAPFONT "_ROOT/kytschi/fonts/8bitOperatorPlus8-Regular.ttf"
+							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
 							BITMAPTEXT "The Traveller";32;0;220;150
 							BITMAPTEXT "Press any key to start";18;0;235;320
 						END BITMAP

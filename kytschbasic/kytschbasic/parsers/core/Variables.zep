@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Variables
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2024 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -58,7 +58,7 @@ class Variables
 		return args;
 	}
 
-	public function clean(string line, bool inline_string = true)
+	public function clean(string line, bool inline_string = true, bool variable = true)
 	{
 		var args, arg, maths = "";
 
@@ -67,18 +67,14 @@ class Variables
 		
 		for arg in args {
 			let maths = Maths::parse(arg);
-			if (maths) {
+			if (maths !== null) {
 				let line .= maths;
 			} else {
-				if (is_numeric(arg)) {
-					let line .= arg . ".";
-				} else {
-					let line .= (inline_string ? "{" : "") . "$" . trim(str_replace(this->types, "", arg)) . (inline_string ? "}" : "");
-				}
+				let line .= (inline_string ? "{" : "") . (variable ? "$" : "") . trim(str_replace(this->types, "", arg)) . (inline_string ? "}" : "");
 			}
 		}
 		
-		return Maths::equation(rtrim(line, "."));
+		return Maths::equation(line);
 	}
 
 	public function constants(string line)
@@ -134,19 +130,48 @@ class Variables
 		if (strpos(line, "%=") !== false) {
 			let splits = explode("%=", line);
 			if (count(splits) > 1) {
-				return "<?php $" . splits[0] . " = intval(" . this->clean(splits[1], false) . "); ?>";
+				return "<?php $" .
+					splits[0] .
+					" = intval(" .
+					this->clean(
+						splits[1],
+						false, 
+						in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
+					) . 
+				"); ?>";
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
 		} elseif (strpos(line, "#=") !== false) {
 			let splits = explode("#=", line);
 			if (count(splits) > 1) {
-				return "<?php $" . splits[0] . " = (double)" . this->clean(splits[1], false) . "; ?>";
+				return "<?php $" .
+					splits[0] .
+					" = (double)" .
+					this->clean(
+						splits[1],
+						false,
+						in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
+					) . "; ?>";
+			} else {
+				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+			}
+		} elseif (strpos(line, "$=") !== false) {
+			let splits = explode("$=", line);
+			if (count(splits) > 1) {
+				return "<?php $" .
+					splits[0] .
+					" = " .
+					this->clean(
+						splits[1],
+						false,
+						in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
+					) . "; ?>";
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
 		} else {
-			return "<?php " . this->clean(line, false) . "; ?>";
+			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 		}		
 	}
 }

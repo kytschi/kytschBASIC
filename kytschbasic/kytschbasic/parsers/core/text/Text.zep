@@ -26,7 +26,6 @@
 namespace KytschBASIC\Parsers\Core\Text;
 
 use KytschBASIC\Parsers\Core\Command;
-use KytschBASIC\Parsers\Core\Maths;
 
 class Text extends Command
 {
