@@ -34,9 +34,11 @@ class Select extends Command
 	public function parse(string command, args)
 	{
 		if (command == "SELECT") {
-			return "<?php switch (" . this->clean(args, false) . ") { ?>";
-		} elseif (command == "ENDSELECT") {
-			return "<?php } ?>";
+			return "<?php switch (" . this->clean(
+				args,
+				false,
+				in_array(substr(args, strlen(args) - 1, 1), this->types) ? true : false
+			) . ") { ?>";
 		}
 		return null;
 	}

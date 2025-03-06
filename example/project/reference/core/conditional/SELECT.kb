@@ -18,34 +18,34 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-SPRINT DEF iLoop$=10
-SPRINT WHILE iLoop>0
-	SPRINT SELECT iLoop
-		SPRINT CASE 2
-			SPRINT PRINT iLoop
-			SPRINT LINE BREAK
-		SPRINT CASE 4
-			SPRINT PRINT iLoop
-			SPRINT LINE BREAK
-	SPRINT END SELECT
-	SPRINT LET iLoop=iLoop-1
-SPRINT WEND
+DEF iLoop%=10
+WHILE iLoop%>0
+	SELECT iLoop%
+		CASE 2
+			PRINT iLoop%
+			LINE BREAK
+		CASE 4
+			PRINT iLoop%
+			LINE BREAK
+	END SELECT
+	LET iLoop%=iLoop%-1
+WEND
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					DEF iLoop$=10
-					WHILE iLoop>0
-						SELECT iLoop
+					DEF iLoop%=10
+					WHILE iLoop%>0
+						SELECT iLoop%
 							CASE 2
-								PRINT iLoop
+								PRINT iLoop%
 								LINE BREAK
 							CASE 4
-								PRINT iLoop
+								PRINT iLoop%
 								LINE BREAK
 						END SELECT
-						LET iLoop=iLoop-1
+						LET iLoop%=iLoop%-1
 					WEND
 				END DIV
 				HEADING 4

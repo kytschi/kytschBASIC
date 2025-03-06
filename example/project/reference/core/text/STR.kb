@@ -9,7 +9,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "STR$";"heading-command basic"
+					PRINT "STR";"heading-command basic"
 				END SWRITE
 				SWRITE
 					PRINT "Converts to a string."
@@ -18,16 +18,18 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT STR$("Hi World!")
-PRINT STR$(26)
+PRINT STR "Hi World!"
+LINE BREAK
+PRINT STR 26
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-Hi World!
-26
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT STR "Hi World!"
+					LINE BREAK
+					PRINT STR 26
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

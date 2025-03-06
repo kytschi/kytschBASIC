@@ -84,6 +84,51 @@ class Text extends Command
 			}
 
 			let value = "\" . chr(intval(\"" . this->setArg(args[0], false) . "\")) . \"";
+		} elseif (substr(args[0], 0, 6) == "STRING") {
+			let args[0] = trim(str_replace("STRING", "", args[0]));
+
+			if (args[0] != "0" && empty(args[0])) {
+				throw new \Exception("Invalid STRING");
+			}
+						
+			let converted = this->setArg(args[0]);
+			array_shift(args);
+			
+			if (isset(args[0])) {
+				if (is_numeric(args[0])) {
+					let length = intval(args[0]);
+				}
+			}
+
+			while length {
+				let value .= converted;
+				let length -= 1;
+			}
+		} elseif (substr(args[0], 0, 9) == "STRIPLEAD") {
+			let args[0] = trim(str_replace("STRIPLEAD", "", args[0]));
+
+			if (args[0] != "0" && empty(args[0])) {
+				throw new \Exception("Invalid STRIPLEAD");
+			}
+						
+			let converted = this->setArg(args[0]);
+			array_shift(args);
+			
+			var strip_char = "";
+			if (isset(args[0])) {
+				let value = this->setArg(args[0]);
+				let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
+			}
+
+			let value = "\" . ltrim(\"" . converted . "\", " . strip_char . ") . \"";
+		} elseif (substr(args[0], 0, 3) == "STR") {
+			let args[0] = trim(str_replace("STR", "", args[0]));
+
+			if (args[0] != "0" && empty(args[0])) {
+				throw new \Exception("Invalid STR");
+			}
+
+			let value = "\" . (string)\"" . trim(this->setArg(args[0], false), "\"") . "\" . \"";
 		} elseif (substr(args[0], 0, 3) == "ASC") {
 			let args[0] = trim(str_replace("ASC", "", args[0]));
 

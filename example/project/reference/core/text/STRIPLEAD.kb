@@ -9,9 +9,9 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "STRIPLEAD$";"heading-command basic"
+					PRINT "STRIPLEAD";"heading-command basic"
 					LINE BREAK
-					PRINT "STRING, ASCII|CHARACTER";"heading-args"
+					PRINT "STRING; ASCII|CHARACTER";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will remove all the lead characters based on a supplied ASCII character value or a character."
@@ -20,16 +20,18 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT STRIPLEAD$("AAABBBAAA", 65)
-PRINT STRIPLEAD$("AAABBBAAA", "A")
+PRINT STRIPLEAD "AAABBBAAA"; 65
+LINE BREAK
+PRINT STRIPLEAD "AAABBBAAA"; "A"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-BBBAAA
-BBBAAA
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT STRIPLEAD "AAABBBAAA"; 65
+					LINE BREAK
+					PRINT STRIPLEAD "AAABBBAAA"; "A"
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

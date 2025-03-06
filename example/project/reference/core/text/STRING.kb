@@ -9,7 +9,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "STRING$";"basic"
+					PRINT "STRING";"basic"
 				END HEADING 2
 				SWRITE
 					PRINT "This function will return a string containing repeat sequential occurrences of the string."
@@ -18,14 +18,14 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT STRING$("HI!", 3)
+PRINT STRING "HI!"; 3
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-HI!HI!HI!
-				END CPRINT
+				DIV "kb-code-block"
+					PRINT STRING "HI!"; 3
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

@@ -158,7 +158,17 @@ class Parser
 				let output .= "<?php break; ?>" . this->newline;
 				let this->has_case = false;
 			}
-			let output .= "<?php case " . (new Command())->clean(args, false) . ": ?>" . this->newline;
+
+			let parser = new Command();
+
+			let output .= "<?php case " .
+			parser->clean(
+					args,
+					false,
+					in_array(substr(args, strlen(args) - 1, 1), parser->types) ? true : false
+				)
+				. ": ?>" . this->newline;
+
 			let this->has_case = true;
 
 			return output;
@@ -171,6 +181,12 @@ class Parser
 			let this->has_case = true;
 
 			return output;
+		} elseif (command == "END SELECT") {
+			if (this->has_case) {
+				let output .= "<?php break; ?>" . this->newline;
+				let this->has_case = false;
+			}
+			return "<?php } ?>";
 		} elseif (command == "VERSION") {
 			return "<span class=\"kb-version\">" . constant("VERSION") . "</span>";
 		}
