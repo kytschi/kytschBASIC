@@ -54,6 +54,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
 		"KytschBASIC\\Parsers\\Core\\Load",
 		"KytschBASIC\\Parsers\\Core\\Database",
+		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",

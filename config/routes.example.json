@@ -74,6 +74,22 @@
 		"url": "/reference/MAIL",
 		"template": "project/reference/core/mail/MAIL.kb"
 	},
+	{
+		"url": "/reference/MAILFROM",
+		"template": "project/reference/core/mail/MAILFROM.kb"
+	},
+	{
+		"url": "/reference/MAILTO",
+		"template": "project/reference/core/mail/MAILTO.kb"
+	},
+	{
+		"url": "/reference/MAILSUBJECT",
+		"template": "project/reference/core/mail/MAILSUBJECT.kb"
+	},
+	{
+		"url": "/reference/MAILBODY",
+		"template": "project/reference/core/mail/MAILBODY.kb"
+	},
 	
 	{
 		"url": "/reference/GOTO",

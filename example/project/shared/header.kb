@@ -250,6 +250,18 @@ HEADER
 		LINK "/reference/MAIL#refMAIL";"Find out about the MAIL command";"nav-link";;"refMAIL"
 			PRINT "MAIL"
 		END LINK
+		LINK "/reference/MAILBODY#refMAILBODY";"Find out about the MAILBODY command";"nav-link";;"refMAILBODY"
+			PRINT "MAILBODY"
+		END LINK
+		LINK "/reference/MAILFROM#refMAILFROM";"Find out about the MAILFROM command";"nav-link";;"refMAILFROM"
+			PRINT "MAILFROM"
+		END LINK
+		LINK "/reference/MAILSUBJECT#refMAILSUBJECT";"Find out about the MAILSUBJECT command";"nav-link";;"refMAILSUBJECT"
+			PRINT "MAILSUBJECT"
+		END LINK
+		LINK "/reference/MAILTO#refMAILTO";"Find out about the MAILTO command";"nav-link";;"refMAILTO"
+			PRINT "MAILTO"
+		END LINK
 		LINK "/reference/MID#refMID";"Find out about the MID command";"nav-link";;"refMID"
 			PRINT "MID"
 		END LINK

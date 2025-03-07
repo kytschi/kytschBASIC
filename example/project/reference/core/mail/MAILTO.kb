@@ -9,10 +9,12 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				HEADING 2
-					PRINT "MAIL";"basic"
+					PRINT "MAILTO";"basic"
+					LINE BREAK
+					PRINT "EMAIL";"heading-args"
 				END HEADING 2
 				SWRITE
-					PRINT "Ability to send an HTML email."
+					PRINT "Set the to email address when sending an email."
 					LINE BREAK
 					PRINT "Note: Only sendmail is supported at present so you will need that installed also.";"heading-args"
 				END SWRITE
@@ -42,13 +44,13 @@ MAIL
 		PRINT "You suck!"
 	END MAILBODY
 END MAIL
-				END CPRINT			
+				END CPRINT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24";"see-also"
-					LINK "/reference/MAILTO"
-						PRINT "MAILTO"
+					LINK "/reference/MAIL"
+						PRINT "MAIL"
 					END LINK
 					PRINT " | "
 					LINK "/reference/MAILFROM"
