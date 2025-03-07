@@ -73,6 +73,18 @@ class Layout extends Command
 		} else {
 			let params .= " id='" . this->genID("kb-" . tag) . "'";
 		}
+
+		if (isset(args[2])) {
+			let output .= " " . str_replace(
+				"\"",
+				"\\\"",
+				this->clean(
+					args[2],
+					false,
+					in_array(substr(args[2], strlen(args[2]) - 1, 1), this->types) ? true : false
+				)
+			);
+		}
 		
 		return "<?= \"<" . tag . params . ">\"; ?>";
 	}

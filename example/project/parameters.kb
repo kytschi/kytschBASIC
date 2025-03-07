@@ -15,30 +15,50 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Parameters are set after the command and are set in a specific order. For example:"
 				END SWRITE
 				CPRINT
-WINDOW "intro";;(200,0)
+PRINT "Hello World! I've parameters too!";"heading-args"
 				END CPRINT
 				SWRITE
-					PRINT "The WINDOW commands parameters are as follows,"
+					PRINT "The PRINT commands parameters are as follows,"
 				END SWRITE
-				PRINT "ID; TITLE; (X1,Y1)-(X2,Y2); TYPE; SCREEN ID";"heading-args"
+				PRINT "STRING; CLASS; ID";"heading-args"
 				SWRITE
-					PRINT "Notice how we didn't want to set the TITLE, just the ID and the X1 and Y1 of the command. But we still leave the TITLE parameter in even though it is blank."
+					PRINT "Notice how we didn't want to set the ID, just the CLASS for the command."
 				END SWRITE
 				HEADING 4
-					PRINT "Setting HTML parameters on commands"
+					PRINT "Output"
 				END HEADING 4
+				CPRINT
+&lt;span class="heading-args" id="kb-span-46063087656773"&gt;Hello World! I've parameters too!&lt;/span&gt;
+				END CPRINT
 				SWRITE
-					PRINT "You can pass any parameter you like along with the command but note that only those valid ones to the corresponding HTML tag will be picked up by browser and used. The rest will be outputted. HTML parameters always come after the command parameters."
+					PRINT "Note:";"heading-args"
+					PRINT " kytsch"
+					PRINT "BASIC";"basic"
+					PRINT " will automatically add an ID when none is supplied."
+				END SWRITE
+				HEADING 3
+					PRINT "Setting HTML parameters on commands"
+				END HEADING 3
+				SWRITE
+					PRINT "You can pass any parameter you like along with the command but note that only "
+					PRINT "those valid ones to the corresponding HTML tag will be picked up by the browser and used. "
+					PRINT "HTML parameters always come after the command parameters."
 				END SWRITE
 				SWRITE
 					PRINT "Lets use the WINDOW example above and set its class."
 				END SWRITE
 				CPRINT
-WINDOW "intro";;(200,0);;;class="some-class";data-id="some-id"
+PRINT "Hello World! I've parameters too!";"heading-args";"id-hello-word";onclick="alert('Hello World!')"
 				END CPRINT
 				SWRITE
-					PRINT "HTML specific parameters start with the parameter name, then = and then you set its value."
+					PRINT "HTML specific parameters start with the parameter name, then = and then you set it's value."
 				END SWRITE
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				CPRINT
+&lt;span class="heading-args" id="id-hello-word" onclick="alert('Hello World!')"&gt;Hello World! I've parameters too!&lt;/span&gt;
+				END CPRINT
 				PRINT "It is important that the parameter count matches that of what the command is expecting!";"important"
 				SWRITE
 					PRINT "For more information on HTML tags and what they do please visit "
@@ -48,6 +68,22 @@ WINDOW "intro";;(200,0);;;class="some-class";data-id="some-id"
 					PRINT " or using your favourite search engine look up html tags."
 					LINE BREAK
 				END SWRITE
+				HEADING 3
+					PRINT "Skipping parameters on commands"
+				END HEADING 3
+				CPRINT
+PRINT "Hello World! I've parameters too!";;;onclick="alert('Hello World!')"
+				END CPRINT
+				SWRITE
+					PRINT "Here we aren't setting the CLASS or the ID on the PRINT command but notice we must still add the ; to indicate nothing is set so that we "
+					PRINT "can add our HTML parameters at the end."
+				END SWRITE
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				CPRINT
+&lt;span id="kb-span-46063087656773" onclick="alert('Hello World!')"&gt;Hello World! I've parameters too!&lt;/span&gt;
+				END CPRINT
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

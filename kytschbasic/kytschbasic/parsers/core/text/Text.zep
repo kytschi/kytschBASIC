@@ -73,10 +73,22 @@ class Text extends Command
 			let output .= " class='" . this->setArg(args[1]) . "'";
 		}
 
-		if (isset(args[2])) {
+		if (isset(args[2]) && !empty(args[2])) {
 			let output .= " id='" . this->setArg(args[2]) . "'";
 		} else {
 			let output .= " id='" . this->genID("kb-span") . "'";
+		}
+
+		if (isset(args[3])) {
+			let output .= " " . str_replace(
+				"\"",
+				"\\\"",
+				this->clean(
+					args[3],
+					false,
+					in_array(substr(args[3], strlen(args[3]) - 1, 1), this->types) ? true : false
+				)
+			);
 		}
 		
 		return output . ">\" . " . value . " . \"</span>\";?>";

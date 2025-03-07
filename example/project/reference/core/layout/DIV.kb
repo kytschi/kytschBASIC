@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "DIV";"heading-command basic"
 					LINE BREAK
-					PRINT "CLASS, ID";"heading-args"
+					PRINT "CLASS; ID";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Creating a HTML div."
