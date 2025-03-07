@@ -20,16 +20,18 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-SPRINT SWRITE
-	SPRINT VERSION
-SPRINT END SWRITE
+SWRITE
+	VERSION
+END SWRITE
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-SWRITE
-	VERSION
-END SWRITE
+				DIV "kb-col kb-col-24 kb-code-block"
+					SWRITE
+						VERSION
+					END SWRITE
+				END DIV
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

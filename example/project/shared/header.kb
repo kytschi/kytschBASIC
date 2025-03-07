@@ -317,7 +317,7 @@ HEADER
 			PRINT "TCELL"
 		END LINK
 		LINK "/reference/TEXTAREA#refTEXTAREA";"Find out about the TEXTAREA command";"nav-link";;"refTEXTAREA"
-			PRINT "FORM TEXTAREA"
+			PRINT "TEXTAREA"
 		END LINK
 		LINK "/reference/TEXTINPUT#refTEXTINPUT";"Find out about the TEXTINPUT command";"nav-link";;"refTEXTINPUT"
 			PRINT "TEXTINPUT"

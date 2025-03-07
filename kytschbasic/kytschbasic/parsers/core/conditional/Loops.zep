@@ -33,8 +33,14 @@ class Loops extends Command
 	public function parse(string command, args)
 	{
 		if (command == "WHILE") {
-			return "<?php while (" . this->clean(args, false) . ") { ?>";
-		} elseif (command == "WEND" || command == "NEXT") {
+			return "<?php while (" .
+				this->clean(
+					args,
+					false,
+					in_array(substr(args, strlen(args) - 1, 1), this->types) ? true : false
+				) .
+			") { ?>";
+		} elseif (command == "WEND" || command == "NEXT" || command == "END WHILE") {
 			return "<?php } ?>";
 		} elseif (command == "FOR") {
 			if (strpos(args, " IN ") !== false) {

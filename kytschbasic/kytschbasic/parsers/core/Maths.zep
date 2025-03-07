@@ -35,8 +35,8 @@ class Maths
 
 		var splits, val;
 		
-		let splits = preg_split("/\*|\+|\-|\>|\>=|\<|\<-|\==|\//", command, 0, 2);
-
+		let splits = preg_split("/\*|\+|\<-|\-|\>=|\>|\<=|\<|\==|\//", command, 0, 2);
+		
 		if (count(splits) == 1) {
 			return command;
 		}

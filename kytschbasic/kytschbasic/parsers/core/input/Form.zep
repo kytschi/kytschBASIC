@@ -36,7 +36,9 @@ class Form extends Command
 		} elseif (command == "FORM") {
 			return this->processForm(args);
 		} elseif (command == "TEXTINPUT") {
-			return this->processFormInput(args);
+			return this->processInput(args);
+		} elseif (command == "TEXTAREA") {
+			return this->processTextarea(args);
 		} elseif (command == "CAPTCHA") {
 			return this->processCaptcha(args);
 		}
@@ -75,7 +77,7 @@ class Form extends Command
 		return "<?= \"<form" . params . ">\"; ?>";
 	}
 
-	private function processFormInput(string line, string type = "text")
+	private function processInput(string line, string type = "text")
 	{
 		var args, params="";
 
@@ -88,24 +90,65 @@ class Form extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " class='" . this->setArg(args[1]) . "'";
+			let params .= "value='" . this->setArg(args[1]) . "'";
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " placeholder='" . this->setArg(args[2]) . "'";
+			let params .= " class='" . this->setArg(args[2]) . "'";
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " id='" . this->setArg(args[3]) . "'";
+			let params .= " placeholder='" . this->setArg(args[3]) . "'";
+		}
+
+		if (isset(args[4]) && !empty(args[4])) {
+			let params .= " id='" . this->setArg(args[4]) . "'";
 		} else {
 			let params .= " id='" . this->genID("kb-form-input") . "'";
 		}
 
-		if (isset(args[4]) && !empty(args[4])) {
+		if (isset(args[5]) && !empty(args[5])) {
 			let params .= " required='required'";
 		}
 		
 		return "<?= \"<input type='" . type . "'" . params . ">\"; ?>";
+	}
+
+	private function processTextarea(string line, string type = "text")
+	{
+		var args, params="", value = "";
+
+		let args = this->args(line);
+		
+		if (isset(args[0]) && !empty(args[0])) {
+			let params .= " name='" . this->setArg(args[0]) . "'";
+		} else {
+			let params .= " name='" . this->genID("kb-form-input") . "'";
+		}
+
+		if (isset(args[1]) && !empty(args[1])) {
+			let value = this->setArg(args[1]);
+		}
+
+		if (isset(args[2]) && !empty(args[2])) {
+			let params .= " class='" . this->setArg(args[2]) . "'";
+		}
+
+		if (isset(args[3]) && !empty(args[3])) {
+			let params .= " placeholder='" . this->setArg(args[3]) . "'";
+		}
+
+		if (isset(args[4]) && !empty(args[4])) {
+			let params .= " id='" . this->setArg(args[4]) . "'";
+		} else {
+			let params .= " id='" . this->genID("kb-form-input") . "'";
+		}
+
+		if (isset(args[5]) && !empty(args[5])) {
+			let params .= " required='required'";
+		}
+		
+		return "<?= \"<textarea" . params . ">" . value . "</textarea>\"; ?>";
 	}
 
 	private function processCaptcha(args)

@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "TEXTINPUT";"heading-command basic"
 					LINE BREAK
-					PRINT "NAME; CLASS; PLACEHOLDER TEXT; ID; REQUIRED";"heading-args"
+					PRINT "NAME; VALUE; CLASS; PLACEHOLDER TEXT; ID; REQUIRED";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a form input of the text type."
@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						TEXTINPUT "input_test"; "form-input"; "Enter your name"
+						TEXTINPUT "input_test";; "form-input"; "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -55,36 +55,36 @@ END FORM
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET["input_test"] THEN
-	PRINT "You submitted this,"
-	LINE BREAK
-	PRINT _GET["input_test"]
-END IF
-FORM "form_test"
-	SWRITE
-		LINE BREAK
-		TABLE "table-border"
-			TBODY
-				TROW
-					TCELL
-						PRINT "Name"
-					END TCELL
-					TCELL
-						TEXTINPUT "input_test"; "form-input"; "Enter your name"
-					END TCELL
-				END TROW
-				TROW
-					TCELL
-						WHITESPACE
-					END TCELL
-					TCELL
-						BUTTON SUBMIT "btn_test";;; "submit"
-					END TCELL
-				END TROW
-			END TBODY
-		END TABLE
-	END SWRITE
-END FORM
+					IFNTE _GET["input_test"] THEN
+						PRINT "You submitted this,"
+						LINE BREAK
+						PRINT _GET["input_test"]
+					END IF
+					FORM "form_test"
+						SWRITE
+							LINE BREAK
+							TABLE "table-border"
+								TBODY
+									TROW
+										TCELL
+											PRINT "Name"
+										END TCELL
+										TCELL
+											TEXTINPUT "input_test";; "form-input"; "Enter your name"
+										END TCELL
+									END TROW
+									TROW
+										TCELL
+											WHITESPACE
+										END TCELL
+										TCELL
+											BUTTON SUBMIT "btn_test";;; "submit"
+										END TCELL
+									END TROW
+								END TBODY
+							END TABLE
+						END SWRITE
+					END FORM
 				END DIV
 				HEADING 4
 					PRINT "See also"

@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FORM TEXTAREA statment | kytschBASIC"
+	NAME "TEXTAREA statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,9 +9,9 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row";"main-content"
 			DIV "kb-col kb-col-24";"main-content-col"
 				SWRITE
-					PRINT "FORM TEXTAREA";"heading-command basic"
+					PRINT "TEXTAREA";"heading-command basic"
 					LINE BREAK
-					PRINT "NAME, CLASS, PLACEHOLDER TEXT, ID, REQUIRED";"heading-args"
+					PRINT "NAME; VALUE; CLASS; PLACEHOLDER TEXT; ID; REQUIRED";"heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a form textarea."
@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						FORM TEXTAREA "input_test", "form-input", "Enter your name"
+						TEXTAREA "input_test";; "form-input"; "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -55,36 +55,36 @@ END FORM
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET["input_test"] THEN
-	PRINT "You submitted this,"
-	LINE BREAK
-	PRINT _GET["input_test"]
-END IF
-FORM "form_test"
-	SWRITE
-		LINE BREAK
-		TABLE "table-border"
-			TBODY
-				TROW
-					TCELL
-						PRINT "Message"
-					END TCELL
-					TCELL
-						FORM TEXTAREA "input_test", "form-input", "Enter your message"
-					END TCELL
-				END TROW
-				TROW
-					TCELL
-						WHITESPACE
-					END TCELL
-					TCELL
-						BUTTON SUBMIT "btn_test";;; "submit"
-					END TCELL
-				END TROW
-			END TBODY
-		END TABLE
-	END SWRITE
-END FORM
+					IFNTE _GET["input_test"] THEN
+						PRINT "You submitted this,"
+						LINE BREAK
+						PRINT _GET["input_test"]
+					END IF
+					FORM "form_test"
+						SWRITE
+							LINE BREAK
+							TABLE "table-border"
+								TBODY
+									TROW
+										TCELL
+											PRINT "Message"
+										END TCELL
+										TCELL
+											TEXTAREA "input_test";; "form-input"; "Enter your name"
+										END TCELL
+									END TROW
+									TROW
+										TCELL
+											WHITESPACE
+										END TCELL
+										TCELL
+											BUTTON SUBMIT "btn_test";;; "submit"
+										END TCELL
+									END TROW
+								END TBODY
+							END TABLE
+						END SWRITE
+					END FORM
 				END DIV
 				HEADING 4
 					PRINT "See also"

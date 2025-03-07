@@ -18,16 +18,20 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-UCASE "Hello World!"
-PRINT UCASE$("Hello World!")
+DEF test$=UCASE "Hello World!"
+PRINT test$
+LINE BREAK
+PRINT UCASE "Hello World!"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-HELLO WORLD!
-HELLO WORLD!
-				END CPRINT
+				DIV "kb-col kb-col-24 kb-code-block"
+					DEF test$=UCASE "Hello World!"
+					PRINT test$
+					LINE BREAK
+					PRINT UCASE "Hello World!"
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

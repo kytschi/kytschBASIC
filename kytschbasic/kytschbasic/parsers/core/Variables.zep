@@ -163,7 +163,7 @@ class Variables
 					splits[0] .
 					" = " .
 					this->clean(
-						splits[1],
+						trim((new Text())->processValue(splits[1]), "\""),
 						false,
 						in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
 					) . "; ?>";
