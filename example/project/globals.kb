@@ -85,14 +85,6 @@ BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
 								PRINT "The page path from the URL, for example /globals"
 							END TCELL
 						END TROW
-						TROW
-							TCELL
-								PRINT "&#95;PATH"
-							END TCELL
-							TCELL
-								PRINT "The page path from the URL, for example /globals"
-							END TCELL
-						END TROW
 					END TBODY
 				END TABLE
 			END DIV

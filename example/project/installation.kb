@@ -13,14 +13,22 @@ BODY
 					PRINT "kytsch";"kytsch"
 					PRINT "BASIC";"basic"
 				END HEADING 2
+				HEADING 3
+					PRINT "Requirements";"basic"
+				END HEADING 3
 				SWRITE
-					PRINT "First thing you will need is to install "
-					LINK "https://docs.zephir-lang.com/0.12/en/installation";"Checkout Zephir";;"_blank"
-						PRINT "Zephir"
-					END LINK
+					PRINT "PHP 7.4 to 8.2"
+					LINE BREAK
+					PRINT "PHP-GD"
+					LINE BREAK
+					PRINT "PHP-MySQL (Optional)"
 				END SWRITE
+
+				HEADING 3
+					PRINT "Get the source code";"basic"
+				END HEADING 3
 				SWRITE
-					PRINT "Now open your favourite terminal/console and clone the repo."
+					PRINT "Now open your favourite terminal/console and clone the repo or use your favourite GUI git tool."
 				END SWRITE
 				CPRINT
 git clone https://github.com/kytschi/kytschBASIC.git
@@ -29,20 +37,21 @@ OR
 
 git clone git@github.com:kytschi/kytschBASIC.git
 				END CPRINT
-
+				
+				HEADING 3
+					PRINT "Enable the module";"basic"
+				END HEADING 3
 				SWRITE
-					PRINT "Building the kytschBASIC PHP module."
+					PRINT "You can copy the sample ini file from the `php` folder from the repo for the desired PHP version. Remember to do this as root or a user with administrator permissions."
 				END SWRITE
 				CPRINT
-cd kytschBASIC/kytschbasic
-zephir build
+cp kytschBASIC/php/kytschBASIC-8.2.ini /etc/php/8.2/mods-available/kytschBASIC.ini
 				END CPRINT
-
 				SWRITE
-					PRINT "Enable the kytschBASIC module. You can copy the sample ini file from the `php` folder in this repo. Remember to do this as root or a user with administrator permissions."
+					PRINT "Now enable the kytschBASIC module in your PHP-FPM install or however you run PHP on your webserver."
 				END SWRITE
 				CPRINT
-cp kytschBASIC/php/kytschBASIC.ini /etc/php/7.4/mods-available/
+ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kytschBASIC.ini
 				END CPRINT
 				SWRITE
 					PRINT "And don't forget to restart the PHP service."
@@ -53,9 +62,8 @@ cp kytschBASIC/php/kytschBASIC.ini /etc/php/7.4/mods-available/
 				END SWRITE
 				CPRINT
 &lt;?php
-use KytschBASIC\Compiler;
 
-(new Compiler(__DIR__ . '/../kytschbasic-config.json'))->run();
+(new KytschBASIC\Compiler(__DIR__ . '/../config'))->run();
 				END CPRINT
 
 				SWRITE
@@ -80,7 +88,7 @@ use KytschBASIC\Compiler;
 					END HEADING 3
 				END LINK
 				SWRITE
-					PRINT "kytschBASIC configuration is handled via JSON config files. From there you can define the database connection, the routes, etc. "
+					PRINT "kytschBASIC configuration is handled via JSON config files located in the config folder. From there you can define the database connection, the routes, etc. "
 					LINK "https://github.com/kytschi/kytschBASIC/tree/master/config";;;"_blank"
 						PRINT "See kytschBASIC example configs for more information"
 					END LINK
@@ -130,6 +138,22 @@ use KytschBASIC\Compiler;
 		"template": "project/news.kb"
 	}
 ]
+				END CPRINT
+				HEADING 3
+					PRINT "Building from source";"basic"
+				END HEADING 3
+				SWRITE
+					PRINT "First thing you will need is to install "
+					LINK "https://docs.zephir-lang.com/0.12/en/installation";"Checkout Zephir";;"_blank"
+						PRINT "Zephir"
+					END LINK
+				END SWRITE
+				SWRITE
+					PRINT "Building the kytschBASIC PHP module."
+				END SWRITE
+				CPRINT
+cd kytschBASIC/kytschbasic
+zephir build
 				END CPRINT
 			END DIV
 		END DIV

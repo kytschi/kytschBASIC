@@ -223,6 +223,10 @@ p {
     white-space: pre-line;
 }
 
+p a {
+    text-decoration: underline;
+}
+
 pre, .kb-code-block {
     padding: 40px;
     color: #ffc228;
