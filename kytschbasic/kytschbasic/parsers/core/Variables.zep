@@ -26,6 +26,8 @@
 namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
+use KytschBASIC\Libs\Arcade\Parsers\Screen\Display;
+use KytschBASIC\Parsers\Core\Function\Misc;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Text\Text;
 
@@ -39,30 +41,19 @@ class Variables
 			return [];
 		}
 
-		var args, arg, key, replace;
-
-		let replace = md5(time());
-
-		let line = preg_replace_callback(
-			"/\"[^\"]+\"/",
-			function (match) use (replace) {
-				return str_replace(";", replace, match[0]);
-			},
-			line
-		);
-
-		let args = explode(";", line);
-		for key, arg in args {
-			let args[key] = str_replace(replace, ";", arg);
+		if (substr(line, 0, 1) == "(") {
+			return [line];
 		}
-		return args;
+
+		return preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line);
 	}
 
 	public function clean(string line, bool inline_string = true, bool variable = true)
 	{
 		var args, arg, maths = "";
 
-		let args = this->args(line);
+		let args = this->args(trim(line));
+		
 		let line = "";
 		
 		for arg in args {
@@ -70,11 +61,19 @@ class Variables
 			if (maths !== null) {
 				let line .= maths;
 			} else {
-				let line .= (inline_string ? "{" : "") . (variable ? "$" : "") . trim(str_replace(this->types, "", arg)) . (inline_string ? "}" : "");
+				let maths = Display::parse(arg);
+
+				if (maths !== null) {
+					let line .= maths;
+				} else {
+					let line .= (inline_string ? "{" : "") .
+						(variable ? "$" . str_replace(this->types, "", arg) : arg) .
+						(inline_string ? "}" : "");
+				}
 			}
 		}
 		
-		return Maths::equation(line);
+		return (maths !== null) ? Maths::equation(line) : line;
 	}
 
 	public function constants(string line)
@@ -99,12 +98,49 @@ class Variables
 			return this->processDef(args, true);
 		} elseif (command == "DEF") {
 			return this->processDef(args);
+		} elseif (command == "DIM") {
+			return this->processDim(args);
 		} elseif (command == "2DP") {
-			return "<?php " . $this->clean(args, false) . " = number_format(" . $this->clean(args, false) . ", 2, '.', ''); ?>";
+			return "<?php " . this->clean(args, false) . " = number_format(" . this->clean(args, false) . ", 2, '.', ''); ?>";
+		} elseif (command == "SHUFFLE") {
+			return "<?php shuffle(" . this->clean(args, false) . "); ?>";
+		} elseif (command == "POP") {
+			return this->arrayMod(args);
+		} elseif (command == "SHIFT") {
+			return this->arrayMod(args, false);
 		} elseif (command == "DUMP") {
-			return "<?php var_dump(" . $this->clean(args, false) . "); ?>";
+			return "<?php var_dump(" . this->clean(args, false) . "); ?>";
 		} elseif (command == "BENCHMARK") {
 			return this->processBenchmark();
+		}
+	}
+
+	private function arrayMod(args, bool pop = true)
+	{
+		let args = this->args(args);
+
+		if (pop) {
+			if (count(args) > 1) {
+				return "<?php array_splice(" .
+					this->clean(args[0], false) . ", " .
+					"count(" . this->clean(args[0], false) . ") - 1 - intval(" .
+					this->clean(args[1], false, in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false) .
+					"), 1); ?>";
+			} else {
+				return "<?php array_pop(" . this->clean(args[0], false) . "); ?>";
+			}
+		} else {
+			if (count(args) > 1) {
+				return "<?php array_splice(" .
+					this->clean(args[0], false) . ", intval(" .
+					this->clean(
+						args[1],
+						false,
+						in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false
+					) . "), 1); ?>";
+			} else {
+				return "<?php array_shift(" . this->clean(args[0], false) . "); ?>";
+			}
 		}
 	}
 
@@ -129,6 +165,13 @@ class Variables
 
 		if (strpos(line, "%=") !== false) {
 			let splits = explode("%=", line);
+			if (count(splits) > 1) {
+				return this->createInt(splits[0], splits);
+			} else {
+				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+			}
+		} elseif (strpos(line, "%()=") !== false) {
+			let splits = explode("%()=", line);
 			if (count(splits) > 1) {
 				return "<?php $" .
 					splits[0] .
@@ -159,19 +202,95 @@ class Variables
 		} elseif (strpos(line, "$=") !== false) {
 			let splits = explode("$=", line);
 			if (count(splits) > 1) {
-				return "<?php $" .
-					splits[0] .
-					" = " .
-					this->clean(
-						trim((new Text())->processValue(splits[1]), "\""),
-						false,
-						in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
-					) . "; ?>";
+				return this->createString(line, splits);
+			} else {
+				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+			}
+		} elseif (strpos(line, "$()=") !== false) {
+			let splits = explode("$()=", line);
+			if (count(splits) > 1) {
+				return this->createString(line, splits, "[]");
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
 		} else {
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+		}		
+	}
+
+	private function processDim(string line)
+	{
+		if (strpos(line, "$=") !== false) {
+			return this->createArray(line, explode("$=", line));
+		} elseif (strpos(line, "%=") !== false) {
+			return this->createArray(line, explode("%=", line));
+		} elseif (strpos(line, "#=") !== false) {
+			return this->createArray(line, explode("#=", line));
+		}
+	}
+
+	private function createInt(string line, splits, var_type = "")
+	{
+		array_shift(splits);
+
+		return "<?php $" .
+			line .
+			var_type . "= intval(" .
+			(new Misc())->processFunction(splits) .
+			"); ?>";
+	}
+
+	private function createString(string line, splits, var_type = "")
+	{
+		var strings, str = "", value = "";
+
+		let strings = preg_split("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", splits[1]);
+		
+		if (count(strings) > 1) {
+			while (count(strings)) {
+				let value = trim(strings[0]);
+								
+				let str .= this->clean(
+					value,
+					false,
+					in_array(substr(value, strlen(value) - 1, 1), this->types) ? true : false
+				) . " . ";
+
+				array_shift(strings);
+			}
+			let value = trim(str, " . ");
+		} else {
+			if (substr(splits[1], strlen(splits[1]) - 1, 1) == ")") {
+				let value = "$" . rtrim(str_replace("(", "[$", str_replace(this->types, "", splits[1])), ")") . "]";
+			} else {
+				let value = (new Text())->processValue(trim(splits[1], " . "));
+			}
+		}	
+		
+		return "<?php $" .
+			splits[0] .
+			var_type . "= " .
+			value . "; ?>";
+	}
+
+	private function createArray(string line, splits)
+	{
+		if (count(splits) > 1) {
+			return "<?php $" .
+				splits[0] .
+				" = array(" .
+				trim(
+					trim(
+						this->clean(
+							splits[1],
+							false,
+							in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
+						),
+						"("),
+					")")
+				. "); ?>";
+		} else {
+			throw new Exception("Invalid DIM");
 		}		
 	}
 }

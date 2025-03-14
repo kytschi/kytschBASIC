@@ -67,7 +67,8 @@ class Exception extends \Exception
         
         echo this;
         if (template && line) {
-            echo "<p>&nbsp;&nbsp;<strong>Trace</strong><br/>&nbsp;&nbsp;Source <strong>" . str_replace(getcwd(), "", template) . "</strong> at line <strong>" . line . "</strong></p>";
+            echo "<p>&nbsp;&nbsp;<strong>Trace</strong><br/>&nbsp;&nbsp;Source <strong>" .
+                str_replace(getcwd(), "", template) . "</strong> at line <strong>" . line . "</strong></p>";
         }
         die();
     }

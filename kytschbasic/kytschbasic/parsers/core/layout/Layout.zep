@@ -75,7 +75,7 @@ class Layout extends Command
 		}
 
 		if (isset(args[2])) {
-			let output .= " " . str_replace(
+			let params .= " " . str_replace(
 				"\"",
 				"\\\"",
 				this->clean(

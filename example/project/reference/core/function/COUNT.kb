@@ -1,0 +1,55 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "COUNT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "COUNT","heading-command basic"
+					LINE BREAK
+					PRINT "STRING","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This function will return the length of an array."
+				END SWRITE
+				SWRITE "heading-args"
+					PRINT "Note, this only applies to the DEF command and will not work on any other."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+DIM strings$=["kytsch", "BASIC"]
+DEF count%=COUNT strings$
+PRINT count%
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+					DIM strings$=["kytsch", "BASIC"]
+					DEF count%=COUNT strings$
+					PRINT count%
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/DEF"
+						PRINT "DEF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DIM"
+						PRINT "DIM"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

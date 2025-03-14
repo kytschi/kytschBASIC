@@ -1,9 +1,9 @@
 FOOTER
-	DIV "kb-row";"footer-content"
+	DIV "kb-row","footer-content"
 		DIV "kb-col kb-col-12"
 			PRINT "Powered by "
-			PRINT "kytsch";"kytsch"
-			PRINT "BASIC";"basic"
+			PRINT "kytsch","kytsch"
+			PRINT "BASIC","basic"
 			PRINT " "
 			VERSION
 			SWRITE
@@ -15,7 +15,7 @@ FOOTER
 			SWRITE
 				PRINT "Created by Mike Welsh"
 			END SWRITE
-			LINK "https://kytschi.com";"Checkout Kytschi";;"_blank"
+			LINK "https://kytschi.com","Checkout Kytschi",,"_blank"
 				PRINT "Checkout Kytschi"
 			END LINK
 		END DIV

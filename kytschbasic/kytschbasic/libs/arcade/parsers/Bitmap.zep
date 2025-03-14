@@ -89,27 +89,27 @@ class Bitmap extends Command
 		let args = this->args(args);
 
 		if (isset(args[0])) {
-			let x = intval(args[0]);
+			let x = "intval(\"" . this->setArg(args[0]) . "\")";
 		}
 
 		if (isset(args[1])) {
-			let y = intval(args[1]);
+			let y = "intval(\"" . this->setArg(args[1]) . "\")";
 		}
 
 		if (isset(args[2])) {
-			let width = intval(args[2]);
+			let width = "intval(\"" . this->setArg(args[2]) . "\")";
 		}
 
 		if (isset(args[3])) {
-			let height = intval(args[3]);
+			let height = "intval(\"" . this->setArg(args[3]) . "\")";
 		}
 
 		return "<?php 
 		$KBSHAPES = [];
-		$KBBITMAPWIDTH=" . width . ";
-		$KBBITMAPHEIGHT=" . height . ";
-		$KBBITMAPX=" . x . ";
-		$KBBITMAPY=" . y . ";
+		$KBBITMAPWIDTH = " . width . ";
+		$KBBITMAPHEIGHT = " . height . ";
+		$KBBITMAPX = " . x . ";
+		$KBBITMAPY = " . y . ";
 		$KBBITMAP = imagecreatetruecolor($KBBITMAPWIDTH, $KBBITMAPHEIGHT);
 		imagealphablending($KBBITMAP, true);
 		imageantialias($KBBITMAP, false);

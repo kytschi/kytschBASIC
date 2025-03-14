@@ -1,0 +1,58 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "Arcade - Sevens | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "Sevens"
+				END HEADING 2
+				SWRITE
+					PRINT "The card game Sevens built using the arcade library."
+				END SWRITE
+				DIM suits$=["clubs","hearts","diamonds","spades"]
+DIM faces$=["ace","2","3","4","5","6","7","8","9","10","jack","queen","king"]
+
+DIM cards$=[]
+DIM player$=[]
+
+DEF end%=52/3
+
+FOR suit$ IN suits$
+    FOR face$ IN faces$
+        LET cards$[]=face$ + "_of_" + suit$ + ".svg"
+    NEXT
+NEXT
+
+DEF count%=COUNT cards$
+PRINT count%
+
+REM FOR iLoop=1 TO end%
+    REM DEF count%=COUNT cards$
+    REM DEF select%=RAND
+REM NEXT
+
+REM FOR card$ IN cards$
+    REM PRINT card$
+    REM LINE BREAK
+REM NEXT
+
+				REM SCREEN "the-traveller"
+					REM WINDOW "board"
+						REM RGB 16;168;13
+						REM BITMAP 0;0;DISPWIDTH;DISPHEIGHT
+							REM RGB 255;0;0
+						REM END BITMAP
+					REM END WINDOW
+				REM END SCREEN
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

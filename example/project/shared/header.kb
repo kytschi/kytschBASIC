@@ -1,376 +1,388 @@
 HEADER
 	HEADING 1
-		PRINT "kytsch";"kytsch"
-		PRINT "BASIC";"basic"
+		PRINT "kytsch","kytsch"
+		PRINT "BASIC","basic"
 	END HEADING 1
 	MENU
-		LINK "/";"Go to the homepage";"nav-link"
+		LINK "/","Go to the homepage","nav-link"
 			PRINT "Home"
 		END LINK
-		LINK "/about";"Go to the about page";"nav-link"
+		LINK "/about","Go to the about page","nav-link"
 			PRINT "About"
 		END LINK
-		LINK "https://github.com/kytschi/kytschBASIC";"View the source";"nav-link";"_blank"
+		LINK "https://github.com/kytschi/kytschBASIC","View the source","nav-link","_blank"
 			PRINT "Download"
 		END LINK
-		LINK "/installation";"Read about the installation";"nav-link"
+		LINK "/installation","Read about the installation","nav-link"
 			PRINT "Installation"
 		END LINK
-		LINK "/parameters";"Go to parameters page";"nav-link"
+		LINK "/parameters","Go to parameters page","nav-link"
 			PRINT "Parameters"
 		END LINK
-		LINK "/globals";"Go to globals page";"nav-link"
+		LINK "/globals","Go to globals page","nav-link"
 			PRINT "Globals"
 		END LINK
-		LINK "/arcade";"Go to page on arcade library";"nav-link"
+		LINK "/arcade","Go to page on arcade library","nav-link"
 			PRINT "Arcade"
 		END LINK
-		LINK "/news";"What's in the news";"nav-link"
+		LINK "/news","What's in the news","nav-link"
 			PRINT "News"
 		END LINK
-		LINK "/issues";"Some of the known issues";"nav-link"
+		LINK "/issues","Some of the known issues","nav-link"
 			PRINT "Issues"
 		END LINK
 		SWRITE "nav-link h3"
 			PRINT "Reference"
 		END SWRITE
-		LINK "/reference/ABS#refABS";"Find out about the ABS command";"nav-link";;"refABS"
+		LINK "/reference/ABS#refABS","Find out about the ABS command","nav-link",,"refABS"
 			PRINT "ABS"
 		END LINK
-		LINK "/reference/ACOS#refACOS";"Find out about the ACOS command";"nav-link";;"refACOS"
+		LINK "/reference/ACOS#refACOS","Find out about the ACOS command","nav-link",,"refACOS"
 			PRINT "ACOS"
 		END LINK
-		LINK "/reference/ASIN#refASIN";"Find out about the ASIN command";"nav-link";;"refASIN"
+		LINK "/reference/ASIN#refASIN","Find out about the ASIN command","nav-link",,"refASIN"
 			PRINT "ASIN"
 		END LINK
-		LINK "/reference/ATAN#refATAN";"Find out about the ATAN command";"nav-link";;"refATAN"
+		LINK "/reference/ATAN#refATAN","Find out about the ATAN command","nav-link",,"refATAN"
 			PRINT "ATAN"
 		END LINK
-		LINK "/reference/ARC#refARC";"Find out about the ARC command";"nav-link";;"refARC"
+		LINK "/reference/ARC#refARC","Find out about the ARC command","nav-link",,"refARC"
 			PRINT "ARC"
 		END LINK
-		LINK "/reference/ARCF#refARCF";"Find out about the ARCF command";"nav-link";;"refARCF"
+		LINK "/reference/ARCF#refARCF","Find out about the ARCF command","nav-link",,"refARCF"
 			PRINT "ARCF"
 		END LINK
-		LINK "/reference/ASC#refASC";"Find out about the ASC command";"nav-link";;"refASC"
+		LINK "/reference/ASC#refASC","Find out about the ASC command","nav-link",,"refASC"
 			PRINT "ASC"
 		END LINK
-		LINK "/reference/BENCHMARK#refBENCHMARK";"Find out about the BENCHMARK command";"nav-link";;"refBENCHMARK"
+		LINK "/reference/BENCHMARK#refBENCHMARK","Find out about the BENCHMARK command","nav-link",,"refBENCHMARK"
 			PRINT "BENCHMARK"
 		END LINK
-		LINK "/reference/BIN#refBIN";"Find out about the BIN command";"nav-link";;"refBIN"
+		LINK "/reference/BIN#refBIN","Find out about the BIN command","nav-link",,"refBIN"
 			PRINT "BIN"
 		END LINK
-		LINK "/reference/BITMAP#refBITMAP";"Find out about the BITMAP command";"nav-link";;"refBITMAP"
+		LINK "/reference/BITMAP#refBITMAP","Find out about the BITMAP command","nav-link",,"refBITMAP"
 			PRINT "BITMAP"
 		END LINK
-		LINK "/reference/BITMAPFONT#refBITMAPFONT";"Find out about the BITMAPFONT command";"nav-link";;"refBITMAPFONT"
+		LINK "/reference/BITMAPFONT#refBITMAPFONT","Find out about the BITMAPFONT command","nav-link",,"refBITMAPFONT"
 			PRINT "BITMAPFONT"
 		END LINK
-		LINK "/reference/BITMAPTEXT#refBITMAPTEXT";"Find out about the BITMAPTEXT command";"nav-link";;"refBITMAPTEXT"
+		LINK "/reference/BITMAPTEXT#refBITMAPTEXT","Find out about the BITMAPTEXT command","nav-link",,"refBITMAPTEXT"
 			PRINT "BITMAPTEXT"
 		END LINK
-		LINK "/reference/BODY#refBODY";"Find out about the BODY command";"nav-link";;"refBODY"
+		LINK "/reference/BODY#refBODY","Find out about the BODY command","nav-link",,"refBODY"
 			PRINT "BODY"
 		END LINK
-		LINK "/reference/BOX#refBOX";"Find out about the BOX command";"nav-link";;"refBOX"
+		LINK "/reference/BOX#refBOX","Find out about the BOX command","nav-link",,"refBOX"
 			PRINT "BOX"
 		END LINK
-		LINK "/reference/BOXF#refBOXF";"Find out about the BOXF command";"nav-link";;"refBOXF"
+		LINK "/reference/BOXF#refBOXF","Find out about the BOXF command","nav-link",,"refBOXF"
 			PRINT "BOXF"
 		END LINK
-		LINK "/reference/BUTTON#refBUTTON";"Find out about the BUTTON command";"nav-link";;"refBUTTON"
+		LINK "/reference/BUTTON#refBUTTON","Find out about the BUTTON command","nav-link",,"refBUTTON"
 			PRINT "BUTTON"
 		END LINK
-		LINK "/reference/BUTTON-SUBMIT#refBUTTONSUBMIT";"Find out about the BUTTON SUBMIT command";"nav-link";;"refBUTTONSUBMIT"
+		LINK "/reference/BUTTON-SUBMIT#refBUTTONSUBMIT","Find out about the BUTTON SUBMIT command","nav-link",,"refBUTTONSUBMIT"
 			PRINT "BUTTON SUBMIT"
 		END LINK
-		LINK "/reference/CAPTCHA#refCAPTCHA";"Find out about the CAPTCHA command";"nav-link";;"refCAPTCHA"
+		LINK "/reference/CAPTCHA#refCAPTCHA","Find out about the CAPTCHA command","nav-link",,"refCAPTCHA"
 			PRINT "CAPTCHA"
 		END LINK
-		LINK "/reference/CASE#refCASE";"Find out about the CASE command";"nav-link";;"refCASE"
+		LINK "/reference/CASE#refCASE","Find out about the CASE command","nav-link",,"refCASE"
 			PRINT "CASE"
 		END LINK
-		LINK "/reference/CENTRE#refCENTRE";"Find out about the CENTRE command";"nav-link";;"refCENTRE"
+		LINK "/reference/CENTRE#refCENTRE","Find out about the CENTRE command","nav-link",,"refCENTRE"
 			PRINT "CENTRE"
 		END LINK
-		LINK "/reference/CHR#refCHR";"Find out about the CHR command";"nav-link";;"refCHR"
+		LINK "/reference/CHR#refCHR","Find out about the CHR command","nav-link",,"refCHR"
 			PRINT "CHR"
 		END LINK
-		LINK "/reference/CIRCLE#refCIRCLE";"Find out about the CIRCLE command";"nav-link";;"refCIRCLE"
+		LINK "/reference/CIRCLE#refCIRCLE","Find out about the CIRCLE command","nav-link",,"refCIRCLE"
 			PRINT "CIRCLE"
 		END LINK
-		LINK "/reference/CIRCLEF#refCIRCLEF";"Find out about the CIRCLEF command";"nav-link";;"refCIRCLEF"
+		LINK "/reference/CIRCLEF#refCIRCLEF","Find out about the CIRCLEF command","nav-link",,"refCIRCLEF"
 			PRINT "CIRCLEF"
 		END LINK
-		LINK "/reference/COPY-SHAPE#refCOPYSHAPE";"Find out about the COPY SHARE command";"nav-link";;"refCOPYSHAPE"
+		LINK "/reference/COPY-SHAPE#refCOPYSHAPE","Find out about the COPY SHARE command","nav-link",,"refCOPYSHAPE"
 			PRINT "COPY SHAPE"
 		END LINK
-		LINK "/reference/COS#refCOS";"Find out about the COS command";"nav-link";;"refCOS"
+		LINK "/reference/COS#refCOS","Find out about the COS command","nav-link",,"refCOS"
 			PRINT "COS"
 		END LINK
-		LINK "/reference/CPRINT#refCPRINT";"Find out about the CPRINT command";"nav-link";;"refCPRINT"
+		LINK "/reference/COUNT#refCOUNT","Find out about the COUNT command","nav-link",,"refCOUNT"
+			PRINT "COUNT"
+		END LINK
+		LINK "/reference/CPRINT#refCPRINT","Find out about the CPRINT command","nav-link",,"refCPRINT"
 			PRINT "CPRINT"
 		END LINK
-		LINK "/reference/DBIND#refDBIND";"Find out about the DBIND command";"nav-link";;"refDBIND"
+		LINK "/reference/DBIND#refDBIND","Find out about the DBIND command","nav-link",,"refDBIND"
 			PRINT "DBIND"
 		END LINK
-		LINK "/reference/DEF#refDEF";"Find out about the DEF command";"nav-link";;"refDEF"
+		LINK "/reference/DEF#refDEF","Find out about the DEF command","nav-link",,"refDEF"
 			PRINT "DEF"
 		END LINK
-		LINK "/reference/DJOIN#refDJOIN";"Find out about the DJOIN command";"nav-link";;"refDJOIN"
+		LINK "/reference/DIM#refDIM","Find out about the DIM command","nav-link",,"refDIM"
+			PRINT "DIM"
+		END LINK
+		LINK "/reference/DJOIN#refDJOIN","Find out about the DJOIN command","nav-link",,"refDJOIN"
 			PRINT "DJOIN"
 		END LINK
-		LINK "/reference/DLJOIN#refDLJOIN";"Find out about the DLJOIN command";"nav-link";;"refDLJOIN"
+		LINK "/reference/DLJOIN#refDLJOIN","Find out about the DLJOIN command","nav-link",,"refDLJOIN"
 			PRINT "DLJOIN"
 		END LINK
-		LINK "/reference/DRJOIN#refDRJOIN";"Find out about the DRJOIN command";"nav-link";;"refDRJOIN"
+		LINK "/reference/DRJOIN#refDRJOIN","Find out about the DRJOIN command","nav-link",,"refDRJOIN"
 			PRINT "DRJOIN"
 		END LINK
-		LINK "/reference/DLIMIT#refDLIMIT";"Find out about the DLIMIT command";"nav-link";;"refDLIMIT"
+		LINK "/reference/DLIMIT#refDLIMIT","Find out about the DLIMIT command","nav-link",,"refDLIMIT"
 			PRINT "DLIMIT"
 		END LINK
-		LINK "/reference/DOPEN#refDOPEN";"Find out about the DOPEN command";"nav-link";;"refDOPEN"
+		LINK "/reference/DOPEN#refDOPEN","Find out about the DOPEN command","nav-link",,"refDOPEN"
 			PRINT "DOPEN"
 		END LINK
-		LINK "/reference/DREAD#refDREAD";"Find out about the DREAD command";"nav-link";;"refDREAD"
+		LINK "/reference/DREAD#refDREAD","Find out about the DREAD command","nav-link",,"refDREAD"
 			PRINT "DREAD"
 		END LINK
-		LINK "/reference/DSELECT#refDSELECT";"Find out about the DSELECT command";"nav-link";;"refDSELECT"
+		LINK "/reference/DSELECT#refDSELECT","Find out about the DSELECT command","nav-link",,"refDSELECT"
 			PRINT "DSELECT"
 		END LINK
-		LINK "/reference/DSET#refDSET";"Find out about the DSET command";"nav-link";;"refDSET"
+		LINK "/reference/DSET#refDSET","Find out about the DSET command","nav-link",,"refDSET"
 			PRINT "DSET"
 		END LINK
-		LINK "/reference/DSORT#refDSORT";"Find out about the DSORT command";"nav-link";;"refDSORT"
+		LINK "/reference/DSORT#refDSORT","Find out about the DSORT command","nav-link",,"refDSORT"
 			PRINT "DSORT"
 		END LINK
-		LINK "/reference/DUMP#refDUMP";"Find out about the DUMP command";"nav-link";;"refDUMP"
+		LINK "/reference/DUMP#refDUMP","Find out about the DUMP command","nav-link",,"refDUMP"
 			PRINT "DUMP"
 		END LINK
-		LINK "/reference/DWHERE#refDWHERE";"Find out about the DWHERE command";"nav-link";;"refDWHERE"
+		LINK "/reference/DWHERE#refDWHERE","Find out about the DWHERE command","nav-link",,"refDWHERE"
 			PRINT "DWHERE"
 		END LINK
-		LINK "/reference/ELLIPSE#refELLIPSE";"Find out about the ELLIPSE command";"nav-link";;"refELLIPSE"
+		LINK "/reference/ELLIPSE#refELLIPSE","Find out about the ELLIPSE command","nav-link",,"refELLIPSE"
 			PRINT "ELLIPSE"
 		END LINK
-		LINK "/reference/ELLIPSEF#refELLIPSEF";"Find out about the ELLIPSEF command";"nav-link";;"refELLIPSEF"
+		LINK "/reference/ELLIPSEF#refELLIPSEF","Find out about the ELLIPSEF command","nav-link",,"refELLIPSEF"
 			PRINT "ELLIPSEF"
 		END LINK
-		LINK "/reference/EXP#refEXP";"Find out about the EXP command";"nav-link";;"refEXP"
+		LINK "/reference/EXP#refEXP","Find out about the EXP command","nav-link",,"refEXP"
 			PRINT "EXP"
 		END LINK
-		LINK "/reference/FAVICON#refFAVICON";"Find out about the FAVICON command";"nav-link";;"refFAVICON"
+		LINK "/reference/FAVICON#refFAVICON","Find out about the FAVICON command","nav-link",,"refFAVICON"
 			PRINT "FAVICON"
 		END LINK
-		LINK "/reference/FRAC#refFRAC";"Find out about the FRAC command";"nav-link";;"refFRAC"
+		LINK "/reference/FRAC#refFRAC","Find out about the FRAC command","nav-link",,"refFRAC"
 			PRINT "FRAC"
 		END LINK
-		LINK "/reference/FORM#refFORM";"Find out about the FORM command";"nav-link";;"refFORM"
+		LINK "/reference/FORM#refFORM","Find out about the FORM command","nav-link",,"refFORM"
 			PRINT "FORM"
 		END LINK
-		LINK "/reference/FOOTER#refFOOTER";"Find out about the FOOTER command";"nav-link";;"refFOOTER"
+		LINK "/reference/FOOTER#refFOOTER","Find out about the FOOTER command","nav-link",,"refFOOTER"
 			PRINT "FOOTER"
 		END LINK
-		LINK "/reference/FOR#refFOR";"Find out about the FOR command";"nav-link";;"refFOR"
+		LINK "/reference/FOR#refFOR","Find out about the FOR command","nav-link",,"refFOR"
 			PRINT "FOR"
 		END LINK
-		LINK "/reference/GOTO#refGOTO";"Find out about the GOTO command";"nav-link";;"refGOTO"
+		LINK "/reference/GOTO#refGOTO","Find out about the GOTO command","nav-link",,"refGOTO"
 			PRINT "GOTO"
 		END LINK
-		LINK "/reference/HCOS#refHCOS";"Find out about the HCOS command";"nav-link";;"refHCOS"
+		LINK "/reference/HCOS#refHCOS","Find out about the HCOS command","nav-link",,"refHCOS"
 			PRINT "HCOS"
 		END LINK
-		LINK "/reference/HEAD#refHEAD";"Find out about the HEAD command";"nav-link";;"refHEAD"
+		LINK "/reference/HEAD#refHEAD","Find out about the HEAD command","nav-link",,"refHEAD"
 			PRINT "HEAD"
 		END LINK
-		LINK "/reference/HEADER#refHEADER";"Find out about the HEADER command";"nav-link";;"refHEADER"
+		LINK "/reference/HEADER#refHEADER","Find out about the HEADER command","nav-link",,"refHEADER"
 			PRINT "HEADER"
 		END LINK
-		LINK "/reference/HEADING#refHEADING";"Find out about the HEADING command";"nav-link";;"refHEADING"
+		LINK "/reference/HEADING#refHEADING","Find out about the HEADING command","nav-link",,"refHEADING"
 			PRINT "HEADING"
 		END LINK
-		LINK "/reference/HEX#refHEX";"Find out about the HEX command";"nav-link";;"refHEX"
+		LINK "/reference/HEX#refHEX","Find out about the HEX command","nav-link",,"refHEX"
 			PRINT "HEX"
 		END LINK
-		LINK "/reference/HSIN#refHSIN";"Find out about the HSIN command";"nav-link";;"refHSIN"
+		LINK "/reference/HSIN#refHSIN","Find out about the HSIN command","nav-link",,"refHSIN"
 			PRINT "HSIN"
 		END LINK
-		LINK "/reference/HTAN#refHTAN";"Find out about the HTAN command";"nav-link";;"refHTAN"
+		LINK "/reference/HTAN#refHTAN","Find out about the HTAN command","nav-link",,"refHTAN"
 			PRINT "HTAN"
 		END LINK
-		LINK "/reference/IF#refIF";"Find out about the IF command";"nav-link";;"refIF"
+		LINK "/reference/IF#refIF","Find out about the IF command","nav-link",,"refIF"
 			PRINT "IF"
 		END LINK
-		LINK "/reference/IFNTE#refIFNTE";"Find out about the IFNTE command";"nav-link";;"refIFNTE"
+		LINK "/reference/IFNTE#refIFNTE","Find out about the IFNTE command","nav-link",,"refIFNTE"
 			PRINT "IFNTE"
 		END LINK
-		LINK "/reference/IMAGE#refIMAGE";"Find out about the IMAGE command";"nav-link";;"refIMAGE"
+		LINK "/reference/IMAGE#refIMAGE","Find out about the IMAGE command","nav-link",,"refIMAGE"
 			PRINT "IMAGE"
 		END LINK
-		LINK "/reference/INCLUDE#refINCLUDE";"Find out about the INCLUDE command";"nav-link";;"refINCLUDE"
+		LINK "/reference/INCLUDE#refINCLUDE","Find out about the INCLUDE command","nav-link",,"refINCLUDE"
 			PRINT "INCLUDE"
 		END LINK
-		LINK "/reference/INT#refINT";"Find out about the INT command";"nav-link";;"refINT"
+		LINK "/reference/INT#refINT","Find out about the INT command","nav-link",,"refINT"
 			PRINT "INT"
 		END LINK
-		LINK "/reference/INSTR#refINSTR";"Find out about the INSTR command";"nav-link";;"refINSTR"
+		LINK "/reference/INSTR#refINSTR","Find out about the INSTR command","nav-link",,"refINSTR"
 			PRINT "INSTR"
 		END LINK
-		LINK "/reference/LCASE#refLCASE";"Find out about the LCASE command";"nav-link";;"refLCASE"
+		LINK "/reference/LCASE#refLCASE","Find out about the LCASE command","nav-link",,"refLCASE"
 			PRINT "LCASE"
 		END LINK
-		LINK "/reference/LEFT#refLEFT";"Find out about the LEFT command";"nav-link";;"refLEFT"
+		LINK "/reference/LEFT#refLEFT","Find out about the LEFT command","nav-link",,"refLEFT"
 			PRINT "LEFT"
 		END LINK
-		LINK "/reference/LEN#refLEN";"Find out about the LEN command";"nav-link";;"refLEN"
+		LINK "/reference/LEN#refLEN","Find out about the LEN command","nav-link",,"refLEN"
 			PRINT "LEN"
 		END LINK
-		LINK "/reference/LET#refLET";"Find out about the LET command";"nav-link";;"refLET"
+		LINK "/reference/LET#refLET","Find out about the LET command","nav-link",,"refLET"
 			PRINT "LET"
 		END LINK
-		LINK "/reference/LINE#refLINE";"Find out about the LINE command";"nav-link";;"refLINE"
+		LINK "/reference/LINE#refLINE","Find out about the LINE command","nav-link",,"refLINE"
 			PRINT "LINE"
 		END LINK
-		LINK "/reference/LINE-BREAK#refLINEBREAK";"Find out about the LINE BREAK command";"nav-link";;"refLINEBREAK"
+		LINK "/reference/LINE-BREAK#refLINEBREAK","Find out about the LINE BREAK command","nav-link",,"refLINEBREAK"
 			PRINT "LINE BREAK"
 		END LINK
-		LINK "/reference/LINK#refLINK";"Find out about the LINK command";"nav-link";;"refLINK"
+		LINK "/reference/LINK#refLINK","Find out about the LINK command","nav-link",,"refLINK"
 			PRINT "LINK"
 		END LINK
-		LINK "/reference/LOG#refLOG";"Find out about the LOG command";"nav-link";;"refLOG"
+		LINK "/reference/LOG#refLOG","Find out about the LOG command","nav-link",,"refLOG"
 			PRINT "LOG"
 		END LINK
-		LINK "/reference/LOG10#refLOG10";"Find out about the LOG10 command";"nav-link";;"refLOG10"
+		LINK "/reference/LOG10#refLOG10","Find out about the LOG10 command","nav-link",,"refLOG10"
 			PRINT "LOG10"
 		END LINK
-		LINK "/reference/LSET#refLSET";"Find out about the LSET command";"nav-link";;"refLSET"
+		LINK "/reference/LSET#refLSET","Find out about the LSET command","nav-link",,"refLSET"
 			PRINT "LSET"
 		END LINK
-		LINK "/reference/MAIL#refMAIL";"Find out about the MAIL command";"nav-link";;"refMAIL"
+		LINK "/reference/MAIL#refMAIL","Find out about the MAIL command","nav-link",,"refMAIL"
 			PRINT "MAIL"
 		END LINK
-		LINK "/reference/MAILBODY#refMAILBODY";"Find out about the MAILBODY command";"nav-link";;"refMAILBODY"
+		LINK "/reference/MAILBODY#refMAILBODY","Find out about the MAILBODY command","nav-link",,"refMAILBODY"
 			PRINT "MAILBODY"
 		END LINK
-		LINK "/reference/MAILFROM#refMAILFROM";"Find out about the MAILFROM command";"nav-link";;"refMAILFROM"
+		LINK "/reference/MAILFROM#refMAILFROM","Find out about the MAILFROM command","nav-link",,"refMAILFROM"
 			PRINT "MAILFROM"
 		END LINK
-		LINK "/reference/MAILSUBJECT#refMAILSUBJECT";"Find out about the MAILSUBJECT command";"nav-link";;"refMAILSUBJECT"
+		LINK "/reference/MAILSUBJECT#refMAILSUBJECT","Find out about the MAILSUBJECT command","nav-link",,"refMAILSUBJECT"
 			PRINT "MAILSUBJECT"
 		END LINK
-		LINK "/reference/MAILTO#refMAILTO";"Find out about the MAILTO command";"nav-link";;"refMAILTO"
+		LINK "/reference/MAILTO#refMAILTO","Find out about the MAILTO command","nav-link",,"refMAILTO"
 			PRINT "MAILTO"
 		END LINK
-		LINK "/reference/MID#refMID";"Find out about the MID command";"nav-link";;"refMID"
+		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK
-		LINK "/reference/PRINT#refPRINT";"Find out about the PRINT command";"nav-link";;"refPRINT"
+		LINK "/reference/PRINT#refPRINT","Find out about the PRINT command","nav-link",,"refPRINT"
 			PRINT "PRINT"
 		END LINK
-		LINK "/reference/REM#refREM";"Find out about the REM command";"nav-link";;"refREM"
+		LINK "/reference/POP#refPOP","Find out about the POP command","nav-link",,"refPOP"
+			PRINT "POP"
+		END LINK
+		LINK "/reference/REM#refREM","Find out about the REM command","nav-link",,"refREM"
 			PRINT "REM"
 		END LINK
-		LINK "/reference/REPLACE#refREPLACE";"Find out about the REPLACE command";"nav-link";;"refREPLACE"
+		LINK "/reference/REPLACE#refREPLACE","Find out about the REPLACE command","nav-link",,"refREPLACE"
 			PRINT "REPLACE"
 		END LINK
-		LINK "/reference/RGB#refRGB";"Find out about the RGB command";"nav-link";;"refRGB"
+		LINK "/reference/RGB#refRGB","Find out about the RGB command","nav-link",,"refRGB"
 			PRINT "RGB"
 		END LINK
-		LINK "/reference/RIGHT#refRIGHT";"Find out about the DSORT command";"nav-link";;"refRIGHT"
+		LINK "/reference/RIGHT#refRIGHT","Find out about the DSORT command","nav-link",,"refRIGHT"
 			PRINT "RIGHT"
 		END LINK
-		LINK "/reference/RND#refRND";"Find out about the RIGHT command";"nav-link";;"refRND"
+		LINK "/reference/RND#refRND","Find out about the RIGHT command","nav-link",,"refRND"
 			PRINT "RND"
 		END LINK
-		LINK "/reference/RSET#refRSET";"Find out about the RSET command";"nav-link";;"refRSET"
+		LINK "/reference/RSET#refRSET","Find out about the RSET command","nav-link",,"refRSET"
 			PRINT "RSET"
 		END LINK
-		LINK "/reference/SCREEN#refSCREEN";"Find out about the SCREEN command";"nav-link";;"refSCREEN"
+		LINK "/reference/SCREEN#refSCREEN","Find out about the SCREEN command","nav-link",,"refSCREEN"
 			PRINT "SCREEN"
 		END LINK
-		LINK "/reference/SELECT#refSELECT";"Find out about the SELECT command";"nav-link";;"refSELECT"
+		LINK "/reference/SELECT#refSELECT","Find out about the SELECT command","nav-link",,"refSELECT"
 			PRINT "SELECT"
 		END LINK
-		LINK "/reference/SGN#refSGN";"Find out about the SGN command";"nav-link";;"refSGN"
+		LINK "/reference/SGN#refSGN","Find out about the SGN command","nav-link",,"refSGN"
 			PRINT "SGN"
 		END LINK
-		LINK "/reference/SIN#refSIN";"Find out about the SIN command";"nav-link";;"refSIN"
+		LINK "/reference/SHIFT#refSHIFT","Find out about the SHIFT command","nav-link",,"refSHIFT"
+			PRINT "SHIFT"
+		END LINK
+		LINK "/reference/SIN#refSIN","Find out about the SIN command","nav-link",,"refSIN"
 			PRINT "SIN"
 		END LINK
-		LINK "/reference/SPRINT#refSPRINT";"Find out about the SPRINT command";"nav-link";;"refSPRINT"
+		LINK "/reference/SPRINT#refSPRINT","Find out about the SPRINT command","nav-link",,"refSPRINT"
 			PRINT "SPRINT"
 		END LINK
-		LINK "/reference/SQR#refSQR";"Find out about the SQR command";"nav-link";;"refSQR"
+		LINK "/reference/SQR#refSQR","Find out about the SQR command","nav-link",,"refSQR"
 			PRINT "SQR"
 		END LINK
-		LINK "/reference/STR#refSTR";"Find out about the STR command";"nav-link";;"refSTR"
+		LINK "/reference/STR#refSTR","Find out about the STR command","nav-link",,"refSTR"
 			PRINT "STR"
 		END LINK
-		LINK "/reference/STRING#refSTRING";"Find out about the STRING command";"nav-link";;"refSTRING"
+		LINK "/reference/STRING#refSTRING","Find out about the STRING command","nav-link",,"refSTRING"
 			PRINT "STRING"
 		END LINK
-		LINK "/reference/STRIPLEAD#refSTRIPLEAD";"Find out about the STRIPLEAD command";"nav-link";;"refSTRIPLEAD"
+		LINK "/reference/STRIPLEAD#refSTRIPLEAD","Find out about the STRIPLEAD command","nav-link",,"refSTRIPLEAD"
 			PRINT "STRIPLEAD"
 		END LINK
-		LINK "/reference/STRIPTRAIL#refSTRIPTRAIL";"Find out about the STRIPTRAIL command";"nav-link";;"refSTRIPTRAIL"
+		LINK "/reference/STRIPTRAIL#refSTRIPTRAIL","Find out about the STRIPTRAIL command","nav-link",,"refSTRIPTRAIL"
 			PRINT "STRIPTRAIL"
 		END LINK
-		LINK "/reference/TAN#refTAN";"Find out about the TAN command";"nav-link";;"refTAN"
+		LINK "/reference/TAN#refTAN","Find out about the TAN command","nav-link",,"refTAN"
 			PRINT "TAN"
 		END LINK
-		LINK "/reference/TABLE#refTABLE";"Find out about the TABLE command";"nav-link";;"refTABLE"
+		LINK "/reference/TABLE#refTABLE","Find out about the TABLE command","nav-link",,"refTABLE"
 			PRINT "TABLE"
 		END LINK
-		LINK "/reference/TBODY#refTBODY";"Find out about the TBODY command";"nav-link";;"refTBODY"
+		LINK "/reference/TBODY#refTBODY","Find out about the TBODY command","nav-link",,"refTBODY"
 			PRINT "TBODY"
 		END LINK
-		LINK "/reference/TCELL#refTCELL";"Find out about the TCELL command";"nav-link";;"refTCELL"
+		LINK "/reference/TCELL#refTCELL","Find out about the TCELL command","nav-link",,"refTCELL"
 			PRINT "TCELL"
 		END LINK
-		LINK "/reference/TEXTAREA#refTEXTAREA";"Find out about the TEXTAREA command";"nav-link";;"refTEXTAREA"
+		LINK "/reference/TEXTAREA#refTEXTAREA","Find out about the TEXTAREA command","nav-link",,"refTEXTAREA"
 			PRINT "TEXTAREA"
 		END LINK
-		LINK "/reference/TEXTINPUT#refTEXTINPUT";"Find out about the TEXTINPUT command";"nav-link";;"refTEXTINPUT"
+		LINK "/reference/TEXTINPUT#refTEXTINPUT","Find out about the TEXTINPUT command","nav-link",,"refTEXTINPUT"
 			PRINT "TEXTINPUT"
 		END LINK
-		LINK "/reference/TFOOT#refTFOOT";"Find out about the TFOOT command";"nav-link";;"refTFOOT"
+		LINK "/reference/TFOOT#refTFOOT","Find out about the TFOOT command","nav-link",,"refTFOOT"
 			PRINT "TFOOT"
 		END LINK
-		LINK "/reference/THEAD#refTHEAD";"Find out about the THEAD command";"nav-link";;"refTHEAD"
+		LINK "/reference/THEAD#refTHEAD","Find out about the THEAD command","nav-link",,"refTHEAD"
 			PRINT "THEAD"
 		END LINK
-		LINK "/reference/THEADCELL#refTHEADCELL";"Find out about the THEADCELL command";"nav-link";;"refTHEADCELL"
+		LINK "/reference/THEADCELL#refTHEADCELL","Find out about the THEADCELL command","nav-link",,"refTHEADCELL"
 			PRINT "THEADCELL"
 		END LINK
-		LINK "/reference/TROW#refTROW";"Find out about the TROW command";"nav-link";;"refTROW"
+		LINK "/reference/TROW#refTROW","Find out about the TROW command","nav-link",,"refTROW"
 			PRINT "TROW"
 		END LINK
-		LINK "/reference/UCASE#refUCASE";"Find out about the UCASE command";"nav-link";;"refUCASE"
+		LINK "/reference/UCASE#refUCASE","Find out about the UCASE command","nav-link",,"refUCASE"
 			PRINT "UCASE"
 		END LINK
-		LINK "/reference/UNLEFT#refUNLEFT";"Find out about the UNLEFT command";"nav-link";;"refUNLEFT"
+		LINK "/reference/UNLEFT#refUNLEFT","Find out about the UNLEFT command","nav-link",,"refUNLEFT"
 			PRINT "UNLEFT"
 		END LINK
-		LINK "/reference/UNRIGHT#refUNRIGHT";"Find out about the UNRIGHT command";"nav-link";;"refUNRIGHT"
+		LINK "/reference/UNRIGHT#refUNRIGHT","Find out about the UNRIGHT command","nav-link",,"refUNRIGHT"
 			PRINT "UNRIGHT"
 		END LINK
-		LINK "/reference/VAL#refVAL";"Find out about the VAL command";"nav-link";;"refVAL"
+		LINK "/reference/VAL#refVAL","Find out about the VAL command","nav-link",,"refVAL"
 			PRINT "VAL"
 		END LINK
-		LINK "/reference/VERSION#refVERSION";"Find out about the VERSION command";"nav-link";;"refVERSION"
+		LINK "/reference/VERSION#refVERSION","Find out about the VERSION command","nav-link",,"refVERSION"
 			PRINT "VERSION"
 		END LINK
-		LINK "/reference/WHILE#refWHILE";"Find out about the WHILE command";"nav-link";;"refWHILE"
+		LINK "/reference/WHILE#refWHILE","Find out about the WHILE command","nav-link",,"refWHILE"
 			PRINT "WHILE"
 		END LINK
-		LINK "/reference/WINDOW#refWINDOW";"Find out about the WINDOW command";"nav-link";;"refWINDOW"
+		LINK "/reference/WINDOW#refWINDOW","Find out about the WINDOW command","nav-link",,"refWINDOW"
 			PRINT "WINDOW"
 		END LINK
 	END MENU
 END HEADER
 
-DIV ;"mobile"
+DIV ,"mobile"
 	SWRITE
 		PRINT "Put down that phone!"
 		LINE BREAK

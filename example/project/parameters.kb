@@ -6,8 +6,8 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
 					PRINT "Parameters on commands"
 				END HEADING 2
@@ -15,12 +15,12 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Parameters are set after the command and are set in a specific order. For example:"
 				END SWRITE
 				CPRINT
-PRINT "Hello World! I've parameters too!";"heading-args"
+PRINT "Hello World! I've parameters too!","heading-args"
 				END CPRINT
 				SWRITE
 					PRINT "The PRINT commands parameters are as follows,"
 				END SWRITE
-				PRINT "STRING; CLASS; ID";"heading-args"
+				PRINT "STRING, CLASS, ID","heading-args"
 				SWRITE
 					PRINT "Notice how we didn't want to set the ID, just the CLASS for the command."
 				END SWRITE
@@ -31,9 +31,9 @@ PRINT "Hello World! I've parameters too!";"heading-args"
 &lt;span class="heading-args" id="kb-span-46063087656773"&gt;Hello World! I've parameters too!&lt;/span&gt;
 				END CPRINT
 				SWRITE
-					PRINT "Note:";"heading-args"
+					PRINT "Note:","heading-args"
 					PRINT " kytsch"
-					PRINT "BASIC";"basic"
+					PRINT "BASIC","basic"
 					PRINT " will automatically add an ID when none is supplied."
 				END SWRITE
 				HEADING 3
@@ -48,7 +48,7 @@ PRINT "Hello World! I've parameters too!";"heading-args"
 					PRINT "Lets use the WINDOW example above and set its class."
 				END SWRITE
 				CPRINT
-PRINT "Hello World! I've parameters too!";"heading-args";"id-hello-word";onclick="alert('Hello World!')"
+PRINT "Hello World! I've parameters too!","heading-args","id-hello-word",onclick="alert('Hello World!')"
 				END CPRINT
 				SWRITE
 					PRINT "HTML specific parameters start with the parameter name, then = and then you set it's value."
@@ -59,10 +59,10 @@ PRINT "Hello World! I've parameters too!";"heading-args";"id-hello-word";onclick
 				CPRINT
 &lt;span class="heading-args" id="id-hello-word" onclick="alert('Hello World!')"&gt;Hello World! I've parameters too!&lt;/span&gt;
 				END CPRINT
-				PRINT "It is important that the parameter count matches that of what the command is expecting!";"important"
+				PRINT "It is important that the parameter count matches that of what the command is expecting!","important"
 				SWRITE
 					PRINT "For more information on HTML tags and what they do please visit "
-					LINK "https://developer.mozilla.org/en-US/docs/Web/HTML/Element";;"_blank"
+					LINK "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",,"_blank"
 						PRINT "Mdn web docs"
 					END LINK
 					PRINT " or using your favourite search engine look up html tags."
@@ -72,10 +72,10 @@ PRINT "Hello World! I've parameters too!";"heading-args";"id-hello-word";onclick
 					PRINT "Skipping parameters on commands"
 				END HEADING 3
 				CPRINT
-PRINT "Hello World! I've parameters too!";;;onclick="alert('Hello World!')"
+PRINT "Hello World! I've parameters too!",,,onclick="alert('Hello World!')"
 				END CPRINT
 				SWRITE
-					PRINT "Here we aren't setting the CLASS or the ID on the PRINT command but notice we must still add the ; to indicate nothing is set so that we "
+					PRINT "Here we aren't setting the CLASS or the ID on the PRINT command but notice we must still add the \",\" to indicate nothing is set so that we "
 					PRINT "can add our HTML parameters at the end."
 				END SWRITE
 				HEADING 4

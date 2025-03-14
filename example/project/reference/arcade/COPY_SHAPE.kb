@@ -7,14 +7,14 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "COPY SHAPE";"heading-command basic"
+					PRINT "COPY SHAPE","heading-command basic"
 					LINE BREAK
-					PRINT "CURRENT SHAPE; NEW SHAPE";"heading-args"
+					PRINT "CURRENT SHAPE, NEW SHAPE","heading-args"
 					LINE BREAK
-					PRINT "Requires arcade library";"heading-required"
+					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to copy a shape."
@@ -24,17 +24,17 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-RGB 0;0;0
-BITMAP 0;0;640;480
+RGB 0,0,0
+BITMAP 0,0,640,480
 	REM Create a circle
-	RGB 255;0;0
-	CIRCLE 280;220;40
+	RGB 255,0,0
+	CIRCLE 280,220,40
 
 	REM Copy the freshly drawn circle and create a new one
-	COPYSHAPE 0;1
+	COPYSHAPE 0,1
 
 	REM Move the copied circle's X and Y
-	MOVESHAPE 360;300
+	MOVESHAPE 360,300
 
 	REM Draw the newly copied shape
 	DRAWSHAPE
@@ -43,17 +43,17 @@ END BITMAP
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				RGB 0;0;0
-				BITMAP 0;0;640;480
+				RGB 0,0,0
+				BITMAP 0,0,640,480
 					REM Create a circle
-					RGB 255;0;0
-					CIRCLE 280;220;40
+					RGB 255,0,0
+					CIRCLE 280,220,40
 
 					REM Copy the freshly drawn circle and create a new one
-					COPYSHAPE 0;1
+					COPYSHAPE 0,1
 
 					REM Move the copied circle's X and Y
-					MOVESHAPE 360;300
+					MOVESHAPE 360,300
 
 					REM Draw the newly copied shape
 					DRAWSHAPE
@@ -77,7 +77,7 @@ END BITMAP
 					END THEAD
 					TBODY
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "0"
 							END TCELL
 							TCELL
@@ -88,7 +88,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "1"
 							END TCELL
 							TCELL
@@ -103,7 +103,7 @@ END BITMAP
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK

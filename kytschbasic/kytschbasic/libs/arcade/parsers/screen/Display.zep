@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Display
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -26,13 +26,13 @@
 namespace KytschBASIC\Libs\Arcade\Parsers\Screen;
 
 use KytschBASIC\Helpers\Cookie;
-use KytschBASIC\Parsers\Core\Command;
 
-class Display extends Command
+class Display
 {
-	public function parse(string command, string args)
+	public static function parse(string command)
 	{
-		var display, return_value = 0, controller;
+		var display, return_value = 10, controller;
+
 		let controller = new Cookie();
 
 		if (command == "DISPHEIGHT") {
@@ -44,7 +44,7 @@ class Display extends Command
 				}
 			}
 
-			return "<?php echo " . return_value . "; ?>";
+			return return_value;
 		} elseif (command == "DISPWIDTH") {
 			let display = controller->get("display");
 
@@ -54,7 +54,9 @@ class Display extends Command
 				}
 			}
 
-			return "<?php echo " . return_value . "; ?>";
+			return return_value;
 		}
+
+		return null;
 	}
 }

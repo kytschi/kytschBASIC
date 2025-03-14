@@ -7,14 +7,14 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "BITMAPFONT";"heading-command basic"
+					PRINT "BITMAPFONT","heading-command basic"
 					LINE BREAK
 					PRINT "FONT"
 					LINE BREAK
-					PRINT "Requires arcade library";"heading-required"
+					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to use a font when writing on a bitmap."
@@ -23,21 +23,21 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-SCREEN "the-traveller";800;600
+SCREEN "the-traveller"
 	WINDOW "intro"
-		RGB 0;0;0
-		BITMAP 0;0;800;400
-			RGB 255;0;0
+		RGB 0,0,0
+		BITMAP 0,0,800,400
+			RGB 255,0,0
 			BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-			BITMAPTEXT "The Traveller";32;0;120;150
-			BITMAPTEXT "Press any key to start";18;0;135;320
+			BITMAPTEXT "The Traveller",32,0,120,150
+			BITMAPTEXT "Press any key to start",18,0,135,320
 		END BITMAP
 	END WINDOW
 	WINDOW "input"
-		RGB 0;0;0
-		BITMAP 0;0;800;200
-			RGB 255;0;0
-			LINE 0;0;800;0
+		RGB 0,0,0
+		BITMAP 0,0,800,200
+			RGB 255,0,0
+			LINE 0,0,800,0
 		END BITMAP
 	END WINDOW
 END SCREEN
@@ -45,21 +45,21 @@ END SCREEN
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				SCREEN "the-traveller";800;600
+				SCREEN "the-traveller"
 					WINDOW "intro"
-						RGB 0;0;0
-						BITMAP 0;0;800;400
-							RGB 255;0;0
+						RGB 0,0,0
+						BITMAP 0,0,800,400
+							RGB 255,0,0
 							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller";32;0;120;150
-							BITMAPTEXT "Press any key to start";18;0;135;320
+							BITMAPTEXT "The Traveller",32,0,120,150
+							BITMAPTEXT "Press any key to start",18,0,135,320
 						END BITMAP
 					END WINDOW
 					WINDOW "input"
-						RGB 0;0;0
-						BITMAP 0;0;800;200
-							RGB 255;0;0
-							LINE 0;0;800;0
+						RGB 0,0,0
+						BITMAP 0,0,800,200
+							RGB 255,0,0
+							LINE 0,0,800,0
 						END BITMAP
 					END WINDOW
 				END SCREEN
@@ -82,7 +82,7 @@ END SCREEN
 					END THEAD
 					TBODY
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "FONT"
 							END TCELL
 							TCELL
@@ -97,7 +97,7 @@ END SCREEN
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK

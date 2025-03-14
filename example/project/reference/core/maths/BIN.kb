@@ -6,10 +6,10 @@ END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "BIN";"basic"
+					PRINT "BIN","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Returns a 32 character string equivalent to the binary representation of the number."
@@ -37,7 +37,7 @@ PRINT var$
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
 					END LINK

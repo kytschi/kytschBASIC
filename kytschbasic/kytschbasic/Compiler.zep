@@ -75,7 +75,7 @@ class Compiler
 		let this->globals["_VALID"] = [];
 		let this->globals["_VALID"]["captcha"] = (new Form())->validateCaptcha();
 				
-		/*let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api";
+		/*let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api",
 		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/
 
 		//Session::start(this->config);

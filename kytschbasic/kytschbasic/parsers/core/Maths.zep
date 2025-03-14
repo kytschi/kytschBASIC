@@ -27,9 +27,9 @@ namespace KytschBASIC\Parsers\Core;
 
 class Maths
 {
-	public static function equation(string command)
+	public static function equation(command)
 	{
-		if (substr(command, 0, 1) == "\"") {
+		if (substr(command, 0, 1) == "\"" || command == "" || command === null) {
 			return command;
 		}
 
@@ -88,7 +88,7 @@ class Maths
 		} elseif (command == "SQR") {
 			return sqrt(floatval(args));
 		} elseif (command == "LOG") {
-			let args = explode(";", args);
+			let args = explode(",", args);
 			if (count(args) > 1) {
 				return log(floatval(args[0]), floatval(args[1]));
 			} else {
@@ -106,7 +106,7 @@ class Maths
 			if (empty(args)) {
 				return rand(1, 10) / 10;
 			} else {
-				let args = explode(";", args);
+				let args = explode(",", args);
 				if (count(args) == 1) {
 					return rand(1, intval(args[0]));
 				} else {

@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "STR";"heading-command basic"
+					PRINT "STR","heading-command basic"
 				END SWRITE
 				SWRITE
 					PRINT "Converts to a string."
@@ -33,7 +33,7 @@ PRINT STR 26
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					END LINK

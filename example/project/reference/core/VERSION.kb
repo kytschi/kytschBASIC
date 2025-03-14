@@ -6,14 +6,14 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "VERSION";"basic"
+					PRINT "VERSION","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "This command will display the current version of kytsch"
-					PRINT "BASIC";"basic"
+					PRINT "BASIC","basic"
 					PRINT " on screen"
 				END SWRITE
 				HEADING 3

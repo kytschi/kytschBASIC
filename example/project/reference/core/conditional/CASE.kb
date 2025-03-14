@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "CASE";"basic"
+					PRINT "CASE","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "CASE conditional statement."
@@ -22,10 +22,10 @@ LET iLoop=10
 WHILE iLoop>0
     SELECT iLoop
         CASE 2
-            PRINT iLoop;"basic"
+            PRINT iLoop,"basic"
             LINE BREAK
         CASE 4
-            PRINT iLoop;"basic"
+            PRINT iLoop,"basic"
             LINE BREAK
         DEFAULT
             PRINT iLoop
@@ -42,10 +42,10 @@ WEND
 					WHILE iLoop>0
 						SELECT iLoop
 							CASE 2
-								PRINT iLoop;"basic"
+								PRINT iLoop,"basic"
 								LINE BREAK
 							CASE 4
-								PRINT iLoop;"basic"
+								PRINT iLoop,"basic"
 								LINE BREAK
 							DEFAULT
 								PRINT iLoop
@@ -57,7 +57,7 @@ WEND
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK

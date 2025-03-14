@@ -6,21 +6,21 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "MAILBODY";"basic"
+					PRINT "MAILBODY","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Set the message body of the email when sending an email."
 					LINE BREAK
-					PRINT "Note: Only sendmail is supported at present so you will need that installed also.";"heading-args"
+					PRINT "Note: Only sendmail is supported at present so you will need that installed also.","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Anything inbetween the "
-					PRINT "MAILBODY"; "basic"
+					PRINT "MAILBODY", "basic"
 					PRINT " and "
-					PRINT "END MAILBODY"; "basic"
+					PRINT "END MAILBODY", "basic"
 					PRINT " commands will be used as the email body."
 				END SWRITE
 				HEADING 3
@@ -46,7 +46,7 @@ END MAIL
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/MAIL"
 						PRINT "MAIL"
 					END LINK

@@ -99,3 +99,7 @@ zephir build
 
 ## More information
 For more information and a to view the available command set please visit [https://kytschbasic.org](https://kytschbasic.org)
+
+## Thanks
+
+The Arcade library makes use of [JS-Cookie](https://github.com/js-cookie/js-cookie) and [jQuery](https://jquery.com/).

@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "CPRINT";"basic"
+					PRINT "CPRINT","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Handy way if you want to show your lovely code for others to see. It will automatically wrap the code in an HTML &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;."
@@ -43,7 +43,7 @@ PRINT "I want to see the statement without executing it"
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/REM"
 						PRINT "REM"
 					END LINK

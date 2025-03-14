@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "CAPTCHA";"heading-command basic"
+					PRINT "CAPTCHA","heading-command basic"
 				END SWRITE
 				SWRITE
 					PRINT "Create a form captcha."
@@ -37,7 +37,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						TEXTINPUT "input_test"; "form-input"; "Enter your name"
+						TEXTINPUT "input_test", "form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -53,7 +53,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test";;; "submit"
+						BUTTON SUBMIT "btn_test",,, "submit"
 					END TCELL
 				END TROW
 			END TBODY
@@ -84,7 +84,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						TEXTINPUT "input_test"; "form-input"; "Enter your name"
+						TEXTINPUT "input_test", "form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -100,7 +100,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test";;; "submit"
+						BUTTON SUBMIT "btn_test",,, "submit"
 					END TCELL
 				END TROW
 			END TBODY
@@ -111,7 +111,7 @@ END FORM
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/FORM"
 						PRINT "FORM"
 					END LINK

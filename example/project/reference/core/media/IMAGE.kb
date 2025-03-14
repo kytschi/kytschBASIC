@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "IMAGE";"heading-command basic"
+					PRINT "IMAGE","heading-command basic"
 					LINE BREAK
-					PRINT "FILE; LABEL; CLASS; ID";"heading-args"
+					PRINT "FILE, LABEL, CLASS, ID","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Render an image to the screen."
@@ -21,12 +21,12 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 REM Loading the GIF of that evil looking dude.
-IMAGE "/kytschi/imgs/plotting.gif"; "Image of a guy plotting"; "plotting-image"
+IMAGE "/kytschi/imgs/plotting.gif", "Image of a guy plotting", "plotting-image"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-IMAGE "/kytschi/imgs/plotting.gif"; "Image of a guy plotting"; "plotting-image"
+IMAGE "/kytschi/imgs/plotting.gif", "Image of a guy plotting", "plotting-image"
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

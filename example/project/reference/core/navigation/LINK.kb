@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "LINK";"heading-command basic"
+					PRINT "LINK","heading-command basic"
 					LINE BREAK
-					PRINT "URL; LABEL; CLASS; TARGET; ID";"heading-args"
+					PRINT "URL, LABEL, CLASS, TARGET, ID","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Generating a link to another page or resource."
@@ -26,7 +26,7 @@ LINK "/about"
 END LINK
 
 REM Open the link in a new tab/window
-LINK "https://github.com/kytschi/kytschBASIC";;;"_blank"
+LINK "https://github.com/kytschi/kytschBASIC",,,"_blank"
 	PRINT "Download"
 END LINK
 				END CPRINT
@@ -34,11 +34,11 @@ END LINK
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					LINK "/about";
+					LINK "/about",
 						PRINT "About"
 					END LINK
 
-					LINK "https://github.com/kytschi/kytschBASIC";;;"_blank"
+					LINK "https://github.com/kytschi/kytschBASIC",,,"_blank"
 						PRINT "Download"
 					END LINK
 				END DIV
@@ -58,7 +58,7 @@ END LINK
 					END THEAD
 					TBODY
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "_self"
 							END TCELL
 							TCELL
@@ -66,7 +66,7 @@ END LINK
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "_blank"
 							END TCELL
 							TCELL
@@ -74,7 +74,7 @@ END LINK
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "_parent"
 							END TCELL
 							TCELL
@@ -82,7 +82,7 @@ END LINK
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "_top"
 							END TCELL
 							TCELL

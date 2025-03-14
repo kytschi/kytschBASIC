@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "INSTR";"heading-command basic"
+					PRINT "INSTR","heading-command basic"
 					LINE BREAK
-					PRINT "HAYSTACK; NEEDLE";"heading-args"
+					PRINT "HAYSTACK, NEEDLE","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will find part of a string and return the position."
@@ -20,18 +20,18 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT INSTR "kytschBASIC"; "BAS"
+PRINT INSTR "kytschBASIC", "BAS"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT INSTR "kytschBASIC"; "BAS"
+					PRINT INSTR "kytschBASIC", "BAS"
 				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					END LINK

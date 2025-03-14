@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "SPRINT";"basic"
+					PRINT "SPRINT","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Will ignore the execution of the statement and just print it to the screen. This is handy when you want to show your lovely code for others to see."
@@ -26,7 +26,7 @@ SPRINT PRINT "I want to see the statement without executing it"
 				DIV "kb-col kb-col-24 kb-code-block"
 					SPRINT PRINT "I want to see the statement without executing it"
 				END DIV
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/REM"
 						PRINT "REM"
 					END LINK

@@ -131,7 +131,7 @@ class Text extends Command
 
 	public function processValue(args)
 	{
-		var converted, length=1, value = "", splits;
+		var converted, length=1, value="", splits;
 
 		if (is_string(args)) {
 			let args = [args];
@@ -246,7 +246,7 @@ class Text extends Command
 			if (args[0] != "0" && empty(args[0])) {
 				throw new \Exception("Invalid LCASE");
 			}
-
+			
 			return "strtolower(\"" . this->setArg(args[0]) . "\")";
 		} elseif (substr(args[0], 0, 3) == "LEN") {
 			let args[0] = trim(str_replace("LEN", "", args[0]));

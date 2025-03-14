@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "DSELECT";"basic"
+					PRINT "DSELECT","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Specify which columns you want to pull back from the database table."
@@ -32,7 +32,7 @@ DATA
 	DWHERE "(slug=:header OR slug=:footer) AND deleted_at IS NULL"
 
 	REM Bind the slug string to be used in the query.
-	DBIND header="header"; footer="footer"
+	DBIND header="header", footer="footer"
 
 	REM Sort the results by their name alphabetically.
 	DSORT "name ASC"
@@ -68,7 +68,7 @@ DATA
 	DWHERE "(slug=:header OR slug=:footer) AND deleted_at IS NULL"
 
 	REM Bind the slug string to be used in the query.
-	DBIND header="header"; footer="footer"
+	DBIND header="header", footer="footer"
 
 	REM Sort the results by their name alphabetically.
 	DSORT "name ASC"
@@ -89,7 +89,7 @@ NEXT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK

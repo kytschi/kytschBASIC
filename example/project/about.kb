@@ -6,12 +6,12 @@ END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
 					PRINT "About "
-					PRINT "kytsch";"kytsch"
-					PRINT "BASIC";"basic"
+					PRINT "kytsch","kytsch"
+					PRINT "BASIC","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "kytschBASIC is a PHP module that will allow you to write BASIC code to render flat html. kytschBASIC is heavily inspired by Amiga BASIC a language I loved on a machine that is still amazing."
@@ -20,7 +20,7 @@ BODY
 					PRINT "The project is still in its early days but you can check it out at the link below."
 				END SWRITE
 				SWRITE
-					LINK "https://github.com/kytschi/kytschBASIC";"Link to the source";;"_blank"
+					LINK "https://github.com/kytschi/kytschBASIC","Link to the source",,"_blank"
 						PRINT "Link to repo"
 					END LINK
 				END SWRITE

@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "RSET$";"heading-command basic"
+					PRINT "RSET$","heading-command basic"
 					LINE BREAK
-					PRINT "STRING, LENGTH";"heading-args"
+					PRINT "STRING, LENGTH","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function returns a string of characters at a specific length. The STRING will be placed at "
@@ -23,22 +23,22 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT RSET "Hello World!"; 6
+PRINT RSET "Hello World!", 6
 LINE BREAK
-PRINT RSET "Hi"; 5
+PRINT RSET "Hi", 5
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT RSET "Hello World!"; 6
+					PRINT RSET "Hello World!", 6
 					LINE BREAK
-					PRINT RSET "Hi"; 5
+					PRINT RSET "Hi", 5
 				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					END LINK

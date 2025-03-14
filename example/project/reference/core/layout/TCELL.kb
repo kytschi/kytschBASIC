@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "TCELL";"heading-command basic"
+					PRINT "TCELL","heading-command basic"
 					LINE BREAK
-					PRINT "WIDTH, CLASS, COLSPAN, ID";"heading-args"
+					PRINT "WIDTH, CLASS, COLSPAN, ID","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Creating a table cell."
@@ -35,7 +35,7 @@ END TCELL
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					END LINK

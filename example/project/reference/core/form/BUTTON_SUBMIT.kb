@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "BUTTON SUBMIT";"heading-command basic"
+					PRINT "BUTTON SUBMIT","heading-command basic"
 					LINE BREAK
-					PRINT "NAME; CLASS; ID; LABEL";"heading-args"
+					PRINT "NAME, CLASS, ID, LABEL","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a form submit button."
@@ -34,8 +34,8 @@ FORM "form_test"
 					TCELL
 						PRINT "Name"
 					END TCELL
-					TCELL ;; 2
-						TEXTINPUT "input_test"; "form-input"; "Enter your name"
+					TCELL ,, 2
+						TEXTINPUT "input_test", "form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -43,7 +43,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test";;; "submit"
+						BUTTON SUBMIT "btn_test",,, "submit"
 					END TCELL
 					TCELL
 						BUTTON SUBMIT "btn_test"
@@ -74,8 +74,8 @@ FORM "form_test"
 					TCELL
 						PRINT "Name"
 					END TCELL
-					TCELL ;; 2
-						TEXTINPUT "input_test"; "form-input"; "Enter your name"
+					TCELL ,, 2
+						TEXTINPUT "input_test", "form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -83,7 +83,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test";;; "submit"
+						BUTTON SUBMIT "btn_test",,, "submit"
 					END TCELL
 					TCELL
 						BUTTON SUBMIT "btn_test"
@@ -99,7 +99,7 @@ END FORM
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/FORM"
 						PRINT "FORM"
 					END LINK

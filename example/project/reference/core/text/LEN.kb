@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "LEN";"heading-command basic"
+					PRINT "LEN","heading-command basic"
 					LINE BREAK
-					PRINT "STRING";"heading-args"
+					PRINT "STRING","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will return the length of the string."
@@ -31,7 +31,7 @@ PRINT LEN "kytschBASIC"
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					END LINK

@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "HTAN";"basic"
+					PRINT "HTAN","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Return the hyperbolic tangent of a float value."
@@ -29,7 +29,7 @@ PRINT HTAN 0.5
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
 					END LINK

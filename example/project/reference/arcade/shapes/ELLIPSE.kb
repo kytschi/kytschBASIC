@@ -7,14 +7,14 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "ELLIPSE";"heading-command basic"
+					PRINT "ELLIPSE","heading-command basic"
 					LINE BREAK
-					PRINT "X; Y; WIDTH; HEIGHT";"heading-args"
+					PRINT "X, Y, WIDTH, HEIGHT","heading-args"
 					LINE BREAK
-					PRINT "Requires arcade library";"heading-required"
+					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw an ellipse on a bitmap and display it on screen as an image."
@@ -24,25 +24,25 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-RGB 0;0;0
-BITMAP 0;0;640;480
-	RGB 255;0;0
-	ELLIPSE 320;280;200;160
-	ELLIPSE 360;240;160;120
-	ELLIPSE 400;200;120;80
-	ELLIPSE 440;160;80;40
+RGB 0,0,0
+BITMAP 0,0,640,480
+	RGB 255,0,0
+	ELLIPSE 320,280,200,160
+	ELLIPSE 360,240,160,120
+	ELLIPSE 400,200,120,80
+	ELLIPSE 440,160,80,40
 END BITMAP
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				RGB 0;0;0
-				BITMAP 0;0;640;480
-					RGB 255;0;0
-					ELLIPSE 320;280;200;160
-					ELLIPSE 360;240;160;120
-					ELLIPSE 400;200;120;80
-					ELLIPSE 440;160;80;40
+				RGB 0,0,0
+				BITMAP 0,0,640,480
+					RGB 255,0,0
+					ELLIPSE 320,280,200,160
+					ELLIPSE 360,240,160,120
+					ELLIPSE 400,200,120,80
+					ELLIPSE 440,160,80,40
 				END BITMAP
 				HEADING 4
 					PRINT "Parameters"
@@ -63,7 +63,7 @@ END BITMAP
 					END THEAD
 					TBODY
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "X"
 							END TCELL
 							TCELL
@@ -74,7 +74,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "Y"
 							END TCELL
 							TCELL
@@ -85,7 +85,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "WIDTH"
 							END TCELL
 							TCELL
@@ -96,7 +96,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "HEIGHT"
 							END TCELL
 							TCELL
@@ -111,7 +111,7 @@ END BITMAP
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK

@@ -60,7 +60,10 @@ class Loops extends Command
 			throw new Exception("Invalid for loop");
 		}
 
-		return "<?php foreach (" . this->clean(args[1], false) . " as " . this->clean(args[0], false) . ") { ?>";
+		return "<?php foreach (" .
+			this->clean(args[1], false, in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false) .
+			" as " .
+			this->clean(args[0], false, in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false) . ") { ?>";
 	}
 
 	private function processForTo(args)
@@ -88,6 +91,22 @@ class Loops extends Command
 			let step = " += 1";
 		}
 
-		return "<?php for (" . this->clean(args[0], false) . "; " . this->clean(variable, false) . dir . this->clean(args[1], false) . "; " . this->clean(variable, false) . step . ") { ?>";
+		return "<?php for (" .
+			this->clean(args[0], false) . "; " .
+			this->clean(variable, false) .
+			dir .
+			this->clean(
+				args[1],
+				false,
+				in_array(
+					substr(
+						args[1],
+						strlen(args[1]) - 1, 
+						1
+					),
+						this->types
+				) ? true : false
+			) . "; " .
+			this->clean(variable, false) . step . ") { ?>";
 	}
 }

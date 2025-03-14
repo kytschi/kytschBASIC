@@ -68,7 +68,7 @@ class Database extends Command
 		} catch DatabaseException, err {
 		    err->fatal();
 		} catch \RuntimeException|\Exception, err {
-		    throw new \Exception("Database error" . ", " . err->getMessage());
+		    throw new \Exception("Database error, " . err->getMessage());
 		}
 	}
 
@@ -153,10 +153,10 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 		if (empty(config->dbname)) {
 			throw new DatabaseException("No database defined in the config");
 		}
-		let dsn .= "dbname=" . config->dbname . ";";
+		let dsn .= "dbname=" . config->dbname . ",";
 				
 		if (!empty(config->host)) {
-			let dsn .= "host=" . config->host . ";";
+			let dsn .= "host=" . config->host . ",";
 		} else {
 			let dsn .= "host=127.0.0.1;";
 		}

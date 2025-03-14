@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "ASC";"basic"
+					PRINT "ASC","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Returns the ASCII value of the first characters in the string."
@@ -21,7 +21,7 @@ LOAD "_ROOT/project/shared/header"
 PRINT ASC "A"
 
 REM You can still assign the standard attributes of the PRINT command.
-PRINT ASC "A"; "kb-class"
+PRINT ASC "A", "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -32,7 +32,7 @@ PRINT ASC "A"; "kb-class"
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/CENTRE"
 						PRINT "CENTRE"
 					END LINK

@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "FOR";"basic"
+					PRINT "FOR","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Create a for loop."
@@ -18,24 +18,36 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-FOR iLoop=1 TO 10
-	PRINT iLoop
+FOR iLoop%=1 TO 10
+	PRINT iLoop%
 	PRINT ", "
+NEXT
+LINE BREAK
+DIM test$=["kytschBASIC","is","awesome!"]
+FOR val$ IN test$
+	PRINT val$
+	PRINT "&nbsp;"
 NEXT
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					FOR iLoop=1 TO 10
-						PRINT iLoop
+					FOR iLoop%=1 TO 10
+						PRINT iLoop%
 						PRINT ", "
+					NEXT
+					LINE BREAK
+					DIM test$=["kytschBASIC","is","awesome!"]
+					FOR val$ IN test$
+						PRINT val$
+						PRINT "&nbsp;"
 					NEXT
 				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK

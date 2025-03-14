@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Arcade
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2023 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2
  *
- * Copyright 2023 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either

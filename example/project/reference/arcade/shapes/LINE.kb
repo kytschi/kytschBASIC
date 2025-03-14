@@ -7,14 +7,14 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "LINE";"heading-command basic"
+					PRINT "LINE","heading-command basic"
 					LINE BREAK
-					PRINT "X1; Y1; X2; Y2";"heading-args"
+					PRINT "X1, Y1, X2, Y2","heading-args"
 					LINE BREAK
-					PRINT "Requires arcade library";"heading-required"
+					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw a line on a bitmap and display it on screen as an image."
@@ -24,65 +24,65 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-RGB 0;0;0
-BITMAP 0;0;640;480
-	RGB 255;0;0
-	LINE 200;220;300;320
-	LINE 300;120;200;220
-	LINE 300;120;400;220
-	LINE 400;220;300;320
+RGB 0,0,0
+BITMAP 0,0,640,480
+	RGB 255,0,0
+	LINE 200,220,300,320
+	LINE 300,120,200,220
+	LINE 300,120,400,220
+	LINE 400,220,300,320
 
-	RGB 255;0;0;40
-	LINE 260;220;330;290
-	LINE 260;220;330;150
+	RGB 255,0,0,40
+	LINE 260,220,330,290
+	LINE 260,220,330,150
 
-	RGB 255;0;0;60
-	LINE 290;220;345;275
-	LINE 290;220;345;165
+	RGB 255,0,0,60
+	LINE 290,220,345,275
+	LINE 290,220,345,165
 
-	RGB 255;0;0;80
-	LINE 320;220;360;260
-	LINE 320;220;360;180
+	RGB 255,0,0,80
+	LINE 320,220,360,260
+	LINE 320,220,360,180
 
-	RGB 255;0;0;90
-	LINE 350;220;375;245
-	LINE 350;220;375;195
+	RGB 255,0,0,90
+	LINE 350,220,375,245
+	LINE 350,220,375,195
 
-	RGB 255;0;0;95
-	LINE 380;220;390;230
-	LINE 380;220;390;210
+	RGB 255,0,0,95
+	LINE 380,220,390,230
+	LINE 380,220,390,210
 END BITMAP
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				RGB 0;0;0
-				BITMAP 0;0;640;480
-					RGB 255;0;0
-					LINE 200;220;300;320
-					LINE 300;120;200;220
-					LINE 300;120;400;220
-					LINE 400;220;300;320
+				RGB 0,0,0
+				BITMAP 0,0,640,480
+					RGB 255,0,0
+					LINE 200,220,300,320
+					LINE 300,120,200,220
+					LINE 300,120,400,220
+					LINE 400,220,300,320
 
-					RGB 255;0;0;40
-					LINE 260;220;330;290
-					LINE 260;220;330;150
+					RGB 255,0,0,40
+					LINE 260,220,330,290
+					LINE 260,220,330,150
 
-					RGB 255;0;0;60
-					LINE 290;220;345;275
-					LINE 290;220;345;165
+					RGB 255,0,0,60
+					LINE 290,220,345,275
+					LINE 290,220,345,165
 
-					RGB 255;0;0;80
-					LINE 320;220;360;260
-					LINE 320;220;360;180
+					RGB 255,0,0,80
+					LINE 320,220,360,260
+					LINE 320,220,360,180
 
-					RGB 255;0;0;90
-					LINE 350;220;375;245
-					LINE 350;220;375;195
+					RGB 255,0,0,90
+					LINE 350,220,375,245
+					LINE 350,220,375,195
 
-					RGB 255;0;0;95
-					LINE 380;220;390;230
-					LINE 380;220;390;210
+					RGB 255,0,0,95
+					LINE 380,220,390,230
+					LINE 380,220,390,210
 				END BITMAP
 				HEADING 4
 					PRINT "Parameters"
@@ -103,7 +103,7 @@ END BITMAP
 					END THEAD
 					TBODY
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "X1"
 							END TCELL
 							TCELL
@@ -114,7 +114,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "Y1"
 							END TCELL
 							TCELL
@@ -125,7 +125,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "X2"
 							END TCELL
 							TCELL
@@ -136,7 +136,7 @@ END BITMAP
 							END TCELL
 						END TROW
 						TROW
-							TCELL ;"table-parameter"
+							TCELL ,"table-parameter"
 								PRINT "Y2"
 							END TCELL
 							TCELL
@@ -151,7 +151,7 @@ END BITMAP
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK

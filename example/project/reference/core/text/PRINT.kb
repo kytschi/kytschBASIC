@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "PRINT";"heading-command basic"
+					PRINT "PRINT","heading-command basic"
 					LINE BREAK
-					PRINT "STRING; CLASS; ID";"heading-args"
+					PRINT "STRING, CLASS, ID","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Outputting to the screen."
@@ -21,7 +21,7 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT "Hello World!"
-PRINT "Hello World! I've parameters too!";"heading-args"
+PRINT "Hello World! I've parameters too!","heading-args"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -33,7 +33,7 @@ PRINT "Hello World! I've parameters too!";"heading-args"
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/parameters"
 						PRINT "Parameters"
 					END LINK

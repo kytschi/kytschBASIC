@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "INT";"basic"
+					PRINT "INT","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Convert to an integer."
@@ -21,7 +21,7 @@ LOAD "_ROOT/project/shared/header"
 PRINT INT 23.45
 
 REM You can still assign the standard attributes of the PRINT command.
-PRINT INT 23.45; "kb-class"
+PRINT INT 23.45, "kb-class"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -32,7 +32,7 @@ PRINT INT 23.45; "kb-class"
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/ASC"
 						PRINT "ASC"
 					END LINK

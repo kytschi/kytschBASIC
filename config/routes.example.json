@@ -23,10 +23,16 @@
 		"url": "/globals",
 		"template": "project/globals.kb"
 	},
+
 	{
 		"url": "/arcade",
 		"template": "project/arcade/index.kb"
 	},
+	{
+		"url": "/arcade/sevens",
+		"template": "project/arcade/sevens.kb"
+	},
+
 	{
 		"url": "/news",
 		"template": "project/news.kb"
@@ -58,6 +64,10 @@
 	},
 
 	{
+		"url": "/reference/COUNT",
+		"template": "project/reference/core/function/COUNT.kb"
+	},
+	{
 		"url": "/reference/LET",
 		"template": "project/reference/core/variables/LET.kb"
 	},
@@ -66,8 +76,20 @@
 		"template": "project/reference/core/variables/DEF.kb"
 	},
 	{
+		"url": "/reference/DIM",
+		"template": "project/reference/core/variables/DIM.kb"
+	},
+	{
 		"url": "/reference/DUMP",
 		"template": "project/reference/core/variables/DUMP.kb"
+	},
+	{
+		"url": "/reference/POP",
+		"template": "project/reference/core/variables/POP.kb"
+	},
+	{
+		"url": "/reference/SHIFT",
+		"template": "project/reference/core/variables/SHIFT.kb"
 	},
 
 	{

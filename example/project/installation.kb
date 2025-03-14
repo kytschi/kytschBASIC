@@ -6,15 +6,15 @@ END HEAD
 BODY
 	LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
 					PRINT "Installing "
-					PRINT "kytsch";"kytsch"
-					PRINT "BASIC";"basic"
+					PRINT "kytsch","kytsch"
+					PRINT "BASIC","basic"
 				END HEADING 2
 				HEADING 3
-					PRINT "Requirements";"basic"
+					PRINT "Requirements","basic"
 				END HEADING 3
 				SWRITE
 					PRINT "PHP 7.4 to 8.2"
@@ -25,7 +25,7 @@ BODY
 				END SWRITE
 
 				HEADING 3
-					PRINT "Get the source code";"basic"
+					PRINT "Get the source code","basic"
 				END HEADING 3
 				SWRITE
 					PRINT "Now open your favourite terminal/console and clone the repo or use your favourite GUI git tool."
@@ -39,7 +39,7 @@ git clone git@github.com:kytschi/kytschBASIC.git
 				END CPRINT
 				
 				HEADING 3
-					PRINT "Enable the module";"basic"
+					PRINT "Enable the module","basic"
 				END HEADING 3
 				SWRITE
 					PRINT "You can copy the sample ini file from the `php` folder from the repo for the desired PHP version. Remember to do this as root or a user with administrator permissions."
@@ -67,7 +67,7 @@ ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kyt
 				END CPRINT
 
 				SWRITE
-					PRINT "NOTICE";"basic"
+					PRINT "NOTICE","basic"
 					PRINT " we are loading in the configuration file. See "
 					LINK "#configuration"
 						PRINT "configuration"
@@ -77,19 +77,19 @@ ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kyt
 
 				SWRITE
 					PRINT "For an example website checkout the source code for this one."
-					LINK "https://github.com/kytschi/kytschBASIC/tree/master/example";;;"_blank"
+					LINK "https://github.com/kytschi/kytschBASIC/tree/master/example",,,"_blank"
 						PRINT "kytschBASIC example"
 					END LINK
 				END SWRITE
 
-				LINK ;;"no-link";;"configuration"
+				LINK ,,"no-link",,"configuration"
 					HEADING 3
-						PRINT "Configuration";"basic"
+						PRINT "Configuration","basic"
 					END HEADING 3
 				END LINK
 				SWRITE
 					PRINT "kytschBASIC configuration is handled via JSON config files located in the config folder. From there you can define the database connection, the routes, etc. "
-					LINK "https://github.com/kytschi/kytschBASIC/tree/master/config";;;"_blank"
+					LINK "https://github.com/kytschi/kytschBASIC/tree/master/config",,,"_blank"
 						PRINT "See kytschBASIC example configs for more information"
 					END LINK
 				END SWRITE
@@ -103,11 +103,11 @@ ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kyt
 [
 	{
 		"name":"kytschBASIC", 		<-- Name of the connection
-		"type": "mysql", 					<-- Connection type
-		"host": "127.0.0.1",			<-- Host IP
-		"port": 3306,							<-- Host port
+		"type": "mysql", 			<-- Connection type
+		"host": "127.0.0.1",		<-- Host IP
+		"port": 3306,				<-- Host port
 		"dbname": "kytschBASIC",	<-- Name of the database
-		"user": "user",						<-- Username that has access
+		"user": "user",				<-- Username that has access
 		"password": "password"		<-- Password of the user
 	}
 ]
@@ -140,11 +140,11 @@ ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kyt
 ]
 				END CPRINT
 				HEADING 3
-					PRINT "Building from source";"basic"
+					PRINT "Building from source","basic"
 				END HEADING 3
 				SWRITE
 					PRINT "First thing you will need is to install "
-					LINK "https://docs.zephir-lang.com/0.12/en/installation";"Checkout Zephir";;"_blank"
+					LINK "https://docs.zephir-lang.com/0.12/en/installation","Checkout Zephir",,"_blank"
 						PRINT "Zephir"
 					END LINK
 				END SWRITE

@@ -7,8 +7,8 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
 					PRINT "Arcade"
 				END HEADING 2
@@ -35,14 +35,14 @@ END HEAD
 					PRINT "Display height in pixels: "
 					DISPHEIGHT
 				END SWRITE
-				SCREEN "the-traveller";800;600
+				SCREEN "the-traveller"
 					WINDOW "intro"
 						RGB 0;0;0
 						BITMAP 0;0;800;400
 							RGB 255;0;0
 							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller";32;0;120;150
-							BITMAPTEXT "Press any key to start";18;0;135;320
+							BITMAPTEXT "The Traveller",32;0;120;150
+							BITMAPTEXT "Press any key to start",18;0;135;320
 						END BITMAP
 					END WINDOW
 					WINDOW "input"

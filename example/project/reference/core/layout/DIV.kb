@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "DIV";"heading-command basic"
+					PRINT "DIV","heading-command basic"
 					LINE BREAK
-					PRINT "CLASS; ID";"heading-args"
+					PRINT "CLASS, ID","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Creating a HTML div."

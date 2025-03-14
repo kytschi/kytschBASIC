@@ -61,7 +61,7 @@ class Head extends Command
 	private function processCharset(string line)
 	{
 		var args;
-		let args = explode("\";", line);
+		let args = explode("\",", line);
 		if (isset(args[0]) && !empty(args[0])) {
 			return "<meta charset=\"" . this->setArg(args[0]) . "\">";
 		}
@@ -72,7 +72,7 @@ class Head extends Command
 	private function processFavicon(string line)
 	{
 		var args;
-		let args = explode("\";", line);
+		let args = explode("\",", line);
 		let line = "";
 
 		if (isset(args[0]) && !empty(args[0])) {
@@ -89,7 +89,7 @@ class Head extends Command
 	private function processMeta(string type, string line)
 	{
 		var args;
-		let args = explode("\";", line);
+		let args = explode("\",", line);
 		if (isset(args[0]) && !empty(args[0])) {
 			return "<meta name=\"" . type . "\" content=\"" . this->setArg(args[0]) . "\">";
 		}
@@ -100,7 +100,7 @@ class Head extends Command
 	private function processLang(string line)
 	{
 		var args;
-		let args = explode("\";", line);
+		let args = explode("\",", line);
 		if (isset(args[0]) && !empty(args[0])) {
 			return "<html lang=\"" . this->setArg(args[0]) . "\">";
 		}
@@ -111,7 +111,7 @@ class Head extends Command
 	private function processName(string line)
 	{
 		var args;
-		let args = explode("\";", line);
+		let args = explode("\",", line);
 		if (isset(args[0]) && !empty(args[0])) {
 			return "<title>" . this->setArg(args[0]) . "</title>";
 		}
@@ -124,7 +124,7 @@ class Head extends Command
 		var args, config;
 		let config = constant("CONFIG");
 
-		let args = explode("\";", line);
+		let args = explode("\",", line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
 			let args[0] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . this->setArg(args[0]) . "/css/palette.css";

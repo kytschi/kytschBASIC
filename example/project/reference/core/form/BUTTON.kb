@@ -6,12 +6,12 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "BUTTON";"heading-command basic"
+					PRINT "BUTTON","heading-command basic"
 					LINE BREAK
-					PRINT "NAME; CLASS; ID; LABEL";"heading-args"
+					PRINT "NAME, CLASS, ID, LABEL","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a button."
@@ -28,8 +28,8 @@ SWRITE
 				TCELL
 					PRINT "Name"
 				END TCELL
-				TCELL ;; 2
-					TEXTINPUT "input_test"; "form-input"; "Enter your name"
+				TCELL ,, 2
+					TEXTINPUT "input_test", "form-input", "Enter your name"
 				END TCELL
 			END TROW
 			TROW
@@ -37,7 +37,7 @@ SWRITE
 					WHITESPACE
 				END TCELL
 				TCELL
-					BUTTON "btn_test";;; "button"
+					BUTTON "btn_test",,, "button"
 				END TCELL
 				TCELL
 					BUTTON "btn_test2"
@@ -61,8 +61,8 @@ END SWRITE
 									TCELL
 										PRINT "Name"
 									END TCELL
-									TCELL ;; 2
-										TEXTINPUT "input_test"; "form-input"; "Enter your name"
+									TCELL ,, 2
+										TEXTINPUT "input_test", "form-input", "Enter your name"
 									END TCELL
 								END TROW
 								TROW
@@ -70,7 +70,7 @@ END SWRITE
 										WHITESPACE
 									END TCELL
 									TCELL
-										BUTTON "btn_test";;; "button"
+										BUTTON "btn_test",,, "button"
 									END TCELL
 									TCELL
 										BUTTON "btn_test2"
@@ -85,7 +85,7 @@ END SWRITE
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/FORM"
 						PRINT "FORM"
 					END LINK

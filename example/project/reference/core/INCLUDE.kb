@@ -6,10 +6,10 @@ END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
-		DIV "kb-row";"main-content"
-			DIV "kb-col kb-col-24";"main-content-col"
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "INCLUDE";"basic"
+					PRINT "INCLUDE","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "This command will let you include libraries."
@@ -28,7 +28,7 @@ END HEAD
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24";"see-also"
+				DIV "kb-col kb-col-24","see-also"
 					LINK "/arcade"
 						PRINT "arcade"
 					END LINK
