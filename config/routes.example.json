@@ -251,6 +251,10 @@
 		"template": "project/reference/core/layout/HEADER.kb"
 	},
 	{
+		"url": "/reference/PALETTE",
+		"template": "project/reference/core/layout/PALETTE.kb"
+	},
+	{
 		"url": "/reference/TABLE",
 		"template": "project/reference/core/layout/TABLE.kb"
 	},
@@ -343,6 +347,10 @@
 	{
 		"url": "/reference/SCREEN",
 		"template": "project/reference/arcade/screen/SCREEN.kb"
+	},
+	{
+		"url": "/reference/SPRITE",
+		"template": "project/reference/arcade/screen/SPRITE.kb"
 	},
 	{
 		"url": "/reference/WINDOW",

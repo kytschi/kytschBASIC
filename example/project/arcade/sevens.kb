@@ -1,58 +1,149 @@
 LANG "en"
 HEAD
 	INCLUDE arcade
-	LOAD "_ROOT/project/shared/head"
+	CHARSET "UTF-8"
+    DESCRIPTION "This is a kytschBASIC example"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/sevens"
 	NAME "Arcade - Sevens | kytschBASIC"
 END HEAD
 BODY
-LOAD "_ROOT/project/shared/header"
-	MAIN
-		DIV "kb-row","main-content"
-			DIV "kb-col kb-col-24","main-content-col"
-				HEADING 2
-					PRINT "Sevens"
-				END HEADING 2
-				SWRITE
-					PRINT "The card game Sevens built using the arcade library."
-				END SWRITE
-				DIM suits$=["clubs","hearts","diamonds","spades"]
-DIM faces$=["ace","2","3","4","5","6","7","8","9","10","jack","queen","king"]
+DIM suits$=("clubs","hearts","diamonds","spades")
+DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
 
-DIM cards$=[]
-DIM player$=[]
+DIM cards$=()
+DIM player$=()
+DIM comp1$=()
 
-DEF end%=52/3
+DEF end%=(52/3)-1
 
 FOR suit$ IN suits$
     FOR face$ IN faces$
-        LET cards$[]=face$ + "_of_" + suit$ + ".svg"
+        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".svg"
     NEXT
 NEXT
 
-DEF count%=COUNT cards$
-PRINT count%
+SHUFFLE cards$
 
-REM FOR iLoop=1 TO end%
-    REM DEF count%=COUNT cards$
-    REM DEF select%=RAND
-REM NEXT
+FOR iLoop%=0 TO end%
+    LET player$()=cards$(0)
+    SHIFT cards$
+NEXT
 
-REM FOR card$ IN cards$
-    REM PRINT card$
-    REM LINE BREAK
-REM NEXT
+FOR iLoop%=0 TO end%
+    LET comp1$()=cards$(0)
+    SHIFT cards$
+NEXT
 
-				REM SCREEN "the-traveller"
-					REM WINDOW "board"
-						REM RGB 16;168;13
-						REM BITMAP 0;0;DISPWIDTH;DISPHEIGHT
-							REM RGB 255;0;0
-						REM END BITMAP
-					REM END WINDOW
-				REM END SCREEN
-			END DIV
-		END DIV
-	LOAD "_ROOT/project/shared/footer"
-	END MAIN
+SCREEN "sevens"
+    WINDOW "board"
+        WINDOW "deck"
+            WINDOW "diamonds"
+                SPRITE "diamonds_placeholder","placeholder"
+                    IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
+                END SPRITE
+            END WINDOW
+            WINDOW "hearts"
+                SPRITE "hearts_placeholder","placeholder"
+                    IMAGE "/kytschi/imgs/cards/hearts_placeholder.svg"
+                END SPRITE
+            END WINDOW
+            WINDOW "spades"
+                SPRITE "spades_placeholder","placeholder"
+                    IMAGE "/kytschi/imgs/cards/spades_placeholder.svg"
+                END SPRITE
+            END WINDOW
+            WINDOW "clubs"
+                SPRITE "clubs_placeholder","placeholder"
+                    IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
+                END SPRITE
+            END WINDOW
+        END WINDOW
+        WINDOW "game"
+            TABLE
+                THEAD
+                    TROW
+                        THEADCELL
+                            PRINT "&nbsp;"
+                        END THEADCELL
+                        THEADCELL ,"text-left"
+                            PRINT "Player"
+                        END THEADCELL
+                        THEADCELL
+                            PRINT "Cards"
+                        END THEADCELL
+                        THEADCELL
+                            PRINT "Score"
+                        END THEADCELL
+                    END TROW
+                END THEAD
+                TBODY
+                    TROW ,"score-player"
+                        TCELL ,"player-turn"
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL
+                            PRINT "You"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "0"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "0"
+                        END TCELL
+                    END TROW
+                    TROW ,"score-computer-one"
+                        TCELL
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL
+                            PRINT "Computer One"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "0"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "0"
+                        END TCELL
+                    END TROW
+                    TROW ,"score-computer-two"
+                        TCELL
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL
+                            PRINT "Computer Two"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "0"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "0"
+                        END TCELL
+                    END TROW
+                END TBODY
+            END TABLE
+        END WINDOW
+    END WINDOW
+    WINDOW "player"
+        WINDOW "hand"
+            FOR card$ IN player$
+                SPRITE "card", "card"
+                    IMAGE card$
+                END SPRITE
+            NEXT
+        END WINDOW
+        WINDOW "controls"
+            BUTTON "btnPlay"
+                PRINT "play"
+            END BUTTON
+            BUTTON "btnKnock"
+                PRINT "knocking"
+            END BUTTON
+        END WINDOW
+    END WINDOW
+END SCREEN
 END BODY
 END

@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
 <!-- http://code.google.com/p/vector-playing-cards/ -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="167.0869141pt"
    height="242.6669922pt"
    viewBox="0 0 167.0869141 242.6669922"
    xml:space="preserve"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.0 r9654"
-   sodipodi:docname="K_of_hearts.svg"
-   inkscape:export-filename="/home/byron/art/cards/final/PNGs/king_of_hearts.png"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="hearts_1.svg"
+   inkscape:export-filename="/home/byron/art/cards/final/PNGs/A_of_hearts.png"
    inkscape:export-xdpi="215.44792"
-   inkscape:export-ydpi="215.44792"><metadata
+   inkscape:export-ydpi="215.44792"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><metadata
    id="metadata43"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
    id="defs41"><radialGradient
      inkscape:collect="always"
      xlink:href="#linearGradient3773"
@@ -200,17 +199,21 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1680"
-   inkscape:window-height="977"
+   inkscape:window-width="1916"
+   inkscape:window-height="915"
    id="namedview39"
    showgrid="false"
    inkscape:zoom="1.7208768"
-   inkscape:cx="72.124594"
-   inkscape:cy="147.27218"
-   inkscape:window-x="0"
-   inkscape:window-y="25"
+   inkscape:cx="72.346841"
+   inkscape:cy="147.59918"
+   inkscape:window-x="1920"
+   inkscape:window-y="144"
    inkscape:window-maximized="1"
-   inkscape:current-layer="svg2" />
+   inkscape:current-layer="svg2"
+   inkscape:showpageshadow="2"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:document-units="pt" />
 	<g
    id="Layer_x0020_1"
    style="fill-rule:nonzero;clip-rule:nonzero;stroke:#000000;stroke-miterlimit:4;">
@@ -259,26 +262,25 @@
 
 <text
    xml:space="preserve"
-   style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#df0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+   style="font-style:normal;font-weight:normal;line-height:0%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;fill:#df0000;fill-opacity:1;stroke:none"
    x="6.2456665"
    y="28.013288"
-   id="text3788"
-   sodipodi:linespacing="125%"><tspan
+   id="text3788"><tspan
      sodipodi:role="line"
      id="tspan3790"
      x="6.2456665"
      y="28.013288"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#df0000;fill-opacity:1;font-family:Arial;-inkscape-font-specification:Arial">K</tspan></text>
-
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;fill:#df0000;fill-opacity:1">A</tspan></text>
 
 <g
    transform="matrix(0.19686979,0,0,0.19686979,11.54991,16.869674)"
-   id="g3036"><g
+   id="g3036"
+   style="display:none"><g
      style="stroke:none"
      id="layer1-9"
      transform="matrix(34.670635,0,0,32.448413,363.65075,535.3979)"><path
        sodipodi:nodetypes="scsscss"
-       d="M 3.676,-9 C 0.433,-9 0,-5.523 0,-5.523 0,-5.523 -0.433,-9 -3.676,-9 -5.946,-9 -8,-7.441 -8,-4.5 -8,-0.614 -1.4208493,3.2938141 0,9 1.35201,3.2985969 8,-0.614 8,-4.5 8,-7.441 5.946,-9 3.676,-9 z"
+       d="M 3.676,-9 C 0.433,-9 0,-5.523 0,-5.523 0,-5.523 -0.433,-9 -3.676,-9 -5.946,-9 -8,-7.441 -8,-4.5 -8,-0.614 -1.4208493,3.2938141 0,9 1.35201,3.2985969 8,-0.614 8,-4.5 8,-7.441 5.946,-9 3.676,-9 Z"
        id="hl"
        inkscape:connector-curvature="0"
        style="fill:url(#radialGradient3776);fill-opacity:1;stroke:none" /></g><path
@@ -301,20 +303,26 @@
      inkscape:connector-curvature="0"
      id="hl-8"
      d="M 3.676,-9 C 0.433,-9 0,-5.523 0,-5.523 0,-5.523 -0.433,-9 -3.676,-9 -5.946,-9 -8,-7.441 -8,-4.5 -8,-0.614 -1.4208493,3.2938141 0,9 1.35201,3.2985969 8,-0.614 8,-4.5 8,-7.441 5.946,-9 3.676,-9 z"
+     sodipodi:nodetypes="scsscss" /></g><g
+   transform="matrix(6.6842641,0,0,6.2558345,83.55707,122.08551)"
+   id="layer1-9-6-3"
+   style="fill:#df0000;fill-opacity:1"><path
+     style="fill:#df0000;fill-opacity:1"
+     inkscape:connector-curvature="0"
+     id="hl-8-5"
+     d="M 3.676,-9 C 0.433,-9 0,-5.523 0,-5.523 0,-5.523 -0.433,-9 -3.676,-9 -5.946,-9 -8,-7.441 -8,-4.5 -8,-0.614 -1.4208493,3.2938141 0,9 1.35201,3.2985969 8,-0.614 8,-4.5 8,-7.441 5.946,-9 3.676,-9 Z"
      sodipodi:nodetypes="scsscss" /></g><text
    xml:space="preserve"
-   style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#df0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+   style="font-style:normal;font-weight:normal;line-height:0%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;fill:#df0000;fill-opacity:1;stroke:none"
    x="-161.08786"
    y="-213.51517"
    id="text3788-4"
-   sodipodi:linespacing="125%"
-   transform="scale(-1,-1)"><tspan
+   transform="scale(-1)"><tspan
      sodipodi:role="line"
      id="tspan3790-3"
      x="-161.08786"
      y="-213.51517"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#df0000;fill-opacity:1;font-family:Arial;-inkscape-font-specification:Arial">K</tspan></text>
-
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;fill:#df0000;fill-opacity:1">A</tspan></text>
 <g
    transform="matrix(-1.6743072,0,0,-1.5669921,150.15601,195.14313)"
    id="layer1-9-6-5"

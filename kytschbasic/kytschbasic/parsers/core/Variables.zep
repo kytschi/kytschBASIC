@@ -117,29 +117,36 @@ class Variables
 
 	private function arrayMod(args, bool pop = true)
 	{
+		var value;
 		let args = this->args(args);
+
+		let value = this->clean(args[0], false);
 
 		if (pop) {
 			if (count(args) > 1) {
 				return "<?php array_splice(" .
-					this->clean(args[0], false) . ", " .
-					"count(" . this->clean(args[0], false) . ") - 1 - intval(" .
-					this->clean(args[1], false, in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false) .
-					"), 1); ?>";
+					value . ", " .
+					"count(" . value . ") - 1 - 
+					intval(" .
+						this->clean(args[1], false, in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false) .
+					"),
+					1); ?>";
 			} else {
-				return "<?php array_pop(" . this->clean(args[0], false) . "); ?>";
+				return "<?php array_pop(" . value . "); ?>";
 			}
 		} else {
 			if (count(args) > 1) {
 				return "<?php array_splice(" .
-					this->clean(args[0], false) . ", intval(" .
-					this->clean(
-						args[1],
-						false,
-						in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false
-					) . "), 1); ?>";
+					this->clean(args[0], false) . ",
+					intval(" .
+						this->clean(
+							args[1],
+							false,
+							in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false
+						) . "),
+					1); ?>";
 			} else {
-				return "<?php array_shift(" . this->clean(args[0], false) . "); ?>";
+				return "<?php array_shift(" . value . "); ?>";
 			}
 		}
 	}
@@ -161,7 +168,7 @@ class Variables
 
 	private function processDef(string line, bool let_var = false)
 	{
-		var splits;
+		var splits, element_var;
 
 		if (strpos(line, "%=") !== false) {
 			let splits = explode("%=", line);
@@ -170,11 +177,11 @@ class Variables
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
-		} elseif (strpos(line, "%()=") !== false) {
-			let splits = explode("%()=", line);
+		} elseif (strpos(line, "%(") !== false) {
+			let splits = explode(")=", line, 2);
 			if (count(splits) > 1) {
 				return "<?php $" .
-					splits[0] .
+					ltrim(splits[0], "%(") .
 					" = intval(" .
 					this->clean(
 						splits[1],
@@ -206,10 +213,21 @@ class Variables
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
-		} elseif (strpos(line, "$()=") !== false) {
-			let splits = explode("$()=", line);
+		} elseif (strpos(line, "$(") !== false) {
+			let splits = explode(")=", line, 2);
 			if (count(splits) > 1) {
-				return this->createString(line, splits, "[]");
+				let element_var = explode("$(", splits[0], 2);
+				if (count(element_var) > 1) {
+					let splits[0] = rtrim(element_var[0], "$(");
+					return this->createString(
+						line,
+						splits,
+						"[" . this->clean(element_var[1], false) . "]"
+					);
+				} else {
+					let splits[0] = rtrim(splits[0], "$(");
+					return this->createString(line, splits, "[]");
+				}
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
@@ -245,7 +263,7 @@ class Variables
 		var strings, str = "", value = "";
 
 		let strings = preg_split("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", splits[1]);
-		
+
 		if (count(strings) > 1) {
 			while (count(strings)) {
 				let value = trim(strings[0]);
@@ -260,8 +278,8 @@ class Variables
 			}
 			let value = trim(str, " . ");
 		} else {
-			if (substr(splits[1], strlen(splits[1]) - 1, 1) == ")") {
-				let value = "$" . rtrim(str_replace("(", "[$", str_replace(this->types, "", splits[1])), ")") . "]";
+			if (substr(splits[1], strlen(splits[1]) - 2, 1) != ")") {
+				let value = this->setElement(splits[1]);
 			} else {
 				let value = (new Text())->processValue(trim(splits[1], " . "));
 			}
@@ -292,5 +310,44 @@ class Variables
 		} else {
 			throw new Exception("Invalid DIM");
 		}		
+	}
+
+	private function setElement(string value)
+	{
+		var matches, clean, str;
+
+		for str in this->types {
+			if (strpos(value, str) !== false) {
+				let value = preg_replace("/\\" . str . "/", "", value, 1);
+				break;
+			}
+		}
+
+		let value = "$" . value;
+		
+		preg_match_all("/(.*?)(\(.*?\))/", value, matches);
+
+		if (!empty(matches[1]) && !empty(matches[2])) {
+			for str in matches[2] {
+				let clean = str_replace(")", "", str_replace("(", "", str));
+				let value = str_replace(
+					str,
+					"[" .
+					(
+						is_numeric(clean) ?
+						clean :
+						this->clean(
+							clean,
+							false,
+							in_array(substr(clean, strlen(clean) - 1, 1), this->types) ? true : false
+						)
+						) .
+					"]",
+					value
+				);
+			}
+		}
+
+		return value;
 	}
 }

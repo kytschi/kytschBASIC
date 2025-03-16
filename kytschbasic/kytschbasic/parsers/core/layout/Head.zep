@@ -127,7 +127,7 @@ class Head extends Command
 		let args = explode("\",", line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let args[0] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/" . this->setArg(args[0]) . "/css/palette.css";
+			let args[0] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . this->setArg(rtrim(args[0], ".css")) . ".css";
 						
 			if (!empty(config["cache"])) {
 				if (empty(config["cache"]->enabled)) {

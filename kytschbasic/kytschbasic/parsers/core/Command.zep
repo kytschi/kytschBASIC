@@ -37,7 +37,7 @@ class Command extends Variables
 	public function setArg(string arg, bool trim_string = true)
 	{
 		let arg = trim(arg);
-
+		
 		if (is_numeric(arg)) {
 			return arg;
 		}

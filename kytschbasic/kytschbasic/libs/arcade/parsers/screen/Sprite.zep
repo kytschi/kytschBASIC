@@ -1,13 +1,13 @@
 /**
- * SCREEN parser
+ * SPRITE parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Screen
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Sprite
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -27,18 +27,18 @@ namespace KytschBASIC\Libs\Arcade\Parsers\Screen;
 
 use KytschBASIC\Parsers\Core\Command;
 
-class Screen extends Command
+class Sprite extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "SCREEN") {
-			return this->parseScreen(args);
-		} elseif (command == "END SCREEN") {
+		if (command == "SPRITE") {
+			return this->parseSprite(args);
+		} elseif (command == "END SPRITE") {
 			return "</div>";
 		}
 	}
 
-	public function parseScreen(args)
+	public function parseSprite(args)
 	{
 		var params = "";
 		let args = this->args(args);
@@ -46,7 +46,7 @@ class Screen extends Command
 		if (isset(args[0])) {
 			let params .= " id='" . this->setArg(args[0]) . "'";
 		} else {
-			let params .= " id='" . this->genID("kb-screen") . "'";
+			let params .= " id='" . this->genID("kb-window") . "'";
 		}
 
 		if (isset(args[1])) {

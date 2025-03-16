@@ -436,11 +436,7 @@ class Text extends Command
 			}
 			return "substr(\"" . converted . "\", 0,  intval(strlen(\"" . converted . "\")) - intval(" . length . "))";
 		} else {
-			let converted = this->setArg(args[0]);
-			if (empty(converted)) {
-				let converted = "\"\"";
-			}
-			return "\"" . converted . "\"";
+			return "\"" . this->setArg(args[0]) . "\"";
 		}
 	}
 }

@@ -109,9 +109,9 @@ DIM test$=()
 FOR iLoop%=0 TO 10
 	LET test$(iLoop%)="array element" + iLoop%
 NEXT
-FOR val# IN test#
+FOR val$ IN test$
 	PRINT val#
-	PRINT ",&nbsp;"
+	LINE BREAK
 NEXT
 				END CPRINT
 				SWRITE "h3"
@@ -120,11 +120,11 @@ NEXT
 				DIV "kb-code-block"
 					DIM test$=()
 					FOR iLoop%=0 TO 10
-						LET test$(iLoop%) = "array element" + iLoop%
+						LET test$(iLoop%)="array element" + iLoop%
 					NEXT
-					FOR val# IN test#
+					FOR val$ IN test$
 						PRINT val#
-						PRINT ",&nbsp;"
+						LINE BREAK
 					NEXT
 				END DIV
 			END DIV

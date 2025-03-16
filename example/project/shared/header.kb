@@ -271,6 +271,9 @@ HEADER
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK
+		LINK "/reference/PALETTE#refPALETTE","Find out about the PALETTE command","nav-link",,"refPALETTE"
+			PRINT "PALETTE"
+		END LINK
 		LINK "/reference/PRINT#refPRINT","Find out about the PRINT command","nav-link",,"refPRINT"
 			PRINT "PRINT"
 		END LINK
@@ -312,6 +315,9 @@ HEADER
 		END LINK
 		LINK "/reference/SPRINT#refSPRINT","Find out about the SPRINT command","nav-link",,"refSPRINT"
 			PRINT "SPRINT"
+		END LINK
+				LINK "/reference/SPRITE#refSPRITE","Find out about the SPRITE command","nav-link",,"refSPRITE"
+			PRINT "SPRITE"
 		END LINK
 		LINK "/reference/SQR#refSQR","Find out about the SQR command","nav-link",,"refSQR"
 			PRINT "SQR"

@@ -63,6 +63,7 @@ class Parser
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Ellipse",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Sprite",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Window",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape"
 	];

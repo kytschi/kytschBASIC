@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "SCREEN","heading-command basic"
 					LINE BREAK
-					PRINT "ID","heading-args"
+					PRINT "ID, CLASS","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE

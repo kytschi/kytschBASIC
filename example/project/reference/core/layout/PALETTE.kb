@@ -1,0 +1,70 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "PALETTE statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "PALETTE","heading-command basic"
+					LINE BREAK
+					PRINT "NAME","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Load a CSS file."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+PALETTE "/kytschi/css/palette"
+BODY
+	SWRITE
+		PRINT "Creating the HTML body."
+	END SWRITE
+END BODY
+END
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				CPRINT
+&lt;body&gt;
+	&lt;p&gt;
+		Creating the HTML body.
+	&lt;/p&gt;
+&lt;/body&gt;
+				END CPRINT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/DIV"
+						PRINT "DIV"
+					END LINK
+					PRINT " | "
+					LINK "/reference/FOOTER"
+						PRINT "FOOTER"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEADER"
+						PRINT "HEADER"
+					END LINK
+					PRINT " | "
+					LINK "/parameters"
+						PRINT "parameters"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

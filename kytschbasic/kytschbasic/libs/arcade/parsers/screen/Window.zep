@@ -48,6 +48,10 @@ class Window extends Command
 		} else {
 			let params .= " id='" . this->genID("kb-window") . "'";
 		}
+
+		if (isset(args[1])) {
+			let params .= " class='" . this->setArg(args[1]) . "'";
+		}
 		
 		return "<div" . params . ">";
 	}

@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
-	NAME "WINDOW statment | kytschBASIC"
+	NAME "SPRITE statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -10,14 +10,14 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "WINDOW","heading-command basic"
+					PRINT "SPRITE","heading-command basic"
 					LINE BREAK
 					PRINT "ID, CLASS","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
-					PRINT "Creates a window on screen."
+					PRINT "Creates a sprite on screen."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"

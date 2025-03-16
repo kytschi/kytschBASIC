@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "ARC","heading-command basic"
 					LINE BREAK
-					PRINT "X; Y; RADIUS; START ANGLE; END ANGLE","heading-args"
+					PRINT "X, Y, RADIUS, START ANGLE, END ANGLE","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE
