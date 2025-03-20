@@ -41,8 +41,8 @@ END HEAD
 						BITMAP 0,0,800,400
 							RGB 255,0,0
 							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller",32;0,120,150
-							BITMAPTEXT "Press any key to start",18;0,135,320
+							BITMAPTEXT "The Traveller",32,0,120,150
+							BITMAPTEXT "Press any key to start",18,0,135,320
 						END BITMAP
 					END WINDOW
 					WINDOW "input"

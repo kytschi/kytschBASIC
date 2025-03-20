@@ -365,7 +365,7 @@ class Text extends Command
 			return "substr(\"" . converted . "\", " . (start - 1) . ", " . end . ")";
 		} elseif (substr(args[0], 0, 7) == "REPLACE") {
 			let args[0] = trim(str_replace("REPLACE", "", args[0]));
-
+			
 			if (args[0] != "0" && empty(args[0])) {
 				throw new \Exception("Invalid REPLACE");
 			}

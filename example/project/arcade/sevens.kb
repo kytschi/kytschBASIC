@@ -38,6 +38,16 @@ FOR iLoop%=0 TO end%
     SHIFT cards$
 NEXT
 
+REM AFUNCTION onCardClick()
+
+REM END AFUNCTION
+
+JAVASCRIPT
+function onCardClick(event) {
+    console.log(event);
+}
+END JAVASCRIPT
+
 SCREEN "sevens"
     WINDOW "board"
         WINDOW "deck"
@@ -130,7 +140,8 @@ SCREEN "sevens"
     WINDOW "player"
         WINDOW "hand"
             FOR card$ IN player$
-                SPRITE "card", "card"
+                DEF id$=REPLACE card$, "/kytschi/imgs/cards/", ""
+                SPRITE id$, "card", "onCardClick"
                     IMAGE card$
                 END SPRITE
             NEXT

@@ -34,6 +34,7 @@ use KytschBASIC\Parsers\Core\Text\Text;
 class Variables
 {
 	public types = ["$", "%", "#", "&"];
+	public array_types = ["$(", "%(", "#(", "&("];
 
 	public function args(string line)
 	{
@@ -168,7 +169,7 @@ class Variables
 
 	private function processDef(string line, bool let_var = false)
 	{
-		var splits, element_var;
+		var splits;
 
 		if (strpos(line, "%=") !== false) {
 			let splits = explode("%=", line);
@@ -216,18 +217,7 @@ class Variables
 		} elseif (strpos(line, "$(") !== false) {
 			let splits = explode(")=", line, 2);
 			if (count(splits) > 1) {
-				let element_var = explode("$(", splits[0], 2);
-				if (count(element_var) > 1) {
-					let splits[0] = rtrim(element_var[0], "$(");
-					return this->createString(
-						line,
-						splits,
-						"[" . this->clean(element_var[1], false) . "]"
-					);
-				} else {
-					let splits[0] = rtrim(splits[0], "$(");
-					return this->createString(line, splits, "[]");
-				}
+				return this->setArrayElement(line, splits, "$(");
 			} else {
 				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 			}
@@ -247,15 +237,76 @@ class Variables
 		}
 	}
 
+	private function setArrayElement(string line, splits, string type)
+	{
+		var output = "<?php $", vars;
+
+		let vars = explode(type, splits[0]);
+
+		if (isset(vars[1])) {
+			let output .= vars[0] . "[" . 
+				this->clean(
+					vars[1],
+					false,
+					in_array(substr(vars[1], strlen(vars[1]) - 1, 1), this->types) ? true : false
+				) .
+				"] = ";
+		} else {
+			let output .= vars[0] . "[] = ";
+		}
+		
+		if (substr(line, strlen(line) - 1, 1) == ")") {
+			let vars =  preg_split("/(?<!\")(?:\$\(|%\(|#\(|&\()/", rtrim(splits[1], ")"));
+
+			let output .= "$" . vars[0] . "[";
+
+			if (is_numeric(vars[1])) {
+				let output .= vars[1];
+			} else {
+				let output .= this->clean(
+					vars[1],
+					false,
+					in_array(substr(vars[1], strlen(vars[1]) - 1, 1), this->types) ? true : false
+				);
+			}
+
+			let output .= "]";
+		} else {
+			var str;
+
+			let vars = preg_split("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", splits[1]);
+
+			for str in vars {
+				let str = trim(str);
+
+				let output .= this->clean(
+					str,
+					false,
+					in_array(substr(str, strlen(str) - 1, 1), this->types) ? true : false
+				) . " . ";
+			}
+
+			let output = rtrim(output, " . ");
+		}
+
+		return output . "; ?>";
+	}
+
 	private function createInt(string line, splits, var_type = "")
 	{
+		var output = "<?php $";
+
 		array_shift(splits);
 
-		return "<?php $" .
-			line .
-			var_type . "= intval(" .
-			(new Misc())->processFunction(splits) .
-			"); ?>";
+		let output .= line . var_type . " = intval(";
+
+		if (is_numeric(splits[0])) {
+			let output .= splits[0];
+		} else {
+			let output .= (new Misc())->processFunction(splits);
+		}
+
+		return output . "); ?>";
 	}
 
 	private function createString(string line, splits, var_type = "")
@@ -279,34 +330,44 @@ class Variables
 			let value = trim(str, " . ");
 		} else {
 			if (substr(splits[1], strlen(splits[1]) - 2, 1) != ")") {
-				let value = this->setElement(splits[1]);
+				if (substr(splits[1], 0, 1) == "\"") {
+					let value = this->setElement(splits[1]);
+				} else {
+					let strings = this->args(trim(splits[1], " . "));
+					let value = (new Text())->processValue(strings);
+				}
 			} else {
-				let value = (new Text())->processValue(trim(splits[1], " . "));
+				let strings = this->args(trim(splits[1], " . "));
+				let value = (new Text())->processValue(strings);
 			}
 		}	
 		
 		return "<?php $" .
 			splits[0] .
-			var_type . "= " .
+			var_type . " = " .
 			value . "; ?>";
 	}
 
 	private function createArray(string line, splits)
 	{
+		var output = "<?php $";
+
 		if (count(splits) > 1) {
-			return "<?php $" .
-				splits[0] .
-				" = array(" .
-				trim(
-					trim(
-						this->clean(
-							splits[1],
-							false,
-							in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
-						),
-						"("),
-					")")
-				. "); ?>";
+			let output .= splits[0] . " = ";
+			
+			if (in_array(substr(line, strlen(line) - 1, 1), this->types)) {
+				let output .= this->clean(
+					splits[1],
+					false,
+					in_array(substr(line, strlen(line) - 1, 1), this->types) ? true : false
+				);
+			} elseif (substr(line, strlen(line) - 2, 1) == "\")") {
+				let output .= str_replace(")", "]", str_replace("(", "[", splits[1])) . ")";
+			} else {
+				let output .= "array(" . str_replace(["(", ")"], "", splits[1]) . ")";
+			}
+
+			return output . "; ?>";
 		} else {
 			throw new Exception("Invalid DIM");
 		}		
@@ -341,7 +402,7 @@ class Variables
 							false,
 							in_array(substr(clean, strlen(clean) - 1, 1), this->types) ? true : false
 						)
-						) .
+					) .
 					"]",
 					value
 				);

@@ -56,6 +56,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\AFunction",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
@@ -134,6 +135,12 @@ class Parser
 		} elseif (command == "END CPRINT") {
 			let this->cprint = false;
 			return "</code></pre>" . this->newline;
+		} elseif (command == "JAVASCRIPT") {
+			let this->cprint = true;
+			return "<script type='text/javascript'>" . this->newline;
+		} elseif (command == "END JAVASCRIPT") {
+			let this->cprint = false;
+			return "</script>" . this->newline;
 		} 
 
 		if (this->cprint) {

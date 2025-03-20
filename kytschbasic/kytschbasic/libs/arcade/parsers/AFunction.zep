@@ -1,7 +1,7 @@
 /**
- * SPRITE parser
+ * AFUNCTION parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Sprite
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Function
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -23,40 +23,45 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Libs\Arcade\Parsers\Screen;
+namespace KytschBASIC\Libs\Arcade\Parsers;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
-class Sprite extends Command
+class AFunction extends Command
 {
 	public function parse(string command, string args)
 	{
-		if (command == "SPRITE") {
-			return this->parseSprite(args);
-		} elseif (command == "END SPRITE") {
-			return "</div>";
+		if (command == "AFUNCTION") {
+			return this->parseFunction(args);
+		} elseif (command == "END AFUNCTION") {
+			return "\n});</script>";
 		}
 	}
 
-	public function parseSprite(args)
+	private function parseFunction(args)
 	{
-		var params = "";
+		var output="<script type='text/javascript'>$(function() {\n", splits;
 		let args = this->args(args);
 
 		if (isset(args[0])) {
-			let params .= " id='<?= \"" . this->setArg(args[0]) . "\"; ?>'";
-		} else {
-			let params .= " id='" . this->genID("kb-window") . "'";
+			preg_match_all("/(.*?)(\(.*?\))/", args[0], splits);
+			if (!empty(splits[1]) && !empty(splits[2])) {
+				let args[0] = array_shift(splits[2]);
+
+				let output .= "function " .
+					array_shift(splits[1]) .
+					this->clean(
+						args[0],
+						false, 
+						in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false
+					) .
+					"{";
+			} else {
+				throw new Exception("Invalid AFUNCTION");
+			}
 		}
 
-		if (isset(args[1])) {
-			let params .= " class='" . this->setArg(args[1]) . "'";
-		}
-
-		if (isset(args[2])) {
-			let params .= " onclick='javascript:" . this->setArg(args[2]) . "(event)'";
-		}
-		
-		return "<div" . params . ">";
+		return output . "\n}";
 	}
 }
