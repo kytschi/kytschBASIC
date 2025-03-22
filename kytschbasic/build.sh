@@ -1,5 +1,5 @@
 #!/bin/bash
-versions=("7.4" "8.0" "8.1" "8.2")
+versions=("7.4" "8.0" "8.1" "8.2" "8.3")
 for version in ${versions[@]}; do
     printf "Building for PHP $version\n"
     sudo update-alternatives --set php /usr/bin/php$version

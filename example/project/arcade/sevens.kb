@@ -11,7 +11,7 @@ HEAD
 	NAME "Arcade - Sevens | kytschBASIC"
 END HEAD
 BODY
-DIM suits$=("clubs","hearts","diamonds","spades")
+DIM suits$=("diamonds", "clubs","hearts","spades")
 DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
 
 DIM cards$=()
@@ -33,41 +33,237 @@ FOR iLoop%=0 TO end%
     SHIFT cards$
 NEXT
 
+NATSORT player$
+
 FOR iLoop%=0 TO end%
     LET comp1$()=cards$(0)
     SHIFT cards$
 NEXT
 
-REM AFUNCTION onCardClick()
+ADIM computer_1$=comp1$
+ADIM computer_2$=cards$
+ADIM diamonds%=(7)
+ADIM clubs%=(7)
+ADIM spades%=(7)
+ADIM hearts%=(7)
+ADEF selected_card$=""
+ADEF deck_suit$=""
+ADEF card_suit$=""
+ADIM players$=("you","computer_1","computer_2")
+ADEF turn%=0
 
-REM END AFUNCTION
+AFUNCTION computerPlay()
+    var value = "";
+    var played = false;
+
+    window[players[turn]].forEach((card, index) => {
+        if (!played) {
+            selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            let card_details = selected_card.split("_");
+            deck_suit = card_details[0];
+            value = card_details[1];       
+
+            if (canPlay(event, value)) {
+                playCard(event, value);
+                window[players[turn]].splice(index, 1);
+                if (window[players[turn]].length == 1) {
+                    gameInfo(event, "LAST CARD");
+                }
+                played = true;
+            }
+        }
+    });
+
+    if (!played) {
+        gameInfo(event, "KNOCKING");
+    }
+
+    updateTurn();
+END AFUNCTION
+
+AFUNCTION updateTurn()
+    $("#player-" + players[turn]).removeClass("player-turn");
+
+    turn += 1;
+    if (turn == players.length) {
+        turn = 0;
+    }
+    
+    $("#player-" + players[turn]).addClass("player-turn");
+
+    if (players[turn] != "you") {
+        computerPlay();
+    }
+END AFUNCTION
+
+AFUNCTION updateDeck(cards, value)
+    let status = false;
+
+    if (window[cards].length == 1) {
+        if (window[cards][0] == value) {
+            window[cards] = [6,8];
+            return true;
+        }
+    } else {
+        window[cards].forEach((face, index) => {
+            if (face == value) {
+                window[cards][index] = window[cards][index] + ((face < 7) ? -1 : 1);
+                status = true;
+                return;
+            }
+        });
+    }
+
+    return status;
+END AFUNCTION
+
+AFUNCTION canPlay(value)
+    switch (deck_suit) {
+        case "diamonds":
+            return updateDeck(event, "diamonds", value);
+        case "clubs":
+            return updateDeck(event, "clubs", value);
+        case "hearts":
+            return updateDeck(event, "hearts", value);
+        case "spades":
+            return updateDeck(event, "spades", value);
+        default:
+            return false;
+    }
+END AFUNCTION
+
+AFUNCTION onCardClick()
+    selected_card = event.target.parentElement.id;
+    card_suit = (selected_card).split("_")[0];
+    $("#hand .card").removeClass("card-highlight");
+    $("#" + selected_card).addClass("card-highlight");
+END AFUNCTION
+
+AFUNCTION playerKnocking()
+    gameInfo(event, "KNOCKING");
+    updateTurn();
+END AFUNCTION
+
+AFUNCTION playCard(value)
+    $("#" + selected_card).removeClass("card-highlight");
+
+    if (players[turn] == "you") {
+        $("#" + deck_suit).append($("#" + selected_card).prop("outerHTML"));
+    } else {
+        $("#" + deck_suit).append('<div id="' + selected_card + '" class="card" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
+    }
+
+    $("#" + deck_suit + " #" + selected_card).attr("onclick", $("#" + deck_suit + "_placeholder").attr("onclick"));
+
+    if (value < 7) {
+        $("#" + deck_suit + " #" + selected_card).addClass("card-lower");
+    } else if (value > 7) {
+        $("#" + deck_suit + " #" + selected_card).addClass("card-higher");
+    }
+
+    if (value == "11") {
+        value = "jack";
+    } else if (value == "12") {
+        value = "queen";
+    } else if (value == "13") {
+        value = "king";
+    } else if (value == "1") {
+        value = "ace";
+    }
+
+    gameInfo(event, value + " of " + deck_suit);
+
+    if (players[turn] == "you") {
+        $("#hand #" + selected_card).remove();
+    }
+
+    $("#" + players[turn] + "-cards span").html(parseInt($("#" + players[turn] + "-cards span").html()) - 1);
+
+    selected_card = "";
+END AFUNCTION
+
+AFUNCTION onDeckClick()
+    deck_suit = (event.target.parentElement.id).split("_")[0];
+
+    if (selected_card && deck_suit == card_suit) {
+        let value = parseInt(selected_card.split("_")[1]);
+
+        if (!canPlay(event, value)) {
+            gameInfo(event, "INVALID PLAY");
+            return;
+        }
+
+        playCard(event, value);
+        updateTurn();
+    } else {
+        gameInfo(event, "INVALID PLAY");
+    }
+END AFUNCTION
+
+AFUNCTION gameInfo(text)
+    $("#game-info").val($("#game-info").val() + players[turn] + ": " + text + "\n");
+    $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
+END AFUNCTION
+
 
 JAVASCRIPT
-function onCardClick(event) {
-    console.log(event);
-}
+$(document).ready(function() {
+    var played = false;
+
+    for (iLoop = 1; iLoop <= players.length - 1; iLoop++) {
+        turn = iLoop;
+        window[players[turn]].forEach((card, index) => {
+            if (!played) {
+                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                let card_details = selected_card.split("_");
+                deck_suit = card_details[0];
+                value = card_details[1];   
+                if (deck_suit == "diamonds" && value == "7") {
+                    played = true;
+                    computerPlay();
+                }
+            }
+        });
+
+        if (played) {
+            break;
+        }
+    }
+
+    if (!played) {
+        turn = 0;
+    }
+
+    $("button[name=btnKnock]").click(() => {
+        playerKnocking();
+    });
+
+    $("button[name=btnLastCard]").click(() => {
+        gameInfo(event, "LAST CARD");
+    });
+});
 END JAVASCRIPT
 
 SCREEN "sevens"
     WINDOW "board"
         WINDOW "deck"
-            WINDOW "diamonds"
-                SPRITE "diamonds_placeholder","placeholder"
+            WINDOW "diamonds", "deck-placeholder"
+                SPRITE "diamonds_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
                 END SPRITE
             END WINDOW
-            WINDOW "hearts"
-                SPRITE "hearts_placeholder","placeholder"
+            WINDOW "hearts", "deck-placeholder"
+                SPRITE "hearts_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/hearts_placeholder.svg"
                 END SPRITE
             END WINDOW
-            WINDOW "spades"
-                SPRITE "spades_placeholder","placeholder"
+            WINDOW "spades", "deck-placeholder"
+                SPRITE "spades_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/spades_placeholder.svg"
                 END SPRITE
             END WINDOW
-            WINDOW "clubs"
-                SPRITE "clubs_placeholder","placeholder"
+            WINDOW "clubs", "deck-placeholder"
+                SPRITE "clubs_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
                 END SPRITE
             END WINDOW
@@ -92,66 +288,69 @@ SCREEN "sevens"
                 END THEAD
                 TBODY
                     TROW ,"score-player"
-                        TCELL ,"player-turn"
+                        TCELL ,"player-turn",,"player-you"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL
                             PRINT "You"
                         END TCELL
-                        TCELL ,"text-center"
-                            PRINT "0"
+                        TCELL ,"text-center",,"you-cards"
+                            PRINT COUNT player$
                         END TCELL
-                        TCELL ,"text-center"
+                        TCELL ,"text-center",,"you-score"
                             PRINT "0"
                         END TCELL
                     END TROW
-                    TROW ,"score-computer-one"
-                        TCELL
+                    TROW ,"score-computer-1"
+                        TCELL ,,,"player-computer_1"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL
                             PRINT "Computer One"
                         END TCELL
-                        TCELL ,"text-center"
-                            PRINT "0"
+                        TCELL ,"text-center",,"computer_1-cards"
+                            PRINT COUNT comp1$
                         END TCELL
-                        TCELL ,"text-center"
+                        TCELL ,"text-center",,"computer_1-score"
                             PRINT "0"
                         END TCELL
                     END TROW
-                    TROW ,"score-computer-two"
-                        TCELL
+                    TROW ,"score-computer-2"
+                        TCELL ,,,"player-computer_2"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL
                             PRINT "Computer Two"
                         END TCELL
-                        TCELL ,"text-center"
-                            PRINT "0"
+                        TCELL ,"text-center",,"computer_2-cards"
+                            PRINT COUNT cards$
                         END TCELL
-                        TCELL ,"text-center"
+                        TCELL ,"text-center",,"computer_2-score"
                             PRINT "0"
                         END TCELL
                     END TROW
                 END TBODY
             END TABLE
+
+            TEXTAREA "game-info", "",,, "game-info"            
         END WINDOW
     END WINDOW
     WINDOW "player"
         WINDOW "hand"
             FOR card$ IN player$
                 DEF id$=REPLACE card$, "/kytschi/imgs/cards/", ""
+                DEF id$=REPLACE id$, ".svg", ""
                 SPRITE id$, "card", "onCardClick"
                     IMAGE card$
                 END SPRITE
             NEXT
         END WINDOW
         WINDOW "controls"
-            BUTTON "btnPlay"
-                PRINT "play"
-            END BUTTON
             BUTTON "btnKnock"
                 PRINT "knocking"
+            END BUTTON
+            BUTTON "btnLastCard"
+                PRINT "last card"
             END BUTTON
         END WINDOW
     END WINDOW

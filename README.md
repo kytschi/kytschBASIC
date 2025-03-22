@@ -4,7 +4,7 @@ A PHP module written in [Zephir](https://zephir-lang.com/en) that will allow you
 
 ## Requirements
 
-* PHP 7.4 to 8.2
+* PHP 7.4 to 8.3
 * PHP-GD
 * PHP-MySQL (Optional)
 

@@ -136,6 +136,15 @@ class Text extends Command
 		if (is_string(args)) {
 			let args = [args];
 		}
+
+		switch (this->getCommand(args[0])) {
+			case "REPLACE":
+				return this->processReplace(args);
+			case "COUNT":
+				return this->processCount(args);
+			default:
+				return "\"" . this->setArg(args[0]) . "\"";
+		}
 		
 		if (substr(args[0], 0, 3) == "INT") {
 			let args[0] = trim(str_replace("INT", "", args[0]));
@@ -363,27 +372,6 @@ class Text extends Command
 			}
 
 			return "substr(\"" . converted . "\", " . (start - 1) . ", " . end . ")";
-		} elseif (substr(args[0], 0, 7) == "REPLACE") {
-			let args[0] = trim(str_replace("REPLACE", "", args[0]));
-			
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid REPLACE");
-			}
-						
-			var find="", replace="";
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				let find = this->setArg(args[0]);
-				array_shift(args);
-			}
-
-			if (isset(args[0])) {
-				let replace = this->setArg(args[0]);
-			}
-			
-			return "str_replace(\"" . find . "\", \"" . replace . "\", \"" . converted . "\")";
 		} elseif (substr(args[0], 0, 5) == "INSTR") {
 			let args[0] = trim(str_replace("INSTR", "", args[0]));
 
@@ -438,5 +426,47 @@ class Text extends Command
 		} else {
 			return "\"" . this->setArg(args[0]) . "\"";
 		}
+	}
+
+	public function processCount(args)
+	{
+		let args[0] = trim(str_replace("COUNT", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid COUNT");
+		}
+
+		return "count($" . str_replace(this->types, "", args[0]) . ")";
+	}
+
+	public function processReplace(args)
+	{
+		var find = "", replace = "", converted = "";
+
+		let args[0] = trim(str_replace("REPLACE", "", args[0]));
+			
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid REPLACE");
+		}
+
+		let args = this->args(args[0]);
+
+		if (empty(args)) {
+			throw new \Exception("Invalid REPLACE");
+		}
+		
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			let find = this->setArg(args[0]);
+			array_shift(args);
+		}
+
+		if (isset(args[0])) {
+			let replace = this->setArg(args[0]);
+		}
+		
+		return "str_replace(\"" . find . "\", \"" . replace . "\", \"" . converted . "\")";
 	}
 }

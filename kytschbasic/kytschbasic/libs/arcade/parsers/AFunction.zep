@@ -1,7 +1,7 @@
 /**
  * AFUNCTION parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Function
+ * @package     KytschBASIC\Libs\Arcade\Parsers\AFunction
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -35,33 +35,34 @@ class AFunction extends Command
 		if (command == "AFUNCTION") {
 			return this->parseFunction(args);
 		} elseif (command == "END AFUNCTION") {
-			return "\n});</script>";
+			return "}\n</script>";
 		}
 	}
 
 	private function parseFunction(args)
 	{
-		var output="<script type='text/javascript'>$(function() {\n", splits;
-		let args = this->args(args);
+		var output = "<script type='text/javascript'>\n", splits, str;
 
-		if (isset(args[0])) {
-			preg_match_all("/(.*?)(\(.*?\))/", args[0], splits);
-			if (!empty(splits[1]) && !empty(splits[2])) {
-				let args[0] = array_shift(splits[2]);
+		preg_match_all("/\((.*?)\)/", args, splits);
+		
+		if (!empty(splits[0])) {
+			let str = str_replace(array_shift(splits[0]), "", args);
+			let output .= "function " . str . "(event, ";
 
-				let output .= "function " .
-					array_shift(splits[1]) .
-					this->clean(
-						args[0],
-						false, 
-						in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false
-					) .
-					"{";
-			} else {
-				throw new Exception("Invalid AFUNCTION");
+			let args = this->args(array_shift(splits[1]));
+
+			for str in args {
+				let output .= this->clean(
+					str,
+					false, 
+					in_array(substr(str, strlen(str) - 1, 1), this->types) ? true : false
+				) . ", ";
 			}
+			let output = rtrim(output, ", ") . ") {\n";
+		} else {
+			throw new Exception("Invalid AFUNCTION");
 		}
 
-		return output . "\n}";
+		return output;
 	}
 }

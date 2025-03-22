@@ -28,6 +28,7 @@ namespace KytschBASIC\Parsers\Core;
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Variables;
+use KytschBASIC\Libs\Arcade\Parsers\AFunction;
 
 class Parser
 {
@@ -56,7 +57,6 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\AFunction",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
@@ -141,7 +141,13 @@ class Parser
 		} elseif (command == "END JAVASCRIPT") {
 			let this->cprint = false;
 			return "</script>" . this->newline;
-		} 
+		} elseif (command == "AFUNCTION") {
+			let this->cprint = true;
+			return (new AFunction())->parse(command, args);
+		} elseif (command == "END AFUNCTION") {
+			let this->cprint = false;
+			return (new AFunction())->parse(command, args);
+		}
 
 		if (this->cprint) {
 			return line;

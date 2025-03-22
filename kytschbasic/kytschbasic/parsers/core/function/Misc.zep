@@ -26,6 +26,7 @@
 namespace KytschBASIC\Parsers\Core\Function;
 
 use KytschBASIC\Parsers\Core\Command;
+use KytschBASIC\Parsers\Core\Text\Text;
 
 class Misc extends Command
 {
@@ -35,20 +36,15 @@ class Misc extends Command
 			let args = [args];
 		}
 
-		if (substr(args[0], 0, 5) == "COUNT") {
-			let args[0] = trim(str_replace("COUNT", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid COUNT");
-			}
-
-			return "count($" . str_replace(this->types, "", args[0]) . ")";
-		} else {
-			return this->clean(
-				args[0],
-				false, 
-				in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false
-			);
+		switch (this->getCommand(args[0])) {
+			case "COUNT":
+				return (new Text())->processCount(args);
+			default:
+				return this->clean(
+					args[0],
+					false, 
+					in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false
+				);
 		}
 	}
 }
