@@ -261,7 +261,7 @@ AFUNCTION gameInfo(text, error = false)
 END AFUNCTION
 
 AFUNCTION gameOver()
-    var score = 0;
+    var score = 0, card_details, value = 0;
 
     game_over = 1;
     gameInfo(event, "I WIN!!!");
@@ -269,20 +269,50 @@ AFUNCTION gameOver()
     let leftOver = $("#hand").children();
 
     if (leftOver.length != 0) {
-        leftOver.forEach((card, index) => {
-            console.log(card);
+        score = parseInt($("#you-score span").html());
+        leftOver.each((index, card) => {
+            card_details = $(card).attr("id").split("_");
+            value = parseInt(card_details[1]);
+            if (value == 1) {
+                score += 11;
+            } else if ((["11", "12", "13"]).includes(value)) {
+                score += 10;
+            } else {
+                score += value;
+            }
         });
+
+        $("#you-score span").html(score);
+    }
+
+    for (var iLoop = 1; iLoop < players.length; iLoop++) {
+        score = parseInt($("#" + players[iLoop] + "-score span").html());
+
+        window[players[iLoop]].forEach((card, index) => {
+            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
+            value = parseInt(card_details[1]);
+            if (value == 1) {
+                score += 11;
+            } else if ((["11", "12", "13"]).includes(value)) {
+                score += 10;
+            } else {
+                score += value;
+            }
+        });
+
+        $("#" + players[iLoop] + "-score span").html(score);
     }
 END AFUNCTION
 
 AFUNCTION playerLastCard()
-    if ($("#hand").children().lenghth != 1) {
-        gameInfo(event, "INVALID LAST CARD! Miss a turn", true);
-        updateTurn();
+    console.log($("#hand").children().length);
+    if (game_over) {
         return;
     }
 
-    if (game_over) {
+    if ($("#hand").children().length != 1) {
+        gameInfo(event, "INVALID LAST CARD! Miss a turn", true);
+        updateTurn();
         return;
     }
     gameInfo(event, "LAST CARD");
