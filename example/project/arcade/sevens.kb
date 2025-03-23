@@ -51,8 +51,13 @@ ADEF deck_suit$=""
 ADEF card_suit$=""
 ADIM players$=("you","computer_1","computer_2")
 ADEF turn%=0
+ADEF game_over%=0
 
 AFUNCTION computerPlay()
+    if (game_over) {
+        return;
+    }
+
     var value = "";
     var played = false;
 
@@ -68,6 +73,9 @@ AFUNCTION computerPlay()
                 window[players[turn]].splice(index, 1);
                 if (window[players[turn]].length == 1) {
                     gameInfo(event, "LAST CARD");
+                } else if (window[players[turn]].length == 0) {
+                    gameInfo(event, "I WIN!!!");
+                    game_over = 1;
                 }
                 played = true;
             }
@@ -76,12 +84,17 @@ AFUNCTION computerPlay()
 
     if (!played) {
         gameInfo(event, "KNOCKING");
+        console.log(window[players[turn]]);
     }
 
     updateTurn();
 END AFUNCTION
 
 AFUNCTION updateTurn()
+    if (game_over) {
+        return;
+    }
+
     $("#player-" + players[turn]).removeClass("player-turn");
 
     turn += 1;
@@ -118,6 +131,10 @@ AFUNCTION updateDeck(cards, value)
 END AFUNCTION
 
 AFUNCTION canPlay(value)
+    if (game_over) {
+        return;
+    }
+
     switch (deck_suit) {
         case "diamonds":
             return updateDeck(event, "diamonds", value);
@@ -140,7 +157,11 @@ AFUNCTION onCardClick()
 END AFUNCTION
 
 AFUNCTION playerKnocking()
+    if (game_over) {
+        return;
+    }
     gameInfo(event, "KNOCKING");
+
     updateTurn();
 END AFUNCTION
 
@@ -183,6 +204,10 @@ AFUNCTION playCard(value)
 END AFUNCTION
 
 AFUNCTION onDeckClick()
+    if (game_over) {
+        return;
+    }
+
     deck_suit = (event.target.parentElement.id).split("_")[0];
 
     if (selected_card && deck_suit == card_suit) {
@@ -194,6 +219,10 @@ AFUNCTION onDeckClick()
         }
 
         playCard(event, value);
+        if ($("#hand").children().length == 0) {
+            gameInfo(event, "I WIN!!!");
+            game_over = 1;
+        }
         updateTurn();
     } else {
         gameInfo(event, "INVALID PLAY");
@@ -220,7 +249,10 @@ $(document).ready(function() {
                 value = card_details[1];   
                 if (deck_suit == "diamonds" && value == "7") {
                     played = true;
-                    computerPlay();
+                    playCard(event, value);
+                    window[players[turn]].splice(index, 1);
+                    updateDeck(event, "diamonds", value);
+                    updateTurn();
                 }
             }
         });
@@ -239,6 +271,9 @@ $(document).ready(function() {
     });
 
     $("button[name=btnLastCard]").click(() => {
+        if (game_over) {
+            return;
+        }
         gameInfo(event, "LAST CARD");
     });
 });
@@ -346,11 +381,11 @@ SCREEN "sevens"
             NEXT
         END WINDOW
         WINDOW "controls"
-            BUTTON "btnKnock"
-                PRINT "knocking"
-            END BUTTON
-            BUTTON "btnLastCard"
+            BUTTON "btnLastCard", "btn-last-card"
                 PRINT "last card"
+            END BUTTON
+            BUTTON "btnKnock", "btn-knocking"
+                PRINT "knocking"
             END BUTTON
         END WINDOW
     END WINDOW

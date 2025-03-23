@@ -141,3 +141,19 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+#sevens button {
+    height: 50px;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#sevens .btn-last-card {
+    background-color: #ffd400;
+}
+
+#sevens .btn-knocking {
+    background-color: #f43c09;
+    color: #fff;
+}
