@@ -124,6 +124,8 @@ class Variables
 			return "<?php sort(" . this->clean(args, false) . "); ?>";
 		} elseif (command == "SSORT") {
 			return "<?php sort(" . this->clean(args, false) . ", SORT_STRING); ?>";
+		} elseif (command == "NSORT") {
+			return "<?php sort(" . this->clean(args, false) . ", SORT_NUMERIC); ?>";
 		} elseif (command == "NATSORT") {
 			return "<?php natsort(" . this->clean(args, false) . "); ?>";
 		} elseif (command == "POP") {

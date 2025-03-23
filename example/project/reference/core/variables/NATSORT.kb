@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "SHIFT statment | kytschBASIC"
+	NAME "NATSORT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,26 +9,19 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "SHIFT","basic"
+					PRINT "NATSORT","basic"
 					LINE BREAK
-					PRINT "ARRAY, POSITION (OPTIONAL)","heading-args"
+					PRINT "ARRAY","heading-args"
 				END HEADING 2
 				SWRITE
-					PRINT "Removing an element from an array starting from the start of the array."
+					PRINT "Sort an array sorting using 'natural ordering.'"
 				END SWRITE
 				SWRITE "h3"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test$=("kytschBASIC","is","awesome!")
-SHIFT test$
-FOR val$ IN test$
-	PRINT val$
-	PRINT "&nbsp;"
-NEXT
-LINE BREAK
-DIM test$=("kytschBASIC","is","awesome!")
-SHIFT test$, 1
+DIM test$=("card5","card9","card3","card6","card1","card4","card7","card8","card2","card10")
+NATSORT test$
 FOR val$ IN test$
 	PRINT val$
 	PRINT "&nbsp;"
@@ -38,15 +31,8 @@ NEXT
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					DIM test$=("kytschBASIC","is","awesome!")
-					SHIFT test$
-					FOR val$ IN test$
-						PRINT val$
-						PRINT "&nbsp;"
-					NEXT
-					LINE BREAK
-					DIM test$=("kytschBASIC","is","awesome!")
-					SHIFT test$, 1
+					DIM test$=("card5","card9","card3","card6","card1","card4","card7","card8","card2","card10")
+					NATSORT test$
 					FOR val$ IN test$
 						PRINT val$
 						PRINT "&nbsp;"

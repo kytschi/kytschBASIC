@@ -91,6 +91,26 @@
 		"url": "/reference/SHIFT",
 		"template": "project/reference/core/variables/SHIFT.kb"
 	},
+	{
+		"url": "/reference/SHUFFLE",
+		"template": "project/reference/core/variables/SHUFFLE.kb"
+	},
+	{
+		"url": "/reference/SORT",
+		"template": "project/reference/core/variables/SORT.kb"
+	},
+	{
+		"url": "/reference/SSORT",
+		"template": "project/reference/core/variables/SSORT.kb"
+	},
+	{
+		"url": "/reference/NSORT",
+		"template": "project/reference/core/variables/NSORT.kb"
+	},
+	{
+		"url": "/reference/NATSORT",
+		"template": "project/reference/core/variables/NATSORT.kb"
+	},
 
 	{
 		"url": "/reference/MAIL",

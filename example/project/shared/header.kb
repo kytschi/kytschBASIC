@@ -271,6 +271,12 @@ HEADER
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK
+		LINK "/reference/NATSORT#refNATSORT","Find out about the NATSORT command","nav-link",,"refNATSORT"
+			PRINT "NATSORT"
+		END LINK
+		LINK "/reference/NSORT#refNSORT","Find out about the NSORT command","nav-link",,"refNSORT"
+			PRINT "NSORT"
+		END LINK
 		LINK "/reference/PALETTE#refPALETTE","Find out about the PALETTE command","nav-link",,"refPALETTE"
 			PRINT "PALETTE"
 		END LINK
@@ -310,8 +316,17 @@ HEADER
 		LINK "/reference/SHIFT#refSHIFT","Find out about the SHIFT command","nav-link",,"refSHIFT"
 			PRINT "SHIFT"
 		END LINK
+		LINK "/reference/SHUFFLE#refSHUFFLE","Find out about the SHUFFLE command","nav-link",,"refSHUFFLE"
+			PRINT "SHUFFLE"
+		END LINK
 		LINK "/reference/SIN#refSIN","Find out about the SIN command","nav-link",,"refSIN"
 			PRINT "SIN"
+		END LINK
+		LINK "/reference/SORT#refSORT","Find out about the SORT command","nav-link",,"refSORT"
+			PRINT "SORT"
+		END LINK
+		LINK "/reference/SSORT#refSSORT","Find out about the SSORT command","nav-link",,"refSSORT"
+			PRINT "SSORT"
 		END LINK
 		LINK "/reference/SPRINT#refSPRINT","Find out about the SPRINT command","nav-link",,"refSPRINT"
 			PRINT "SPRINT"

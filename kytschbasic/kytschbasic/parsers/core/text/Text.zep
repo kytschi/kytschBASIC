@@ -44,24 +44,6 @@ class Text extends Command
 		return null;
 	}
 
-	private function processCentre(args)
-	{
-		var value="";
-
-		let args = this->args(args);
-		let value = this->setArg(args[0]);
-
-		if (isset(args[1])) {
-			let value = substr(
-				value,
-				(strlen(value) / 2) - 1,
-				intval(args[1])
-			);
-		}
-
-		return "\"" . value . "\"";
-	}
-
 	private function processPrint(args)
 	{
 		var value="", output = "<?= \"<span";
@@ -131,301 +113,101 @@ class Text extends Command
 
 	public function processValue(args)
 	{
-		var converted, length=1, value="", splits;
-
 		if (is_string(args)) {
 			let args = [args];
 		}
 
 		switch (this->getCommand(args[0])) {
-			case "REPLACE":
-				return this->processReplace(args);
+			case "ASC":
+				return this->processAsc(args);
+			case "CENTRE":
+				return this->processCentre(args);
+			case "CHR":
+				return this->processChr(args);
 			case "COUNT":
 				return this->processCount(args);
+			case "INSTR":
+				return this->processInstr(args);
+			case "INT":
+				return this->processInt(args);
+			case "LCASE":
+				return this->processLCase(args);
+			case "LEFT":
+				return this->processLeft(args);
+			case "LEN":
+				return this->processLen(args);
+			case "LSET":
+				return this->processLSet(args);
+			case "MID":
+				return this->processMid(args);
+			case "REPLACE":
+				return this->processReplace(args);
+			case "RSET":
+				return this->processRSet(args);
+			case "RIGHT":
+				return this->processRight(args);
+			case "STRING":
+				return this->processString(args);
+			case "STRIPLEAD":
+				return this->processStripLead(args);
+			case "STRIPTRAIL":
+				return this->processStripTrail(args);
+			case "STR":
+				return this->processToString(args);
+			case "UCASE":
+				return this->processUCase(args);
+			case "UNLEFT":
+				return this->processUnLeft(args);
+			case "UNRIGHT":
+				return this->processUnRight(args);
+			case "VAL":
+				return this->processVal(args);
 			default:
 				return "\"" . this->setArg(args[0]) . "\"";
 		}
-		
-		if (substr(args[0], 0, 3) == "INT") {
-			let args[0] = trim(str_replace("INT", "", args[0]));
+	}
 
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid INT");
-			}
+	public function processAsc(args)
+	{
+		let args[0] = trim(str_replace("ASC", "", args[0]));
 
-			return "intval(\"" . this->setArg(args[0], false) . "\")";
-		} elseif (substr(args[0], 0, 3) == "CHR") {
-			let args[0] = trim(str_replace("CHR", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid CHR");
-			}
-
-			return "chr(intval(\"" . this->setArg(args[0], false) . "\"))";
-		} elseif (substr(args[0], 0, 3) == "VAL") {
-			let args[0] = trim(str_replace("VAL", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid VAL");
-			}
-
-			return "floatval(\"" . this->setArg(args[0], true) . "\")";
-		} elseif (substr(args[0], 0, 5) == "UCASE") {
-			let args[0] = trim(str_replace("UCASE", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid UCASE");
-			}
-
-			return "strtoupper(" . this->setArg(args[0], false) . ")";
-		} elseif (substr(args[0], 0, 6) == "STRING") {
-			let args[0] = trim(str_replace("STRING", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid STRING");
-			}
-						
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-
-			while length {
-				let value .= converted;
-				let length -= 1;
-			}
-			return value;
-		} elseif (substr(args[0], 0, 9) == "STRIPLEAD") {
-			let args[0] = trim(str_replace("STRIPLEAD", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid STRIPLEAD");
-			}
-						
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			var strip_char = "";
-			if (isset(args[0])) {
-				let value = this->setArg(args[0]);
-				let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
-			}
-
-			return "ltrim(\"" . converted . "\", " . strip_char . ")";
-		} elseif (substr(args[0], 0, 10) == "STRIPTRAIL") {
-			let args[0] = trim(str_replace("STRIPTRAIL", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid STRIPTRAIL");
-			}
-						
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			var strip_char = "";
-			if (isset(args[0])) {
-				let value = this->setArg(args[0]);
-				let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
-			}
-
-			return "rtrim(\"" . converted . "\", " . strip_char . ")";
-		} elseif (substr(args[0], 0, 3) == "STR") {
-			let args[0] = trim(str_replace("STR", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid STR");
-			}
-
-			return "(string)\"" . trim(this->setArg(args[0], false), "\"") . "\"";
-		} elseif (substr(args[0], 0, 3) == "ASC") {
-			let args[0] = trim(str_replace("ASC", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid ASC");
-			}
-
-			return "ord(\"" . this->setArg(args[0]) . "\")";
-		} elseif (substr(args[0], 0, 5) == "LCASE") {
-			let args[0] = trim(str_replace("LCASE", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid LCASE");
-			}
-			
-			return "strtolower(\"" . this->setArg(args[0]) . "\")";
-		} elseif (substr(args[0], 0, 3) == "LEN") {
-			let args[0] = trim(str_replace("LEN", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid LEN");
-			}
-
-			return "strlen(\"" . this->setArg(args[0]) . "\")";
-		} elseif (substr(args[0], 0, 4) == "LSET") {
-			let args[0] = trim(str_replace("LSET", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid LSET");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-						
-			return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(\"" . converted . "\", intval(" . length . "), 'left')";
-		} elseif (substr(args[0], 0, 4) == "RSET") {
-			let args[0] = trim(str_replace("RSET", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid RSET");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-						
-			return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(\"" . converted . "\", intval(" . length . "))";
-		} elseif (substr(args[0], 0, 6) == "CENTRE") {
-			let args[0] = trim(str_replace("CENTRE", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid CENTRE");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-			return "substr(\"" . converted . "\", intval(strlen(\"" . converted . "\") / 2) - 1, intval(" . length . "))";
-		} elseif (substr(args[0], 0, 4) == "LEFT") {
-			let args[0] = trim(str_replace("LEFT", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid LEFT");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-			return "substr(\"" . converted . "\", 0,  intval(" . length . "))";
-		} elseif (substr(args[0], 0, 5) == "RIGHT") {
-			let args[0] = trim(str_replace("RIGHT", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid RIGHT");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-			return "substr(\"" . converted . "\", intval(strlen(\"" . converted . "\")) - intval(" . length . "),  intval(" . length . "))";
-		} elseif (substr(args[0], 0, 3) == "MID") {
-			let args[0] = trim(str_replace("MID", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid MID");
-			}
-						
-			var start=0, end=1;
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let start = intval(args[0]);
-				}
-			}
-
-			if (isset(args[1])) {
-				if (is_numeric(args[1])) {
-					let end = intval(args[1]);
-					unset(args[1]);
-				}
-			}
-
-			return "substr(\"" . converted . "\", " . (start - 1) . ", " . end . ")";
-		} elseif (substr(args[0], 0, 5) == "INSTR") {
-			let args[0] = trim(str_replace("INSTR", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid INSTR");
-			}
-			
-			let args[0] = splits[1];
-			
-			var haystack = "", needle = "";
-			
-			let haystack = this->setArg(args[0]);
-			array_shift(args);
-
-			if (isset(args[0])) {
-				let needle = this->setArg(args[0]);
-			}
-
-			return "strpos(\"" . haystack . "\", \"" . needle . "\")";
-		} elseif (substr(args[0], 0, 6) == "UNLEFT") {
-			let args[0] = trim(str_replace("UNLEFT", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid UNLEFT");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-			return "substr(\"" . converted . "\", intval(" . length . ") - 1,  intval(strlen(\"" . converted . "\")))";
-		} elseif (substr(args[0], 0, 7) == "UNRIGHT") {
-			let args[0] = trim(str_replace("UNRIGHT", "", args[0]));
-
-			if (args[0] != "0" && empty(args[0])) {
-				throw new \Exception("Invalid UNRIGHT");
-			}
-
-			let converted = this->setArg(args[0]);
-			array_shift(args);
-			
-			if (isset(args[0])) {
-				if (is_numeric(args[0])) {
-					let length = intval(args[0]);
-				}
-			}
-			return "substr(\"" . converted . "\", 0,  intval(strlen(\"" . converted . "\")) - intval(" . length . "))";
-		} else {
-			return "\"" . this->setArg(args[0]) . "\"";
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid ASC");
 		}
+
+		return "ord(\"" . this->setArg(args[0]) . "\")";
+	}
+
+	public function processCentre(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("CENTRE", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid CENTRE");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+		return "substr(\"" . converted . "\", intval(strlen(\"" . converted . "\") / 2) - 1, intval(" . length . "))";
+	}
+
+	public function processChr(args)
+	{
+		let args[0] = trim(str_replace("CHR", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid CHR");
+		}
+
+		return "chr(intval(\"" . this->setArg(args[0], false) . "\"))";
 	}
 
 	public function processCount(args)
@@ -437,6 +219,131 @@ class Text extends Command
 		}
 
 		return "count($" . str_replace(this->types, "", args[0]) . ")";
+	}
+
+	public function processInstr(args)
+	{
+		let args[0] = trim(str_replace("INSTR", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid INSTR");
+		}
+				
+		var haystack = "", needle = "";
+		
+		let haystack = this->setArg(args[0]);
+		array_shift(args);
+
+		if (isset(args[0])) {
+			let needle = this->setArg(args[0]);
+		}
+
+		return "strpos(\"" . haystack . "\", \"" . needle . "\")";
+	}
+
+	public function processInt(args)
+	{
+		let args[0] = trim(str_replace("INT", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid INT");
+		}
+
+		return "intval(\"" . this->setArg(args[0], false) . "\")";
+	}
+
+	public function processLCase(args)
+	{
+		let args[0] = trim(str_replace("LCASE", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid LCASE");
+		}
+		
+		return "strtolower(\"" . this->setArg(args[0]) . "\")";
+	}
+
+	public function processLeft(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("LEFT", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid LEFT");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+		return "substr(\"" . converted . "\", 0,  intval(" . length . "))";
+	}
+
+	public function processLen(args)
+	{
+		let args[0] = trim(str_replace("LEN", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid LEN");
+		}
+
+		return "strlen(\"" . this->setArg(args[0]) . "\")";
+	}
+
+	public function processLSet(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("LSET", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid LSET");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+					
+		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(\"" . converted . "\", intval(" . length . "), 'left')";
+	}
+
+	public function processMid(args)
+	{
+		var converted, start = 0, end = 1;
+
+		let args[0] = trim(str_replace("MID", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid MID");
+		}
+					
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let start = intval(args[0]);
+			}
+		}
+
+		if (isset(args[1])) {
+			if (is_numeric(args[1])) {
+				let end = intval(args[1]);
+				unset(args[1]);
+			}
+		}
+
+		return "substr(\"" . converted . "\", " . (start - 1) . ", " . end . ")";
 	}
 
 	public function processReplace(args)
@@ -468,5 +375,192 @@ class Text extends Command
 		}
 		
 		return "str_replace(\"" . find . "\", \"" . replace . "\", \"" . converted . "\")";
+	}
+
+	public function processRight(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("RIGHT", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid RIGHT");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+		return "substr(\"" . converted . "\", intval(strlen(\"" . converted . "\")) - intval(" . length . "),  intval(" . length . "))";
+	}
+
+	public function processRSet(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("RSET", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid RSET");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+					
+		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(\"" . converted . "\", intval(" . length . "))";
+	}
+
+	public function processString(args)
+	{
+		var converted, length = 1, value = "";
+
+		let args[0] = trim(str_replace("STRING", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid STRING");
+		}
+					
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+
+		while length {
+			let value .= converted;
+			let length -= 1;
+		}
+
+		return "\"" . value . "\"";
+	}
+
+	public function processStripLead(args)
+	{
+		var converted, value = "", strip_char = "";
+
+		let args[0] = trim(str_replace("STRIPLEAD", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid STRIPLEAD");
+		}
+					
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+				
+		if (isset(args[0])) {
+			let value = this->setArg(args[0]);
+			let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
+		}
+
+		return "ltrim(\"" . converted . "\", " . strip_char . ")";
+	}
+
+	public function processStripTrail(args)
+	{
+		var converted, value = "", strip_char = "";
+
+		let args[0] = trim(str_replace("STRIPTRAIL", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid STRIPTRAIL");
+		}
+					
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			let value = this->setArg(args[0]);
+			let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
+		}
+
+		return "rtrim(\"" . converted . "\", " . strip_char . ")";
+	}
+
+	public function processToString(args)
+	{
+		let args[0] = trim(str_replace("STR", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid STR");
+		}
+
+		return "(string)\"" . trim(this->setArg(args[0], false), "\"") . "\"";
+	}
+
+	public function processUCase(args)
+	{
+		let args[0] = trim(str_replace("UCASE", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid UCASE");
+		}
+
+		return "strtoupper(" . this->setArg(args[0], false) . ")";
+	}
+
+	public function processUnLeft(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("UNLEFT", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid UNLEFT");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+		return "substr(\"" . converted . "\", intval(" . length . ") - 1,  intval(strlen(\"" . converted . "\")))";
+	}
+
+	public function processUnRight(args)
+	{
+		var converted, length = 1;
+
+		let args[0] = trim(str_replace("UNRIGHT", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid UNRIGHT");
+		}
+
+		let converted = this->setArg(args[0]);
+		array_shift(args);
+		
+		if (isset(args[0])) {
+			if (is_numeric(args[0])) {
+				let length = intval(args[0]);
+			}
+		}
+		return "substr(\"" . converted . "\", 0,  intval(strlen(\"" . converted . "\")) - intval(" . length . "))";
+	}
+
+	public function processVal(args)
+	{
+		let args[0] = trim(str_replace("VAL", "", args[0]));
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid VAL");
+		}
+
+		return "floatval(\"" . this->setArg(args[0], true) . "\")";
 	}
 }

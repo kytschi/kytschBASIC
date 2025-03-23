@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "SHIFT statment | kytschBASIC"
+	NAME "NSORT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,26 +9,19 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "SHIFT","basic"
+					PRINT "NSORT","basic"
 					LINE BREAK
-					PRINT "ARRAY, POSITION (OPTIONAL)","heading-args"
+					PRINT "ARRAY","heading-args"
 				END HEADING 2
 				SWRITE
-					PRINT "Removing an element from an array starting from the start of the array."
+					PRINT "Sort an array comparing elements as numbers."
 				END SWRITE
 				SWRITE "h3"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test$=("kytschBASIC","is","awesome!")
-SHIFT test$
-FOR val$ IN test$
-	PRINT val$
-	PRINT "&nbsp;"
-NEXT
-LINE BREAK
-DIM test$=("kytschBASIC","is","awesome!")
-SHIFT test$, 1
+DIM test$=("5-card","9-card","3-card","6-card","1-card","4-card","7-card","8-card","2-card","10-card")
+NSORT test$
 FOR val$ IN test$
 	PRINT val$
 	PRINT "&nbsp;"
@@ -38,15 +31,8 @@ NEXT
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					DIM test$=("kytschBASIC","is","awesome!")
-					SHIFT test$
-					FOR val$ IN test$
-						PRINT val$
-						PRINT "&nbsp;"
-					NEXT
-					LINE BREAK
-					DIM test$=("kytschBASIC","is","awesome!")
-					SHIFT test$, 1
+					DIM test$=("5-card","9-card","3-card","6-card","1-card","4-card","7-card","8-card","2-card","10-card")
+					NSORT test$
 					FOR val$ IN test$
 						PRINT val$
 						PRINT "&nbsp;"

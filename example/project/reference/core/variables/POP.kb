@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				HEADING 2
 					PRINT "POP","basic"
 					LINE BREAK
-					PRINT "ID (OPTIONAL)","heading-args"
+					PRINT "ARRAY, POSITION (OPTIONAL)","heading-args"
 				END HEADING 2
 				SWRITE
 					PRINT "Removing an element from an array starting from the end of the array."
