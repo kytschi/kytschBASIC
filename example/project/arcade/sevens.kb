@@ -66,7 +66,7 @@ AFUNCTION computerPlay()
             selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
             let card_details = selected_card.split("_");
             deck_suit = card_details[0];
-            value = card_details[1];       
+            value = card_details[1];
 
             if (canPlay(event, value)) {
                 playCard(event, value);
@@ -74,8 +74,7 @@ AFUNCTION computerPlay()
                 if (window[players[turn]].length == 1) {
                     gameInfo(event, "LAST CARD");
                 } else if (window[players[turn]].length == 0) {
-                    gameInfo(event, "I WIN!!!");
-                    game_over = 1;
+                    gameOver(event);
                 }
                 played = true;
             }
@@ -84,7 +83,6 @@ AFUNCTION computerPlay()
 
     if (!played) {
         gameInfo(event, "KNOCKING");
-        console.log(window[players[turn]]);
     }
 
     updateTurn();
@@ -109,18 +107,24 @@ AFUNCTION updateTurn()
     }
 END AFUNCTION
 
-AFUNCTION updateDeck(cards, value)
+AFUNCTION updateDeck(cards, value, check = false)
     let status = false;
 
     if (window[cards].length == 1) {
         if (window[cards][0] == value) {
-            window[cards] = [6,8];
+            if (!check) {
+                $("button[name=btnLastCard]").removeAttr("disabled");
+                window[cards] = [6,8];
+            }
             return true;
         }
     } else {
         window[cards].forEach((face, index) => {
             if (face == value) {
-                window[cards][index] = window[cards][index] + ((face < 7) ? -1 : 1);
+                if (!check) {
+                    $("button[name=btnLastCard]").removeAttr("disabled");
+                    window[cards][index] = window[cards][index] + ((face < 7) ? -1 : 1);
+                }
                 status = true;
                 return;
             }
@@ -130,20 +134,20 @@ AFUNCTION updateDeck(cards, value)
     return status;
 END AFUNCTION
 
-AFUNCTION canPlay(value)
+AFUNCTION canPlay(value, check = false)
     if (game_over) {
         return;
     }
 
     switch (deck_suit) {
         case "diamonds":
-            return updateDeck(event, "diamonds", value);
+            return updateDeck(event, "diamonds", value, check);
         case "clubs":
-            return updateDeck(event, "clubs", value);
+            return updateDeck(event, "clubs", value, check);
         case "hearts":
-            return updateDeck(event, "hearts", value);
+            return updateDeck(event, "hearts", value, check);
         case "spades":
-            return updateDeck(event, "spades", value);
+            return updateDeck(event, "spades", value, check);
         default:
             return false;
     }
@@ -152,7 +156,7 @@ END AFUNCTION
 AFUNCTION onCardClick()
     selected_card = event.target.parentElement.id;
     card_suit = (selected_card).split("_")[0];
-    $("#hand .card").removeClass("card-highlight");
+    $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
 END AFUNCTION
 
@@ -160,13 +164,36 @@ AFUNCTION playerKnocking()
     if (game_over) {
         return;
     }
-    gameInfo(event, "KNOCKING");
 
-    updateTurn();
+    var valid = true, no_update = false;
+    
+    $("#hand").children().each((index, card) => {
+        let card_details = $(card).attr("id").split("_");
+        deck_suit = card_details[0];
+        let value = card_details[1];
+
+        if (canPlay(event, value, true)) {
+            if (deck_suit == "diamonds" && value == "7") {
+                no_update = true;
+            }
+            $(card).addClass("card-warn");
+            valid = false;
+        }
+    });
+
+    if (valid == true) {
+        gameInfo(event, "KNOCKING");
+    } else {
+        gameInfo(event, "INVALID KNOCKING!" + (!no_update ? " Miss a turn" : ""));
+    }
+
+    if (!no_update) {
+        updateTurn();
+    }
 END AFUNCTION
 
 AFUNCTION playCard(value)
-    $("#" + selected_card).removeClass("card-highlight");
+    $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
 
     if (players[turn] == "you") {
         $("#" + deck_suit).append($("#" + selected_card).prop("outerHTML"));
@@ -220,8 +247,7 @@ AFUNCTION onDeckClick()
 
         playCard(event, value);
         if ($("#hand").children().length == 0) {
-            gameInfo(event, "I WIN!!!");
-            game_over = 1;
+            gameOver(event);
         }
         updateTurn();
     } else {
@@ -229,11 +255,38 @@ AFUNCTION onDeckClick()
     }
 END AFUNCTION
 
-AFUNCTION gameInfo(text)
-    $("#game-info").val($("#game-info").val() + players[turn] + ": " + text + "\n");
+AFUNCTION gameInfo(text, error = false)
+    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : players[turn]) + ": " + text + "\n");
     $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
 
+AFUNCTION gameOver()
+    var score = 0;
+
+    game_over = 1;
+    gameInfo(event, "I WIN!!!");
+
+    let leftOver = $("#hand").children();
+
+    if (leftOver.length != 0) {
+        leftOver.forEach((card, index) => {
+            console.log(card);
+        });
+    }
+END AFUNCTION
+
+AFUNCTION playerLastCard()
+    if ($("#hand").children().lenghth != 1) {
+        gameInfo(event, "INVALID LAST CARD! Miss a turn", true);
+        updateTurn();
+        return;
+    }
+
+    if (game_over) {
+        return;
+    }
+    gameInfo(event, "LAST CARD");
+END AFUNCTION
 
 JAVASCRIPT
 $(document).ready(function() {
@@ -270,11 +323,9 @@ $(document).ready(function() {
         playerKnocking();
     });
 
+    $("button[name=btnLastCard]").attr("disabled", "disabled");
     $("button[name=btnLastCard]").click(() => {
-        if (game_over) {
-            return;
-        }
-        gameInfo(event, "LAST CARD");
+        playerLastCard();
     });
 });
 END JAVASCRIPT
