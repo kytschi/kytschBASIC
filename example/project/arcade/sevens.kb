@@ -250,6 +250,8 @@ AFUNCTION onDeckClick()
         playCard(event, value);
         if ($("#hand").children().length == 0) {
             gameOver(event);
+        } else if ($("#hand").children().length == 1) {
+            gameInfo(event, "LAST CARD");
         }
         updateTurn();
     } else {
@@ -320,19 +322,6 @@ AFUNCTION gameOver()
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
 END AFUNCTION
 
-AFUNCTION playerLastCard()
-    if (game_over) {
-        return;
-    }
-
-    if ($("#hand").children().length != 1) {
-        gameInfo(event, "INVALID LAST CARD! Miss a turn", true);
-        updateTurn();
-        return;
-    }
-    gameInfo(event, "LAST CARD");
-END AFUNCTION
-
 JAVASCRIPT
 $(document).ready(function() {
     var played = false;
@@ -376,11 +365,6 @@ $(document).ready(function() {
 
     $("button[name=btnNewGame]").click(() => {
         window.location.reload();
-    });
-
-    $("button[name=btnLastCard]").attr("disabled", "disabled");
-    $("button[name=btnLastCard]").click(() => {
-        playerLastCard();
     });
 });
 END JAVASCRIPT
@@ -487,9 +471,6 @@ SCREEN "sevens"
             NEXT
         END WINDOW
         WINDOW "controls"
-            BUTTON "btnLastCard", "btn-last-card"
-                PRINT "last card"
-            END BUTTON
             BUTTON "btnKnock", "btn-knocking"
                 PRINT "knocking"
             END BUTTON
