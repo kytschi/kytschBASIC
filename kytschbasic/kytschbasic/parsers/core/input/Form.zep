@@ -110,6 +110,10 @@ class Form extends Command
 		if (isset(args[5]) && !empty(args[5])) {
 			let params .= " required='required'";
 		}
+
+		if (isset(args[6]) && !empty(args[6])) {
+			let params .= " " . this->setArg(args[6]);
+		}
 		
 		return "<?= \"<input type='" . type . "'" . params . ">\"; ?>";
 	}
@@ -146,6 +150,10 @@ class Form extends Command
 
 		if (isset(args[5]) && !empty(args[5])) {
 			let params .= " required='required'";
+		}
+
+		if (isset(args[6]) && !empty(args[6])) {
+			let params .= " " . this->setArg(args[6]);
 		}
 		
 		return "<?= \"<textarea" . params . ">" . value . "</textarea>\"; ?>";

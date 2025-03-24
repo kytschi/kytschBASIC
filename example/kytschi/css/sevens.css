@@ -162,3 +162,9 @@ html, body {
     background-color: #f43c09;
     color: #fff;
 }
+
+#sevens .btn-new-game {
+    margin-top: 40px;
+    background-color: #2794e8;
+    color: #fff;
+}

@@ -61,6 +61,8 @@ AFUNCTION computerPlay()
     var value = "";
     var played = false;
 
+    window[players[turn]].sort(() => Math.random() - .5);
+
     window[players[turn]].forEach((card, index) => {
         if (!played) {
             selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
@@ -275,7 +277,7 @@ AFUNCTION gameOver()
             value = parseInt(card_details[1]);
             if (value == 1) {
                 score += 11;
-            } else if ((["11", "12", "13"]).includes(value)) {
+            } else if (([11, 12, 13]).includes(value)) {
                 score += 10;
             } else {
                 score += value;
@@ -293,7 +295,7 @@ AFUNCTION gameOver()
             value = parseInt(card_details[1]);
             if (value == 1) {
                 score += 11;
-            } else if ((["11", "12", "13"]).includes(value)) {
+            } else if (([11, 12, 13]).includes(value)) {
                 score += 10;
             } else {
                 score += value;
@@ -305,7 +307,6 @@ AFUNCTION gameOver()
 END AFUNCTION
 
 AFUNCTION playerLastCard()
-    console.log($("#hand").children().length);
     if (game_over) {
         return;
     }
@@ -351,6 +352,10 @@ $(document).ready(function() {
 
     $("button[name=btnKnock]").click(() => {
         playerKnocking();
+    });
+
+    $("button[name=btnNewGame]").click(() => {
+        window.location.reload();
     });
 
     $("button[name=btnLastCard]").attr("disabled", "disabled");
@@ -448,7 +453,7 @@ SCREEN "sevens"
                 END TBODY
             END TABLE
 
-            TEXTAREA "game-info", "",,, "game-info"            
+            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
         END WINDOW
     END WINDOW
     WINDOW "player"
@@ -467,6 +472,9 @@ SCREEN "sevens"
             END BUTTON
             BUTTON "btnKnock", "btn-knocking"
                 PRINT "knocking"
+            END BUTTON
+            BUTTON "btnNewGame", "btn-new-game"
+                PRINT "new game"
             END BUTTON
         END WINDOW
     END WINDOW
