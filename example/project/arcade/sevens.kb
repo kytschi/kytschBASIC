@@ -265,6 +265,15 @@ END AFUNCTION
 AFUNCTION gameOver()
     var score = 0, card_details, value = 0;
 
+    if (typeof(kb_cookie.kb_sevens_scores) == "undefined") {
+        kb_cookie.kb_sevens_scores = {};
+        players.forEach((player) => {
+            kb_cookie.kb_sevens_scores[player] = {
+                "score": 0
+            }
+        });
+    }
+
     game_over = 1;
     gameInfo(event, "I WIN!!!");
 
@@ -285,6 +294,8 @@ AFUNCTION gameOver()
         });
 
         $("#you-score span").html(score);
+
+        kb_cookie.kb_sevens_scores["you"].score = score;
     }
 
     for (var iLoop = 1; iLoop < players.length; iLoop++) {
@@ -303,7 +314,10 @@ AFUNCTION gameOver()
         });
 
         $("#" + players[iLoop] + "-score span").html(score);
+        kb_cookie.kb_sevens_scores[players[iLoop]].score = score;
     }
+
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
 END AFUNCTION
 
 AFUNCTION playerLastCard()
@@ -322,6 +336,12 @@ END AFUNCTION
 JAVASCRIPT
 $(document).ready(function() {
     var played = false;
+    
+    if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
+        for (const [player, value] of Object.entries(kb_cookie.kb_sevens_scores)) {
+            $("#" + player + "-score span").html(value.score);
+        }
+    }
 
     for (iLoop = 1; iLoop <= players.length - 1; iLoop++) {
         turn = iLoop;

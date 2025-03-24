@@ -37,14 +37,14 @@ class Arcade extends Command
 		let output = output . this->jsCookie();
 
 		return output . "<script type=\"text/javascript\">
-			let cookie = Cookies.get(\"kb_HLPR\");
-			if (typeof(cookie) == \"undefined\") {
-				cookie = {display: [0,0]};
+			let kb_cookie = Cookies.get(\"kb_HLPR\");
+			if (typeof(kb_cookie) == \"undefined\") {
+				kb_cookie = {display: [0,0]};
 			} else {
-				cookie = JSON.parse(cookie);
+				kb_cookie = JSON.parse(kb_cookie);
 			}
-			cookie.display = [window.innerWidth, window.innerHeight];
-			Cookies.set(\"kb_HLPR\", JSON.stringify(cookie));
+			kb_cookie.display = [window.innerWidth, window.innerHeight];
+			Cookies.set(\"kb_HLPR\", JSON.stringify(kb_cookie));
 		</script>";
 	}
 
