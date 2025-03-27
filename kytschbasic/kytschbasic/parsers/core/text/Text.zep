@@ -52,24 +52,20 @@ class Text extends Command
 		let value = this->processValue(args);
 		
 		if (isset(args[1])) {
-			let output .= " class='" . this->setArg(args[1]) . "'";
+			let output .= " class=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let output .= " id='" . this->setArg(args[2]) . "'";
+			let output .= " id=" . this->outputArg(args[2]);
 		} else {
-			let output .= " id='" . this->genID("kb-span") . "'";
+			let output .= " id=" . this->outputArg(this->genID("kb-span"));
 		}
 
 		if (isset(args[3])) {
 			let output .= " " . str_replace(
 				"\"",
 				"\\\"",
-				this->clean(
-					args[3],
-					false,
-					in_array(substr(args[3], strlen(args[3]) - 1, 1), this->types) ? true : false
-				)
+				args[3]
 			);
 		}
 		
@@ -99,13 +95,13 @@ class Text extends Command
 		let args = this->args(args);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " class='" . this->setArg(args[0]) . "'";
+			let params .= " class=" . this->outputArg(args[0]);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " id='" . this->setArg(args[1]) . "'";
+			let params .= " id=" . this->outputArg(args[1]);
 		} else {
-			let params .= " id='" . this->genID("kb-span") . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-span"));
 		}
 		
 		return "<?= \"<p" . params . ">\"; ?>";
@@ -163,7 +159,7 @@ class Text extends Command
 			case "VAL":
 				return this->processVal(args);
 			default:
-				return "\"" . this->setArg(args[0]) . "\"";
+				return "\"" . trim(args[0], "\"") . "\"";
 		}
 	}
 
@@ -175,7 +171,7 @@ class Text extends Command
 			throw new \Exception("Invalid ASC");
 		}
 
-		return "ord(\"" . this->setArg(args[0]) . "\")";
+		return "ord(" . this->outputArg(args[0], false, true) . ")";
 	}
 
 	public function processCentre(args)
@@ -188,7 +184,7 @@ class Text extends Command
 			throw new \Exception("Invalid CENTRE");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = args[0];
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -207,7 +203,7 @@ class Text extends Command
 			throw new \Exception("Invalid CHR");
 		}
 
-		return "chr(intval(\"" . this->setArg(args[0], false) . "\"))";
+		return "chr(intval(" . this->outputArg(args[0], false, true) . "))";
 	}
 
 	public function processCount(args)
@@ -229,16 +225,16 @@ class Text extends Command
 			throw new \Exception("Invalid INSTR");
 		}
 				
-		var haystack = "", needle = "";
+		var haystack = "", needle = "\"\"";
 		
-		let haystack = this->setArg(args[0]);
+		let haystack = this->outputArg(args[0], false, true);
 		array_shift(args);
 
 		if (isset(args[0])) {
-			let needle = this->setArg(args[0]);
+			let needle = this->outputArg(args[0], false, true);
 		}
 
-		return "strpos(\"" . haystack . "\", \"" . needle . "\")";
+		return "strpos(" . haystack . ", " . needle . ")";
 	}
 
 	public function processInt(args)
@@ -249,7 +245,7 @@ class Text extends Command
 			throw new \Exception("Invalid INT");
 		}
 
-		return "intval(\"" . this->setArg(args[0], false) . "\")";
+		return "intval(" . this->outputArg(args[0], false, true) . ")";
 	}
 
 	public function processLCase(args)
@@ -260,7 +256,7 @@ class Text extends Command
 			throw new \Exception("Invalid LCASE");
 		}
 		
-		return "strtolower(\"" . this->setArg(args[0]) . "\")";
+		return "strtolower(" . this->outputArg(args[0], false, true) . ")";
 	}
 
 	public function processLeft(args)
@@ -273,7 +269,7 @@ class Text extends Command
 			throw new \Exception("Invalid LEFT");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = args[0];
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -292,7 +288,7 @@ class Text extends Command
 			throw new \Exception("Invalid LEN");
 		}
 
-		return "strlen(\"" . this->setArg(args[0]) . "\")";
+		return "strlen(" . this->outputArg(args[0], false, true) . ")";
 	}
 
 	public function processLSet(args)
@@ -305,7 +301,7 @@ class Text extends Command
 			throw new \Exception("Invalid LSET");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -314,7 +310,7 @@ class Text extends Command
 			}
 		}
 					
-		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(\"" . converted . "\", intval(" . length . "), 'left')";
+		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . converted . ", intval(" . length . "), 'left')";
 	}
 
 	public function processMid(args)
@@ -327,7 +323,7 @@ class Text extends Command
 			throw new \Exception("Invalid MID");
 		}
 					
-		let converted = this->setArg(args[0]);
+		let converted = args[0];
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -348,7 +344,7 @@ class Text extends Command
 
 	public function processReplace(args)
 	{
-		var find = "", replace = "", converted = "";
+		var find = "\"\"", replace = "\"\"", converted = "\"\"";
 
 		let args[0] = trim(str_replace("REPLACE", "", args[0]));
 			
@@ -362,19 +358,19 @@ class Text extends Command
 			throw new \Exception("Invalid REPLACE");
 		}
 		
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			let find = this->setArg(args[0]);
+			let find = this->outputArg(args[0], false, true);
 			array_shift(args);
 		}
 
 		if (isset(args[0])) {
-			let replace = this->setArg(args[0]);
+			let replace = this->outputArg(args[0], false, true);
 		}
 		
-		return "str_replace(\"" . find . "\", \"" . replace . "\", \"" . converted . "\")";
+		return "str_replace(" . find . ", " . replace . ", " . converted . ")";
 	}
 
 	public function processRight(args)
@@ -387,7 +383,7 @@ class Text extends Command
 			throw new \Exception("Invalid RIGHT");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -395,7 +391,7 @@ class Text extends Command
 				let length = intval(args[0]);
 			}
 		}
-		return "substr(\"" . converted . "\", intval(strlen(\"" . converted . "\")) - intval(" . length . "),  intval(" . length . "))";
+		return "substr(" . converted . ", intval(strlen(" . converted . ")) - intval(" . length . "),  intval(" . length . "))";
 	}
 
 	public function processRSet(args)
@@ -408,7 +404,7 @@ class Text extends Command
 			throw new \Exception("Invalid RSET");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -417,7 +413,7 @@ class Text extends Command
 			}
 		}
 					
-		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(\"" . converted . "\", intval(" . length . "))";
+		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . converted . ", intval(" . length . "))";
 	}
 
 	public function processString(args)
@@ -430,7 +426,7 @@ class Text extends Command
 			throw new \Exception("Invalid STRING");
 		}
 					
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -444,7 +440,7 @@ class Text extends Command
 			let length -= 1;
 		}
 
-		return "\"" . value . "\"";
+		return value;
 	}
 
 	public function processStripLead(args)
@@ -457,15 +453,15 @@ class Text extends Command
 			throw new \Exception("Invalid STRIPLEAD");
 		}
 					
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 				
 		if (isset(args[0])) {
-			let value = this->setArg(args[0]);
+			let value = args[0];
 			let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
 		}
 
-		return "ltrim(\"" . converted . "\", " . strip_char . ")";
+		return "ltrim(" . converted . ", " . strip_char . ")";
 	}
 
 	public function processStripTrail(args)
@@ -478,15 +474,15 @@ class Text extends Command
 			throw new \Exception("Invalid STRIPTRAIL");
 		}
 					
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			let value = this->setArg(args[0]);
+			let value = args[0];
 			let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
 		}
 
-		return "rtrim(\"" . converted . "\", " . strip_char . ")";
+		return "rtrim(" . converted . ", " . strip_char . ")";
 	}
 
 	public function processToString(args)
@@ -497,7 +493,7 @@ class Text extends Command
 			throw new \Exception("Invalid STR");
 		}
 
-		return "(string)\"" . trim(this->setArg(args[0], false), "\"") . "\"";
+		return "(string)" . this->outputArg(args[0], false, true);
 	}
 
 	public function processUCase(args)
@@ -508,7 +504,7 @@ class Text extends Command
 			throw new \Exception("Invalid UCASE");
 		}
 
-		return "strtoupper(" . this->setArg(args[0], false) . ")";
+		return "strtoupper(" . this->outputArg(args[0], false, true) . ")";
 	}
 
 	public function processUnLeft(args)
@@ -521,7 +517,7 @@ class Text extends Command
 			throw new \Exception("Invalid UNLEFT");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -529,7 +525,8 @@ class Text extends Command
 				let length = intval(args[0]);
 			}
 		}
-		return "substr(\"" . converted . "\", intval(" . length . ") - 1,  intval(strlen(\"" . converted . "\")))";
+
+		return "substr(" . converted . ", intval(" . length . ") - 1,  intval(strlen(" . converted . ")))";
 	}
 
 	public function processUnRight(args)
@@ -542,7 +539,7 @@ class Text extends Command
 			throw new \Exception("Invalid UNRIGHT");
 		}
 
-		let converted = this->setArg(args[0]);
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
@@ -550,7 +547,7 @@ class Text extends Command
 				let length = intval(args[0]);
 			}
 		}
-		return "substr(\"" . converted . "\", 0,  intval(strlen(\"" . converted . "\")) - intval(" . length . "))";
+		return "substr(" . converted . ", 0,  intval(strlen(" . converted . ")) - intval(" . length . "))";
 	}
 
 	public function processVal(args)
@@ -561,6 +558,6 @@ class Text extends Command
 			throw new \Exception("Invalid VAL");
 		}
 
-		return "floatval(\"" . this->setArg(args[0], true) . "\")";
+		return "floatval(" . this->outputArg(args[0], false, true) . ")";
 	}
 }

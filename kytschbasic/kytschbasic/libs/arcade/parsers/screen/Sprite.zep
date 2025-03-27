@@ -44,17 +44,17 @@ class Sprite extends Command
 		let args = this->args(args);
 
 		if (isset(args[0])) {
-			let params .= " id='<?= \"" . this->setArg(args[0]) . "\"; ?>'";
+			let params .= " id='<?= \"" . args[0] . "\"; ?>'";
 		} else {
 			let params .= " id='" . this->genID("kb-window") . "'";
 		}
 
 		if (isset(args[1])) {
-			let params .= " class='" . this->setArg(args[1]) . "'";
+			let params .= " class=\\\"" . args[1] . "\\\"";
 		}
 
 		if (isset(args[2])) {
-			let params .= " onclick='javascript:" . this->setArg(args[2]) . "(event)'";
+			let params .= " onclick='javascript:" . args[2] . "(event)'";
 		}
 		
 		return "<div" . params . ">";

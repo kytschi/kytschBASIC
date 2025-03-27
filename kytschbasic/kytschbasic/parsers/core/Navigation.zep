@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Navigation
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2024 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -53,25 +53,25 @@ class Navigation extends Command
 		let args = this->args(line);
 				
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " href='" . this->setArg(args[0]) . "'";
+			let params .= " href=" . this->outputArg(args[0]);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " title='" . this->setArg(args[1]) . "'";
+			let params .= " title=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " class='" . this->setArg(args[2]) . "'";
+			let params .= " class=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " target='" . this->setArg(args[3]) . "'";
+			let params .= " target=" . this->outputArg(args[3]);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id='" . this->setArg(args[4]) . "'";
+			let params .= " id=" . this->outputArg(args[4]);
 		} else {
-			let params .= " id='" . this->genID("kb-a") . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-a"));
 		}
 		
 		return "<?= \"<a" . params . ">\"; ?>";
@@ -84,13 +84,13 @@ class Navigation extends Command
 		let args = this->args(line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " class='" . this->setArg(args[0]) . "'";
+			let params .= " class=" . this->outputArg(args[0]);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " id='" . this->setArg(args[1]) . "'";
+			let params .= " id=" . this->outputArg(args[1]);
 		} else {
-			let params .= " id='" . this->genID("kb-span") . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-span"));
 		}
 		
 		return "<?= \"<nav" . params . ">\"; ?>";

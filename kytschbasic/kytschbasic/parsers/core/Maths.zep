@@ -25,104 +25,130 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
-class Maths
+use KytschBASIC\Parsers\Core\Variables;
+
+class Maths extends Variables
 {
-	public static function equation(command)
+	private bracket_checks = ["%)", "$)", "#)", "&)"];
+
+	public function equation(command)
 	{
 		if (substr(command, 0, 1) == "\"" || command == "" || command === null) {
 			return command;
 		}
 
-		var splits, val;
+		var splits, val, cleaned, check;
 		
 		let splits = preg_split("/\*|\+|\<-|\-|\>=|\>|\<=|\<|\==|\//", command, 0, 2);
-		
+				
 		if (count(splits) == 1) {
 			return command;
 		}
 		
-		for val in splits {
-			if (!is_numeric(val) && substr(val, 0, 1) != "$") {
-				let command = str_replace(val, "$" . val, command);
+		for val in splits {			
+			if (!is_numeric(val)) {
+				if (in_array(substr(val, strlen(val) - 2, 2), this->bracket_checks)) {
+					let val = rtrim(val, ")");
+				}
+
+				if (in_array(substr(val, strlen(val) - 1, 1), this->types)) {
+					let cleaned = str_replace(this->types, "", val);
+					let command = str_replace(val, "$" . cleaned, command);
+				} else {
+					for check in this->array_types {
+						if (strpos(val, check) !== false) {
+							let cleaned = str_replace(this->array_types, "[", val);
+							if (substr(cleaned, "))") !== false) {
+								let cleaned = rtrim(cleaned, "))") . "])";
+							} else {
+								let cleaned = rtrim(cleaned, ")") . "]";
+							}
+							let command = str_replace(val, "$" . cleaned, command);
+							break;
+						}
+					}
+				}
 			}
 		}
 
 		return command;
 	}
 
-	public static function parse(command)
+	public function parse(string command, string args)
 	{
 		if (substr(command, 0, 1) == "\"") {
 			return null;
 		}
 
-		var args;
-		let args = explode(" ", command);
+		var splits = [];
+		
+		let splits = explode(" ", command);
+		
+		let command = (string)splits[0];
+		array_shift(splits);
 
-		let command = args[0];
-		array_shift(args);
-		let args = implode(" ", args);
+		let splits = implode(" ", splits);
 		
 		if (command == "ABS") {
-			return abs(args);
+			return abs(splits);
 		} elseif (command == "ACOS") {
-			return acos(floatval(args));
+			return acos(floatval(splits));
 		} elseif (command == "ASIN") {
-			return asin(floatval(args));
+			return asin(floatval(splits));
 		} elseif (command == "ATAN") {
-			return atan(floatval(args));
+			return atan(floatval(splits));
 		} elseif (command == "HCOS") {
-			return cosh(floatval(args));
+			return cosh(floatval(splits));
 		} elseif (command == "HSIN") {
-			return sinh(floatval(args));
+			return sinh(floatval(splits));
 		} elseif (command == "HTAN") {
-			return tanh(floatval(args));
+			return tanh(floatval(splits));
 		} elseif (command == "COS") {
-			return cos(floatval(args));
+			return cos(floatval(splits));
 		} elseif (command == "SIN") {
-			return sin(floatval(args));
+			return sin(floatval(splits));
 		} elseif (command == "TAN") {
-			return tan(floatval(args));
+			return tan(floatval(splits));
 		} elseif (command == "EXP") {
-			return exp(floatval(args));
+			return exp(floatval(splits));
 		} elseif (command == "SQR") {
-			return sqrt(floatval(args));
+			return sqrt(floatval(splits));
 		} elseif (command == "LOG") {
-			let args = explode(",", args);
-			if (count(args) > 1) {
-				return log(floatval(args[0]), floatval(args[1]));
+			let splits = explode(",", splits);
+			if (count(splits) > 1) {
+				return log(floatval(splits[0]), floatval(splits[1]));
 			} else {
-				return log(floatval(args[0]));
+				return log(floatval(splits[0]));
 			}
 		} elseif (command == "LOG10") {
-			return log10(args);
+			return log10(splits);
 		} elseif (command == "HEX") {
-			return "\"" . str_pad(dechex(intval(args)), 8, "0", 0) . "\"";
+			return "\"" . str_pad(dechex(intval(splits)), 8, "0", 0) . "\"";
 		} elseif (command == "BIN") {
-			return "\"" . str_pad(decbin(intval(args)), 32, "0", 0) . "\"";
+			return "\"" . str_pad(decbin(intval(splits)), 32, "0", 0) . "\"";
 		} elseif (command == "FRAC") {
-			return fmod(args, 1);
+			return fmod(splits, 1);
 		} elseif (command == "RND") {
-			if (empty(args)) {
+			if (empty(splits)) {
 				return rand(1, 10) / 10;
 			} else {
-				let args = explode(",", args);
-				if (count(args) == 1) {
-					return rand(1, intval(args[0]));
+				let splits = explode(",", splits);
+				if (count(splits) == 1) {
+					return rand(1, intval(splits[0]));
 				} else {
-					return rand(intval(args[0]), intval(args[1]));
+					return rand(intval(splits[0]), intval(splits[1]));
 				}
 			}
 		} elseif (command == "SGN") {
-			let args = intval(args);
-			if (args > 0) {
+			let splits = intval(splits);
+			if (splits > 0) {
 				return 1;
-			} elseif (args < 0) {
+			} elseif (splits < 0) {
 				return -1;
 			} else {
 				return 0;
 			}
-		} 
+		}
 
 		return null;
 	}

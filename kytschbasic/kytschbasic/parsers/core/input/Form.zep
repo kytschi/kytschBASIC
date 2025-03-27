@@ -53,9 +53,9 @@ class Form extends Command
 		let args = this->args(line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " id='" . this->setArg(args[0]) . "'";
+			let params .= " id=" . this->outputArg(args[0]);
 		} else {
-			let params .= " id='" . this->genID("kb-form") . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-form"));
 		}
 
 		var method = "GET";
@@ -64,14 +64,14 @@ class Form extends Command
 				let method = strtoupper(args[1]);
 			}
 		}
-		let params .= " method='" . method . "'";
+		let params .= " method=" . this->outputArg(method);
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " action='" . this->setArg(args[2]) . "'";
+			let params .= " action=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " class='" . this->setArg(args[3]) . "'";
+			let params .= " class=" . this->outputArg(args[3]);
 		}
 		
 		return "<?= \"<form" . params . ">\"; ?>";
@@ -84,38 +84,38 @@ class Form extends Command
 		let args = this->args(line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " name='" . this->setArg(args[0]) . "'";
+			let params .= " name=" . this->outputArg(args[0]);
 		} else {
-			let params .= " name='" . this->genID("kb-form-input") . "'";
+			let params .= " name=" . this->outputArg(this->genID("kb-form-input"));
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= "value='" . this->setArg(args[1]) . "'";
+			let params .= "value=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " class='" . this->setArg(args[2]) . "'";
+			let params .= " class=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " placeholder='" . this->setArg(args[3]) . "'";
+			let params .= " placeholder=" . this->outputArg(args[3]);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id='" . this->setArg(args[4]) . "'";
+			let params .= " id=" . this->outputArg(args[4]);
 		} else {
-			let params .= " id='" . this->genID("kb-form-input") . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-form-input"));
 		}
 
 		if (isset(args[5]) && !empty(args[5])) {
-			let params .= " required='required'";
+			let params .= " required=\\\"required\\\"";
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let params .= " " . this->setArg(args[6]);
+			let params .= " " . args[6];
 		}
 		
-		return "<?= \"<input type='" . type . "'" . params . ">\"; ?>";
+		return "<?= \"<input type=\\\"" . type . "\\\"" . params . ">\"; ?>";
 	}
 
 	private function processTextarea(string line, string type = "text")
@@ -125,35 +125,35 @@ class Form extends Command
 		let args = this->args(line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " name='" . this->setArg(args[0]) . "'";
+			let params .= " name=" . this->outputArg(args[0]);
 		} else {
-			let params .= " name='" . this->genID("kb-form-input") . "'";
+			let params .= " name=" . this->outputArg(this->genID("kb-form-input"));
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let value = this->setArg(args[1]);
+			let value = args[1];
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " class='" . this->setArg(args[2]) . "'";
+			let params .= " class=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " placeholder='" . this->setArg(args[3]) . "'";
+			let params .= " placeholder=" . this->outputArg(args[3]);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id='" . this->setArg(args[4]) . "'";
+			let params .= " id=" . this->outputArg(args[4]);
 		} else {
-			let params .= " id='" . this->genID("kb-form-input") . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-form-input"));
 		}
 
 		if (isset(args[5]) && !empty(args[5])) {
-			let params .= " required='required'";
+			let params .= " required=\\\"required\\\"";
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let params .= " " . this->setArg(args[6]);
+			let params .= " " . args[6];
 		}
 		
 		return "<?= \"<textarea" . params . ">" . value . "</textarea>\"; ?>";

@@ -80,7 +80,7 @@ class Database extends Command
 		for arg in args {
 			let splits = explode("=", arg);
 			if (!empty(splits[0]) && !empty(splits[0])) {
-				let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = \"" . this->setArg(trim(splits[1])) . "\";";
+				let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = \"" . splits[1] . "\";";
 			}
 		}
 		
@@ -99,25 +99,25 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 	private function parseFetch(args)
 	{
 		let args = this->args(args);
-		return this->parseExecute() . "\n<?php " . this->clean(args[0], false) . " = $KBDBSTATEMENT->fetchAll(); ?>";
+		return this->parseExecute() . "\n<?php " . args[0] . " = $KBDBSTATEMENT->fetchAll(); ?>";
 	}
 
 	private function parseJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" JOIN " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" JOIN " . args[0] . "\"; ?>";
 	}
 
 	private function parseLeftJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" LEFT JOIN " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" LEFT JOIN " . args[0] . "\"; ?>";
 	}
 
 	private function parseLimit(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBLIMIT = \" LIMIT " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBLIMIT = \" LIMIT " . args[0] . "\"; ?>";
 	}
 
 	private function parseOpen(args)
@@ -126,7 +126,7 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 		let configs = constant("CONFIG");
 
 		let args = this->args(args);
-		let config = this->setArg(args[0]);
+		let config = args[0];
 		
 		if (empty(configs["database"])) {
 			throw new DatabaseException("No database configuration found");
@@ -153,53 +153,62 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 		if (empty(config->dbname)) {
 			throw new DatabaseException("No database defined in the config");
 		}
-		let dsn .= "dbname=" . config->dbname . ",";
+		let dsn .= "dbname=" . config->dbname . ";";
 				
 		if (!empty(config->host)) {
-			let dsn .= "host=" . config->host . ",";
+			let dsn .= "host=" . config->host . ";";
 		} else {
 			let dsn .= "host=127.0.0.1;";
 		}
 
-		return "<?php $KBDBBIND = []; $KBDBSELECT = ''; $KBDBUPDATE = ''; $KBDBTABLE = ''; $KBDBWHERE = ''; $KBDBJOIN = ''; $KBDBSORT = ''; $KBDBLIMIT = ''; $KBDBSET = '';
-			$KBDBCONN = new \\PDO('" . dsn . "', '" .
+		return "<?php\n" .
+			"$KBDBBIND = [];\n" .
+			"$KBDBSELECT = '';\n" .
+			"$KBDBUPDATE = '';\n" .
+			"$KBDBTABLE = '';\n" .
+			"$KBDBWHERE = '';\n" .
+			"$KBDBJOIN = '';\n" .
+			"$KBDBSORT = '';\n" .
+			"$KBDBLIMIT = '';\n" .
+			"$KBDBSET = '';\n" .
+			"$KBDBCONN = new \\PDO('" . dsn . "', '" .
 			(!empty(config->user) ? config->user : "") . "', '" .
-			(!empty(config->password) ? config->password : "") . "');?>";
+			(!empty(config->password) ? config->password : "") . "');\n?>";
 	}
 
 	private function parseRead(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBTABLE = \"" . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBTABLE = \"" . args[0] . "\"; ?>";
 	}
 
 	private function parseRightJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" RIGHT JOIN " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" RIGHT JOIN " . args[0] . "\"; ?>";
 	}
 
 	private function parseSelect(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBSELECT = \"SELECT " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBSELECT = \"SELECT " . args[0] . "\"; ?>";
 	}
 
 	private function parseSet(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET " . args[0] . "\"; ?>";
 	}
 
 	private function parseSort(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBSORT = \" ORDER BY " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBSORT = \" ORDER BY " . args[0] . "\"; ?>";
 	}
 
 	private function parseWhere(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBWHERE = \" WHERE " . this->setArg(args[0]) . "\"; ?>";
+		return "<?php $KBDBWHERE = \" WHERE " . args[0] . "\"; ?>";
 	}
 }

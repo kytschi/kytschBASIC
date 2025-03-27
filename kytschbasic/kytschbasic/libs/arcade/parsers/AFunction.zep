@@ -50,15 +50,7 @@ class AFunction extends Command
 			let output .= "function " . str . "(event, ";
 
 			let args = this->args(array_shift(splits[1]));
-
-			for str in args {
-				let output .= this->clean(
-					str,
-					false, 
-					in_array(substr(str, strlen(str) - 1, 1), this->types) ? true : false
-				) . ", ";
-			}
-			let output = rtrim(output, ", ") . ") {\n";
+			let output .= implode(", ", args) . ") {\n";
 		} else {
 			throw new Exception("Invalid AFUNCTION");
 		}

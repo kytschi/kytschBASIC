@@ -13,12 +13,24 @@ END HEAD
 BODY
 DIM suits$=("diamonds", "clubs","hearts","spades")
 DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
+DIM names$=("You", "Ernest", "Laura", "Lenny", "Brian", "Helen", "Angie")
 
 DIM cards$=()
-DIM player$=()
+DIM hands$=()
 DIM comp1$=()
 
-DEF end%=(52/3)-1
+DEF no_players%=3
+
+IFNTE _GET("np") THEN
+    LET no_players%=_GET("np")
+END IF
+
+IF no_players%<3 THEN
+	LET no_players%=3
+END IF
+
+DEF end%=(52/no_players%)-1
+LET no_players%=no_players%-1
 
 FOR suit$ IN suits$
     FOR face$ IN faces$
@@ -28,20 +40,23 @@ NEXT
 
 SHUFFLE cards$
 
-FOR iLoop%=0 TO end%
-    LET player$()=cards$(0)
-    SHIFT cards$
+FOR player%=0 TO no_players%
+    DIM hand$=()
+    FOR iLoop%=0 TO end%
+        LET hand$()=cards$(0)
+        SHIFT cards$
+    NEXT
+    LET hands$(player%)=hand$
 NEXT
 
-NATSORT player$
+NATSORT hands$(0)
 
-FOR iLoop%=0 TO end%
-    LET comp1$()=cards$(0)
-    SHIFT cards$
-NEXT
+ADIM hands$=hands$
+ADIM names$=names$
 
 ADIM computer_1$=comp1$
 ADIM computer_2$=cards$
+
 ADIM diamonds%=(7)
 ADIM clubs%=(7)
 ADIM spades%=(7)
@@ -49,9 +64,9 @@ ADIM hearts%=(7)
 ADEF selected_card$=""
 ADEF deck_suit$=""
 ADEF card_suit$=""
-ADIM players$=("you","computer_1","computer_2")
 ADEF turn%=0
 ADEF game_over%=0
+ADEF start%=1
 
 AFUNCTION computerPlay()
     if (game_over) {
@@ -61,9 +76,9 @@ AFUNCTION computerPlay()
     var value = "";
     var played = false;
 
-    window[players[turn]].sort(() => Math.random() - .5);
+    window[hands[turn]].sort(() => Math.random() - .5);
 
-    window[players[turn]].forEach((card, index) => {
+    window[hands[turn]].forEach((card, index) => {
         if (!played) {
             selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
             let card_details = selected_card.split("_");
@@ -72,10 +87,10 @@ AFUNCTION computerPlay()
 
             if (canPlay(event, value)) {
                 playCard(event, value);
-                window[players[turn]].splice(index, 1);
-                if (window[players[turn]].length == 1) {
+                window[hands[turn]].splice(index, 1);
+                if (window[hands[turn]].length == 1) {
                     gameInfo(event, "LAST CARD");
-                } else if (window[players[turn]].length == 0) {
+                } else if (window[hands[turn]].length == 0) {
                     gameOver(event);
                 }
                 played = true;
@@ -95,16 +110,16 @@ AFUNCTION updateTurn()
         return;
     }
 
-    $("#player-" + players[turn]).removeClass("player-turn");
+    $("#player-" + hands[turn]).removeClass("player-turn");
 
     turn += 1;
-    if (turn == players.length) {
+    if (turn == hands.length) {
         turn = 0;
     }
     
-    $("#player-" + players[turn]).addClass("player-turn");
+    $("#player-" + names[turn]).addClass("player-turn");
 
-    if (players[turn] != "you") {
+    if (turn != 0) {
         computerPlay();
     }
 END AFUNCTION
@@ -113,6 +128,13 @@ AFUNCTION updateDeck(cards, value, check = false)
     let status = false;
 
     if (window[cards].length == 1) {
+        if (value != 7 && deck_suit != "diamonds" && start == 1) {
+            gameInfo(event, "Start with the 7 of diamonds", true);
+            return;
+        }
+
+        start = 0;
+
         if (window[cards][0] == value) {
             if (!check) {
                 $("button[name=btnLastCard]").removeAttr("disabled");
@@ -186,7 +208,7 @@ AFUNCTION playerKnocking()
     if (valid == true) {
         gameInfo(event, "KNOCKING");
     } else {
-        gameInfo(event, "INVALID KNOCKING!" + (!no_update ? " Miss a turn" : ""));
+        gameInfo(event, "INVALID KNOCKING!" + (!no_update ? " Miss a turn" : ""), true);
     }
 
     if (!no_update) {
@@ -197,7 +219,7 @@ END AFUNCTION
 AFUNCTION playCard(value)
     $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
 
-    if (players[turn] == "you") {
+    if (turn == 0) {
         $("#" + deck_suit).append($("#" + selected_card).prop("outerHTML"));
     } else {
         $("#" + deck_suit).append('<div id="' + selected_card + '" class="card" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
@@ -223,11 +245,11 @@ AFUNCTION playCard(value)
 
     gameInfo(event, value + " of " + deck_suit);
 
-    if (players[turn] == "you") {
+    if (turn == 0) {
         $("#hand #" + selected_card).remove();
     }
 
-    $("#" + players[turn] + "-cards span").html(parseInt($("#" + players[turn] + "-cards span").html()) - 1);
+    $("#" + names[turn] + "-cards span").html(parseInt($("#" + names[turn] + "-cards span").html()) - 1);
 
     selected_card = "";
 END AFUNCTION
@@ -243,7 +265,7 @@ AFUNCTION onDeckClick()
         let value = parseInt(selected_card.split("_")[1]);
 
         if (!canPlay(event, value)) {
-            gameInfo(event, "INVALID PLAY");
+            gameInfo(event, "INVALID PLAY", true);
             return;
         }
 
@@ -255,12 +277,12 @@ AFUNCTION onDeckClick()
         }
         updateTurn();
     } else {
-        gameInfo(event, "INVALID PLAY");
+        gameInfo(event, "INVALID PLAY", true);
     }
 END AFUNCTION
 
 AFUNCTION gameInfo(text, error = false)
-    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : players[turn]) + ": " + text + "\n");
+    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
     $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
 
@@ -269,7 +291,7 @@ AFUNCTION gameOver()
 
     if (typeof(kb_cookie.kb_sevens_scores) == "undefined") {
         kb_cookie.kb_sevens_scores = {};
-        players.forEach((player) => {
+        names.forEach((player) => {
             kb_cookie.kb_sevens_scores[player] = {
                 "score": 0
             }
@@ -282,7 +304,7 @@ AFUNCTION gameOver()
     let leftOver = $("#hand").children();
 
     if (leftOver.length != 0) {
-        score = parseInt($("#you-score span").html());
+        score = parseInt($("#player-0-score span").html());
         leftOver.each((index, card) => {
             card_details = $(card).attr("id").split("_");
             value = parseInt(card_details[1]);
@@ -295,15 +317,15 @@ AFUNCTION gameOver()
             }
         });
 
-        $("#you-score span").html(score);
+        $("#player-0-score span").html(score);
 
-        kb_cookie.kb_sevens_scores["you"].score = score;
+        kb_cookie.kb_sevens_scores[0].score = score;
     }
 
-    for (var iLoop = 1; iLoop < players.length; iLoop++) {
-        score = parseInt($("#" + players[iLoop] + "-score span").html());
+    for (var iLoop = 1; iLoop < names.length; iLoop++) {
+        score = parseInt($("#" + names[iLoop] + "-score span").html());
 
-        window[players[iLoop]].forEach((card, index) => {
+        window[hands[iLoop]].forEach((card, index) => {
             card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
             value = parseInt(card_details[1]);
             if (value == 1) {
@@ -315,8 +337,8 @@ AFUNCTION gameOver()
             }
         });
 
-        $("#" + players[iLoop] + "-score span").html(score);
-        kb_cookie.kb_sevens_scores[players[iLoop]].score = score;
+        $("#player-" + iLoop + "-score span").html(score);
+        kb_cookie.kb_sevens_scores[iLoop].score = score;
     }
 
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
@@ -332,9 +354,9 @@ $(document).ready(function() {
         }
     }
 
-    for (iLoop = 1; iLoop <= players.length - 1; iLoop++) {
+    for (iLoop = 1; iLoop <= hands.length - 1; iLoop++) {
         turn = iLoop;
-        window[players[turn]].forEach((card, index) => {
+        window[hands[turn]].forEach((card, index) => {
             if (!played) {
                 selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
                 let card_details = selected_card.split("_");
@@ -343,7 +365,7 @@ $(document).ready(function() {
                 if (deck_suit == "diamonds" && value == "7") {
                     played = true;
                     playCard(event, value);
-                    window[players[turn]].splice(index, 1);
+                    window[hands[turn]].splice(index, 1);
                     updateDeck(event, "diamonds", value);
                     updateTurn();
                 }
@@ -412,48 +434,23 @@ SCREEN "sevens"
                     END TROW
                 END THEAD
                 TBODY
-                    TROW ,"score-player"
-                        TCELL ,"player-turn",,"player-you"
-                            PRINT "&nbsp;"
-                        END TCELL
-                        TCELL
-                            PRINT "You"
-                        END TCELL
-                        TCELL ,"text-center",,"you-cards"
-                            PRINT COUNT player$
-                        END TCELL
-                        TCELL ,"text-center",,"you-score"
-                            PRINT "0"
-                        END TCELL
-                    END TROW
-                    TROW ,"score-computer-1"
-                        TCELL ,,,"player-computer_1"
-                            PRINT "&nbsp;"
-                        END TCELL
-                        TCELL
-                            PRINT "Computer One"
-                        END TCELL
-                        TCELL ,"text-center",,"computer_1-cards"
-                            PRINT COUNT comp1$
-                        END TCELL
-                        TCELL ,"text-center",,"computer_1-score"
-                            PRINT "0"
-                        END TCELL
-                    END TROW
-                    TROW ,"score-computer-2"
-                        TCELL ,,,"player-computer_2"
-                            PRINT "&nbsp;"
-                        END TCELL
-                        TCELL
-                            PRINT "Computer Two"
-                        END TCELL
-                        TCELL ,"text-center",,"computer_2-cards"
-                            PRINT COUNT cards$
-                        END TCELL
-                        TCELL ,"text-center",,"computer_2-score"
-                            PRINT "0"
-                        END TCELL
-                    END TROW
+                    FOR iLoop%=0 TO no_players%
+                        DEF id$="score-"+iLoop%
+                        TROW ,id$
+                            TCELL ,,,"player-" + iLoop%
+                                PRINT "&nbsp;"
+                            END TCELL
+                            TCELL
+                                PRINT "You"
+                            END TCELL
+                            TCELL ,"text-center",,"player-" + iLoop% + "-cards"
+                                PRINT "0"
+                            END TCELL
+                            TCELL ,"text-center",,"player-" + iLoop% + "-score"
+                                PRINT "0"
+                            END TCELL
+                        END TROW
+                    NEXT
                 END TBODY
             END TABLE
 

@@ -44,7 +44,7 @@ class Exception extends \Exception
         var message;
 
         let message = this->gfx(this->getCode()) . 
-            "<p>&nbsp;&nbsp;<strong>" . this->getMessage() . "</strong><br/>" . 
+            "<p>&nbsp;&nbsp;<pre style='padding-left:10px'>" . this->getMessage() . "</pre><br/>" . 
             "&nbsp;&nbsp;<small><muted>kytschBASIC " . constant("VERSION") . "</muted></small></p>";
 
         return message;

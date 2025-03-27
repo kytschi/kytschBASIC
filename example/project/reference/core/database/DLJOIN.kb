@@ -43,8 +43,8 @@ END DATA
 
 REM Loop through the results stored in menu& variable.
 FOR item& IN menu&
-	LINK item&["url"], item&["tooltip"]
-		PRINT item&["name"]			
+	LINK item&("url"), item&("tooltip")
+		PRINT item&("name")			
 	END LINK
 NEXT
 				END CPRINT
@@ -77,8 +77,8 @@ END DATA
 
 REM Loop through the results stored in menu& variable.
 FOR item& IN menu&
-	LINK item&["url"], item&["tooltip"]
-		PRINT item&["name"]			
+	LINK item&("url"), item&("tooltip")
+		PRINT item&("name")			
 	END LINK
 NEXT
 				END DIV

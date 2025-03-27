@@ -23,7 +23,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DIM strings$=["kytsch", "BASIC"]
+DIM strings$=("kytsch", "BASIC")
 DEF count%=COUNT strings$
 PRINT count%
 				END CPRINT
@@ -31,7 +31,7 @@ PRINT count%
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					DIM strings$=["kytsch", "BASIC"]
+					DIM strings$=("kytsch", "BASIC")
 					DEF count%=COUNT strings$
 					PRINT count%
 				END DIV

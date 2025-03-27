@@ -51,24 +51,24 @@ class Button extends Command
 		
 		let args = this->args(args);
 
-		let output = "<?= \"<button type='" . type . "'";
+		let output = "<?= \"<button type=" . this->outputArg(type);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let output .= " name='" . this->setArg(args[0]) . "'";
+			let output .= " name=" . this->outputArg(args[0]);
 		} else {
-			let output .= " name='" . this->genID("kb-btn-submit") . "'";
+			let output .= " name=" . this->outputArg(this->genID("kb-btn-submit"));
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " class='" . this->setArg(args[1]) . "'";
+			let output .= " class=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let output .= " id='" . this->setArg(args[2]) . "'";
+			let output .= " id=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let output .= "><span>" . this->setArg(args[3]) . "</span></button>";
+			let output .= "><span>" . trim(this->outputArg(args[3], false), "\"") . "</span></button>";
 		} else {
 			let output .= ">";
 		}

@@ -23,7 +23,7 @@ FOR iLoop%=1 TO 10
 	PRINT ", "
 NEXT
 LINE BREAK
-DIM test$=["kytschBASIC","is","awesome!"]
+DIM test$=("kytschBASIC","is","awesome!")
 FOR val$ IN test$
 	PRINT val$
 	PRINT "&nbsp;"
@@ -38,7 +38,7 @@ NEXT
 						PRINT ", "
 					NEXT
 					LINE BREAK
-					DIM test$=["kytschBASIC","is","awesome!"]
+					DIM test$=("kytschBASIC","is","awesome!")
 					FOR val$ IN test$
 						PRINT val$
 						PRINT "&nbsp;"

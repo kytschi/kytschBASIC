@@ -29,7 +29,7 @@ SWRITE
 					PRINT "Name"
 				END TCELL
 				TCELL ,, 2
-					TEXTINPUT "input_test", "form-input", "Enter your name"
+					TEXTINPUT "input_test",,"form-input", "Enter your name"
 				END TCELL
 			END TROW
 			TROW
@@ -37,7 +37,7 @@ SWRITE
 					WHITESPACE
 				END TCELL
 				TCELL
-					BUTTON "btn_test",,, "button"
+					BUTTON "btn_test",,,"button"
 				END TCELL
 				TCELL
 					BUTTON "btn_test2"
@@ -62,7 +62,7 @@ END SWRITE
 										PRINT "Name"
 									END TCELL
 									TCELL ,, 2
-										TEXTINPUT "input_test", "form-input", "Enter your name"
+										TEXTINPUT "input_test",,"form-input", "Enter your name"
 									END TCELL
 								END TROW
 								TROW

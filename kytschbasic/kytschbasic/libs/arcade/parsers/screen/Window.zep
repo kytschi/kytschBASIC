@@ -44,13 +44,13 @@ class Window extends Command
 		let args = this->args(args);
 
 		if (isset(args[0])) {
-			let params .= " id='" . this->setArg(args[0]) . "'";
+			let params .= " id=\\\"" . args[0] . "\\\"";
 		} else {
-			let params .= " id='" . this->genID("kb-window") . "'";
+			let params .= " id=\\\"" . this->genID("kb-window") . "\\\"";
 		}
 
 		if (isset(args[1])) {
-			let params .= " class='" . this->setArg(args[1]) . "'";
+			let params .= " class=\\\"" . this->setArg(args[1]) . "\\\"";
 		}
 		
 		return "<div" . params . ">";

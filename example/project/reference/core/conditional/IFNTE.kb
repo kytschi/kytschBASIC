@@ -18,10 +18,10 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-IFNTE _GET["input_test"] THEN
+IFNTE _GET("input_test") THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT _GET["input_test"]
+	PRINT _GET("input_test")
 END IF
 				END CPRINT
 				HEADING 4

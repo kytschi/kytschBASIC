@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Layout
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2
  *
- * Copyright 2024 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -65,24 +65,20 @@ class Layout extends Command
 		let args = this->args(line);
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " class='" . this->setArg(args[0]) . "'";
+			let params .= " class=" . this->outputArg(args[0]);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " id='" . this->setArg(args[1]) . "'";
+			let params .= " id=" . this->outputArg(args[1]);
 		} else {
-			let params .= " id='" . this->genID("kb-" . tag) . "'";
+			let params .= " id=" . this->outputArg(this->genID("kb-" . tag));
 		}
 
 		if (isset(args[2])) {
 			let params .= " " . str_replace(
 				"\"",
 				"\\\"",
-				this->clean(
-					args[2],
-					false,
-					in_array(substr(args[2], strlen(args[2]) - 1, 1), this->types) ? true : false
-				)
+				args[2]				
 			);
 		}
 		

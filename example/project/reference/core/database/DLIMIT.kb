@@ -44,9 +44,9 @@ END DATA
 REM Loop through the results stored in menu& variable.
 FOR item& IN menu#
 	SWRITE
-		PRINT item&["id"]
+		PRINT item&("id")
 		LINE BREAK
-		PRINT item&["name"]
+		PRINT item&("name")
 	END SWRITE
 NEXT
 				END CPRINT
@@ -80,9 +80,9 @@ END DATA
 REM Loop through the results stored in menu& variable.
 FOR item& IN menu#
 	SWRITE
-		PRINT item&["id"]
+		PRINT item&("id")
 		LINE BREAK
-		PRINT item&["name"]
+		PRINT item&("name")
 	END SWRITE
 NEXT
 				END DIV

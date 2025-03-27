@@ -20,13 +20,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-IFNTE _GET["input_test"] THEN
+IFNTE _GET("input_test") THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT _GET["input_test"]
+	PRINT _GET("input_test")
 END IF
 FORM "form_test"
-	SWRITE
+	DIV
 		LINE BREAK
 		TABLE "table-border"
 			TBODY
@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL ,, 2
-						TEXTINPUT "input_test", "form-input", "Enter your name"
+						TEXTINPUT "input_test",,"form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -53,20 +53,20 @@ FORM "form_test"
 				END TROW
 			END TBODY
 		END TABLE
-	END SWRITE
+	END DIV
 END FORM
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET["input_test"] THEN
+IFNTE _GET("input_test") THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT _GET["input_test"]
+	PRINT _GET("input_test")
 END IF
 FORM "form_test"
-	SWRITE
+	DIV
 		LINE BREAK
 		TABLE "table-border"
 			TBODY
@@ -75,7 +75,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL ,, 2
-						TEXTINPUT "input_test", "form-input", "Enter your name"
+						TEXTINPUT "input_test",,"form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -83,7 +83,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test",,, "submit"
+						BUTTON SUBMIT "btn_test",,,"submit"
 					END TCELL
 					TCELL
 						BUTTON SUBMIT "btn_test"
@@ -93,7 +93,7 @@ FORM "form_test"
 				END TROW
 			END TBODY
 		END TABLE
-	END SWRITE
+	END DIV
 END FORM
 				END DIV
 				HEADING 4

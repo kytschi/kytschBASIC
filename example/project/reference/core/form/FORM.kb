@@ -20,10 +20,10 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-IFNTE _GET["input_test"] THEN
+IFNTE _GET("input_test") THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT _GET["input_test"]
+	PRINT _GET("input_test")
 END IF
 FORM "form_test"
 	SWRITE
@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						TEXTINPUT "input_test", "form-input", "Enter your name"
+						TEXTINPUT "input_test",,"form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
@@ -55,10 +55,10 @@ END FORM
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET["input_test"] THEN
+IFNTE _GET("input_test") THEN
 	PRINT "You submitted this,"
 	LINE BREAK
-	PRINT _GET["input_test"]
+	PRINT _GET("input_test")
 END IF
 FORM "form_test"
 	SWRITE
@@ -70,7 +70,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						TEXTINPUT "input_test", "form-input", "Enter your name"
+						TEXTINPUT "input_test",,"form-input", "Enter your name"
 					END TCELL
 				END TROW
 				TROW
