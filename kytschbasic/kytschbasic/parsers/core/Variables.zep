@@ -57,7 +57,9 @@ class Variables
 
 	public function args(string line)
 	{
-		var args = [], arg, vars, str, cleaned, splits;
+		var args = [], arg, vars, str, cleaned, splits, text, value;
+
+		let text = new Text();
 		
 		if (empty(line)) {
 			return [];
@@ -83,26 +85,33 @@ class Variables
 
 				for str in vars {
 					let str = trim(str);
-
-					let cleaned .= trim(this->clean(
-						str,
-						this->isVariable(str),
-						this->isVariable(str),
-						[str]
-					), "\"");
+					let value = text->processValue(str);
+					if (value != null) {
+						let cleaned .= value . " . ";
+					} else {
+						let cleaned .= this->clean(
+							str,
+							this->isVariable(str),
+							[str]
+						) . " . ";
+					}
 				}
 
-				let args[] = cleaned;
+				let args[] = rtrim(cleaned, " . ");
 			} else {				
 				if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
 					let args[] = arg;	
 				} else {
-					let args[] = this->clean(
-						arg,
-						this->isVariable(arg),
-						this->isVariable(arg),
-						[arg]
-					);
+					let value = text->processValue(arg);
+					if (value != null) {
+						let args[] = value;
+					} else {
+						let args[] = this->clean(
+							arg,
+							this->isVariable(arg),
+							[arg]
+						);
+					}
 				}
 			}
 		}
@@ -110,9 +119,9 @@ class Variables
 		return args;
 	}
 
-	public function clean(string line, bool inline_string = true, bool variable = true, args = null)
+	public function clean(string line, bool inline_string = true, args = null)
 	{
-		var arg, maths = null, maths_controller;
+		var arg, value = null, maths_controller;
 
 		let maths_controller = new Maths();
 
@@ -125,36 +134,35 @@ class Variables
 		for arg in args {
 			let arg = trim(arg);
 
-			let maths = maths_controller->parse(arg, "");
-			if (maths !== null) {
-				let line .= maths;
+			let value = maths_controller->processValue(arg);
+			if (value !== null) {
+				let line .= value;
 			} else {
-				let maths = Display::parse(arg);
+				let value = Display::parse(arg);
 
-				if (maths !== null) {
-					let line .= maths;
+				if (value !== null) {
+					let line .= value;
 				} else {
-					var form;
-					for form in this->form_variables {
-						if (strpos(arg, form) !== false) {
-							let arg = this->cleanArray(arg);
-							let variable = true;
-							break;
-						}
+					if (this->isFormVariable(arg)) {
+						let inline_string = false;
+						let arg = "$" . arg;
 					}
 
 					if (substr(arg, strlen(arg) - 1, 1) == ")") {
 						let arg = str_replace("(", "[", str_replace(")", "]", arg));
 					}
 					
-					let line .= (inline_string ? "{" : "") .
-						(variable ? "$" . str_replace(this->types, "", arg) : arg) .
-						(inline_string ? "}" : "");
+					let line .= inline_string ? this->outputArg("{$" . str_replace(this->types, "", arg) . "}", false) : arg;
 				}
 			}
 		}
 		
-		return (maths !== null) ? maths_controller->equation(line) : line;
+		return (value !== null) ? maths_controller->equation(line) : line;
+	}
+
+	public function cleanArg(string command, arg)
+	{
+		return rtrim(trim(str_replace(command . "(", "", arg)), ")");
 	}
 
 	private function cleanArray(arg)
@@ -218,25 +226,33 @@ class Variables
 		} elseif (command == "SHIFT") {
 			return this->arrayMod(args, false);
 		} elseif (command == "DUMP") {
-			return "<?php var_dump(" .
-				this->clean(
-					args,
-					this->isVariable(args) ? false : true,
-					this->isVariable(args)
-				) . "); ?>";
+			return "<?php var_dump(" . this->clean(args, this->isVariable(args)) . "); ?>";
 		} elseif (command == "BENCHMARK") {
 			return this->processBenchmark();
 		}
 	}
 
-	private function isVariable(string arg)
+	public function isVariable(string arg)
 	{
+		if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
+			return false;
+		}
+
 		if (in_array(substr(arg, strlen(arg) - 1, 1), this->types)) {
 			return true;
 		}
 		
 		if (preg_match("/(?<!\")(?:\$\(|%\(|#\(|&\()/", trim(arg))) {
 			return true;
+		}
+		
+		return false;
+	}
+
+	public function isFormVariable(string arg)
+	{
+		if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
+			return false;
 		}
 
 		var val;
@@ -265,7 +281,6 @@ class Variables
 					intval(" .
 						this->clean(
 							args[1],
-							false,
 							this->isVariable(args[1])
 						) .
 					"),
@@ -280,7 +295,6 @@ class Variables
 					intval(" .
 						this->clean(
 							args[1],
-							false,
 							this->isVariable(args[1])
 						) . "),
 					1); ?>";
@@ -358,7 +372,6 @@ class Variables
 			let output .= vars[0] . "[" . 
 				this->clean(
 					vars[1],
-					false,
 					this->isVariable(vars[1])
 				) .
 				"] = ";
@@ -385,7 +398,6 @@ class Variables
 			if (in_array(substr(line, strlen(line) - 1, 1), this->types)) {
 				let converted = this->clean(
 					splits[1],
-					false,
 					this->isVariable(line)
 				);
 			} elseif (substr(line, strlen(line) - 2, 1) == "\")") {
@@ -420,7 +432,6 @@ class Variables
 			} else {
 				let output .= this->clean(
 					vars[1],
-					false,
 					this->isVariable(vars[1])
 				);
 			}
@@ -434,7 +445,6 @@ class Variables
 			for str in vars {
 				let cleaned .= this->clean(
 					trim(str),
-					false,
 					this->isVariable(str)
 				) . " . ";
 			}
@@ -520,11 +530,16 @@ class Variables
 				}
 			} else {
 				if (this->getCommand(str)) {
-					let converted = (new Text())->processValue(str);					
+					let converted = (new Text())->processValue(str);
+					if (converted == null) {
+						let converted = (new Maths())->processValue(str);
+					}
+					if (converted == null) {
+						throw new Exception("Invalid command");
+					}
 				} else {
 					let converted = this->clean(
 						str,
-						false,
 						this->isVariable(str)
 					);
 				}

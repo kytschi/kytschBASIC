@@ -217,14 +217,21 @@ class Parser
 
 	private function processIf(line, string command = "if", args, bool not_empty = false)
 	{
-		var output = "", parser;
+		var output = "", parser, controller;
+
+		let controller = new Command();
+
 		let args = explode(" THEN", args);
+		
 		let output = "<?php " . command . " (";
+
 		if (not_empty) {
-			let output .= "!empty(" . (new Command())->clean(args[0], false) . ")";
+			let output .= "!empty(" .
+				controller->clean(args[0], controller->isVariable(args[0])) . ")";
 		} else {
-			let output .= (new Command())->clean(args[0], false);
+			let output .= controller->clean(args[0], controller->isVariable(args[0]));
 		}
+
 		let output .= "): ?>";
 
 		if (count(args) > 1) {

@@ -18,20 +18,29 @@ BODY
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT ABS -250
+PRINT ABS(-250)
 LINE BREAK
 
-DEF var#=ABS -50
+DEF var#=ABS(-50)
 PRINT var#
+LINE BREAK
+
+LET var#=-50
+PRINT ABS(var#)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT ABS -250
+					PRINT ABS(-250)
 					LINE BREAK
-					DEF var#=ABS -50
+
+					DEF var#=ABS(-50)
 					PRINT var#
+					LINE BREAK
+
+					LET var#=-50
+					PRINT ABS(var#)
 				END DIV
 				HEADING 4
 					PRINT "See also"

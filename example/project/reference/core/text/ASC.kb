@@ -12,22 +12,36 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "ASC","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "Returns the ASCII value of the first characters in the string."
+					PRINT "Returns the ASCII code of a character."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT ASC "A"
+DEF char$=ASC("A")
+PRINT char$
+LINE BREAK
 
-REM You can still assign the standard attributes of the PRINT command.
-PRINT ASC "A", "kb-class"
+PRINT ASC("E")+" DUDES!", "basic"
+LINE BREAK
+
+LET char$="B"
+PRINT ASC(char$)
+
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT ASC "A"
+					DEF char$=ASC("A")
+					PRINT char$
+					LINE BREAK
+
+					PRINT ASC("E")+" DUDES!", "basic"
+					LINE BREAK
+
+					LET char$="B"
+					PRINT ASC(char$)
 				END DIV
 				HEADING 4
 					PRINT "See also"

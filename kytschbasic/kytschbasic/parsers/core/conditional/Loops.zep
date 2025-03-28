@@ -36,8 +36,7 @@ class Loops extends Command
 			return "<?php while (" .
 				this->clean(
 					args,
-					false,
-					in_array(substr(args, strlen(args) - 1, 1), this->types) ? true : false
+					this->isVariable(args)
 				) .
 			") { ?>";
 		} elseif (command == "WEND" || command == "NEXT" || command == "END WHILE") {
@@ -61,9 +60,9 @@ class Loops extends Command
 		}
 
 		return "<?php foreach (" .
-			this->clean(args[1], false, in_array(substr(args[1], strlen(args[1]) - 1, 1), this->types) ? true : false) .
+			this->clean(args[1], this->isVariable(args[1])) .
 			" as " .
-			this->clean(args[0], false, in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false) . ") { ?>";
+			this->clean(args[0], this->isVariable(args[2])) . ") { ?>";
 	}
 
 	private function processForTo(args)
@@ -95,18 +94,7 @@ class Loops extends Command
 			this->clean(args[0], false) . "; " .
 			this->clean(variable, false) .
 			dir .
-			this->clean(
-				args[1],
-				false,
-				in_array(
-					substr(
-						args[1],
-						strlen(args[1]) - 1, 
-						1
-					),
-						this->types
-				) ? true : false
-			) . "; " .
+			this->clean(args[1], this->isVariable(args[1])) . "; " .
 			this->clean(variable, false) . step . ") { ?>";
 	}
 }

@@ -18,21 +18,30 @@ BODY
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT ASIN 0.5
+PRINT ASIN(0.5)
 LINE BREAK
 
-DEF var#=ASIN 0.4
+DEF var#=ASIN(0.4)
 PRINT var#
+LINE BREAK
+
+LET var#=0.4
+PRINT ASIN(var#)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT ASIN 0.5
+					PRINT ASIN(0.5)
 					LINE BREAK
 
-					DEF var#=ASIN 0.4
+					DEF var#=ASIN(0.4)
 					PRINT var#
+
+					LINE BREAK
+
+					LET var#=0.4
+					PRINT ASIN(var#)
 				END DIV
 				HEADING 4
 					PRINT "See also"

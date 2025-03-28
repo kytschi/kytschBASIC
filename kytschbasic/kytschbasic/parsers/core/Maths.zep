@@ -80,8 +80,9 @@ class Maths extends Variables
 			return null;
 		}
 
-		var splits = [];
+		return this->processValue(this->args(args));
 		
+		/*var splits;
 		let splits = explode(" ", command);
 		
 		let command = (string)splits[0];
@@ -89,13 +90,7 @@ class Maths extends Variables
 
 		let splits = implode(" ", splits);
 		
-		if (command == "ABS") {
-			return abs(splits);
-		} elseif (command == "ACOS") {
-			return acos(floatval(splits));
-		} elseif (command == "ASIN") {
-			return asin(floatval(splits));
-		} elseif (command == "ATAN") {
+		if (command == "ATAN") {
 			return atan(floatval(splits));
 		} elseif (command == "HCOS") {
 			return cosh(floatval(splits));
@@ -125,7 +120,7 @@ class Maths extends Variables
 		} elseif (command == "HEX") {
 			return "\"" . str_pad(dechex(intval(splits)), 8, "0", 0) . "\"";
 		} elseif (command == "BIN") {
-			return "\"" . str_pad(decbin(intval(splits)), 32, "0", 0) . "\"";
+			return this->processBin(args);
 		} elseif (command == "FRAC") {
 			return fmod(splits, 1);
 		} elseif (command == "RND") {
@@ -150,6 +145,103 @@ class Maths extends Variables
 			}
 		}
 
-		return null;
+		return null;*/
+	}
+
+	public function processValue(args)
+	{
+		if (is_string(args)) {
+			let args = [args];
+		}
+		
+		switch (this->getCommand(args[0])) {
+			case "ABS":
+				return this->processAbs(args);
+			case "ACOS":
+				return this->processAcos(args);
+			case "ASIN":
+				return this->processAsin(args);
+			case "ATAN":
+				return this->processAtan(args);
+			case "BIN":
+				return this->processBin(args);
+			default:
+				return null;
+		}
+	}
+
+	public function processAbs(args)
+	{
+		let args[0] = this->cleanArg("ABS", args[0]);
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid ABS");
+		}
+
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
+		return "abs(" . this->outputArg(args[0], false) . ")";
+	}
+
+	public function processAcos(args)
+	{
+		let args[0] = this->cleanArg("ACOS", args[0]);
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid ACOS");
+		}
+
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
+		return "acos(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processAsin(args)
+	{
+		let args[0] = this->cleanArg("ASIN", args[0]);
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid ASIN");
+		}
+
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
+		return "asin(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processAtan(args)
+	{
+		let args[0] = this->cleanArg("ATAN", args[0]);
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid ATAN");
+		}
+
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
+		return "atan(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processBin(args)
+	{
+		let args[0] = this->cleanArg("BIN", args[0]);
+
+		if (args[0] != "0" && empty(args[0])) {
+			throw new \Exception("Invalid BIN");
+		}
+
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
+		return "str_pad(decbin(intval(" . this->outputArg(args[0], false) . ")), 32, '0', 0)";
 	}
 }

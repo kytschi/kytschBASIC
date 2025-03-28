@@ -49,7 +49,12 @@ class Text extends Command
 		var value="", output = "<?= \"<span";
 
 		let args = this->args(args);
-		let value = this->processValue(args);
+
+		let value = args[0];
+
+		if (substr(value, 0, 1) == "{") {
+			let value = this->outputArg(value, false, true);
+		}
 		
 		if (isset(args[1])) {
 			let output .= " class=" . this->outputArg(args[1]);
@@ -112,7 +117,7 @@ class Text extends Command
 		if (is_string(args)) {
 			let args = [args];
 		}
-
+		
 		switch (this->getCommand(args[0])) {
 			case "ASC":
 				return this->processAsc(args);
@@ -159,17 +164,22 @@ class Text extends Command
 			case "VAL":
 				return this->processVal(args);
 			default:
-				return "\"" . trim(args[0], "\"") . "\"";
+				return null;
 		}
 	}
 
 	public function processAsc(args)
 	{
-		let args[0] = trim(str_replace("ASC", "", args[0]));
-
+		let args[0] = this->cleanArg("ASC", args[0]);
+		
 		if (args[0] != "0" && empty(args[0])) {
 			throw new \Exception("Invalid ASC");
 		}
+
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "ord(" . this->outputArg(args[0], false, true) . ")";
 	}
@@ -179,20 +189,22 @@ class Text extends Command
 		var converted, length = 1;
 
 		let args[0] = trim(str_replace("CENTRE", "", args[0]));
-
+		let args = this->args(args[0]);
+		
 		if (args[0] != "0" && empty(args[0])) {
 			throw new \Exception("Invalid CENTRE");
 		}
 
 		let converted = args[0];
-		array_shift(args);
-		
-		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
+				
+		if (isset(args[1])) {
+			if (is_numeric(args[1])) {
+				let length = intval(args[1]);
 			}
 		}
-		return "substr(\"" . converted . "\", intval(strlen(\"" . converted . "\") / 2) - 1, intval(" . length . "))";
+		return "substr(" .
+			this->outputArg(converted, false, true) . ", intval(strlen(" .
+			this->outputArg(converted, false, true) . ") / 2) - 1, intval(" . length . "))";
 	}
 
 	public function processChr(args)

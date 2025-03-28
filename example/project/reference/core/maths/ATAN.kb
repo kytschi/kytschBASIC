@@ -18,21 +18,29 @@ BODY
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT ATAN 0.5
+PRINT ATAN(0.5)
 LINE BREAK
 
-DEF var#=ATAN 0.4
+DEF var#=ATAN(0.4)
 PRINT var#
+LINE BREAK
+
+DEF var#=0.4
+PRINT ATAN(var#)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT ATAN 0.5
+					PRINT ATAN(0.5)
 					LINE BREAK
 
-					DEF var#=ATAN 0.4
+					DEF var#=ATAN(0.4)
 					PRINT var#
+					LINE BREAK
+
+					DEF var#=0.4
+					PRINT ATAN(var#)
 				END DIV
 				HEADING 4
 					PRINT "See also"
