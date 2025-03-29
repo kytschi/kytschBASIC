@@ -20,16 +20,21 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT REPLACE "Hi World!", "Hi", "Hello"
+PRINT REPLACE("Hi World!", "Hi", "Hello")
+LINE BREAK
 
 REM You can still assign the standard attributes of the PRINT command.
-PRINT REPLACE "Hi World!", "Hi", "Hello", "kb-class"
+PRINT REPLACE("Hi World!", "Hi", "Hello"), "basic"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT REPLACE "Hi World!", "Hi", "Hello"
+					PRINT REPLACE("Hi World!", "Hi", "Hello")
+					LINE BREAK
+
+					REM You can still assign the standard attributes of the PRINT command.
+					PRINT REPLACE("Hi World!", "Hi", "Hello"), "basic"
 				END DIV
 				HEADING 4
 					PRINT "See also"

@@ -35,36 +35,38 @@ class Database extends Command
 		var err;
 
 		try {
-			if (command == "DOPEN") {
-				return this->parseOpen(args);
-			} elseif (command == "DFETCH") {
-				return this->parseFetch(args);
-			} elseif (command == "DREAD") {
-				return this->parseRead(args);
-			} elseif (command == "DSELECT") {
-				return this->parseSelect(args);
-			} elseif (command == "DWHERE") {
-				return this->parseWhere(args);
-			} elseif (command == "DSORT") {
-				return this->parseSort(args);
-			} elseif (command == "DBIND") {
-				return this->parseBind(args);
-			} elseif (command == "DJOIN") {
-				return this->parseJoin(args);
-			} elseif (command == "DLJOIN") {
-				return this->parseLeftJoin(args);
-			} elseif (command == "DRJOIN") {
-				return this->parseRightJoin(args);
-			} elseif (command == "DLIMIT") {
-				return this->parseLimit(args);
-			} elseif (command == "DSET") {
-				return this->parseSet(args);
-			} elseif (command == "DEXEC") {
-				return this->parseExecute();
-			} elseif (command == "END DATA") {
-				return "";
+			switch (command) {
+				case "DOPEN":
+					return this->parseOpen(args);
+				case "DFETCH":
+					return this->parseFetch(args);
+				case "DREAD":
+					return this->parseRead(args);
+				case "DSELECT":
+					return this->parseSelect(args);
+				case "DWHERE":
+					return this->parseWhere(args);
+				case "DSORT":
+					return this->parseSort(args);
+				case "DBIND":
+					return this->parseBind(args);
+				case "DJOIN":
+					return this->parseJoin(args);
+				case "DLJOIN":
+					return this->parseLeftJoin(args);
+				case "DRJOIN":
+					return this->parseRightJoin(args);
+				case "DLIMIT":
+					return this->parseLimit(args);
+				case "DSET":
+					return this->parseSet(args);
+			 	case "DEXEC":
+					return this->parseExecute();
+				case "END DATA":
+					return "";
+				default:
+					return null;
 			}
-			
 		} catch DatabaseException, err {
 		    err->fatal();
 		} catch \RuntimeException|\Exception, err {
@@ -78,9 +80,10 @@ class Database extends Command
 		let args = this->args(args);
 		
 		for arg in args {
-			let splits = explode("=", arg);
+			let splits = preg_split("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", arg);
+
 			if (!empty(splits[0]) && !empty(splits[0])) {
-				let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = \"" . splits[1] . "\";";
+				let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = " . this->outputArg(splits[1], false, true) . ";";
 			}
 		}
 		
@@ -99,25 +102,25 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 	private function parseFetch(args)
 	{
 		let args = this->args(args);
-		return this->parseExecute() . "\n<?php " . args[0] . " = $KBDBSTATEMENT->fetchAll(); ?>";
+		return this->parseExecute() . "\n<?php " . str_replace(["\"", "{", "}"], "", args[0]) . " = $KBDBSTATEMENT->fetchAll(); ?>";
 	}
 
 	private function parseJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" JOIN " . args[0] . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" JOIN \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseLeftJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" LEFT JOIN " . args[0] . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" LEFT JOIN \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseLimit(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBLIMIT = \" LIMIT " . args[0] . "\"; ?>";
+		return "<?php $KBDBLIMIT = \" LIMIT \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseOpen(args)
@@ -126,8 +129,8 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 		let configs = constant("CONFIG");
 
 		let args = this->args(args);
-		let config = args[0];
-		
+		let config = trim(args[0], "\"");
+				
 		if (empty(configs["database"])) {
 			throw new DatabaseException("No database configuration found");
 		}
@@ -179,36 +182,36 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 	private function parseRead(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBTABLE = \"" . args[0] . "\"; ?>";
+		return "<?php $KBDBTABLE = " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseRightJoin(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" RIGHT JOIN " . args[0] . "\"; ?>";
+		return "<?php $KBDBJOIN .= \" RIGHT JOIN \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseSelect(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBSELECT = \"SELECT " . args[0] . "\"; ?>";
+		return "<?php $KBDBSELECT = \"SELECT \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseSet(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET " . args[0] . "\"; ?>";
+		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseSort(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBSORT = \" ORDER BY " . args[0] . "\"; ?>";
+		return "<?php $KBDBSORT = \" ORDER BY \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 
 	private function parseWhere(args)
 	{
 		let args = this->args(args);
-		return "<?php $KBDBWHERE = \" WHERE " . args[0] . "\"; ?>";
+		return "<?php $KBDBWHERE = \" WHERE \" . " . this->outputArg(args[0], false, true) . "; ?>";
 	}
 }

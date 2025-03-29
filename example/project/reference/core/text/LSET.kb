@@ -23,17 +23,17 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT LSET "Hello World!", 5
+PRINT LSET("Hello World!", 5)
 LINE BREAK
-PRINT LSET "Hi", 5
+PRINT LSET("Hi", 5)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT LSET "Hello World!", 5
+					PRINT LSET("Hello World!", 5)
 					LINE BREAK
-					PRINT LSET "Hi", 5
+					PRINT LSET("Hi", 5)
 				END DIV
 				HEADING 4
 					PRINT "See also"

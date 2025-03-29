@@ -217,11 +217,11 @@ HEADER
 		LINK "/reference/INCLUDE#refINCLUDE","Find out about the INCLUDE command","nav-link",,"refINCLUDE"
 			PRINT "INCLUDE"
 		END LINK
-		LINK "/reference/INT#refINT","Find out about the INT command","nav-link",,"refINT"
-			PRINT "INT"
-		END LINK
 		LINK "/reference/INSTR#refINSTR","Find out about the INSTR command","nav-link",,"refINSTR"
 			PRINT "INSTR"
+		END LINK
+		LINK "/reference/INT#refINT","Find out about the INT command","nav-link",,"refINT"
+			PRINT "INT"
 		END LINK
 		LINK "/reference/LCASE#refLCASE","Find out about the LCASE command","nav-link",,"refLCASE"
 			PRINT "LCASE"

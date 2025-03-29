@@ -18,17 +18,17 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT STR "Hi World!"
+PRINT STR("Hi World!")
 LINE BREAK
-PRINT STR 26
+PRINT STR(26)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT STR "Hi World!"
+					PRINT STR("Hi World!")
 					LINE BREAK
-					PRINT STR 26
+					PRINT STR(26)
 				END DIV
 				HEADING 4
 					PRINT "See also"

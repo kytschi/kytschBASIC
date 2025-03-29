@@ -21,7 +21,9 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 REM a random number between 3 and 5
-PRINT RND 3,5
+DEF start%=3
+DEF end%=5
+PRINT RND(start%, end%)
 REM a random number between 1 and 10
 PRINT RND
 				END CPRINT
@@ -29,7 +31,9 @@ PRINT RND
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT RND 3,5
+					DEF start%=3
+					DEF end%=5
+					PRINT RND(start%, end%)
 					LINE BREAK
 					PRINT RND
 				END DIV

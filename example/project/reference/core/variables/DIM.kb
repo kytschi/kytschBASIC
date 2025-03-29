@@ -20,7 +20,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Defining an array of strings and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
@@ -30,7 +30,7 @@ FOR val$ IN test$
 	PRINT "&nbsp;"
 NEXT
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -47,7 +47,7 @@ NEXT
 				SWRITE
 					PRINT "Defining an array of integers and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
@@ -57,7 +57,7 @@ FOR val% IN test%
 	PRINT ",&nbsp;"
 NEXT
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -74,17 +74,17 @@ NEXT
 				SWRITE
 					PRINT "Defining an array of doubles and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test#=(1,2,3)
+DIM test#=(1.01,2.02,3.03)
 FOR val# IN test#
 	PRINT val#
 	PRINT ",&nbsp;"
 NEXT
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -100,8 +100,10 @@ NEXT
 				END SWRITE
 				SWRITE
 					PRINT "Defining a blank array and writing to it."
+					LINE BREAK
+					PRINT "Note: Array's start at index 0","heading-args"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
@@ -114,7 +116,7 @@ FOR val$ IN test$
 	LINE BREAK
 NEXT
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"

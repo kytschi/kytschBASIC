@@ -82,58 +82,9 @@ class Maths extends Variables
 
 		return this->processValue(this->args(args));
 		
-		/*var splits;
-		let splits = explode(" ", command);
-		
-		let command = (string)splits[0];
-		array_shift(splits);
-
-		let splits = implode(" ", splits);
-		
-		if (command == "ATAN") {
-			return atan(floatval(splits));
-		} elseif (command == "HCOS") {
-			return cosh(floatval(splits));
-		} elseif (command == "HSIN") {
-			return sinh(floatval(splits));
-		} elseif (command == "HTAN") {
-			return tanh(floatval(splits));
-		} elseif (command == "COS") {
-			return cos(floatval(splits));
-		} elseif (command == "SIN") {
-			return sin(floatval(splits));
-		} elseif (command == "TAN") {
-			return tan(floatval(splits));
-		} elseif (command == "EXP") {
-			return exp(floatval(splits));
-		} elseif (command == "SQR") {
-			return sqrt(floatval(splits));
-		} elseif (command == "LOG") {
-			let splits = explode(",", splits);
-			if (count(splits) > 1) {
-				return log(floatval(splits[0]), floatval(splits[1]));
-			} else {
-				return log(floatval(splits[0]));
-			}
-		} elseif (command == "LOG10") {
-			return log10(splits);
-		} elseif (command == "HEX") {
-			return "\"" . str_pad(dechex(intval(splits)), 8, "0", 0) . "\"";
-		} elseif (command == "BIN") {
-			return this->processBin(args);
-		} elseif (command == "FRAC") {
-			return fmod(splits, 1);
-		} elseif (command == "RND") {
-			if (empty(splits)) {
-				return rand(1, 10) / 10;
-			} else {
-				let splits = explode(",", splits);
-				if (count(splits) == 1) {
-					return rand(1, intval(splits[0]));
-				} else {
-					return rand(intval(splits[0]), intval(splits[1]));
-				}
-			}
+		/*		
+		if (command == "RND") {
+			
 		} elseif (command == "SGN") {
 			let splits = intval(splits);
 			if (splits > 0) {
@@ -153,7 +104,11 @@ class Maths extends Variables
 		if (is_string(args)) {
 			let args = [args];
 		}
-		
+
+		if (substr(args[0], 0, 5) == "LOG10") {
+			return this->processLog10(args);
+		}
+
 		switch (this->getCommand(args[0])) {
 			case "ABS":
 				return this->processAbs(args);
@@ -165,6 +120,32 @@ class Maths extends Variables
 				return this->processAtan(args);
 			case "BIN":
 				return this->processBin(args);
+			case "COS":
+				return this->processCos(args);
+			case "EXP":
+				return this->processExp(args);
+			case "FRAC":
+				return this->processFrac(args);
+			case "HCOS":
+				return this->processHCos(args);
+			case "HEX":
+				return this->processHex(args);
+			case "HSIN":
+				return this->processHSin(args);
+			case "HTAN":
+				return this->processHTan(args);
+			case "LOG":
+				return this->processLog(args);
+			case "RND":
+				return this->processRnd(args);
+			case "SIN":
+				return this->processSin(args);
+			case "SGN":
+				return this->processSgn(args);
+			case "SQR":
+				return this->processSqr(args);
+			case "TAN":
+				return this->processTan(args);
 			default:
 				return null;
 		}
@@ -173,75 +154,156 @@ class Maths extends Variables
 	public function processAbs(args)
 	{
 		let args[0] = this->cleanArg("ABS", args[0]);
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid ABS");
-		}
-
-		let args[0] = this->clean(
-			args[0],
-			this->isVariable(args[0])
-		);
+		let args = this->args(args[0]);
 		return "abs(" . this->outputArg(args[0], false) . ")";
 	}
 
 	public function processAcos(args)
 	{
 		let args[0] = this->cleanArg("ACOS", args[0]);
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid ACOS");
-		}
-
-		let args[0] = this->clean(
-			args[0],
-			this->isVariable(args[0])
-		);
+		let args = this->args(args[0]);
 		return "acos(floatval(" . this->outputArg(args[0], false) . "))";
 	}
 
 	public function processAsin(args)
 	{
 		let args[0] = this->cleanArg("ASIN", args[0]);
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid ASIN");
-		}
-
-		let args[0] = this->clean(
-			args[0],
-			this->isVariable(args[0])
-		);
+		let args = this->args(args[0]);
 		return "asin(floatval(" . this->outputArg(args[0], false) . "))";
 	}
 
 	public function processAtan(args)
 	{
 		let args[0] = this->cleanArg("ATAN", args[0]);
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid ATAN");
-		}
-
-		let args[0] = this->clean(
-			args[0],
-			this->isVariable(args[0])
-		);
+		let args = this->args(args[0]);
 		return "atan(floatval(" . this->outputArg(args[0], false) . "))";
 	}
 
 	public function processBin(args)
 	{
 		let args[0] = this->cleanArg("BIN", args[0]);
+		let args = this->args(args[0]);
+		return "str_pad(decbin(intval(" . this->outputArg(args[0], false) . ")), 32, '0', 0)";
+	}
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid BIN");
+	public function processCos(args)
+	{
+		let args[0] = this->cleanArg("COS", args[0]);
+		let args = this->args(args[0]);
+		return "cos(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processExp(args)
+	{
+		let args[0] = this->cleanArg("EXP", args[0]);
+		let args = this->args(args[0]);
+		return "exp(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processFrac(args)
+	{
+		let args[0] = this->cleanArg("FRAC", args[0]);
+		let args = this->args(args[0]);
+		return "fmod(" . this->outputArg(args[0], false) . ", 1)";
+	}
+
+	public function processHCos(args)
+	{
+		let args[0] = this->cleanArg("HCOS", args[0]);
+		let args = this->args(args[0]);
+		return "cosh(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processHex(args)
+	{
+		let args[0] = this->cleanArg("HEX", args[0]);
+		let args = this->args(args[0]);
+		return "str_pad(dechex(intval(". this->outputArg(args[0], false) . ")), 8, '0', 0)";
+	}
+
+	public function processHSin(args)
+	{
+		let args[0] = this->cleanArg("HSIN", args[0]);
+		let args = this->args(args[0]);
+		return "sinh(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processHTan(args)
+	{
+		let args[0] = this->cleanArg("HTAN", args[0]);
+		let args = this->args(args[0]);
+		return "tanh(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processLog(args)
+	{
+		let args[0] = this->cleanArg("LOG", args[0]);
+		let args = this->args(args[0]);
+
+		if (count(args) > 1) {
+			return "log(floatval(" . this->outputArg(args[0], false) . "), floatval(" . this->outputArg(args[1], false) . "))";
 		}
 
-		let args[0] = this->clean(
-			args[0],
-			this->isVariable(args[0])
-		);
-		return "str_pad(decbin(intval(" . this->outputArg(args[0], false) . ")), 32, '0', 0)";
+		return "log(floatval(" . this->outputArg(args[0], false) . "))";		
+	}
+
+	public function processLog10(args)
+	{
+		let args[0] = this->cleanArg("LOG10", args[0]);
+		let args = this->args(args[0]);
+
+		return "log10(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processRnd(args)
+	{
+		let args[0] = ltrim(rtrim(trim(str_replace("RND", "", args[0])), ")"), "(");
+
+		if (empty(args[0])) {
+			return rand(1, 10);
+		}
+
+		let args = this->args(args[0]);
+		
+		if (count(args) == 1) {
+			return "rand(1, intval(" . this->outputArg(args[0], false). "))";
+		}
+
+		return "rand(intval(" . this->outputArg(args[0], false) . "), intval(" . this->outputArg(args[1], false). "))";
+	}
+
+	public function processSin(args)
+	{
+		let args[0] = this->cleanArg("SIN", args[0]);
+		let args = this->args(args[0]);		
+		return "sin(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processSgn(args)
+	{
+		let args[0] = this->cleanArg("SGN", args[0]);
+		let args = this->args(args[0]);
+
+		if (empty(args[0])) {
+			let args[0] = 0;
+		}
+
+		let args[0] = this->outputArg(args[0], false);
+
+		return "((floatval(" . args[0] . ") > 0) ? 1 : ((floatval(" . args[0] . ") < 0) ? -1 : 0))";
+	}
+
+	public function processSqr(args)
+	{
+		let args[0] = this->cleanArg("SQR", args[0]);
+		let args = this->args(args[0]);
+		return "sqrt(floatval(" . this->outputArg(args[0], false) . "))";
+	}
+
+	public function processTan(args)
+	{
+		let args[0] = this->cleanArg("TAN", args[0]);
+		let args = this->args(args[0]);
+		return "tan(floatval(" . this->outputArg(args[0], false) . "))";
 	}
 }

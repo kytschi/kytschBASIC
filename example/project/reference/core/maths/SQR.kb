@@ -12,19 +12,19 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "SQR","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "Returns the e raised to the power of the number supplied."
+					PRINT "Returns the square root of a number."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT SQR 9
+PRINT SQR(9)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT SQR 9
+					PRINT SQR(9)
 				END DIV
 				HEADING 4
 					PRINT "See also"

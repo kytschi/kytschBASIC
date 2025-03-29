@@ -20,14 +20,14 @@ LOAD "_ROOT/project/shared/header"
 				CPRINT
 DEF iLoop%=10
 WHILE iLoop%>0
-	PRINT iLoop
+	PRINT iLoop%
 	LINE BREAK
 	LET iLoop%=iLoop%-1
 WEND
 LINE BREAK
 LET iLoop%=1
 WHILE iLoop%<=10
-	PRINT iLoop
+	PRINT iLoop%
 	LINE BREAK
 	LET iLoop%=iLoop%+1
 END WHILE
@@ -38,14 +38,14 @@ END WHILE
 				DIV "kb-col kb-col-24 kb-code-block"
 					DEF iLoop%=10
 					WHILE iLoop%>0
-						PRINT iLoop
+						PRINT iLoop%
 						LINE BREAK
 						LET iLoop%=iLoop%-1
 					WEND
 					LINE BREAK
 					LET iLoop%=1
 					WHILE iLoop%<=10
-						PRINT iLoop
+						PRINT iLoop%
 						LINE BREAK
 						LET iLoop%=iLoop%+1
 					END WHILE

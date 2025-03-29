@@ -24,16 +24,20 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 DIM strings$=("kytsch", "BASIC")
-DEF count%=COUNT strings$
+DEF count%=COUNT(strings$)
 PRINT count%
+LINE BREAK
+PRINT COUNT(strings$), "basic"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
 					DIM strings$=("kytsch", "BASIC")
-					DEF count%=COUNT strings$
+					DEF count%=COUNT(strings$)
 					PRINT count%
+					LINE BREAK
+					PRINT COUNT(strings$), "basic"
 				END DIV
 				HEADING 4
 					PRINT "See also"

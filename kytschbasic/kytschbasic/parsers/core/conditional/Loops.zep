@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Conditional\Loops
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1
  *
- * Copyright 2024 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -27,18 +27,14 @@ namespace KytschBASIC\Parsers\Core\Conditional;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
+use KytschBASIC\Parsers\Core\Maths;
 
 class Loops extends Command
 {
 	public function parse(string command, args)
 	{
 		if (command == "WHILE") {
-			return "<?php while (" .
-				this->clean(
-					args,
-					this->isVariable(args)
-				) .
-			") { ?>";
+			return this->processWhile(args);
 		} elseif (command == "WEND" || command == "NEXT" || command == "END WHILE") {
 			return "<?php } ?>";
 		} elseif (command == "FOR") {
@@ -60,9 +56,9 @@ class Loops extends Command
 		}
 
 		return "<?php foreach (" .
-			this->clean(args[1], this->isVariable(args[1])) .
+			this->cleanVarOnly(args[1]) .
 			" as " .
-			this->clean(args[0], this->isVariable(args[2])) . ") { ?>";
+			this->cleanVarOnly(args[0]) . ") { ?>";
 	}
 
 	private function processForTo(args)
@@ -72,9 +68,11 @@ class Loops extends Command
 			throw new Exception("Invalid for loop");
 		}
 
-		var variable = "", step, dir = " <= ";
+		var variable, step, dir = " <= ", start = 0;
 		let variable = explode("=", args[0]);
-		let variable = variable[0];
+
+		let start = this->clean(variable[1], false);
+		let variable = "$" . str_replace(")", "]", str_replace("(", "[", str_replace(this->types, "", variable[0])));
 
 		let step = explode(" STEP ", args[1]);
 		if (count(step) > 1) {
@@ -91,10 +89,19 @@ class Loops extends Command
 		}
 
 		return "<?php for (" .
-			this->clean(args[0], false) . "; " .
+			variable . " = intval(" . start . "); " .
 			this->clean(variable, false) .
 			dir .
 			this->clean(args[1], this->isVariable(args[1])) . "; " .
 			this->clean(variable, false) . step . ") { ?>";
+	}
+	
+	private function processWhile(args)
+	{
+		var output = "<?php while (";
+
+		let output .= (new Maths())->equation(args);
+
+		return output . ") { ?>";
 	}
 }

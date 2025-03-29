@@ -42,8 +42,7 @@ class Misc extends Command
 			default:
 				return this->clean(
 					args[0],
-					false, 
-					in_array(substr(args[0], strlen(args[0]) - 1, 1), this->types) ? true : false
+					this->isVariable(args[0])
 				);
 		}
 	}

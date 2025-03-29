@@ -37,24 +37,6 @@ class Variables
 	public array_types = ["$(", "%(", "#(", "&("];
 	public form_variables = ["_GET", "_POST", "_REQUEST"];
 
-	public function dump(output)
-	{
-		echo "<pre>";
-		var_dump(output);
-		echo "</pre>";
-	}
-
-	public function outputArg(arg, bool in_quotes = true, bool clean = false)
-	{
-		let arg = trim(arg, "\"");
-
-		if (clean && this->isVariable(arg)) {
-			let arg = str_replace(" ", "", arg);
-		}
-
-		return (in_quotes ? "\\\"" : "\"") . arg . (in_quotes ? "\\\"" : "\"");
-	}
-
 	public function args(string line)
 	{
 		var args = [], arg, vars, str, cleaned, splits, text, value;
@@ -69,8 +51,8 @@ class Variables
 			return [line];
 		}
 
-		let splits = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line);
-
+		let splits = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?![^()]*\))/", line);
+		
 		for arg in splits {
 			let arg = trim(arg);
 
@@ -119,6 +101,35 @@ class Variables
 		return args;
 	}
 
+	private function arrayMod(args, bool pop = true)
+	{
+		var value;
+
+		let args = this->args(this->cleanArg(pop ? "POP" : "SHIFT" , args));
+		
+		let value = this->cleanVarOnly(args[0]);
+		
+		if (pop) {
+			if (count(args) > 1) {
+				return "<?php array_splice(" .
+					value . ", " .
+					"count(" . value . ") - 1 - intval(" . this->outputArg(args[1], false) . "), " .
+					"1); ?>";
+			} else {
+				return "<?php array_pop(" . value . "); ?>";
+			}
+		} else {
+			if (count(args) > 1) {
+				return "<?php array_splice(" .
+					value . ",
+					intval(" . this->outputArg(args[1], false) . "), " .
+					"1); ?>";
+			} else {
+				return "<?php array_shift(" . value . "); ?>";
+			}
+		}
+	}
+
 	public function clean(string line, bool inline_string = true, args = null)
 	{
 		var arg, value = null, maths_controller;
@@ -160,9 +171,26 @@ class Variables
 		return (value !== null) ? maths_controller->equation(line) : line;
 	}
 
+	public function cleanVarOnly(arg)
+	{
+		var search;
+		let search = this->types;
+
+		let search[] = "\"{";
+		let search[] = "}\"";
+
+		return "$" . str_replace(")", "]", str_replace("(", "[", str_replace(search, "", this->clean(arg, false))));
+	}
+
 	public function cleanArg(string command, arg)
 	{
-		return rtrim(trim(str_replace(command . "(", "", arg)), ")");
+		let arg = rtrim(trim(str_replace(command . "(", "", arg)), ")");
+
+		if ((arg != "0" && empty(arg)) || substr(arg, 0, strlen(command)) == command) {
+			throw new Exception("Invalid " . arg);
+		}
+
+		return arg;
 	}
 
 	private function cleanArray(arg)
@@ -186,6 +214,13 @@ class Variables
 		return line;
 	}
 
+	public function dump(output)
+	{
+		echo "<pre>";
+		var_dump(output);
+		echo "</pre>";
+	}
+
 	public function getCommand(string line)
 	{
 		var strings;
@@ -195,41 +230,6 @@ class Variables
 		}
 	
 		return null;
-	}
-
-	public function parse(string command, string args)
-	{
-		if (command == "LET") {
-			return this->processDef(args, true);
-		} elseif (command == "DEF") {
-			return this->processDef(args);
-		} elseif (command == "ADEF") {
-			return this->processDef(args, false, true);
-		} elseif (command == "DIM") {
-			return this->processDim(args);
-		} elseif (command == "ADIM") {
-			return this->processDim(args, true);
-		} elseif (command == "2DP") {
-			return "<?php " . this->clean(args, false) . " = number_format(" . this->clean(args, false) . ", 2, '.', ''); ?>";
-		} elseif (command == "SHUFFLE") {
-			return "<?php shuffle(" . this->clean(args, false, true) . "); ?>";
-		} elseif (command == "SORT") {
-			return "<?php sort(" . this->clean(args, false, true) . "); ?>";
-		} elseif (command == "SSORT") {
-			return "<?php sort(" . this->clean(args, false, true) . ", SORT_STRING); ?>";
-		} elseif (command == "NSORT") {
-			return "<?php sort(" . this->clean(args, false, true) . ", SORT_NUMERIC); ?>";
-		} elseif (command == "NATSORT") {
-			return "<?php natsort(" . this->clean(args, false, true) . "); ?>";
-		} elseif (command == "POP") {
-			return this->arrayMod(args);
-		} elseif (command == "SHIFT") {
-			return this->arrayMod(args, false);
-		} elseif (command == "DUMP") {
-			return "<?php var_dump(" . this->clean(args, this->isVariable(args)) . "); ?>";
-		} elseif (command == "BENCHMARK") {
-			return this->processBenchmark();
-		}
 	}
 
 	public function isVariable(string arg)
@@ -258,7 +258,7 @@ class Variables
 		var val;
 
 		for val in this->form_variables {
-			if (substr(val, 0, strlen(val)) == val) {
+			if (substr(arg, 0, strlen(val)) == val) {
 				return true;
 			}
 		}
@@ -266,41 +266,52 @@ class Variables
 		return false;
 	}
 
-	private function arrayMod(args, bool pop = true)
+	public function outputArg(arg, bool in_quotes = true, bool clean = false)
 	{
-		var value;
-		let args = this->args(args);
+		let arg = trim(arg, "\"");
 
-		let value = this->clean(args[0], false);
+		if (clean && this->isVariable(arg)) {
+			let arg = str_replace(" ", "", arg);
+		}
 
-		if (pop) {
-			if (count(args) > 1) {
-				return "<?php array_splice(" .
-					value . ", " .
-					"count(" . value . ") - 1 - 
-					intval(" .
-						this->clean(
-							args[1],
-							this->isVariable(args[1])
-						) .
-					"),
-					1); ?>";
-			} else {
-				return "<?php array_pop(" . value . "); ?>";
-			}
-		} else {
-			if (count(args) > 1) {
-				return "<?php array_splice(" .
-					this->clean(args[0], false) . ",
-					intval(" .
-						this->clean(
-							args[1],
-							this->isVariable(args[1])
-						) . "),
-					1); ?>";
-			} else {
-				return "<?php array_shift(" . value . "); ?>";
-			}
+		return (in_quotes ? "\\\"" : "\"") . arg . (in_quotes ? "\\\"" : "\"");
+	}
+
+	public function parse(string command, string args)
+	{	
+		switch (this->getCommand(command)) {
+			case "2DP":
+				return this->processTwoDP(command);
+			case "ADEF":
+				return this->processDef(args, false, true);
+			case "ADIM":
+				return this->processDim(args, true);
+			case "BENCHMARK":
+				return this->processBenchmark();
+			case "DEF":
+				return this->processDef(args);
+			case "DIM":
+				return this->processDim(args);
+			case "DUMP":
+				return this->dump(this->clean(args, this->isVariable(args)));
+			case "LET":
+				return this->processDef(args, true);
+			case "NATSORT":
+				return this->processNatSort(command);
+			case "NSORT":
+				return this->processNSort(command);
+			case "POP":
+				return this->arrayMod(command . args);
+			case "SHIFT":
+				return this->arrayMod(command . args, false);
+			case "SHUFFLE":
+				return this->processShuffle(command);
+			case "SORT":
+				return this->processSort(command);
+			case "SSORT":
+				return this->processSSort(command);
+			default:
+				return null;
 		}
 	}
 
@@ -395,7 +406,7 @@ class Variables
 		if (count(splits) > 1) {
 			let output .= splits[0] . " = ";
 			
-			if (in_array(substr(line, strlen(line) - 1, 1), this->types)) {
+			if (this->isVariable(line)) {
 				let converted = this->clean(
 					splits[1],
 					this->isVariable(line)
@@ -557,6 +568,42 @@ class Variables
 		let output .= cleaned;
 		
 		return output . (javascript ? "</script>" : "; ?>");
+	}
+
+	public function processTwoDP(args)
+	{
+		let args = this->args(this->cleanArg("2DP", args));
+		return "<?php " . this->cleanVarOnly(args[0]) . " = number_format(" . args[0] . ", 2, '.', ''); ?>";
+	}
+
+	public function processNatSort(args)
+	{
+		let args = this->args(this->cleanArg("NATSORT", args));
+		return "<?php natsort(" . this->cleanVarOnly(args[0]) . "); ?>";
+	}
+
+	public function processNSort(args)
+	{
+		let args = this->args(this->cleanArg("NSORT", args));
+		return "<?php sort(" . this->cleanVarOnly(args[0]) . ", SORT_NUMERIC); ?>";
+	}
+
+	public function processShuffle(args)
+	{
+		let args = this->args(this->cleanArg("SHUFFLE", args));
+		return "<?php shuffle(" . this->cleanVarOnly(args[0]) . "); ?>";
+	}
+
+	public function processSort(args)
+	{
+		let args = this->args(this->cleanArg("SORT", args));
+		return "<?php sort(" . this->cleanVarOnly(args[0]) . "); ?>";
+	}
+
+	public function processSSort(args)
+	{
+		let args = this->args(this->cleanArg("SSORT", args));
+		return "<?php sort(" . this->cleanVarOnly(args[0]) . ", SORT_STRING); ?>";
 	}
 
 	public function outputForJavascript(value)

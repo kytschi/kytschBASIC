@@ -27,6 +27,7 @@ namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
+use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Variables;
 use KytschBASIC\Libs\Arcade\Parsers\AFunction;
 
@@ -176,10 +177,9 @@ class Parser
 			let parser = new Command();
 
 			let output .= "<?php case " .
-			parser->clean(
+				parser->clean(
 					args,
-					false,
-					in_array(substr(args, strlen(args) - 1, 1), parser->types) ? true : false
+					parser->isVariable(args)
 				)
 				. ": ?>" . this->newline;
 
@@ -217,7 +217,7 @@ class Parser
 
 	private function processIf(line, string command = "if", args, bool not_empty = false)
 	{
-		var output = "", parser, controller;
+		var output = "", parser, controller, variable;
 
 		let controller = new Command();
 
@@ -225,11 +225,15 @@ class Parser
 		
 		let output = "<?php " . command . " (";
 
+		let parser = preg_split("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
+		let variable = "$" . str_replace(")", "]", str_replace("(", "[", str_replace(controller->types, "", parser[0])));		
+		let args[0] = str_replace(parser[0], variable, args[0]);
+		let args[0] = preg_replace("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", "==", args[0]);
+
 		if (not_empty) {
-			let output .= "!empty(" .
-				controller->clean(args[0], controller->isVariable(args[0])) . ")";
+			let output .= "!empty(" . args[0] . ")";
 		} else {
-			let output .= controller->clean(args[0], controller->isVariable(args[0]));
+			let output .= args[0];
 		}
 
 		let output .= "): ?>";

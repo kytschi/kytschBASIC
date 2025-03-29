@@ -14,7 +14,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "This allows you to dump a variable onscreen for inspection"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT

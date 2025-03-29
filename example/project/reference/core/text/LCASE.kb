@@ -18,13 +18,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT LCASE "Hello World!"
+PRINT LCASE("Hello World!")
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT LCASE "Hello World!"
+					PRINT LCASE("Hello World!")
 				END DIV
 				HEADING 4
 					PRINT "See also"

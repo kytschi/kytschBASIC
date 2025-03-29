@@ -20,14 +20,14 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Defining a string and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 DEF test$="kytschBASIC is awesome!"
 PRINT test$
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -41,14 +41,14 @@ PRINT test$
 				SWRITE
 					PRINT "Defining an integer and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 DEF test%=1337
 PRINT test%
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -62,14 +62,14 @@ PRINT test%
 				SWRITE
 					PRINT "Defining a double and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 DEF test#=1337.11
 PRINT test#
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -83,7 +83,7 @@ PRINT test#
 				SWRITE
 					PRINT "Filtering a double to two decimal places"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
@@ -91,13 +91,92 @@ DEF test#=1337.737
 2DP test#
 PRINT test#
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
 					DEF test#=1337.737
 					2DP test#
 					PRINT test#
+				END DIV
+
+				SWRITE "basic h3"
+					PRINT "Mixed"
+				END SWRITE
+				SWRITE
+					PRINT "Defining a variable where the type is mixed, unknown or for example a result set."
+				END SWRITE
+				SWRITE "basic"
+					PRINT "Example"
+				END SWRITE
+				CPRINT
+DATA
+	REM Open the database connection from the config file labelled kytschBASIC.
+	DOPEN "kytschBASIC"
+
+	REM Read from the menu table in the database.
+	DREAD "menu"
+
+	REM Select all entries from the menu table.
+	DSELECT "*"
+
+	REM Condition the select to those that aren't deleted.
+	DWHERE "(slug=:header OR slug=:footer) AND deleted_at IS NULL"
+
+	REM Bind the slug string to be used in the query.
+	DBIND header="header", footer="footer"
+
+	REM Sort the results by their name alphabetically.
+	DSORT "name ASC"
+
+	REM Fetch the results and assign them to menu variable.
+	DFETCH menu&
+END DATA
+
+REM Loop through the results stored in menu& variable.
+FOR item& IN menu&
+	SWRITE
+		PRINT item&("id")
+		PRINT ": "
+		PRINT item&("name")
+	END SWRITE
+NEXT
+				END CPRINT
+				SWRITE "basic"
+					PRINT "Output"
+				END SWRITE
+				DIV "kb-code-block"
+					DATA
+						REM Open the database connection from the config file labelled kytschBASIC.
+						DOPEN "kytschBASIC"
+
+						REM Read from the menu table in the database.
+						DREAD "menu"
+
+						REM Select all entries from the menu table.
+						DSELECT "*"
+
+						REM Condition the select to those that aren't deleted.
+						DWHERE "(slug=:header OR slug=:footer) AND deleted_at IS NULL"
+
+						REM Bind the slug string to be used in the query.
+						DBIND header="header", footer="footer"
+
+						REM Sort the results by their name alphabetically.
+						DSORT "name ASC"
+
+						REM Fetch the results and assign them to menu variable.
+						DFETCH menu&
+					END DATA
+
+					REM Loop through the results stored in menu& variable.
+					FOR item& IN menu&
+						SWRITE
+							PRINT item&("id")
+							PRINT ": "
+							PRINT item&("name")
+						END SWRITE
+					NEXT
 				END DIV
 			END DIV
 		END DIV

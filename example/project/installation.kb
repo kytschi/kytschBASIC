@@ -93,7 +93,7 @@ ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kyt
 						PRINT "See kytschBASIC example configs for more information"
 					END LINK
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Database"
 				END SWRITE
 				SWRITE
@@ -113,7 +113,7 @@ ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kyt
 ]
 				END CPRINT
 
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Routes"
 				END SWRITE
 				SWRITE

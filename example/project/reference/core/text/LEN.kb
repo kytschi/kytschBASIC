@@ -20,13 +20,13 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT LEN "kytschBASIC"
+PRINT LEN("kytschBASIC")
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					PRINT LEN "kytschBASIC"
+					PRINT LEN("kytschBASIC")
 				END DIV
 				HEADING 4
 					PRINT "See also"

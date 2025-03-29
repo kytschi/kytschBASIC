@@ -18,13 +18,19 @@ BODY
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT COS 3.1415926536
+PRINT COS(3.1415926536)
+LINE BREAK
+DEF val#=3.1415926536
+PRINT COS(val#)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT COS 3.1415926536
+					PRINT COS(3.1415926536)
+					LINE BREAK
+					DEF val#=3.1415926536
+					PRINT COS(val#)
 				END DIV
 				HEADING 4
 					PRINT "See also"

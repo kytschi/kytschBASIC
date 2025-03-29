@@ -16,23 +16,23 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Randomly shuffle up an array."
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 DIM test$=("card1","card2","card3","card4","card5","card6","card7","card8","card9","card10")
-SHUFFLE test$
+SHUFFLE(test$)
 FOR val$ IN test$
 	PRINT val$
 	PRINT "&nbsp;"
 NEXT
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
 					DIM test$=("card1","card2","card3","card4","card5","card6","card7","card8","card9","card10")
-					SHUFFLE test$
+					SHUFFLE(test$)
 					FOR val$ IN test$
 						PRINT val$
 						PRINT "&nbsp;"

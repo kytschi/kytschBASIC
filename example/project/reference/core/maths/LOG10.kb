@@ -18,13 +18,13 @@ BODY
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT LOG10 100
+PRINT LOG10(100)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT LOG10 100
+					PRINT LOG10(100)
 				END DIV
 				HEADING 4
 					PRINT "See also"

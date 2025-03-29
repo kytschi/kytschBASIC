@@ -148,7 +148,7 @@ class Text extends Command
 			case "RIGHT":
 				return this->processRight(args);
 			case "STRING":
-				return this->processString(args);
+				return this->processStringSetup(args);
 			case "STRIPLEAD":
 				return this->processStripLead(args);
 			case "STRIPTRAIL":
@@ -172,10 +172,6 @@ class Text extends Command
 	{
 		let args[0] = this->cleanArg("ASC", args[0]);
 		
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid ASC");
-		}
-
 		let args[0] = this->clean(
 			args[0],
 			this->isVariable(args[0])
@@ -188,55 +184,41 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("CENTRE", "", args[0]));
+		let args[0] = this->cleanArg("CENTRE", args[0]);
 		let args = this->args(args[0]);
 		
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid CENTRE");
-		}
-
-		let converted = args[0];
+		let converted = this->outputArg(converted, false, true);
 				
 		if (isset(args[1])) {
-			if (is_numeric(args[1])) {
-				let length = intval(args[1]);
-			}
+			let length = this->outputArg(args[1], false, true);
 		}
-		return "substr(" .
-			this->outputArg(converted, false, true) . ", intval(strlen(" .
-			this->outputArg(converted, false, true) . ") / 2) - 1, intval(" . length . "))";
+		return "substr(" . converted . ", intval(strlen(" . converted . ") / 2) - 1, intval(" . length . "))";
 	}
 
 	public function processChr(args)
 	{
-		let args[0] = trim(str_replace("CHR", "", args[0]));
+		let args[0] = this->cleanArg("CHR", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid CHR");
-		}
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "chr(intval(" . this->outputArg(args[0], false, true) . "))";
 	}
 
 	public function processCount(args)
 	{
-		let args[0] = trim(str_replace("COUNT", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid COUNT");
-		}
-
-		return "count($" . str_replace(this->types, "", args[0]) . ")";
+		let args[0] = this->cleanArg("COUNT", args[0]);
+		
+		return "count(" . this->cleanVarOnly(args[0]) . ")";
 	}
 
 	public function processInstr(args)
 	{
-		let args[0] = trim(str_replace("INSTR", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid INSTR");
-		}
-				
+		let args[0] = this->cleanArg("INSTR", args[0]);
+		let args = this->args(args[0]);
+						
 		var haystack = "", needle = "\"\"";
 		
 		let haystack = this->outputArg(args[0], false, true);
@@ -251,23 +233,25 @@ class Text extends Command
 
 	public function processInt(args)
 	{
-		let args[0] = trim(str_replace("INT", "", args[0]));
+		let args[0] = this->cleanArg("INT", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid INT");
-		}
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "intval(" . this->outputArg(args[0], false, true) . ")";
 	}
 
 	public function processLCase(args)
 	{
-		let args[0] = trim(str_replace("LCASE", "", args[0]));
+		let args[0] = this->cleanArg("LCASE", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid LCASE");
-		}
-		
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
+	
 		return "strtolower(" . this->outputArg(args[0], false, true) . ")";
 	}
 
@@ -275,30 +259,27 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("LEFT", "", args[0]));
+		let args[0] = this->cleanArg("LEFT", args[0]);
+		let args = this->args(args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid LEFT");
-		}
-
-		let converted = args[0];
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
-			}
+			let length = this->outputArg(args[0], false, true);
 		}
-		return "substr(\"" . converted . "\", 0,  intval(" . length . "))";
+
+		return "substr(" . converted . ", 0,  intval(" . length . "))";
 	}
 
 	public function processLen(args)
 	{
-		let args[0] = trim(str_replace("LEN", "", args[0]));
+		let args[0] = this->cleanArg("LEN", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid LEN");
-		}
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "strlen(" . this->outputArg(args[0], false, true) . ")";
 	}
@@ -307,19 +288,14 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("LSET", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid LSET");
-		}
+		let args[0] = this->cleanArg("LSET", args[0]);
+		let args = this->args(args[0]);
 
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
-			}
+			let length = this->outputArg(args[0], false, true);
 		}
 					
 		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . converted . ", intval(" . length . "), 'left')";
@@ -329,41 +305,28 @@ class Text extends Command
 	{
 		var converted, start = 0, end = 1;
 
-		let args[0] = trim(str_replace("MID", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid MID");
-		}
+		let args[0] = this->cleanArg("MID", args[0]);
+		let args = this->args(args[0]);
 					
-		let converted = args[0];
+		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let start = intval(args[0]);
-			}
+			let start = this->outputArg(args[0], false, true);
 		}
 
 		if (isset(args[1])) {
-			if (is_numeric(args[1])) {
-				let end = intval(args[1]);
-				unset(args[1]);
-			}
+			let end = this->outputArg(args[0], false, true);
 		}
 
-		return "substr(\"" . converted . "\", " . (start - 1) . ", " . end . ")";
+		return "substr(" . converted . ", (" . start . " - 1), " . end . ")";
 	}
 
 	public function processReplace(args)
 	{
 		var find = "\"\"", replace = "\"\"", converted = "\"\"";
 
-		let args[0] = trim(str_replace("REPLACE", "", args[0]));
-			
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid REPLACE");
-		}
-
+		let args[0] = this->cleanArg("REPLACE", args[0]);
 		let args = this->args(args[0]);
 
 		if (empty(args)) {
@@ -389,20 +352,16 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("RIGHT", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid RIGHT");
-		}
+		let args[0] = this->cleanArg("RIGHT", args[0]);
+		let args = this->args(args[0]);
 
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
-			}
+			let length = this->outputArg(args[0], false, true);
 		}
+
 		return "substr(" . converted . ", intval(strlen(" . converted . ")) - intval(" . length . "),  intval(" . length . "))";
 	}
 
@@ -410,42 +369,39 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("RSET", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid RSET");
-		}
+		let args[0] = this->cleanArg("RSET", args[0]);
+		let args = this->args(args[0]);
 
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
-			}
+			let length = this->outputArg(args[0], false, true);
 		}
 					
 		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . converted . ", intval(" . length . "))";
 	}
 
-	public function processString(args)
+	public function processStringSetup(args)
 	{
-		var converted, length = 1, value = "";
+		var converted, length = 1;
 
-		let args[0] = trim(str_replace("STRING", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid STRING");
-		}
-					
+		let args[0] = this->cleanArg("STRING", args[0]);
+		let args = this->args(args[0]);
+		
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
-			}
+			let length = this->outputArg(args[0], false, true);
 		}
+
+		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processString(" . converted . ", intval(" . length . "))";		
+	}
+
+	public function processString(converted, length)
+	{
+		var value = "";
 
 		while length {
 			let value .= converted;
@@ -459,18 +415,15 @@ class Text extends Command
 	{
 		var converted, value = "", strip_char = "";
 
-		let args[0] = trim(str_replace("STRIPLEAD", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid STRIPLEAD");
-		}
-					
+		let args[0] = this->cleanArg("STRIPLEAD", args[0]);
+		let args = this->args(args[0]);
+	
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 				
 		if (isset(args[0])) {
-			let value = args[0];
-			let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
+			let value = this->outputArg(args[0], false, true);
+			let strip_char = "is_numeric(" . value . ") ? chr(intval(" . value . ")) : " . value;
 		}
 
 		return "ltrim(" . converted . ", " . strip_char . ")";
@@ -480,18 +433,15 @@ class Text extends Command
 	{
 		var converted, value = "", strip_char = "";
 
-		let args[0] = trim(str_replace("STRIPTRAIL", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid STRIPTRAIL");
-		}
+		let args[0] = this->cleanArg("STRIPTRAIL", args[0]);
+		let args = this->args(args[0]);
 					
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
-			let value = args[0];
-			let strip_char = "is_numeric(\"" . value . "\") ? chr(intval(\"" . value . "\")) : \"" . value . "\"";
+			let value = this->outputArg(args[0], false, true);
+			let strip_char = "is_numeric(" . value . ") ? chr(intval(" . value . ")) : " . value;
 		}
 
 		return "rtrim(" . converted . ", " . strip_char . ")";
@@ -499,22 +449,24 @@ class Text extends Command
 
 	public function processToString(args)
 	{
-		let args[0] = trim(str_replace("STR", "", args[0]));
+		let args[0] = this->cleanArg("STR", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid STR");
-		}
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "(string)" . this->outputArg(args[0], false, true);
 	}
 
 	public function processUCase(args)
 	{
-		let args[0] = trim(str_replace("UCASE", "", args[0]));
+		let args[0] = this->cleanArg("UCASE", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid UCASE");
-		}
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "strtoupper(" . this->outputArg(args[0], false, true) . ")";
 	}
@@ -523,18 +475,15 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("UNLEFT", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid UNLEFT");
-		}
+		let args[0] = this->cleanArg("UNLEFT", args[0]);
+		let args = this->args(args[0]);
 
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
 			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
+				let length = this->outputArg(args[0], false, true);
 			}
 		}
 
@@ -545,18 +494,15 @@ class Text extends Command
 	{
 		var converted, length = 1;
 
-		let args[0] = trim(str_replace("UNRIGHT", "", args[0]));
-
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid UNRIGHT");
-		}
+		let args[0] = this->cleanArg("UNRIGHT", args[0]);
+		let args = this->args(args[0]);
 
 		let converted = this->outputArg(args[0], false, true);
 		array_shift(args);
 		
 		if (isset(args[0])) {
 			if (is_numeric(args[0])) {
-				let length = intval(args[0]);
+				let length = this->outputArg(args[0], false, true);
 			}
 		}
 		return "substr(" . converted . ", 0,  intval(strlen(" . converted . ")) - intval(" . length . "))";
@@ -564,11 +510,12 @@ class Text extends Command
 
 	public function processVal(args)
 	{
-		let args[0] = trim(str_replace("VAL", "", args[0]));
+		let args[0] = this->cleanArg("VAL", args[0]);
 
-		if (args[0] != "0" && empty(args[0])) {
-			throw new \Exception("Invalid VAL");
-		}
+		let args[0] = this->clean(
+			args[0],
+			this->isVariable(args[0])
+		);
 
 		return "floatval(" . this->outputArg(args[0], false, true) . ")";
 	}

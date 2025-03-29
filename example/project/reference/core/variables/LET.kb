@@ -20,14 +20,14 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Defining a string and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 LET test$="kytschBASIC is awesome!"
 PRINT test$
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -41,14 +41,14 @@ PRINT test$
 				SWRITE
 					PRINT "Defining an integer and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 LET test%=1337
 PRINT test%
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -62,14 +62,14 @@ PRINT test%
 				SWRITE
 					PRINT "Defining a double and using the variable"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
 LET test#=1337.11
 PRINT test#
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
@@ -83,7 +83,7 @@ PRINT test#
 				SWRITE
 					PRINT "Filtering a double to two decimal places"
 				END SWRITE
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
@@ -91,7 +91,7 @@ LET test#=1337.1337
 2DP test#
 PRINT test#
 				END CPRINT
-				SWRITE "h3"
+				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"

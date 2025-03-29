@@ -46,24 +46,21 @@ class Mail extends Command
 			return "<?php $KBMAIL['from'] = " .
 				this->clean(
 					args,
-					false,
-					in_array(substr(args, strlen(args) - 1, 1), this->types) ? true : false
+					this->isVariable(args)					
 				) .
 			"; ?>";
 		} elseif (command == "MAILTO") {
 			return "<?php $KBMAIL['to'] = " .
 				this->clean(
 					args,
-					false,
-					in_array(substr(args, strlen(args) - 1, 1), this->types) ? true : false
+					this->isVariable(args)
 				) .
 			"; ?>";
 		} elseif (command == "MAILSUBJECT") {
 			return "<?php $KBMAIL['subject'] = " .
 				this->clean(
 					args,
-					false,
-					in_array(substr(args, strlen(args) - 1, 1), this->types) ? true : false
+					this->isVariable(args)
 				) .
 			"; ?>";
 		}  elseif (command == "MAILBODY") {

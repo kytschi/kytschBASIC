@@ -18,19 +18,20 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PRINT SIN 100
+PRINT SIN(100)
 LINE BREAK
 
-DEF var#=SIN 50
+DEF var#=SIN(50)
 PRINT var#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					PRINT SIN 100
+					PRINT SIN(100)
 					LINE BREAK
-					DEF var#=SIN 50
+
+					DEF var#=SIN(50)
 					PRINT var#
 				END DIV
 				HEADING 4
