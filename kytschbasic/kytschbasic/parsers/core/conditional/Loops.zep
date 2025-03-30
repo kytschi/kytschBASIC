@@ -68,10 +68,12 @@ class Loops extends Command
 			throw new Exception("Invalid for loop");
 		}
 
-		var variable, step, dir = " <= ", start = 0;
+		var variable, step, dir = " <= ", start = 0, end = 1;
 		let variable = explode("=", args[0]);
 
 		let start = this->clean(variable[1], false);
+		let end = this->clean(args[1], this->isVariable(args[1])) ;
+
 		let variable = "$" . str_replace(")", "]", str_replace("(", "[", str_replace(this->types, "", variable[0])));
 
 		let step = explode(" STEP ", args[1]);
@@ -92,7 +94,7 @@ class Loops extends Command
 			variable . " = intval(" . start . "); " .
 			this->clean(variable, false) .
 			dir .
-			this->clean(args[1], this->isVariable(args[1])) . "; " .
+			"intval(" . end . "); " .
 			this->clean(variable, false) . step . ") { ?>";
 	}
 	

@@ -65,9 +65,9 @@ class Parser
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Ellipse",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Sprite",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Window",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape"
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Sprite"
 	];
 
 	/*
@@ -165,12 +165,12 @@ class Parser
 		} elseif (command == "ELSEIF") {
 			return this->processIf(line, "elseif", args);
 		} elseif (command == "ELSE") {
-			return "<?php else: ?>";
+			return "<?php else: ?>\n";
 		} elseif (trim(command) == "END IF") {
-			return "<?php endif; ?>";
+			return "<?php endif; ?>\n";
 		} elseif (command == "CASE") {
 			if (this->has_case) {
-				let output .= "<?php break; ?>" . this->newline;
+				let output .= "<?php break; ?>\n" . this->newline;
 				let this->has_case = false;
 			}
 
@@ -181,26 +181,26 @@ class Parser
 					args,
 					parser->isVariable(args)
 				)
-				. ": ?>" . this->newline;
+				. ": ?>\n" . this->newline;
 
 			let this->has_case = true;
 
 			return output;
 		} elseif (command == "DEFAULT") {
 			if (this->has_case) {
-				let output .= "<?php break; ?>" . this->newline;
+				let output .= "<?php break; ?>\n" . this->newline;
 				let this->has_case = false;
 			}
-			let output .= "<?php default: ?>" . this->newline;
+			let output .= "<?php default: ?>\n" . this->newline;
 			let this->has_case = true;
 
 			return output;
 		} elseif (command == "END SELECT") {
 			if (this->has_case) {
-				let output .= "<?php break; ?>" . this->newline;
+				let output .= "<?php break; ?>\n" . this->newline;
 				let this->has_case = false;
 			}
-			return "<?php } ?>";
+			return "<?php } ?>\n";
 		} elseif (command == "VERSION") {
 			return "<span class=\"kb-version\">" . constant("VERSION") . "</span>";
 		}
@@ -236,7 +236,7 @@ class Parser
 			let output .= args[0];
 		}
 
-		let output .= "): ?>";
+		let output .= "): ?>\n";
 
 		if (count(args) > 1) {
 			if (!empty(trim(args[1]))) {

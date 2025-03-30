@@ -35,13 +35,13 @@ class AFunction extends Command
 		if (command == "AFUNCTION") {
 			return this->parseFunction(args);
 		} elseif (command == "END AFUNCTION") {
-			return "}\n</script>";
+			return "}\n</script>\n";
 		}
 	}
 
 	private function parseFunction(args)
 	{
-		var output = "<script type='text/javascript'>\n", splits, str;
+		var output = "<script type=\"text/javascript\">\n", splits, str;
 
 		preg_match_all("/\((.*?)\)/", args, splits);
 		

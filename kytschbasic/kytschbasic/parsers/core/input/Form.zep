@@ -102,7 +102,7 @@ class Form extends Command
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id=" . this->outputArg(args[4]);
+			let params .= " id=" . (args[4]);
 		} else {
 			let params .= " id=" . this->outputArg(this->genID("kb-form-input"));
 		}
@@ -112,7 +112,7 @@ class Form extends Command
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let params .= " " . args[6];
+			let params .= " " . trim(this->outputArg(args[6], false), "\"");
 		}
 		
 		return "<?= \"<input type=\\\"" . type . "\\\"" . params . ">\"; ?>";
@@ -120,10 +120,10 @@ class Form extends Command
 
 	private function processTextarea(string line, string type = "text")
 	{
-		var args, params="", value = "";
+		var args, params = "", value = "";
 
 		let args = this->args(line);
-		
+				
 		if (isset(args[0]) && !empty(args[0])) {
 			let params .= " name=" . this->outputArg(args[0]);
 		} else {
@@ -131,7 +131,7 @@ class Form extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let value = args[1];
+			let value = this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
@@ -153,10 +153,10 @@ class Form extends Command
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let params .= " " . args[6];
+			let params .= " " . trim(this->outputArg(args[6], false), "\"");
 		}
 		
-		return "<?= \"<textarea" . params . ">" . value . "</textarea>\"; ?>";
+		return "<?= \"<textarea" . params . ">\" . " . value . " . \"</textarea>\"; ?>";
 	}
 
 	private function processCaptcha(args)

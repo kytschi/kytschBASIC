@@ -44,15 +44,15 @@ class Screen extends Command
 		let args = this->args(args);
 
 		if (isset(args[0])) {
-			let params .= " id=\\\"" . args[0] . "\\\"";
+			let params .= " id=" . this->outputArg(args[0]);
 		} else {
-			let params .= " id=\\\"" . this->genID("kb-screen") . "\\\"";
+			let params .= " id=" . this->outputArg(this->genID("kb-screen"));
 		}
 
 		if (isset(args[1])) {
-			let params .= " class=\\\"" . args[1] . "\\\"";
+			let params .= " class=" . this->outputArg(args[1]);
 		}
 		
-		return "<div" . params . ">";
+		return "<?= \"<div" . params . ">\"; ?>";
 	}
 }

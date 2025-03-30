@@ -51,7 +51,7 @@ class Text extends Command
 		let args = this->args(args);
 
 		let value = args[0];
-
+		
 		if (substr(value, 0, 1) == "{") {
 			let value = this->outputArg(value, false, true);
 		}
@@ -210,8 +210,9 @@ class Text extends Command
 	public function processCount(args)
 	{
 		let args[0] = this->cleanArg("COUNT", args[0]);
-		
-		return "count(" . this->cleanVarOnly(args[0]) . ")";
+		let args[0] = this->clean(args[0], false);
+				
+		return "count(" . args[0] . ")";
 	}
 
 	public function processInstr(args)
