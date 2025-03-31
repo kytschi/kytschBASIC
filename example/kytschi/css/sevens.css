@@ -152,6 +152,22 @@ html, body {
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
+    width: 100%;
+}
+
+#sevens form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sevens .form-input {
+    display: inline-block;
+    width: calc(100% - 6px);
+    margin-top: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 35px;
 }
 
 #sevens .btn-last-card {
@@ -163,8 +179,22 @@ html, body {
     color: #fff;
 }
 
+#sevens .btn-submit {
+    background-color: #ffd400;
+}
+
 #sevens .btn-new-game {
     margin-top: 40px;
     background-color: #2794e8;
     color: #fff;
+}
+
+#sevens .no-players {
+    display: flex;
+}
+
+#sevens .no-players span {
+    color: #fff;
+    width: 50%;
+    padding-top: 15px;
 }

@@ -35,6 +35,8 @@ class Form extends Command
 			return "</form>";
 		} elseif (command == "FORM") {
 			return this->processForm(args);
+		} elseif (command == "NUMBERINPUT") {
+			return this->processInput(args, "number");
 		} elseif (command == "TEXTINPUT") {
 			return this->processInput(args);
 		} elseif (command == "TEXTAREA") {

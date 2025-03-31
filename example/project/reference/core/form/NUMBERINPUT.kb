@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						NUMBERINPUT "input_test",, "form-input", "Enter your name"
+						NUMBERINPUT "input_test",, "form-input", "Enter a number"
 					END TCELL
 				END TROW
 				TROW

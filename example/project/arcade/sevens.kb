@@ -336,7 +336,7 @@ $(document).ready(function() {
         }
     }
 
-    for (iLoop = 1; iLoop <= hands.length - 1; iLoop++) {
+    for (iLoop = 0; iLoop <= hands.length - 1; iLoop++) {
         turn = iLoop;
         hands[turn].forEach((card, index) => {
             if (!played) {
@@ -435,7 +435,6 @@ SCREEN "sevens"
                     NEXT
                 END TBODY
             END TABLE
-
             TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
         END WINDOW
     END WINDOW
@@ -456,6 +455,16 @@ SCREEN "sevens"
             BUTTON "btnNewGame", "btn-new-game"
                 PRINT "new game"
             END BUTTON
+            FORM "form_test"
+                LET no_players%=no_players%+1
+                DIV "no-players"
+                    PRINT "No. players"
+                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",, "max='6'"
+                END DIV
+                BUTTON SUBMIT "btnSubmit",  "btn-submit"
+                    PRINT "setup"
+                END BUTTON
+            END FORM
         END WINDOW
     END WINDOW
 END SCREEN
