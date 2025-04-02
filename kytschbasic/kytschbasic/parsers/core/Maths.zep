@@ -31,7 +31,7 @@ class Maths extends Variables
 {
 	private bracket_checks = ["%)", "$)", "#)", "&)"];
 
-	public function equation(command)
+	/*public function equation(command)
 	{
 		if (substr(command, 0, 1) == "\"" || command == "" || command === null) {
 			return command;
@@ -74,29 +74,13 @@ class Maths extends Variables
 		return command;
 	}
 
-	public function parse(string command, string args)
+	public function parse(string line, string command, array args)
 	{
 		if (substr(command, 0, 1) == "\"") {
 			return null;
 		}
 
 		return this->processValue(this->args(args));
-		
-		/*		
-		if (command == "RND") {
-			
-		} elseif (command == "SGN") {
-			let splits = intval(splits);
-			if (splits > 0) {
-				return 1;
-			} elseif (splits < 0) {
-				return -1;
-			} else {
-				return 0;
-			}
-		}
-
-		return null;*/
 	}
 
 	public function processValue(args)
@@ -305,5 +289,5 @@ class Maths extends Variables
 		let args[0] = this->cleanArg("TAN", args[0]);
 		let args = this->args(args[0]);
 		return "tan(floatval(" . this->outputArg(args[0], false) . "))";
-	}
+	}*/
 }

@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Screen extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "SCREEN") {
 			return this->parseScreen(args);
@@ -54,5 +54,5 @@ class Screen extends Command
 		}
 		
 		return "<?= \"<div" . params . ">\"; ?>";
-	}
+	}*/
 }

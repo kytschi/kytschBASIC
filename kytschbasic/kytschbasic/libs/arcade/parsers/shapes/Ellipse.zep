@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Ellipse extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "ELLIPSE") {
 			return this->parseEllipse(args);
@@ -50,5 +50,5 @@ class Ellipse extends Command
 			'width' => " . (isset(args[2]) ? intval(args[2]) : 50) . ",
 			'height' => " . (isset(args[3]) ? intval(args[3]) : 50) . ",
 		]; ?>";
-	}
+	}*/
 }

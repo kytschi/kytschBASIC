@@ -31,9 +31,21 @@ use KytschBASIC\Parsers\Core\Maths;
 
 class Loops extends Command
 {
-	public function parse(string command, args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "WHILE") {
+		switch (command) {
+			case "FOR":
+				return this->processFor(line, args);
+			case "WEND":
+				return "<?php } ?>";
+			case "NEXT":
+				return "<?php } ?>";
+			case "END WHILE":
+				return "<?php } ?>";
+			default:
+				return null;
+		}
+		/*if (command == "WHILE") {
 			return this->processWhile(args);
 		} elseif (command == "WEND" || command == "NEXT" || command == "END WHILE") {
 			return "<?php } ?>";
@@ -45,36 +57,51 @@ class Loops extends Command
 			}
 		}
 
-		return null;
+		return null;*/
+	}
+
+	private function processFor(string line, array args)
+	{
+		var splits;
+
+		if (empty(args[0])) {
+			throw new Exception("Invalid FOR statement");
+		}
+
+		let splits = preg_split("/IN(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
+		if (!empty(splits)) {
+			return this->processForIn(splits);
+		}
+
+		let splits = preg_split("/TO(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
+		if (empty(splits)) {
+			throw new Exception("Invalid FOR statement");
+		}
 	}
 
 	private function processForIn(args)
 	{
-		let args = explode(" IN ", args);
-		if (count(args) < 1) {
-			throw new Exception("Invalid for loop");
-		}
-
 		return "<?php foreach (" .
-			this->cleanVarOnly(args[1]) .
+			trim(args[1]) .
 			" as " .
-			this->cleanVarOnly(args[0]) . ") { ?>";
+			trim(args[0]) . ") { ?>";
 	}
-
+/*
 	private function processForTo(args)
 	{
+		var output = "<?php for (", variable, step, dir = " <= ", vars, splits;
+
 		let args = explode(" TO ", args);
 		if (count(args) < 1) {
 			throw new Exception("Invalid for loop");
 		}
 
-		var variable, step, dir = " <= ", start = 0, end = 1;
-		let variable = explode("=", args[0]);
-
-		let start = this->clean(variable[1], false);
-		let end = this->clean(args[1], this->isVariable(args[1])) ;
-
-		let variable = "$" . str_replace(")", "]", str_replace("(", "[", str_replace(this->types, "", variable[0])));
+		let splits = explode("=", args[0]);
+		let vars = this->args(splits[0]);
+		let variable = vars[0];
+		let vars = this->args(splits[1]);
+		
+		let output .= variable . " = intval(" . vars[0] . "); " . variable;
 
 		let step = explode(" STEP ", args[1]);
 		if (count(step) > 1) {
@@ -90,12 +117,11 @@ class Loops extends Command
 			let step = " += 1";
 		}
 
-		return "<?php for (" .
-			variable . " = intval(" . start . "); " .
-			this->clean(variable, false) .
-			dir .
-			"intval(" . end . "); " .
-			this->clean(variable, false) . step . ") { ?>";
+		let vars = this->args(args[1]);
+		
+
+		let output .= dir . "intval(" . vars[0] . "); " . variable . step;
+		return output . ") { ?>";
 	}
 	
 	private function processWhile(args)
@@ -105,5 +131,5 @@ class Loops extends Command
 		let output .= (new Maths())->equation(args);
 
 		return output . ") { ?>";
-	}
+	}*/
 }

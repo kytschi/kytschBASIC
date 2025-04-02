@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Image extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "IMAGE") {
 			return this->processImage(args);
@@ -62,5 +62,5 @@ class Image extends Command
 		}
 
 		return output . "/>\"; ?>";
-	}
+	}*/
 }

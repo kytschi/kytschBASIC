@@ -33,7 +33,7 @@ class Bitmap extends Command
 	private image = null;
 	private copy = null;
 
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "BITMAP") {
 			return this->parseBitmap(args);
@@ -161,5 +161,5 @@ class Bitmap extends Command
 		let output .= "$KBCOLOUR, $KBBITMAPFONT, ";
 
 		return output . value . "); ?>";
-	}
+	}*/
 }

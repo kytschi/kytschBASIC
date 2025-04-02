@@ -25,45 +25,44 @@
  */
 namespace KytschBASIC\Parsers\Core\Text;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
 class Text extends Command
 {
-	public function parse(string command, string args)
+	public function parse(string line, string command, array args)
 	{
 		if (command == "PRINT") {
 			return this->processPrint(args);
 		} elseif (command == "END SWRITE") {
 			return "</p>";
-		} elseif (command == "SWRITE") {
+		} /*elseif (command == "SWRITE") {
 			return this->processSWrite(args);
 		} elseif (command == "LINE BREAK") {
 			return "<br/>";
-		}
+		}*/
 
 		return null;
 	}
 
-	private function processPrint(args)
+	private function processPrint(array args)
 	{
 		var value="", output = "<?= \"<span";
-
-		let args = this->args(args);
-
+		
 		let value = args[0];
 		
 		if (substr(value, 0, 1) == "{") {
-			let value = this->outputArg(value, false, true);
+			let value = this->outputArg(value);
 		}
 		
-		if (isset(args[1])) {
+		if (isset(args[1]) && !empty(args[1])) {
 			let output .= " class=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
 			let output .= " id=" . this->outputArg(args[2]);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-span"));
+			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
 		}
 
 		if (isset(args[3])) {
@@ -76,7 +75,7 @@ class Text extends Command
 		
 		return output . ">\" . " . value . " . \"</span>\";?>";
 	}
-
+/*
 	public function processPadding(string text, int length, string dir = "right")
 	{
 		var spaces="", end;
@@ -111,15 +110,11 @@ class Text extends Command
 		
 		return "<?= \"<p" . params . ">\"; ?>";
 	}
-
-	public function processValue(args)
-	{
-		if (is_string(args)) {
-			let args = [args];
-		}
-		
-		switch (this->getCommand(args[0])) {
-			case "ASC":
+*/
+	public function processValue(arg)
+	{		
+		switch (this->getCommand(arg)) {
+			/*case "ASC":
 				return this->processAsc(args);
 			case "CENTRE":
 				return this->processCentre(args);
@@ -154,20 +149,20 @@ class Text extends Command
 			case "STRIPTRAIL":
 				return this->processStripTrail(args);
 			case "STR":
-				return this->processToString(args);
+				return this->processToString(args);*/
 			case "UCASE":
-				return this->processUCase(args);
-			case "UNLEFT":
+				return this->processUCase(arg);
+			/*case "UNLEFT":
 				return this->processUnLeft(args);
 			case "UNRIGHT":
 				return this->processUnRight(args);
 			case "VAL":
-				return this->processVal(args);
+				return this->processVal(args);*/
 			default:
 				return null;
 		}
 	}
-
+/*
 	public function processAsc(args)
 	{
 		let args[0] = this->cleanArg("ASC", args[0]);
@@ -210,8 +205,12 @@ class Text extends Command
 	public function processCount(args)
 	{
 		let args[0] = this->cleanArg("COUNT", args[0]);
-		let args[0] = this->clean(args[0], false);
-				
+		let args = this->args(args[0]);
+
+		if (count(args) > 1) {
+			throw new Exception("Invalid COUNT");
+		}
+		
 		return "count(" . args[0] . ")";
 	}
 
@@ -459,19 +458,12 @@ class Text extends Command
 
 		return "(string)" . this->outputArg(args[0], false, true);
 	}
-
-	public function processUCase(args)
+*/
+	public function processUCase(arg)
 	{
-		let args[0] = this->cleanArg("UCASE", args[0]);
-
-		let args[0] = this->clean(
-			args[0],
-			this->isVariable(args[0])
-		);
-
-		return "strtoupper(" . this->outputArg(args[0], false, true) . ")";
+		return "strtoupper(" . this->cleanArg("UCASE", arg) . ")";
 	}
-
+/*
 	public function processUnLeft(args)
 	{
 		var converted, length = 1;
@@ -520,4 +512,5 @@ class Text extends Command
 
 		return "floatval(" . this->outputArg(args[0], false, true) . ")";
 	}
+		*/
 }

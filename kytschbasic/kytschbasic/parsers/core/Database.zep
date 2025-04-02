@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Database extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		var err;
 
@@ -213,5 +213,5 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 	{
 		let args = this->args(args);
 		return "<?php $KBDBWHERE = \" WHERE \" . " . this->outputArg(args[0], false, true) . "; ?>";
-	}
+	}*/
 }

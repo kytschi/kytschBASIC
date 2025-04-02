@@ -32,7 +32,7 @@ class Misc extends Command
 {
 	public function processFunction(args)
 	{
-		if (is_string(args)) {
+		/*if (is_string(args)) {
 			let args = [args];
 		}
 
@@ -40,10 +40,7 @@ class Misc extends Command
 			case "COUNT":
 				return (new Text())->processCount(args);
 			default:
-				return this->clean(
-					args[0],
-					this->isVariable(args[0])
-				);
-		}
+				return null;
+		}*/
 	}
 }

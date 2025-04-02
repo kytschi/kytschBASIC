@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Heading extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "END HEADING") {
 			return this->processHeading(args, true);
@@ -64,5 +64,5 @@ class Heading extends Command
 		}
 
 		return "<?= \"<h" . size . params . ">\"; ?>";
-	}
+	}*/
 }

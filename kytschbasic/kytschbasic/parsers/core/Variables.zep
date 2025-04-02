@@ -39,90 +39,82 @@ class Variables
 
 	public function args(string line)
 	{
-		var args = [], arg, vars, str, cleaned, splits, text, value;
+		var args = [], arg, vars, str, splits, subvars, cleaned, find, text;
 
 		let text = new Text();
-		
-		if (empty(line)) {
-			return [];
+
+		// Clean any + used for string join.
+		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", ".", line);
+
+		//Grab all vars.
+		preg_match_all("/\\b[\\w.-]*[$%#&](?!\\w)/u", line, vars);
+		for str in vars[0] {
+			let line = str_replace(str, "$" . str_replace(this->types, "", str), line);
 		}
 
-		if (substr(line, 0, 1) == "(") {
-			return [line];
+		//Grab all form vars.
+		preg_match_all("/(_GET|_POST|_REQUEST)(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
+		for str in vars[1] {
+			let line = substr_replace(line, "$" . str[0], str[1], strlen(str[0]));
 		}
-
-		let splits = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?![^()]*\))/", line);
-						
+				
+		// Split on the equals.
+		let splits = preg_split("/(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?<!=)=/", line, 2, PREG_SPLIT_NO_EMPTY);
 		for arg in splits {
 			let arg = trim(arg);
 
-			if (empty(arg)) {
-				let args[] = arg;
-				continue;
-			}
-			
-			let vars = preg_split("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", arg);
-			
-			if (count(vars) > 1) {
-				let cleaned = "";
+			// Split on comma.
+			let vars = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", arg);
+			for str in vars {
+				let str = trim(str);
 
-				for str in vars {
-					let str = trim(str);
-					let value = text->processValue(str);
-					if (value != null) {
-						let cleaned .= value . " . ";
+				//Check to see if its a maths equation.
+				let subvars = preg_split("/\*|\+|\<-|\-|\>=|\>|\<=|\<|\==|\//", str, 0, 2);
+				if (count(subvars) > 1) {
+					let args[] = str;
+					continue;
+				}
+				
+				//Grab all array elements.
+				let cleaned = this->argsArrayElements(str);
+				
+				if (this->getCommand(cleaned)) {
+					let find = text->processValue(cleaned);
+					if (find != null) {
+						let cleaned = find;
 					} else {
-						let cleaned .= this->clean(
-							str,
-							this->isVariable(str),
-							[str]
-						) . " . ";
+						let find = this->processValue(cleaned);
+						if (find != null) {
+							let cleaned = find;
+						}
 					}
 				}
 
-				let args[] = rtrim(cleaned, " . ");
-			} else {				
-				if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
-					let args[] = arg;	
-				} else {
-					let value = text->processValue(arg);
-					if (value != null) {
-						let args[] = value;
-					} else {
-						let vars = preg_split("/(?<!\")(?:\$\(|%\(|#\(|&\()/", rtrim(arg, ")"));
-						if (count(vars) > 1) {
-							if (!is_numeric(vars[1]) && substr(vars[1], 0, 1) != "\"") {
-								let arg = str_replace(
-									vars[1],
-									"$" . str_replace(this->types, "", vars[1]),
-									arg
-								);
-							}
-	
-							let arg = str_replace("(", "[", str_replace(")", "]", arg));
-	
-							let arg = str_replace(
-								[vars[0] . "$", vars[0] . "%", vars[0] . "#", vars[0] . "&"],
-								"$" . str_replace(this->types, "", vars[0]),
-								arg
-							);
-							
-							let args[] = arg;
-						} else {
-							let args[] = this->clean(
-								arg,
-								this->isVariable(arg),
-								[arg]
-							);
-						}						
-					}
-				}
+				let args[] = cleaned;
 			}
 		}
 
 		return args;
 	}
 
+	private function argsArrayElements(arg)
+	{
+		var splits, str, cleaned;
+		
+		preg_match_all("/\((?:[^()\"]+|\"(?:\\\\.|[^\\\\\"])*\")*\)/", arg, splits, PREG_OFFSET_CAPTURE);
+				
+		if (empty(splits[0])) {
+			return arg;
+		}
+						
+		for str in splits[0] {
+			let cleaned = rtrim(ltrim(str[0], "("), ")");
+			let arg = substr_replace(arg, "[" . cleaned . "]", str[1], strlen(str[0]));
+		}
+		
+		return this->argsArrayElements(arg);
+	}
+/*
 	private function arrayMod(args, bool pop = true)
 	{
 		var value;
@@ -151,106 +143,30 @@ class Variables
 			}
 		}
 	}
-
-	public function clean(string line, bool inline_string = true, args = null)
-	{
-		var arg, value = null, maths_controller, vars;
-
-		let maths_controller = new Maths();
-
-		if (!args) {
-			let args = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", trim(line));
-		}
-		
-		let line = "";
-		
-		for arg in args {
-			let arg = trim(arg);
-
-			let value = maths_controller->processValue(arg);
-			if (value !== null) {
-				let line .= value;
-			} else {
-				let value = Display::parse(arg);
-
-				if (value !== null) {
-					let line .= value;
-				} else {
-					if (this->isFormVariable(arg)) {
-						let inline_string = false;
-						let arg = "$" . arg;
-					}
-
-					if (substr(arg, strlen(arg) - 1, 1) == ")") {
-						let vars = preg_split("/(?<!\")(?:\$\(|%\(|#\(|&\()/", rtrim(arg, ")"));
-						
-						if (!is_numeric(vars[1]) && substr(vars[1], 0, 1) != "\"") {
-							let arg = str_replace(
-								vars[1],
-								"$" . str_replace(this->types, "", vars[1]),
-								arg
-							);
-						}
-
-						let arg = str_replace("(", "[", str_replace(")", "]", arg));
-
-						let arg = str_replace(
-							[vars[0] . "$", vars[0] . "%", vars[0] . "#", vars[0] . "&"],
-							"$" . str_replace(this->types, "", vars[0]),
-							arg
-						);
-
-						let line .= inline_string ? this->outputArg("{" . arg . "}", false) : arg;
-					} else {
-						let line .= inline_string ? this->outputArg("{$" . str_replace(this->types, "", arg) . "}", false) : arg;
-					}
-				}
-			}
-		}
-		
-		return (value !== null) ? maths_controller->equation(line) : line;
-	}
-	
+	*/
 	public function cleanArg(string command, arg)
 	{
-		let arg = preg_replace("/\)$/", "", trim(str_replace(command . "(", "", arg)));
+		let arg = rtrim(
+			rtrim(
+				str_replace(
+					[
+						command . "(",
+						command . "["
+					],
+					"",
+					arg
+				),
+				"]"
+			),
+		")");
 
-		if ((arg != "0" && empty(arg)) || substr(arg, 0, strlen(command)) == command) {
-			throw new Exception("Invalid " . arg);
+		if ((arg != "0" && empty(arg))) {
+			throw new Exception("Invalid " . command);
 		}
 
 		return arg;
 	}
-
-	private function cleanArray(arg)
-	{
-		return str_replace("(", "[", str_replace(")", "]", arg));
-	}
-
-	public function cleanVarOnly(arg, bool clean = true, bool types = true)
-	{
-		var search;
-		
-		let search = types ? this->types : [];
-
-		let search[] = "\"{";
-		let search[] = "}\"";
-
-		return (types ? "$" : "") . str_replace(
-			")",
-			"]",
-			str_replace(
-				"(",
-				"[",
-				str_replace(
-					search,
-					"",
-					(clean ? this->clean(arg, false) : arg)
-				)
-			)
-		);
-	}
-
+/*
 	public function constants(string line)
 	{
 		var con, constants = [
@@ -266,192 +182,9 @@ class Variables
 
 		return line;
 	}
-
-	private function createArray(string line, splits, bool javascript = false)
-	{
-		var output = "<?php $", converted = "";
-
-		if (javascript) {
-			let output = "<script type=\"text/javascript\">\nvar ";
-		}
-
-		if (count(splits) > 1) {
-			let output .= splits[0] . " = ";
-			
-			if (this->isVariable(line)) {
-				let converted = this->clean(
-					splits[1],
-					this->isVariable(line)
-				);
-			} elseif (substr(line, strlen(line) - 2, 1) == "\")") {
-				let converted = str_replace(")", "]", str_replace("(", "[", splits[1])) . ")";
-			} else {
-				let converted = "array(" . str_replace(["(", ")"], "", splits[1]) . ")";
-			}
-
-			if (substr(converted, 0, 3) == "\"{$") {
-				let converted = this->cleanVarOnly(converted, false);
-			}
-
-			if (javascript) {
-				let output .= "<?= (new KytschBASIC\\Parsers\\Core\\Variables())->outputForJavascript(" . converted . "); ?>";
-			} else {
-				let output .= converted;
-			}
-
-			return output . (javascript ? "\n</script>\n" : "; ?>");
-		} else {
-			throw new Exception("Invalid DIM");
-		}		
-	}
-
-	private function createElement(string line, splits, string type)
-	{
-		var vars, output = "", cleaned;
-		
-		if (substr(line, strlen(line) - 1, 1) == ")") {
-			let vars = preg_split("/(?<!\")(?:\$\(|%\(|#\(|&\()/", rtrim(splits[1], ")"));
-
-			let output .= "$" . vars[0] . "[";
-
-			if (is_numeric(vars[1])) {
-				let output .= vars[1];
-			} else {
-				let cleaned = this->clean(
-					vars[1],
-					this->isVariable(vars[1])
-				);
-
-				if (substr(cleaned, 0, 3) == "\"{$") {
-					let cleaned = this->cleanVarOnly(cleaned, false);
-				}
-
-				let output .= cleaned;
-			}
-
-			let output .= "]";
-		} else {
-			let vars = this->args(splits[1]);
-			if (count(vars) == 1) {
-				if (substr(vars[0], 0, 3) == "\"{$") {
-					let vars[0] = this->cleanVarOnly(vars[0], false);
-				}
-			}
-						
-			if (type == "%(") {
-				let vars[0] = "intval(" . vars[0] . ")";
-			} elseif (type == "#(") {
-				let vars[0] = "(double)" . vars[0] . "";
-			}
-
-			let output .= vars[0];
-		}
-
-		return output;
-	}
-
-	private function createInt(string line, splits, string var_type = "", bool javascript = false)
-	{
-		var output = "<?php $", converted = "";
-
-		if (javascript) {
-			let output = "<script type=\"text/javascript\">\nvar ";
-		}
-
-		array_shift(splits);
-
-		let output .= line . var_type . " = ";
-
-		if (is_numeric(splits[0])) {
-			let converted = splits[0];
-		} else {
-			let converted = (new Misc())->processFunction(splits);
-			let converted = (new Maths())->equation(converted);
-		}
-
-		if (javascript) {
-			let converted = "\"<?= (new KytschBASIC\\Parsers\\Core\\Variables())->outputForJavascript(" . converted . "); ?>\"";
-		}
-
-		return output . (javascript ? "parseInt(" . converted . ");\n</script>\n" : "intval(" . converted . "); ?>");
-	}
-
-	private function createDouble(string line, splits, string var_type = "")
-	{
-		var output = "<?php $";
-
-		array_shift(splits);
-
-		let output .= line . var_type . " = (double)";
-
-		if (is_numeric(splits[0])) {
-			let output .= splits[0];
-		} else {
-			let output .= (new Misc())->processFunction(splits);
-		}
-
-		return output . "; ?>";
-	}
-
-	private function createString(string line, splits, string var_type = "", bool javascript = false)
-	{
-		var strings, str, item, output = "<?php $", cleaned = "", vars, converted = "";
-
-		if (javascript) {
-			let output = "<script type=\"text/javascript\">\nvar ";
-		}
-
-		let output .= splits[0] . var_type . " = ";
-
-		let strings = preg_split("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", splits[1]);
-		
-		for str in strings {
-			let str = trim(str);
-			
-			preg_match_all("/(?<!\")(?:\$\(|%\(|#\(|&\()/", str, vars);
-									
-			if (!empty(vars[0])) {
-				let converted = "";
-				for item in vars[0] {
-					let converted .= this->createElement(str, splits, item);
-				}
-			} else {
-				if (this->getCommand(str)) {
-					let converted = (new Text())->processValue(str);
-					if (converted == null) {
-						let converted = (new Maths())->processValue(str);
-					}
-					if (converted == null) {
-						throw new Exception("Invalid command");
-					}
-				} else {
-					let converted = this->clean(
-						str,
-						this->isVariable(str)
-					);
-				}
-			}
-
-			if (javascript) {
-				let converted = "\"<?= (new KytschBASIC\\Parsers\\Core\\Variables())->outputForJavascript(" . converted . "); ?>\"";
-			}
-
-			let cleaned .= converted . (javascript ? " + " : " . ");
-		}
-
-		let cleaned = rtrim(cleaned, (javascript ? " + " : " . "));
-
-		let output .= cleaned;
-		
-		return output . (javascript ? "\n</script>\n" : "; ?>");
-	}
-
+*/
 	public function dump(output, bool html = false)
 	{
-		if (substr(output, 0, 3) == "\"{$") {
-			let output = this->cleanVarOnly(output, false);
-		}
-
 		if (html) {
 			return "<?php echo \"<pre>\"; var_dump(" . output . "); echo \"</pre>\"; ?>";
 		}
@@ -470,27 +203,16 @@ class Variables
 		}
 
 		if (preg_match("/[A-Z]+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, strings)) {
+			if (strings[0] == "END") {
+				return line;
+			} elseif (substr(strings[0], strlen(strings[0]) - strlen("BREAK"), strlen("BREAK")) == "BREAK") {
+				return line;
+			}
+
 			return strings[0];
 		}
 	
 		return null;
-	}
-
-	public function isFormVariable(string arg)
-	{
-		if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
-			return false;
-		}
-
-		var val;
-
-		for val in this->form_variables {
-			if (substr(arg, 0, strlen(val)) == val) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 
 	public function isVariable(string arg)
@@ -510,17 +232,11 @@ class Variables
 		return false;
 	}
 
-	public function outputArg(arg, bool in_quotes = true, bool clean = false)
+	public function outputArg(arg, bool is_string = false)
 	{
-		let arg = trim(arg, "\"");
-
-		if (clean && this->isVariable(arg)) {
-			let arg = str_replace(" ", "", arg);
-		}
-
-		return (in_quotes ? "\\\"" : "\"") . arg . (in_quotes ? "\\\"" : "\"");
+		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
 	}	
-
+/*
 	public function outputForJavascript(value)
 	{
 		if (is_array(value) || is_object(value)) {
@@ -532,30 +248,28 @@ class Variables
 			echo value;
 		}		
 	}
-	
-	public function parse(string command, string args)
-	{	
-		var cleaned;
-
-		switch (this->getCommand(command)) {
-			case "2DP":
-				return this->processTwoDP(command);
-			case "ADEF":
+	*/
+	public function parse(string line, string command, array args)
+	{
+		switch (command) {
+			/*case "ADEF":
 				return this->processDef(args, false, true);
 			case "ADIM":
-				return this->processDim(args, true);
+				return this->processDim(args, true);*/
 			case "BENCHMARK":
 				return this->processBenchmark();
 			case "DEF":
-				return this->processDef(args);
+				return this->processDef(line, args);
 			case "DIM":
-				return this->processDim(args);
+				return this->processDim(line, args);
 			case "DUMP":
-				let cleaned = this->cleanArg("DUMP", command);
-				return this->dump(this->clean(cleaned, this->isVariable(cleaned)), true);
+				if (strpos(line, "DUMP(") !== false) {
+					let args[0] = rtrim(ltrim(args[0], "["), "]");
+				}
+				return this->dump(args[0], true);
 			case "LET":
-				return this->processDef(args, true);
-			case "MERGE":
+				return this->processDef(line, args, true);
+			/*case "MERGE":
 				return this->processMerge(command, args);
 			case "NATSORT":
 				return this->processNatSort(command);
@@ -570,7 +284,17 @@ class Variables
 			case "SORT":
 				return this->processSort(command);
 			case "SSORT":
-				return this->processSSort(command);
+				return this->processSSort(command);*/
+			default:
+				return null;
+		}
+	}
+
+	public function processValue(arg)
+	{		
+		switch (this->getCommand(arg)) {
+			case "TWODP":
+				return this->processTwoDP(arg);
 			default:
 				return null;
 		}
@@ -591,49 +315,89 @@ class Variables
 		<span class=\"kb-benchmark\"></span>";
 	}
 
-	private function processDef(string line, bool let_var = false, bool javascript = false)
+	private function processDef(string line, array args, bool let_var = false, bool javascript = false)
 	{
-		var splits, split, vars;
+		var arg, key, output = "<?php ", splits;
+
+		if (count(args) < 1) {
+			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+		}
+
+		preg_match_all("/(?<!\")(?:\$=|%=|#=|&=|\$\(\)=|%\(\)=|#\(\)=|&\(\)=)/", trim(line), splits);
+		
+		if (empty(splits[0][0])) {
+			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+		}
+
+		for key, arg in args {
+			if (!key) {
+				let output .= arg . " = ";
+			} else {
+				switch (splits[0][0]) {
+					case "%()=":
+					case "%=":
+						let output .= "intval(" . arg . ");";
+						break;
+					case "#()=":
+					case "#=":
+						let output .= "(double)" . arg . ";";
+						break;
+					default:
+						let output .= arg . ";";
+						break;
+				}
+			}
+		}
+
+		return output . " ?>";
+	}
+
+	private function processDim(string line, array args, bool javascript = false)
+	{
+		var arg, key, output = "<?php ", splits;
+
+		if (count(args) < 1) {
+			throw new Exception("Invalid DIM");
+		}
 
 		preg_match_all("/(?<!\")(?:\$=|%=|#=|&=)/", trim(line), splits);
 
-		if (empty(splits[0])) {
-			preg_match_all("/(?<!\")(?:\$\(|%\(|#\(|&\()/", trim(line), splits);
+		if (empty(splits[0][0])) {
+			throw new Exception("Invalid DIM");
+		}
 
-			if (empty(splits[0])) {
-				throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+		for key, arg in args {
+			if (!key) {
+				let output .= arg . " = array(";
+			} else {
+				let arg = ltrim(rtrim(arg, ")"), "(");
+
+				if (arg == "[]") {
+					let arg = "";
+				}
+
+				if (empty(arg)) {
+					let output .= arg . ", ";
+				} else {
+					switch (splits[0][0]) {
+						case "%=":
+							let output .= "intval(" . arg . "), ";
+							break;
+						case "#=":
+							let output .= "(double)" . arg . ", ";
+							break;
+						default:
+							let output .= arg . ", ";
+							break;
+					}
+				}
 			}
 		}
 
-		for split in splits[0] {
-			switch (split) {
-				case "%=":
-					let vars = explode("%=", line, 2);
-					return this->createInt(vars[0], vars, "", javascript);
-				case "$=":
-					let vars = explode("$=", line, 2);
-					return this->createString(line, vars, "", javascript);
-				case "#=":
-					let vars = explode("#=", line, 2);
-					return this->createDouble(vars[0], vars);
-				default:
-					let vars = explode(")=", line, 2);
-					return this->setArrayElement(line, vars, split);
-			}
-		}
-	}
+		return rtrim(output, ", ") . "); ?>";
 
-	private function processDim(string line, bool javascript = false)
-	{
-		if (strpos(line, "$=") !== false) {
-			return this->createArray(line, explode("$=", line), javascript);
-		} elseif (strpos(line, "%=") !== false) {
-			return this->createArray(line, explode("%=", line), javascript);
-		} elseif (strpos(line, "#=") !== false) {
-			return this->createArray(line, explode("#=", line), javascript);
-		}
 	}
-
+/*
 	public function processMerge(command, args)
 	{
 		let command = command . args;
@@ -676,43 +440,22 @@ class Variables
 		let args = this->args(this->cleanArg("SSORT", args));
 		return "<?php sort(" . this->cleanVarOnly(args[0]) . ", SORT_STRING); ?>";
 	}
-
-	public function processTwoDP(args)
+*/
+	public function processTwoDP(arg)
 	{
-		let args = this->args(this->cleanArg("2DP", args));
-		return "<?php " . this->cleanVarOnly(args[0]) . " = number_format(" . args[0] . ", 2, '.', ''); ?>";
+		let arg = this->cleanArg("TWODP", arg);
+		return "number_format(" . arg . ", 2, '.', '')";
 	}
-
-	private function setArrayElement(string line, splits, string type)
+/*
+	private function setArrayElement(string line, splits, string type, bool let_var = false)
 	{
-		var output = "<?php $", vars, cleaned;
+		var output = "<?php $", vars, args, arg;
+		this->dump(splits[0]);
+		let args = this->args(splits[0]);
+		this->dump(args);
 
-		let vars = explode(type, splits[0]);
-				
-		if (isset(vars[1])) {
-			let output .= vars[0] . "[";
-			if (is_numeric(vars[1])) {
-				let output .= vars[1];
-			} else {
-				let cleaned = this->clean(
-					vars[1],
-					this->isVariable(vars[1])
-				);
-
-				if (substr(cleaned, 0, 3) == "\"{$") {
-					let cleaned = this->cleanVarOnly(cleaned, false);
-				}
-
-				let output .= cleaned;
-			}
-
-			let output .= "] = ";
-		} else {
-			let output .= vars[0] . "[] = ";
-		}
 		
-		let output .= this->createElement(line, splits, type);
 
 		return output . "; ?>";
-	}
+	}*/
 }

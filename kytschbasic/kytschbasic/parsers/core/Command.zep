@@ -34,7 +34,7 @@ class Command extends Variables
 		return id . "-" . hrtime(true);
 	}
 
-	public function setArg(string arg, bool trim_string = true)
+	/*public function setArg(string arg, bool trim_string = true)
 	{
 		let arg = trim(arg);
 		
@@ -47,5 +47,5 @@ class Command extends Variables
 		}
 		
 		return this->constants(trim_string ? trim(arg, "\"") : arg);
-	}
+	}*/
 }

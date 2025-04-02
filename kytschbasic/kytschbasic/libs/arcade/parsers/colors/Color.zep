@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Color extends Command
 {
-	public function parse(string command, string args)
+	public function parse(string line, string command, array args)
 	{
 		if (command == "RGB") {
 			return this->parseRgb(args);

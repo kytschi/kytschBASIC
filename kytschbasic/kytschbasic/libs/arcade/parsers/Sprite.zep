@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Sprite extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "SPRITE") {
 			return this->parseSprite(args);
@@ -64,5 +64,5 @@ class Sprite extends Command
 		}
 		
 		return "<?= \"<div" . params . ">\"; ?>";
-	}
+	}*/
 }

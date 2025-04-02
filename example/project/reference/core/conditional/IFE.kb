@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "IFNTE statment | kytschBASIC"
+	NAME "IFE statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,19 +9,18 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "IFNTE","basic"
+					PRINT "IFE","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "IF NOT EMPTY conditional statement."
+					PRINT "IF EMPTY conditional statement."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-IFNTE _GET("input_test") THEN
-	PRINT "You submitted this,"
-	LINE BREAK
-	PRINT _GET("input_test")
+DEF test%=0
+IFE test% THEN
+	PRINT "Test is empty"
 END IF
 				END CPRINT
 				HEADING 4
@@ -40,8 +39,8 @@ END IF
 						PRINT "IF"
 					END LINK
 					PRINT " | "
-					LINK "/reference/IFE"
-						PRINT "IFE"
+					LINK "/reference/IFNTE"
+						PRINT "IFNTE"
 					END LINK
 				END DIV
 			END DIV

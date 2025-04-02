@@ -32,7 +32,7 @@ use KytschBASIC\Parsers\Core\Parser;
 
 class Load extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "LOAD") {
 			return this->parseLoad(args);
@@ -50,10 +50,6 @@ class Load extends Command
 		switch (lib) {
 			case "arcade":
 				let output = (new Arcade())->build();
-
-				/*if (output) {
-					let this->arcade = new Arcade();
-				}*/
 				break;
 			default:
 				throw new Exception("Invalid library to include");
@@ -82,5 +78,5 @@ class Load extends Command
 		}
 
 		return ext;
-	}
+	}*/
 }

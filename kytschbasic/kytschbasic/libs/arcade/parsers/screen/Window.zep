@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Window extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "WINDOW") {
 			return this->parseWindow(args);
@@ -54,5 +54,5 @@ class Window extends Command
 		}
 		
 		return "<?= \"<div" . params . ">\"; ?>";
-	}
+	}*/
 }

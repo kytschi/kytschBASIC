@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Button extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "BUTTON") {
 			return this->processButton(args);
@@ -74,5 +74,5 @@ class Button extends Command
 		}
 
 		return output . "\"; ?>";
-	}
+	}*/
 }

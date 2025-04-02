@@ -37,24 +37,28 @@ class Parser
 	private newline = "\n";
 	private cprint = false;
 	private has_case = false;
+
+	private controller;
 		
 	/*
 	 * Available parsers.
 	 */
 	private available = [
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
-		"KytschBASIC\\Parsers\\Core\\Input\\Button",
+		/*"KytschBASIC\\Parsers\\Core\\Input\\Button",
 		"KytschBASIC\\Parsers\\Core\\Input\\Form",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Layout",
 		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
-		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
+		"KytschBASIC\\Parsers\\Core\\Layout\\Head",*/
 		"KytschBASIC\\Parsers\\Core\\Variables",
+		/*
 		"KytschBASIC\\Parsers\\Core\\Media\\Image",
 		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Select",
-		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
-		"KytschBASIC\\Parsers\\Core\\Load",
+		*/
+		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops"
+		/*"KytschBASIC\\Parsers\\Core\\Load",
 		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
@@ -67,15 +71,15 @@ class Parser
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Window",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Sprite"
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Sprite"*/
 	];
 
 	/*
-	 * Build the template by parsing the commands.
+	 * Build the template by parsing the lines.
 	 */
 	public function parse(string template)
 	{
-		var err, command = "", args = "", line = "", parser, commands, output = "";
+		var err, command = "", args = "", line = "", lines, output = "";
 
 		let this->cprint = false;
 
@@ -85,33 +89,29 @@ class Parser
 			}
 			
 			// Read the template lines.
-			let commands = file(template);
-			if (empty(commands)) {
+			let lines = file(template);
+			if (empty(lines)) {
 				return;
-			}		
+			}
 
-			for line in commands {
+			let this->controller = new Command();
+
+			for line in lines {
+				let line = trim(line);
+				
 				let this->line_no += 1;
 				
 				if (line == "") {
 					continue;
 				}
 
-				let parser = explode(" ", trim(line));
-				let command = parser[0];
-				array_shift(parser);
-
-				if (isset(parser[0])) {
-					if (command == "END") {
-						let command .= " " . parser[0];
-						array_shift(parser);
-					} elseif (parser[0] == "BREAK") {
-						let command .= " BREAK";
-						array_shift(parser);
-					}
+				let command = this->controller->getCommand(line);
+				if (command == null) {
+					let command = "";
+				} else {
+					let args = this->controller->args(trim(str_replace(command, "", line)));
 				}
-				
-				let args = implode(" ", parser);
+
 				let output .= this->processCommand(line, command, args);
 			}
 
@@ -126,9 +126,9 @@ class Parser
 		}
     }
 
-	private function processCommand(line, string command, args)
+	private function processCommand(string line, string command, array args)
 	{
-		var output = "", parser;
+		var output = "", parser, cleaned;
 
 		if (command == "CPRINT") {
 			let this->cprint = true;
@@ -144,10 +144,8 @@ class Parser
 			return "</script>" . this->newline;
 		} elseif (command == "AFUNCTION") {
 			let this->cprint = true;
-			return (new AFunction())->parse(command, args);
 		} elseif (command == "END AFUNCTION") {
 			let this->cprint = false;
-			return (new AFunction())->parse(command, args);
 		}
 
 		if (this->cprint) {
@@ -162,12 +160,16 @@ class Parser
 			return this->processIf(line, "if", args);
 		} elseif (command == "IFNTE") {
 			return this->processIf(line, "if", args, true);
+		} elseif (command == "IFE") {
+			return this->processIf(line, "if", args, false, true);
 		} elseif (command == "ELSEIF") {
 			return this->processIf(line, "elseif", args);
 		} elseif (command == "ELSE") {
 			return "<?php else: ?>\n";
 		} elseif (trim(command) == "END IF") {
 			return "<?php endif; ?>\n";
+		} elseif (trim(command) == "BREAK") {
+			return "<?php break; ?>\n";
 		} elseif (command == "CASE") {
 			if (this->has_case) {
 				let output .= "<?php break; ?>\n" . this->newline;
@@ -176,12 +178,12 @@ class Parser
 
 			let parser = new Command();
 
-			let output .= "<?php case " .
+			/*let output .= "<?php case " .
 				parser->clean(
 					args,
 					parser->isVariable(args)
 				)
-				. ": ?>\n" . this->newline;
+				. ": ?>\n" . this->newline;*/
 
 			let this->has_case = true;
 
@@ -206,46 +208,39 @@ class Parser
 		}
 
 		for parser in this->available {
-			let line = (new {parser}())->parse(command, args);
-			if (line !== null) {
-				let output .= line . this->newline;
+			let cleaned = (new {parser}())->parse(line, command, args);
+			if (cleaned !== null) {
+				let output .= cleaned . this->newline;
 				break;
 			}
 		}
 		return output;
 	}
 
-	private function processIf(line, string command = "if", args, bool not_empty = false)
+	private function processIf(string line, string command = "if", array args = [], bool not_empty = false, bool is_empty = false)
 	{
-		var output = "", parser, controller, variable;
+		var output = "", splits;
 
-		let controller = new Command();
+		if (empty(args[0])) {
+			throw new Exception("Invalid IF statement");
+		}
 
-		let args = explode(" THEN", args);
-		
 		let output = "<?php " . command . " (";
 
-		let parser = preg_split("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
-		let variable = "$" . str_replace(")", "]", str_replace("(", "[", str_replace(controller->types, "", parser[0])));		
-		let args[0] = str_replace(parser[0], variable, args[0]);
-		let args[0] = preg_replace("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", "==", args[0]);
+		let splits = preg_split("/THEN(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
+		if (empty(splits[0])) {
+			throw new Exception("Invalid IF statement");
+		}
 
 		if (not_empty) {
-			let output .= "!empty(" . args[0] . ")";
+			let output .= "!empty(" . trim(splits[0]) . ")";
+		} elseif (is_empty) {
+			let output .= "empty(" . trim(splits[0]) . ")";
 		} else {
-			let output .= args[0];
+			let output .= trim(splits[0]);
 		}
 
 		let output .= "): ?>\n";
-
-		if (count(args) > 1) {
-			if (!empty(trim(args[1]))) {
-				let parser = explode(" ", trim(args[1]));
-				if (count(parser) > 1) {
-					let output .= this->processCommand(line, parser[0], parser[1]);
-				}
-			}
-		}
 		
 		return output;
 	}

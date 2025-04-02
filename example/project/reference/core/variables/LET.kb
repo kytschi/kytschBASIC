@@ -87,16 +87,18 @@ PRINT test#
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-LET test#=1337.1337
-2DP test#
+LET test#=TWODP(1337.1337)
+
+REM or do it on the PRINT
+PRINT TWODP(test#)
+
 PRINT test#
 				END CPRINT
 				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					LET test#=1337.1337
-					2DP test#
+					LET test#=TWODP(1337.1337)
 					PRINT test#
 				END DIV
 			END DIV

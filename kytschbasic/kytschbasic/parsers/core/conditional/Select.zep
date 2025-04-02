@@ -31,13 +31,13 @@ class Select extends Command
 {
 	private open_case = false;
 
-	public function parse(string command, args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "SELECT") {
+		/*if (command == "SELECT") {
 			return "<?php switch (" .
 				this->clean(args, this->isVariable(args)) .
 			") { ?>";
-		}
+		}*/
 		return null;
 	}
 }

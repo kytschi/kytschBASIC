@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Arc extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "ARC") {
 			return this->parseArc(args);
@@ -53,5 +53,5 @@ class Arc extends Command
 			'e_angle' => " . (isset(args[4]) ? intval(args[4]) : 0) . ",
 			'style' => " . (isset(args[5]) ? args[5] : "IMG_ARC_NOFILL") . ",
 		]; ?>";
-	}
+	}*/
 }

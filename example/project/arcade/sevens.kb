@@ -49,7 +49,15 @@ FOR player%=0 TO no_players%
     LET hands$(player%)=hand$
 NEXT
 
-MERGE(hands$(no_players%), cards$)
+DEF count%=COUNT(cards$)
+FOR player%=0 TO no_players%
+    LET hands$(player%)=cards$(0)
+    SHIFT(cards$)
+    LET count%=COUNT(cards$)
+    IFE count% THEN
+        BREAK
+    END IF
+NEXT
 
 ADIM hands$=hands$
 ADIM names$=names$

@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Form extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "END FORM") {
 			return "</form>";
@@ -283,5 +283,5 @@ class Form extends Command
         }
 
         return true;
-	}
+	}*/
 }

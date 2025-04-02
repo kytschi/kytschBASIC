@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Box extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "BOX") {
 			return this->parseBox(args);
@@ -50,5 +50,5 @@ class Box extends Command
 			'x2' => " . (isset(args[2]) ? intval(args[2]) : 50) . ",
 			'y2' => " . (isset(args[3]) ? intval(args[3]) : 50) . ",
 		]; ?>";
-	}
+	}*/
 }

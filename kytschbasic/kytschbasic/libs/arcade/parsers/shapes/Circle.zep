@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Circle extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "CIRCLE") {
 			return this->parseCircle(args);
@@ -52,5 +52,5 @@ class Circle extends Command
 			's_angle' => 0,
 			'e_angle' => 360,
 		]; ?>";
-	}
+	}*/
 }

@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class AFunction extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "AFUNCTION") {
 			return this->parseFunction(args);
@@ -56,5 +56,5 @@ class AFunction extends Command
 		}
 
 		return output;
-	}
+	}*/
 }

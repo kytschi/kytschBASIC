@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Line extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "LINE") {
 			return this->parseLine(args);
@@ -48,5 +48,5 @@ class Line extends Command
 			'x2' => " . (isset(args[2]) ? intval(args[2]) : 20) . ",
 			'y2' => " . (isset(args[3]) ? intval(args[3]) : 20) . ",
 		]; ?>";
-	}
+	}*/
 }

@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Navigation extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "END LINK") {
 			return "</a>";
@@ -94,5 +94,5 @@ class Navigation extends Command
 		}
 		
 		return "<?= \"<nav" . params . ">\"; ?>";
-	}
+	}*/
 }

@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Head extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "END HEAD") {
 			return "</head>";
@@ -139,5 +139,5 @@ class Head extends Command
 		}
 
 		return "";
-	}
+	}*/
 }

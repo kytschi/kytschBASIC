@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Mail extends Command
 {
-	public function parse(string command, args)
+	/*public function parse(string command, args)
 	{
 		if (command == "MAIL") {
 			return "<?php $KBMAIL = [
@@ -72,13 +72,13 @@ class Mail extends Command
 		}
 
 		return null;
-	}
+	}*/
 
 	/**
 	 * Send the mail using the built up options.
 	 */
-	 public function send(mail_options)
-	 {
+	public function send(mail_options)
+	{
 		if (empty(mail_options)) {
 			throw new Exception("Invalid MAIL");
 		}
@@ -118,6 +118,5 @@ class Mail extends Command
 			
 			throw new Exception(msg);
 		}
-	 }
-	
+	}
 }

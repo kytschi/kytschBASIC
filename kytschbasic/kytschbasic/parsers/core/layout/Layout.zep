@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Layout extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "END DIV") {
 			return "</div>";
@@ -83,5 +83,5 @@ class Layout extends Command
 		}
 		
 		return "<?= \"<" . tag . params . ">\"; ?>";
-	}
+	}*/
 }

@@ -41,7 +41,7 @@ class Compiler
 	private start_time;
 	private newline = "\n";
 
-	private version = "0.0.13 alpha";
+	private version = "0.0.14 alpha";
 
 	public function __construct(string config_dir)
 	{
@@ -73,7 +73,7 @@ class Compiler
 		define("_PATH", url["path"]);
 
 		let this->globals["_VALID"] = [];
-		let this->globals["_VALID"]["captcha"] = (new Form())->validateCaptcha();
+		//let this->globals["_VALID"]["captcha"] = (new Form())->validateCaptcha();
 				
 		/*let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api",
 		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/

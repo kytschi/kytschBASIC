@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Shape extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "COPYSHAPE") {
 			return this->parseCopy(args);
@@ -54,5 +54,5 @@ class Shape extends Command
 		$KBSHAPES[count($KBSHAPES) - 1]['x']=" . intval(isset(args[0]) ? args[0] : 0) . ";
 		$KBSHAPES[count($KBSHAPES) - 1]['y']=" . intval(isset(args[1]) ? args[1] : 0) . ";
 		?>";
-	}
+	}*/
 }

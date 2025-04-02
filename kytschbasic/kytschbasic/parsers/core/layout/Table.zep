@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Table extends Command
 {
-	public function parse(string command, string args)
+	/*public function parse(string line, string command, array args)
 	{
 		if (command == "END TABLE") {
 			return "</table>";
@@ -84,7 +84,7 @@ class Table extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " id=" . this->outputArg(args[3]);
+			let params .= " id=\" . " . args[3] . " . \"" ;
 		} else {
 			let params .= " id=" . this->outputArg(this->genID("kb-" . tag));
 		}
@@ -109,5 +109,5 @@ class Table extends Command
 		}
 		
 		return "<?= \"<" . tag . params . ">\"; ?>";
-	}
+	}*/
 }
