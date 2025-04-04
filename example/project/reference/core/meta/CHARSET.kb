@@ -1,33 +1,31 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FAVICON statment | kytschBASIC"
+	NAME "CHARSET statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "CHARSET","basic"
+				END HEADING 2
 				SWRITE
-					PRINT "FAVICON","heading-command basic"
-					LINE BREAK
-					PRINT "FILE, SIZES","heading-args"
-				END SWRITE
-				SWRITE
-					PRINT "Add a favicon to the site."
+					PRINT "Set the character set of the HTML content."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-FAVICON "/kytschi/imgs/favicon.ico", "64x64"
+CHARSET "utf-8"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
 					HTMLENCODE
-						FAVICON "/kytschi/imgs/favicon.ico", "64x64"
+						CHARSET "utf-8"
 					END HTMLENCODE
 				END DIV
 				HEADING 4
@@ -50,10 +48,6 @@ FAVICON "/kytschi/imgs/favicon.ico", "64x64"
 						PRINT "AUTHOR"
 					END LINK
 					PRINT " | "
-					LINK "/reference/CHARSET"
-						PRINT "CHARSET"
-					END LINK
-					PRINT " | "
 					LINK "/reference/DESCRIPTION"
 						PRINT "DESCRIPTION"
 					END LINK
@@ -64,6 +58,10 @@ FAVICON "/kytschi/imgs/favicon.ico", "64x64"
 					PRINT " | "
 					LINK "/reference/VIEWPORT"
 						PRINT "VIEWPORT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/FAVICON"
+						PRINT "FAVICON"
 					END LINK
 				END DIV
 			END DIV

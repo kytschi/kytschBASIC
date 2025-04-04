@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -29,35 +29,33 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Button extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "BUTTON") {
-			return this->processButton(args);
-		} elseif (command == "END BUTTON") {
-			return "</button>";
+		switch(command) {
+			case "BUTTON":
+				return this->processButton(args);
+			case "END BUTTON":
+				return "</button>";
+			default:
+				return null;
 		}
-
-		return null;
 	}
 
-	private function processButton(args, string type = "button")
+	private function processButton(array args)
 	{
-		var output = "";
-
-		if (strpos(args, "SUBMIT ") !== false) {
-			let args = str_replace("SUBMIT ", "", args);
-			let type = "submit";
-		}
-		
-		let args = this->args(args);
-
-		let output = "<?= \"<button type=" . this->outputArg(type);
+		var output = "<?= \"<button", type = "\"button\"";
 		
 		if (isset(args[0]) && !empty(args[0])) {
+			if (substr(args[0], 0, 6) == "SUBMIT") {
+				let args[0] = this->cleanArg("SUBMIT ", args[0]);
+				let type = "\"submit\"";
+			}
 			let output .= " name=" . this->outputArg(args[0]);
 		} else {
-			let output .= " name=" . this->outputArg(this->genID("kb-btn-submit"));
+			let output .= " name=" . this->outputArg(this->genID("kb-btn-submit"), true);
 		}
+
+		let output .= " type=" . this->outputArg(type);
 
 		if (isset(args[1]) && !empty(args[1])) {
 			let output .= " class=" . this->outputArg(args[1]);
@@ -68,11 +66,11 @@ class Button extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let output .= "><span>" . trim(this->outputArg(args[3], false), "\"") . "</span></button>";
+			let output .= "><span>" . this->outputArg(args[3], true) . "</span></button>";
 		} else {
 			let output .= ">";
 		}
 
 		return output . "\"; ?>";
-	}*/
+	}
 }

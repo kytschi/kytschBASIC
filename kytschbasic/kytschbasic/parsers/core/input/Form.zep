@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -29,139 +29,136 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Form extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "END FORM") {
-			return "</form>";
-		} elseif (command == "FORM") {
-			return this->processForm(args);
-		} elseif (command == "NUMBERINPUT") {
-			return this->processInput(args, "number");
-		} elseif (command == "TEXTINPUT") {
-			return this->processInput(args);
-		} elseif (command == "TEXTAREA") {
-			return this->processTextarea(args);
-		} elseif (command == "CAPTCHA") {
-			return this->processCaptcha(args);
+		switch(command) {
+			case "END FORM":
+				return "</form>";
+			case "FORM":
+				return this->processForm(args);
+			case "NUMBERINPUT":
+				return this->processInput(args, "number");
+			case "TEXTINPUT":
+				return this->processInput(args);
+			case "TEXTAREA":
+				return this->processTextarea(args);
+			case "CAPTCHA":
+				return this->processCaptcha();
+			default:
+				return null;
 		}
-
-		return null;
 	}
 
-	private function processForm(string line)
+	private function processForm(array args)
 	{
-		var args, params="";
-
-		let args = this->args(line);
+		var output = "<?= \"<form", method = "GET";
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " id=" . this->outputArg(args[0]);
+			let output .= " id=" . this->outputArg(args[0]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-form"));
+			let output .= " id=" . this->outputArg(this->genID("kb-form"), true);
 		}
 
-		var method = "GET";
 		if (isset(args[1]) && !empty(args[1])) {
 			if (in_array(strtoupper(args[1]), ["GET", "POST"])) {
 				let method = strtoupper(args[1]);
 			}
 		}
-		let params .= " method=" . this->outputArg(method);
+
+		let output .= " method=" . this->outputArg(method, true);
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " action=" . this->outputArg(args[2]);
+			let output .= " action=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " class=" . this->outputArg(args[3]);
+			let output .= " class=" . this->outputArg(args[3]);
 		}
 		
-		return "<?= \"<form" . params . ">\"; ?>";
+		return output . ">\"; ?>";
 	}
 
-	private function processInput(string line, string type = "text")
+	private function processInput(array args, string type = "text")
 	{
-		var args, params="";
+		var output = "";
 
-		let args = this->args(line);
+		let output = "<?= \"<input type=\\\"" . type . "\\\"";
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0]);
 		} else {
-			let params .= " name=" . this->outputArg(this->genID("kb-form-input"));
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= "value=" . this->outputArg(args[1]);
+			let output .= "value=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " class=" . this->outputArg(args[2]);
+			let output .= " class=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " placeholder=" . this->outputArg(args[3]);
+			let output .= " placeholder=" . this->outputArg(args[3]);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id=" . (args[4]);
+			let output .= " id=" . (args[4]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-form-input"));
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
 		}
 
 		if (isset(args[5]) && !empty(args[5])) {
-			let params .= " required=\\\"required\\\"";
+			let output .= " required=\\\"required\\\"";
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let params .= " " . trim(this->outputArg(args[6], false), "\"");
+			let output .= " " . trim(this->outputArg(args[6], false), "\"");
 		}
 		
-		return "<?= \"<input type=\\\"" . type . "\\\"" . params . ">\"; ?>";
+		return output . ">\"; ?>";
 	}
 
-	private function processTextarea(string line, string type = "text")
+	private function processTextarea(array args, string type = "text")
 	{
-		var args, params = "", value = "";
-
-		let args = this->args(line);
+		var output = "<?= \"<textarea", value = "\"\"";
 				
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0]);
 		} else {
-			let params .= " name=" . this->outputArg(this->genID("kb-form-input"));
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let value = this->outputArg(args[1], false);
+			let value = this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " class=" . this->outputArg(args[2]);
+			let output .= " class=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " placeholder=" . this->outputArg(args[3]);
+			let output .= " placeholder=" . this->outputArg(args[3]);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id=" . this->outputArg(args[4]);
+			let output .= " id=" . this->outputArg(args[4]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-form-input"));
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
 		}
 
 		if (isset(args[5]) && !empty(args[5])) {
-			let params .= " required=\\\"required\\\"";
+			let output .= " required=\\\"required\\\"";
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let params .= " " . trim(this->outputArg(args[6], false), "\"");
+			let output .= " \" . " . args[6] . " . \"";
 		}
 		
-		return "<?= \"<textarea" . params . ">\" . " . value . " . \"</textarea>\"; ?>";
+		return output . ">\" . " . value . " . \"</textarea>\"; ?>";
 	}
 
-	private function processCaptcha(args)
+	private function processCaptcha()
 	{
 		var width, height, image, src, trans_colour, length,
             iLoop, data, letter, image_data, keyspace, key, captcha, line_color,
@@ -283,5 +280,5 @@ class Form extends Command
         }
 
         return true;
-	}*/
+	}
 }

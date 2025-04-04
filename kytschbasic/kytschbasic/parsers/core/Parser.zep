@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.3
+ * @version     0.0.4
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -45,21 +45,20 @@ class Parser
 	 */
 	private available = [
 		"KytschBASIC\\Parsers\\Core\\Text\\Text",
-		/*"KytschBASIC\\Parsers\\Core\\Input\\Button",
+		"KytschBASIC\\Parsers\\Core\\Input\\Button",
 		"KytschBASIC\\Parsers\\Core\\Input\\Form",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Layout",
 		"KytschBASIC\\Parsers\\Core\\Text\\Heading",
-		"KytschBASIC\\Parsers\\Core\\Layout\\Head",*/
+		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
 		"KytschBASIC\\Parsers\\Core\\Variables",
-		/*
 		"KytschBASIC\\Parsers\\Core\\Media\\Image",
-		"KytschBASIC\\Parsers\\Core\\Navigation",
+		/*"KytschBASIC\\Parsers\\Core\\Navigation",*/
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
-		"KytschBASIC\\Parsers\\Core\\Conditional\\Select",
+		/*"KytschBASIC\\Parsers\\Core\\Conditional\\Select",
 		*/
-		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops"
-		/*"KytschBASIC\\Parsers\\Core\\Load",
-		"KytschBASIC\\Parsers\\Core\\Database",
+		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
+		"KytschBASIC\\Parsers\\Core\\Load",
+		/*"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
@@ -67,11 +66,11 @@ class Parser
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Circle",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Ellipse",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",*/
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Window",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Sprite"*/
+		/*"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape",*/
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Sprite"
 	];
 
 	/*
@@ -82,7 +81,8 @@ class Parser
 		var err, command = "", args = "", line = "", lines, output = "";
 
 		let this->cprint = false;
-
+		let this->controller = new Command();
+		
 		try {
 			if (!file_exists(template)) {
 				throw new Exception("Template, " . template . ", not found");
@@ -93,8 +93,6 @@ class Parser
 			if (empty(lines)) {
 				return;
 			}
-
-			let this->controller = new Command();
 
 			for line in lines {
 				let line = trim(line);
@@ -144,9 +142,15 @@ class Parser
 			return "</script>" . this->newline;
 		} elseif (command == "AFUNCTION") {
 			let this->cprint = true;
+			return (new AFunction())->parse(line, command, args);
 		} elseif (command == "END AFUNCTION") {
 			let this->cprint = false;
-		}
+			return (new AFunction())->parse(line, command, args);
+		} elseif (command == "HTMLENCODE") {
+			return "<?php ob_start(); ?>";
+		} elseif (command == "END HTMLENCODE") {
+			return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>";
+		} 
 
 		if (this->cprint) {
 			return line;

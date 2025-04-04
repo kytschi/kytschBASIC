@@ -19,17 +19,19 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 SWRITE
-	Hello World!
-	I am a paragraph.
+	PRINT "Hello World!"
+	PRINT "I am a paragraph."
 END SWRITE
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-Hello World!
-I am a paragraph.
-				END CPRINT
+				DIV "kb-code-block"
+					SWRITE
+						PRINT "Hello World!"
+						PRINT "I am a paragraph."
+					END SWRITE
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

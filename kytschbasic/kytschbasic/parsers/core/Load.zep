@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Load
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -32,51 +32,47 @@ use KytschBASIC\Parsers\Core\Parser;
 
 class Load extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "LOAD") {
-			return this->parseLoad(args);
-		} elseif (command == "INCLUDE") {
-			return this->parseInclude(args);
+		switch (command) {
+			case "LOAD":
+				return this->parseLoad(args);
+			case "INCLUDE":
+				return this->parseInclude(args);
+			default:
+				return null;
 		}
-
-		return null;
 	}
 
-	private function parseInclude(string lib)
+	private function parseInclude(array args)
 	{
-		var output = "";
+		if(empty(args[0])) {
+			throw new Exception("Invalid INCLUDE");
+		}
 
-		switch (lib) {
+		switch (strtolower(args[0])) {
 			case "arcade":
-				let output = (new Arcade())->build();
-				break;
+				return (new Arcade())->build();
 			default:
 				throw new Exception("Invalid library to include");
 		}
-
-		return output;
 	}
 
-	private function parseLoad(string args)
+	private function parseLoad(array args)
 	{
 		var ext;
 
-		if (substr(args, 0, 1) != "\"") {
-			let args = this->clean(args);
-		} else {
-			let args = this->constants(args) . "\"";
+		if(empty(args[0])) {
+			throw new Exception("Invalid INCLUDE");
 		}
 
-		let ext = pathinfo(args, PATHINFO_EXTENSION);
+		let ext = pathinfo(args[0], PATHINFO_EXTENSION);
+
 		switch (ext) {
 			case "js":
-				let ext = "<script src=" . args . "></script>";
+				return "<script src=" . this->outputArg(args[0]) . "></script>";
 			default:
-				let ext = (new Parser())->parse(trim(args, "\"") . ".kb");
-				break;
+				return (new Parser())->parse(trim(args[0], "\"") . ".kb");
 		}
-
-		return ext;
-	}*/
+	}
 }

@@ -21,15 +21,29 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT "Hello World!"
-PRINT "Hello World! I've parameters too!","heading-args"
+LINE BREAK
+
+PRINT "Hello World! I've parameters too!","basic"
+LINE BREAK
+
+DEF string$="kytschBASIC"
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-&lt;span&gt;Hello World!&lt;/span&gt;
-&lt;span class="heading-args"&gt;Hello World! I've arugments too!&lt;/span&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					HTMLENCODE
+						PRINT "Hello World!"
+						LINE BREAK
+
+						PRINT "Hello World! I've parameters too!","basic"
+						LINE BREAK
+
+						DEF string$="kytschBASIC"
+						PRINT string$
+					END HTMLENCODE
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

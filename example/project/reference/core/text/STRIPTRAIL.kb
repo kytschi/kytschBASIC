@@ -22,7 +22,12 @@ LOAD "_ROOT/project/shared/header"
 				CPRINT
 PRINT STRIPTRAIL("AAABBBAAA", 65)
 LINE BREAK
+
 PRINT STRIPTRAIL("AAABBBAAA", "A")
+LINE BREAK
+
+DEF string$=STRIPTRAIL("AAABBBAAA", "A")
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -30,7 +35,12 @@ PRINT STRIPTRAIL("AAABBBAAA", "A")
 				DIV "kb-code-block"
 					PRINT STRIPTRAIL("AAABBBAAA", 65)
 					LINE BREAK
+
 					PRINT STRIPTRAIL("AAABBBAAA", "A")
+					LINE BREAK
+
+					DEF string$=STRIPTRAIL("AAABBBAAA", "A")
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"

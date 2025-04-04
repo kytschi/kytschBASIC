@@ -20,7 +20,12 @@ LOAD "_ROOT/project/shared/header"
 				CPRINT
 PRINT STR("Hi World!")
 LINE BREAK
+
 PRINT STR(26)
+LINE BREAK
+
+DEF string$=STR(123.21)
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -28,7 +33,12 @@ PRINT STR(26)
 				DIV "kb-code-block"
 					PRINT STR("Hi World!")
 					LINE BREAK
+
 					PRINT STR(26)
+					LINE BREAK
+
+					DEF string$=STR(123.21)
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"

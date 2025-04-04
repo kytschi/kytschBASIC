@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Screen
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -29,30 +29,32 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Screen extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "SCREEN") {
-			return this->parseScreen(args);
-		} elseif (command == "END SCREEN") {
-			return "</div>";
+		switch(command) {
+			case "SCREEN":
+				return this->parseScreen(args);
+			case "END SCREEN":
+				return "</div>";
+			default:
+				return null;
 		}
 	}
 
-	public function parseScreen(args)
+	public function parseScreen(array args)
 	{
-		var params = "";
-		let args = this->args(args);
+		var output = "<?= \"<div";
 
-		if (isset(args[0])) {
-			let params .= " id=" . this->outputArg(args[0]);
+		if (isset(args[0]) && !empty(args[0])) {
+			let output .= " id=" . this->outputArg(args[0]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-screen"));
+			let output .= " id=" . this->outputArg(this->genID("kb-screen"), true);
 		}
 
-		if (isset(args[1])) {
-			let params .= " class=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1])) {
+			let output .= " class=" . this->outputArg(args[1]);
 		}
 		
-		return "<?= \"<div" . params . ">\"; ?>";
-	}*/
+		return output . ">\"; ?>";
+	}
 }

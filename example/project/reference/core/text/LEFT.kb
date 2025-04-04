@@ -21,12 +21,20 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT LEFT("kytschBASIC", 6)
+LINE BREAK
+
+DEF string$=LEFT("kytschBASIC", 6)
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
 					PRINT LEFT("kytschBASIC", 6)
+					LINE BREAK
+
+					DEF string$=LEFT("kytschBASIC", 6)
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"

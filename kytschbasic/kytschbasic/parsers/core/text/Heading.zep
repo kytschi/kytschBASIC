@@ -29,40 +29,40 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Heading extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "END HEADING") {
-			return this->processHeading(args, true);
-		} elseif (command == "HEADING") {
-			return this->processHeading(args);
+		switch(command) {
+			case "END HEADING":
+				return this->processHeading(args, true);
+			case "HEADING":
+				return this->processHeading(args);
+			default:
+				return null;
 		}
-
-		return null;
 	}
 
-	private function processHeading(string line, bool close = false)
+	private function processHeading(array args, bool close = false)
 	{
-		var args, params="", size = 1;
-
-		let args = this->args(line);
+		var params="", size = 1;
 
 		if (isset(args[0]) && !empty(args[0])) {
 			let size = args[0];
 		}
+
 		if (close) {
 			return "<?= \"</h" . size . ">\"; ?>";
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " class=\\\"" . args[1] . "\\\"";
+			let params .= " class=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " id=\\\"" . args[2] . "\\\"";
+			let params .= " id=" . this->outputArg(args[2]);
 		} else {
-			let params .= " id=\\\"" . this->genID("kb-heading") . "\\\"";
+			let params .= " id=" . this->outputArg(this->genID("kb-heading"), true);
 		}
 
 		return "<?= \"<h" . size . params . ">\"; ?>";
-	}*/
+	}
 }

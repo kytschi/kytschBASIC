@@ -29,34 +29,30 @@ use KytschBASIC\Helpers\Cookie;
 
 class Display
 {
-	public static function parse(string command)
+	public function parse(string command)
 	{
-		var display, return_value = 10, controller;
+		switch (command) {
+			case "DISPHEIGHT":
+				return this->parseDisplay(1);
+			case "DISPWIDTH":
+				return this->parseDisplay(0);
+			default:
+				return null;
+		}
+	}
 
-		let controller = new Cookie();
+	private function parseDisplay(int index)
+	{
+		var return_value = 10, display;
 
-		if (command == "DISPHEIGHT") {
-			let display = controller->get("display");
-
-			if (display) {
-				if (isset(display[1])) {
-					let return_value = display[1];
-				}
+		let display = (new Cookie())->get("display");
+		
+		if (display) {
+			if (isset(display[index])) {
+				let return_value = display[index];
 			}
-
-			return return_value;
-		} elseif (command == "DISPWIDTH") {
-			let display = controller->get("display");
-
-			if (display) {
-				if (isset(display[0])) {
-					let return_value = display[0];
-				}
-			}
-
-			return return_value;
 		}
 
-		return null;
+		return return_value;
 	}
 }

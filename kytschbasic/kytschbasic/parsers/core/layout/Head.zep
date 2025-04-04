@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Head
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2023 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -25,119 +25,118 @@
  */
 namespace KytschBASIC\Parsers\Core\Layout;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
 class Head extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "END HEAD") {
-			return "</head>";
-		} elseif (command == "HEAD" && command != "HEADI") {
-			return "<head>";
-		} elseif (command == "PALETTE") {
-			return this->processPalette(args);
-		} elseif (command == "NAME") {
-			return this->processName(args);
-		} elseif (command == "LANG") {
-			return this->processLang(args);
-		} elseif (command == "CHARSET") {
-			return this->processCharset(args);
-		} elseif (command == "DESCRIPTION") {
-			return this->processMeta("description", args);
-		} elseif (command == "KEYWORDS") {
-			return this->processMeta("keywords", args);
-		} elseif (command == "AUTHOR") {
-			return this->processMeta("author", args);
-		} elseif (command == "VIEWPORT") {
-			return this->processMeta("viewport", args);
-		}  elseif (command == "FAVICON") {
-			return this->processFavicon(args);
+		switch(command) {
+			case "AUTHOR":
+				return this->processMeta("author", command, args);
+			case "CHARSET":
+				return this->processCharset(args);
+			case "DESCRIPTION":
+				return this->processMeta("description", command, args);
+			case "END HEAD":
+				return "</head>";
+			case "FAVICON":
+				return this->processFavicon(args);
+			case "HEAD":
+				return "<head>";
+			case "KEYWORDS":
+				return this->processMeta("keywords", command, args);
+			case "LANG":
+				return this->processLang(args);
+			case "NAME":
+				return this->processName(args);
+			case "PALETTE":
+				return this->processPalette(args);
+			case "VIEWPORT":
+				return this->processMeta("viewport", command, args);
+			default:
+				return null;
 		}
-
-		return null;
 	}
 
-	private function processCharset(string line)
+	private function processCharset(array args)
 	{
-		var args;
-		let args = explode("\",", line);
-		if (isset(args[0]) && !empty(args[0])) {
-			return "<meta charset=\"" . this->setArg(args[0]) . "\">";
+		if (empty(args[0])) {
+			throw new Exception("Invalid CHARSET");
 		}
 		
-		return "";
+		return "<?= \"<meta charset=" . this->outputArg(args[0]) . ">\"; ?>";
 	}
 
-	private function processFavicon(string line)
+	private function processFavicon(array args)
 	{
-		var args;
-		let args = explode("\",", line);
-		let line = "";
+		var output = "<?= \"<link rel=";
 
-		if (isset(args[0]) && !empty(args[0])) {
-			let line = "<link rel=\"icon\" href=\"" . this->setArg(args[0]) . "\"";
+		if (empty(args[0])) {
+			throw new Exception("Invalid FAVICON");
+		}
+
+		let output .= this->outputArg("icon", true);
+
+		let output .= " href=" . this->outputArg(args[0]);
+		
+		if (isset(args[1]) && !empty(args[1])) {
+			let output .= " sizes=" . this->outputArg(args[1]);
+		}
+
+		return output . ">\"; ?>";
+	}
+
+	private function processMeta(string type, string command, array args)
+	{
+		if (empty(args[0])) {
+			throw new Exception("Invalid " . command);
 		}
 		
-		if (isset(args[1])) {
-			let line .= " sizes=\"" . this->setArg(args[1]) . "\"";
-		}
-
-		return line . ">";
+		return "<?= \"<meta name=" . this->outputArg(type, true) . " content=" . this->outputArg(args[0]) . ">\"; ?>";
 	}
 
-	private function processMeta(string type, string line)
+	private function processLang(array args)
 	{
-		var args;
-		let args = explode("\",", line);
-		if (isset(args[0]) && !empty(args[0])) {
-			return "<meta name=\"" . type . "\" content=\"" . this->setArg(args[0]) . "\">";
+		if (empty(args[0])) {
+			throw new Exception("Invalid LANG");
 		}
 		
-		return "";
+		return "<?= \"<html lang=" . this->outputArg(args[0]) . ">\"; ?>";
 	}
 
-	private function processLang(string line)
+	private function processName(array args)
 	{
-		var args;
-		let args = explode("\",", line);
-		if (isset(args[0]) && !empty(args[0])) {
-			return "<html lang=\"" . this->setArg(args[0]) . "\">";
+		if (empty(args[0])) {
+			throw new Exception("Invalid NAME");
 		}
-
-		return "";
+		
+		return "<?= \"<title>\" . " . args[0] . " . \"</title>\"; ?>";
 	}
 
-	private function processName(string line)
+	private function processPalette(array args)
 	{
-		var args;
-		let args = explode("\",", line);
-		if (isset(args[0]) && !empty(args[0])) {
-			return "<title>" . this->setArg(args[0]) . "</title>";
-		}
-
-		return "";
-	}
-
-	private function processPalette(string line)
-	{
-		var args, config;
+		var config, output = "<?= \"<link rel=", href;
 		let config = constant("CONFIG");
 
-		let args = explode("\",", line);
-		
-		if (isset(args[0]) && !empty(args[0])) {
-			let args[0] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . this->setArg(rtrim(args[0], ".css")) . ".css";
-						
-			if (!empty(config["cache"])) {
-				if (empty(config["cache"]->enabled)) {
-					let args[0] = args[0] . "?no-cache=" . microtime();
-				}
-			}
-
-			return args[0] . "\">";				
+		if (empty(args[0])) {
+			throw new Exception("Invalid PALETTE");
 		}
 
-		return "";
-	}*/
+		let output .= this->outputArg("stylesheet", true);
+		let output .= " type=" . this->outputArg("text/css", true);
+
+		let href = args[0] . " . '.css'";
+		
+		if (!empty(config["cache"])) {
+			if (empty(config["cache"]->enabled)) {
+				let href .= "?no-cache=" . microtime();
+			}
+		}
+
+		let output .= " href=" . this->outputArg(href);
+
+		return output . ">\"; ?>";
+	}
 }

@@ -55,6 +55,9 @@ HEADER
 		LINK "/reference/ASC#refASC","Find out about the ASC command","nav-link",,"refASC"
 			PRINT "ASC"
 		END LINK
+		LINK "/reference/AUTHOR#refAUTHOR","Find out about the AUTHOR command","nav-link",,"refAUTHOR"
+			PRINT "AUTHOR"
+		END LINK
 		LINK "/reference/BENCHMARK#refBENCHMARK","Find out about the BENCHMARK command","nav-link",,"refBENCHMARK"
 			PRINT "BENCHMARK"
 		END LINK
@@ -94,6 +97,9 @@ HEADER
 		LINK "/reference/CENTRE#refCENTRE","Find out about the CENTRE command","nav-link",,"refCENTRE"
 			PRINT "CENTRE"
 		END LINK
+		LINK "/reference/CHARSET#refCHARSET","Find out about the CHARSET command","nav-link",,"refCHARSET"
+			PRINT "CHARSET"
+		END LINK
 		LINK "/reference/CHR#refCHR","Find out about the CHR command","nav-link",,"refCHR"
 			PRINT "CHR"
 		END LINK
@@ -120,6 +126,9 @@ HEADER
 		END LINK
 		LINK "/reference/DEF#refDEF","Find out about the DEF command","nav-link",,"refDEF"
 			PRINT "DEF"
+		END LINK
+		LINK "/reference/DESCRIPTION#refDESCRIPTION","Find out about the DESCRIPTION command","nav-link",,"refDESCRIPTION"
+			PRINT "DESCRIPTION"
 		END LINK
 		LINK "/reference/DIM#refDIM","Find out about the DIM command","nav-link",,"refDIM"
 			PRINT "DIM"
@@ -162,6 +171,9 @@ HEADER
 		END LINK
 		LINK "/reference/ELLIPSEF#refELLIPSEF","Find out about the ELLIPSEF command","nav-link",,"refELLIPSEF"
 			PRINT "ELLIPSEF"
+		END LINK
+		LINK "/reference/EQUATIONS#refEQUATIONS","Find out about the EQUATIONS command","nav-link",,"refEQUATIONS"
+			PRINT "EQUATIONS"
 		END LINK
 		LINK "/reference/EXP#refEXP","Find out about the EXP command","nav-link",,"refEXP"
 			PRINT "EXP"
@@ -222,6 +234,9 @@ HEADER
 		END LINK
 		LINK "/reference/INT#refINT","Find out about the INT command","nav-link",,"refINT"
 			PRINT "INT"
+		END LINK
+		LINK "/reference/KEYWORDS#refKEYWORDS","Find out about the KEYWORDS command","nav-link",,"refKEYWORDS"
+			PRINT "KEYWORDS"
 		END LINK
 		LINK "/reference/LCASE#refLCASE","Find out about the LCASE command","nav-link",,"refLCASE"
 			PRINT "LCASE"
@@ -393,6 +408,9 @@ HEADER
 		END LINK
 		LINK "/reference/VERSION#refVERSION","Find out about the VERSION command","nav-link",,"refVERSION"
 			PRINT "VERSION"
+		END LINK
+		LINK "/reference/VIEWPORT#refVIEWPORT","Find out about the VIEWPORT command","nav-link",,"refVIEWPORT"
+			PRINT "VIEWPORT"
 		END LINK
 		LINK "/reference/WHILE#refWHILE","Find out about the WHILE command","nav-link",,"refWHILE"
 			PRINT "WHILE"

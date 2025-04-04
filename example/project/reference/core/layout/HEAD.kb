@@ -26,16 +26,14 @@ END HEAD
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-&lt;head&gt;
-	&lt;meta charset="UTF-8"&gt;&lt;meta name="description" content="This is a kytschBASIC example"&gt;
-	&lt;meta name="keywords" content="kytschBASIC, BASIC, web BASIC"&gt;
-	&lt;meta name="author" content="Mike Welsh"&gt;
-	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-	&lt;link rel="stylesheet" type="text/css" href="/kytschi/css/palette.css"&gt;
-	&lt;title&gt;HEADING statment | kytschBASIC&lt;/title&gt;
-&lt;/head&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					HTMLENCODE
+						HEAD
+							LOAD "_ROOT/project/shared/head"
+							NAME "HEAD statment | kytschBASIC"
+						END HEAD
+					END HTMLENCODE
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

@@ -39,12 +39,13 @@ class Variables
 
 	public function args(string line)
 	{
-		var args = [], arg, vars, str, splits, subvars, cleaned, find, text;
+		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display;
 
 		let text = new Text();
+		let display = new Display();
 
 		// Clean any + used for string join.
-		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", ".", line);
+		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", ".", line);
 
 		//Grab all vars.
 		preg_match_all("/\\b[\\w.-]*[$%#&](?!\\w)/u", line, vars);
@@ -57,27 +58,39 @@ class Variables
 		for str in vars[1] {
 			let line = substr_replace(line, "$" . str[0], str[1], strlen(str[0]));
 		}
+
+		//Grab all constants.
+		preg_match_all("/_ROOT|_RURL|_URL|_PATH/", line, vars, PREG_OFFSET_CAPTURE);
+		for str in vars[0] {
+			let line = substr_replace(line, constant(str[0]), str[1], strlen(str[0]));
+		}
 				
 		// Split on the equals.
 		let splits = preg_split("/(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?<!=)=/", line, 2, PREG_SPLIT_NO_EMPTY);
 		for arg in splits {
 			let arg = trim(arg);
-
+			
 			// Split on comma.
-			let vars = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", arg);
+			let vars = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
 			for str in vars {
 				let str = trim(str);
 
+				// Handle empties.
+				if (str == "\"\"") {
+					let str = "";
+				}
+				
 				//Check to see if its a maths equation.
-				let subvars = preg_split("/\*|\+|\<-|\-|\>=|\>|\<=|\<|\==|\//", str, 0, 2);
+				let subvars = preg_split("/([+\-\/])(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", str, 0, 2);
 				if (count(subvars) > 1) {
 					let args[] = str;
 					continue;
 				}
-				
+
 				//Grab all array elements.
 				let cleaned = this->argsArrayElements(str);
-				
+
+				// Process any sub commands, i.e. COUNT()
 				if (this->getCommand(cleaned)) {
 					let find = text->processValue(cleaned);
 					if (find != null) {
@@ -86,6 +99,11 @@ class Variables
 						let find = this->processValue(cleaned);
 						if (find != null) {
 							let cleaned = find;
+						} else {
+							let find = display->parse(cleaned);
+							if (find != null) {
+								let cleaned = find;
+							}
 						}
 					}
 				}
@@ -114,51 +132,41 @@ class Variables
 		
 		return this->argsArrayElements(arg);
 	}
-/*
-	private function arrayMod(args, bool pop = true)
-	{
-		var value;
 
-		let args = this->args(this->cleanArg(pop ? "POP" : "SHIFT" , args));
-		
-		let value = this->cleanVarOnly(args[0]);
-		
-		if (pop) {
+	private function arrayMod(string command, array args)
+	{
+		let args[0] = this->cleanArg(command, args[0]);
+				
+		if (command == "POP") {
 			if (count(args) > 1) {
 				return "<?php array_splice(" .
-					value . ", " .
-					"count(" . value . ") - 1 - intval(" . this->outputArg(args[1], false) . "), " .
+					args[0] . ", " .
+					"count(" . args[0] . ") - 1 - intval(" . args[1] . "), " .
 					"1); ?>";
 			} else {
-				return "<?php array_pop(" . value . "); ?>";
+				return "<?php array_pop(" . args[0] . "); ?>";
 			}
 		} else {
 			if (count(args) > 1) {
 				return "<?php array_splice(" .
-					value . ",
-					intval(" . this->outputArg(args[1], false) . "), " .
+					args[0] . ",
+					intval(" . args[1] . "), " .
 					"1); ?>";
 			} else {
-				return "<?php array_shift(" . value . "); ?>";
+				return "<?php array_shift(" . args[0] . "); ?>";
 			}
 		}
 	}
-	*/
+	
 	public function cleanArg(string command, arg)
 	{
-		let arg = rtrim(
-			rtrim(
-				str_replace(
-					[
-						command . "(",
-						command . "["
-					],
-					"",
-					arg
-				),
-				"]"
-			),
-		")");
+		let arg = ltrim(trim(arg), command);
+		
+		if (substr(arg, 0, 1) == "[") {
+			let arg = ltrim(arg, "[");
+			let arg = substr(arg, 0, strlen(arg) - 1);
+		}
+		let arg = rtrim(ltrim(arg, "("), ")");
 
 		if ((arg != "0" && empty(arg))) {
 			throw new Exception("Invalid " . command);
@@ -166,23 +174,12 @@ class Variables
 
 		return arg;
 	}
-/*
-	public function constants(string line)
+
+	private function cleanJS(arg)
 	{
-		var con, constants = [
-			"_ROOT",
-			"_RURL",
-			"_URL",
-			"_PATH"
-		];
-
-		for con in constants {
-			let line = str_replace(con, constant(con), line);
-		}
-
-		return line;
+		return ltrim(arg, "$");
 	}
-*/
+
 	public function dump(output, bool html = false)
 	{
 		if (html) {
@@ -205,7 +202,7 @@ class Variables
 		if (preg_match("/[A-Z]+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, strings)) {
 			if (strings[0] == "END") {
 				return line;
-			} elseif (substr(strings[0], strlen(strings[0]) - strlen("BREAK"), strlen("BREAK")) == "BREAK") {
+			} elseif (strings[0] == "LINE" && substr(line, strlen(line) - strlen("BREAK"), strlen("BREAK")) == "BREAK") {
 				return line;
 			}
 
@@ -252,10 +249,10 @@ class Variables
 	public function parse(string line, string command, array args)
 	{
 		switch (command) {
-			/*case "ADEF":
-				return this->processDef(args, false, true);
+			case "ADEF":
+				return this->processDef(line, args, false, true);
 			case "ADIM":
-				return this->processDim(args, true);*/
+				return this->processDim(line, args, true);
 			case "BENCHMARK":
 				return this->processBenchmark();
 			case "DEF":
@@ -263,28 +260,26 @@ class Variables
 			case "DIM":
 				return this->processDim(line, args);
 			case "DUMP":
-				if (strpos(line, "DUMP(") !== false) {
-					let args[0] = rtrim(ltrim(args[0], "["), "]");
-				}
+				let args[0] = this->cleanArg("DUMP", args[0]);
 				return this->dump(args[0], true);
 			case "LET":
 				return this->processDef(line, args, true);
-			/*case "MERGE":
-				return this->processMerge(command, args);
+			case "MERGE":
+				return this->processMerge(args);
 			case "NATSORT":
-				return this->processNatSort(command);
+				return this->processNatSort(args);
 			case "NSORT":
-				return this->processNSort(command);
+				return this->processNSort(args);
 			case "POP":
-				return this->arrayMod(command . args);
+				return this->arrayMod(command, args);
 			case "SHIFT":
-				return this->arrayMod(command . args, false);
+				return this->arrayMod(command, args);
 			case "SHUFFLE":
-				return this->processShuffle(command);
+				return this->processShuffle(args);
 			case "SORT":
-				return this->processSort(command);
+				return this->processSort(args);
 			case "SSORT":
-				return this->processSSort(command);*/
+				return this->processSSort(args);
 			default:
 				return null;
 		}
@@ -295,6 +290,8 @@ class Variables
 		switch (this->getCommand(arg)) {
 			case "TWODP":
 				return this->processTwoDP(arg);
+			case "COUNT":
+				return this->processCount(arg);
 			default:
 				return null;
 		}
@@ -315,38 +312,67 @@ class Variables
 		<span class=\"kb-benchmark\"></span>";
 	}
 
+	private function processCount(arg)
+	{
+		let arg = this->cleanArg("COUNT", arg);
+		return "count(" . arg . ")";
+	}
+
 	private function processDef(string line, array args, bool let_var = false, bool javascript = false)
 	{
-		var arg, key, output = "<?php ", splits;
+		var arg, output = "<?php ", splits, cleaned;
 
-		if (count(args) < 1) {
+		if (count(args) <= 1) {
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 		}
 
-		preg_match_all("/(?<!\")(?:\$=|%=|#=|&=|\$\(\)=|%\(\)=|#\(\)=|&\(\)=)/", trim(line), splits);
-		
+		let splits = explode("=", line, 2);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
+		}
+
+		if (javascript) {
+			let output = "<?= '<script type=\"text/javascript\">";
+		}
+
+		preg_match("/[$\%#&](?=(?:(?:[^\"]*\"){2})*[^\"]*$)(?!(?:[^()]*\)))/", splits[0], splits, PREG_OFFSET_CAPTURE);
 		if (empty(splits[0][0])) {
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 		}
 
-		for key, arg in args {
-			if (!key) {
-				let output .= arg . " = ";
-			} else {
-				switch (splits[0][0]) {
-					case "%()=":
-					case "%=":
-						let output .= "intval(" . arg . ");";
-						break;
-					case "#()=":
-					case "#=":
-						let output .= "(double)" . arg . ";";
-						break;
-					default:
-						let output .= arg . ";";
-						break;
-				}
+		let output .= (javascript ? "var " . ltrim(args[0], "$") : args[0]) . " = ";
+		array_shift(args);
+
+		for arg in args {
+			switch (splits[0][0]) {
+				case "%":
+					let cleaned = "intval(" . arg . ")";
+					break;
+				case "#":
+					let cleaned = "(double)" . arg . "";
+					break;
+				default:
+					let cleaned = arg;
+					break;
 			}
+
+			if (javascript && cleaned == "\"\"") {
+				let cleaned = "json_encode(" . cleaned . ")";
+			}
+
+			if (javascript && cleaned == "") {
+				let cleaned = "json_encode(\"\")";
+				let arg = "\"\"";
+			}
+
+			let output .= (
+				javascript ? "' . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ") . ';" :
+				arg . ";"
+			);
+		}
+
+		if (javascript) {
+			let output .= "</script>';";
 		}
 
 		return output . " ?>";
@@ -354,7 +380,7 @@ class Variables
 
 	private function processDim(string line, array args, bool javascript = false)
 	{
-		var arg, key, output = "<?php ", splits;
+		var arg, output = "<?php ", splits, is_array = false, cleaned;
 
 		if (count(args) < 1) {
 			throw new Exception("Invalid DIM");
@@ -366,96 +392,98 @@ class Variables
 			throw new Exception("Invalid DIM");
 		}
 
-		for key, arg in args {
-			if (!key) {
-				let output .= arg . " = array(";
-			} else {
-				let arg = ltrim(rtrim(arg, ")"), "(");
-
-				if (arg == "[]") {
-					let arg = "";
-				}
-
-				if (empty(arg)) {
-					let output .= arg . ", ";
-				} else {
-					switch (splits[0][0]) {
-						case "%=":
-							let output .= "intval(" . arg . "), ";
-							break;
-						case "#=":
-							let output .= "(double)" . arg . ", ";
-							break;
-						default:
-							let output .= arg . ", ";
-							break;
-					}
-				}
-			}
+		if (javascript) {
+			let output = "<?= '<script type=\"text/javascript\">";
 		}
 
-		return rtrim(output, ", ") . "); ?>";
+		let output .= (javascript ? "var " . ltrim(args[0], "$") : args[0]) . " = ";
+		array_shift(args);
+
+		for arg in args {
+			if (substr(arg, 0, 1) == "(" || arg == "[]") {
+				let is_array = true;
+				let output .= "[";
+			}
+
+			let arg = ltrim(rtrim(arg, ")"), "(");
+			if (arg == "[]") {
+				continue;
+			}
+
+			switch (splits[0][0]) {
+				case "%=":
+					let cleaned = "intval(" . arg . ")";
+					break;
+				case "#=":
+					let cleaned = "(double)" . arg . "";
+					break;
+				default:
+					let cleaned = arg;
+					break;
+			}
+
+			if (javascript && cleaned == "") {
+				let cleaned = "json_encode([])";
+				let arg = [];
+			}
+
+			let output .= (
+				javascript ? "' . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ") . ', " :
+				arg . ", "
+			);
+		}
+
+		let output = rtrim(output, ", ");
+		if (is_array) {
+			let output .= "];";
+		}
+
+		if (javascript) {
+			let output .= "</script>';";
+		}
+
+		return output . " ?>";
 
 	}
-/*
-	public function processMerge(command, args)
-	{
-		let command = command . args;
-		let args = this->args(this->cleanArg("MERGE", command));
-		let args[0] = this->cleanVarOnly(args[0], false, false);
-		
-		return "<?php " . args[0] . " = array_merge(" . args[0] . ", " . this->cleanVarOnly(args[1], false, false) . "); ?>";
+
+	public function processMerge(args)
+	{	
+		let args[0] = this->cleanArg("MERGE", args[0]);
+		return "<?php " . args[0] . " = array_merge(" . args[0] . ", " . args[1] . "); ?>";
 	}
 
 	public function processNatSort(args)
 	{
-		var cleaned;
-
-		let args = this->args(this->cleanArg("NATSORT", args));
-		let cleaned = this->cleanVarOnly(args[0], false);
-
-		return "<?php natsort(" . cleaned . "); " . cleaned . " = array_values(" . cleaned . "); ?>";
+		let args[0] = this->cleanArg("NATSORT", args[0]);
+		return "<?php natsort(" . args[0] . "); " . args[0] . " = array_values(" . args[0] . "); ?>";
 	}
 
 	public function processNSort(args)
 	{
-		let args = this->args(this->cleanArg("NSORT", args));
-		return "<?php sort(" . this->cleanVarOnly(args[0]) . ", SORT_NUMERIC); ?>";
+		return "<?php sort(" . this->cleanArg("NSORT", args[0]) . ", SORT_NUMERIC); ?>";
 	}
 
 	public function processShuffle(args)
 	{
-		let args = this->args(this->cleanArg("SHUFFLE", args));
-		return "<?php shuffle(" . this->cleanVarOnly(args[0]) . "); ?>";
+		let args[0] = this->cleanArg("SHUFFLE", args[0]);
+		return "<?php shuffle(" . args[0] . "); ?>";
 	}
 
 	public function processSort(args)
 	{
-		let args = this->args(this->cleanArg("SORT", args));
-		return "<?php sort(" . this->cleanVarOnly(args[0]) . "); ?>";
+		let args[0] = this->cleanArg("SORT", args[0]);
+		return "<?php sort(" . args[0] . "); ?>";
 	}
 
 	public function processSSort(args)
 	{
-		let args = this->args(this->cleanArg("SSORT", args));
-		return "<?php sort(" . this->cleanVarOnly(args[0]) . ", SORT_STRING); ?>";
+		let args[0] = this->cleanArg("SSORT", args[0]);
+		return "<?php sort(" . args[0] . ", SORT_STRING); ?>";
 	}
-*/
+
 	public function processTwoDP(arg)
 	{
 		let arg = this->cleanArg("TWODP", arg);
 		return "number_format(" . arg . ", 2, '.', '')";
 	}
-/*
-	private function setArrayElement(string line, splits, string type, bool let_var = false)
-	{
-		var output = "<?php $", vars, args, arg;
-		this->dump(splits[0]);
-		let args = this->args(splits[0]);
-		this->dump(args);
-
-		
-
-		return output . "; ?>";
-	}*/
 }

@@ -1,6 +1,6 @@
 <?php
-/*$line = '"/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".svg"';
-$splits = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", ".", $line);
+/*$line = 'DEF card$="/kytschi/imgs/cards/12_clubs.svg"';
+$splits = preg_split("/([+\-\/])(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", $line, 0, 2);
 var_dump($splits);
 die();*/
 (new KytschBASIC\Compiler(__DIR__ . '/../config'))->run();

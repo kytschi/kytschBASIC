@@ -25,6 +25,10 @@ LINE BREAK
 
 REM You can still assign the standard attributes of the PRINT command.
 PRINT MID("kytschBASIC", 7, 5), "basic"
+LINE BREAK
+
+DEF string$=MID("kytschBASIC", 7, 5)
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -32,7 +36,13 @@ PRINT MID("kytschBASIC", 7, 5), "basic"
 				DIV "kb-code-block"
 					PRINT MID("kytschBASIC", 7, 5)
 					LINE BREAK
+
+					REM You can still assign the standard attributes of the PRINT command.
 					PRINT MID("kytschBASIC", 7, 5), "basic"
+					LINE BREAK
+
+					DEF string$=MID("kytschBASIC", 7, 5)
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"

@@ -71,7 +71,7 @@ class Navigation extends Command
 		if (isset(args[4]) && !empty(args[4])) {
 			let params .= " id=" . this->outputArg(args[4]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-a"));
+			let params .= " id=" . this->outputArg(this->genID("kb-a"), true);
 		}
 		
 		return "<?= \"<a" . params . ">\"; ?>";
@@ -90,7 +90,7 @@ class Navigation extends Command
 		if (isset(args[1]) && !empty(args[1])) {
 			let params .= " id=" . this->outputArg(args[1]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-span"));
+			let params .= " id=" . this->outputArg(this->genID("kb-span"), true);
 		}
 		
 		return "<?= \"<nav" . params . ">\"; ?>";

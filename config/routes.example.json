@@ -304,6 +304,27 @@
 	},
 
 	{
+		"url": "/reference/AUTHOR",
+		"template": "project/reference/core/meta/AUTHOR.kb"
+	},
+	{
+		"url": "/reference/CHARSET",
+		"template": "project/reference/core/meta/CHARSET.kb"
+	},
+	{
+		"url": "/reference/DESCRIPTION",
+		"template": "project/reference/core/meta/DESCRIPTION.kb"
+	},
+	{
+		"url": "/reference/KEYWORDS",
+		"template": "project/reference/core/meta/KEYWORDS.kb"
+	},
+	{
+		"url": "/reference/VIEWPORT",
+		"template": "project/reference/core/meta/VIEWPORT.kb"
+	},
+
+	{
 		"url": "/reference/LINK",
 		"template": "project/reference/core/navigation/LINK.kb"
 	},
@@ -404,6 +425,10 @@
 	{
 		"url": "/reference/COS",
 		"template": "project/reference/core/maths/COS.kb"
+	},
+	{
+		"url": "/reference/EQUATIONS",
+		"template": "project/reference/core/maths/EQUATIONS.kb"
 	},
 	{
 		"url": "/reference/EXP",

@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -29,40 +29,42 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Sprite extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "SPRITE") {
-			return this->parseSprite(args);
-		} elseif (command == "END SPRITE") {
-			return "</div>";
+		switch(command) {
+			case "SPRITE":
+				return this->parseSprite(args);
+			case "END SPRITE":
+				return "</div>";
+			default:
+				return null;
 		}
 	}
 
-	public function parseSprite(args)
+	public function parseSprite(array args)
 	{
-		var params = "", cleaned;
-		let args = this->args(args);
+		var output = "<?= \"<div", cleaned;
 
-		if (isset(args[0])) {
-			let params .= " id=" . this->outputArg(args[0]);
+		if (isset(args[0]) && !empty(args[0])) {
+			let output .= " id=" . this->outputArg(args[0]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-window"));
+			let output .= " id=" . this->outputArg(this->genID("kb-window"), true);
 		}
 
-		if (isset(args[1])) {
-			let params .= " class=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1])) {
+			let output .= " class=" . this->outputArg(args[1]);
 		}
 
-		if (isset(args[2])) {
+		if (isset(args[2]) && !empty(args[2])) {
 			if (substr(args[2], 0, 1) == "\"") {
 				let cleaned = trim(args[2], "\"");
 			} else {
 				let cleaned = this->outputArg(args[2], false);
 			}
 
-			let params .= " onclick='javascript:" . cleaned . "(event)'";
+			let output .= " onclick='javascript:" . cleaned . "(event)'";
 		}
 		
-		return "<?= \"<div" . params . ">\"; ?>";
-	}*/
+		return output . ">\"; ?>";
+	}
 }

@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -29,22 +29,20 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Image extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "IMAGE") {
-			return this->processImage(args);
-		}
-
-		return null;
+		switch(command) {
+			case "IMAGE":
+				return this->processImage(args);
+			default:
+				return null;
+		}	
 	}
 
-	private function processImage(args)
+	private function processImage(array args)
 	{
-		var output = "";		
-		let args = this->args(args);
-
-		let output = "<?= \"<image";
-		
+		var output = "<?= \"<image";		
+				
 		if (isset(args[0]) && !empty(args[0])) {
 			let output .= " src=" . this->outputArg(args[0]);
 		}
@@ -62,5 +60,5 @@ class Image extends Command
 		}
 
 		return output . "/>\"; ?>";
-	}*/
+	}
 }

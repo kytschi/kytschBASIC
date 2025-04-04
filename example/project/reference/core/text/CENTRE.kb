@@ -20,15 +20,19 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DEF string$=CENTRE "AAABBBAAA", 3
+DEF string$=CENTRE("AAABBBAAA", 3)
 PRINT string$
+LINE BREAK
+PRINT CENTRE("AAABBBAAA", 3), "basic"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					DEF string$=CENTRE "AAABBBAAA", 3
+					DEF string$=CENTRE("AAABBBAAA", 3)
 					PRINT string$
+					LINE BREAK
+					PRINT CENTRE("AAABBBAAA", 3), "basic"
 				END DIV
 				HEADING 4
 					PRINT "See also"

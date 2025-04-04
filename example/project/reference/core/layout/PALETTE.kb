@@ -21,23 +21,16 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PALETTE "/kytschi/css/palette"
-BODY
-	SWRITE
-		PRINT "Creating the HTML body."
-	END SWRITE
-END BODY
-END
+
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-&lt;body&gt;
-	&lt;p&gt;
-		Creating the HTML body.
-	&lt;/p&gt;
-&lt;/body&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					HTMLENCODE
+						PALETTE "/kytschi/css/palette"
+					END HTMLENCODE
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

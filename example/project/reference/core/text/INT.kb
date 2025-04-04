@@ -22,7 +22,11 @@ PRINT INT(23.45)
 LINE BREAK
 
 REM You can still assign the standard attributes of the PRINT command.
-PRINT INT(23.45), "basic"
+PRINT INT(45.67), "basic"
+LINE BREAK
+
+DEF test$="12.34"
+DEF int%=INT(test$)
 				END CPRINT
 				HEADING 4
 					PRINT "Output"

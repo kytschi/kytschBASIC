@@ -51,7 +51,8 @@ NEXT
 
 DEF count%=COUNT(cards$)
 FOR player%=0 TO no_players%
-    LET hands$(player%)=cards$(0)
+    LET hands$(player%)()=cards$(0)
+    NATSORT(hands$(player%))
     SHIFT(cards$)
     LET count%=COUNT(cards$)
     IFE count% THEN
@@ -62,10 +63,10 @@ NEXT
 ADIM hands$=hands$
 ADIM names$=names$
 
-ADIM diamonds%=(7)
-ADIM clubs%=(7)
-ADIM spades%=(7)
-ADIM hearts%=(7)
+ADIM deck_diamonds%=(7)
+ADIM deck_clubs%=(7)
+ADIM deck_spades%=(7)
+ADIM deck_hearts%=(7)
 ADEF selected_card$=""
 ADEF deck_suit$=""
 ADEF card_suit$=""
@@ -73,7 +74,7 @@ ADEF turn%=0
 ADEF game_over%=0
 ADEF start%=1
 
-AFUNCTION computerPlay()
+AFUNCTION "computerPlay"
     if (game_over) {
         return;
     }
@@ -110,7 +111,7 @@ AFUNCTION computerPlay()
     updateTurn();
 END AFUNCTION
 
-AFUNCTION updateTurn()
+AFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
@@ -129,10 +130,10 @@ AFUNCTION updateTurn()
     }
 END AFUNCTION
 
-AFUNCTION updateDeck(cards, value, check = false)
+AFUNCTION "updateDeck", "cards", "value", "check=false"
     let status = false;
 
-    if (window[cards].length == 1) {
+    if (window["deck_" + cards].length == 1) {
         if (value != 7 && deck_suit != "diamonds" && start == 1) {
             gameInfo(event, "Start with the 7 of diamonds", true);
             return;
@@ -140,19 +141,19 @@ AFUNCTION updateDeck(cards, value, check = false)
 
         start = 0;
 
-        if (window[cards][0] == value) {
+        if (window["deck_" + cards][0] == value) {
             if (!check) {
                 $("button[name=btnLastCard]").removeAttr("disabled");
-                window[cards] = [6,8];
+                window["deck_" + cards] = [6,8];
             }
             return true;
         }
     } else {
-        window[cards].forEach((face, index) => {
+        window["deck_" + cards].forEach((face, index) => {
             if (face == value) {
                 if (!check) {
                     $("button[name=btnLastCard]").removeAttr("disabled");
-                    window[cards][index] = window[cards][index] + ((face < 7) ? -1 : 1);
+                    window["deck_" + cards][index] = window["deck_" + cards][index] + ((face < 7) ? -1 : 1);
                 }
                 status = true;
                 return;
@@ -163,7 +164,7 @@ AFUNCTION updateDeck(cards, value, check = false)
     return status;
 END AFUNCTION
 
-AFUNCTION canPlay(value, check = false)
+AFUNCTION "canPlay", "value", "check = false"
     if (game_over) {
         return;
     }
@@ -182,14 +183,14 @@ AFUNCTION canPlay(value, check = false)
     }
 END AFUNCTION
 
-AFUNCTION onCardClick()
+AFUNCTION "onCardClick"
     selected_card = event.target.parentElement.id;
     card_suit = (selected_card).split("_")[0];
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
 END AFUNCTION
 
-AFUNCTION playerKnocking()
+AFUNCTION "playerKnocking"
     if (game_over) {
         return;
     }
@@ -221,7 +222,7 @@ AFUNCTION playerKnocking()
     }
 END AFUNCTION
 
-AFUNCTION playCard(value)
+AFUNCTION "playCard", "value"
     $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
 
     if (turn == 0) {
@@ -265,7 +266,7 @@ AFUNCTION playCard(value)
     selected_card = "";
 END AFUNCTION
 
-AFUNCTION onDeckClick()
+AFUNCTION "onDeckClick"
     if (game_over) {
         return;
     }
@@ -292,12 +293,12 @@ AFUNCTION onDeckClick()
     }
 END AFUNCTION
 
-AFUNCTION gameInfo(text, error = false)
+AFUNCTION "gameInfo", "text", "error = false"
     $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
     $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
 
-AFUNCTION gameOver()
+AFUNCTION "gameOver"
     var score = 0, card_details, value = 0;
 
     if (typeof(kb_cookie.kb_sevens_scores) == "undefined") {
@@ -337,7 +338,7 @@ END AFUNCTION
 JAVASCRIPT
 $(document).ready(function() {
     var played = false;
-    
+
     if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_sevens_scores)) {
             $("#player-" + player + "-score span").html(value.score);
@@ -464,7 +465,7 @@ SCREEN "sevens"
                 PRINT "new game"
             END BUTTON
             FORM "form_test"
-                LET no_players%=no_players%+1
+                LET no_players%=(no_players%+1)
                 DIV "no-players"
                     PRINT "No. players"
                     NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",, "max='6'"

@@ -30,31 +30,53 @@ use KytschBASIC\Parsers\Core\Command;
 
 class AFunction extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "AFUNCTION") {
-			return this->parseFunction(args);
-		} elseif (command == "END AFUNCTION") {
-			return "}\n</script>\n";
+		switch(command) {
+			case "AFUNCTION":
+				return this->parseFunction(line, args);
+			case "END AFUNCTION":
+				return "}</script>\n";
+			default:
+				return null;
 		}
 	}
 
-	private function parseFunction(args)
+	private function parseFunction(string line, array args)
 	{
-		var output = "<script type=\"text/javascript\">\n", splits, str;
+		var output = "<script type=\"text/javascript\">", key, str, splits, arg, args;
 
-		preg_match_all("/\((.*?)\)/", args, splits);
-		
-		if (!empty(splits[0])) {
-			let str = str_replace(array_shift(splits[0]), "", args);
-			let output .= "function " . str . "(event, ";
-
-			let args = this->args(array_shift(splits[1]));
-			let output .= implode(", ", args) . ") {\n";
-		} else {
+		if (empty(args)) {
 			throw new Exception("Invalid AFUNCTION");
 		}
 
-		return output;
-	}*/
+		let args[0] = trim(args[0], "\"");
+		if (substr(args[0], 0, 1) == "$") {
+			let args[0] = "<?= " . args[0] . "; ?>";
+		}
+
+		let output .= "function " . args[0] . "(event";
+		array_shift(args);
+
+		for arg in args {
+			let arg = trim(trim(arg), "\"");
+
+			let output .= ",  ";
+
+			let splits = preg_split("/=\\$(?=(?:[^\"']*[\"'][^\"']*[\"'])*[^\"']*$)/", arg, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+			if (count(splits) > 1) {
+				for key, str in splits {
+					if (!key) {
+						let output .= str . "=";
+					} else {
+						let output .= "'<?= $" . str . "; ?>'";
+					}
+				}
+			} else {
+				let output .= arg;
+			}
+		}
+
+		return output . ") {";
+	}
 }

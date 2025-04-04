@@ -21,12 +21,20 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT UNRIGHT("Hi World!", 7)
+LINE BREAK
+
+DEF string$=UNRIGHT("Hi World!", 7)
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT UNRIGHT("Hi World!", 7)
+					LINE BREAK
+
+					DEF string$=UNRIGHT("Hi World!", 7)
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"

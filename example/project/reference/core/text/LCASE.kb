@@ -19,12 +19,20 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT LCASE("Hello World!")
+LINE BREAK
+
+DEF string$=LCASE("Hello World!")
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
 					PRINT LCASE("Hello World!")
+					LINE BREAK
+
+					DEF string$=LCASE("Hello World!")
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"

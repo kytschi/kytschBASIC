@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -68,15 +68,17 @@ class Loops extends Command
 			throw new Exception("Invalid FOR statement");
 		}
 
-		let splits = preg_split("/IN(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
-		if (!empty(splits)) {
+		let splits = preg_split("/\\bIN\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
+		if (count(splits) > 1) {
 			return this->processForIn(splits);
 		}
 
-		let splits = preg_split("/TO(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
-		if (empty(splits)) {
+		let splits = preg_split("/\\bTO\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line);
+		if (count(splits) <= 1 || count(args) <= 1) {
 			throw new Exception("Invalid FOR statement");
 		}
+
+		return this->processForTo(args);
 	}
 
 	private function processForIn(args)
@@ -86,24 +88,18 @@ class Loops extends Command
 			" as " .
 			trim(args[0]) . ") { ?>";
 	}
-/*
+
 	private function processForTo(args)
 	{
-		var output = "<?php for (", variable, step, dir = " <= ", vars, splits;
+		var output = "<?php for (", variable, step, dir = " <= ";
 
-		let args = explode(" TO ", args);
-		if (count(args) < 1) {
-			throw new Exception("Invalid for loop");
-		}
+		let variable = args[0];
 
-		let splits = explode("=", args[0]);
-		let vars = this->args(splits[0]);
-		let variable = vars[0];
-		let vars = this->args(splits[1]);
-		
-		let output .= variable . " = intval(" . vars[0] . "); " . variable;
+		let args = explode(" TO ", args[1], 2);
+				
+		let output .= variable . " = intval(" . args[0] . "); " . variable;
 
-		let step = explode(" STEP ", args[1]);
+		let step = explode(" STEP ", args[1], 2);
 		if (count(step) > 1) {
 			let args[1] = step[0];
 			let step[1] = intval(step[1]);
@@ -115,12 +111,10 @@ class Loops extends Command
 			}
 		} else {
 			let step = " += 1";
-		}
+		}	
 
-		let vars = this->args(args[1]);
-		
+		let output .= dir . "intval(" . args[1] . "); " . variable . step;
 
-		let output .= dir . "intval(" . vars[0] . "); " . variable . step;
 		return output . ") { ?>";
 	}
 	
@@ -128,8 +122,6 @@ class Loops extends Command
 	{
 		var output = "<?php while (";
 
-		let output .= (new Maths())->equation(args);
-
 		return output . ") { ?>";
-	}*/
+	}
 }

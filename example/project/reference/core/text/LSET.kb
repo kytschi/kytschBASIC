@@ -25,7 +25,9 @@ LOAD "_ROOT/project/shared/header"
 				CPRINT
 PRINT LSET("Hello World!", 5)
 LINE BREAK
-PRINT LSET("Hi", 5)
+
+DEF string$=LSET("Hi", 5)
+PRINT string$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -33,7 +35,9 @@ PRINT LSET("Hi", 5)
 				DIV "kb-code-block"
 					PRINT LSET("Hello World!", 5)
 					LINE BREAK
-					PRINT LSET("Hi", 5)
+
+					DEF string$=LSET("Hi", 5)
+					PRINT string$
 				END DIV
 				HEADING 4
 					PRINT "See also"
