@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Ellipse
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2024 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2024 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -29,19 +29,20 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Ellipse extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "ELLIPSE") {
-			return this->parseEllipse(args);
-		} elseif (command == "ELLIPSEF") {
-			return this->parseEllipse(args, true);
+		switch (command) {
+			case "ELLIPSE":
+				return this->parseEllipse(args);
+			case "ELLIPSEF":
+				return this->parseEllipse(args, true);
+			default:
+				return null;
 		}
 	}
 
-	public function parseEllipse(args, bool filled = false)
+	public function parseEllipse(array args, bool filled = false)
 	{
-		let args = this->args(args);
-
 		return "<?php $KBSHAPES[] = [
 			'colour' => $KBRGB,
 			'shape' => '" . (filled ? "imagefilledellipse" : "imageellipse") . "',
@@ -50,5 +51,5 @@ class Ellipse extends Command
 			'width' => " . (isset(args[2]) ? intval(args[2]) : 50) . ",
 			'height' => " . (isset(args[3]) ? intval(args[3]) : 50) . ",
 		]; ?>";
-	}*/
+	}
 }

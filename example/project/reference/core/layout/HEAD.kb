@@ -27,12 +27,12 @@ END HEAD
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					HTMLENCODE
+					SHOWHTML
 						HEAD
 							LOAD "_ROOT/project/shared/head"
 							NAME "HEAD statment | kytschBASIC"
 						END HEAD
-					END HTMLENCODE
+					END SHOWHTML
 				END DIV
 				HEADING 4
 					PRINT "See also"

@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -26,11 +26,18 @@
 namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\DatabaseException;
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
 class Database extends Command
 {
-	/*public function parse(string line, string command, array args)
+	private function dbClean(arg)
+	{
+		let arg = str_replace("[", "(", trim(arg, "\""));
+		return str_replace("]", ")", arg);
+	}
+
+	public function parse(string line, string command, array args)
 	{
 		var err;
 
@@ -76,14 +83,17 @@ class Database extends Command
 
 	private function parseBind(args)
 	{
-		var arg, splits, output = "<?php ";
-		let args = this->args(args);
+		var arg, output = "<?php ", key;
 		
-		for arg in args {
-			let splits = preg_split("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", arg);
+		if (count(args) < 1) {
+			throw new Exception("Invalid DBIND");
+		}
 
-			if (!empty(splits[0]) && !empty(splits[0])) {
-				let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = " . this->outputArg(splits[1], false, true) . ";";
+		for key, arg in args {
+			if (key % 2 == 0) {
+				let output .= "$KBDBBIND['" . trim(arg) . "'] = ";
+			} else {
+				let output .= arg . ";\n";
 			}
 		}
 		
@@ -96,31 +106,44 @@ class Database extends Command
 $KBDBSTATEMENT = $KBDBCONN->prepare(
 	$KBDBSELECT . ($KBDBSELECT ? ' FROM ' : '') . $KBDBTABLE . $KBDBSET . $KBDBJOIN . $KBDBWHERE . $KBDBSORT . $KBDBLIMIT
 );
+
 $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 	}
 
 	private function parseFetch(args)
 	{
-		let args = this->args(args);
+		if (!count(args)) {
+			throw new Exception("Invalid DFETCH");
+		}
+
 		return this->parseExecute() . "\n<?php " . str_replace(["\"", "{", "}"], "", args[0]) . " = $KBDBSTATEMENT->fetchAll(); ?>";
 	}
 
 	private function parseJoin(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" JOIN \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DJOIN");
+		}
+
+		return "<?php $KBDBJOIN .= \" JOIN " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseLeftJoin(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" LEFT JOIN \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DLJOIN");
+		}
+
+		return "<?php $KBDBJOIN .= \" LEFT JOIN " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseLimit(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBLIMIT = \" LIMIT \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DLIMIT");
+		}
+
+		return "<?php $KBDBLIMIT = \" LIMIT " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseOpen(args)
@@ -128,7 +151,10 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 		var config, configs, dsn = "", item;
 		let configs = constant("CONFIG");
 
-		let args = this->args(args);
+		if (!count(args)) {
+			throw new Exception("Invalid DOPEN");
+		}
+
 		let config = trim(args[0], "\"");
 				
 		if (empty(configs["database"])) {
@@ -181,37 +207,55 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 
 	private function parseRead(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBTABLE = " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DREAD");
+		}
+
+		return "<?php $KBDBTABLE = " . args[0] . "; ?>";
 	}
 
 	private function parseRightJoin(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBJOIN .= \" RIGHT JOIN \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DRJOIN");
+		}
+
+		return "<?php $KBDBJOIN .= \" RIGHT JOIN " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseSelect(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBSELECT = \"SELECT \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DSELECT");
+		}
+
+		return "<?php $KBDBSELECT = \"SELECT " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseSet(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DSET");
+		}
+
+		return "<?php $KBDBUPDATE = 'UPDATE '; $KBDBSET = \" SET " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseSort(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBSORT = \" ORDER BY \" . " . this->outputArg(args[0], false, true) . "; ?>";
+		if (!count(args)) {
+			throw new Exception("Invalid DSORT");
+		}
+
+		return "<?php $KBDBSORT = \" ORDER BY " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseWhere(args)
 	{
-		let args = this->args(args);
-		return "<?php $KBDBWHERE = \" WHERE \" . " . this->outputArg(args[0], false, true) . "; ?>";
-	}*/
+		if (!count(args)) {
+			throw new Exception("Invalid DWHERE");
+		}
+
+		return "<?php $KBDBWHERE = \" WHERE " . this->dbClean(args[0]) . "\"; ?>";
+	}
 }

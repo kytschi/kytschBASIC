@@ -24,9 +24,9 @@ DESCRIPTION "This is a kytschBASIC example"
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					HTMLENCODE
+					SHOWHTML
 						DESCRIPTION "This is a kytschBASIC example"
-					END HTMLENCODE
+					END SHOWHTML
 				END DIV
 				HEADING 4
 					PRINT "See also"

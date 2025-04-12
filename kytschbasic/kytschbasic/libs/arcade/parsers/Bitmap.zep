@@ -33,12 +33,102 @@ class Bitmap extends Command
 	private image = null;
 	private copy = null;
 
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "BITMAP") {
-			return this->parseBitmap(args);
-		} elseif (command == "END BITMAP") {
-			return "<?php
+		switch (command) {
+			case "BITMAP":
+				return this->processBitmap(args);
+			case "BITMAPFONT":
+				return this->processBitmapFont(args);
+			case "BITMAPTEXT":
+				return this->processBitmapText(args);
+			case "END BITMAP":
+				return this->processEndBitmap(args);
+			default:
+				return null;
+		}
+	}
+
+	private function processBitmap(array args)
+	{
+		var x=0, y=0, width=320, height=240;
+
+		if (isset(args[0])) {
+			let x = "intval(\"" . args[0] . "\")";
+		}
+
+		if (isset(args[1])) {
+			let y = "intval(\"" . args[1] . "\")";
+		}
+
+		if (isset(args[2])) {
+			let width = "intval(\"" . args[2] . "\")";
+		}
+
+		if (isset(args[3])) {
+			let height = "intval(\"" . args[3] . "\")";
+		}
+
+		return "<?php 
+		$KBSHAPES = [];
+		$KBBITMAPWIDTH = " . width . ";
+		$KBBITMAPHEIGHT = " . height . ";
+		$KBBITMAPX = " . x . ";
+		$KBBITMAPY = " . y . ";
+		$KBBITMAP = imagecreatetruecolor($KBBITMAPWIDTH, $KBBITMAPHEIGHT);
+		imagealphablending($KBBITMAP, true);
+		imageantialias($KBBITMAP, false);
+		$KBBKGRND = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);
+		imagefill($KBBITMAP, $KBBITMAPX, $KBBITMAPY, $KBBKGRND);
+		?>";
+	}
+
+	private function processBitmapFont(array args)
+	{
+		return "<?php $KBBITMAPFONT=" . args[0] . ";?>";
+	}
+
+	private function processBitmapText(array args)
+	{
+		var output = "<?php ", value;
+
+		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
+		let output .= "imagefttext($KBBITMAP, ";
+
+		let value = args[0];
+
+		if (isset(args[1])) {
+			let output .= args[1] . ", ";
+		} else {
+			let output .= "12, ";
+		}
+
+		if (isset(args[2])) {
+			let output .= args[2] . ", ";
+		} else {
+			let output .= "0, ";
+		}
+
+		if (isset(args[3])) {
+			let output .= args[3] . ", ";
+		} else {
+			let output .= "0, ";
+		}
+
+		if (isset(args[4])) {
+			let output .= args[4] . ", ";
+		} else {
+			let output .= "0, ";
+		}
+
+		let output .= "$KBCOLOUR, $KBBITMAPFONT, ";
+
+		return output . value . "); ?>";
+	}
+
+	private function processEndBitmap(array args)
+	{
+		return "<?php
 			foreach ($KBSHAPES as $KBSHAPE) {
 				switch($KBSHAPE['shape']) {
 					case 'imagearc':
@@ -76,90 +166,5 @@ class Bitmap extends Command
 			$KBBITMAP = ob_get_contents();
 			ob_end_clean(); ?>
 			<img src=\"data:image/png;base64,<?= base64_encode($KBBITMAP); ?>\">";
-		} elseif (command == "BITMAPFONT") {
-			return this->parseBitmapFont(args);
-		} elseif (command == "BITMAPTEXT") {
-			return this->parseBitmapText(args);
-		}
 	}
-
-	private function parseBitmap(args)
-	{
-		var x=0, y=0, width=320, height=240;
-
-		let args = this->args(args);
-
-		if (isset(args[0])) {
-			let x = "intval(\"" . args[0] . "\")";
-		}
-
-		if (isset(args[1])) {
-			let y = "intval(\"" . args[1] . "\")";
-		}
-
-		if (isset(args[2])) {
-			let width = "intval(\"" . args[2] . "\")";
-		}
-
-		if (isset(args[3])) {
-			let height = "intval(\"" . args[3] . "\")";
-		}
-
-		return "<?php 
-		$KBSHAPES = [];
-		$KBBITMAPWIDTH = " . width . ";
-		$KBBITMAPHEIGHT = " . height . ";
-		$KBBITMAPX = " . x . ";
-		$KBBITMAPY = " . y . ";
-		$KBBITMAP = imagecreatetruecolor($KBBITMAPWIDTH, $KBBITMAPHEIGHT);
-		imagealphablending($KBBITMAP, true);
-		imageantialias($KBBITMAP, false);
-		$KBBKGRND = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);
-		imagefill($KBBITMAP, $KBBITMAPX, $KBBITMAPY, $KBBKGRND);
-		?>";
-	}
-
-	private function parseBitmapFont(args)
-	{
-		return "<?php $KBBITMAPFONT=\"" . this->setArg(args) . "\";?>";
-	}
-
-	private function parseBitmapText(args)
-	{
-		var output = "<?php ", value;
-
-		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
-		let output .= "imagefttext($KBBITMAP, ";
-
-		let args = this->args(args);
-		let value = args[0];
-
-		if (isset(args[1])) {
-			let output .= args[1] . ", ";
-		} else {
-			let output .= "12, ";
-		}
-
-		if (isset(args[2])) {
-			let output .= args[2] . ", ";
-		} else {
-			let output .= "0, ";
-		}
-
-		if (isset(args[3])) {
-			let output .= args[3] . ", ";
-		} else {
-			let output .= "0, ";
-		}
-
-		if (isset(args[4])) {
-			let output .= args[4] . ", ";
-		} else {
-			let output .= "0, ";
-		}
-
-		let output .= "$KBCOLOUR, $KBBITMAPFONT, ";
-
-		return output . value . "); ?>";
-	}*/
 }

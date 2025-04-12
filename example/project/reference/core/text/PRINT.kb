@@ -33,7 +33,7 @@ PRINT string$
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					HTMLENCODE
+					SHOWHTML
 						PRINT "Hello World!"
 						LINE BREAK
 
@@ -42,7 +42,7 @@ PRINT string$
 
 						DEF string$="kytschBASIC"
 						PRINT string$
-					END HTMLENCODE
+					END SHOWHTML
 				END DIV
 				HEADING 4
 					PRINT "See also"

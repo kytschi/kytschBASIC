@@ -12,7 +12,6 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "BITMAPTEXT","heading-command basic"
 					LINE BREAK
-					LINE BREAK
 					PRINT "TEXT, SIZE, ANGLE, X, Y","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"

@@ -32,18 +32,24 @@ class Heading extends Command
 	public function parse(string line, string command, array args)
 	{
 		switch(command) {
-			case "END HEADING":
-				return this->processHeading(args, true);
 			case "HEADING":
 				return this->processHeading(args);
 			default:
-				return null;
+				if (strpos(command, "END HEADING") !== false) {
+					return this->processHeading(args, command);
+				} else {					
+					return null;
+				}
 		}
 	}
 
-	private function processHeading(array args, bool close = false)
+	private function processHeading(array args, string close = "")
 	{
 		var params="", size = 1;
+
+		if (close) {
+			let args[0] = ltrim(close, "END HEADING ");
+		}
 
 		if (isset(args[0]) && !empty(args[0])) {
 			let size = args[0];

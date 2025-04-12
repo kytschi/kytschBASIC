@@ -30,49 +30,71 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Mail extends Command
 {
-	/*public function parse(string command, args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "MAIL") {
-			return "<?php $KBMAIL = [
-				'open' => false,
-				'to' => '',
-				'from' => '',
-				'subject' => 'An email from kyschBASIC',
-				'message' => '',
-				'method' => 'sendmail',
-				'type' => 'html'
-			]; ?>";
-		} elseif (command == "MAILFROM") {
-			return "<?php $KBMAIL['from'] = " .
-				this->clean(
-					args,
-					this->isVariable(args)					
-				) .
-			"; ?>";
-		} elseif (command == "MAILTO") {
-			return "<?php $KBMAIL['to'] = " .
-				this->clean(
-					args,
-					this->isVariable(args)
-				) .
-			"; ?>";
-		} elseif (command == "MAILSUBJECT") {
-			return "<?php $KBMAIL['subject'] = " .
-				this->clean(
-					args,
-					this->isVariable(args)
-				) .
-			"; ?>";
-		}  elseif (command == "MAILBODY") {
-			return "<?php $KBMAIL['open'] = true; ob_start(); ?>";
-		} elseif (command == "END MAILBODY") {
-			return "<?php $KBMAIL['message'] = ob_get_contents(); ob_end_clean(); $KBMAIL['open'] = false;?>";
-		} elseif (command == "END MAIL") {
-			return "<?php (new KytschBASIC\\Parsers\\Core\\Communication\\Mail())->send($KBMAIL); ?>";
+		switch (command) {
+			case "END MAIL":
+				return this->processMailEnd(args);
+			case "END MAILBODY":
+				return this->processMailEndBody(args);
+			case "MAIL":
+				return this->processMail(args);
+			case "MAILBODY":
+				return this->processMailBody(args);
+			case "MAILFROM":
+				return this->processMailFrom(args);
+			case "MAILTO":
+				return this->processMailTo(args);
+			case "MAILSUBJECT":
+				return this->processMailSubject(args);
+			default:
+				return null;
+			
 		}
+	}
 
-		return null;
-	}*/
+	private function processMail(array args)
+	{
+		return "<?php $KBMAIL = [
+			'open' => false,
+			'to' => '',
+			'from' => '',
+			'subject' => 'An email from kyschBASIC',
+			'message' => '',
+			'method' => 'sendmail',
+			'type' => 'html'
+		]; ?>";
+	}
+
+	private function processMailBody(array args)
+	{
+		return "<?php $KBMAIL['open'] = true; ob_start(); ?>";
+	}
+
+	private function processMailEnd(array args)
+	{
+		return "<?php (new KytschBASIC\\Parsers\\Core\\Communication\\Mail())->send($KBMAIL); ?>";
+	}
+
+	private function processMailEndBody(array args)
+	{
+		return "<?php $KBMAIL['message'] = ob_get_contents(); ob_end_clean(); $KBMAIL['open'] = false;?>";
+	}
+
+	private function processMailFrom(array args)
+	{
+		return "<?php $KBMAIL['to'] = " . args[0] . "; ?>";
+	}
+
+	private function processMailSubject(array args)
+	{
+		return "<?php $KBMAIL['subject'] = " . args[0] . "; ?>";
+	}
+
+	private function processMailTo(array args)
+	{
+		return "<?php $KBMAIL['from'] = " . args[0] . "; ?>";
+	}
 
 	/**
 	 * Send the mail using the built up options.

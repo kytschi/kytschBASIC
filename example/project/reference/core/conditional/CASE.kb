@@ -19,7 +19,7 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 LET iLoop%=10
-WHILE iLoop%>0
+WHILE (iLoop%>0)
     SELECT iLoop%
         CASE 2
             PRINT iLoop%,"basic"
@@ -31,7 +31,7 @@ WHILE iLoop%>0
             PRINT iLoop%
             LINE BREAK
     END SELECT
-    LET iLoop%=iLoop%-1
+    LET iLoop%=(iLoop%-1)
 WEND
 				END CPRINT
 				HEADING 4
@@ -39,7 +39,7 @@ WEND
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					LET iLoop%=10
-					WHILE iLoop%>0
+					WHILE (iLoop%>0)
 						SELECT iLoop%
 							CASE 2
 								PRINT iLoop%,"basic"
@@ -51,7 +51,7 @@ WEND
 								PRINT iLoop%
 								LINE BREAK
 						END SELECT
-						LET iLoop%=iLoop%-1
+						LET iLoop%=(iLoop%-1)
 					WEND
 				END DIV
 				HEADING 4

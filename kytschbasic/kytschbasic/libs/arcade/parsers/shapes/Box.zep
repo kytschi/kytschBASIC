@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Box
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -29,19 +29,20 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Box extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "BOX") {
-			return this->parseBox(args);
-		} elseif (command == "BOXF") {
-			return this->parseBox(args, true);
+		switch (command) {
+			case "BOX":
+				return this->parseBox(args);
+			case "BOXF":
+				return this->parseBox(args, true);
+			default:
+				return null;
 		}
 	}
 
-	public function parseBox(args, bool filled = false)
+	public function parseBox(array args, bool filled = false)
 	{
-		let args = this->args(args);
-
 		return "<?php $KBSHAPES[] = [
 			'colour' => $KBRGB,
 			'shape' => '" . (filled ? "imagefilledrectangle" : "imagerectangle") . "',
@@ -50,5 +51,5 @@ class Box extends Command
 			'x2' => " . (isset(args[2]) ? intval(args[2]) : 50) . ",
 			'y2' => " . (isset(args[3]) ? intval(args[3]) : 50) . ",
 		]; ?>";
-	}*/
+	}
 }

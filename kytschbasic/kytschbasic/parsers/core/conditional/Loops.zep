@@ -42,22 +42,11 @@ class Loops extends Command
 				return "<?php } ?>";
 			case "END WHILE":
 				return "<?php } ?>";
+			case "WHILE":
+				return this->processWhile(args);
 			default:
 				return null;
 		}
-		/*if (command == "WHILE") {
-			return this->processWhile(args);
-		} elseif (command == "WEND" || command == "NEXT" || command == "END WHILE") {
-			return "<?php } ?>";
-		} elseif (command == "FOR") {
-			if (strpos(args, " IN ") !== false) {
-				return this->processForIn(args);
-			} else {
-				return this->processForTo(args);
-			}
-		}
-
-		return null;*/
 	}
 
 	private function processFor(string line, array args)
@@ -65,8 +54,10 @@ class Loops extends Command
 		var splits;
 
 		if (empty(args[0])) {
-			throw new Exception("Invalid FOR statement");
+			throw new Exception("Invalid FOR");
 		}
+
+		let args[0] = rtrim(args[0], ")");
 
 		let splits = preg_split("/\\bIN\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
 		if (count(splits) > 1) {
@@ -75,7 +66,7 @@ class Loops extends Command
 
 		let splits = preg_split("/\\bTO\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line);
 		if (count(splits) <= 1 || count(args) <= 1) {
-			throw new Exception("Invalid FOR statement");
+			throw new Exception("Invalid FOR");
 		}
 
 		return this->processForTo(args);
@@ -83,6 +74,19 @@ class Loops extends Command
 
 	private function processForIn(args)
 	{
+		var arg;
+
+		if (count(args) < 1) {
+			throw new Exception("Invalid FOR");
+		}
+
+		for arg in this->types {
+			if (strpos(args[1], arg) !== false) {
+				let args[1] = "$" . str_replace(this->types, "", trim(args[1]));
+				break;
+			}
+		}
+
 		return "<?php foreach (" .
 			trim(args[1]) .
 			" as " .
@@ -92,6 +96,10 @@ class Loops extends Command
 	private function processForTo(args)
 	{
 		var output = "<?php for (", variable, step, dir = " <= ";
+
+		if (count(args) < 1) {
+			throw new Exception("Invalid FOR");
+		}
 
 		let variable = args[0];
 
@@ -121,6 +129,12 @@ class Loops extends Command
 	private function processWhile(args)
 	{
 		var output = "<?php while (";
+
+		if (!count(args)) {
+			throw new Exception("Invalid WHILE");
+		}
+
+		let output .= args[0];
 
 		return output . ") { ?>";
 	}

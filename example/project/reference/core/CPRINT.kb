@@ -19,7 +19,7 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 SPRINT CPRINT
-SPRINT PRINT "I want to see the statement without executing it"
+PRINT "I want to see the statement without executing it"
 SPRINT END CPRINT
 				END CPRINT
 				HEADING 4

@@ -25,7 +25,7 @@ DEF var#=ABS(-50)
 PRINT var#
 LINE BREAK
 
-LET var#=-50
+LET var#="-50"
 PRINT ABS(var#)
 				END CPRINT
 				HEADING 4

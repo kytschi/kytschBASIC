@@ -17,7 +17,7 @@ BODY
 					PRINT "Requirements","basic"
 				END HEADING 3
 				SWRITE
-					PRINT "PHP 7.4 to 8.2"
+					PRINT "PHP 7.4 to 8.3"
 					LINE BREAK
 					PRINT "PHP-GD"
 					LINE BREAK
@@ -45,13 +45,13 @@ git clone git@github.com:kytschi/kytschBASIC.git
 					PRINT "You can copy the sample ini file from the `php` folder from the repo for the desired PHP version. Remember to do this as root or a user with administrator permissions."
 				END SWRITE
 				CPRINT
-cp kytschBASIC/php/kytschBASIC-8.2.ini /etc/php/8.2/mods-available/kytschBASIC.ini
+cp kytschBASIC/php/kytschBASIC-8.3.ini /etc/php/8.3/mods-available/kytschBASIC.ini
 				END CPRINT
 				SWRITE
 					PRINT "Now enable the kytschBASIC module in your PHP-FPM install or however you run PHP on your webserver."
 				END SWRITE
 				CPRINT
-ln -s /etc/php/8.2/mods-available/kytschBASIC.ini /etc/php/8.2/fpm/config/50-kytschBASIC.ini
+ln -s /etc/php/8.3/mods-available/kytschBASIC.ini /etc/php/8.3/fpm/config/50-kytschBASIC.ini
 				END CPRINT
 				SWRITE
 					PRINT "And don't forget to restart the PHP service."

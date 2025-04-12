@@ -36,7 +36,9 @@ class Parser
 	private line_no = 0;
 	private newline = "\n";
 	private cprint = false;
+	private js = false;
 	private has_case = false;
+	private show_html = false;
 
 	private controller;
 		
@@ -52,13 +54,11 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
 		"KytschBASIC\\Parsers\\Core\\Variables",
 		"KytschBASIC\\Parsers\\Core\\Media\\Image",
-		/*"KytschBASIC\\Parsers\\Core\\Navigation",*/
+		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
-		/*"KytschBASIC\\Parsers\\Core\\Conditional\\Select",
-		*/
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
 		"KytschBASIC\\Parsers\\Core\\Load",
-		/*"KytschBASIC\\Parsers\\Core\\Database",
+		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
@@ -66,22 +66,27 @@ class Parser
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Circle",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Ellipse",
-		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",*/
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Window",
-		/*"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape",*/
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Shape",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Sprite"
 	];
 
 	/*
 	 * Build the template by parsing the lines.
 	 */
-	public function parse(string template)
+	public function parse(string template, bool show_html_mode = false)
 	{
-		var err, command = "", args = "", line = "", lines, output = "";
+		var err, command = "", args = [], line = "", lines, output = "";
 
 		let this->cprint = false;
+		let this->js = false;
 		let this->controller = new Command();
+
+		if (show_html_mode) {
+			let this->show_html = true;
+		}
 		
 		try {
 			if (!file_exists(template)) {
@@ -95,7 +100,9 @@ class Parser
 			}
 
 			for line in lines {
-				let line = trim(line);
+				if (!this->cprint) {
+					let line = trim(line);
+				}
 				
 				let this->line_no += 1;
 				
@@ -106,8 +113,8 @@ class Parser
 				let command = this->controller->getCommand(line);
 				if (command == null) {
 					let command = "";
-				} else {
-					let args = this->controller->args(trim(str_replace(command, "", line)));
+				} elseif (!this->cprint) {
+					let args = this->controller->args(trim(ltrim(line, command)));
 				}
 
 				let output .= this->processCommand(line, command, args);
@@ -128,93 +135,111 @@ class Parser
 	{
 		var output = "", parser, cleaned;
 
-		if (command == "CPRINT") {
-			let this->cprint = true;
-			return "<pre><code>" . this->newline;
-		} elseif (command == "END CPRINT") {
-			let this->cprint = false;
-			return "</code></pre>" . this->newline;
-		} elseif (command == "JAVASCRIPT") {
-			let this->cprint = true;
-			return "<script type='text/javascript'>" . this->newline;
-		} elseif (command == "END JAVASCRIPT") {
-			let this->cprint = false;
-			return "</script>" . this->newline;
-		} elseif (command == "AFUNCTION") {
-			let this->cprint = true;
-			return (new AFunction())->parse(line, command, args);
-		} elseif (command == "END AFUNCTION") {
-			let this->cprint = false;
-			return (new AFunction())->parse(line, command, args);
-		} elseif (command == "HTMLENCODE") {
-			return "<?php ob_start(); ?>";
-		} elseif (command == "END HTMLENCODE") {
-			return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>";
-		} 
+		switch (command) {
+			case "SPRINT":
+				return trim(ltrim(line, "SPRINT")) . this->newline;
+			case "CPRINT":
+				let this->cprint = true;
+				return "<pre><code>" . this->newline;
+			case "END CPRINT":
+				let this->cprint = false;
+				return "</code></pre>" . this->newline;
+			case "JAVASCRIPT":
+				if (!this->cprint) {
+					let this->js = true;
+					return "<script type='text/javascript'>" . this->newline;
+				}
+				break;
+			case "END JAVASCRIPT":
+				if (!this->cprint) {
+					let this->js = false;
+					return "</script>" . this->newline;
+				}
+				break;
+			case "AFUNCTION":
+				if (!this->cprint) {
+					let this->js = true;
+					return (new AFunction())->parse(line, command, args);
+				}
+				break;
+			case "END AFUNCTION":
+				if (!this->cprint) {
+					let this->js = false;
+					return (new AFunction())->parse(line, command, args);
+				}
+				break;
+			default:
+				if (this->cprint || this->js) {
+					return line . this->newline;
+				}
+				break;
+		}
 
-		if (this->cprint) {
-			return line;
+		switch (command) {
+			case "REM":
+				return;
+			case "SHOWHTML":
+				let this->show_html = true;
+				return "<?php ob_start(); ?>";
+			case "END SHOWHTML":
+				let this->show_html = false;
+				return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>" . this->newline;
+			case "IF":
+				return this->processIf(line, "if", args);
+			case "IFNTE":
+				return this->processIf(line, "if", args, true);
+			case "IFE":
+				return this->processIf(line, "if", args, false, true);
+			case "ELSEIF":
+				return this->processIf(line, "elseif", args);
+			case "ELSE":
+				return "<?php else: ?>" . this->newline;
+			case "END IF":
+				return "<?php endif; ?>" . this->newline;
+			case "BREAK":
+				return "<?php break; ?>" . this->newline;
+			case "CASE":
+				if (this->has_case) {
+					let output .= "<?php break; ?>" . this->newline;
+					let this->has_case = false;
+				}
+
+				if (count(args) < 1) {
+					throw new Exception("Invalid CASE");
+				}
+		
+				let this->has_case = true;
+	
+				return output . "<?php case " . args[0] . ": ?>" . this->newline;
+			case "DEFAULT":
+				if (this->has_case) {
+					let output .= "<?php break; ?>" . this->newline;
+					let this->has_case = false;
+				}
+				let this->has_case = true;
+				return output . "<?php default: ?>" . this->newline;
+			case "SELECT":
+				if (count(args) < 1) {
+					throw new Exception("Invalid SELECT");
+				}
+				return "<?php switch(" . args[0] . ") { ?>" . this->newline;
+			case "END SELECT":
+				if (this->has_case) {
+					let output .= "<?php break; ?>" . this->newline;
+					let this->has_case = false;
+				}
+				return output . "<?php } ?>" . this->newline;
+			case "VERSION":
+				return "<span class=\"kb-version\">" . constant("VERSION") . "</span>" . this->newline;
 		}
 		
-		if (command == "SPRINT") {
-			return str_replace("SPRINT ", "", line) . this->newline;
-		} elseif (command == "REM") {
-			return;
-		} elseif (command == "IF") {
-			return this->processIf(line, "if", args);
-		} elseif (command == "IFNTE") {
-			return this->processIf(line, "if", args, true);
-		} elseif (command == "IFE") {
-			return this->processIf(line, "if", args, false, true);
-		} elseif (command == "ELSEIF") {
-			return this->processIf(line, "elseif", args);
-		} elseif (command == "ELSE") {
-			return "<?php else: ?>\n";
-		} elseif (trim(command) == "END IF") {
-			return "<?php endif; ?>\n";
-		} elseif (trim(command) == "BREAK") {
-			return "<?php break; ?>\n";
-		} elseif (command == "CASE") {
-			if (this->has_case) {
-				let output .= "<?php break; ?>\n" . this->newline;
-				let this->has_case = false;
-			}
-
-			let parser = new Command();
-
-			/*let output .= "<?php case " .
-				parser->clean(
-					args,
-					parser->isVariable(args)
-				)
-				. ": ?>\n" . this->newline;*/
-
-			let this->has_case = true;
-
-			return output;
-		} elseif (command == "DEFAULT") {
-			if (this->has_case) {
-				let output .= "<?php break; ?>\n" . this->newline;
-				let this->has_case = false;
-			}
-			let output .= "<?php default: ?>\n" . this->newline;
-			let this->has_case = true;
-
-			return output;
-		} elseif (command == "END SELECT") {
-			if (this->has_case) {
-				let output .= "<?php break; ?>\n" . this->newline;
-				let this->has_case = false;
-			}
-			return "<?php } ?>\n";
-		} elseif (command == "VERSION") {
-			return "<span class=\"kb-version\">" . constant("VERSION") . "</span>";
-		}
-
 		for parser in this->available {
 			let cleaned = (new {parser}())->parse(line, command, args);
 			if (cleaned !== null) {
 				let output .= cleaned . this->newline;
+				if (substr(cleaned, strlen(cleaned) - 2, 2) == "?>" && this->show_html) {
+					let output .= this->newline;
+				}
 				break;
 			}
 		}
@@ -225,17 +250,17 @@ class Parser
 	{
 		var output = "", splits;
 
-		if (empty(args[0])) {
+		if (!count(args)) {
 			throw new Exception("Invalid IF statement");
 		}
-
+		
 		let output = "<?php " . command . " (";
 
 		let splits = preg_split("/THEN(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
-		if (empty(splits[0])) {
+		if (!count(splits)) {
 			throw new Exception("Invalid IF statement");
 		}
-
+		
 		if (not_empty) {
 			let output .= "!empty(" . trim(splits[0]) . ")";
 		} elseif (is_empty) {
@@ -244,7 +269,7 @@ class Parser
 			let output .= trim(splits[0]);
 		}
 
-		let output .= "): ?>\n";
+		let output .= "): ?>" . this->newline;
 		
 		return output;
 	}

@@ -41,8 +41,7 @@ class Color extends Command
 	public function parseRgb(args)
 	{
 		var output = "<?php $KBRGB=[";
-		let args = this->args(args);
-				
+						
 		if (isset(args[0])) {
 			let output .= intval(args[0]) . ",";
 		} else {

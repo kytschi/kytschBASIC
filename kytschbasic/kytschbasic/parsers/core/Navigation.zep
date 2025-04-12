@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -29,70 +29,72 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Navigation extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "END LINK") {
-			return "</a>";
-		} elseif (command == "LINK") {
-			return this->processLink(args);
-		} elseif (command == "END MENU") {
-			return "</nav>";
-		} elseif (command == "MENU") {
-			return this->processNav(args);
-		} elseif (command == "GOTO") {
-			return "<?php header(\"Location: " . this->setArg(args) . "\"); ?>";
-		} 
-
-		return null;
+		switch(command) {
+			case "END LINK":
+				return "</a>";
+			case "END MENU":
+				return "</nav>";
+			case "GOTO":
+				return this->processGoto(args);
+			case "LINK":
+				return this->processLink(args);
+			case "MENU":
+				return this->processNav(args);
+			default:
+				return null;
+		}
 	}
 
-	private function processLink(string line)
+	private function processGoto(array args)
 	{
-		var args, params="";
+		return "<?php header(\"Location: " . args[0] . "\"); ?>";
+	}
 
-		let args = this->args(line);
+	private function processLink(array args)
+	{
+		var output = "<?= \"<a";
 				
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " href=" . this->outputArg(args[0]);
+			let output .= " href=" . this->outputArg(args[0]);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " title=" . this->outputArg(args[1]);
+			let output .= " title=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " class=" . this->outputArg(args[2]);
+			let output .= " class=" . this->outputArg(args[2]);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let params .= " target=" . this->outputArg(args[3]);
+			let output .= " target=" . this->outputArg(args[3]);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let params .= " id=" . this->outputArg(args[4]);
+			let output .= " id=" . this->outputArg(args[4]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-a"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-a"), true);
 		}
 		
-		return "<?= \"<a" . params . ">\"; ?>";
+		return  output . ">\"; ?>";
 	}
 
-	private function processNav(string line)
+	private function processNav(array args)
 	{
-		var args, params="";
-
-		let args = this->args(line);
+		var output = "<?= \"<nav";
 		
 		if (isset(args[0]) && !empty(args[0])) {
-			let params .= " class=" . this->outputArg(args[0]);
+			let output .= " class=" . this->outputArg(args[0]);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " id=" . this->outputArg(args[1]);
+			let output .= " id=" . this->outputArg(args[1]);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-span"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
 		}
 		
-		return "<?= \"<nav" . params . ">\"; ?>";
-	}*/
+		return  output . ">\"; ?>";
+	}
 }

@@ -49,7 +49,7 @@ class Text extends Command
 	private function processPrint(array args)
 	{
 		var value="", output = "<?= \"<span";
-		
+				
 		let value = args[0];
 						
 		if (isset(args[1]) && !empty(args[1])) {
@@ -150,7 +150,8 @@ class Text extends Command
 
 	public function processAsc(arg)
 	{
-		return "ord(" . this->cleanArg("ASC", arg) . ")";
+		let arg = this->cleanArg("ASC", arg);
+		return "ord(" . arg . ")";
 	}
 
 	public function processCentre(arg)
@@ -163,7 +164,7 @@ class Text extends Command
 			throw new Exception("Invalid CENTRE");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (!count(args)) {
 			throw new Exception("Invalid CENTRE");
 		}
@@ -190,7 +191,7 @@ class Text extends Command
 			throw new Exception("Invalid INSTR");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (!count(args)) {
 			throw new Exception("Invalid INSTR");
 		}
@@ -218,7 +219,7 @@ class Text extends Command
 			throw new Exception("Invalid LEFT");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid LEFT");
 		}
@@ -241,7 +242,7 @@ class Text extends Command
 			throw new Exception("Invalid LSET");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid LSET");
 		}
@@ -259,7 +260,7 @@ class Text extends Command
 			throw new Exception("Invalid MID");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 2) {
 			throw new Exception("Invalid MID");
 		}
@@ -277,7 +278,7 @@ class Text extends Command
 			throw new Exception("Invalid REPLACE");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 2) {
 			throw new Exception("Invalid REPLACE");
 		}
@@ -295,7 +296,7 @@ class Text extends Command
 			throw new Exception("Invalid RIGHT");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid RIGHT");
 		}
@@ -313,7 +314,7 @@ class Text extends Command
 			throw new Exception("Invalid RSET");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid RSET");
 		}
@@ -331,7 +332,7 @@ class Text extends Command
 			throw new Exception("Invalid STRING");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid STRING");
 		}
@@ -361,7 +362,7 @@ class Text extends Command
 			throw new Exception("Invalid STRIPLEAD");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid STRIPLEAD");
 		}
@@ -379,7 +380,7 @@ class Text extends Command
 			throw new Exception("Invalid STRIPTRAIL");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid STRIPTRAIL");
 		}
@@ -407,7 +408,7 @@ class Text extends Command
 			throw new Exception("Invalid UNLEFT");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid UNLEFT");
 		}
@@ -425,7 +426,7 @@ class Text extends Command
 			throw new Exception("Invalid UNRIGHT");
 		}
 
-		let args = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+		let args = this->commaSplit(arg);
 		if (count(args) < 1) {
 			throw new Exception("Invalid UNRIGHT");
 		}

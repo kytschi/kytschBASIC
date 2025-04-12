@@ -24,46 +24,38 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-SCREEN "the-traveller"
-	WINDOW "intro"
-		RGB 0,0,0
-		BITMAP 0,0,800,400
-			RGB 255,0,0
-			BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-			BITMAPTEXT "The Traveller",32,0,120,150
-			BITMAPTEXT "Press any key to start",18,0,135,320
-		END BITMAP
-	END WINDOW
-	WINDOW "input"
-		RGB 0,0,0
-		BITMAP 0,0,800,200
-			RGB 255,0,0
-			LINE 0,0,800,0
-		END BITMAP
+DIM cards$=("clubs_1.svg", "clubs_2.svg", "clubs_3.svg", "clubs_4.svg")
+SCREEN "cards"
+	WINDOW "hand"
+		FOR card$ IN cards$
+			DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+			DEF id$=REPLACE(id$, ".svg", "")
+			LET card$="/kytschi/imgs/cards/" . card$
+			SPRITE id$, "card", "onCardClick"
+				IMAGE card$
+			END SPRITE
+		NEXT
 	END WINDOW
 END SCREEN
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				SCREEN "the-traveller"
-					WINDOW "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
-							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller",32,0,120,150
-							BITMAPTEXT "Press any key to start",18,0,135,320
-						END BITMAP
-					END WINDOW
-					WINDOW "input"
-						RGB 0,0,0
-						BITMAP 0,0,800,200
-							RGB 255,0,0
-							LINE 0,0,800,0
-						END BITMAP
-					END WINDOW
-				END SCREEN
+				DIV "kb-col kb-col-24 kb-code-block"
+					DIM cards$=("clubs_1.svg", "clubs_2.svg", "clubs_3.svg", "clubs_4.svg")
+					SCREEN "cards"
+						WINDOW "hand"
+							FOR card$ IN cards$
+								DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+								DEF id$=REPLACE(id$, ".svg", "")
+								LET card$="/kytschi/imgs/cards/" . card$
+								SPRITE id$, "card", "onCardClick"
+									IMAGE card$
+								END SPRITE
+							NEXT
+						END WINDOW
+					END SCREEN
+				END DIV
 				HEADING 4
 					PRINT "Parameters"
 				END HEADING 4

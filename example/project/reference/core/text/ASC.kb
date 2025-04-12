@@ -22,7 +22,7 @@ DEF char$=ASC("A")
 PRINT char$
 LINE BREAK
 
-PRINT ASC("E")+" DUDES!", "basic"
+PRINT ASC("E")
 LINE BREAK
 
 LET char$="B"
@@ -37,7 +37,7 @@ PRINT ASC(char$)
 					PRINT char$
 					LINE BREAK
 
-					PRINT ASC("E")+" DUDES!", "basic"
+					PRINT ASC("E")
 					LINE BREAK
 
 					LET char$="B"

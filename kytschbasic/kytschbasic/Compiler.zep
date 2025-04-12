@@ -26,7 +26,6 @@
 namespace KytschBASIC;
 
 use KytschBASIC\Exceptions\Exception;
-use KytschBASIC\Parsers\Core\Input\Form;
 use KytschBASIC\Parsers\Core\Parser;
 
 class Compiler
@@ -71,10 +70,7 @@ class Compiler
 		define("_RURL", _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"]);
 		define("_URL", _SERVER["REQUEST_URI"]);
 		define("_PATH", url["path"]);
-
-		let this->globals["_VALID"] = [];
-		//let this->globals["_VALID"]["captcha"] = (new Form())->validateCaptcha();
-				
+						
 		/*let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api",
 		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/
 
@@ -133,8 +129,6 @@ class Compiler
 		var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
 		
 		try {
-			let output = "<?php ";
-			let output = output . "$_VALID = unserialize('" . serialize(this->globals["_VALID"]) . "');?>";
 			let output = output . "<!DOCTYPE html>" . this->newline;
 			let output = output . parsed;
 			file_put_contents(constant("_ROOT") . "/compiled.php", output);

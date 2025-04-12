@@ -31,263 +31,196 @@ class Maths extends Variables
 {
 	private bracket_checks = ["%)", "$)", "#)", "&)"];
 
-	/*public function equation(command)
+	public function isEquation(line)
 	{
-		if (substr(command, 0, 1) == "\"" || command == "" || command === null) {
-			return command;
-		}
-
-		var splits, val, cleaned, check;
-		
-		let splits = preg_split("/\*|\+|\<-|\-|\>=|\>|\<=|\<|\==|\//", command, 0, 2);
-				
-		if (count(splits) == 1) {
-			return command;
-		}
-		
-		for val in splits {			
-			if (!is_numeric(val)) {
-				if (in_array(substr(val, strlen(val) - 2, 2), this->bracket_checks)) {
-					let val = rtrim(val, ")");
-				}
-
-				if (in_array(substr(val, strlen(val) - 1, 1), this->types)) {
-					let cleaned = str_replace(this->types, "", val);
-					let command = str_replace(val, "$" . cleaned, command);
-				} else {
-					for check in this->array_types {
-						if (strpos(val, check) !== false) {
-							let cleaned = str_replace(this->array_types, "[", val);
-							if (substr(cleaned, "))") !== false) {
-								let cleaned = rtrim(cleaned, "))") . "])";
-							} else {
-								let cleaned = rtrim(cleaned, ")") . "]";
-							}
-							let command = str_replace(val, "$" . cleaned, command);
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		return command;
+		return preg_split("/([+\-\/\*])(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, 0, 2);
 	}
 
-	public function parse(string line, string command, array args)
+	public function processValue(arg)
 	{
-		if (substr(command, 0, 1) == "\"") {
-			return null;
+
+		if (substr(arg, 0, 5) == "LOG10") {
+			return this->processLog10(arg);
 		}
 
-		return this->processValue(this->args(args));
-	}
-
-	public function processValue(args)
-	{
-		if (is_string(args)) {
-			let args = [args];
-		}
-
-		if (substr(args[0], 0, 5) == "LOG10") {
-			return this->processLog10(args);
-		}
-
-		switch (this->getCommand(args[0])) {
+		switch (this->getCommand(arg)) {
 			case "ABS":
-				return this->processAbs(args);
+				return this->processAbs(arg);
 			case "ACOS":
-				return this->processAcos(args);
+				return this->processAcos(arg);
 			case "ASIN":
-				return this->processAsin(args);
+				return this->processAsin(arg);
 			case "ATAN":
-				return this->processAtan(args);
+				return this->processAtan(arg);
 			case "BIN":
-				return this->processBin(args);
+				return this->processBin(arg);
 			case "COS":
-				return this->processCos(args);
+				return this->processCos(arg);
 			case "EXP":
-				return this->processExp(args);
+				return this->processExp(arg);
 			case "FRAC":
-				return this->processFrac(args);
+				return this->processFrac(arg);
 			case "HCOS":
-				return this->processHCos(args);
+				return this->processHCos(arg);
 			case "HEX":
-				return this->processHex(args);
+				return this->processHex(arg);
 			case "HSIN":
-				return this->processHSin(args);
+				return this->processHSin(arg);
 			case "HTAN":
-				return this->processHTan(args);
+				return this->processHTan(arg);
 			case "LOG":
-				return this->processLog(args);
+				return this->processLog(arg);
 			case "RND":
-				return this->processRnd(args);
+				return this->processRnd(arg);
 			case "SIN":
-				return this->processSin(args);
+				return this->processSin(arg);
 			case "SGN":
-				return this->processSgn(args);
+				return this->processSgn(arg);
 			case "SQR":
-				return this->processSqr(args);
+				return this->processSqr(arg);
 			case "TAN":
-				return this->processTan(args);
+				return this->processTan(arg);
 			default:
 				return null;
 		}
 	}
 
-	public function processAbs(args)
+	public function processAbs(arg)
 	{
-		let args[0] = this->cleanArg("ABS", args[0]);
-		let args = this->args(args[0]);
-		return "abs(" . this->outputArg(args[0], false) . ")";
+		let arg = this->cleanArg("ABS", arg);
+		return "abs(" . arg . ")";
 	}
 
-	public function processAcos(args)
+	public function processAcos(arg)
 	{
-		let args[0] = this->cleanArg("ACOS", args[0]);
-		let args = this->args(args[0]);
-		return "acos(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("ACOS", arg);
+		return "acos(floatval(" . arg . "))";
 	}
 
-	public function processAsin(args)
+	public function processAsin(arg)
 	{
-		let args[0] = this->cleanArg("ASIN", args[0]);
-		let args = this->args(args[0]);
-		return "asin(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("ASIN", arg);
+		return "asin(floatval(" . arg . "))";
 	}
 
-	public function processAtan(args)
+	public function processAtan(arg)
 	{
-		let args[0] = this->cleanArg("ATAN", args[0]);
-		let args = this->args(args[0]);
-		return "atan(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("ATAN", arg);
+		return "atan(floatval(" . arg . "))";
 	}
 
-	public function processBin(args)
+	public function processBin(arg)
 	{
-		let args[0] = this->cleanArg("BIN", args[0]);
-		let args = this->args(args[0]);
-		return "str_pad(decbin(intval(" . this->outputArg(args[0], false) . ")), 32, '0', 0)";
+		let arg = this->cleanArg("BIN", arg);
+		return "str_pad(decbin(intval(" . arg . ")), 32, '0', 0)";
 	}
 
-	public function processCos(args)
+	public function processCos(arg)
 	{
-		let args[0] = this->cleanArg("COS", args[0]);
-		let args = this->args(args[0]);
-		return "cos(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("COS", arg);
+		return "cos(floatval(" . arg . "))";
 	}
 
-	public function processExp(args)
+	public function processExp(arg)
 	{
-		let args[0] = this->cleanArg("EXP", args[0]);
-		let args = this->args(args[0]);
-		return "exp(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("EXP", arg);
+		return "exp(floatval(" . arg . "))";
 	}
 
-	public function processFrac(args)
+	public function processFrac(arg)
 	{
-		let args[0] = this->cleanArg("FRAC", args[0]);
-		let args = this->args(args[0]);
-		return "fmod(" . this->outputArg(args[0], false) . ", 1)";
+		let arg = this->cleanArg("FRAC", arg);
+		return "fmod(" . arg . ", 1)";
 	}
 
-	public function processHCos(args)
+	public function processHCos(arg)
 	{
-		let args[0] = this->cleanArg("HCOS", args[0]);
-		let args = this->args(args[0]);
-		return "cosh(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("HCOS", arg);
+		return "cosh(floatval(" . arg . "))";
 	}
 
-	public function processHex(args)
+	public function processHex(arg)
 	{
-		let args[0] = this->cleanArg("HEX", args[0]);
-		let args = this->args(args[0]);
-		return "str_pad(dechex(intval(". this->outputArg(args[0], false) . ")), 8, '0', 0)";
+		let arg = this->cleanArg("HEX", arg);
+		return "str_pad(dechex(intval(". arg . ")), 8, '0', 0)";
 	}
 
-	public function processHSin(args)
+	public function processHSin(arg)
 	{
-		let args[0] = this->cleanArg("HSIN", args[0]);
-		let args = this->args(args[0]);
-		return "sinh(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("HSIN", arg);
+		return "sinh(floatval(" . arg . "))";
 	}
 
-	public function processHTan(args)
+	public function processHTan(arg)
 	{
-		let args[0] = this->cleanArg("HTAN", args[0]);
-		let args = this->args(args[0]);
-		return "tanh(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("HTAN", arg);
+		return "tanh(floatval(" . arg . "))";
 	}
 
-	public function processLog(args)
+	public function processLog(arg)
 	{
-		let args[0] = this->cleanArg("LOG", args[0]);
-		let args = this->args(args[0]);
+		var args;
 
+		let arg = this->cleanArg("LOG", arg);
+
+		let args = this->commaSplit(arg);
+		
 		if (count(args) > 1) {
-			return "log(floatval(" . this->outputArg(args[0], false) . "), floatval(" . this->outputArg(args[1], false) . "))";
+			return "log(floatval(" . args[0]. "), floatval(" . args[1] . "))";
 		}
 
-		return "log(floatval(" . this->outputArg(args[0], false) . "))";		
+		return "log(floatval(" . arg . "))";		
 	}
 
-	public function processLog10(args)
+	public function processLog10(arg)
 	{
-		let args[0] = this->cleanArg("LOG10", args[0]);
-		let args = this->args(args[0]);
-
-		return "log10(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("LOG10", arg);
+		return "log10(floatval(" . arg . "))";
 	}
 
-	public function processRnd(args)
+	public function processRnd(arg)
 	{
-		let args[0] = ltrim(rtrim(trim(str_replace("RND", "", args[0])), ")"), "(");
+		let arg = ltrim(rtrim(trim(str_replace("RND", "", arg)), ")"), "(");
 
-		if (empty(args[0])) {
+		if (empty(arg)) {
 			return rand(1, 10);
 		}
-
-		let args = this->args(args[0]);
 		
-		if (count(args) == 1) {
-			return "rand(1, intval(" . this->outputArg(args[0], false). "))";
+		if (count(arg) == 1) {
+			return "rand(1, intval(" . arg. "))";
 		}
 
-		return "rand(intval(" . this->outputArg(args[0], false) . "), intval(" . this->outputArg(args[1], false). "))";
+		return "rand(intval(" . arg . "), intval(" . this->outputArg(arg[1], false). "))";
 	}
 
-	public function processSin(args)
+	public function processSin(arg)
 	{
-		let args[0] = this->cleanArg("SIN", args[0]);
-		let args = this->args(args[0]);		
-		return "sin(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("SIN", arg);
+		return "sin(floatval(" . arg . "))";
 	}
 
-	public function processSgn(args)
+	public function processSgn(arg)
 	{
-		let args[0] = this->cleanArg("SGN", args[0]);
-		let args = this->args(args[0]);
+		let arg = this->cleanArg("SGN", arg);
 
-		if (empty(args[0])) {
-			let args[0] = 0;
+		if (empty(arg)) {
+			let arg = 0;
 		}
 
-		let args[0] = this->outputArg(args[0], false);
+		let arg = arg;
 
-		return "((floatval(" . args[0] . ") > 0) ? 1 : ((floatval(" . args[0] . ") < 0) ? -1 : 0))";
+		return "((floatval(" . arg . ") > 0) ? 1 : ((floatval(" . arg . ") < 0) ? -1 : 0))";
 	}
 
-	public function processSqr(args)
+	public function processSqr(arg)
 	{
-		let args[0] = this->cleanArg("SQR", args[0]);
-		let args = this->args(args[0]);
-		return "sqrt(floatval(" . this->outputArg(args[0], false) . "))";
+		let arg = this->cleanArg("SQR", arg);
+		return "sqrt(floatval(" . arg . "))";
 	}
 
-	public function processTan(args)
+	public function processTan(arg)
 	{
-		let args[0] = this->cleanArg("TAN", args[0]);
-		let args = this->args(args[0]);
-		return "tan(floatval(" . this->outputArg(args[0], false) . "))";
-	}*/
+		let arg = this->cleanArg("TAN", arg);
+		return "tan(floatval(" . arg . "))";
+	}
 }

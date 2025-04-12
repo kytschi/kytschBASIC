@@ -27,7 +27,7 @@ namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Libs\Arcade\Parsers\Screen\Display;
-use KytschBASIC\Parsers\Core\Function\Misc;
+use KytschBASIC\Parsers\Core\Input\Form;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Text\Text;
 
@@ -39,20 +39,55 @@ class Variables
 
 	public function args(string line)
 	{
-		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display;
-
+		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display, maths, iLoop;
+		
 		let text = new Text();
 		let display = new Display();
+		let maths = new Maths();
 
 		// Clean any + used for string join.
 		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", ".", line);
 
 		//Grab all vars.
-		preg_match_all("/\\b[\\w.-]*[$%#&](?!\\w)/u", line, vars);
-		for str in vars[0] {
-			let line = str_replace(str, "$" . str_replace(this->types, "", str), line);
-		}
+		preg_match_all("/(?<!\\\\)\"(?:\\\\\"|.)*?\"(*SKIP)(*FAIL)|([a-zA-Z0-9_]*)([\$#%&])(?:\()?/", line, vars, PREG_OFFSET_CAPTURE);
+		for arg, str in vars[0] {
+			if (str[0] == "%") {
+				continue;
+			}
 
+			// Used to see if its an array.
+			let subvars = false;
+			for find in this->array_types {
+				if (strpos(str[0], find) !== false) {
+					// Used to see if its an array.
+					let subvars = true;
+					let cleaned = "";
+					let iLoop = str[1];
+					while (iLoop < strlen(line)) {						
+						if (substr(line, iLoop, 1) == ")") {
+							let cleaned .= "]";
+							break;
+						} elseif (substr(line, iLoop, 1) == "(") {
+							let cleaned .= "[";
+						} elseif (!in_array(substr(line, iLoop, 1), this->types, true)) {							
+							let cleaned .= substr(line, iLoop, 1);
+						}
+
+						let iLoop += 1;
+					}
+
+					let cleaned = "$" . cleaned;
+					
+					let line = substr_replace(line, cleaned, str[1], strlen(cleaned));
+				}
+			}
+
+			if (!subvars) {
+				let cleaned = "$" . str_replace(this->types, "", str[0]);
+				let line = substr_replace(line, cleaned, str[1], strlen(cleaned));
+			}
+		}
+		
 		//Grab all form vars.
 		preg_match_all("/(_GET|_POST|_REQUEST)(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
 		for str in vars[1] {
@@ -64,32 +99,45 @@ class Variables
 		for str in vars[0] {
 			let line = substr_replace(line, constant(str[0]), str[1], strlen(str[0]));
 		}
-				
-		// Split on the equals.
-		let splits = preg_split("/(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?<!=)=/", line, 2, PREG_SPLIT_NO_EMPTY);
+		
+		// Split on comma.
+		let splits = this->commaSplit(line);
 		for arg in splits {
+			// Handle empties.
+			if (arg == "") {
+				let args[] = "\"\"";
+				continue;
+			}
 			let arg = trim(arg);
 			
-			// Split on comma.
-			let vars = preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg);
+			// Split on the equals.
+			//let vars = preg_split("/(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?<!=)=/", arg, 2, PREG_SPLIT_NO_EMPTY);
+			let vars = preg_split("/\=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", arg, 2, PREG_SPLIT_NO_EMPTY);
 			for str in vars {
 				let str = trim(str);
 
 				// Handle empties.
 				if (str == "\"\"") {
-					let str = "";
+					let args[] = "\"\"";
 				}
 				
 				//Check to see if its a maths equation.
-				let subvars = preg_split("/([+\-\/])(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", str, 0, 2);
-				if (count(subvars) > 1) {
+				let subvars = maths->isEquation(str);
+				if (count(subvars) > 1 && !this->getCommand(subvars[0])) {
 					let args[] = str;
 					continue;
+				} elseif (this->getCommand(subvars[0]) && !this->isFormVariable(subvars[0])) {
+					let str = str_replace("(", "|||KBBRACKETSTART|||", str, 1);
+					if (substr(str, strlen(str) - 1, 1) == ")") {
+						let str = rtrim(str, ")") . "|||KBBRACKETEND|||";
+					}
 				}
 
 				//Grab all array elements.
 				let cleaned = this->argsArrayElements(str);
-
+				let cleaned = str_replace("|||KBBRACKETSTART|||", "(", cleaned);
+				let cleaned = str_replace("|||KBBRACKETEND|||", ")", cleaned);				
+												
 				// Process any sub commands, i.e. COUNT()
 				if (this->getCommand(cleaned)) {
 					let find = text->processValue(cleaned);
@@ -103,6 +151,11 @@ class Variables
 							let find = display->parse(cleaned);
 							if (find != null) {
 								let cleaned = find;
+							} else {
+								let find = maths->processValue(cleaned);
+								if (find != null) {
+									let cleaned = find;
+								}
 							}
 						}
 					}
@@ -120,7 +173,7 @@ class Variables
 		var splits, str, cleaned;
 		
 		preg_match_all("/\((?:[^()\"]+|\"(?:\\\\.|[^\\\\\"])*\")*\)/", arg, splits, PREG_OFFSET_CAPTURE);
-				
+						
 		if (empty(splits[0])) {
 			return arg;
 		}
@@ -133,10 +186,11 @@ class Variables
 		return this->argsArrayElements(arg);
 	}
 
-	private function arrayMod(string command, array args)
+	private function arrayMod(string command, args)
 	{
 		let args[0] = this->cleanArg(command, args[0]);
-				
+		let args = this->commaSplit(args[0]);
+						
 		if (command == "POP") {
 			if (count(args) > 1) {
 				return "<?php array_splice(" .
@@ -160,7 +214,7 @@ class Variables
 	
 	public function cleanArg(string command, arg)
 	{
-		let arg = ltrim(trim(arg), command);
+		let arg = ltrim(trim(arg), command);		
 		
 		if (substr(arg, 0, 1) == "[") {
 			let arg = ltrim(arg, "[");
@@ -180,6 +234,11 @@ class Variables
 		return ltrim(arg, "$");
 	}
 
+	public function commaSplit(line)
+	{
+		return preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", line);
+	}
+
 	public function dump(output, bool html = false)
 	{
 		if (html) {
@@ -195,11 +254,13 @@ class Variables
 	{
 		var strings;
 
+		let line = trim(line);
+
 		if (substr(line, 0, 1) == "\"" || preg_match("/^[a-z]/", line)) {
 			return null;
 		}
 
-		if (preg_match("/[A-Z]+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, strings)) {
+		if (preg_match("/[A-Z_]+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, strings)) {
 			if (strings[0] == "END") {
 				return line;
 			} elseif (strings[0] == "LINE" && substr(line, strlen(line) - strlen("BREAK"), strlen("BREAK")) == "BREAK") {
@@ -210,6 +271,19 @@ class Variables
 		}
 	
 		return null;
+	}
+
+	public function isFormVariable(string arg)
+	{
+		var type;
+
+		for type in this->form_variables {
+			if (substr(arg, 0, strlen(type) + 1) == "$" . type) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function isVariable(string arg)
@@ -286,12 +360,14 @@ class Variables
 	}
 
 	public function processValue(arg)
-	{		
+	{
 		switch (this->getCommand(arg)) {
 			case "TWODP":
 				return this->processTwoDP(arg);
 			case "COUNT":
 				return this->processCount(arg);
+			case "VALID_CAPTCHA":				
+				return str_replace("VALID_CAPTCHA", (new Form())->validateCaptcha(), arg);
 			default:
 				return null;
 		}

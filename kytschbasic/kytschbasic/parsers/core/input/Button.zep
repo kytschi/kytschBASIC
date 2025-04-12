@@ -66,7 +66,7 @@ class Button extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let output .= "><span>" . this->outputArg(args[3], true) . "</span></button>";
+			let output .= "><span>\" . " . args[3] . " . \"</span></button>";
 		} else {
 			let output .= ">";
 		}

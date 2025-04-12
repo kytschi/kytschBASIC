@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Line
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -29,17 +29,18 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Line extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "LINE") {
-			return this->parseLine(args);
+		switch (command) {
+			case "LINE":
+				return this->parseLine(args);
+			default:
+				return null;
 		}
 	}
 
-	public function parseLine(args)
+	public function parseLine(array args)
 	{
-		let args = this->args(args);
-
 		return "<?php $KBSHAPES[] = [
 			'colour' => $KBRGB,
 			'shape' => 'imageline',
@@ -48,5 +49,5 @@ class Line extends Command
 			'x2' => " . (isset(args[2]) ? intval(args[2]) : 20) . ",
 			'y2' => " . (isset(args[3]) ? intval(args[3]) : 20) . ",
 		]; ?>";
-	}*/
+	}
 }

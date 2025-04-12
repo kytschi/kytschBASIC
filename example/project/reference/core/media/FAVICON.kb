@@ -26,9 +26,9 @@ FAVICON "/kytschi/imgs/favicon.ico", "64x64"
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					HTMLENCODE
+					SHOWHTML
 						FAVICON "/kytschi/imgs/favicon.ico", "64x64"
-					END HTMLENCODE
+					END SHOWHTML
 				END DIV
 				HEADING 4
 					PRINT "See also"

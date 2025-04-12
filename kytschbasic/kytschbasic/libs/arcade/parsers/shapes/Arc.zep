@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Arc
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2023 Mike Welsh
+ * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.2
+ * @version     0.0.3
  *
- * Copyright 2023 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -29,19 +29,20 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Arc extends Command
 {
-	/*public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args)
 	{
-		if (command == "ARC") {
-			return this->parseArc(args);
-		} elseif (command == "ARCF") {
-			return this->parseArc(args, true);
+		switch (command) {
+			case "ARC":
+				return this->parseArc(args);
+			case "ARCF":
+				return this->parseArc(args, true);
+			default:
+				return null;
 		}
 	}
 
-	public function parseArc(args, bool filled = false)
+	public function parseArc(array args, bool filled = false)
 	{
-		let args = this->args(args);
-
 		return "<?php $KBSHAPES[] = [
 			'colour' => $KBRGB,
 			'shape' => '" . (filled ? "imagefilledarc" : "imagearc") . "',
@@ -53,5 +54,5 @@ class Arc extends Command
 			'e_angle' => " . (isset(args[4]) ? intval(args[4]) : 0) . ",
 			'style' => " . (isset(args[5]) ? args[5] : "IMG_ARC_NOFILL") . ",
 		]; ?>";
-	}*/
+	}
 }

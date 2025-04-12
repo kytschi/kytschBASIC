@@ -130,7 +130,7 @@ class Form extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let value = this->outputArg(args[1]);
+			let value = args[1];
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
@@ -238,7 +238,7 @@ class Form extends Command
 	public function validateCaptcha()
 	{
 		if (!isset(_REQUEST["kb-captcha"])) {
-			return false;
+			return 0;
 		}
 
 		var splits, iv, encrypted, token;
@@ -250,7 +250,7 @@ class Form extends Command
 		let iv = base64_decode(ltrim(implode("=", splits), "="));
 
 		if (empty(iv)) {
-			return false;
+			return 0;
 		}
 		
 		let token = openssl_decrypt(
@@ -262,23 +262,23 @@ class Form extends Command
         );
 
         if (!token) {
-            return false;
+            return 0;
         }
 
         let splits = explode("=", token);
 
         if (splits[0] != "_KBCAPTCHA") {
-            return false;
+            return 0;
         }
 
         if (splits[1] != _REQUEST["kb-captcha"]) {
-            return false;
+            return 0;
         }
 
 		if (time() > splits[2]) {
-            return false;
+            return 0;
         }
 
-        return true;
+        return 1;
 	}
 }

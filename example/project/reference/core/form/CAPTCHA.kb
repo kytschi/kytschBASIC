@@ -19,7 +19,7 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 IFNTE _GET("input_test") THEN
-	IF _VALID("captcha") THEN
+	IF VALID_CAPTCHA THEN
 		PRINT "You submitted this,"
 		LINE BREAK
 		PRINT _GET("input_test")
@@ -66,7 +66,7 @@ END FORM
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 IFNTE _GET("input_test") THEN
-	IF _VALID("captcha") THEN
+	IF VALID_CAPTCHA THEN
 		PRINT "You submitted this,"
 		LINE BREAK
 		PRINT _GET("input_test")
