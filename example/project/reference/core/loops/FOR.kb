@@ -28,6 +28,11 @@ FOR val$ IN test$
 	PRINT val$
 	PRINT "&nbsp;"
 NEXT
+LINE BREAK
+FOR iLoop%=1 TO 10 STEP 2
+	PRINT iLoop%
+	PRINT ", "
+NEXT
 				END CPRINT
 				HEADING 4
 					PRINT "Output"

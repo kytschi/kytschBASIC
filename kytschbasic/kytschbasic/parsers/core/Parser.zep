@@ -113,7 +113,7 @@ class Parser
 				let command = this->controller->getCommand(line);
 				if (command == null) {
 					let command = "";
-				} elseif (!this->cprint) {
+				} elseif (!this->cprint && command != "REM" && command != "SPRINT") {
 					let args = this->controller->args(trim(ltrim(line, command)));
 				}
 
@@ -177,7 +177,7 @@ class Parser
 
 		switch (command) {
 			case "REM":
-				return;
+				return "";
 			case "SHOWHTML":
 				let this->show_html = true;
 				return "<?php ob_start(); ?>";
@@ -260,13 +260,15 @@ class Parser
 		if (!count(splits)) {
 			throw new Exception("Invalid IF statement");
 		}
-		
+
+		let splits[0] = this->controller->setDoubleEquals(trim(splits[0]));
+						
 		if (not_empty) {
-			let output .= "!empty(" . trim(splits[0]) . ")";
+			let output .= "!empty(" . splits[0] . ")";
 		} elseif (is_empty) {
-			let output .= "empty(" . trim(splits[0]) . ")";
+			let output .= "empty(" . splits[0] . ")";
 		} else {
-			let output .= trim(splits[0]);
+			let output .= splits[0];
 		}
 
 		let output .= "): ?>" . this->newline;

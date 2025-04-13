@@ -150,194 +150,315 @@ class Text extends Command
 
 	public function processAsc(arg)
 	{
-		let arg = this->cleanArg("ASC", arg);
-		return "ord(" . arg . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("ASC", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid ASC");
+		}
+
+		return str_replace(find, "ord(" . cleaned . ")", arg);
 	}
 
 	public function processCentre(arg)
 	{
-		var args, length = 1;
+		var args, cleaned, find, length = 1;
 
-		let arg = this->cleanArg("CENTRE", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("CENTRE", find);
+		if (empty(cleaned)) {
 			throw new Exception("Invalid CENTRE");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (!count(args)) {
 			throw new Exception("Invalid CENTRE");
 		}
-						
+
 		if (isset(args[1]) && !empty(args[1])) {
 			let length = args[1];
 		}
 
-		return "substr(" . args[0] . ", intval(strlen(" . args[0] . ") / 2) - 1, intval(" . length . "))";
+		return str_replace(find, "substr(" . args[0] . ", intval(strlen(" . args[0] . ") / 2) - 1, intval(" . length . "))", arg);
 	}
 
 	public function processChr(arg)
 	{
-		return "chr(intval(" . this->cleanArg("CHR", arg) . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("CHR", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid CHR");
+		}
+
+		return str_replace(find, "chr(intval(" . cleaned . "))", arg);
 	}
 
 	public function processInstr(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("INSTR", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("INSTR", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid INSTR");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (!count(args)) {
 			throw new Exception("Invalid INSTR");
 		}
 
-		return "strpos(" . args[0] . ", " . args[1] . ")";
+		return str_replace(find, "strpos(" . args[0] . ", " . args[1] . ")", arg);
 	}
 
 	public function processInt(arg)
 	{
-		return "intval(" . this->cleanArg("INT", arg) . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("INT", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid INT");
+		}
+
+		return str_replace(find, "intval(" . cleaned . ")", arg);
 	}
 
 	public function processLCase(arg)
 	{	
-		return "strtolower(" . this->cleanArg("LCASE", arg) . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("LCASE", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid LCASE");
+		}
+
+		return str_replace(find, "strtolower(" . cleaned . ")", arg);
 	}
 
 	public function processLeft(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("LEFT", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("LEFT", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid LEFT");
 		}
 
-		let args = this->commaSplit(arg);
-		if (count(args) < 1) {
+		let args = this->commaSplit(cleaned);
+		if (!count(args)) {
 			throw new Exception("Invalid LEFT");
 		}
 
-		return "substr(" . args[0] . ", 0,  intval(" . args[1] . "))";
+		return str_replace(find, "substr(" . args[0] . ", 0,  intval(" . args[1] . "))", arg);
 	}
 
 	public function processLen(arg)
 	{
-		return "strlen(" . this->cleanArg("LEN", arg) . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("LEN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid LEN");
+		}
+
+		return str_replace(find, "strlen(" . cleaned . ")", arg);
 	}
 
 	public function processLSet(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("LSET", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("LSET", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid LSET");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
 			throw new Exception("Invalid LSET");
 		}
-					
-		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "), 'left')";
+
+		return str_replace(find, "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "), 'left')", arg);
 	}
 
 	public function processMid(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("MID", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("MID", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid MID");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 2) {
 			throw new Exception("Invalid MID");
 		}
 
-		return "substr(" . args[0] . ", (" . args[1] . " - 1), " . args[2] . ")";
+		return str_replace(find, "substr(" . args[0] . ", (" . args[1] . " - 1), " . args[2] . ")", arg);
 	}
 
 	public function processReplace(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("REPLACE", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("REPLACE", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid REPLACE");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 2) {
 			throw new Exception("Invalid REPLACE");
 		}
 		
-		return "str_replace(" . args[1] . ", " . args[2] . ", " . args[0] . ")";
+		return str_replace(find, "str_replace(" . args[1] . ", " . args[2] . ", " . args[0] . ")", arg);
 	}
 
 	public function processRight(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("RIGHT", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("RIGHT", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid RIGHT");
 		}
 
-		let args = this->commaSplit(arg);
-		if (count(args) < 1) {
+		let args = this->commaSplit(cleaned);
+		if (!count(args)) {
 			throw new Exception("Invalid RIGHT");
 		}
 
-		return "substr(" . args[0] . ", intval(strlen(" . args[0] . ")) - intval(" . args[1] . "),  intval(" . args[1] . "))";
+		return str_replace(find, "substr(" . args[0] . ", intval(strlen(" . args[0] . ")) - intval(" . args[1] . "),  intval(" . args[1] . "))", arg);
 	}
 
 	public function processRSet(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("RSET", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("RSET", find);
+
+		if (empty(cleaned)) {
 			throw new Exception("Invalid RSET");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
 			throw new Exception("Invalid RSET");
 		}
-					
-		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "))";
+
+		return str_replace(find, "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "))", arg);
 	}
 
 	public function processStringSetup(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("STRING", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("STRING", find);
+		if (empty(cleaned)) {
 			throw new Exception("Invalid STRING");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
 			throw new Exception("Invalid STRING");
 		}
 
-		return "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processString(" . args[0] . ", intval(" . args[1] . "))";		
+		return str_replace(find, "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processString(" . args[0] . ", intval(" . args[1] . "))", arg);
 	}
 
 	public function processString(converted, length)
@@ -354,88 +475,147 @@ class Text extends Command
 
 	public function processStripLead(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("STRIPLEAD", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("STRIPLEAD", find);
+		if (empty(cleaned)) {
 			throw new Exception("Invalid STRIPLEAD");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
 			throw new Exception("Invalid STRIPLEAD");
 		}
 
-		return "ltrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . "))";
+		return str_replace(find, "ltrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . "))", arg);
 	}
 
 	public function processStripTrail(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("STRIPTRAIL", arg);
-
-		if (empty(arg)) {
-			throw new Exception("Invalid STRIPTRAIL");
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
 		}
 
-		let args = this->commaSplit(arg);
+		let cleaned = this->cleanArg("STRIPLEAD", find);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid STRIPLEAD");
+		}
+
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
-			throw new Exception("Invalid STRIPTRAIL");
+			throw new Exception("Invalid STRIPLEAD");
 		}
 
-		return "rtrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . "))";
+		return str_replace(find, "rtrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . "))", arg);
 	}
 
 	public function processToString(arg)
 	{
-		return "(string)" . this->cleanArg("STR", arg);
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("STR", find);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid STR");
+		}
+
+		return str_replace(find, "(string)" . cleaned, arg);
 	}
 
 	public function processUCase(arg)
 	{
-		return "strtoupper(" . this->cleanArg("UCASE", arg) . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("UCASE", find);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid UCASE");
+		}
+
+		return str_replace(find, "strtoupper(" . cleaned . ")", arg);
 	}
 
 	public function processUnLeft(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("UNLEFT", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("UNLEFT", find);
+		if (empty(cleaned)) {
 			throw new Exception("Invalid UNLEFT");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
 			throw new Exception("Invalid UNLEFT");
 		}
-		
-		return "substr(" . args[0] . ", intval(" . args[1] . ") - 1,  intval(strlen(" . args[0] . ")))";
+
+		return str_replace(find, "substr(" . args[0] . ", intval(" . args[1] . ") - 1,  intval(strlen(" . args[0] . ")))", arg);
 	}
 
 	public function processUnRight(arg)
 	{
-		var args;
+		var args, cleaned, find;
 
-		let arg = this->cleanArg("UNRIGHT", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
 
-		if (empty(arg)) {
+		let cleaned = this->cleanArg("UNRIGHT", find);
+		if (empty(cleaned)) {
 			throw new Exception("Invalid UNRIGHT");
 		}
 
-		let args = this->commaSplit(arg);
+		let args = this->commaSplit(cleaned);
 		if (count(args) < 1) {
 			throw new Exception("Invalid UNRIGHT");
 		}
-		
-		return "substr(" . args[0] . ", 0,  intval(strlen(" . args[0] . ")) - intval(" . args[1] . "))";
+
+		return str_replace(find, "substr(" . args[0] . ", 0,  intval(strlen(" . args[0] . ")) - intval(" . args[1] . "))", arg);
 	}
 
 	public function processVal(arg)
 	{
-		return "floatval(" . this->cleanArg("VAL", arg) . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("VAL", find);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid VAL");
+		}
+
+		return str_replace(find, "floatval(" . cleaned . ")", arg);
 	}
 }

@@ -13,7 +13,7 @@ END HEAD
 BODY
 DIM suits$=("diamonds", "clubs","hearts","spades")
 DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
-DIM names$=("You", "Ernest", "Laura", "Lenny", "Brian", "Helen", "Angie")
+DIM names$=("You", "Mike", "Laura", "Lenny", "Brian", "Helen", "Angie")
 
 DIM cards$=()
 DIM hands$=()

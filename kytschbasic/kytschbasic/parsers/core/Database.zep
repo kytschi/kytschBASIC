@@ -83,18 +83,18 @@ class Database extends Command
 
 	private function parseBind(args)
 	{
-		var arg, output = "<?php ", key;
+		var arg, output = "<?php ", splits;
 		
 		if (count(args) < 1) {
 			throw new Exception("Invalid DBIND");
 		}
 
-		for key, arg in args {
-			if (key % 2 == 0) {
-				let output .= "$KBDBBIND['" . trim(arg) . "'] = ";
-			} else {
-				let output .= arg . ";\n";
+		for arg in args {
+			let splits = this->equalsSplit(arg);
+			if (count(splits) <= 1) {
+				throw new Exception("Invalid DBIND");
 			}
+			let output .= "$KBDBBIND['" . trim(splits[0]) . "'] = " . trim(splits[1]) . ";";
 		}
 		
 		return output . " ?>";

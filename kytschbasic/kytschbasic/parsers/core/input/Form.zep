@@ -91,7 +91,7 @@ class Form extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			let output .= "value=" . this->outputArg(args[1]);
+			let output .= " value=" . this->outputArg(args[1]);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
@@ -103,7 +103,7 @@ class Form extends Command
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let output .= " id=" . (args[4]);
+			let output .= " id=" . this->outputArg(args[4]);
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
 		}

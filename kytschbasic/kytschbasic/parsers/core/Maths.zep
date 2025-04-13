@@ -25,6 +25,7 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Variables;
 
 class Maths extends Variables
@@ -87,74 +88,230 @@ class Maths extends Variables
 
 	public function processAbs(arg)
 	{
-		let arg = this->cleanArg("ABS", arg);
-		return "abs(" . arg . ")";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("ABS", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid ABS");
+		}
+
+		return str_replace(find, "abs(" . cleaned . ")", arg);
 	}
 
 	public function processAcos(arg)
 	{
-		let arg = this->cleanArg("ACOS", arg);
-		return "acos(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("ACOS", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid ACOS");
+		}
+
+		return str_replace(find, "acos(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processAsin(arg)
 	{
-		let arg = this->cleanArg("ASIN", arg);
-		return "asin(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("ASIN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid ASIN");
+		}
+
+		return str_replace(find, "asin(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processAtan(arg)
 	{
-		let arg = this->cleanArg("ATAN", arg);
-		return "atan(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("ATAN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid ATAN");
+		}
+
+		return str_replace(find, "atan(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processBin(arg)
 	{
-		let arg = this->cleanArg("BIN", arg);
-		return "str_pad(decbin(intval(" . arg . ")), 32, '0', 0)";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("BIN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid BIN");
+		}
+
+		return str_replace(find, "str_pad(decbin(intval(" . cleaned . ")), 32, '0', 0)", arg);
 	}
 
 	public function processCos(arg)
 	{
-		let arg = this->cleanArg("COS", arg);
-		return "cos(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("COS", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid COS");
+		}
+
+		return str_replace(find, "cos(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processExp(arg)
 	{
-		let arg = this->cleanArg("EXP", arg);
-		return "exp(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("EXP", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid EXP");
+		}
+
+		return str_replace(find, "exp(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processFrac(arg)
 	{
-		let arg = this->cleanArg("FRAC", arg);
-		return "fmod(" . arg . ", 1)";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("FRAC", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid FRAC");
+		}
+
+		return str_replace(find, "fmod(" . cleaned . ", 1)", arg);
 	}
 
 	public function processHCos(arg)
 	{
-		let arg = this->cleanArg("HCOS", arg);
-		return "cosh(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("HCOS", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid HCOS");
+		}
+
+		return str_replace(find, "cosh(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processHex(arg)
 	{
-		let arg = this->cleanArg("HEX", arg);
-		return "str_pad(dechex(intval(". arg . ")), 8, '0', 0)";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("HEX", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid HEX");
+		}
+
+		return str_replace(find, "str_pad(dechex(intval(". cleaned . ")), 8, '0', 0)", arg);
 	}
 
 	public function processHSin(arg)
 	{
-		let arg = this->cleanArg("HSIN", arg);
-		return "sinh(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("HSIN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid HSIN");
+		}
+
+		return str_replace(find, "sinh(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processHTan(arg)
 	{
-		let arg = this->cleanArg("HTAN", arg);
-		return "tanh(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("HTAN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid HTAN");
+		}
+
+		return str_replace(find, "tanh(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processLog(arg)
@@ -164,7 +321,6 @@ class Maths extends Variables
 		let arg = this->cleanArg("LOG", arg);
 
 		let args = this->commaSplit(arg);
-		
 		if (count(args) > 1) {
 			return "log(floatval(" . args[0]. "), floatval(" . args[1] . "))";
 		}
@@ -174,29 +330,61 @@ class Maths extends Variables
 
 	public function processLog10(arg)
 	{
-		let arg = this->cleanArg("LOG10", arg);
-		return "log10(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("LOG10", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid LOG10");
+		}
+
+		return str_replace(find, "log10(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processRnd(arg)
 	{
-		let arg = ltrim(rtrim(trim(str_replace("RND", "", arg)), ")"), "(");
+		var args, cleaned;
 
-		if (empty(arg)) {
-			return rand(1, 10);
+		if (arg == "RND") {
+			return str_replace(arg, "rand(1, 10)", arg);
+		}
+
+		let cleaned = this->cleanArg("RND", arg);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid RND");
+		}
+
+		let args = this->commaSplit(cleaned);
+		if (count(args) != 2) {
+			throw new Exception("Invalid RND");
 		}
 		
-		if (count(arg) == 1) {
-			return "rand(1, intval(" . arg. "))";
-		}
-
-		return "rand(intval(" . arg . "), intval(" . this->outputArg(arg[1], false). "))";
+		return str_replace(arg, "rand(intval(" . args[0] . "), intval(" . args[1] . "))", arg);
 	}
 
 	public function processSin(arg)
 	{
-		let arg = this->cleanArg("SIN", arg);
-		return "sin(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("SIN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid SIN");
+		}
+
+		return str_replace(find, "sin(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processSgn(arg)
@@ -214,13 +402,38 @@ class Maths extends Variables
 
 	public function processSqr(arg)
 	{
-		let arg = this->cleanArg("SQR", arg);
-		return "sqrt(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("SQR", find);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid SQR");
+		}
+
+		return str_replace(find, "sqrt(floatval(" . cleaned . "))", arg);
 	}
 
 	public function processTan(arg)
 	{
-		let arg = this->cleanArg("TAN", arg);
-		return "tan(floatval(" . arg . "))";
+		var args, cleaned, find;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("TAN", find);
+
+		if (empty(cleaned)) {
+			throw new Exception("Invalid TAN");
+		}
+
+		return str_replace(find, "tan(floatval(" . cleaned . "))", arg);
 	}
 }

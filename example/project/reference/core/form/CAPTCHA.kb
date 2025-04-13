@@ -14,6 +14,10 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Create a form captcha."
 				END SWRITE
+				SWRITE
+					PRINT "Note: ", "heading-args"
+					PRINT "you can modify the CAPTCHA input using the CSS class kb-captcha-input and the CAPTCHA image using the CSS class kb-captcha-img."
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3

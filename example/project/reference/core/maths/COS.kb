@@ -12,7 +12,7 @@ BODY
 					PRINT "COS","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "Return the cosine of a float value."
+					PRINT "Return the cosine of a float value in radians."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"

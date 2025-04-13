@@ -57,27 +57,25 @@ class Loops extends Command
 			throw new Exception("Invalid FOR");
 		}
 
-		let args[0] = rtrim(args[0], ")");
-
 		let splits = preg_split("/\\bIN\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
 		if (count(splits) > 1) {
 			return this->processForIn(splits);
 		}
 
-		let splits = preg_split("/\\bTO\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line);
-		if (count(splits) <= 1 || count(args) <= 1) {
-			throw new Exception("Invalid FOR");
+		let splits = preg_split("/\\bTO\\b(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid FOR TO");
 		}
 
-		return this->processForTo(args);
+		return this->processForTo(splits, args);
 	}
 
 	private function processForIn(args)
 	{
 		var arg;
 
-		if (count(args) < 1) {
-			throw new Exception("Invalid FOR");
+		if (!count(args)) {
+			throw new Exception("Invalid FOR IN");
 		}
 
 		for arg in this->types {
@@ -93,35 +91,38 @@ class Loops extends Command
 			trim(args[0]) . ") { ?>";
 	}
 
-	private function processForTo(args)
+	private function processForTo(splits, args)
 	{
-		var output = "<?php for (", variable, step, dir = " <= ";
+		var output = "<?php for (", variable, step, dir = " <= ", subvars;
 
-		if (count(args) < 1) {
-			throw new Exception("Invalid FOR");
+		if (!count(args)) {
+			throw new Exception("Invalid FOR TO");
 		}
 
-		let variable = args[0];
+		let splits[0] = str_replace("FOR ", "", trim(splits[0]));
+		let subvars = this->equalsSplit(splits[0]);
+		if (count(subvars) <= 1) {
+			throw new Exception("Invalid FOR TO");
+		}
+		let variable = subvars[0];
+		
+		let args = explode(" STEP ", trim(splits[1]), 2);
+						
+		let output .= variable . " = intval(" . subvars[1] . "); " . variable;
 
-		let args = explode(" TO ", args[1], 2);
-				
-		let output .= variable . " = intval(" . args[0] . "); " . variable;
-
-		let step = explode(" STEP ", args[1], 2);
-		if (count(step) > 1) {
-			let args[1] = step[0];
-			let step[1] = intval(step[1]);
-			if (step[1] < 0) {
+		if (isset(args[1])) {
+			let args[1] = intval(args[1]);
+			if (args[1] < 0) {
 				let dir = " >= ";
-				let step = " -= " . trim(step[1], "-");
+				let step = " -= " . trim(args[1], "-");
 			} else {
-				let step = " += " . step[1];
+				let step = " += " . args[1];
 			}
 		} else {
 			let step = " += 1";
 		}	
 
-		let output .= dir . "intval(" . args[1] . "); " . variable . step;
+		let output .= dir . "intval(" . args[0] . "); " . variable . step;
 
 		return output . ") { ?>";
 	}
@@ -134,7 +135,7 @@ class Loops extends Command
 			throw new Exception("Invalid WHILE");
 		}
 
-		let output .= args[0];
+		let output .= this->setDoubleEquals(rtrim(ltrim(args[0], "["), "]"));
 
 		return output . ") { ?>";
 	}

@@ -24,8 +24,8 @@ LINE BREAK
 PRINT VAL("26")
 LINE BREAK
 
-DEF value%=VAL("37.37")
-PRINT value%
+DEF value#=VAL("37.37")
+PRINT value#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -37,8 +37,8 @@ PRINT value%
 					PRINT VAL("26")
 					LINE BREAK
 
-					DEF value%=VAL("37.37")
-					PRINT value%
+					DEF value#=VAL("37.37")
+					PRINT value#
 				END DIV
 				HEADING 4
 					PRINT "See also"
