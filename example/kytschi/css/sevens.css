@@ -18,20 +18,27 @@ html, body {
 #sevens #board, #sevens #player {
     display: flex;
     width: 100%;
-    height: 50%;
+}
+
+#sevens #board {
+    height: 300px;
 }
 
 #sevens #player {
     padding-top: 10px;
     border-top: 2px solid #000;
+    height: calc(100% - 300px);
 }
 
 #sevens #player #hand {
     width: calc(100% - 300px);
+    overflow-y: scroll;
     display: flex;
-    gap: 10px;
-    align-items: start;
+    column-gap: 10px;
+    row-gap: 20px;
+    align-content: flex-start;
     flex-wrap: wrap;
+    flex-direction: row;
 }
 
 #sevens #player #controls {
@@ -45,21 +52,22 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     width: calc(100% - 300px);
     height: 100%;
-}
-
-#sevens #deck .deck-placeholder {
-    display: block;
 }
 
 #sevens #game {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 290px;
     height: 100%;
+    padding-left: 10px;
     border-left: 2px solid #000;
+}
+
+#sevens #deck .deck-placeholder {
+    display: block;
 }
 
 #sevens #game table {
@@ -67,8 +75,8 @@ html, body {
     color: #fff;
 }
 
-#sevens .card {
-    display: inline-block;
+#sevens .card, #sevens .placeholder {
+    display: inline-flex;
     background: none;
     border: none;
     width: 120px;
@@ -76,7 +84,6 @@ html, body {
     padding: 0;
     margin: 0;
     font-size: 0;
-    vertical-align: top;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -84,6 +91,16 @@ html, body {
 #sevens #deck .card {
     position: absolute;
     margin-left: -120px;
+}
+
+@media only screen and (max-width: 810px) {
+    #sevens .card, #sevens .placeholder {
+        width: 100px;
+    }
+
+    #sevens #deck .card {
+        margin-left: -100px;
+    }
 }
 
 #sevens #deck .card-lower {
@@ -100,18 +117,6 @@ html, body {
 
 #sevens .card-warn {
     border: 4px solid #f43c09;
-}
-
-#sevens .placeholder {
-    display: inline-block;
-    background: none;
-    border: none;
-    width: 120px;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    font-size: 0;
-    vertical-align: top;
 }
 
 #sevens img {
@@ -137,7 +142,7 @@ html, body {
     border-top: 2px solid #000;
     margin-top: 10px;
     width: 100%;
-    height: 100%;
+    height: 300px;
     overflow-y: scroll;
 }
 
@@ -177,6 +182,8 @@ html, body {
 #sevens .btn-knocking {
     background-color: #f43c09;
     color: #fff;
+    margin-top: 10px;
+    width: 285px;
 }
 
 #sevens .btn-submit {
@@ -184,7 +191,6 @@ html, body {
 }
 
 #sevens .btn-new-game {
-    margin-top: 40px;
     background-color: #2794e8;
     color: #fff;
 }

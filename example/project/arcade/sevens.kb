@@ -417,9 +417,6 @@ SCREEN "sevens"
                             PRINT "Player"
                         END THEADCELL
                         THEADCELL
-                            PRINT "Cards"
-                        END THEADCELL
-                        THEADCELL
                             PRINT "Score"
                         END THEADCELL
                     END TROW
@@ -434,9 +431,6 @@ SCREEN "sevens"
                             TCELL
                                 PRINT names$(iLoop%)
                             END TCELL
-                            TCELL ,"text-center",,"player-" + iLoop% + "-cards"
-                                PRINT COUNT(hands$(iLoop%))
-                            END TCELL
                             TCELL ,"text-center",,"player-" + iLoop% + "-score"
                                 PRINT "0"
                             END TCELL
@@ -444,7 +438,9 @@ SCREEN "sevens"
                     NEXT
                 END TBODY
             END TABLE
-            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+            BUTTON "btnKnock", "btn-knocking"
+                PRINT "knocking"
+            END BUTTON
         END WINDOW
     END WINDOW
     WINDOW "player"
@@ -458,9 +454,6 @@ SCREEN "sevens"
             NEXT
         END WINDOW
         WINDOW "controls"
-            BUTTON "btnKnock", "btn-knocking"
-                PRINT "knocking"
-            END BUTTON
             BUTTON "btnNewGame", "btn-new-game"
                 PRINT "new game"
             END BUTTON
@@ -474,6 +467,7 @@ SCREEN "sevens"
                     PRINT "setup"
                 END BUTTON
             END FORM
+            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
         END WINDOW
     END WINDOW
 END SCREEN
