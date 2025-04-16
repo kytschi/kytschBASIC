@@ -53,6 +53,8 @@ class Head extends Command
 				return this->processName(args);
 			case "PALETTE":
 				return this->processPalette(args);
+			case "SCRIPT":
+				return this->processScript(args);
 			case "VIEWPORT":
 				return this->processMeta("viewport", command, args);
 			default:
@@ -138,5 +140,33 @@ class Head extends Command
 		let output .= " href=" . this->outputArg(href);
 
 		return output . ">\"; ?>";
+	}
+
+	private function processScript(array args)
+	{
+		var config, output = "<?= \"<script", href, type = "text/javascript";
+		let config = constant("CONFIG");
+
+		if (empty(args[0])) {
+			throw new Exception("Invalid SCRIPT");
+		}
+
+		if (!empty(args[1])) {
+			let type = args[1];
+		}
+
+		let output .= " type=" . this->outputArg(type, true);
+
+		let href = args[0] . " . '.js'";
+		
+		if (!empty(config["cache"])) {
+			if (empty(config["cache"]->enabled)) {
+				let href .= "?no-cache=" . microtime();
+			}
+		}
+
+		let output .= " src=" . this->outputArg(href);
+
+		return output . "></script>\"; ?>";
 	}
 }

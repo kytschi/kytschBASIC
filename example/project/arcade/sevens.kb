@@ -8,6 +8,8 @@ HEAD
     VIEWPORT "width=device-width, initial-scale=1.0"
     FAVICON "/kytschi/imgs/favicon.ico","64x64"
     PALETTE "/kytschi/css/sevens"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
 	NAME "Arcade - Sevens | kytschBASIC"
 END HEAD
 BODY
@@ -82,33 +84,35 @@ AFUNCTION "computerPlay"
     var value = "";
     var played = false;
 
-    hands[turn].sort(() => Math.random() - .5);
+    sleep(500).then(() => {
+        hands[turn].sort(() => Math.random() - .5);
 
-    hands[turn].forEach((card, index) => {
-        if (!played) {
-            selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
-            let card_details = selected_card.split("_");
-            deck_suit = card_details[0];
-            value = card_details[1];
+        hands[turn].forEach((card, index) => {
+            if (!played) {
+                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                let card_details = selected_card.split("_");
+                deck_suit = card_details[0];
+                value = card_details[1];
 
-            if (canPlay(event, value)) {
-                playCard(event, value);
-                hands[turn].splice(index, 1);
-                if (hands[turn].length == 1) {
-                    gameInfo(event, "LAST CARD");
-                } else if (hands[turn].length == 0) {
-                    gameOver(event);
+                if (canPlay(event, value)) {
+                    playCard(event, value);
+                    hands[turn].splice(index, 1);
+                    if (hands[turn].length == 1) {
+                        gameInfo(event, "LAST CARD");
+                    } else if (hands[turn].length == 0) {
+                        gameOver(event);
+                    }
+                    played = true;
                 }
-                played = true;
             }
+        });
+
+        if (!played) {
+            gameInfo(event, "KNOCKING");
         }
+
+        updateTurn();
     });
-
-    if (!played) {
-        gameInfo(event, "KNOCKING");
-    }
-
-    updateTurn();
 END AFUNCTION
 
 AFUNCTION "updateTurn"
@@ -249,7 +253,7 @@ AFUNCTION "playCard", "value"
         value = "ace";
     }
 
-    gameInfo(event, value + " of " + deck_suit);
+    gameInfo(event, "Played " + value + " of " + deck_suit);
 
     if (turn == 0) {
         $("#hand #" + selected_card).remove();
@@ -294,6 +298,17 @@ AFUNCTION "onDeckClick"
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: (error ? "ERROR" : names[turn]),
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
+    });
+
     $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
     $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
@@ -336,6 +351,10 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 $(document).ready(function() {
     var played = false;
 
