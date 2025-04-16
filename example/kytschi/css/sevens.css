@@ -164,7 +164,7 @@ html, body {
 }
 
 #sevens .last-card span {
-    /*display: none;*/
+    display: none;
     cursor: pointer;
     background-color: #FFD400;
     color: #000;
