@@ -64,6 +64,18 @@ class Sprite extends Command
 
 			let output .= " onclick='javascript:" . cleaned . "(event)'";
 		}
+
+		if (isset(args[3]) && !empty(args[3])) {
+			if (substr(args[3], 0, 1) == "\"") {
+				let cleaned = trim(args[3], "\"");
+			} else {
+				let cleaned = this->outputArg(args[3], false);
+			}
+
+			let output .= " ondblclick='javascript:" . cleaned . "(event)'";
+		}
+
+		
 		
 		return output . ">\"; ?>";
 	}

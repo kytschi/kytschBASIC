@@ -99,6 +99,7 @@ AFUNCTION "computerPlay"
                     hands[turn].splice(index, 1);
                     if (hands[turn].length == 1) {
                         gameInfo(event, "LAST CARD");
+                        $("#last-card-" + turn).show();
                     } else if (hands[turn].length == 0) {
                         gameOver(event);
                     }
@@ -194,6 +195,14 @@ AFUNCTION "onCardClick"
     $("#" + selected_card).addClass("card-highlight");
 END AFUNCTION
 
+AFUNCTION "onCardDblClick"
+    selected_card = event.target.parentElement.id;
+    card_suit = (selected_card).split("_")[0];
+    $("#hand .card").removeClass(["card-highlight", "card-warn"]);
+    $("#" + selected_card).addClass("card-highlight");
+    onDeckClick(event, card_suit);
+END AFUNCTION
+
 AFUNCTION "playerKnocking"
     if (game_over) {
         return;
@@ -270,12 +279,16 @@ AFUNCTION "playCard", "value"
     selected_card = "";
 END AFUNCTION
 
-AFUNCTION "onDeckClick"
+AFUNCTION "onDeckClick", "suit=null"
     if (game_over) {
         return;
     }
 
-    deck_suit = (event.target.parentElement.id).split("_")[0];
+    if (suit) {
+        deck_suit = suit;
+    } else {
+        deck_suit = (event.target.parentElement.id).split("_")[0];
+    }
 
     if (selected_card && deck_suit == card_suit) {
         let value = parseInt(selected_card.split("_")[1]);
@@ -348,6 +361,8 @@ AFUNCTION "gameOver"
     }
 
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+
+    $(".btn-new-game").addClass("card-highlight");
 END AFUNCTION
 
 JAVASCRIPT
@@ -435,6 +450,9 @@ SCREEN "sevens"
                         THEADCELL ,"text-left"
                             PRINT "Player"
                         END THEADCELL
+                        THEADCELL ,"text-left"
+                            PRINT "&nbsp;"
+                        END THEADCELL
                         THEADCELL
                             PRINT "Score"
                         END THEADCELL
@@ -450,6 +468,9 @@ SCREEN "sevens"
                             TCELL
                                 PRINT names$(iLoop%)
                             END TCELL
+                            TCELL ,"last-card",,"last-card-" + iLoop%
+                                PRINT "&nbsp;"
+                            END TCELL
                             TCELL ,"text-center",,"player-" + iLoop% + "-score"
                                 PRINT "0"
                             END TCELL
@@ -464,7 +485,7 @@ SCREEN "sevens"
             FOR card$ IN hands$(0)
                 DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
                 DEF id$=REPLACE(id$, ".svg", "")
-                SPRITE id$, "card", "onCardClick"
+                SPRITE id$, "card", "onCardClick", "onCardDblClick"
                     IMAGE card$
                 END SPRITE
             NEXT

@@ -163,7 +163,13 @@ html, body {
     background-color: #4ee5fc;
 }
 
+#sevens .last-card span {
+    display: none;
+    background-color: #FFD400;
+}
+
 #sevens #game-info {
+    display: none;
     background-color: #fff;
     border: 0;
     border-top: 2px solid #000;
