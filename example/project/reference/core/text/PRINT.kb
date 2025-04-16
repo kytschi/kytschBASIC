@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "PRINT","heading-command basic"
 					LINE BREAK
-					PRINT "STRING, CLASS, ID","heading-args"
+					PRINT "STRING, CLASS, ID, TITLE","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Outputting to the screen."

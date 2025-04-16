@@ -61,6 +61,10 @@ class Text extends Command
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
 		}
+
+		if (isset(args[3]) && !empty(args[3])) {
+			let output .= " title=" . this->outputArg(args[3]);
+		}
 		
 		return output . ">\" . " . args[0] . " . \"</span>\";?>";
 	}

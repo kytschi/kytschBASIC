@@ -164,8 +164,12 @@ html, body {
 }
 
 #sevens .last-card span {
-    display: none;
+    /*display: none;*/
+    cursor: pointer;
     background-color: #FFD400;
+    color: #000;
+    font-size: 12px;
+    padding: 0 2px;
 }
 
 #sevens #game-info {

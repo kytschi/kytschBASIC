@@ -99,7 +99,7 @@ AFUNCTION "computerPlay"
                     hands[turn].splice(index, 1);
                     if (hands[turn].length == 1) {
                         gameInfo(event, "LAST CARD");
-                        $("#last-card-" + turn).show();
+                        $("#last-card-" + turn + " span").show();
                     } else if (hands[turn].length == 0) {
                         gameOver(event);
                     }
@@ -303,6 +303,7 @@ AFUNCTION "onDeckClick", "suit=null"
             gameOver(event);
         } else if ($("#hand").children().length == 1) {
             gameInfo(event, "LAST CARD");
+            $("#last-card-" + turn + " span").show();
         }
         updateTurn();
     } else {
@@ -469,7 +470,7 @@ SCREEN "sevens"
                                 PRINT names$(iLoop%)
                             END TCELL
                             TCELL ,"last-card",,"last-card-" + iLoop%
-                                PRINT "&nbsp;"
+                                PRINT "LC",,,"Last card"
                             END TCELL
                             TCELL ,"text-center",,"player-" + iLoop% + "-score"
                                 PRINT "0"
