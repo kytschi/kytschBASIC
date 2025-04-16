@@ -113,7 +113,7 @@ class Form extends Command
 		}
 
 		if (isset(args[6]) && !empty(args[6])) {
-			let output .= " " . trim(this->outputArg(args[6], false), "\"");
+			let output .= trim(this->outputArg(args[6], true), "\\\"");
 		}
 		
 		return output . ">\"; ?>";

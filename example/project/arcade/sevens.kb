@@ -84,7 +84,7 @@ AFUNCTION "computerPlay"
     var value = "";
     var played = false;
 
-    sleep(500).then(() => {
+    sleep(3000).then(() => {
         hands[turn].sort(() => Math.random() - .5);
 
         hands[turn].forEach((card, index) => {
@@ -280,7 +280,7 @@ AFUNCTION "playCard", "value"
 END AFUNCTION
 
 AFUNCTION "onDeckClick", "suit=null"
-    if (game_over) {
+    if (game_over || turn) {
         return;
     }
 
@@ -502,7 +502,7 @@ SCREEN "sevens"
                 LET no_players%=(no_players%+1)
                 DIV "no-players"
                     PRINT "No. players"
-                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",, "max='6'"
+                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
                 END DIV
                 BUTTON SUBMIT "btnSubmit",  "btn-submit"
                     PRINT "setup"
