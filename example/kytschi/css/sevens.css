@@ -40,7 +40,7 @@ html, body {
 #sevens #game {
     display: flex;
     flex-direction: column;
-    flex: 0 0 290px;
+    flex: 0 0 200px;
     height: 100%;
     border-left: 2px solid #000;
     padding: 10px;
@@ -67,9 +67,9 @@ html, body {
 
 #sevens #player #controls {
     gap: 10px;
-    flex: 0 0 290px;
-    /*display: flex;*/
-    display: none;
+    flex: 0 0 200px;
+    display: flex;
+    /*display: none;*/
     flex-direction: column;
     border-left: 2px solid #000;
     padding: 10px;
@@ -168,7 +168,7 @@ html, body {
     border: 0;
     border-top: 2px solid #000;
     margin-top: 10px;
-    width: 285px;
+    width: calc(100% - 10px);
     height: 300px;
     overflow-y: scroll;
 }
@@ -187,21 +187,6 @@ html, body {
     width: 100%;
 }
 
-#sevens form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#sevens .form-input {
-    display: inline-block;
-    width: calc(100% - 6px);
-    margin-top: 10px;
-    background-color: #fff;
-    border: 2px solid #000;
-    height: 35px;
-}
-
 #sevens .btn-last-card {
     background-color: #ffd400;
 }
@@ -210,27 +195,43 @@ html, body {
     background-color: #f43c09;
     color: #fff;
     margin-top: 10px;
-    width: 285px;
+    margin-bottom: 20px;
+    width: calc(100% - 10px);
 }
 
 #sevens .btn-submit {
     background-color: #ffd400;
-    width: 285px;
+    width: calc(100% - 10px);
 }
 
 #sevens .btn-new-game {
     background-color: #2794e8;
     color: #fff;
-    width: 285px;
+    width: calc(100% - 10px);
 }
 
 #sevens .no-players {
     display: flex;
-    width: 285px;
+    width: calc(100% - 10px);
 }
 
 #sevens .no-players span {
     color: #fff;
-    width: 50%;
     padding-top: 15px;
+    flex: auto;
+}
+
+#sevens form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sevens .form-input {
+    display: inline-block;
+    width: 60px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 35px;
 }
