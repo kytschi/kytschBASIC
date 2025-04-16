@@ -151,7 +151,7 @@ class Head extends Command
 			throw new Exception("Invalid SCRIPT");
 		}
 
-		if (!empty(args[1])) {
+		if (isset(args[1]) && !empty(args[1])) {
 			let type = args[1];
 		}
 
