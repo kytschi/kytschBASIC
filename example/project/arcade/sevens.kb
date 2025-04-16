@@ -438,13 +438,14 @@ SCREEN "sevens"
                     NEXT
                 END TBODY
             END TABLE
-            BUTTON "btnKnock", "btn-knocking"
-                PRINT "knocking"
-            END BUTTON
+            
         END WINDOW
     END WINDOW
     WINDOW "player"
         WINDOW "hand"
+            BUTTON "btnKnock", "btn-knocking"
+                PRINT "knocking"
+            END BUTTON
             FOR card$ IN hands$(0)
                 DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
                 DEF id$=REPLACE(id$, ".svg", "")
