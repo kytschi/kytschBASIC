@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "SPRITE","heading-command basic"
 					LINE BREAK
-					PRINT "ID, CLASS, ONCLICK","heading-args"
+					PRINT "ID, CLASS, ON CLICK FUNC, ON DOUBLE CLICK FUNC","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE

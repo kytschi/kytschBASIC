@@ -1,0 +1,242 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #09a314;
+}
+
+#fiveandthreess {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding: 5px;
+}
+
+#fiveandthreess #board, #fiveandthreess #player {
+    display: flex;
+    width: 100%;
+}
+
+#fiveandthreess #board {
+    display: flex;
+    height: 500px;
+    position: absolute;
+}
+
+#fiveandthreess #deck {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+
+#fiveandthreess #game {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 200px;
+    height: 100%;
+    border-left: 2px solid #000;
+    padding: 10px;
+    z-index: 5;
+}
+
+#fiveandthreess #player {
+    margin-top: 500px;
+    border-top: 2px solid #000;
+    z-index: 10;
+    background-color: #09a314;
+}
+
+#fiveandthreess #player #hand {
+    flex: 1 1 auto;
+    display: flex;
+    column-gap: 10px;
+    row-gap: 20px;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-top: 10px;
+}
+
+#fiveandthreess #player #controls {
+    gap: 10px;
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #000;
+    padding: 10px;
+}
+
+#fiveandthreess #game table {
+    width: 100%;
+    color: #fff;
+}
+
+#fiveandthreess img {
+    width: 100%;
+    margin: 0;
+}
+
+#fiveandthreess .domino, #fiveandthreess .placeholder {
+    display: inline-block;
+    background: none;
+    border: none;
+    width: 54px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#fiveandthreess #deck-left {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+#fiveandthreess #deck-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;    
+}
+
+#fiveandthreess #deck .domino, #fiveandthreess #deck .placeholder {
+    transform: rotate(90deg);    
+    transform-origin: center;
+    white-space: nowrap;
+    width: fit-content;    
+}
+#fiveandthreess #deck .domino.rotate {
+    transform: rotate(-90deg);  
+}
+#fiveandthreess #deck .placeholder {
+    margin: 0 11px 0 11px;
+}
+
+#fiveandthreess #deck-right .domino {
+    margin-right: 33px;
+    margin-left: 23px;
+}
+
+#fiveandthreess #deck-left .domino {
+    margin-left: 33px;
+    margin-right: 23px;
+}
+
+#fiveandthreess #deck .domino.double {
+    transform: rotate(0deg);
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+#fiveandthreess .domino-highlight {
+    border: 4px solid #4ee5fc;
+}
+
+#fiveandthreess .domino-warn {
+    border: 4px solid #f43c09;
+}
+
+#fiveandthreess .text-center {
+    text-align: center;
+}
+
+#fiveandthreess .text-left {
+    text-align: left;
+}
+
+#fiveandthreess .player-turn {
+    background-color: #4ee5fc;
+}
+
+#fiveandthreess .last-card span {
+    display: none;
+    cursor: pointer;
+    background-color: #FFD400;
+    color: #000;
+    font-size: 12px;
+    padding: 0 2px;
+}
+
+#fiveandthreess #game-info {
+    display: none;
+    background-color: #fff;
+    border: 0;
+    border-top: 2px solid #000;
+    margin-top: 10px;
+    width: calc(100% - 10px);
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#fiveandthreess #game-info p {
+    margin: 0;
+    padding: 0;
+}
+
+#fiveandthreess button {
+    height: 50px;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+#fiveandthreess .btn-last-card {
+    background-color: #ffd400;
+}
+
+#fiveandthreess .btn-knocking {
+    background-color: #f43c09;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: calc(100% - 10px);
+}
+
+#fiveandthreess .btn-submit {
+    background-color: #ffd400;
+    width: calc(100% - 10px);
+}
+
+#fiveandthreess .btn-new-game {
+    background-color: #2794e8;
+    color: #fff;
+    width: calc(100% - 10px);
+}
+
+#fiveandthreess .no-players {
+    display: flex;
+    width: calc(100% - 10px);
+}
+
+#fiveandthreess .no-players span {
+    color: #fff;
+    padding-top: 15px;
+    flex: auto;
+}
+
+#fiveandthreess form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#fiveandthreess .form-input {
+    display: inline-block;
+    width: 60px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 35px;
+}

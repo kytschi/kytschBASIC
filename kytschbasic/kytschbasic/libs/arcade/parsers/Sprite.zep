@@ -74,8 +74,6 @@ class Sprite extends Command
 
 			let output .= " ondblclick='javascript:" . cleaned . "(event)'";
 		}
-
-		
 		
 		return output . ">\"; ?>";
 	}

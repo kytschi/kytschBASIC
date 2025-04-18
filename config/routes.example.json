@@ -32,6 +32,10 @@
 		"url": "/arcade/sevens",
 		"template": "project/arcade/sevens.kb"
 	},
+	{
+		"url": "/arcade/5and3s",
+		"template": "project/arcade/5and3s.kb"
+	},
 
 	{
 		"url": "/news",

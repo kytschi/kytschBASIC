@@ -43,7 +43,7 @@ class Window extends Command
 
 	public function parseWindow(array args)
 	{
-		var output = "<?= \"<div";
+		var output = "<?= \"<div", cleaned = "";
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[0]);
@@ -53,6 +53,26 @@ class Window extends Command
 
 		if (isset(args[1]) && !empty(args[1])) {
 			let output .= " class=" . this->outputArg(args[1]);
+		}
+
+		if (isset(args[2]) && !empty(args[2])) {
+			if (substr(args[2], 0, 1) == "\"") {
+				let cleaned = trim(args[2], "\"");
+			} else {
+				let cleaned = this->outputArg(args[2], false);
+			}
+
+			let output .= " onclick='javascript:" . cleaned . "(event)'";
+		}
+
+		if (isset(args[3]) && !empty(args[3])) {
+			if (substr(args[3], 0, 1) == "\"") {
+				let cleaned = trim(args[3], "\"");
+			} else {
+				let cleaned = this->outputArg(args[3], false);
+			}
+
+			let output .= " ondblclick='javascript:" . cleaned . "(event)'";
 		}
 		
 		return output . ">\"; ?>";

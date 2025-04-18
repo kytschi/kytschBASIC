@@ -1,0 +1,392 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	CHARSET "UTF-8"
+    DESCRIPTION "This is a kytschBASIC example"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/5and3s"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - 5 & 3s | kytschBASIC"
+END HEAD
+BODY
+DIM faces$=("00", "10", "11", "20", "21", "22", "30", "31", "32", "33", "40", "41", "42", "43", "44", "50", "51", "52", "53", "54", "55", "60", "61", "62", "63", "64", "65", "66")
+DIM dominoes$=()
+DIM hands$=()
+
+FOR face$ IN faces$
+    LET dominoes$()="/kytschi/imgs/dominoes/" + face$ + ".svg"
+NEXT
+
+DIM names$=("You", "Mike", "Laura", "Lenny")
+
+DEF no_players%=2
+
+IFNTE _GET("np") THEN
+    LET no_players%=_GET("np")
+END IF
+
+IF no_players%<2 THEN
+	LET no_players%=2
+ELSEIF no_players%>4 THEN
+	LET no_players%=4
+END IF
+
+DEF deal%=17
+IF no_players%>2 THEN
+    LET deal%=4
+END IF
+
+LET no_players%=no_players%-1
+
+SHUFFLE(dominoes$)
+
+FOR player%=0 TO no_players%
+    DIM hand$=()
+    FOR iLoop%=0 TO deal%
+        LET hand$()=dominoes$(0)
+        SHIFT(dominoes$)
+    NEXT
+    NATSORT(hand$)
+    LET hands$(player%)=hand$
+NEXT
+
+ADEF selected_domino$=""
+ADEF turn%=0
+ADEF game_over%=0
+ADIM hands$=hands$
+ADIM names$=names$
+ADIM played_left$=()
+ADIM played_right$=()
+ADEF rotate%=0
+
+AFUNCTION "onDominoClick"
+    selected_domino = event.target.parentElement.id;
+    $("#hand .domino").removeClass(["domino-highlight", "domino-warn"]);
+    $("#" + selected_domino).addClass("domino-highlight");
+END AFUNCTION
+
+AFUNCTION "onDeckClick", "position='left'"
+    if (game_over || turn) {
+        return;
+    }
+
+    if (selected_domino) {
+        if (!canPlay(event, position)) {
+            gameInfo(event, "INVALID PLAY", true);
+            return;
+        }
+
+        playDomino(event, position);
+        if ($("#hand").children().length == 0) {
+            gameOver(event);
+        } else if ($("#hand").children().length == 1) {
+            gameInfo(event, "LAST CARD");
+            //$("#last-card-" + turn + " span").show();
+        }
+        //updateTurn();
+    } else {
+        //gameInfo(event, "INVALID PLAY", true);
+    }
+END AFUNCTION
+
+AFUNCTION "onDeckRightClick"
+    onDeckClick(event, "right");
+END AFUNCTION
+
+AFUNCTION "onDeckLeftClick"
+    onDeckClick(event, "left");
+END AFUNCTION
+
+AFUNCTION "canPlay", "position='left'", "check = false"
+    if (game_over) {
+        return false;
+    }
+
+    var check, value;
+    if (position == "left") {
+        check = played_left[played_left.length - 1];        
+    } else {
+        check = played_right[played_right.length - 1];
+    }
+
+    if (check) {
+        if (check[0] === check[1]) {
+            check = check[0];
+        } else {
+            if (position == "left") {
+                check = check[1];
+            } else {
+                check = check[0];
+            }
+        }
+        
+        for (let iLoop=0; iLoop < selected_domino.length; iLoop++) {
+            value = selected_domino[iLoop];
+            //console.log(check, " = ", value, iLoop);
+            if (check == value) {
+                if (position == "left" && iLoop) {                    
+                    rotate = 1;
+                } else if (position == "right" && !iLoop) {                    
+                    rotate = 1;
+                }
+                return true;
+            }
+        }
+    } else {
+        return true;
+    }
+    return false;
+END AFUNCTION
+
+AFUNCTION "playDomino", "position='left'"
+    $("#" + selected_domino).removeClass(["domino-highlight", "domino-warn"]);
+    if (selected_domino[0] === selected_domino[1]) {
+        $("#" + selected_domino).addClass("double");
+    }
+    
+    if (turn == 0) {
+        $("#deck-" + position).append($("#" + selected_domino).prop("outerHTML"));
+    } else {
+        $("#deck-" + position).append('<div id="' + selected_domino + '" class="domino" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/dominoes/' + selected_domino + '.svg"></div>');
+    }
+
+    $("#deck-" + position + " #" + selected_domino).attr("onclick", "onDeckClick");
+
+    gameInfo(event, "Played " + selected_domino);
+
+    if (turn == 0) {
+        $("#hand #" + selected_domino).remove();
+        hands[turn].forEach((domino, index) => {
+            let check = (domino).replace("/kytschi/imgs/dominoes/", "").replace(".svg", "");
+            if (check == selected_domino) {
+                hands[turn].splice(index, 1);
+            }
+        });
+    }
+
+    if (rotate) {
+        $("#" + selected_domino).addClass("rotate");
+        selected_domino = selected_domino.split("").reverse().join("");
+        //console.log("rotate", selected_domino);
+        rotate = 0;
+    }
+
+    if (played_left.length == 0 && played_right.length == 0) {
+        played_left.push(selected_domino);
+        played_right.push(selected_domino);
+    } else if (position == "left") {
+        played_left.push(selected_domino);
+    } else {
+        played_right.push(selected_domino);
+    }
+
+    selected_domino = "";
+END AFUNCTION
+
+AFUNCTION "computerPlay"
+    if (game_over) {
+        return;
+    }
+
+    var value = "";
+    var played = false;
+
+    sleep(500).then(() => {
+        hands[turn].sort(() => Math.random() - .5);
+
+        hands[turn].forEach((domino, index) => {
+            if (!played) {
+                selected_domino = (domino).replace("/kytschi/imgs/dominoes/", "").replace(".svg", "");
+                /*let card_details = selected_card.split("_");
+                deck_suit = card_details[0];
+                value = card_details[1];*/
+
+                if (canPlay(event, value)) {
+                    playCard(event, value);
+                    hands[turn].splice(index, 1);
+                    if (hands[turn].length == 1) {
+                        gameInfo(event, "LAST CARD");
+                        $("#last-card-" + turn + " span").show();
+                    } else if (hands[turn].length == 0) {
+                        gameOver(event);
+                    }
+                    played = true;
+                }
+            }
+        });
+
+        if (!played) {
+            gameInfo(event, "KNOCKING");
+        }
+
+        updateTurn();
+    });
+END AFUNCTION
+
+AFUNCTION "updateTurn"
+    if (game_over) {
+        return;
+    }
+
+    $("#player-" + turn).removeClass("player-turn");
+
+    turn += 1;
+    if (turn == hands.length) {
+        turn = 0;
+    }
+    
+    $("#player-" + turn).addClass("player-turn");
+
+    if (turn != 0) {
+        computerPlay();
+    }
+END AFUNCTION
+
+AFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: (error ? "ERROR" : names[turn]),
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
+    });
+
+    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
+    $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
+END AFUNCTION
+
+AFUNCTION "gameOver"
+    var score = 0, card_details, value = 0;
+
+    if (typeof(kb_cookie.kb_sevens_scores) == "undefined") {
+        kb_cookie.kb_sevens_scores = {};
+        names.forEach((player, index) => {
+            kb_cookie.kb_sevens_scores[index] = {
+                "score": 0
+            }
+        });
+    }
+
+    game_over = 1;
+    gameInfo(event, "I WIN!!!");
+
+    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
+        score = parseInt($("#player-" + iLoop + "-score span").html());
+
+        hands[iLoop].forEach((domino, index) => {
+            domino = (domino).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            /*value = parseInt(domino[1]);
+            if (value == 1) {
+                score += 11;
+            } else if (([11, 12, 13]).includes(value)) {
+                score += 10;
+            } else {
+                score += value;
+            }*/
+        });
+
+        $("#player-" + iLoop + "-score span").html(score);
+        kb_cookie.kb_sevens_scores[iLoop].score = score;
+    }
+
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+
+    $(".btn-new-game").addClass("domino-highlight");
+END AFUNCTION
+
+SCREEN "fiveandthreess"
+    WINDOW "board"
+        WINDOW "deck"
+            SPRITE "left-blank","placeholder","onDeckLeftClick"
+                IMAGE "/kytschi/imgs/dominoes/back.svg"
+            END SPRITE
+            WINDOW "deck-left"
+                
+            END WINDOW
+            WINDOW "deck-right"
+                
+            END WINDOW
+            SPRITE "right-blank","placeholder","onDeckRightClick"
+                IMAGE "/kytschi/imgs/dominoes/back.svg"
+            END SPRITE
+        END WINDOW
+        WINDOW "game"
+            TABLE
+                THEAD
+                    TROW
+                        THEADCELL
+                            PRINT "&nbsp;"
+                        END THEADCELL
+                        THEADCELL ,"text-left"
+                            PRINT "Player"
+                        END THEADCELL
+                        THEADCELL ,"text-left"
+                            PRINT "&nbsp;"
+                        END THEADCELL
+                        THEADCELL
+                            PRINT "Score"
+                        END THEADCELL
+                    END TROW
+                END THEAD
+                TBODY
+                    FOR iLoop%=0 TO no_players%
+                        DEF id$="score-"+iLoop%
+                        TROW ,id$
+                            TCELL ,,,"player-" + iLoop%
+                                PRINT "&nbsp;"
+                            END TCELL
+                            TCELL
+                                PRINT names$(iLoop%)
+                            END TCELL
+                            TCELL ,"last-card",,"last-card-" + iLoop%
+                                PRINT "LC",,,"Last card"
+                            END TCELL
+                            TCELL ,"text-center",,"player-" + iLoop% + "-score"
+                                PRINT "0"
+                            END TCELL
+                        END TROW
+                    NEXT
+                END TBODY
+            END TABLE
+        END WINDOW
+    END WINDOW
+    WINDOW "player"
+        WINDOW "hand"
+            FOR domino$ IN hands$(0)
+                DEF id$=REPLACE(domino$, "/kytschi/imgs/dominoes/", "")
+                DEF id$=REPLACE(id$, ".svg", "")
+                SPRITE id$, "domino", "onDominoClick"
+                    IMAGE domino$
+                END SPRITE
+            NEXT
+        END WINDOW
+        WINDOW "controls"
+            BUTTON "btnKnock", "btn-knocking"
+                PRINT "knocking"
+            END BUTTON
+            BUTTON "btnNewGame", "btn-new-game"
+                PRINT "new game"
+            END BUTTON
+            FORM "form_test"
+                LET no_players%=(no_players%+1)
+                DIV "no-players"
+                    PRINT "No. players"
+                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='4' min='2'"
+                END DIV
+                BUTTON SUBMIT "btnSubmit",  "btn-submit"
+                    PRINT "setup"
+                END BUTTON
+            END FORM
+            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+        END WINDOW
+    END WINDOW
+END SCREEN
+END BODY
+END
