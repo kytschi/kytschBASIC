@@ -51,16 +51,18 @@ FOR player%=0 TO no_players%
     LET hands$(player%)=hand$
 NEXT
 
-DEF count%=COUNT(cards$)
-FOR player%=0 TO no_players%
-    LET hands$(player%)()=cards$(0)
-    NATSORT(hands$(player%))
-    SHIFT(cards$)
-    LET count%=COUNT(cards$)
-    IFE count% THEN
-        BREAK
-    END IF
-NEXT
+IFNTE $cards THEN
+	DEF count%=COUNT(cards$)
+	FOR player%=0 TO no_players%
+		LET hands$(player%)()=cards$(0)
+		NATSORT(hands$(player%))
+		SHIFT(cards$)
+		LET count%=COUNT(cards$)
+		IFE count% THEN
+			BREAK
+		END IF
+	NEXT
+END IF
 
 ADIM hands$=hands$
 ADIM names$=names$
