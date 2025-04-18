@@ -53,6 +53,14 @@ END HEAD
 						END BITMAP
 					END WINDOW
 				END SCREEN
+				HEADING 3
+					LINE BREAK
+					PRINT "An example game built in kytsch"
+					PRINT "BASIC", "basic"
+				END HEADING 3
+				LINK "/arcade/sevens"
+					PRINT "Sevens card game"
+				END LINK
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"
