@@ -89,7 +89,7 @@ class Text extends Command
 	{
 		var output = "<?= \"<p";
 		
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[0]);
 		}
 

@@ -137,23 +137,23 @@ class Parser
 
 		switch (command) {
 			case "SPRINT":
-				return trim(ltrim(line, "SPRINT")) . this->newline;
+				return trim(ltrim(line, "SPRINT"));
 			case "CPRINT":
 				let this->cprint = true;
-				return "<pre><code>" . this->newline;
+				return "<pre><code>";
 			case "END CPRINT":
 				let this->cprint = false;
-				return "</code></pre>" . this->newline;
+				return "</code></pre>";
 			case "JAVASCRIPT":
 				if (!this->cprint) {
 					let this->js = true;
-					return "<script type='text/javascript'>" . this->newline;
+					return "<script type='text/javascript'>";
 				}
 				break;
 			case "END JAVASCRIPT":
 				if (!this->cprint) {
 					let this->js = false;
-					return "</script>" . this->newline;
+					return "</script>";
 				}
 				break;
 			case "AFUNCTION":
@@ -183,7 +183,7 @@ class Parser
 				return "<?php ob_start(); ?>";
 			case "END SHOWHTML":
 				let this->show_html = false;
-				return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>" . this->newline;
+				return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>";
 			case "IF":
 				return this->processIf(line, "if", args);
 			case "IFNTE":
@@ -193,14 +193,14 @@ class Parser
 			case "ELSEIF":
 				return this->processIf(line, "elseif", args);
 			case "ELSE":
-				return "<?php else: ?>" . this->newline;
+				return "<?php else: ?>";
 			case "END IF":
-				return "<?php endif; ?>" . this->newline;
+				return "<?php endif; ?>";
 			case "BREAK":
-				return "<?php break; ?>" . this->newline;
+				return "<?php break; ?>";
 			case "CASE":
 				if (this->has_case) {
-					let output .= "<?php break; ?>" . this->newline;
+					let output .= "<?php break; ?>";
 					let this->has_case = false;
 				}
 
@@ -210,27 +210,27 @@ class Parser
 		
 				let this->has_case = true;
 	
-				return output . "<?php case " . args[0] . ": ?>" . this->newline;
+				return output . "<?php case " . args[0] . ": ?>";
 			case "DEFAULT":
 				if (this->has_case) {
-					let output .= "<?php break; ?>" . this->newline;
+					let output .= "<?php break; ?>";
 					let this->has_case = false;
 				}
 				let this->has_case = true;
-				return output . "<?php default: ?>" . this->newline;
+				return output . "<?php default: ?>" ;
 			case "SELECT":
 				if (count(args) < 1) {
 					throw new Exception("Invalid SELECT");
 				}
-				return "<?php switch(" . args[0] . ") { ?>" . this->newline;
+				return "<?php switch(" . args[0] . ") { ?>";
 			case "END SELECT":
 				if (this->has_case) {
-					let output .= "<?php break; ?>" . this->newline;
+					let output .= "<?php break; ?>";
 					let this->has_case = false;
 				}
-				return output . "<?php } ?>" . this->newline;
+				return output . "<?php } ?>";
 			case "VERSION":
-				return "<span class=\"kb-version\">" . constant("VERSION") . "</span>" . this->newline;
+				return "<span class=\"kb-version\">" . constant("VERSION") . "</span>";
 		}
 		
 		for parser in this->available {
@@ -271,7 +271,7 @@ class Parser
 			let output .= splits[0];
 		}
 
-		let output .= "): ?>" . this->newline;
+		let output .= "): ?>";
 		
 		return output;
 	}

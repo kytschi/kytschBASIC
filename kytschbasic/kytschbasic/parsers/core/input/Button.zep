@@ -45,7 +45,7 @@ class Button extends Command
 	{
 		var output = "<?= \"<button", type = "\"button\"";
 		
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			if (substr(args[0], 0, 6) == "SUBMIT") {
 				let args[0] = this->cleanArg("SUBMIT ", args[0]);
 				let type = "\"submit\"";

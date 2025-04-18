@@ -200,7 +200,6 @@ class Variables
 
 	public function equalsSplit(line)
 	{
-		//return preg_split("/\=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", line, 2, PREG_SPLIT_NO_EMPTY);
 		return preg_split("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, 2, PREG_SPLIT_NO_EMPTY);
 	}
 

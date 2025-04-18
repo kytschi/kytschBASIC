@@ -45,7 +45,7 @@ class Screen extends Command
 	{
 		var output = "<?= \"<div";
 
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[0]);
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-screen"), true);

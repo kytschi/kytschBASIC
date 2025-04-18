@@ -43,7 +43,7 @@ class Image extends Command
 	{
 		var output = "<?= \"<image";		
 				
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " src=" . this->outputArg(args[0]);
 		}
 

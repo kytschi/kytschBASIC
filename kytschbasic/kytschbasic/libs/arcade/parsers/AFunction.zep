@@ -36,7 +36,7 @@ class AFunction extends Command
 			case "AFUNCTION":
 				return this->parseFunction(line, args);
 			case "END AFUNCTION":
-				return "}</script>\n";
+				return "}</script>";
 			default:
 				return null;
 		}

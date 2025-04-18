@@ -38,8 +38,7 @@ class Compiler
 	private globals = [];
 
 	private start_time;
-	private newline = "\n";
-
+	
 	private version = "0.0.14 alpha";
 
 	public function __construct(string config_dir)
@@ -129,7 +128,7 @@ class Compiler
 		var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
 		
 		try {
-			let output = output . "<!DOCTYPE html>" . this->newline;
+			let output = output . "<!DOCTYPE html>";
 			let output = output . parsed;
 			file_put_contents(constant("_ROOT") . "/compiled.php", output);
 			require (constant("_ROOT") . "/compiled.php");

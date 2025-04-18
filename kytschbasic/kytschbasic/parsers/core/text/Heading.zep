@@ -51,7 +51,7 @@ class Heading extends Command
 			let args[0] = ltrim(close, "END HEADING ");
 		}
 
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let size = args[0];
 		}
 

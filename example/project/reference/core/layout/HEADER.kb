@@ -27,20 +27,21 @@ BODY
 		END SWRITE
 	END HEADER
 END BODY
-END
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				CPRINT
-&lt;body&gt;
-	&lt;header&gt;
-		&lt;p&gt;
-			Creating the HTML header.
-		&lt;/p&gt;
-	&lt;/header&gt;
-&lt;/body&gt;
-				END CPRINT
+				DIV "kb-code-block"
+					SHOWHTML
+						BODY
+							HEADER
+								SWRITE
+									PRINT "Creating the HTML header."
+								END SWRITE
+							END HEADER
+						END BODY
+					END SHOWHTML
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

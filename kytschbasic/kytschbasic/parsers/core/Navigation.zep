@@ -56,7 +56,7 @@ class Navigation extends Command
 	{
 		var output = "<?= \"<a";
 				
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " href=" . this->outputArg(args[0]);
 		}
 
@@ -85,7 +85,7 @@ class Navigation extends Command
 	{
 		var output = "<?= \"<nav";
 		
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[0]);
 		}
 

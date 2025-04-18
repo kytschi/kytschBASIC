@@ -37,7 +37,7 @@ END LINK
 					LINK "/about",
 						PRINT "About"
 					END LINK
-
+					PRINT "&nbsp|&nbsp;"
 					LINK "https://github.com/kytschi/kytschBASIC",,,"_blank"
 						PRINT "Download"
 					END LINK

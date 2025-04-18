@@ -53,7 +53,7 @@ class Form extends Command
 	{
 		var output = "<?= \"<form", method = "GET";
 		
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[0]);
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-form"), true);
@@ -84,7 +84,7 @@ class Form extends Command
 
 		let output = "<?= \"<input type=\\\"" . type . "\\\"";
 		
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " name=" . this->outputArg(args[0]);
 		} else {
 			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
@@ -123,7 +123,7 @@ class Form extends Command
 	{
 		var output = "<?= \"<textarea", value = "\"\"";
 				
-		if (isset(args[0]) && !empty(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " name=" . this->outputArg(args[0]);
 		} else {
 			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);

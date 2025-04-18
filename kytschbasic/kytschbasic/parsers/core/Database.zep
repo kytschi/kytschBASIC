@@ -116,7 +116,7 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 			throw new Exception("Invalid DFETCH");
 		}
 
-		return this->parseExecute() . "\n<?php " . str_replace(["\"", "{", "}"], "", args[0]) . " = $KBDBSTATEMENT->fetchAll(); ?>";
+		return this->parseExecute() . "<?php " . str_replace(["\"", "{", "}"], "", args[0]) . " = $KBDBSTATEMENT->fetchAll(); ?>";
 	}
 
 	private function parseJoin(args)
@@ -190,19 +190,19 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 			let dsn .= "host=127.0.0.1;";
 		}
 
-		return "<?php\n" .
-			"$KBDBBIND = [];\n" .
-			"$KBDBSELECT = '';\n" .
-			"$KBDBUPDATE = '';\n" .
-			"$KBDBTABLE = '';\n" .
-			"$KBDBWHERE = '';\n" .
-			"$KBDBJOIN = '';\n" .
-			"$KBDBSORT = '';\n" .
-			"$KBDBLIMIT = '';\n" .
-			"$KBDBSET = '';\n" .
+		return "<?php " .
+			"$KBDBBIND = [];" .
+			"$KBDBSELECT = '';" .
+			"$KBDBUPDATE = '';" .
+			"$KBDBTABLE = '';" .
+			"$KBDBWHERE = '';" .
+			"$KBDBJOIN = '';" .
+			"$KBDBSORT = '';" .
+			"$KBDBLIMIT = '';" .
+			"$KBDBSET = '';" .
 			"$KBDBCONN = new \\PDO('" . dsn . "', '" .
 			(!empty(config->user) ? config->user : "") . "', '" .
-			(!empty(config->password) ? config->password : "") . "');\n?>";
+			(!empty(config->password) ? config->password : "") . "');?>";
 	}
 
 	private function parseRead(args)

@@ -72,7 +72,7 @@ class Load extends Command
 			case "js":
 				return "<script src=" . this->outputArg(args[0]) . "></script>";
 			default:
-				return (new Parser())->parse(trim(args[0], "\"") . ".kb", true);
+				return (new Parser())->parse(trim(args[0], "\"") . ".kb", false);
 		}
 	}
 }
