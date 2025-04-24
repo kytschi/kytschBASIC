@@ -36,6 +36,10 @@
 		"url": "/arcade/5and3s",
 		"template": "project/arcade/5and3s.kb"
 	},
+	{
+		"url": "/arcade/switch",
+		"template": "project/arcade/switch.kb"
+	},
 
 	{
 		"url": "/news",

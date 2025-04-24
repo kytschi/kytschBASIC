@@ -26,17 +26,6 @@ html, body {
     position: absolute;
 }
 
-#fiveandthreess #deck {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    flex: 1 1 auto;
-    overflow: hidden;
-}
-
 #fiveandthreess #game {
     display: flex;
     flex-direction: column;
@@ -96,14 +85,64 @@ html, body {
     border-radius: 5px;
     overflow: hidden;
 }
+#fiveandthreess #deck-left-reverse .placeholder, #fiveandthreess #deck-right-reverse .placeholder {
+    display: none;
+}
 
-#fiveandthreess #deck-left {
+#fiveandthreess #deck {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+#fiveandthreess #deck-top, #fiveandthreess #deck-bottom, #fiveandthreess #deck-middle {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid #000;
+}
+
+#fiveandthreess .deck-col {
+    display: inline-block;
+    flex: 0 0 200px;
+    border: 1px solid #000;
+}
+
+#fiveandthreess #deck-left-reverse, #fiveandthreess #deck-right-reverse, #fiveandthreess #deck-middle-start  {
+    border: 1px solid #000;
+    display: flex;
+    gap: 10px;
+    height: 104px;
+    width: 100%;
+}
+
+#fiveandthreess #deck-middle-start  {
+    align-items: center;
+    justify-content: center;
+}
+
+#fiveandthreess #deck-right-reverse {
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#fiveandthreess #deck-left-reverse {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#fiveandthreess #deck-left, #fiveandthreess #deck-right-reverse {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
 }
 
-#fiveandthreess #deck-right {
+#fiveandthreess #deck-right, #fiveandthreess #deck-left-reverse {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;    
@@ -122,12 +161,11 @@ html, body {
     margin: 0 11px 0 11px;
 }
 
-#fiveandthreess #deck-right .domino {
+#fiveandthreess #deck-right .domino, #fiveandthreess #deck-right-reverse .domino {
     margin-right: 33px;
     margin-left: 23px;
 }
-
-#fiveandthreess #deck-left .domino {
+#fiveandthreess #deck-left .domino, #fiveandthreess #deck-left-reverse .domino {
     margin-left: 33px;
     margin-right: 23px;
 }
@@ -135,7 +173,30 @@ html, body {
 #fiveandthreess #deck .domino.double {
     transform: rotate(0deg);
     margin-left: 10px;
-    margin-right: 0px;
+    margin-right: 2px;
+}
+#fiveandthreess #deck-right .domino.double {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+#fiveandthreess #deck .down, #fiveandthreess #deck .up {
+    transform: rotate(0deg);
+}
+#fiveandthreess #deck .up {
+    margin-top: -170px;
+    margin-left: 70px;
+}
+#fiveandthreess #deck .down {
+    margin-top: 170px;
+    margin-left: -70px;
+}
+#fiveandthreess #deck .down.double {
+    margin-top: 220px;
+    margin-left: -74px;
+}
+#fiveandthreess #deck .placeholder:hover {
+    border: 4px solid #00ff6a;
 }
 
 #fiveandthreess .domino-highlight {

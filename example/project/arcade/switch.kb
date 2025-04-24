@@ -1,0 +1,482 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	CHARSET "UTF-8"
+    DESCRIPTION "This is a kytschBASIC example"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/switch"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - Switch | kytschBASIC"
+END HEAD
+BODY
+DIM suits$=("diamonds", "clubs","hearts","spades")
+DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
+DIM names$=("You", "Mike", "Laura", "Lenny", "Brian", "Helen", "Angie")
+
+DIM cards$=()
+DIM hands$=()
+
+DEF no_players%=3
+
+IFNTE _GET("np") THEN
+    LET no_players%=_GET("np")
+END IF
+
+IF no_players%<3 THEN
+	LET no_players%=3
+END IF
+
+DEF end%=6
+LET no_players%=no_players%-1
+
+FOR suit$ IN suits$
+    FOR face$ IN faces$
+        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".svg"
+    NEXT
+NEXT
+
+SHUFFLE(cards$)
+
+FOR player%=0 TO no_players%
+    DIM hand$=()
+    FOR iLoop%=0 TO end%
+        LET hand$()=cards$(0)
+        SHIFT(cards$)
+    NEXT
+    NATSORT(hand$)
+    LET hands$(player%)=hand$
+NEXT
+
+ADIM hands$=hands$
+ADIM names$=names$
+
+ADIM deck%=()
+ADIM pool$=cards$
+ADEF selected_card$=""
+ADEF turn%=-1
+ADEF switch_dir%=0
+ADEF game_over%=0
+ADEF start%=1
+ADEF miss_a_turn%=1
+ADEF pick_up%=0
+
+AFUNCTION "computerPlay"
+    if (game_over) {
+        return;
+    }
+
+    var value = "";
+    var played = false;
+
+    sleep(500).then(() => {
+        hands[turn].sort(() => Math.random() - .5);
+
+        for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
+            if (!played) {
+                let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                if (canPlay(event, card)) {
+                    selected_card = card;
+                    playCard(event);
+                    hands[turn].splice(iLoop, 1);
+                    if (hands[turn].length == 1) {
+                        gameInfo(event, "LAST CARD");
+                    } else if (hands[turn].length == 0) {
+                        gameOver(event);
+                    }
+                    played = true;
+                    break;
+                }
+            }
+        }
+
+        if (!played) {
+            gameInfo(event, "KNOCKING");
+        }
+
+        updateTurn();
+    });
+END AFUNCTION
+
+AFUNCTION "updateTurn"
+    if (game_over) {
+        return;
+    }
+
+    $("#player-" + turn).removeClass("player-turn");
+
+    if (parseInt(switch_dir) == 0) {
+        turn += 1;
+
+        if (miss_a_turn == 1) {
+            turn += 1;
+            gameInfo(event, "Miss a turn");
+            miss_a_turn = 0;
+        }
+
+        if (turn >= hands.length) {
+            turn = 0;
+        }
+    } else {
+        turn -= 1;
+
+        if (miss_a_turn == 1) {
+            turn -= 1;
+            gameInfo(event, "Miss a turn");
+            miss_a_turn = 0;
+        }
+
+        if (turn < 0) {
+            turn = hands.length - 1;
+        }
+    }
+    
+    if (pick_up) {
+        if (pick_up == 4) {
+            gameInfo(event, "Pick up four");
+            hands[turn].push(pool[0]);
+            pool.splice(0, 1);
+            hands[turn].push(pool[0]);
+            pool.splice(0, 1);
+        } else {
+            gameInfo(event, "Pick up two");
+        }
+
+        pick_up = 0;
+
+        hands[turn].push(pool[0]);
+        pool.splice(0, 1);
+        hands[turn].push(pool[0]);
+        pool.splice(0, 1);
+
+        if (turn == 0) {
+            rebuildHand(event);
+        }
+    }
+
+    $("#player-" + turn).addClass("player-turn");
+
+    if (turn != 0) {
+        computerPlay();
+    }
+END AFUNCTION
+
+AFUNCTION "rebuildHand"
+    $("#hand").html("");
+    hands[0].forEach((card) => {
+        let id = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+        $("#hand").append('<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>');
+    });
+END AFUNCTION
+
+AFUNCTION "canPlay", "check=null"
+    if (game_over) {
+        return;
+    }
+
+    if (deck.length == 0) {
+        return true;
+    }
+
+    let check_details = selected_card.split("_");
+    if (check) {
+        check_details = check.split("_");
+    }
+        
+    let card_details = deck[deck.length-1].split("_");
+    if (
+        check_details[0] == card_details[0] ||
+        check_details[1] == card_details[1]
+    ) {
+        return true;
+    }    
+
+    return false;
+END AFUNCTION
+
+AFUNCTION "onCardClick"
+    selected_card = event.target.parentElement.id;
+    $("#hand .card").removeClass(["card-highlight", "card-warn"]);
+    $("#" + selected_card).addClass("card-highlight");
+END AFUNCTION
+
+AFUNCTION "onCardDblClick"
+    selected_card = event.target.parentElement.id;
+    $("#hand .card").removeClass(["card-highlight", "card-warn"]);
+    $("#" + selected_card).addClass("card-highlight");
+    onDeckClick(event);
+END AFUNCTION
+
+AFUNCTION "playerKnocking"
+    if (game_over) {
+        return;
+    }
+
+    var valid = true;
+    
+    for (let iLoop = 0; iLoop < hands[0].length; iLoop++) {
+        let card =  hands[0][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+        if (canPlay(event, card)) {
+            $("#" + card).addClass("card-warn");
+            valid = false;
+        }
+    }
+
+    if (valid == true) {
+        gameInfo(event, "KNOCKING");
+    } else {
+        gameInfo(event, "INVALID KNOCKING! Miss a turn", true);
+    }
+
+    updateTurn();
+END AFUNCTION
+
+AFUNCTION "playCard"
+    $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
+
+    if (turn == 0) {
+        $("#deck").append($("#" + selected_card).prop("outerHTML"));
+    } else {
+        $("#deck").append('<div id="' + selected_card + '" class="card" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
+    }
+    
+    $("#deck #" + selected_card).prop("onclick", null).off("click");
+    deck.push(selected_card);
+
+    let card_details = selected_card.split("_");
+    let card_suit = card_details[0];
+    let value = card_details[1];
+
+    if (value == "11") {
+        value = "jack";
+    } else if (value == "12") {
+        value = "queen";
+    } else if (value == "13") {
+        value = "king";
+    } else if (value == "1") {
+        value = "ace";
+    }
+
+    gameInfo(event, "Played " + value + " of " + card_suit);
+
+    if (value == 7) {
+        switch_dir = switch_dir ? 0 : 1;
+        gameInfo(event, "Switch");
+    } else if (value == 8) {
+        miss_a_turn = 1;
+    } else if (value == 2) {
+        pick_up = 2;
+    } else if (value == "jack" && (card_suit == "clubs" || card_suit == "spades")) {
+        pick_up = 4;
+    }
+
+    if (turn == 0) {
+        $("#hand #" + selected_card).remove();
+        hands[turn].forEach((card, index) => {
+            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            if (check == selected_card) {
+                hands[turn].splice(index, 1);
+            }
+        });
+    }
+
+    $("#player-cards-" + turn + " span").html(hands[turn].length);
+
+    selected_card = "";
+END AFUNCTION
+
+AFUNCTION "onDeckClick"
+    if (game_over || turn) {
+        return;
+    }
+
+    if (!canPlay(event)) {
+        gameInfo(event, "INVALID PLAY", true);
+        return;
+    }
+
+    playCard(event);
+    if ($("#hand").children().length == 0) {
+        gameOver(event);
+    } else if ($("#hand").children().length == 1) {
+        gameInfo(event, "LAST CARD");
+    }
+    updateTurn();
+END AFUNCTION
+
+AFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: (error ? "ERROR" : names[turn]),
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
+    });
+
+    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
+    $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
+END AFUNCTION
+
+AFUNCTION "gameOver"
+    var score = 0, card_details, value = 0;
+
+    if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
+        kb_cookie.kb_switch_scores = {};
+        names.forEach((player, index) => {
+            kb_cookie.kb_switch_scores[index] = {
+                "score": 0,
+                "turn": turn
+            }
+        });
+    }
+
+    game_over = 1;
+    gameInfo(event, "I WIN!!!");
+
+    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
+        score = parseInt($("#player-" + iLoop + "-score span").html());
+
+        hands[iLoop].forEach((card, index) => {
+            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
+            value = parseInt(card_details[1]);
+            if (value == 1) {
+                score += 11;
+            } else if (([11, 12, 13]).includes(value)) {
+                score += 10;
+            } else {
+                score += value;
+            }
+        });
+
+        $("#player-" + iLoop + "-score span").html(score);
+        kb_cookie.kb_switch_scores[iLoop].score = score;
+    }
+
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+
+    $(".btn-new-game").addClass("card-highlight");
+END AFUNCTION
+
+JAVASCRIPT
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+$(document).ready(function() {
+    var played = false;
+
+    if (typeof(kb_cookie.kb_switch_scores) != "undefined") {
+        for (const [player, value] of Object.entries(kb_cookie.kb_switch_scores)) {
+            $("#player-" + player + "-score span").html(value.score);
+            if (turn == -1) {
+                turn = value.turn;
+            }
+        }
+    } else {
+        turn = 0;
+    }
+
+    turn = 0;
+
+    if (turn) {
+        hands[turn].forEach((card, index) => {
+            selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            playCard(event);
+            hands[turn].splice(index, 1);
+            updateTurn();
+        });
+    }
+
+    $("button[name=btnKnock]").click(() => {
+        playerKnocking();
+    });
+
+    $("button[name=btnNewGame]").click(() => {
+        window.location.reload();
+    });
+});
+END JAVASCRIPT
+
+SCREEN "switch"
+    WINDOW "board"
+        WINDOW "deck",,"onDeckClick"
+        END WINDOW
+        WINDOW "game"
+            TABLE
+                THEAD
+                    TROW
+                        THEADCELL
+                            PRINT "&nbsp;"
+                        END THEADCELL
+                        THEADCELL ,"text-left"
+                            PRINT "Player"
+                        END THEADCELL
+                        THEADCELL ,"text-left"
+                            PRINT "Cards"
+                        END THEADCELL
+                        THEADCELL
+                            PRINT "Score"
+                        END THEADCELL
+                    END TROW
+                END THEAD
+                TBODY
+                    FOR iLoop%=0 TO no_players%
+                        DEF id$="score-"+iLoop%
+                        TROW ,id$
+                            TCELL ,,,"player-" + iLoop%
+                                PRINT "&nbsp;"
+                            END TCELL
+                            TCELL
+                                PRINT names$(iLoop%)
+                            END TCELL
+                            TCELL ,,,"player-cards-" + iLoop%
+                                PRINT COUNT(hands$[iLoop%])
+                            END TCELL
+                            TCELL ,"text-center",,"player-" + iLoop% + "-score"
+                                PRINT "0"
+                            END TCELL
+                        END TROW
+                    NEXT
+                END TBODY
+            END TABLE
+        END WINDOW
+    END WINDOW
+    WINDOW "player"
+        WINDOW "hand"
+            FOR card$ IN hands$(0)
+                DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+                DEF id$=REPLACE(id$, ".svg", "")
+                SPRITE id$, "card", "onCardClick", "onCardDblClick"
+                    IMAGE card$
+                END SPRITE
+            NEXT
+        END WINDOW
+        WINDOW "controls"
+            BUTTON "btnKnock", "btn-knocking"
+                PRINT "knocking"
+            END BUTTON
+            BUTTON "btnNewGame", "btn-new-game"
+                PRINT "new game"
+            END BUTTON
+            FORM "form_test"
+                LET no_players%=(no_players%+1)
+                DIV "no-players"
+                    PRINT "No. players"
+                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
+                END DIV
+                BUTTON SUBMIT "btnSubmit",  "btn-submit"
+                    PRINT "setup"
+                END BUTTON
+            END FORM
+            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+        END WINDOW
+    END WINDOW
+END SCREEN
+END BODY
+END

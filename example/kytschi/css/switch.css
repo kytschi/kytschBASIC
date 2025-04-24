@@ -1,0 +1,248 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #09a314;
+}
+
+#switch {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding: 5px;
+}
+
+#switch #board, #switch #player {
+    display: flex;
+    width: 100%;
+}
+
+#switch #board {
+    display: flex;
+    height: 300px;
+    position: absolute;
+}
+
+#switch #deck {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 1 1 auto;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#switch #game {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 200px;
+    height: 100%;
+    border-left: 2px solid #000;
+    padding: 10px;
+    z-index: 5;
+}
+
+#switch #player {
+    margin-top: 300px;
+    border-top: 2px solid #000;
+    z-index: 10;
+    background-color: #09a314;
+}
+
+#switch #player #hand {
+    flex: 1 1 auto;
+    display: flex;
+    column-gap: 10px;
+    row-gap: 20px;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-top: 10px;
+}
+
+#switch #player #controls {
+    gap: 10px;
+    flex: 0 0 200px;
+    display: flex;
+    /*display: none;*/
+    flex-direction: column;
+    border-left: 2px solid #000;
+    padding: 10px;
+}
+
+#switch #deck .deck-placeholder {
+    display: block;
+}
+
+#switch #game table {
+    width: 100%;
+    color: #fff;
+}
+
+#switch .card, #switch .placeholder {
+    display: inline-flex;
+    background: none;
+    border: none;
+    width: 120px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#switch #deck .card {
+    position: absolute;
+    margin-left: -120px;
+}
+
+@media only screen and (max-width: 810px) {
+    #switch #board {
+        height: 260px;
+    }
+
+    #switch #player {
+        margin-top: 260px;
+    }
+
+    #switch .card, #switch .placeholder {
+        width: 100px;
+    }
+
+    #switch #deck .card {
+        margin-left: -100px;
+    }
+}
+
+@media only screen and (max-height: 315px) {
+    #switch .card, #switch .placeholder {
+        width: 80px;
+    }
+
+    #switch #deck .card {
+        margin-left: -80px;
+    }
+}
+
+#switch #deck .card-lower {
+    margin-top: -40px;
+}
+
+#switch #deck .card-higher {
+    margin-top: 40px;
+}
+
+#switch .card-highlight {
+    border: 4px solid #4ee5fc;
+}
+
+#switch .card-warn {
+    border: 4px solid #f43c09;
+}
+
+#switch img {
+    width: 100%;
+    margin: 0;
+}
+
+#switch .text-center {
+    text-align: center;
+}
+
+#switch .text-left {
+    text-align: left;
+}
+
+#switch .player-turn {
+    background-color: #4ee5fc;
+}
+
+#switch .last-card span {
+    display: none;
+    cursor: pointer;
+    background-color: #FFD400;
+    color: #000;
+    font-size: 12px;
+    padding: 0 2px;
+}
+
+#switch #game-info {
+    /*display: none;*/
+    background-color: #fff;
+    border: 0;
+    border-top: 2px solid #000;
+    margin-top: 10px;
+    width: calc(100% - 10px);
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#switch #game-info p {
+    margin: 0;
+    padding: 0;
+}
+
+#switch button {
+    height: 50px;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+#switch .btn-last-card {
+    background-color: #ffd400;
+}
+
+#switch .btn-knocking {
+    background-color: #f43c09;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: calc(100% - 10px);
+}
+
+#switch .btn-submit {
+    background-color: #ffd400;
+    width: calc(100% - 10px);
+}
+
+#switch .btn-new-game {
+    background-color: #2794e8;
+    color: #fff;
+    width: calc(100% - 10px);
+}
+
+#switch .no-players {
+    display: flex;
+    width: calc(100% - 10px);
+}
+
+#switch .no-players span {
+    color: #fff;
+    padding-top: 15px;
+    flex: auto;
+}
+
+#switch form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#switch .form-input {
+    display: inline-block;
+    width: 60px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 35px;
+}
