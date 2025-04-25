@@ -61,43 +61,44 @@ ADEF turn%=-1
 ADEF switch_dir%=0
 ADEF game_over%=0
 ADEF start%=1
-ADEF miss_a_turn%=1
+ADEF miss_a_turn%=0
 ADEF pick_up%=0
+ADEF pick_up_done%=0
+ADEF change_suit%=0
 
 AFUNCTION "computerPlay"
-    if (game_over) {
+    if (game_over || turn == 0) {
         return;
     }
 
     var value = "";
     var played = false;
 
-    sleep(500).then(() => {
-        hands[turn].sort(() => Math.random() - .5);
+    $("#player-last-card-" + turn).hide();
 
-        for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
-            if (!played) {
-                let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
-                if (canPlay(event, card)) {
-                    selected_card = card;
-                    playCard(event);
-                    hands[turn].splice(iLoop, 1);
-                    if (hands[turn].length == 1) {
-                        gameInfo(event, "LAST CARD");
-                    } else if (hands[turn].length == 0) {
-                        gameOver(event);
+    sleep(500).then(() => {
+        if (turn != 0) {
+            hands[turn].sort(() => Math.random() - .5);
+
+            for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
+                if (!played) {
+                    let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                    if (canPlay(event, card)) {
+                        selected_card = card;
+                        playCard(event);
+                        hands[turn].splice(iLoop, 1);
+                        played = true;
+                        break;
                     }
-                    played = true;
-                    break;
                 }
             }
-        }
 
-        if (!played) {
-            gameInfo(event, "KNOCKING");
-        }
+            if (!played) {
+                playerKnocking(event);
+            }
 
-        updateTurn();
+            updateTurn();
+        }
     });
 END AFUNCTION
 
@@ -107,6 +108,16 @@ AFUNCTION "updateTurn"
     }
 
     $("#player-" + turn).removeClass("player-turn");
+
+    $("#player-last-card-" + turn).hide();
+    if (hands[turn].length == 1) {
+        gameInfo(event, "LAST CARD");
+        $("#player-last-card-" + turn).show();
+        
+    } else if (hands[turn].length == 0) {
+        gameOver(event);
+    }
+    $("#player-cards-" + turn).html(hands[turn].length);
 
     if (parseInt(switch_dir) == 0) {
         turn += 1;
@@ -134,23 +145,15 @@ AFUNCTION "updateTurn"
         }
     }
     
-    if (pick_up) {
-        if (pick_up == 4) {
-            gameInfo(event, "Pick up four");
+    if (pick_up && pick_up_done) {
+        gameInfo(event, "You have to pick up " + pick_up);
+        for (iLoop = 0; iLoop < pick_up; iLoop++) {
             hands[turn].push(pool[0]);
             pool.splice(0, 1);
-            hands[turn].push(pool[0]);
-            pool.splice(0, 1);
-        } else {
-            gameInfo(event, "Pick up two");
         }
 
         pick_up = 0;
-
-        hands[turn].push(pool[0]);
-        pool.splice(0, 1);
-        hands[turn].push(pool[0]);
-        pool.splice(0, 1);
+        pick_up_done = 0;
 
         if (turn == 0) {
             rebuildHand(event);
@@ -177,7 +180,8 @@ AFUNCTION "canPlay", "check=null"
         return;
     }
 
-    if (deck.length == 0) {
+    if (start == 1) {
+        start = 0;
         return true;
     }
 
@@ -186,7 +190,7 @@ AFUNCTION "canPlay", "check=null"
         check_details = check.split("_");
     }
         
-    let card_details = deck[deck.length-1].split("_");
+    let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
     if (
         check_details[0] == card_details[0] ||
         check_details[1] == card_details[1]
@@ -215,20 +219,12 @@ AFUNCTION "playerKnocking"
         return;
     }
 
-    var valid = true;
-    
-    for (let iLoop = 0; iLoop < hands[0].length; iLoop++) {
-        let card =  hands[0][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
-        if (canPlay(event, card)) {
-            $("#" + card).addClass("card-warn");
-            valid = false;
-        }
-    }
+    gameInfo(event, "KNOCKING");
+    hands[turn].push(pool[0]);
+    pool.splice(0, 1);
 
-    if (valid == true) {
-        gameInfo(event, "KNOCKING");
-    } else {
-        gameInfo(event, "INVALID KNOCKING! Miss a turn", true);
+    if (turn == 0) {
+        rebuildHand(event);
     }
 
     updateTurn();
@@ -236,15 +232,6 @@ END AFUNCTION
 
 AFUNCTION "playCard"
     $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
-
-    if (turn == 0) {
-        $("#deck").append($("#" + selected_card).prop("outerHTML"));
-    } else {
-        $("#deck").append('<div id="' + selected_card + '" class="card" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
-    }
-    
-    $("#deck #" + selected_card).prop("onclick", null).off("click");
-    deck.push(selected_card);
 
     let card_details = selected_card.split("_");
     let card_suit = card_details[0];
@@ -262,30 +249,28 @@ AFUNCTION "playCard"
 
     gameInfo(event, "Played " + value + " of " + card_suit);
 
+    pick_up_done=0;
     if (value == 7) {
         switch_dir = switch_dir ? 0 : 1;
         gameInfo(event, "Switch");
     } else if (value == 8) {
         miss_a_turn = 1;
     } else if (value == 2) {
-        pick_up = 2;
+        pick_up += 2;
+        pick_up_done = 1;
     } else if (value == "jack" && (card_suit == "clubs" || card_suit == "spades")) {
-        pick_up = 4;
+        pick_up += 4;
+        pick_up_done = 1;
+    }    
+
+    if (value == "ace") {
+        if (turn == 0) {
+            change_suit = 1;
+            $("#switch #change-suit").show();
+        }
+    } else {
+        updateDeck(event);
     }
-
-    if (turn == 0) {
-        $("#hand #" + selected_card).remove();
-        hands[turn].forEach((card, index) => {
-            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
-            if (check == selected_card) {
-                hands[turn].splice(index, 1);
-            }
-        });
-    }
-
-    $("#player-cards-" + turn + " span").html(hands[turn].length);
-
-    selected_card = "";
 END AFUNCTION
 
 AFUNCTION "onDeckClick"
@@ -299,12 +284,53 @@ AFUNCTION "onDeckClick"
     }
 
     playCard(event);
-    if ($("#hand").children().length == 0) {
-        gameOver(event);
-    } else if ($("#hand").children().length == 1) {
-        gameInfo(event, "LAST CARD");
+    if (change_suit == 0) {
+        updateTurn(event);
     }
-    updateTurn();
+END AFUNCTION
+
+AFUNCTION updateDeck
+    $("#deck").append('<div id="' + selected_card + '" class="card"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
+    deck.push('/kytschi/imgs/cards/' + selected_card + '.svg');
+
+    if (turn == 0) {
+        //console.log("update", turn);
+        $("#hand #" + selected_card).remove();
+        hands[turn].forEach((card, index) => {
+            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            if (check == selected_card) {
+                hands[turn].splice(index, 1);
+            }
+        });
+    }
+
+    // Remove from deck and back into pool.
+    if (deck.length == 2) {
+        pool.push(deck[0]);
+        deck.splice(0, 1);
+        pool.sort(() => Math.random() - .5);
+    }
+
+    selected_card = "";
+END AFUNCTION
+
+AFUNCTION "onChangeSuitClick", "id=null"
+    let suit = event.target.parentElement.id;
+    if (id) {
+        suit = id;
+    }
+    gameInfo(event, "Change to " + suit);
+    $("#switch #change-suit").hide();
+
+    let card_details = selected_card.split("_");
+    if (turn == 0) {
+        $("#hand #" + selected_card).remove();
+    }
+    selected_card = suit + "_" + card_details[1];
+
+    updateDeck(event);
+    change_suit = 0;
+    updateTurn(event);
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
@@ -370,6 +396,7 @@ function sleep (time) {
 
 $(document).ready(function() {
     var played = false;
+    start = 1;
 
     if (typeof(kb_cookie.kb_switch_scores) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_switch_scores)) {
@@ -435,8 +462,9 @@ SCREEN "switch"
                             TCELL
                                 PRINT names$(iLoop%)
                             END TCELL
-                            TCELL ,,,"player-cards-" + iLoop%
-                                PRINT COUNT(hands$[iLoop%])
+                            TCELL
+                                PRINT COUNT(hands$[iLoop%]),,"player-cards-" + iLoop%
+                                PRINT "LC","last-card","player-last-card-" + iLoop%,"Last card"
                             END TCELL
                             TCELL ,"text-center",,"player-" + iLoop% + "-score"
                                 PRINT "0"
@@ -475,6 +503,29 @@ SCREEN "switch"
                 END BUTTON
             END FORM
             TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+        END WINDOW
+    END WINDOW
+    WINDOW "change-suit"
+        WINDOW "change-suit-background"
+        END WINDOW
+        WINDOW "change-suit-select"
+            HEADING 1
+                PRINT "Change suit"
+            END HEADING 1
+            WINDOW "change-suit-select-placeholders"
+                SPRITE "diamonds", "placeholder", "onChangeSuitClick"
+                    IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
+                END SPRITE
+                SPRITE "hearts", "placeholder", "onChangeSuitClick"
+                    IMAGE "/kytschi/imgs/cards/hearts_placeholder.svg"
+                END SPRITE
+                SPRITE "spades", "placeholder", "onChangeSuitClick"
+                    IMAGE "/kytschi/imgs/cards/spades_placeholder.svg"
+                END SPRITE
+                SPRITE "clubs", "placeholder", "onChangeSuitClick"
+                    IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
+                END SPRITE
+            END WINDOW
         END WINDOW
     END WINDOW
 END SCREEN
