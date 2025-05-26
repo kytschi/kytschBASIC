@@ -145,21 +145,6 @@ AFUNCTION "updateTurn"
         }
     }
     
-    if (pick_up && pick_up_done) {
-        gameInfo(event, "You have to pick up " + pick_up);
-        for (iLoop = 0; iLoop < pick_up; iLoop++) {
-            hands[turn].push(pool[0]);
-            pool.splice(0, 1);
-        }
-
-        pick_up = 0;
-        pick_up_done = 0;
-
-        if (turn == 0) {
-            rebuildHand(event);
-        }
-    }
-
     $("#player-" + turn).addClass("player-turn");
 
     if (turn != 0) {
@@ -169,6 +154,7 @@ END AFUNCTION
 
 AFUNCTION "rebuildHand"
     $("#hand").html("");
+    hands[0].sort();
     hands[0].forEach((card) => {
         let id = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
         $("#hand").append('<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>');
@@ -193,7 +179,9 @@ AFUNCTION "canPlay", "check=null"
     let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
     if (
         check_details[0] == card_details[0] ||
-        check_details[1] == card_details[1]
+        check_details[1] == card_details[1] ||
+        check_details[1] == 1 ||
+        check_details[1] == 11
     ) {
         return true;
     }    
@@ -249,7 +237,7 @@ AFUNCTION "playCard"
 
     gameInfo(event, "Played " + value + " of " + card_suit);
 
-    pick_up_done=0;
+    pick_up_done=1;
     if (value == 7) {
         switch_dir = switch_dir ? 0 : 1;
         gameInfo(event, "Switch");
@@ -257,19 +245,72 @@ AFUNCTION "playCard"
         miss_a_turn = 1;
     } else if (value == 2) {
         pick_up += 2;
-        pick_up_done = 1;
+        pick_up_done = 0;
     } else if (value == "jack" && (card_suit == "clubs" || card_suit == "spades")) {
         pick_up += 4;
-        pick_up_done = 1;
-    }    
+        pick_up_done = 0;
+    } else if (value == "jack" && (card_suit == "hearts" || card_suit == "diamonds")) {
+        pick_up = 0;
+        pick_up_done = 0;
+    }
 
     if (value == "ace") {
         if (turn == 0) {
             change_suit = 1;
             $("#switch #change-suit").show();
+        } else {
+            let best_suit = [0,0,0,0];
+            for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
+                let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                let card_details = card.split("_");
+                if (card_details[0] == "diamonds") {
+                    best_suit[0] += 1;
+                } else if (card_details[0] == "hearts") {
+                    best_suit[1] += 1;
+                } else if (card_details[0] == "spades") {
+                    best_suit[2] += 1;
+                } else if (card_details[0] == "clubs") {
+                    best_suit[3] += 1;
+                }
+            }
+
+            let max = -1;
+            let suit = -1;
+            for (let iLoop = 0; iLoop < best_suit.length; iLoop++) {
+                if (best_suit[iLoop] > max) {
+                    max = best_suit[iLoop];
+                    if (iLoop == 0) {
+                        suit = "diamonds";
+                    } else if (iLoop == 1) {
+                        suit = "hearts";
+                    } else if (iLoop == 0) {
+                        suit = "spades";
+                    } else if (iLoop == 0) {
+                        suit = "clubs";
+                    }
+                }
+            }
+
+            onChangeSuitClick(event, suit);
+            return;
         }
     } else {
         updateDeck(event);
+    }
+
+    if (pick_up && pick_up_done) {
+        gameInfo(event, "You have to pick up " + pick_up);
+        for (iLoop = 0; iLoop < pick_up; iLoop++) {
+            hands[turn].push(pool[0]);
+            pool.splice(0, 1);
+        }
+
+        pick_up = 0;
+        pick_up_done = 0;
+
+        if (turn == 0) {
+            rebuildHand(event);
+        }
     }
 END AFUNCTION
 
@@ -294,7 +335,6 @@ AFUNCTION updateDeck
     deck.push('/kytschi/imgs/cards/' + selected_card + '.svg');
 
     if (turn == 0) {
-        //console.log("update", turn);
         $("#hand #" + selected_card).remove();
         hands[turn].forEach((card, index) => {
             let check = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
@@ -315,10 +355,13 @@ AFUNCTION updateDeck
 END AFUNCTION
 
 AFUNCTION "onChangeSuitClick", "id=null"
-    let suit = event.target.parentElement.id;
+    let suit = "";
     if (id) {
         suit = id;
+    } else {
+        suit = event.target.parentElement.id;
     }
+    
     gameInfo(event, "Change to " + suit);
     $("#switch #change-suit").hide();
 
@@ -330,7 +373,9 @@ AFUNCTION "onChangeSuitClick", "id=null"
 
     updateDeck(event);
     change_suit = 0;
-    updateTurn(event);
+    if (turn == 0) {
+        updateTurn(event);
+    }
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
@@ -409,15 +454,16 @@ $(document).ready(function() {
         turn = 0;
     }
 
-    turn = 0;
+    //turn = 0;
 
     if (turn) {
-        hands[turn].forEach((card, index) => {
+        computerPlay();
+        /*hands[turn].forEach((card, index) => {
             selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
             playCard(event);
             hands[turn].splice(index, 1);
             updateTurn();
-        });
+        });*/
     }
 
     $("button[name=btnKnock]").click(() => {
