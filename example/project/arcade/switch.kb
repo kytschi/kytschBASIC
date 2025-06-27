@@ -79,7 +79,6 @@ AFUNCTION "computerPlay"
     sleep(500).then(() => {
         if (turn != 0) {
             hands[turn].sort(() => Math.random() - .5);
-
             for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
                 if (!played) {
                     let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
@@ -94,10 +93,15 @@ AFUNCTION "computerPlay"
             }
 
             if (!played) {
-                playerKnocking(event);
+                if (pick_up && !pick_up_done) {
+                    pick_up_done = 1;
+                    pickup(event);
+                } else {
+                    playerKnocking(event);
+                }
+            } else {
+                updateTurn(event);
             }
-
-            updateTurn();
         }
     });
 END AFUNCTION
@@ -121,34 +125,41 @@ AFUNCTION "updateTurn"
 
     if (parseInt(switch_dir) == 0) {
         turn += 1;
-
-        if (miss_a_turn == 1) {
-            turn += 1;
-            gameInfo(event, "Miss a turn");
-            miss_a_turn = 0;
-        }
-
         if (turn >= hands.length) {
             turn = 0;
         }
-    } else {
-        turn -= 1;
-
+        
         if (miss_a_turn == 1) {
-            turn -= 1;
             gameInfo(event, "Miss a turn");
             miss_a_turn = 0;
+            turn += 1;
+            if (turn >= hands.length) {
+                turn = 0;
+            }
         }
-
+    } else {
+        turn -= 1;
         if (turn < 0) {
             turn = hands.length - 1;
         }
+
+        if (miss_a_turn == 1) {
+            gameInfo(event, "Miss a turn");
+            miss_a_turn = 0;
+            turn -= 1;
+            if (turn < 0) {
+                turn = hands.length - 1;
+            }
+        }          
     }
     
     $("#player-" + turn).addClass("player-turn");
+    //console.log("turn", turn, hands[turn]);
 
     if (turn != 0) {
         computerPlay();
+    } else {
+        pickup(event);
     }
 END AFUNCTION
 
@@ -174,6 +185,13 @@ AFUNCTION "canPlay", "check=null"
     let check_details = selected_card.split("_");
     if (check) {
         check_details = check.split("_");
+    }
+
+    if (pick_up && !pick_up_done) {
+        if (check_details[1] == 2) {
+            return true;
+        }
+        return false;
     }
         
     let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
@@ -207,6 +225,8 @@ AFUNCTION "playerKnocking"
         return;
     }
 
+    pickup(event);
+
     gameInfo(event, "KNOCKING");
     hands[turn].push(pool[0]);
     pool.splice(0, 1);
@@ -216,6 +236,24 @@ AFUNCTION "playerKnocking"
     }
 
     updateTurn();
+END AFUNCTION
+
+AFUNCTION "pickup"
+    if (pick_up && pick_up_done) {
+        gameInfo(event, "You have to pick up " + pick_up);
+        for (iLoop = 0; iLoop < pick_up; iLoop++) {
+            hands[turn].push(pool[0]);
+            pool.splice(0, 1);
+        }
+
+        pick_up = 0;
+        pick_up_done = 0;
+
+        if (turn == 0) {
+            rebuildHand(event);
+        }
+        updateTurn(event);
+    }
 END AFUNCTION
 
 AFUNCTION "playCard"
@@ -246,12 +284,6 @@ AFUNCTION "playCard"
     } else if (value == 2) {
         pick_up += 2;
         pick_up_done = 0;
-    } else if (value == "jack" && (card_suit == "clubs" || card_suit == "spades")) {
-        pick_up += 4;
-        pick_up_done = 0;
-    } else if (value == "jack" && (card_suit == "hearts" || card_suit == "diamonds")) {
-        pick_up = 0;
-        pick_up_done = 0;
     }
 
     if (value == "ace") {
@@ -273,7 +305,7 @@ AFUNCTION "playCard"
                     best_suit[3] += 1;
                 }
             }
-
+            
             let max = -1;
             let suit = -1;
             for (let iLoop = 0; iLoop < best_suit.length; iLoop++) {
@@ -292,30 +324,24 @@ AFUNCTION "playCard"
             }
 
             onChangeSuitClick(event, suit);
+            //updateTurn(event);
             return;
         }
     } else {
         updateDeck(event);
     }
 
-    if (pick_up && pick_up_done) {
-        gameInfo(event, "You have to pick up " + pick_up);
-        for (iLoop = 0; iLoop < pick_up; iLoop++) {
-            hands[turn].push(pool[0]);
-            pool.splice(0, 1);
-        }
-
-        pick_up = 0;
-        pick_up_done = 0;
-
-        if (turn == 0) {
-            rebuildHand(event);
-        }
-    }
+    pickup(event);
 END AFUNCTION
 
 AFUNCTION "onDeckClick"
     if (game_over || turn) {
+        return;
+    }
+
+    if (pick_up && !pick_up_done) {
+        pick_up_done = 1;
+        pickup(event);
         return;
     }
 
@@ -352,6 +378,8 @@ AFUNCTION updateDeck
     }
 
     selected_card = "";
+
+    $("#deck .card").removeClass("card-highlight");
 END AFUNCTION
 
 AFUNCTION "onChangeSuitClick", "id=null"
@@ -366,16 +394,22 @@ AFUNCTION "onChangeSuitClick", "id=null"
     $("#switch #change-suit").hide();
 
     let card_details = selected_card.split("_");
-    if (turn == 0) {
-        $("#hand #" + selected_card).remove();
+
+    for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
+        let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+        if (selected_card == card) {            
+            hands[turn].splice(iLoop, 1);            
+            break;
+        }
     }
+
     selected_card = suit + "_" + card_details[1];
 
     updateDeck(event);
     change_suit = 0;
-    if (turn == 0) {
+    //if (turn == 0) {
         updateTurn(event);
-    }
+    //}
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
@@ -454,7 +488,7 @@ $(document).ready(function() {
         turn = 0;
     }
 
-    //turn = 0;
+    turn = 0;
 
     if (turn) {
         computerPlay();
