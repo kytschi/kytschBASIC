@@ -154,7 +154,6 @@ AFUNCTION "updateTurn"
     }
     
     $("#player-" + turn).addClass("player-turn");
-    //console.log("turn", turn, hands[turn]);
 
     if (turn != 0) {
         computerPlay();
@@ -324,7 +323,6 @@ AFUNCTION "playCard"
             }
 
             onChangeSuitClick(event, suit);
-            //updateTurn(event);
             return;
         }
     } else {
@@ -407,9 +405,7 @@ AFUNCTION "onChangeSuitClick", "id=null"
 
     updateDeck(event);
     change_suit = 0;
-    //if (turn == 0) {
-        updateTurn(event);
-    //}
+    updateTurn(event);
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
