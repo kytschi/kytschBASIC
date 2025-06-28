@@ -484,16 +484,8 @@ $(document).ready(function() {
         turn = 0;
     }
 
-    turn = 0;
-
     if (turn) {
         computerPlay();
-        /*hands[turn].forEach((card, index) => {
-            selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
-            playCard(event);
-            hands[turn].splice(index, 1);
-            updateTurn();
-        });*/
     }
 
     $("button[name=btnKnock]").click(() => {
