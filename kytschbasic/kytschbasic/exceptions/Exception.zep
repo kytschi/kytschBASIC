@@ -27,13 +27,16 @@ namespace KytschBASIC\Exceptions;
 class Exception extends \Exception
 {
     public code;
+    private version = "0.0.14 alpha";
+    private html;
     
-	public function __construct(string message, int code = 500)
+	public function __construct(string message, int code = 500, bool html = true)
 	{
         //Trigger the parent construct.
         parent::__construct(message, code);
 
         let this->code = code;
+        let this->html = html;
     }
 
     /**
@@ -43,9 +46,17 @@ class Exception extends \Exception
     {
         var message;
 
-        let message = this->gfx(this->getCode()) . 
-            "<p>&nbsp;&nbsp;<pre style='padding-left:10px'>" . this->getMessage() . "</pre><br/>" . 
-            "&nbsp;&nbsp;<small><muted>kytschBASIC " . constant("VERSION") . "</muted></small></p>";
+        if (defined("VERSION")) {
+            let this->version = constant("VERSION");
+        }
+
+        if (this->html) {
+            let message = this->gfx(this->getCode()) . 
+                "<p>&nbsp;&nbsp;<pre style='padding-left:10px'>" . this->getMessage() . "</pre><br/>" . 
+                "&nbsp;&nbsp;<small><muted>kytschBASIC " . this->version . "</muted></small></p>";
+        } else {
+            let message = this->gfx(this->getCode()) . "\n" . this->getMessage() . "\n";
+        }
 
         return message;
     }
@@ -56,19 +67,26 @@ class Exception extends \Exception
      */
     public function fatal(string template = "", int line = 0)
     {
-        switch (this->code) {
-            case 404:
-                header("HTTP/1.0 404 Not Found");
-                break;
-            default:
-                header("HTTP/1.0 500 Internal Server Error");
-                break;
+        if (this->html) {
+            switch (this->code) {
+                case 404:
+                    header("HTTP/1.0 404 Not Found");
+                    break;
+                default:
+                    header("HTTP/1.0 500 Internal Server Error");
+                    break;
+            }
         }
         
         echo this;
         if (template && line) {
-            echo "<p>&nbsp;&nbsp;<strong>Trace</strong><br/>&nbsp;&nbsp;Source <strong>" .
-                str_replace(getcwd(), "", template) . "</strong> at line <strong>" . line . "</strong></p>";
+            if (this->html) {
+                echo "<p>&nbsp;&nbsp;<strong>Trace</strong><br/>&nbsp;&nbsp;Source <strong>" .
+                    str_replace(getcwd(), "", template) . "</strong> at line <strong>" . line . "</strong></p>";
+            } else {
+                echo "Trace:\n";
+                echo str_replace(getcwd(), "", template) . " at line " . line . "\n";
+            }
         }
         die();
     }
@@ -82,9 +100,13 @@ class Exception extends \Exception
             let code = 500;
         }
 
-        var gfx;
+        var gfx = "<pre>";
 
-        let gfx = "<pre>
+        if (!this->html) {
+            let gfx = "";
+        }
+
+        let gfx .= "
          ⡴⠶⣆⠠⠤⣤⠤⠤⠤⠤⠤⠤⠀⠤⣔⠒⢀⡨⠛⢵⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⢸⠃⠀⣾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⠀⢸⡇⠀
 ⠀⠀⠀⠀⠀⠀⠀⢸⡄⡠⠃⠀⠀⠀⠀⠈⠆⠀⠀⠂⠀⠀⠀⠀⠀⠀⠱⣸⡇⠀
@@ -101,7 +123,11 @@ class Exception extends \Exception
 ⠀⢀⠤⠐⠒⠉⠉⡇⡠⠤⣇⠀⠀⠀⠀⠀⡿⠀⠀⠀⢻⠀⠀⠀⠀⢰⡡⠒⢄⡸
 ⡰⠁⠀⣀⣄⣀⡀⢹⣱⡞⡜⡄⠀⠀⠀⠀⡇⠁⠀⠊⢠⠀⠀⠀⢀⠏⠰⡲⣮⣷
 ⢇⠀⠀⠀⠀⠈⢹⠉⠚⠒⢣⠼⣀⠀⠀⠀⡐⠉⠉⠉⠹⡀⠀⠀⡀⢯⣳⠊⠀⠀
-⠈⠢⢀⣀⣀⠤⠃⠀⠀⠀⠳⠧⠄⠬⠤⠔⠁⠀⠀⠀⠀⠑⠂⠀⠓⠊⠀⠀⠀⠀</pre>";
+⠈⠢⢀⣀⣀⠤⠃⠀⠀⠀⠳⠧⠄⠬⠤⠔⠁⠀⠀⠀⠀⠑⠂⠀⠓⠊⠀⠀⠀⠀";
+
+        if (this->html) {
+            let gfx .= "</pre>";
+        }
 
         return gfx;
     }

@@ -164,7 +164,7 @@ AFUNCTION "playDomino", "position='left'"
         double = true;
     }
 
-    gameInfo(event, "Played " + selected_domino);
+    gameInfo(event, "Played " + selected_domino[0] + " : " + selected_domino[1]);
 
     hands[turn].forEach((domino, index) => {
         let check = (domino).replace("/kytschi/imgs/dominoes/", "").replace(".svg", "");

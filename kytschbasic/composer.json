@@ -1,5 +1,6 @@
 {
     "require": {
-        "phalcon/zephir": "^0.17.0"
+        "phalcon/zephir": "^0.17.0",
+        "cboden/ratchet": "^0.4"
     }
 }

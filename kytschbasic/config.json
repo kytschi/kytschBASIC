@@ -61,7 +61,7 @@
     "name": "kytschbasic",
     "description": "An 80s language by an 80s kid for the modern world!",
     "author": "Mike Welsh hello@kytschi.com",
-    "version": "0.0.8 alpha",
+    "version": "0.0.15 alpha",
     "verbose": false,
     "requires": {
         "extensions": []

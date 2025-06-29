@@ -40,6 +40,8 @@ class Parser
 	private has_case = false;
 	private show_html = false;
 
+	private websocket_server = null;
+
 	private controller;
 		
 	/*
@@ -60,6 +62,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Load",
 		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
+		"KytschBASIC\\Parsers\\Core\\Communication\\Websocket\\Websocket",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",

@@ -229,7 +229,7 @@ html, body {
 }
 
 #fiveandthreess #game-info {
-    display: none;
+    /*display: none;*/
     background-color: #fff;
     border: 0;
     border-top: 2px solid #000;

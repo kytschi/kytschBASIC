@@ -41,9 +41,15 @@ class Compiler
 	
 	private version = "0.0.14 alpha";
 
-	public function __construct(string config_dir)
+	private vendor_folder = "../kytschbasic/vendor";
+
+	private cli;
+
+	public function __construct(string config_dir, bool cli = false)
 	{
 		define("START_TIME", microtime(true) * 1000);
+
+		let this->cli = cli;
 
 		if (config_dir) {
 			this->loadConfig(config_dir);
@@ -51,29 +57,43 @@ class Compiler
 
 		//Surpress the errors and let kytschBASIC take over.
 		ini_set("display_errors", "0");
-		register_shutdown_function(function() {
-			var err;
-			let err = error_get_last();
-			if (err) {
-				(new Exception(err["message"]))->fatal();
-				die();
-			}
-		});
+		register_shutdown_function("KytschBASIC\\Compiler::shutdownError", cli);
 
 		define("VERSION", this->version);
 
-		var url;
-		let url = parse_url(_SERVER["REQUEST_URI"]);
+		if (!cli) {
+			var url;
+			let url = parse_url(_SERVER["REQUEST_URI"]);
 
-		define("_ROOT", getcwd());
-		define("_RURL", _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"]);
-		define("_URL", _SERVER["REQUEST_URI"]);
-		define("_PATH", url["path"]);
-						
+			define("_ROOT", getcwd());
+			define("_RURL", _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"]);
+			define("_URL", _SERVER["REQUEST_URI"]);
+			define("_PATH", url["path"]);
+		}
+		
+		// Include the vendor folder for external libs.
+		require_once this->vendor_folder . "/autoload.php";
+
 		/*let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api",
 		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/
 
 		//Session::start(this->config);
+	}
+
+	public static function shutdownError(cli)
+	{
+		var err;
+		let err = error_get_last();
+		if (err) {
+			(
+				new Exception(
+					err["message"],
+					500,
+					(cli ? false : true)
+				)
+			)->fatal();
+			die();
+		}
 	}
 
 	/*
@@ -88,7 +108,8 @@ class Compiler
 			"database",
 			"routes",
 			"security",
-			"session"
+			"session",
+			"websocket"
 		];
 
 		try {
@@ -97,7 +118,8 @@ class Compiler
 				if (!file_exists(filename)) {
 					throw new Exception(
 						"config not found, looking for " . item . ".json",
-						400
+						400,
+						(this->cli ? false : true)
 					);
 				}
 
@@ -105,7 +127,8 @@ class Compiler
 				if (empty(config[item])) {
 					throw new Exception(
 						"failed to decode the JSON",
-						400
+						400,
+						(this->cli ? false : true)
 					);
 				}
 			}
@@ -116,7 +139,8 @@ class Compiler
 		} catch \RuntimeException|\Exception, item {
 		    throw new Exception(
 				"Failed to load the config, " . item->getMessage(),
-				item->getCode()
+				item->getCode(),
+				(this->cli ? false : true)
 			);
 		}
 	}
