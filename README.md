@@ -4,9 +4,10 @@ A PHP module written in [Zephir](https://zephir-lang.com/en) that will allow you
 
 ## Requirements
 
-* PHP 7.4 to 8.3
+* PHP 8.0 to 8.3
 * PHP-GD
 * PHP-MySQL (Optional)
+* PHP-Swoole (Optional if want to run websockets for games and chat)
 
 ## Installation
 
@@ -22,12 +23,12 @@ git clone git@github.com:kytschi/kytschBASIC.git
 Enable the kytschBASIC module. You can copy the sample ini file from the `php` folder in this repo. Remember to do this as root or
 a user with administrator permissions.
 ```bash
-cp kytschBASIC/php/kytschBASIC.ini /etc/php/7.4/mods-available/
+cp kytschBASIC/php/kytschBASIC.ini /etc/php/8.3/mods-available/
 ```
 
 Edit the `kytschBASIC.ini`, then point the extension to the correct location and the desired php version, for example
 ```
-extension=/var/www/kytschbasic/complied/php7.4-kytschbasic.so
+extension=/var/www/kytschbasic/complied/php8.3-kytschbasic.so
 ```
 
 And don't forget to restart the PHP service.
