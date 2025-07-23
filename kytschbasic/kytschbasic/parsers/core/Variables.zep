@@ -48,7 +48,7 @@ class Variables
 		// Clean any + used for string join.
 		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", ".", line);
 
-		//Grab all vars.
+		// Grab all vars.
 		preg_match_all("/(?<!\\\\)\"(?:\\\\\"|.)*?\"(*SKIP)(*FAIL)|([a-zA-Z0-9_]*)([\$#%&])(?:\()?/", line, vars, PREG_OFFSET_CAPTURE);
 		for arg, str in vars[0] {
 			if (str[0] == "%") {
@@ -59,18 +59,43 @@ class Variables
 			let line = substr_replace(line, cleaned, str[1], strlen(cleaned));
 		}
 		
-		//Grab all form vars.
+		// Grab all form vars.
 		preg_match_all("/(_GET|_POST|_REQUEST)(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
 		for str in vars[1] {
 			let line = substr_replace(line, "$" . str[0], str[1], strlen(str[0]));
 		}
 
-		//Grab all constants.
+		// Grab all constants.
 		preg_match_all("/_ROOT|_RURL|_URL|_PATH/", line, vars, PREG_OFFSET_CAPTURE);
 		for str in vars[0] {
-			let line = substr_replace(line, constant(str[0]), str[1], strlen(str[0]));
+			let line = substr_replace(
+				line,
+				constant(str[0]),
+				str[1],
+				strlen(str[0])
+			);
 		}
-		
+
+		// Grab the _UVARS const if used.
+		preg_match_all("/_UVARS\\(([^)]*)\\)/", line, vars, PREG_OFFSET_CAPTURE);
+		let arg = 0;
+		while (arg != count(vars[0])) {
+			let vars[0][arg][0] = str_replace(
+				"(" . vars[1][arg][0] . ")",
+				"[" . vars[1][arg][0] . "]",
+				vars[0][arg][0]
+			);
+
+			let line = substr_replace(
+				line,
+				vars[0][arg][0],
+				vars[0][arg][1],
+				strlen(vars[0][arg][0])
+			);
+
+			let arg += 1;
+		}
+				
 		// Split on comma.
 		let splits = this->commaSplit(line);
 		for arg in splits {

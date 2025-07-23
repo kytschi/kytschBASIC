@@ -33,8 +33,9 @@ class Database extends Command
 {
 	private function dbClean(arg)
 	{
-		let arg = str_replace("[", "(", trim(arg, "\""));
-		return str_replace("]", ")", arg);
+		return trim(arg, "\"");
+		/*let arg = str_replace("[", "(", trim(arg, "\""));
+		return str_replace("]", ")", arg);*/
 	}
 
 	public function parse(string line, string command, array args)

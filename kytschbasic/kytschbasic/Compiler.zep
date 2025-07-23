@@ -164,7 +164,7 @@ class Compiler
 
 	public function run()
 	{
-		var config;
+		var config, url_vars = [];
 		let config = constant("CONFIG");
 
 		if (empty(config["routes"])) {
@@ -176,7 +176,9 @@ class Compiler
 		let fallback = null;
 
 		if (isset(url["path"])) {
-			var route;
+			var route, key, end, matches, path, splits;
+
+			let path = url["path"];
 			
 			for route in config["routes"] {
 				if (!isset(route->url)) {
@@ -186,13 +188,34 @@ class Compiler
 					(new Exception("route template not defined in the config"))->fatal();
 				}
 
-				//Fallback url, catch all basically.
+				// Fallback url, catch all basically.
 				if (route->url == "*") {
 					let fallback = route;
 					continue;					
 				}
+
+				// Check to see if the url has any dynamic vars in it.
+				if preg_match_all("/\\{([^}]*)\\}/", route->url, matches, PREG_OFFSET_CAPTURE) {
+					let splits = preg_split("#/+#", trim(path, "/"), -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
+					let key = count(matches[0]) - 1;
+					let end = count(splits) - 1;
+					while (key != -1) {
+						let path = str_replace(
+							splits[end][0],
+							matches[0][key][0],
+							path,
+							1
+						);
+
+						let url_vars[matches[1][key][0]] = splits[end][0];
+
+						let key -= 1;
+						let end -= 1;
+					}
+				}
 				
-				if (route->url == url["path"]) {
+				if (route->url == path) {
+					define("_UVARS", url_vars);
 					return this->compile(route);
 				}
 			}
