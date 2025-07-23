@@ -1,0 +1,86 @@
+DATA
+	DOPEN "kytschBASIC"
+	DREAD "crossword_puzzles"
+	DSELECT "*"
+    DLJOIN "crossword_puzzle_clues ON crossword_puzzle_clues.crossword_puzzle_id=crossword_puzzles.id AND crossword_puzzle_clues.deleted_at IS NULL"
+    DLJOIN "crossword_clues ON crossword_clues.id=crossword_puzzle_clues.crossword_clue_id AND crossword_clues.deleted_at IS NULL"
+	DWHERE "crossword_puzzles.deleted_at IS NULL AND crossword_puzzles.number=1"
+    DSORT "crossword_puzzle_clues.number ASC"
+	DFETCH puzzle&
+END DATA
+
+DEF down&=()
+DEF across&=()
+
+FOR word& IN puzzle&
+    IF word&("type")="across" THEN
+        LET across&()=word&
+    ELSE
+        LET down&()=word&
+    END IF
+NEXT
+
+LANG "en"
+HEAD
+	INCLUDE arcade
+	CHARSET "UTF-8"
+    DESCRIPTION "This is a kytschBASIC example"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/crossword"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - Crossword | kytschBASIC"
+END HEAD
+BODY
+    SCREEN "crossword"
+        WINDOW "board"
+            FOR word& IN puzzle&
+                FOR iLoop%=1 TO word&("word_length")
+                    DIV word&("type")
+                        IF iLoop%=1 THEN
+                            DIV "number"
+                                PRINT word&("number")
+                            END DIV
+                        END IF
+                    END DIV
+                NEXT
+            NEXT
+        END WINDOW
+        WINDOW "clues"
+            WINDOW "across"
+                SWRITE "title"
+                    PRINT "Across"
+                END SWRITE
+                FOR word& IN across&
+                    SWRITE
+                        PRINT word&("number")
+                        PRINT ": "
+                        PRINT word&("clue")
+                        PRINT " ("
+                        PRINT word&("answer")
+                        PRINT ")"
+                    END SWRITE
+                NEXT
+            END WINDOW
+            WINDOW "down"
+                SWRITE "title"
+                    PRINT "Down"
+                END SWRITE
+                FOR word& IN down&
+                    SWRITE
+                        PRINT word&("number")
+                        PRINT ": "
+                        PRINT word&("clue")
+                        PRINT " ("
+                        PRINT word&("answer")
+                        PRINT ")"
+                    END SWRITE
+                NEXT
+            END WINDOW
+        END WINDOW
+    END SCREEN
+END BODY
+END

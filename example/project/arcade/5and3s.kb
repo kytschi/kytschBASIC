@@ -64,7 +64,8 @@ ADIM played_right$=()
 ADEF rotate%=0
 ADIM positions$=("left", "right")
 ADIM selection$=faces$
-ADEF max_dominoes%=4
+ADEF max_dominoes_left%=5
+ADEF max_dominoes_right%=5
 ADEF reverse%=0
 
 AFUNCTION "onDominoClick"
@@ -102,13 +103,21 @@ AFUNCTION "onDeckLeftClick"
     onDeckClick(event, "left");
 END AFUNCTION
 
+AFUNCTION "onDeckLeftReverseClick"
+    onDeckClick(event, "left-reverse");
+END AFUNCTION
+
+AFUNCTION "onDeckRightReverseClick"
+    onDeckClick(event, "right-reverse");
+END AFUNCTION
+
 AFUNCTION "canPlay", "position='left'"
     if (game_over) {
         return false;
     }
 
     var check, value;
-    if (position == "left") {
+    if (position == "left" || position == "left-reverse") {
         check = played_left[played_left.length - 1];        
     } else {
         check = played_right[played_right.length - 1];
@@ -133,7 +142,6 @@ AFUNCTION "canPlay", "position='left'"
                 } else if (position == "right" && !iLoop) {                    
                     rotate = 1;
                 }
-                //console.log(selected_domino, check, value, rotate);
                 return true;
             }
         }
@@ -144,24 +152,24 @@ AFUNCTION "canPlay", "position='left'"
 END AFUNCTION
 
 AFUNCTION "playDomino", "position='left'"
-    var double = false, deck_id = "#deck-" + position;
+    var double = false, deck_id = "#deck-" + position;    
 
-    if (reverse) {
+    /*if (reverse) {
         deck_id += "-reverse";
-    }
+    }*/
 
     $("#" + selected_domino).removeClass(["domino-highlight", "domino-warn"]);
     
     if (turn == 0) {
         $(deck_id).append($("#" + selected_domino).prop("outerHTML"));
     } else {
-        $(deck_id).append('<div id="' + selected_domino + '" class="domino" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/dominoes/' + selected_domino + '.svg"></div>');
+        $(deck_id).append('<div id="' + selected_domino + '" class="domino" onclick="javascript:onDominoClick(event)"><img src="/kytschi/imgs/dominoes/' + selected_domino + '.svg"></div>');
     }
 
     if (selected_domino[0] == selected_domino[1]) {
         $(deck_id + " #" + selected_domino).addClass("double");
         rotate = 0;
-        double = true;
+        double = 1;
     }
 
     gameInfo(event, "Played " + selected_domino[0] + " : " + selected_domino[1]);
@@ -176,8 +184,6 @@ AFUNCTION "playDomino", "position='left'"
     if (turn == 0) {
         $("#hand #" + selected_domino).remove();
     }
-
-    //console.log(selected_domino, rotate);
 
     if (rotate) {
         $(deck_id + " #" + selected_domino).addClass("rotate");
@@ -195,15 +201,21 @@ AFUNCTION "playDomino", "position='left'"
         scoring.forEach((score) => {
             updateScore(event, check, score);
         });
-    } else if (position == "left") {
+    } else if (position == "left" || position == "left-reverse") {        
         played_left.push(selected_domino);
-        if (played_left.length == max_dominoes) {
-            $(deck_id + " .left-blank").addClass("down");
-            if (double) {
-                $(deck_id + " .left-blank").addClass("double");
-            }
-            $(deck_id + " .left-blank").show();
-            reverse = 1;
+        if (double && position == "left") {
+            max_dominoes_left += 1;
+        }
+        console.log(deck_id, played_left.length, max_dominoes_left);
+        
+        if (played_left.length == max_dominoes_left) {
+            $("#deck-middle-start .left-blank").hide();
+            //$(deck_id + "-placeholder").addClass("down");
+            //if (double) {
+                $(deck_id + "-placeholder").addClass("double");
+            //}
+            $(deck_id + "-reverse-placeholder").removeClass("placeholder-hide").addClass("placeholder-show");
+            //reverse = 1;
         }
 
         check = parseInt(selected_domino[1]) + parseInt(played_right[played_right.length - 1][0]);
@@ -212,14 +224,19 @@ AFUNCTION "playDomino", "position='left'"
         });
     } else {
         played_right.push(selected_domino);
+        if (double && position == "right") {
+            max_dominoes_right += 1;
+        }
+        console.log(deck_id, played_right.length, max_dominoes_right);
 
-        if (played_right.length == max_dominoes) {
-            $(deck_id + " .right-blank").addClass("down");
-            if (double) {
-                $(deck_id + " .right-blank").addClass("double");
-            }
-            $(deck_id + " .right-blank").show();
-            reverse = 1;
+        if (played_right.length == max_dominoes_right) {
+            $("#deck-middle-start .right-blank").hide();
+            //$(deck_id + "-placeholder").addClass("down");
+            //if (double) {
+                $(deck_id + "-reverse-placeholder").addClass("double");
+            //}
+            $(deck_id + "-reverse-placeholder").removeClass("placeholder-hide").addClass("placeholder-show");
+            //reverse = 1;
         }
 
         check = parseInt(selected_domino[0]) + + parseInt(played_left[played_left.length - 1][1]);        
@@ -455,7 +472,7 @@ SCREEN "fiveandthreess"
                     PRINT "&nbsp;"
                 END WINDOW
                 WINDOW "deck-left-reverse"
-                    SPRITE ,"left-blank placeholder","onDeckLeftClick"
+                    SPRITE "deck-left-reverse-placeholder","left-blank placeholder-hide","onDeckLeftReverseClick"
                         IMAGE "/kytschi/imgs/dominoes/back.svg"
                     END SPRITE  
                 END WINDOW
@@ -492,7 +509,7 @@ SCREEN "fiveandthreess"
                     PRINT "&nbsp;"
                 END WINDOW
                 WINDOW "deck-right-reverse"
-                    SPRITE ,"right-blank placeholder","onDeckRightClick"
+                    SPRITE "deck-right-reverse-placeholder","right-blank placeholder-hide","onDeckRightReverseClick"
                         IMAGE "/kytschi/imgs/dominoes/back.svg"
                     END SPRITE
                 END WINDOW

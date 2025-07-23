@@ -40,6 +40,10 @@
 		"url": "/arcade/switch",
 		"template": "project/arcade/switch.kb"
 	},
+	{
+		"url": "/arcade/crossword",
+		"template": "project/arcade/crossword.kb"
+	},
 
 	{
 		"url": "/news",

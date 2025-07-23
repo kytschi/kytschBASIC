@@ -74,5 +74,6 @@ kytschbasic/ext/kytschbasic.lo
 kytschbasic/ext/kytschbasic/
 example/compiled.php
 example/project/test.kb
+example/project/chat.kb
 vendor
 composer.lock
