@@ -105,7 +105,7 @@ class Database extends Command
 	{
 		return "<?php
 $KBDBSTATEMENT = $KBDBCONN->prepare(
-	$KBDBSELECT . ($KBDBSELECT ? ' FROM ' : '') . $KBDBTABLE . $KBDBSET . $KBDBJOIN . $KBDBWHERE . $KBDBSORT . $KBDBLIMIT
+	$KBDBSELECT . ($KBDBSELECT ? ' FROM ' : '') . $KBDBINSERT . $KBDBUPDATE . $KBDBTABLE . $KBDBSET . $KBDBJOIN . $KBDBWHERE . $KBDBSORT . $KBDBLIMIT
 );
 
 $KBDBSTATEMENT->execute($KBDBBIND); ?>";
@@ -195,6 +195,7 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 			"$KBDBBIND = [];" .
 			"$KBDBSELECT = '';" .
 			"$KBDBUPDATE = '';" .
+			"$KBDBINSERT = '';" .
 			"$KBDBTABLE = '';" .
 			"$KBDBWHERE = '';" .
 			"$KBDBJOIN = '';" .

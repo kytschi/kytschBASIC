@@ -60,8 +60,8 @@ class Form extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
-			if (in_array(strtoupper(args[1]), ["GET", "POST"])) {
-				let method = strtoupper(args[1]);
+			if (in_array(strtoupper(trim(args[1], "\"")), ["GET", "POST"])) {
+				let method = strtoupper(trim(args[1], "\""));
 			}
 		}
 

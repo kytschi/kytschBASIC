@@ -57,16 +57,22 @@ class Button extends Command
 
 		let output .= " type=" . this->outputArg(type);
 
-		if (isset(args[1]) && !empty(args[1])) {
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[1]);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[2]);
 		}
 
-		if (isset(args[3]) && !empty(args[3])) {
-			let output .= "><span>\" . " . args[3] . " . \"</span></button>";
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " value=" . this->outputArg(args[3]);
+		} else {
+			let output .= " value='button'";
+		}
+
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= "><span>\" . " . args[4] . " . \"</span></button>";
 		} else {
 			let output .= ">";
 		}

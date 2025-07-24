@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.14 alpha
+ * @version     0.0.15 alpha
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -39,7 +39,7 @@ class Compiler
 
 	private start_time;
 	
-	private version = "0.0.14 alpha";
+	private version = "0.0.15 alpha";
 
 	private vendor_folder = "../kytschbasic/vendor";
 
