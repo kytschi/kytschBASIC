@@ -43,7 +43,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test",,, "submit"
+						BUTTON SUBMIT "btn_test",,,,"submit"
 					END TCELL
 				END TROW
 			END TBODY
@@ -78,7 +78,7 @@ END FORM
 											WHITESPACE
 										END TCELL
 										TCELL
-											BUTTON SUBMIT "btn_test",,, "submit"
+											BUTTON SUBMIT "btn_test",,,,"submit"
 										END TCELL
 									END TROW
 								END TBODY
@@ -100,6 +100,10 @@ END FORM
 					PRINT " | "
 					LINK "/reference/TEXTINPUT"
 						PRINT "TEXTINPUT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/PASSWORDINPUT"
+						PRINT "PASSWORDINPUT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/TEXTAREA"

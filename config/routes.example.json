@@ -262,6 +262,10 @@
 		"template": "project/reference/core/form/NUMBERINPUT.kb"
 	},
 	{
+		"url": "/reference/PASSWORDINPUT",
+		"template": "project/reference/core/form/PASSWORDINPUT.kb"
+	},
+	{
 		"url": "/reference/BUTTON-SUBMIT",
 		"template": "project/reference/core/form/BUTTON_SUBMIT.kb"
 	},

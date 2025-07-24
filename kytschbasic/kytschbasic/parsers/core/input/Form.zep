@@ -38,6 +38,8 @@ class Form extends Command
 				return this->processForm(args);
 			case "NUMBERINPUT":
 				return this->processInput(args, "number");
+			case "PASSWORDINPUT":
+				return this->processInput(args, "password");
 			case "TEXTINPUT":
 				return this->processInput(args);
 			case "TEXTAREA":

@@ -43,7 +43,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test",,, "submit"
+						BUTTON SUBMIT "btn_test",,,,"submit"
 					END TCELL
 				END TROW
 			END TBODY
@@ -78,7 +78,7 @@ FORM "form_test"
 						WHITESPACE
 					END TCELL
 					TCELL
-						BUTTON SUBMIT "btn_test",,, "submit"
+						BUTTON SUBMIT "btn_test",,,,"submit"
 					END TCELL
 				END TROW
 			END TBODY
@@ -98,6 +98,10 @@ CAPTCHA "captcha"
 				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/TEXTINPUT"
 						PRINT "TEXTINPUT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/PASSWORDINPUT"
+						PRINT "PASSWORDINPUT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/CAPTCHA"
