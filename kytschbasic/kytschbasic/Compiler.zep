@@ -178,20 +178,15 @@ class Compiler
 		if (isset(url["path"])) {
 			var route, key, end, matches, path, splits;
 
-			let path = url["path"];
-			
 			for route in config["routes"] {
+				let path = url["path"];
+				let url_vars = [];
+
 				if (!isset(route->url)) {
 					(new Exception("route URL not defined in the config"))->fatal();
 				}
 				if (!isset(route->template)) {
 					(new Exception("route template not defined in the config"))->fatal();
-				}
-
-				// Fallback url, catch all basically.
-				if (route->url == "*") {
-					let fallback = route;
-					continue;					
 				}
 
 				// Check to see if the url has any dynamic vars in it.
@@ -217,6 +212,10 @@ class Compiler
 				if (route->url == path) {
 					define("_UVARS", url_vars);
 					return this->compile(route);
+				} elseif (route->url == "*") {
+					// Fallback url, catch all basically.
+					let fallback = route;
+					continue;					
 				}
 			}
 		}

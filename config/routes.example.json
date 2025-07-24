@@ -594,5 +594,14 @@
 	{
 		"url": "/reference/VAL",
 		"template": "project/reference/core/text/VAL.kb"
+	},
+
+	{
+		"url": "/reference/HASH",
+		"template": "project/reference/core/security/HASH.kb"
+	},
+	{
+		"url": "/reference/HASHVERIFY",
+		"template": "project/reference/core/security/HASHVERIFY.kb"
 	}
 ]

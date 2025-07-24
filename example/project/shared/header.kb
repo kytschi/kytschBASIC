@@ -196,6 +196,12 @@ HEADER
 		LINK "/reference/GOTO#refGOTO","Find out about the GOTO command","nav-link",,"refGOTO"
 			PRINT "GOTO"
 		END LINK
+		LINK "/reference/HASH#refHASH","Find out about the HASH command","nav-link",,"refHASH"
+			PRINT "HASH"
+		END LINK
+		LINK "/reference/HASHVERIFY#refHASHVERIFY","Find out about the HASHVERIFY command","nav-link",,"refHASHVERIFY"
+			PRINT "HASHVERIFY"
+		END LINK
 		LINK "/reference/HCOS#refHCOS","Find out about the HCOS command","nav-link",,"refHCOS"
 			PRINT "HCOS"
 		END LINK

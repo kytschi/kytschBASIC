@@ -30,6 +30,7 @@ use KytschBASIC\Libs\Arcade\Parsers\Screen\Display;
 use KytschBASIC\Parsers\Core\Input\Form;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Text\Text;
+use KytschBASIC\Parsers\Core\Security\Encryption;
 
 class Variables
 {
@@ -343,6 +344,10 @@ class Variables
 	public function processValue(arg)
 	{
 		switch (this->getCommand(arg)) {
+			case "HASHVERIFY":
+				return (new Encryption())->processHashVerify(arg);
+			case "HASH":
+				return (new Encryption())->processHash(arg);
 			case "TWODP":
 				return this->processTwoDP(arg);
 			case "COUNT":

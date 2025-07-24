@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -33,19 +33,4 @@ class Command extends Variables
 	{
 		return id . "-" . hrtime(true);
 	}
-
-	/*public function setArg(string arg, bool trim_string = true)
-	{
-		let arg = trim(arg);
-		
-		if (is_numeric(arg)) {
-			return arg;
-		}
-
-		if (substr(arg, 0, 1) != "\"") {
-			return this->clean(arg);
-		}
-		
-		return this->constants(trim_string ? trim(arg, "\"") : arg);
-	}*/
 }
