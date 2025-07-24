@@ -188,6 +188,10 @@
 		"template": "project/reference/core/database/DBIND.kb"
 	},
 	{
+		"url": "/reference/DINSERT",
+		"template": "project/reference/core/database/DINSERT.kb"
+	},
+	{
 		"url": "/reference/DLIMIT",
 		"template": "project/reference/core/database/DLIMIT.kb"
 	},

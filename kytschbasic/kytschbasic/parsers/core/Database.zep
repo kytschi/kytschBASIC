@@ -68,6 +68,8 @@ class Database extends Command
 					return this->parseLimit(args);
 				case "DSET":
 					return this->parseSet(args);
+				case "DINSERT":
+					return this->parseInsert(args);
 			 	case "DEXEC":
 					return this->parseExecute();
 				case "END DATA":
@@ -118,6 +120,15 @@ $KBDBSTATEMENT->execute($KBDBBIND); ?>";
 		}
 
 		return this->parseExecute() . "<?php " . str_replace(["\"", "{", "}"], "", args[0]) . " = $KBDBSTATEMENT->fetchAll(); ?>";
+	}
+
+	private function parseInsert(args)
+	{
+		if (!count(args)) {
+			throw new Exception("Invalid DINSERT");
+		}
+
+		return "<?php $KBDBINSERT = 'INSERT INTO '; $KBDBSET = \" SET " . this->dbClean(args[0]) . "\"; ?>";
 	}
 
 	private function parseJoin(args)

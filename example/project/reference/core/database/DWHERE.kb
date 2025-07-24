@@ -111,6 +111,14 @@ NEXT
 						PRINT "DSELECT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/DSET"
+						PRINT "DSET"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DINSERT"
+						PRINT "DINSERT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/DSORT"
 						PRINT "DSORT"
 					END LINK

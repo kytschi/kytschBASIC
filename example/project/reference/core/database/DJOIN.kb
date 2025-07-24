@@ -116,6 +116,14 @@ NEXT
 						PRINT "DSORT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/DSET"
+						PRINT "DSET"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DINSERT"
+						PRINT "DINSERT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
 					END LINK

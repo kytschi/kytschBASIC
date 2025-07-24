@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "DSET statment | kytschBASIC"
+	NAME "DINSERT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,7 +9,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "DSET","basic"
+					PRINT "DINSERT","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Update data in the database"
@@ -23,13 +23,13 @@ DATA
 	DOPEN "kytschBASIC"
 	
 	REM Read from the menu table in the database.
-	DREAD "menu"
+	DREAD "pages"
 
-	REM Update counter by adding one to it.
-	DSET "counter=counter+1"
+	REM Insert into the pages table.
+	DINSERT "name=:name, content=:content, title=:title, path=:path"
 
-	REM Where the entry ID is number 1.
-	DWHERE "id = 1"
+	REM Set the binds for the data.
+	DBIND name=_POST("name"), content=_POST("content"), title=_POST("title"), path=_POST("path")
 
 	REM Execute the query.
 	DEXEC
@@ -61,10 +61,6 @@ END DATA
 					PRINT " | "
 					LINK "/reference/DSET"
 						PRINT "DSET"
-					END LINK
-					PRINT " | "
-					LINK "/reference/DINSERT"
-						PRINT "DINSERT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/DWHERE"

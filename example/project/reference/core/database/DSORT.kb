@@ -117,6 +117,14 @@ DESC is descending, i.e. Z-A
 						PRINT "DSELECT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/DSET"
+						PRINT "DSET"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DINSERT"
+						PRINT "DINSERT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
 					END LINK
