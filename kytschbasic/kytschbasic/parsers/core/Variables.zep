@@ -29,8 +29,9 @@ use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Libs\Arcade\Parsers\Screen\Display;
 use KytschBASIC\Parsers\Core\Input\Form;
 use KytschBASIC\Parsers\Core\Maths;
-use KytschBASIC\Parsers\Core\Text\Text;
 use KytschBASIC\Parsers\Core\Security\Encryption;
+use KytschBASIC\Parsers\Core\Session;
+use KytschBASIC\Parsers\Core\Text\Text;
 
 class Variables
 {
@@ -61,11 +62,16 @@ class Variables
 		}
 		
 		// Grab all form vars.
-		preg_match_all("/(_GET|_POST|_REQUEST)(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
+		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
 		// Add some padding to handle the extra char.
 		let arg = 0;
 		for str in vars[1] {
-			let line = substr_replace(line, "$" . str[0], intval(str[1]) + arg, strlen(str[0]));
+			let line = substr_replace(
+				line,
+				"$" . str[0],
+				intval(str[1]) + arg,
+				strlen(str[0])
+			);
 			let arg += 1;
 		}
 
@@ -126,7 +132,7 @@ class Variables
 			let cleaned = this->argsArrayElements(arg);
 			let cleaned = str_replace("|||KBBRACKETSTART|||", "(", cleaned);
 			let cleaned = str_replace("|||KBBRACKETEND|||", ")", cleaned);
-											
+
 			// Process any sub commands, i.e. COUNT()
 			if (this->getCommand(cleaned)) {
 				let find = text->processValue(cleaned);
@@ -197,6 +203,7 @@ class Variables
 			let arg = ltrim(arg, "[");
 			let arg = substr(arg, 0, strlen(arg) - 1);
 		}
+
 		let arg = rtrim(ltrim(arg, "("), ")");
 
 		if ((arg != "0" && empty(arg))) {
@@ -242,10 +249,13 @@ class Variables
 			return null;
 		}
 
-		if (preg_match("/[A-Z_]+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, strings)) {
+		if (preg_match("/[A-Z]+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, strings)) {
 			if (strings[0] == "END") {
 				return line;
-			} elseif (strings[0] == "LINE" && substr(line, strlen(line) - strlen("BREAK"), strlen("BREAK")) == "BREAK") {
+			} elseif (
+				strings[0] == "LINE" &&
+				substr(line, strlen(line) - strlen("BREAK"), strlen("BREAK")) == "BREAK"
+			) {
 				return line;
 			}
 
@@ -278,7 +288,15 @@ class Variables
 			return true;
 		}
 		
-		if (preg_match("/(?<!\")(?:\$\(|%\(|#\(|&\()/", trim(arg))) {
+		if (substr(arg, 0, 1) == "$" && substr(arg, 0, 1) != "\"") {
+			return true;
+		}
+
+		/*if (preg_match("/(?<!\")(?:\$\(|%\(|#\(|&\()/", trim(arg))) {
+			return true;
+		}*/
+
+		if (preg_match("/(?:(|%\(|#\(|&\()/", trim(arg))) {
 			return true;
 		}
 		
@@ -289,19 +307,7 @@ class Variables
 	{
 		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
 	}	
-/*
-	public function outputForJavascript(value)
-	{
-		if (is_array(value) || is_object(value)) {
-			if (is_array(value)) {
-				let value = array_values(value);
-			}
-			echo json_encode(value);
-		} else {
-			echo value;
-		}		
-	}
-	*/
+
 	public function parse(string line, string command, array args)
 	{
 		switch (command) {
@@ -318,6 +324,8 @@ class Variables
 			case "DUMP":
 				let args[0] = this->cleanArg("DUMP", args[0]);
 				return this->dump(args[0], true);
+			case "ERASE":
+				return this->processErase(args);
 			case "LET":
 				return this->processDef(line, args, true);
 			case "MERGE":
@@ -336,24 +344,6 @@ class Variables
 				return this->processSort(args);
 			case "SSORT":
 				return this->processSSort(args);
-			default:
-				return null;
-		}
-	}
-
-	public function processValue(arg)
-	{
-		switch (this->getCommand(arg)) {
-			case "HASHVERIFY":
-				return (new Encryption())->processHashVerify(arg);
-			case "HASH":
-				return (new Encryption())->processHash(arg);
-			case "TWODP":
-				return this->processTwoDP(arg);
-			case "COUNT":
-				return this->processCount(arg);
-			case "VALID_CAPTCHA":				
-				return str_replace("VALID_CAPTCHA", (new Form())->validateCaptcha(), arg);
 			default:
 				return null;
 		}
@@ -517,6 +507,22 @@ class Variables
 
 	}
 
+	public function setDoubleEquals(arg)
+	{
+		return preg_replace_callback("/\"[^\"]*\"|<=|>=|=/", function(matches) {
+			if (matches[0] === "=") {
+				return "==";
+			}
+			return matches[0];
+		}, arg);
+	}
+
+	public function processErase(args)
+	{
+		let args[0] = this->cleanArg("ERASE", args[0]);
+		return "<?php unset(" . args[0] . "); ?>";
+	}
+
 	public function processMerge(args)
 	{	
 		let args[0] = this->cleanArg("MERGE", args[0]);
@@ -532,6 +538,19 @@ class Variables
 	public function processNSort(args)
 	{
 		return "<?php sort(" . this->cleanArg("NSORT", args[0]) . ", SORT_NUMERIC); ?>";
+	}
+
+	public function processSessionRead(arg)
+	{
+		var splits, cleaned;
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("SESSREAD", splits[1]);
+			return str_replace(splits[1], "KytschBASIC\\Parsers\\Core\\Session::read(" . trim(cleaned) . ")", arg);
+		}
+
+		return "KytschBASIC\\Parsers\\Core\\Session::read(" . trim(this->cleanArg("SESSREAD", arg)) . ")";
 	}
 
 	public function processShuffle(args)
@@ -564,13 +583,38 @@ class Variables
 		return "number_format(" . this->cleanArg("TWODP", arg) . ", 2, '.', '')";
 	}
 
-	public function setDoubleEquals(arg)
+	public function processValidUser(arg)
 	{
-		return preg_replace_callback("/\"[^\"]*\"|<=|>=|=/", function(matches) {
-			if (matches[0] === "=") {
-				return "==";
-			}
-			return matches[0];
-		}, arg);
+		var splits, cleaned;
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("VALIDUSER", splits[1]);
+			return str_replace(splits[1], "KytschBASIC\\Parsers\\Core\\Session::read(" . cleaned . ")", arg);
+		}
+
+		return "KytschBASIC\\Parsers\\Core\\Session::read(" . this->cleanArg("VALIDUSER", arg) . ")";
+	}
+
+	public function processValue(arg)
+	{
+		switch (this->getCommand(arg)) {
+			case "HASHVERIFY":
+				return (new Encryption())->processHashVerify(arg);
+			case "HASH":
+				return (new Encryption())->processHash(arg);
+			case "TWODP":
+				return this->processTwoDP(arg);
+			case "COUNT":
+				return this->processCount(arg);
+			case "VALIDUSER":
+				return this->processValidUser(arg);
+			case "SESSREAD":
+				return this->processSessionRead(arg);
+			case "VALIDCAPTCHA":				
+				return str_replace("VALIDCAPTCHA", (new Form())->validateCaptcha(), arg);
+			default:
+				return null;
+		}
 	}
 }

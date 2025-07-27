@@ -51,12 +51,18 @@ class Encryption extends Command
 		
 		if (count(splits) > 1) {
 			let cleaned = this->cleanArg("HASHVERIFY", splits[1]);
-			let args = this->args(cleaned);			
-			return str_replace(splits[1], "password_verify(" . args[0] . ", '" . trim(args[1], "\"") . "')", arg);
+			let args = this->args(cleaned);
+
+			let args[1] = trim(args[1], "\"");
+			if (!this->isVariable(args[1])) {
+				let args[1] = "'" . args[1] . "'";
+			}
+			
+			return str_replace(splits[1], "password_verify(" . args[0] . ", " . args[1] . ")", arg);
 		}
 
 		let args = this->cleanArg("HASHVERIFY", arg);
 
-		return "password_verify(" . args[0] . ", '" . trim(args[1], "\"") . "')";
+		return "password_verify(" . args[0] . ", " . args[1] . ")";
 	}
 }

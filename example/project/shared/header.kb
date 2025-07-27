@@ -175,6 +175,9 @@ HEADER
 		LINK "/reference/EQUATIONS#refEQUATIONS","Find out about the EQUATIONS command","nav-link",,"refEQUATIONS"
 			PRINT "EQUATIONS"
 		END LINK
+		LINK "/reference/ERASE#refERASE","Find out about the ERASE command","nav-link",,"refERASE"
+			PRINT "ERASE"
+		END LINK
 		LINK "/reference/EXP#refEXP","Find out about the EXP command","nav-link",,"refEXP"
 			PRINT "EXP"
 		END LINK
@@ -333,6 +336,18 @@ HEADER
 		END LINK
 		LINK "/reference/SELECT#refSELECT","Find out about the SELECT command","nav-link",,"refSELECT"
 			PRINT "SELECT"
+		END LINK
+		LINK "/reference/SESSCLEAR#refSESSCLEAR","Find out about the SESSCLEAR command","nav-link",,"refSESSCLEAR"
+			PRINT "SESSCLEAR"
+		END LINK
+		LINK "/reference/SESSDESTORY#refSESSDESTORY","Find out about the SESSDESTORY command","nav-link",,"refSESSDESTORY"
+			PRINT "SESSDESTORY"
+		END LINK
+		LINK "/reference/SESSREAD#refSESSREAD","Find out about the SESSREAD command","nav-link",,"refSESSREAD"
+			PRINT "SESSREAD"
+		END LINK
+		LINK "/reference/SESSWRITE#refSESSWRITE","Find out about the SESSWRITE command","nav-link",,"refSESSWRITE"
+			PRINT "SESSWRITE"
 		END LINK
 		LINK "/reference/SGN#refSGN","Find out about the SGN command","nav-link",,"refSGN"
 			PRINT "SGN"

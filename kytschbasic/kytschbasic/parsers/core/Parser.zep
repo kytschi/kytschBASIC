@@ -61,6 +61,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
 		"KytschBASIC\\Parsers\\Core\\Load",
 		"KytschBASIC\\Parsers\\Core\\Database",
+		"KytschBASIC\\Parsers\\Core\\Session",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Websocket\\Websocket",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
@@ -196,7 +197,7 @@ class Parser
 			case "ELSEIF":
 				return this->processIf(line, "elseif", args);
 			case "ELSE":
-				return "<?php else: ?>";
+				return "<?php else : ?>";
 			case "END IF":
 				return "<?php endif; ?>";
 			case "BREAK":
@@ -274,7 +275,7 @@ class Parser
 			let output .= splits[0];
 		}
 
-		let output .= "): ?>";
+		let output .= ") : ?>";
 		
 		return output;
 	}

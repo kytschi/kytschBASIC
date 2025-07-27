@@ -1,4 +1,6 @@
 {
 	"name": "kytschBASIC",
-	"lifetime": 86400
+	"lifetime": 86400,
+	"secure": true,
+	"user_session_var": "user"
 }

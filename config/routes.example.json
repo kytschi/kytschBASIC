@@ -96,6 +96,10 @@
 		"template": "project/reference/core/variables/DUMP.kb"
 	},
 	{
+		"url": "/reference/ERASE",
+		"template": "project/reference/core/variables/ERASE.kb"
+	},
+	{
 		"url": "/reference/POP",
 		"template": "project/reference/core/variables/POP.kb"
 	},
@@ -607,5 +611,22 @@
 	{
 		"url": "/reference/HASHVERIFY",
 		"template": "project/reference/core/security/HASHVERIFY.kb"
+	},
+
+	{
+		"url": "/reference/SESSREAD",
+		"template": "project/reference/core/session/SESSREAD.kb"
+	},
+	{
+		"url": "/reference/SESSWRITE",
+		"template": "project/reference/core/session/SESSWRITE.kb"
+	},
+	{
+		"url": "/reference/SESSCLEAR",
+		"template": "project/reference/core/session/SESSCLEAR.kb"
+	},
+	{
+		"url": "/reference/SESSDESTORY",
+		"template": "project/reference/core/session/SESSDESTORY.kb"
 	}
 ]

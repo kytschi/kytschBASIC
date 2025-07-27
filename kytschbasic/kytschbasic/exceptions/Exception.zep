@@ -3,10 +3,10 @@
  *
  * @package     KytschBASIC\Exceptions\Exception
  * @author 		Mike Welsh
- * @copyright   2023 Mike Welsh
- * @version     0.0.1
+ * @copyright   2025 Mike Welsh
+ * @version     0.0.2
  *
- * Copyright 2023 Mike Welsh
+ * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -27,11 +27,15 @@ namespace KytschBASIC\Exceptions;
 class Exception extends \Exception
 {
     public code;
-    private version = "0.0.14 alpha";
+    private version = "0.0.15 alpha";
     private html;
     
-	public function __construct(string message, int code = 500, bool html = true)
+	public function __construct(string message, code = 500, bool html = true)
 	{
+        if (is_string(code)) {
+            let code = 500;
+        }
+
         //Trigger the parent construct.
         parent::__construct(message, code);
 
@@ -94,7 +98,7 @@ class Exception extends \Exception
     /**
      * Generate the grumpy cat, I mean just look at him!
      */
-    private function gfx(int code)
+    private function gfx(code)
     {
         if (!code) {
             let code = 500;

@@ -1,0 +1,56 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "ERASE statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "ERASE","basic"
+				END HEADING 2
+				SWRITE
+					PRINT "Unsetting a variable i.e. deleting it."
+				END SWRITE
+				SWRITE "basic"
+					PRINT "Example"
+				END SWRITE
+				CPRINT
+DIM test$=("kytschBASIC","is","awesome!")
+FOR val$ IN test$
+	PRINT val$
+	PRINT "&nbsp;"
+NEXT
+LINE BREAK
+
+ERASE test$[0]
+FOR val$ IN test$
+	PRINT val$
+	PRINT "&nbsp;"
+NEXT
+				END CPRINT
+				SWRITE "basic"
+					PRINT "Output"
+				END SWRITE
+				DIV "kb-code-block"
+					DIM test$=("kytschBASIC","is","awesome!")
+					FOR val$ IN test$
+						PRINT val$
+						PRINT "&nbsp;"
+					NEXT
+					LINE BREAK
+
+					ERASE test$[0]
+					FOR val$ IN test$
+						PRINT val$
+						PRINT "&nbsp;"
+					NEXT
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

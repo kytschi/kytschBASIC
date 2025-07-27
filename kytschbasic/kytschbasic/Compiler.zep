@@ -27,6 +27,7 @@ namespace KytschBASIC;
 
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Parser;
+use KytschBASIC\Parsers\Core\Session;
 
 class Compiler
 {
@@ -41,8 +42,6 @@ class Compiler
 	
 	private version = "0.0.15 alpha";
 
-	private vendor_folder = "../kytschbasic/vendor";
-
 	private cli;
 
 	public function __construct(string config_dir, bool cli = false)
@@ -55,7 +54,7 @@ class Compiler
 			this->loadConfig(config_dir);
 		}
 
-		//Surpress the errors and let kytschBASIC take over.
+		// Surpress the errors and let kytschBASIC take over.
 		ini_set("display_errors", "0");
 		register_shutdown_function("KytschBASIC\\Compiler::shutdownError", cli);
 
@@ -71,13 +70,8 @@ class Compiler
 			define("_PATH", url["path"]);
 		}
 		
-		// Include the vendor folder for external libs.
-		require_once this->vendor_folder . "/autoload.php";
-
-		/*let this->globals["_ARCADE"] = "kytschBASIC-arcade-internal-api",
-		let this->globals["_AURL"] = this->globals["_RURL"] . "/" . this->globals["_ARCADE"];*/
-
-		//Session::start(this->config);
+		// Start the session
+		Session::start();
 	}
 
 	public static function shutdownError(cli)
@@ -150,7 +144,6 @@ class Compiler
 		var err, output = "";
 
 		var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
-		
 		try {
 			let output = output . "<!DOCTYPE html>";
 			let output = output . parsed;
@@ -164,64 +157,110 @@ class Compiler
 
 	public function run()
 	{
-		var config, url_vars = [];
-		let config = constant("CONFIG");
+		var config, url_vars = [], user_session_var = "user", url, fallback = null, err;
 
-		if (empty(config["routes"])) {
-			throw new \Exception("routes not defined in the config");
-		}
+		try {
+			let config = constant("CONFIG");
 
-		var url, fallback;
-		let url = parse_url(_SERVER["REQUEST_URI"]);
-		let fallback = null;
+			if (empty(config["routes"])) {
+				throw new \Exception("routes not defined in the config");
+			}
 
-		if (isset(url["path"])) {
-			var route, key, end, matches, path, splits;
-
-			for route in config["routes"] {
-				let path = url["path"];
-				let url_vars = [];
-
-				if (!isset(route->url)) {
-					(new Exception("route URL not defined in the config"))->fatal();
-				}
-				if (!isset(route->template)) {
-					(new Exception("route template not defined in the config"))->fatal();
-				}
-
-				// Check to see if the url has any dynamic vars in it.
-				if preg_match_all("/\\{([^}]*)\\}/", route->url, matches, PREG_OFFSET_CAPTURE) {
-					let splits = preg_split("#/+#", trim(path, "/"), -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
-					let key = count(matches[0]) - 1;
-					let end = count(splits) - 1;
-					while (key != -1) {
-						let path = str_replace(
-							splits[end][0],
-							matches[0][key][0],
-							path,
-							1
-						);
-
-						let url_vars[matches[1][key][0]] = splits[end][0];
-
-						let key -= 1;
-						let end -= 1;
-					}
-				}
-				
-				if (route->url == path) {
-					define("_UVARS", url_vars);
-					return this->compile(route);
-				} elseif (route->url == "*") {
-					// Fallback url, catch all basically.
-					let fallback = route;
-					continue;					
+			if (!empty(config["session"])) {
+				if (isset(config["session"]->user_session_var) && !empty(config["session"]->user_session_var)) {
+					let user_session_var = config["session"]->user_session_var;
 				}
 			}
-		}
 
-		if (!empty(fallback)) {
-			return this->compile(fallback);
+			let url = parse_url(_SERVER["REQUEST_URI"]);
+			
+			if (isset(url["path"])) {
+				var route, key, end, matches, path, splits, login_route, primary_route;
+
+				// Find the primary and login route first if there is one.
+				for route in config["routes"] {
+					if (isset(route->login) && !empty(route->login)) {
+						let login_route = route;
+						continue;
+					} elseif (isset(route->primary) && !empty(route->primary)) {
+						let primary_route = route;
+						continue;
+					}
+				}
+
+				for route in config["routes"] {
+					let path = url["path"];
+					let url_vars = [];
+
+					if (!isset(route->url)) {
+						(new Exception("route URL not defined in the config"))->fatal();
+					}
+					if (!isset(route->template)) {
+						(new Exception("route template not defined in the config"))->fatal();
+					}
+
+					if (route->url == "*") {
+						// Fallback url, catch all basically.
+						let fallback = route;
+					}
+
+					// Check to see if the url has any dynamic vars in it.
+					if preg_match_all("/\\{([^}]*)\\}/", route->url, matches, PREG_OFFSET_CAPTURE) {
+						let splits = preg_split("#/+#", trim(path, "/"), -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
+						let key = count(matches[0]) - 1;
+						let end = count(splits) - 1;
+						while (key != -1) {
+							let path = str_replace(
+								splits[end][0],
+								matches[0][key][0],
+								path,
+								1
+							);
+
+							let url_vars[matches[1][key][0]] = splits[end][0];
+
+							let key -= 1;
+							let end -= 1;
+						}
+					}
+					
+					if (route->url == path) {
+						/*
+						 * If there is a login and a primary route, kick the user to it.
+						 */
+						if (
+							!empty(login_route) &&
+							login_route->url == path &&
+							Session::read(user_session_var) &&
+							primary_route
+						) {
+							header("Location: " . primary_route->url);
+							die();
+						}
+
+						/*
+						 * Check to see if the route is a secure one. If it is, look for a valid session user.
+						 * If there is not then kick the user to the login defined in the routes.json.
+						 */
+						 if (isset(route->secure) && !empty(route->secure) && !empty(login_route)) {
+							if (empty(Session::read(user_session_var)) && login_route->url != path) {
+								header("Location: " . login_route->url);
+								die();
+							}
+						}
+
+						let fallback = null;
+						define("_UVARS", url_vars);
+						return this->compile(route);
+					}
+				}
+			}
+
+			if (fallback != null) {
+				return this->compile(fallback);
+			}
+		} catch \RuntimeException|\Exception, err {
+			(new Exception(err->getMessage(), err->getCode()))->fatal();
 		}
 
 		(new Exception("Page not found", 404))->fatal();
