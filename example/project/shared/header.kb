@@ -133,6 +133,9 @@ HEADER
 		LINK "/reference/DIM#refDIM","Find out about the DIM command","nav-link",,"refDIM"
 			PRINT "DIM"
 		END LINK
+		LINK "/reference/DIV#refDIV","Find out about the DIV command","nav-link",,"refDIV"
+			PRINT "DIV"
+		END LINK
 		LINK "/reference/DJOIN#refDJOIN","Find out about the DJOIN command","nav-link",,"refDJOIN"
 			PRINT "DJOIN"
 		END LINK

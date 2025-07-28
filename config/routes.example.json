@@ -283,6 +283,10 @@
 		"template": "project/reference/core/layout/BODY.kb"
 	},
 	{
+		"url": "/reference/DIV",
+		"template": "project/reference/core/layout/DIV.kb"
+	},
+	{
 		"url": "/reference/FOOTER",
 		"template": "project/reference/core/layout/FOOTER.kb"
 	},
