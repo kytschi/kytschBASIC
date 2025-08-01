@@ -288,6 +288,11 @@ class Variables
 			return true;
 		}
 		
+		// Mostly like the hash.
+		if (substr_count(arg, "$") > 1) {
+			return false;
+		}
+
 		if (substr(arg, 0, 1) == "$" && substr(arg, 0, 1) != "\"") {
 			return true;
 		}

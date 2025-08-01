@@ -58,12 +58,12 @@ class Encryption extends Command
 				let args[1] = "'" . args[1] . "'";
 			}
 			
-			return str_replace(splits[1], "password_verify(" . args[0] . ", '" . args[1] . "')", arg);
+			return str_replace(splits[1], "password_verify(" . args[0] . ", " . args[1] . ")", arg);
 		}
 
 		let args = this->cleanArg("HASHVERIFY", arg);
 
-		return "password_verify(" . args[0] . ", '" . args[1] . "')";
+		return "password_verify(" . args[0] . ", " . args[1] . ")";
 	}
 
 	public function processUUID(arg)
