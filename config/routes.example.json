@@ -403,7 +403,7 @@
 	},
 	{
 		"url": "/reference/COPYFILE",
-		"template": "project/reference/media/COPYFILE.kb"
+		"template": "project/reference/core/media/COPYFILE.kb"
 	},
 	{
 		"url": "/reference/COPYSHAPE",
@@ -411,7 +411,7 @@
 	},
 	{
 		"url": "/reference/COPYUPLOAD",
-		"template": "project/reference/media/COPYUPLOAD.kb"
+		"template": "project/reference/core/media/COPYUPLOAD.kb"
 	},
 	{
 		"url": "/reference/ELLIPSE",
