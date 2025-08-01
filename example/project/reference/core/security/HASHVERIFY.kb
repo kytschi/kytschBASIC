@@ -32,8 +32,12 @@ PRINT verify$
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
-					LINK "/reference/HASH"
+					LINK "/reference/HASH#refHASH"
 						PRINT "HASH"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/UUID#refUUID"
+						PRINT "UUID"
 					END LINK
 				END DIV
 			END DIV

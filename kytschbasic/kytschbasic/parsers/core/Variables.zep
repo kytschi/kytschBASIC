@@ -37,7 +37,7 @@ class Variables
 {
 	public types = ["$", "%", "#", "&"];
 	public array_types = ["$(", "%(", "#(", "&("];
-	public form_variables = ["_GET", "_POST", "_REQUEST"];
+	public form_variables = ["_GET", "_POST", "_REQUEST", "_FILES"];
 
 	public function args(string line)
 	{
@@ -62,7 +62,7 @@ class Variables
 		}
 		
 		// Grab all form vars.
-		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
+		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
 		// Add some padding to handle the extra char.
 		let arg = 0;
 		for str in vars[1] {
@@ -611,6 +611,8 @@ class Variables
 				return this->processValidUser(arg);
 			case "SESSREAD":
 				return this->processSessionRead(arg);
+			case "UUID":
+				return (new Encryption())->processUUID(arg);
 			case "VALIDCAPTCHA":				
 				return str_replace("VALIDCAPTCHA", (new Form())->validateCaptcha(), arg);
 			default:

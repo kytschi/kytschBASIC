@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "BUTTON SUBMIT","heading-command basic"
 					LINE BREAK
-					PRINT "NAME, CLASS, ID, LABEL","heading-args"
+					PRINT "NAME, CLASS, ID, VALUE, LABEL","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a form submit button."
@@ -138,6 +138,10 @@ END FORM
 					PRINT " | "
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
+					END LINK
+					PRINT " | "
+					LINK "/reference/_FILES"
+						PRINT "_FILES"
 					END LINK
 				END DIV
 			END DIV

@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
-	NAME "COPY SHAPE statment | kytschBASIC"
+	NAME "COPYSHAPE statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -10,7 +10,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "COPY SHAPE","heading-command basic"
+					PRINT "COPYSHAPE","heading-command basic"
 					LINE BREAK
 					PRINT "CURRENT SHAPE, NEW SHAPE","heading-args"
 					LINE BREAK

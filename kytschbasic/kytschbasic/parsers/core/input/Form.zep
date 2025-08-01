@@ -34,6 +34,8 @@ class Form extends Command
 		switch(command) {
 			case "END FORM":
 				return "</form>";
+			case "FILEINPUT":
+				return this->processInput(args, "file");
 			case "FORM":
 				return this->processForm(args);
 			case "NUMBERINPUT":
@@ -69,12 +71,16 @@ class Form extends Command
 
 		let output .= " method=" . this->outputArg(method, true);
 
-		if (isset(args[2]) && !empty(args[2])) {
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
 			let output .= " action=" . this->outputArg(args[2]);
 		}
 
-		if (isset(args[3]) && !empty(args[3])) {
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[3]);
+		}
+
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= " enctype='multipart/form-data'";
 		}
 		
 		return output . ">\"; ?>";
@@ -92,29 +98,29 @@ class Form extends Command
 			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " value=" . this->outputArg(args[1]);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[2]);
 		}
 
-		if (isset(args[3]) && !empty(args[3])) {
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
 			let output .= " placeholder=" . this->outputArg(args[3]);
 		}
 
-		if (isset(args[4]) && !empty(args[4])) {
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[4]);
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
 		}
 
-		if (isset(args[5]) && !empty(args[5])) {
+		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
 			let output .= " required=\\\"required\\\"";
 		}
 
-		if (isset(args[6]) && !empty(args[6])) {
+		if (isset(args[6]) && !empty(args[6]) && args[6] != "\"\"") {
 			let output .= trim(this->outputArg(args[6], true), "\\\"");
 		}
 		

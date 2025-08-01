@@ -60,7 +60,7 @@ class Session extends Command
 			let name = args;
 		}
 
-		if (array_key_exists(name, _SESSION)) {
+		if (array_key_exists(trim(name, "\""), _SESSION)) {
 			return "<?php unset($_SESSION[" . name . "]); ?>";
 		}
 	}

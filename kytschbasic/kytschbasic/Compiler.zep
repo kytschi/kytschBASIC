@@ -56,6 +56,7 @@ class Compiler
 
 		// Surpress the errors and let kytschBASIC take over.
 		ini_set("display_errors", "0");
+		//error_reporting(E_ERROR | E_PARSE);
 		register_shutdown_function("KytschBASIC\\Compiler::shutdownError", cli);
 
 		define("VERSION", this->version);
@@ -143,124 +144,127 @@ class Compiler
 	{
 		var err, output = "";
 
-		var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
 		try {
+			var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
 			let output = output . "<!DOCTYPE html>";
 			let output = output . parsed;
 			file_put_contents(constant("_ROOT") . "/compiled.php", output);
 			require (constant("_ROOT") . "/compiled.php");
-		} catch \RuntimeException|\Exception, err {
-			(new Exception(err->getMessage(), err->getCode()))->fatal();
+			die();
+		} catch Exception, err {
+			err->fatal(constant("_ROOT") . "/" . route->template);
+		} catch \RuntimeException | \Exception | \ParserError, err {
+			(new Exception(
+					err->getMessage(),
+					err->getCode(),
+					true,
+					err->getLineNo()
+				)
+			)->fatal(constant("_ROOT") . "/" . route->template);
 		}
-		return;
 	}
 
 	public function run()
 	{
-		var config, url_vars = [], user_session_var = "user", url, fallback = null, err;
+		var config, url_vars = [], user_session_var = "user", url, complie_route = null;
 
-		try {
-			let config = constant("CONFIG");
+		let config = constant("CONFIG");
 
-			if (empty(config["routes"])) {
-				throw new \Exception("routes not defined in the config");
+		if (empty(config["routes"])) {
+			throw new \Exception("routes not defined in the config");
+		}
+
+		if (!empty(config["session"])) {
+			if (isset(config["session"]->user_session_var) && !empty(config["session"]->user_session_var)) {
+				let user_session_var = config["session"]->user_session_var;
 			}
+		}
 
-			if (!empty(config["session"])) {
-				if (isset(config["session"]->user_session_var) && !empty(config["session"]->user_session_var)) {
-					let user_session_var = config["session"]->user_session_var;
+		let url = parse_url(_SERVER["REQUEST_URI"]);
+				
+		if (isset(url["path"])) {
+			var route, key, end, matches, path, splits, login_route, primary_route;
+
+			// Find the primary and login route first if there is one.
+			for route in config["routes"] {
+				if (isset(route->login) && !empty(route->login)) {
+					let login_route = route;
+					continue;
+				} elseif (isset(route->primary) && !empty(route->primary)) {
+					let primary_route = route;
+					continue;
+				} elseif (route->url == "*") {
+					// Fallback url, catch all basically.
+					//let complie_route = route;
+					continue;
 				}
 			}
 
-			let url = parse_url(_SERVER["REQUEST_URI"]);
-			
-			if (isset(url["path"])) {
-				var route, key, end, matches, path, splits, login_route, primary_route;
+			for route in config["routes"] {
+				let path = url["path"];
+				let url_vars = [];
 
-				// Find the primary and login route first if there is one.
-				for route in config["routes"] {
-					if (isset(route->login) && !empty(route->login)) {
-						let login_route = route;
-						continue;
-					} elseif (isset(route->primary) && !empty(route->primary)) {
-						let primary_route = route;
-						continue;
-					}
+				if (!isset(route->url)) {
+					(new Exception("route URL not defined in the config"))->fatal();
+				}
+				if (!isset(route->template)) {
+					(new Exception("route template not defined in the config"))->fatal();
 				}
 
-				for route in config["routes"] {
-					let path = url["path"];
-					let url_vars = [];
+				// Check to see if the url has any dynamic vars in it.
+				if preg_match_all("/\\{([^}]*)\\}/", route->url, matches, PREG_OFFSET_CAPTURE) {
+					let splits = preg_split("#/+#", trim(path, "/"), -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
+					let key = count(matches[0]) - 1;
+					let end = count(splits) - 1;
+					while (key != -1) {
+						let path = str_replace(
+							splits[end][0],
+							matches[0][key][0],
+							path,
+							1
+						);
 
-					if (!isset(route->url)) {
-						(new Exception("route URL not defined in the config"))->fatal();
+						let url_vars[matches[1][key][0]] = splits[end][0];
+
+						let key -= 1;
+						let end -= 1;
 					}
-					if (!isset(route->template)) {
-						(new Exception("route template not defined in the config"))->fatal();
+				}
+				
+				if (route->url == path) {
+					/*
+					 * If there is a login and a primary route, kick the user to it.
+					 */
+					if (
+						!empty(login_route) &&
+						login_route->url == path &&
+						Session::read(user_session_var) &&
+						primary_route
+					) {
+						header("Location: " . primary_route->url);
+						die();
 					}
 
-					if (route->url == "*") {
-						// Fallback url, catch all basically.
-						let fallback = route;
-					}
-
-					// Check to see if the url has any dynamic vars in it.
-					if preg_match_all("/\\{([^}]*)\\}/", route->url, matches, PREG_OFFSET_CAPTURE) {
-						let splits = preg_split("#/+#", trim(path, "/"), -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
-						let key = count(matches[0]) - 1;
-						let end = count(splits) - 1;
-						while (key != -1) {
-							let path = str_replace(
-								splits[end][0],
-								matches[0][key][0],
-								path,
-								1
-							);
-
-							let url_vars[matches[1][key][0]] = splits[end][0];
-
-							let key -= 1;
-							let end -= 1;
-						}
-					}
-					
-					if (route->url == path) {
-						/*
-						 * If there is a login and a primary route, kick the user to it.
-						 */
-						if (
-							!empty(login_route) &&
-							login_route->url == path &&
-							Session::read(user_session_var) &&
-							primary_route
-						) {
-							header("Location: " . primary_route->url);
+					/*
+					 * Check to see if the route is a secure one. If it is, look for a valid session user.
+					 * If there is not then kick the user to the login defined in the routes.json.
+					 */
+					if (isset(route->secure) && !empty(route->secure) && !empty(login_route)) {
+						if (empty(Session::read(user_session_var)) && login_route->url != path) {
+							header("Location: " . login_route->url);
 							die();
 						}
-
-						/*
-						 * Check to see if the route is a secure one. If it is, look for a valid session user.
-						 * If there is not then kick the user to the login defined in the routes.json.
-						 */
-						 if (isset(route->secure) && !empty(route->secure) && !empty(login_route)) {
-							if (empty(Session::read(user_session_var)) && login_route->url != path) {
-								header("Location: " . login_route->url);
-								die();
-							}
-						}
-
-						let fallback = null;
-						define("_UVARS", url_vars);
-						return this->compile(route);
 					}
+
+					define("_UVARS", url_vars);
+					let complie_route = route;
+					break;
 				}
 			}
 
-			if (fallback != null) {
-				return this->compile(fallback);
+			if (complie_route) {
+				this->compile(complie_route);
 			}
-		} catch \RuntimeException|\Exception, err {
-			(new Exception(err->getMessage(), err->getCode()))->fatal();
 		}
 
 		(new Exception("Page not found", 404))->fatal();

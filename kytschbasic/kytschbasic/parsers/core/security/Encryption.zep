@@ -58,11 +58,30 @@ class Encryption extends Command
 				let args[1] = "'" . args[1] . "'";
 			}
 			
-			return str_replace(splits[1], "password_verify(" . args[0] . ", " . args[1] . ")", arg);
+			return str_replace(splits[1], "password_verify(" . args[0] . ", '" . args[1] . "')", arg);
 		}
 
 		let args = this->cleanArg("HASHVERIFY", arg);
 
-		return "password_verify(" . args[0] . ", " . args[1] . ")";
+		return "password_verify(" . args[0] . ", '" . args[1] . "')";
+	}
+
+	public function processUUID(arg)
+	{
+		var splits, cleaned, uuid, data = [];
+
+        let data = random_bytes(16);
+		
+		//let data[6] = chr(ord(data[6]) & 0x0f | 0x40);
+		//let data[8] = chr(ord(data[8]) & 0x3f | 0x80);
+		let uuid = vsprintf("%s%s-%s-%s-%s-%s%s%s", str_split(bin2hex(data), 4));
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("UUID", splits[1]);
+			return str_replace(splits[1], "\"" . uuid . "\"", arg);
+		}
+
+		return "\"" . uuid . "\"";
 	}
 }

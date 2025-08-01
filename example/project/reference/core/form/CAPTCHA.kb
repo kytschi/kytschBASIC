@@ -159,6 +159,10 @@ END FORM
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
 					END LINK
+					PRINT " | "
+					LINK "/reference/_FILES"
+						PRINT "_FILES"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

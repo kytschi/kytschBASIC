@@ -109,8 +109,14 @@ HEADER
 		LINK "/reference/CIRCLEF#refCIRCLEF","Find out about the CIRCLEF command","nav-link",,"refCIRCLEF"
 			PRINT "CIRCLEF"
 		END LINK
-		LINK "/reference/COPY-SHAPE#refCOPYSHAPE","Find out about the COPY SHARE command","nav-link",,"refCOPYSHAPE"
-			PRINT "COPY SHAPE"
+		LINK "/reference/COPYFILE#refCOPYFILE","Find out about the COPYFILE command","nav-link",,"refCOPYFILE"
+			PRINT "COPYFILE"
+		END LINK
+		LINK "/reference/COPYSHAPE#refCOPYSHAPE","Find out about the COPYSHARE command","nav-link",,"refCOPYSHAPE"
+			PRINT "COPYSHAPE"
+		END LINK
+		LINK "/reference/COPYUPLOAD#refCOPYUPLOAD","Find out about the COPYUPLOAD command","nav-link",,"refCOPYUPLOAD"
+			PRINT "COPYUPLOAD"
 		END LINK
 		LINK "/reference/COS#refCOS","Find out about the COS command","nav-link",,"refCOS"
 			PRINT "COS"
@@ -132,6 +138,9 @@ HEADER
 		END LINK
 		LINK "/reference/DIM#refDIM","Find out about the DIM command","nav-link",,"refDIM"
 			PRINT "DIM"
+		END LINK
+		LINK "/reference/DINSERT#refDINSERT","Find out about the DINSERT command","nav-link",,"refDINSERT"
+			PRINT "DINSERT"
 		END LINK
 		LINK "/reference/DIV#refDIV","Find out about the DIV command","nav-link",,"refDIV"
 			PRINT "DIV"
@@ -186,6 +195,9 @@ HEADER
 		END LINK
 		LINK "/reference/FAVICON#refFAVICON","Find out about the FAVICON command","nav-link",,"refFAVICON"
 			PRINT "FAVICON"
+		END LINK
+		LINK "/reference/FILEINPUT#refFILEINPUT","Find out about the FILEINPUT command","nav-link",,"refFILEINPUT"
+			PRINT "FILEINPUT"
 		END LINK
 		LINK "/reference/FRAC#refFRAC","Find out about the FRAC command","nav-link",,"refFRAC"
 			PRINT "FRAC"
@@ -270,6 +282,9 @@ HEADER
 		END LINK
 		LINK "/reference/LINK#refLINK","Find out about the LINK command","nav-link",,"refLINK"
 			PRINT "LINK"
+		END LINK
+		LINK "/reference/LOAD#refLOAD","Find out about the LOAD command","nav-link",,"refLOAD"
+			PRINT "LOAD"
 		END LINK
 		LINK "/reference/LOG#refLOG","Find out about the LOG command","nav-link",,"refLOG"
 			PRINT "LOG"
@@ -429,6 +444,9 @@ HEADER
 		END LINK
 		LINK "/reference/UNRIGHT#refUNRIGHT","Find out about the UNRIGHT command","nav-link",,"refUNRIGHT"
 			PRINT "UNRIGHT"
+		END LINK
+		LINK "/reference/UUID#refUUID","Find out about the UUID command","nav-link",,"refUUID"
+			PRINT "UUID"
 		END LINK
 		LINK "/reference/VAL#refVAL","Find out about the VAL command","nav-link",,"refVAL"
 			PRINT "VAL"

@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FORM statment | kytschBASIC"
+	NAME "FILEINPUT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,12 +9,12 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "FORM","heading-command basic"
+					PRINT "FILEINPUT","heading-command basic"
 					LINE BREAK
-					PRINT "ID, METHOD (default is GET), ACTION, CLASS, FILE SUPPORT (set to true)","heading-args"
+					PRINT "NAME, VALUE, CLASS, PLACEHOLDER TEXT, ID, REQUIRED","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "Creating an HTML form."
+					PRINT "Create a form input of the file type."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
@@ -35,7 +35,7 @@ FORM "form_test"
 						PRINT "Name"
 					END TCELL
 					TCELL
-						TEXTINPUT "input_test",,"form-input", "Enter your name"
+						FILEINPUT "input_test",, "form-input", "Select a file to upload"
 					END TCELL
 				END TROW
 				TROW
@@ -55,57 +55,43 @@ END FORM
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET("input_test") THEN
-	PRINT "You submitted this,"
-	LINE BREAK
-	PRINT _GET("input_test")
-END IF
-FORM "form_test"
-	SWRITE
-		LINE BREAK
-		TABLE "table-border"
-			TBODY
-				TROW
-					TCELL
-						PRINT "Name"
-					END TCELL
-					TCELL
-						TEXTINPUT "input_test",,"form-input", "Enter your name"
-					END TCELL
-				END TROW
-				TROW
-					TCELL
-						WHITESPACE
-					END TCELL
-					TCELL
-						BUTTON SUBMIT "btn_test",,,,"submit"
-					END TCELL
-				END TROW
-			END TBODY
-		END TABLE
-	END SWRITE
-END FORM
+					IFNTE _GET("input_test") THEN
+						PRINT "You submitted this,"
+						LINE BREAK
+						PRINT _GET("input_test")
+					END IF
+					FORM "form_test"
+						SWRITE
+							LINE BREAK
+							TABLE "table-border"
+								TBODY
+									TROW
+										TCELL
+											PRINT "Name"
+										END TCELL
+										TCELL
+											FILEINPUT "input_test",, "form-input", "Select a file to upload"
+										END TCELL
+									END TROW
+									TROW
+										TCELL
+											WHITESPACE
+										END TCELL
+										TCELL
+											BUTTON SUBMIT "btn_test",,,,"submit"
+										END TCELL
+									END TROW
+								END TBODY
+							END TABLE
+						END SWRITE
+					END FORM
 				END DIV
-				HEADING 3
-					PRINT "Adding a CAPTCHA to the form"
-				END HEADING 3
-				CPRINT
-CAPTCHA "captcha"
-				END CPRINT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
-					LINK "/reference/TEXTINPUT"
-						PRINT "TEXTINPUT"
-					END LINK
-					PRINT " | "
-					LINK "/reference/PASSWORDINPUT"
-						PRINT "PASSWORDINPUT"
-					END LINK
-					PRINT " | "
-					LINK "/reference/FILEINPUT"
-						PRINT "FILEINPUT"
+					LINK "/reference/FORM"
+						PRINT "FORM"
 					END LINK
 					PRINT " | "
 					LINK "/reference/CAPTCHA"
@@ -120,12 +106,20 @@ CAPTCHA "captcha"
 						PRINT "NUMBERINPUT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/TEXTINPUT"
+						PRINT "TEXTINPUT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/BUTTON"
 						PRINT "BUTTON"
 					END LINK
 					PRINT " | "
 					LINK "/reference/BUTTON-SUBMIT"
 						PRINT "BUTTON SUBMIT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/PASSWORDINPUT"
+						PRINT "PASSWORDINPUT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/_GET"

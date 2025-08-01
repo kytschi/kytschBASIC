@@ -56,6 +56,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Layout\\Head",
 		"KytschBASIC\\Parsers\\Core\\Variables",
 		"KytschBASIC\\Parsers\\Core\\Media\\Image",
+		"KytschBASIC\\Parsers\\Core\\Media\\Files",
 		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
@@ -82,7 +83,7 @@ class Parser
 	 */
 	public function parse(string template, bool show_html_mode = false)
 	{
-		var err, command = "", args = [], line = "", lines, output = "";
+		var command = "", args = [], line = "", lines, output = "", err;
 
 		let this->cprint = false;
 		let this->js = false;
@@ -92,11 +93,11 @@ class Parser
 			let this->show_html = true;
 		}
 		
+		if (!file_exists(template)) {
+			throw new Exception("Template, " . template . ", not found");
+		}
+		
 		try {
-			if (!file_exists(template)) {
-				throw new Exception("Template, " . template . ", not found");
-			}
-			
 			// Read the template lines.
 			let lines = file(template);
 			if (empty(lines)) {
@@ -123,16 +124,11 @@ class Parser
 
 				let output .= this->processCommand(line, command, args);
 			}
-
-			return output;
-		} catch Exception, err {
-		    err->fatal(template, this->line_no);
-		} catch \RuntimeException|\Exception, err {
-			var newErr;
-			let newErr = new Exception(err->getMessage(), err->getCode());
-
-			echo newErr->fatal(template, this->line_no);
+		} catch \Exception, err {
+			throw new Exception(err->getMessage(), err->getCode(), true, this->line_no);
 		}
+
+		return output;
     }
 
 	private function processCommand(string line, string command, array args)

@@ -71,6 +71,10 @@
 		"template": "project/reference/core/INCLUDE.kb"
 	},
 	{
+		"url": "/reference/LOAD",
+		"template": "project/reference/core/LOAD.kb"
+	},
+	{
 		"url": "/reference/LINE-BREAK",
 		"template": "project/reference/core/LINE_BREAK.kb"
 	},
@@ -270,6 +274,10 @@
 		"template": "project/reference/core/form/PASSWORDINPUT.kb"
 	},
 	{
+		"url": "/reference/FILEINPUT",
+		"template": "project/reference/core/form/FILEINPUT.kb"
+	},
+	{
 		"url": "/reference/BUTTON-SUBMIT",
 		"template": "project/reference/core/form/BUTTON_SUBMIT.kb"
 	},
@@ -394,8 +402,16 @@
 		"template": "project/reference/arcade/shapes/CIRCLEF.kb"
 	},
 	{
-		"url": "/reference/COPY-SHAPE",
-		"template": "project/reference/arcade/COPY_SHAPE.kb"
+		"url": "/reference/COPYFILE",
+		"template": "project/reference/media/COPYFILE.kb"
+	},
+	{
+		"url": "/reference/COPYSHAPE",
+		"template": "project/reference/arcade/COPYSHAPE.kb"
+	},
+	{
+		"url": "/reference/COPYUPLOAD",
+		"template": "project/reference/media/COPYUPLOAD.kb"
 	},
 	{
 		"url": "/reference/ELLIPSE",
@@ -615,6 +631,10 @@
 	{
 		"url": "/reference/HASHVERIFY",
 		"template": "project/reference/core/security/HASHVERIFY.kb"
+	},
+	{
+		"url": "/reference/UUID",
+		"template": "project/reference/core/security/UUID.kb"
 	},
 
 	{

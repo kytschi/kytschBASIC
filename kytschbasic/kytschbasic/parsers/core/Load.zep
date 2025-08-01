@@ -66,13 +66,15 @@ class Load extends Command
 			throw new Exception("Invalid INCLUDE");
 		}
 
+		let args[0] = trim(args[0], "\"");
 		let ext = pathinfo(args[0], PATHINFO_EXTENSION);
 
 		switch (ext) {
 			case "js":
-				return "<script src=" . this->outputArg(args[0]) . "></script>";
+				let args[0] = str_replace(constant("_ROOT"), "", args[0]);
+				return "<script src='" . args[0] . "'></script>";
 			default:
-				return (new Parser())->parse(trim(args[0], "\"") . ".kb", false);
+				return (new Parser())->parse(args[0] . ".kb", false);
 		}
 	}
 }

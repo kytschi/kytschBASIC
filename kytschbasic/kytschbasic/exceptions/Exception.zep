@@ -29,8 +29,9 @@ class Exception extends \Exception
     public code;
     private version = "0.0.15 alpha";
     private html;
+    private line_no = 0;
     
-	public function __construct(string message, code = 500, bool html = true)
+	public function __construct(string message, code = 500, bool html = true, line = 0)
 	{
         if (is_string(code)) {
             let code = 500;
@@ -41,6 +42,12 @@ class Exception extends \Exception
 
         let this->code = code;
         let this->html = html;
+        let this->line_no = line;
+    }
+
+    public function getLineNo()
+    {
+        return this->line_no;
     }
 
     /**
@@ -69,9 +76,9 @@ class Exception extends \Exception
      * Fatal error just lets us dumb the error out faster and kill the site
      * so we can't go any futher.
      */
-    public function fatal(string template = "", int line = 0)
+    public function fatal(string template = "", line = 0)
     {
-        if (this->html) {
+        if (this->html && !headers_sent()) {
             switch (this->code) {
                 case 404:
                     header("HTTP/1.0 404 Not Found");
@@ -80,6 +87,10 @@ class Exception extends \Exception
                     header("HTTP/1.0 500 Internal Server Error");
                     break;
             }
+        }
+
+        if (!line) {
+            let line = this->line_no;
         }
         
         echo this;

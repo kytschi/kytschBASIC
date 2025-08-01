@@ -49,7 +49,7 @@ class Navigation extends Command
 
 	private function processGoto(array args)
 	{
-		return "<?php header(\"Location: " . trim(args[0], "\"") . "\");die(); ?>";
+		return "<?php header(\"Location: \" . " . args[0] . ");die(); ?>";
 	}
 
 	private function processLink(array args)

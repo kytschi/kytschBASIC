@@ -106,6 +106,10 @@ END FORM
 						PRINT "PASSWORDINPUT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/FILEINPUT"
+						PRINT "FILEINPUT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/NUMBERINPUT"
 						PRINT "NUMBERINPUT"
 					END LINK
@@ -128,6 +132,10 @@ END FORM
 					PRINT " | "
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
+					END LINK
+					PRINT " | "
+					LINK "/reference/_FILES"
+						PRINT "_FILES"
 					END LINK
 				END DIV
 			END DIV
