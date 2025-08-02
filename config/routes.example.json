@@ -258,6 +258,10 @@
 		"template": "project/reference/core/form/CAPTCHA.kb"
 	},
 	{
+		"url": "/reference/CHECKINPUT",
+		"template": "project/reference/core/form/CHECKINPUT.kb"
+	},
+	{
 		"url": "/reference/TEXTINPUT",
 		"template": "project/reference/core/form/TEXTINPUT.kb"
 	},
@@ -278,12 +282,20 @@
 		"template": "project/reference/core/form/FILEINPUT.kb"
 	},
 	{
-		"url": "/reference/BUTTON-SUBMIT",
-		"template": "project/reference/core/form/BUTTON_SUBMIT.kb"
+		"url": "/reference/BUTTONSUBMIT",
+		"template": "project/reference/core/form/BUTTONSUBMIT.kb"
 	},
 	{
 		"url": "/reference/BUTTON",
 		"template": "project/reference/core/form/BUTTON.kb"
+	},
+	{
+		"url": "/reference/SELECTINPUT",
+		"template": "project/reference/core/form/SELECTINPUT.kb"
+	},
+	{
+		"url": "/reference/SELECTINPUTOPT",
+		"template": "project/reference/core/form/SELECTINPUTOPT.kb"
 	},
 
 	{
@@ -363,6 +375,10 @@
 	{
 		"url": "/reference/LINK",
 		"template": "project/reference/core/navigation/LINK.kb"
+	},
+	{
+		"url": "/reference/MENU",
+		"template": "project/reference/core/navigation/MENU.kb"
 	},
 
 	{

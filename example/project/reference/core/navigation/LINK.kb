@@ -91,6 +91,14 @@ END LINK
 						END TROW
 					END TBODY
 				END TABLE
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/MENU#refMENU"
+						PRINT "MENU"
+					END LINK
+				END DIV
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

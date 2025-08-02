@@ -111,7 +111,7 @@ END SWRITE
 					END LINK
 					PRINT " | "
 					LINK "/reference/BUTTON-SUBMIT"
-						PRINT "BUTTON SUBMIT"
+						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/_GET"

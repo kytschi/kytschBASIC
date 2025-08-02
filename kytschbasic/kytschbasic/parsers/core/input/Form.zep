@@ -32,8 +32,14 @@ class Form extends Command
 	public function parse(string line, string command, array args)
 	{
 		switch(command) {
+			case "CAPTCHA":
+				return this->processCaptcha();
+			case "CHECKINPUT":
+				return this->processInputCheckbox(args);
 			case "END FORM":
 				return "</form>";
+			case "END SELECTINPUT":
+				return "</select>";
 			case "FILEINPUT":
 				return this->processInput(args, "file");
 			case "FORM":
@@ -42,12 +48,14 @@ class Form extends Command
 				return this->processInput(args, "number");
 			case "PASSWORDINPUT":
 				return this->processInput(args, "password");
+			case "SELECTINPUT":
+				return this->processSelectInput(args);
+			case "SELECTINPUTOPT":
+				return this->processSelectInputOpt(args);
 			case "TEXTINPUT":
 				return this->processInput(args);
 			case "TEXTAREA":
 				return this->processTextarea(args);
-			case "CAPTCHA":
-				return this->processCaptcha();
 			default:
 				return null;
 		}
@@ -127,7 +135,104 @@ class Form extends Command
 		return output . ">\"; ?>";
 	}
 
-	private function processTextarea(array args, string type = "text")
+	private function processInputCheckbox(array args)
+	{
+		var output = "", value = "''";
+
+		let output = "<?= \"<input type='checkbox'";
+		
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= " name=" . this->outputArg(args[0]);
+		} else {
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
+		}
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let value = trim(args[1], "\"");
+			let output .= " value=" . this->outputArg(args[1]);
+		}
+
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[2]);
+		}
+
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " placeholder=" . this->outputArg(args[3]);
+		}
+
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[4]);
+		} else {
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
+		}
+
+		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
+			let output .= " required=\\\"required\\\"";
+		}
+
+		if (isset(args[6]) && !empty(args[6]) && args[6] != "\"\"") {
+			let output .= "\" . (" . value . " == " . args[6] . " ? 'checked' : '') . \"";
+		}
+		
+		return output . ">\"; ?>";
+	}
+
+	private function processSelectInput(array args)
+	{
+		var output = "<?= \"<select";
+				
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= " name=" . this->outputArg(args[0]);
+		} else {
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
+		}
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[1]);
+		}
+
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= " placeholder=" . this->outputArg(args[2]);
+		}
+
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[3]);
+		} else {
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
+		}
+
+		if (isset(args[4]) && !empty(args[4])) {
+			let output .= " required=\\\"required\\\"";
+		}
+		
+		return output . ">\"; ?>";
+	}
+
+	private function processSelectInputOpt(array args)
+	{
+		var output = "<?= \"<option", label = "\"\"", value = "''";
+				
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let value = args[0];
+			let output .= " value=" . this->outputArg(args[0]);
+		}
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			if (!this->isVariable(args[1])) {
+				let label = trim(args[1], "\"");
+			} else {
+				let label = "\" . " . trim(args[1], "\"") . " . \"";
+			}
+		}
+
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= "\" . (" . value . " == " . args[2] . " ? 'selected' : '') . \"";
+		}
+		
+		return output . ">" . label . "</option>\"; ?>";
+	}
+
+	private function processTextarea(array args)
 	{
 		var output = "<?= \"<textarea", value = "\"\"";
 				

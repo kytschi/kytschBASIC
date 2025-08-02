@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "PASSWORDINPUT statment | kytschBASIC"
+	NAME "SELECTINPUTOPT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,12 +9,12 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "PASSWORDINPUT","heading-command basic"
+					PRINT "SELECTINPUTOPT","heading-command basic"
 					LINE BREAK
-					PRINT "NAME, VALUE, CLASS, PLACEHOLDER TEXT, ID, REQUIRED","heading-args"
+					PRINT "VALUE, LABEL, SELECTED","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "Create a form input of the password type."
+					PRINT "Create a form select box option."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
@@ -32,10 +32,15 @@ FORM "form_test"
 			TBODY
 				TROW
 					TCELL
-						PRINT "Name"
+						PRINT "Active"
 					END TCELL
 					TCELL
-						PASSWORDINPUT "input_test",, "form-input", "Enter your password"
+						SELECTINPUT "input_test",, "form-input", "Please select an option"
+							SELECTINPUTOPT ,"No page"
+							SELECTINPUTOPT "page_one","Page one"
+							SELECTINPUTOPT "page_two","Page two","page_two"
+							SELECTINPUTOPT "page_three","Page three"
+						END SELECTINPUT
 					END TCELL
 				END TROW
 				TROW
@@ -67,10 +72,15 @@ END FORM
 								TBODY
 									TROW
 										TCELL
-											PRINT "Name"
+											PRINT "Active"
 										END TCELL
 										TCELL
-											PASSWORDINPUT "input_test",, "form-input", "Enter your password"
+											SELECTINPUT "input_test",, "form-input", "Please select an option"
+												SELECTINPUTOPT ,"No page"
+												SELECTINPUTOPT "page_one","Page one"
+												SELECTINPUTOPT "page_two","Page two","page_two"
+												SELECTINPUTOPT "page_three","Page three"
+											END SELECTINPUT
 										END TCELL
 									END TROW
 									TROW
@@ -90,51 +100,55 @@ END FORM
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
-					LINK "/reference/FORM"
+					LINK "/reference/FORM#refFORM"
 						PRINT "FORM"
 					END LINK
 					PRINT " | "
-					LINK "/reference/CAPTCHA"
+					LINK "/reference/CAPTCHA#refCAPTCHA"
 						PRINT "CAPTCHA"
 					END LINK
 					PRINT " | "
-					LINK "/reference/TEXTAREA"
+					LINK "/reference/TEXTAREA#refTEXTAREA"
 						PRINT "TEXTAREA"
 					END LINK
 					PRINT " | "
-					LINK "/reference/NUMBERINPUT"
+					LINK "/reference/NUMBERINPUT#refNUMBERINPUT"
 						PRINT "NUMBERINPUT"
 					END LINK
 					PRINT " | "
-					LINK "/reference/TEXTINPUT"
+					LINK "/reference/TEXTINPUT#refTEXTINPUT"
 						PRINT "TEXTINPUT"
 					END LINK
 					PRINT " | "
-					LINK "/reference/BUTTON"
+					LINK "/reference/BUTTON#refBUTTON"
 						PRINT "BUTTON"
 					END LINK
 					PRINT " | "
-					LINK "/reference/FILEINPUT"
-						PRINT "FILEINPUT"
-					END LINK
-					PRINT " | "
-					LINK "/reference/BUTTON-SUBMIT"
+					LINK "/reference/BUTTON-SUBMIT#refBUTTONSUBMIT"
 						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "
-					LINK "/reference/_GET"
+					LINK "/reference/PASSWORDINPUT#refPASSWORDINPUT"
+						PRINT "PASSWORDINPUT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SELECTINPUT#refSELECTINPUT"
+						PRINT "SELECTINPUT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/_GET#ref_GET"
 						PRINT "_GET"
 					END LINK
 					PRINT " | "
-					LINK "/reference/_POST"
+					LINK "/reference/_POST#ref_POST"
 						PRINT "_POST"
 					END LINK
 					PRINT " | "
-					LINK "/reference/_REQUEST"
+					LINK "/reference/_REQUEST#ref_REQUEST"
 						PRINT "_REQUEST"
 					END LINK
 					PRINT " | "
-					LINK "/reference/_FILES"
+					LINK "/reference/_FILES#ref_FILES"
 						PRINT "_FILES"
 					END LINK
 				END DIV

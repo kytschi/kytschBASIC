@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "FORM statment | kytschBASIC"
+	NAME "BUTTONSUBMIT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,12 +9,12 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "FORM","heading-command basic"
+					PRINT "BUTTONSUBMIT","heading-command basic"
 					LINE BREAK
-					PRINT "ID, METHOD (default is GET), ACTION, CLASS, FILE SUPPORT (set to true)","heading-args"
+					PRINT "NAME, CLASS, ID, VALUE, LABEL","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "Creating an HTML form."
+					PRINT "Create a form submit button."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
@@ -26,7 +26,7 @@ IFNTE _GET("input_test") THEN
 	PRINT _GET("input_test")
 END IF
 FORM "form_test"
-	SWRITE
+	DIV
 		LINE BREAK
 		TABLE "table-border"
 			TBODY
@@ -34,7 +34,7 @@ FORM "form_test"
 					TCELL
 						PRINT "Name"
 					END TCELL
-					TCELL
+					TCELL ,, 2
 						TEXTINPUT "input_test",,"form-input", "Enter your name"
 					END TCELL
 				END TROW
@@ -45,10 +45,15 @@ FORM "form_test"
 					TCELL
 						BUTTONSUBMIT "btn_test",,,,"submit"
 					END TCELL
+					TCELL
+						BUTTONSUBMIT "btn_test"
+							PRINT "submit"
+						END BUTTON
+					END TCELL
 				END TROW
 			END TBODY
 		END TABLE
-	END SWRITE
+	END DIV
 END FORM
 				END CPRINT
 				HEADING 4
@@ -61,7 +66,7 @@ IFNTE _GET("input_test") THEN
 	PRINT _GET("input_test")
 END IF
 FORM "form_test"
-	SWRITE
+	DIV
 		LINE BREAK
 		TABLE "table-border"
 			TBODY
@@ -69,7 +74,7 @@ FORM "form_test"
 					TCELL
 						PRINT "Name"
 					END TCELL
-					TCELL
+					TCELL ,, 2
 						TEXTINPUT "input_test",,"form-input", "Enter your name"
 					END TCELL
 				END TROW
@@ -80,32 +85,23 @@ FORM "form_test"
 					TCELL
 						BUTTONSUBMIT "btn_test",,,,"submit"
 					END TCELL
+					TCELL
+						BUTTONSUBMIT "btn_test"
+							PRINT "submit"
+						END BUTTON
+					END TCELL
 				END TROW
 			END TBODY
 		END TABLE
-	END SWRITE
+	END DIV
 END FORM
 				END DIV
-				HEADING 3
-					PRINT "Adding a CAPTCHA to the form"
-				END HEADING 3
-				CPRINT
-CAPTCHA "captcha"
-				END CPRINT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
-					LINK "/reference/TEXTINPUT"
-						PRINT "TEXTINPUT"
-					END LINK
-					PRINT " | "
-					LINK "/reference/PASSWORDINPUT"
-						PRINT "PASSWORDINPUT"
-					END LINK
-					PRINT " | "
-					LINK "/reference/FILEINPUT"
-						PRINT "FILEINPUT"
+					LINK "/reference/FORM"
+						PRINT "FORM"
 					END LINK
 					PRINT " | "
 					LINK "/reference/CAPTCHA"
@@ -116,16 +112,20 @@ CAPTCHA "captcha"
 						PRINT "TEXTAREA"
 					END LINK
 					PRINT " | "
-					LINK "/reference/NUMBERINPUT"
-						PRINT "NUMBERINPUT"
-					END LINK
-					PRINT " | "
 					LINK "/reference/BUTTON"
 						PRINT "BUTTON"
 					END LINK
 					PRINT " | "
-					LINK "/reference/BUTTON-SUBMIT"
-						PRINT "BUTTONSUBMIT"
+					LINK "/reference/NUMBERINPUT"
+						PRINT "NUMBERINPUT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/TEXTINPUT"
+						PRINT "TEXTINPUT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/PASSWORDINPUT"
+						PRINT "PASSWORDINPUT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/_GET"

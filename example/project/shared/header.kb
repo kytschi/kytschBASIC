@@ -85,8 +85,8 @@ HEADER
 		LINK "/reference/BUTTON#refBUTTON","Find out about the BUTTON command","nav-link",,"refBUTTON"
 			PRINT "BUTTON"
 		END LINK
-		LINK "/reference/BUTTON-SUBMIT#refBUTTONSUBMIT","Find out about the BUTTON SUBMIT command","nav-link",,"refBUTTONSUBMIT"
-			PRINT "BUTTON SUBMIT"
+		LINK "/reference/BUTTONSUBMIT#refBUTTONSUBMIT","Find out about the BUTTONSUBMIT command","nav-link",,"refBUTTONSUBMIT"
+			PRINT "BUTTONSUBMIT"
 		END LINK
 		LINK "/reference/CAPTCHA#refCAPTCHA","Find out about the CAPTCHA command","nav-link",,"refCAPTCHA"
 			PRINT "CAPTCHA"
@@ -99,6 +99,9 @@ HEADER
 		END LINK
 		LINK "/reference/CHARSET#refCHARSET","Find out about the CHARSET command","nav-link",,"refCHARSET"
 			PRINT "CHARSET"
+		END LINK
+		LINK "/reference/CHECKINPUT#refCHECKINPUT","Find out about the CHECKINPUT command","nav-link",,"refCHECKINPUT"
+			PRINT "CHECKINPUT"
 		END LINK
 		LINK "/reference/CHR#refCHR","Find out about the CHR command","nav-link",,"refCHR"
 			PRINT "CHR"
@@ -310,6 +313,9 @@ HEADER
 		LINK "/reference/MAILTO#refMAILTO","Find out about the MAILTO command","nav-link",,"refMAILTO"
 			PRINT "MAILTO"
 		END LINK
+		LINK "/reference/MENU#refMENU","Find out about the MENU command","nav-link",,"refMENU"
+			PRINT "MENU"
+		END LINK
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK
@@ -354,6 +360,12 @@ HEADER
 		END LINK
 		LINK "/reference/SELECT#refSELECT","Find out about the SELECT command","nav-link",,"refSELECT"
 			PRINT "SELECT"
+		END LINK
+		LINK "/reference/SELECTINPUT#refSELECTINPUT","Find out about the SELECTINPUT command","nav-link",,"refSELECTINPUT"
+			PRINT "SELECTINPUT"
+		END LINK
+		LINK "/reference/SELECTINPUTOPT#refSELECTINPUTOPT","Find out about the SELECTINPUTOPT command","nav-link",,"refSELECTINPUT"
+			PRINT "SELECTINPUTOPT"
 		END LINK
 		LINK "/reference/SESSCLEAR#refSESSCLEAR","Find out about the SESSCLEAR command","nav-link",,"refSESSCLEAR"
 			PRINT "SESSCLEAR"

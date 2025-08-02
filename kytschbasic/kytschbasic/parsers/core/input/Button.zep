@@ -34,6 +34,8 @@ class Button extends Command
 		switch(command) {
 			case "BUTTON":
 				return this->processButton(args);
+			case "BUTTONSUBMIT":
+				return this->processButton(args, true);
 			case "END BUTTON":
 				return "</button>";
 			default:
@@ -41,13 +43,12 @@ class Button extends Command
 		}
 	}
 
-	private function processButton(array args)
+	private function processButton(array args, bool submit = false)
 	{
 		var output = "<?= \"<button", type = "\"button\"";
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			if (substr(args[0], 0, 6) == "SUBMIT") {
-				let args[0] = this->cleanArg("SUBMIT ", args[0]);
+			if (submit) {
 				let type = "\"submit\"";
 			}
 			let output .= " name=" . this->outputArg(args[0]);

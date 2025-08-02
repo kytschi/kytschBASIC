@@ -146,11 +146,10 @@ class Compiler
 
 		try {
 			var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
-			let output = output . "<!DOCTYPE html>";
-			let output = output . parsed;
+			let output = "<!DOCTYPE html>" . parsed;
 			file_put_contents(constant("_ROOT") . "/compiled.php", output);
-			require (constant("_ROOT") . "/compiled.php");
-			die();
+			require_once(constant("_ROOT") . "/compiled.php");
+			return "";
 		} catch Exception, err {
 			err->fatal(constant("_ROOT") . "/" . route->template);
 		} catch \RuntimeException | \Exception | \ParserError, err {
@@ -166,7 +165,7 @@ class Compiler
 
 	public function run()
 	{
-		var config, url_vars = [], user_session_var = "user", url, complie_route = null;
+		var config, url_vars = [], user_session_var = "user", url, fallback = null;
 
 		let config = constant("CONFIG");
 
@@ -187,20 +186,28 @@ class Compiler
 
 			// Find the primary and login route first if there is one.
 			for route in config["routes"] {
-				if (isset(route->login) && !empty(route->login)) {
+				if (empty(route)) {
+					continue;
+				} elseif (isset(route->login) && !empty(route->login)) {
 					let login_route = route;
 					continue;
 				} elseif (isset(route->primary) && !empty(route->primary)) {
 					let primary_route = route;
 					continue;
-				} elseif (route->url == "*") {
+				}
+				
+				if (route->url == "*") {
 					// Fallback url, catch all basically.
-					//let complie_route = route;
+					let fallback = route;
 					continue;
 				}
 			}
 
 			for route in config["routes"] {
+				if (empty(route)) {
+					continue;
+				}
+
 				let path = url["path"];
 				let url_vars = [];
 
@@ -232,6 +239,8 @@ class Compiler
 				}
 				
 				if (route->url == path) {
+					let fallback = null;
+
 					/*
 					 * If there is a login and a primary route, kick the user to it.
 					 */
@@ -257,13 +266,12 @@ class Compiler
 					}
 
 					define("_UVARS", url_vars);
-					let complie_route = route;
-					break;
+					return this->compile(route);
 				}
 			}
 
-			if (complie_route) {
-				this->compile(complie_route);
+			if (fallback) {
+				return this->compile(fallback);
 			}
 		}
 

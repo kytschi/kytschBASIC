@@ -581,7 +581,7 @@ SCREEN "fiveandthreess"
                     PRINT "No. players"
                     NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='4' min='2'"
                 END DIV
-                BUTTON SUBMIT "btnSubmit",  "btn-submit"
+                BUTTONSUBMIT "btnSubmit",  "btn-submit"
                     PRINT "setup"
                 END BUTTON
             END FORM
