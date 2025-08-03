@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "COUNT statment | kytschBASIC"
+	NAME "DATEFORMAT statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,22 +9,21 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "COUNT","heading-command basic"
+					PRINT "DATEFORMAT","heading-command basic"
 					LINE BREAK
-					PRINT "STRING","heading-args"
+					PRINT "STRING, FORMAT","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "This function will return the length of an array."
+					PRINT "This function will help format a date."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DIM strings$=("kytsch", "BASIC")
-DEF count%=COUNT(strings$)
-PRINT count%
+DEF date%=DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s")
+PRINT date%
 LINE BREAK
-PRINT COUNT(strings$), "basic"
+PRINT DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s"), "basic"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -48,8 +47,8 @@ PRINT COUNT(strings$), "basic"
 						PRINT "DIM"
 					END LINK
 					PRINT " | "
-					LINK "/reference/DATEFORMAT#refDATEFORMAT"
-						PRINT "DATEFORMAT"
+					LINK "/reference/COUNT#refCOUNT"
+						PRINT "COUNT"
 					END LINK
 				END DIV
 			END DIV

@@ -48,8 +48,13 @@ class Text extends Command
 
 	private function processPrint(array args)
 	{
-		var value="", output = "<?= \"<span";
-				
+		var value="", output = "<?= \"<span", matches;
+		
+		if preg_match_all("/<\?php(.*?)\?>/s", args[0], matches) {
+			let args[0] = str_replace("<?" . matches[0][0], "", args[0]);
+			let output = "<?" . matches[0][0] . output;
+        }
+
 		let value = args[0];
 						
 		if (isset(args[1]) && !empty(args[1])) {

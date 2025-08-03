@@ -130,6 +130,9 @@ HEADER
 		LINK "/reference/CPRINT#refCPRINT","Find out about the CPRINT command","nav-link",,"refCPRINT"
 			PRINT "CPRINT"
 		END LINK
+		LINK "/reference/DATEFORMAT#refDATEFORMAT","Find out about the DATEFORMAT command","nav-link",,"refDATEFORMAT"
+			PRINT "DATEFORMAT"
+		END LINK
 		LINK "/reference/DBIND#refDBIND","Find out about the DBIND command","nav-link",,"refDBIND"
 			PRINT "DBIND"
 		END LINK
@@ -247,6 +250,9 @@ HEADER
 		LINK "/reference/IF#refIF","Find out about the IF command","nav-link",,"refIF"
 			PRINT "IF"
 		END LINK
+		LINK "/reference/IFE#refIFE","Find out about the IFE command","nav-link",,"refIFE"
+			PRINT "IFE"
+		END LINK
 		LINK "/reference/IFNTE#refIFNTE","Find out about the IFNTE command","nav-link",,"refIFNTE"
 			PRINT "IFNTE"
 		END LINK
@@ -354,6 +360,9 @@ HEADER
 		END LINK
 		LINK "/reference/RSET#refRSET","Find out about the RSET command","nav-link",,"refRSET"
 			PRINT "RSET"
+		END LINK
+		LINK "/reference/SANITISE#refSANITISE","Find out about the SANITISE command","nav-link",,"refSANITISE"
+			PRINT "SANITISE"
 		END LINK
 		LINK "/reference/SCREEN#refSCREEN","Find out about the SCREEN command","nav-link",,"refSCREEN"
 			PRINT "SCREEN"

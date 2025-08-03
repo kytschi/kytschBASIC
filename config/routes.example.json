@@ -84,6 +84,10 @@
 		"template": "project/reference/core/function/COUNT.kb"
 	},
 	{
+		"url": "/reference/DATEFORMAT",
+		"template": "project/reference/core/function/DATEFORMAT.kb"
+	},
+	{
 		"url": "/reference/LET",
 		"template": "project/reference/core/variables/LET.kb"
 	},
@@ -173,6 +177,10 @@
 	{
 		"url": "/reference/IFNTE",
 		"template": "project/reference/core/conditional/IFNTE.kb"
+	},
+	{
+		"url": "/reference/IFE",
+		"template": "project/reference/core/conditional/IFE.kb"
 	},
 	{
 		"url": "/reference/FOR",
@@ -651,6 +659,10 @@
 	{
 		"url": "/reference/UUID",
 		"template": "project/reference/core/security/UUID.kb"
+	},
+	{
+		"url": "/reference/SANITISE",
+		"template": "project/reference/core/security/SANITISE.kb"
 	},
 
 	{

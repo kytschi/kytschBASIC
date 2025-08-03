@@ -278,7 +278,7 @@ class Variables
 		return false;
 	}
 
-	public function isVariable(string arg)
+	public function isVariable(string arg, bool hash = false)
 	{
 		if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
 			return false;
@@ -289,7 +289,7 @@ class Variables
 		}
 		
 		// Mostly like the hash.
-		if (substr_count(arg, "$") > 1) {
+		if (hash && substr_count(arg, "$") > 1) {
 			return false;
 		}
 
@@ -379,6 +379,24 @@ class Variables
 		}
 
 		return "count(" . this->cleanArg("COUNT", arg) . ")";
+	}
+
+	private function processDateformat(arg)
+	{
+		var splits, cleaned, args;
+		let splits = this->equalsSplit(arg);
+
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("DATEFORMAT", splits[1]);
+			let args = this->commaSplit(cleaned);
+			let arg = str_replace(splits[1], "date_format($KBDATE, " . args[1] . ")", arg);
+			return "$KBDATE = date_create(" . args[0] . ");" . arg;
+		} else {
+			let cleaned = this->cleanArg("DATEFORMAT", arg);
+			let args = this->commaSplit(cleaned);
+			let arg = str_replace(splits[0], "$KBDATE", arg);
+			return "<?php $KBDATE = date_create(" . args[0] . "); $KBDATE = date_format($KBDATE, " . args[1] . ");?>" . arg;
+		}
 	}
 
 	private function processDef(string line, args, bool let_var = false, bool javascript = false)
@@ -604,18 +622,22 @@ class Variables
 	public function processValue(arg)
 	{
 		switch (this->getCommand(arg)) {
+			case "COUNT":
+				return this->processCount(arg);
+			case "DATEFORMAT":
+				return this->processDateformat(arg);
 			case "HASHVERIFY":
 				return (new Encryption())->processHashVerify(arg);
 			case "HASH":
 				return (new Encryption())->processHash(arg);
-			case "TWODP":
-				return this->processTwoDP(arg);
-			case "COUNT":
-				return this->processCount(arg);
 			case "VALIDUSER":
 				return this->processValidUser(arg);
+			case "SANITISE":
+				return this->processSanitise(arg);
 			case "SESSREAD":
 				return this->processSessionRead(arg);
+			case "TWODP":
+				return this->processTwoDP(arg);
 			case "UUID":
 				return (new Encryption())->processUUID(arg);
 			case "VALIDCAPTCHA":				
@@ -624,4 +646,25 @@ class Variables
 				return null;
 		}
 	}
+
+	public function processSanitise(arg)
+    {
+        var checks = [
+            "\\":"&#92;",
+            "’": "&#39;"
+        ],
+        check, replace, splits, cleaned;
+
+		for check, replace in checks {
+			let arg = str_replace(check, replace, arg);
+		}
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("SANITISE", splits[1]);
+			return str_replace(splits[1], "filter_var(rawurldecode(" . cleaned . "), FILTER_SANITIZE_FULL_SPECIAL_CHARS)", arg);
+		}
+        
+		return "filter_var(rawurldecode(" . arg . "), FILTER_SANITIZE_FULL_SPECIAL_CHARS);";
+    }
 }

@@ -39,6 +39,10 @@ PRINT hashed$
 					LINK "/reference/UUID#refUUID"
 						PRINT "UUID"
 					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SANITISE#refSANITISE"
+						PRINT "SANITISE"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

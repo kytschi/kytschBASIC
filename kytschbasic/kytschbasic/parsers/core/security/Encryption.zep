@@ -54,7 +54,7 @@ class Encryption extends Command
 			let args = this->args(cleaned);
 
 			let args[1] = trim(args[1], "\"");
-			if (!this->isVariable(args[1])) {
+			if (!this->isVariable(args[1], true)) {
 				let args[1] = "'" . args[1] . "'";
 			}
 			

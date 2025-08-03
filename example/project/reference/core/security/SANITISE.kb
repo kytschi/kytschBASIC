@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "UUID statment | kytschBASIC"
+	NAME "SANITISE statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,24 +9,24 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "UUID","basic"
+					PRINT "SANITISE","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "Generate a UUID."
+					PRINT "Sanitise the input from a user for example so not to expose yourself to things like XSS."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DEF uuid$=UUID("generate")
-PRINT uuid$
+DEF content$=SANITISE("&lt;script&gt;alert('XSS')&lt;/script&gt;")
+PRINT content$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					DEF uuid$=UUID("generate")
-					PRINT uuid$
+					DEF content$=SANITISE("<script>alert('XSS')</script>")
+					PRINT content$
 				END DIV
 				HEADING 4
 					PRINT "See also"
@@ -40,8 +40,8 @@ PRINT uuid$
 						PRINT "HASHVERIFY"
 					END LINK
 					PRINT "&nbsp;|&nbsp;"
-					LINK "/reference/SANITISE#refSANITISE"
-						PRINT "SANITISE"
+					LINK "/reference/UUID#refUUID"
+						PRINT "UUID"
 					END LINK
 				END DIV
 			END DIV
