@@ -389,13 +389,13 @@ class Variables
 		if (count(splits) > 1) {
 			let cleaned = this->cleanArg("DATEFORMAT", splits[1]);
 			let args = this->commaSplit(cleaned);
-			let arg = str_replace(splits[1], "date_format($KBDATE, " . args[1] . ")", arg);
-			return "$KBDATE = date_create(" . args[0] . ");" . arg;
+			let arg = str_replace(splits[1], "date_format($KBDATE, " . args[1] . ");", arg);
+			return "$KBDATE = " . args[0] . "; if(!empty($KBDATE)) {$KBDATE = date_create($KBDATE);" . arg . "}";
 		} else {
 			let cleaned = this->cleanArg("DATEFORMAT", arg);
 			let args = this->commaSplit(cleaned);
 			let arg = str_replace(splits[0], "$KBDATE", arg);
-			return "<?php $KBDATE = date_create(" . args[0] . "); $KBDATE = date_format($KBDATE, " . args[1] . ");?>" . arg;
+			return "<?php $KBDATE = " . args[0] . "; if(!empty($KBDATE)) {$KBDATE = date_create($KBDATE); $KBDATE = date_format($KBDATE, " . args[1] . ");}?>" . arg;
 		}
 	}
 
