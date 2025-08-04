@@ -37,6 +37,8 @@ class Files extends Command
 				return this->processCopyFile(args);
 			case "COPYUPLOAD":
 				return this->processCopyFileUpload(args);
+			case "WRITEFILE":
+				return this->processWriteFile(args);
 			default:
 				return null;
 		}	
@@ -81,5 +83,24 @@ class Files extends Command
 				}
 			}
 		} ?>";
+	}
+
+	private function processWriteFile(array args)
+	{
+		var output = "<?php file_put_contents(";
+				
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= args[0];
+		}
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= ", \"". this->outputArg(args[1]) . "\"";
+		}
+
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= ", FILE_APPEND";
+		}
+
+		return output . "); ?>";
 	}
 }

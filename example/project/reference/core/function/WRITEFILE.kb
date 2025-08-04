@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "DATEFORMAT statment | kytschBASIC"
+	NAME "WRITEFILE statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,32 +9,23 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "DATEFORMAT","heading-command basic"
+					PRINT "WRITEFILE","heading-command basic"
 					LINE BREAK
-					PRINT "STRING, FORMAT","heading-args"
+					PRINT "FILE, CONTENT, APPEND (Optional)","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "This function will help format a date."
+					PRINT "This function will write some content to a file."
+				END SWRITE
+				SWRITE
+					PRINT "NOTE: ", "basic"
+					PRINT "you will need to set permission to the folder you want to write the file into."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DEF date%=DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s")
-PRINT date%
-LINE BREAK
-PRINT DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s"), "basic"
+WRITEFILE "_ROOT/robots.txt", "User-agent: *\n Disallow:"
 				END CPRINT
-				HEADING 4
-					PRINT "Output"
-				END HEADING 4
-				DIV "kb-code-block"
-					DIM strings$=("kytsch", "BASIC")
-					DEF count%=COUNT(strings$)
-					PRINT count%
-					LINE BREAK
-					PRINT COUNT(strings$), "basic"
-				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
@@ -51,8 +42,8 @@ PRINT DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s"), "basic"
 						PRINT "COUNT"
 					END LINK
 					PRINT " | "
-					LINK "/reference/WRITEFILE#refWRITEFILE"
-						PRINT "WRITEFILE"
+					LINK "/reference/DATEFORMAT#refDATEFORMAT"
+						PRINT "DATEFORMAT"
 					END LINK
 				END DIV
 			END DIV

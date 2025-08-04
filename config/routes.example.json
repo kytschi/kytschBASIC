@@ -88,6 +88,10 @@
 		"template": "project/reference/core/function/DATEFORMAT.kb"
 	},
 	{
+		"url": "/reference/WRITEFILE",
+		"template": "project/reference/core/function/WRITEFILE.kb"
+	},
+	{
 		"url": "/reference/LET",
 		"template": "project/reference/core/variables/LET.kb"
 	},

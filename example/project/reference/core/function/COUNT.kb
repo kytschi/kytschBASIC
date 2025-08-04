@@ -51,6 +51,10 @@ PRINT COUNT(strings$), "basic"
 					LINK "/reference/DATEFORMAT#refDATEFORMAT"
 						PRINT "DATEFORMAT"
 					END LINK
+					PRINT " | "
+					LINK "/reference/WRITEFILE#refWRITEFILE"
+						PRINT "WRITEFILE"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

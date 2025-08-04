@@ -484,6 +484,9 @@ HEADER
 		LINK "/reference/WINDOW#refWINDOW","Find out about the WINDOW command","nav-link",,"refWINDOW"
 			PRINT "WINDOW"
 		END LINK
+		LINK "/reference/WRITEFILE#refWRITEFILE","Find out about the WRITEFILE command","nav-link",,"refWRITEFILE"
+			PRINT "WRITEFILE"
+		END LINK
 	END MENU
 END HEADER
 
