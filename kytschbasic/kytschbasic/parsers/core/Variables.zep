@@ -213,6 +213,11 @@ class Variables
 		return arg;
 	}
 
+	public function cleanIf(arg)
+	{
+		return rtrim(rtrim(arg, " THEN"), " THE");
+	}
+
 	private function cleanJS(arg)
 	{
 		return ltrim(arg, "$");
@@ -369,12 +374,47 @@ class Variables
 		<span class=\"kb-benchmark\"></span>";
 	}
 
+	private function processContains(arg)
+	{
+		var splits, args, cleaned;
+
+		let arg = this->cleanIf(arg);
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("CONTAINS", splits[1]);
+			if (empty(cleaned)) {
+				throw new Exception("Invalid CONTAINS");
+			}
+			let args = this->commaSplit(cleaned);
+			return str_replace(splits[1], "in_array(" . args[1] . ", " . args[0] . ")", arg);
+		}
+
+		let cleaned = this->cleanArg("CONTAINS", arg);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid CONTAINS");
+		}
+
+		let args = this->commaSplit(cleaned);
+		if (count(args) != 2) {
+			throw new Exception("Invalid CONTAINS");
+		}
+
+		return "in_array(" . args[1] . ", " . args[0] . ")";
+	}
+
 	private function processCount(arg)
 	{
 		var splits, cleaned;
+
+		let arg = this->cleanIf(arg);
+
 		let splits = this->equalsSplit(arg);
 		if (count(splits) > 1) {
 			let cleaned = this->cleanArg("COUNT", splits[1]);
+			if (empty(cleaned)) {
+				throw new Exception("Invalid COUNT");
+			}
 			return str_replace(splits[1], "count(" . cleaned . ")", arg);
 		}
 
@@ -622,6 +662,8 @@ class Variables
 	public function processValue(arg)
 	{
 		switch (this->getCommand(arg)) {
+			case "CONTAINS":
+				return this->processContains(arg);
 			case "COUNT":
 				return this->processCount(arg);
 			case "DATEFORMAT":

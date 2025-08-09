@@ -25,6 +25,9 @@ HEADER
 		LINK "/arcade","Go to page on arcade library","nav-link"
 			PRINT "Arcade"
 		END LINK
+		LINK "/examples","Go to page on various examples of apps, utilities, and systems built in kytschBASIC","nav-link"
+			PRINT "Examples"
+		END LINK
 		LINK "/news","What's in the news","nav-link"
 			PRINT "News"
 		END LINK

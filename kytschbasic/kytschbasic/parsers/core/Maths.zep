@@ -97,7 +97,6 @@ class Maths extends Variables
 		}
 
 		let cleaned = this->cleanArg("ABS", find);
-
 		if (empty(cleaned)) {
 			throw new Exception("Invalid ABS");
 		}
@@ -116,7 +115,6 @@ class Maths extends Variables
 		}
 
 		let cleaned = this->cleanArg("ACOS", find);
-
 		if (empty(cleaned)) {
 			throw new Exception("Invalid ACOS");
 		}
@@ -349,13 +347,19 @@ class Maths extends Variables
 
 	public function processRnd(arg)
 	{
-		var args, cleaned;
+		var args, cleaned, find;
 
 		if (arg == "RND") {
 			return str_replace(arg, "rand(1, 10)", arg);
 		}
 
-		let cleaned = this->cleanArg("RND", arg);
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("RND", find);
 		if (empty(cleaned)) {
 			throw new Exception("Invalid RND");
 		}
@@ -364,8 +368,8 @@ class Maths extends Variables
 		if (count(args) != 2) {
 			throw new Exception("Invalid RND");
 		}
-		
-		return str_replace(arg, "rand(intval(" . args[0] . "), intval(" . args[1] . "))", arg);
+
+		return str_replace(find, "rand(intval(" . args[0] . "), intval(" . args[1] . "))", arg);
 	}
 
 	public function processSin(arg)
@@ -389,15 +393,20 @@ class Maths extends Variables
 
 	public function processSgn(arg)
 	{
-		let arg = this->cleanArg("SGN", arg);
+		var args, cleaned, find;
 
-		if (empty(arg)) {
-			let arg = 0;
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
 		}
 
-		let arg = arg;
+		let cleaned = this->cleanArg("SGN", find);
+		if (empty(cleaned) && cleaned != 0) {
+			throw new Exception("Invalid SGN");
+		}
 
-		return "((floatval(" . arg . ") > 0) ? 1 : ((floatval(" . arg . ") < 0) ? -1 : 0))";
+		return str_replace(find, "((floatval(" . cleaned . ") > 0) ? 1 : ((floatval(" . cleaned . ") < 0) ? -1 : 0))", arg);
 	}
 
 	public function processSqr(arg)

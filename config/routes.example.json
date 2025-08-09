@@ -684,5 +684,10 @@
 	{
 		"url": "/reference/SESSDESTORY",
 		"template": "project/reference/core/session/SESSDESTORY.kb"
+	},
+
+	{
+		"url": "/examples",
+		"template": "project/examples/index.kb"
 	}
 ]

@@ -1,0 +1,30 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "Examples | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "Examples"
+				END HEADING 2
+				SWRITE
+					PRINT "Here is a list of various example apps, utilities and systems written in kytschBASIC."
+				END SWRITE
+				HEADING 3
+					LINE BREAK
+					PRINT "Lottery number generator"
+				END HEADING 3
+				LINK "/examples/lottery","Lottery number generator"
+					PRINT "View it here"
+				END LINK
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END
