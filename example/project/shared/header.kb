@@ -115,6 +115,9 @@ HEADER
 		LINK "/reference/CIRCLEF#refCIRCLEF","Find out about the CIRCLEF command","nav-link",,"refCIRCLEF"
 			PRINT "CIRCLEF"
 		END LINK
+		LINK "/reference/CONTAINS#refCONTAINS","Find out about the CONTAINS command","nav-link",,"refCONTAINS"
+			PRINT "CONTAINS"
+		END LINK
 		LINK "/reference/COPYFILE#refCOPYFILE","Find out about the COPYFILE command","nav-link",,"refCOPYFILE"
 			PRINT "COPYFILE"
 		END LINK
