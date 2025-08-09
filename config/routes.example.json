@@ -80,6 +80,10 @@
 	},
 
 	{
+		"url": "/reference/CONTAINS",
+		"template": "project/reference/core/function/CONTAINS.kb"
+	},
+	{
 		"url": "/reference/COUNT",
 		"template": "project/reference/core/function/COUNT.kb"
 	},
