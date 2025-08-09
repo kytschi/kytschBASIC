@@ -28,6 +28,36 @@ LOAD "_ROOT/project/shared/header"
 				FOR val$ IN numbers$
 					PRINT val$ + "&nbsp;"
 				NEXT
+				HEADING 3
+					LINE BREAK
+					PRINT "Euro Millions Lottery"
+				END HEADING 3
+				DIM numbers$=()
+				LET max%=0
+				WHILE (max%<=4)
+					DEF number%=RND(1, 50)
+					IFE CONTAINS(numbers%, number%) THEN
+						LET numbers$()=number%
+					END IF
+					LET max%=COUNT(numbers$)
+				WEND
+				FOR val$ IN numbers$
+					PRINT val$ + "&nbsp;"
+				NEXT
+				DIM numbers$=()
+				LET max%=0
+				WHILE (max%<=1)
+					DEF number%=RND(1, 12)
+					IFE CONTAINS(numbers%, number%) THEN
+						LET numbers$()=number%
+					END IF
+					LET max%=COUNT(numbers$)
+				WEND
+				LINE BREAK
+				PRINT "Lucky Stars: "
+				FOR val$ IN numbers$
+					PRINT val$ + "&nbsp;"
+				NEXT
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"
