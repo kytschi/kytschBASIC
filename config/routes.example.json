@@ -689,5 +689,9 @@
 	{
 		"url": "/examples",
 		"template": "project/examples/index.kb"
+	},
+	{
+		"url": "/examples/lottery",
+		"template": "project/examples/lottery.kb"
 	}
 ]
