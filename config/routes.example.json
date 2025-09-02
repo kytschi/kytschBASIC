@@ -697,5 +697,9 @@
 	{
 		"url": "/examples/lottery",
 		"template": "project/examples/lottery.kb"
+	},
+	{
+		"url": "/examples/name-picker",
+		"template": "project/examples/name_picker.kb"
 	}
 ]

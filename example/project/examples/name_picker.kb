@@ -1,0 +1,37 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "Random name picker | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "Random name picker"
+				END HEADING 2
+				DIM names$=("Mike", "Ash", "Lor")
+				DIM picks$=()
+				DEF max%=0
+				WHILE (max%<=2)
+					DEF number%=RND(0, 2)
+					IFE CONTAINS(picks$, names$(number%)) THEN
+						LET picks$()=names$(number%)
+					END IF
+					LET max%=COUNT(picks$)
+				WEND
+
+				LET max%=max%-1
+				FOR iLoop%=0 TO max%
+					PRINT names$(iLoop%) + " = "
+					PRINT picks$(iLoop%)
+					LINE BREAK
+				NEXT
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END
