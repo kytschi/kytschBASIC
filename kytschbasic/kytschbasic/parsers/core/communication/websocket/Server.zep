@@ -28,7 +28,6 @@ namespace KytschBASIC\Parsers\Core\Communication\Websocket;
 use KytschBASIC\Compiler;
 use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Communication\Websocket\Chat;
-use Swoole\Http\Request;
 use Swoole\WebSocket\Server as WSServer;
 use Swoole\WebSocket\Frame;
 
@@ -39,7 +38,7 @@ class Server
 
     public function __construct(string config_dir)
     {
-        var compiler, config;
+        var compiler, config = [];
 
         if (config_dir) {
             let compiler = new Compiler(config_dir, true);
@@ -54,6 +53,11 @@ class Server
 		}
 
 		let self::config = self::config["websocket"];
+
+        if (self::config->debug) {
+            let config["log_level"] = SWOOLE_LOG_DEBUG;
+            let config["trace_flags"] = SWOOLE_TRACE_ALL;
+        }
 
         if (self::config->secure) {
             let self::server = new WSServer(
@@ -72,18 +76,15 @@ class Server
                 //"ssl_ciphers": "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256"
                 //"ssl_protocols": 32 | 64
             ];
-
-            if (self::config->debug) {
-                let config["log_level"] = SWOOLE_LOG_DEBUG;
-                let config["trace_flags"] = SWOOLE_TRACE_ALL;
-            }
-
-            self::server->set(config);
         } else {
             let self::server = new WSServer(
                 self::config->host,
                 self::config->port
             );
+        }
+
+        if (count(config)) {
+            self::server->set(config);
         }
 
         self::server->on(
@@ -102,6 +103,11 @@ class Server
         );
 
         self::server->on(
+            "request",
+            "KytschBASIC\\Parsers\\Core\\Communication\\Websocket\\Server::request"
+        );
+
+        self::server->on(
             "close",
             "KytschBASIC\\Parsers\\Core\\Communication\\Websocket\\Server::close"
         );
@@ -109,7 +115,7 @@ class Server
         self::server->start();
     }
     
-    private static function broadcast(server, frame, data, type = "chat")
+    private static function broadcast(server, frame, data, type = "chat", from = "server")
     {
         var connection;
 
@@ -120,7 +126,8 @@ class Server
                     json_encode(
                         [
                             "type": type,
-                            "connection_id": frame->fd,
+                            "client_id": frame->fd,
+                            "from": from,
                             "data": data,
                             "created_at": time()
                         ]
@@ -130,7 +137,7 @@ class Server
         }
     }
 
-    public static function close(server, int connection_id, data = null)
+    public static function close(server, int client_id, data = null)
     {
         var connection;
 
@@ -144,7 +151,7 @@ class Server
                     json_encode(
                         [
                             "type": "disconnect",
-                            "connection_id": connection_id,
+                            "client_id": client_id,
                             "data": "A user has disconnected"
                         ]
                     )
@@ -157,21 +164,24 @@ class Server
     {
         var data;
 
-        echo "Received message from connection_id: " . frame->fd . ", " . frame->data . "\n";
+        echo "Received message from client_id: " . frame->fd . ", " . frame->data . "\n";
         
         // Parse the incoming JSON message
-        let data = json_decode(frame->data, true);
+        let data = json_decode(frame->data, false);
         
         // Process different message types
-        switch (data["type"]) {
+        switch (data->type) {
+            case "broadcast":
+                self::broadcast(server, frame, data->data, "broadcast");
+                break;
             case "chat":
-                self::broadcast(server, frame, data["data"]);
+                self::broadcast(server, frame, data->data);
                 break;
             case "game":
                 self::broadcast(server, frame, data, "game");
                 break;
             default:
-                echo "Unknown message type, " . data["type"];
+                echo "Unknown message type, " . data->type;
                 break;
         }
     }
@@ -187,7 +197,21 @@ class Server
                 [
                     "type": "welcome",
                     "data": "Connected to WebSocket server",
-                    "connection_id": request->fd
+                    "client_id": request->fd
+                ]
+            )
+        );
+    }
+
+    public static function request(request, response)
+    {
+        response->header("Content-Type", "application/json");
+        response->end(
+            json_encode(
+                [
+                    "status": "success",
+                    "data": "WebSocket Server is running",
+                    "clients_count": self::server->connections->count()
                 ]
             )
         );

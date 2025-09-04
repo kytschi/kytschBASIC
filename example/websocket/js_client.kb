@@ -1,0 +1,94 @@
+DIV
+    PRINT "Messages"
+    LINE BREAK
+    TEXTAREA "message",,,"Send a message","message"
+END DIV
+LINE BREAK
+LINE BREAK
+DIV ,"messages"
+END DIV
+LINE BREAK
+LINE BREAK
+JAVASCRIPT
+    // WebSocket connection
+    const host = "192.168.122.2";
+    const port = 8081;
+    const socket = new WebSocket('ws:///' + host + ':' + port);
+    var client_id;
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+        addMessage('Connected to WebSocket server');
+        console.log('Connected to server', event);
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function (event) {
+        try {
+            // Try to parse as JSON
+            const data = JSON.parse(event.data);
+ 
+            if (data.type == "welcome") {
+                client_id = data.client_id;
+            }
+
+            if (client_id != data.client_id) {
+                addMessage(`Received: ${data.type} - ${data.data}`);
+            }
+
+            console.log('Message from server:', data, client_id);
+        } catch (e) {
+            // If not JSON, display as plain text
+            addMessage(`Received: ${event.data}`);
+            console.log('Message from server:', event.data);
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', function (event) {
+        addMessage('Disconnected from server');
+        console.log('Disconnected from server');
+    });
+
+    // Error handling
+    socket.addEventListener('error', function (event) {
+        addMessage('WebSocket error occurred');
+        console.error('WebSocket error:', event);
+    });
+
+    // Send JSON message
+    function sendJson() {
+        const input = document.getElementById('message');
+        const message = input.value.trim();
+        
+        if (message && socket.readyState === WebSocket.OPEN) {
+            const jsonData = {
+                type: 'chat',
+                data: message,
+                from: "Mike",
+                client_id: client_id,
+                timestamp: new Date().toISOString()
+            };
+            
+            socket.send(JSON.stringify(jsonData));
+            addMessage(`Sent JSON: ${message}`);
+            input.value = '';
+        }
+    }
+
+    // Add message to display
+    function addMessage(text) {
+        const messagesDiv = document.getElementById('messages');
+        const messageElement = document.createElement('div');
+        messageElement.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
+        messagesDiv.appendChild(messageElement);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Send the message on Enter key
+    document.getElementById('message').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendJson();
+        }
+    });
+END JAVASCRIPT

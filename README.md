@@ -98,6 +98,16 @@ cd kytschBASIC/kytschbasic
 zephir build
 ```
 
+## Starting the web sockets server
+
+To start using the websocket server see the examples in `example/websocket/server.php` and `example/websocket/js_client.kb`.
+
+You have to run the server for PHP cli with a command as follows,
+```bash
+cd kytschbasic/example/websocket
+php -f server.php 
+```
+
 ## More information
 For more information and a to view the available command set please visit [https://kytschbasic.org](https://kytschbasic.org)
 
