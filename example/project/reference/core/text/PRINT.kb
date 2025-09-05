@@ -60,6 +60,14 @@ PRINT string$
 						PRINT "LCASE"
 					END LINK
 					PRINT " | "
+					LINK "/reference/RND"
+						PRINT "RND"
+					END LINK
+					PRINT " | "
+					LINK "/reference/RNDSTRING"
+						PRINT "RNDSTRING"
+					END LINK
+					PRINT " | "
 					LINK "/reference/SWRITE"
 						PRINT "SWRITE"
 					END LINK

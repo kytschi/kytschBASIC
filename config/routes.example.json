@@ -543,6 +543,10 @@
 		"template": "project/reference/core/maths/RND.kb"
 	},
 	{
+		"url": "/reference/RNDSTRING",
+		"template": "project/reference/core/text/RNDSTRING.kb"
+	},
+	{
 		"url": "/reference/SGN",
 		"template": "project/reference/core/maths/SGN.kb"
 	},

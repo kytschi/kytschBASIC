@@ -47,6 +47,14 @@ PRINT UCASE("Hello World!")
 					LINK "/reference/LCASE"
 						PRINT "LCASE"
 					END LINK
+					PRINT " | "
+					LINK "/reference/RND"
+						PRINT "RND"
+					END LINK
+					PRINT " | "
+					LINK "/reference/RNDSTRING"
+						PRINT "RNDSTRING"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

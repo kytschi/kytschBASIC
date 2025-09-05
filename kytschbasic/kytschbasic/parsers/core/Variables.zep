@@ -603,6 +603,54 @@ class Variables
 		return "<?php sort(" . this->cleanArg("NSORT", args[0]) . ", SORT_NUMERIC); ?>";
 	}
 
+	public function processRndString(arg)
+	{
+		var find, length = 8, args,
+		keyspace = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		pieces = [], max, iLoop = 0, key, str;
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+		
+		/*
+         * If the length is less than one set to default length of 8.
+         */
+		if (find != "RNDSTRING") {
+			let length = intval(this->cleanArg("RNDSTRING", find));
+			if (length < 1) {
+				let length = 8;
+			}
+		}
+
+        /*
+         * Generate a max length passed on the keyspace.
+         */
+        let max = mb_strlen(keyspace, "8bit") - 1;
+
+        /*
+         * Loop through and build pieces.
+         */
+        while (iLoop < length) {
+            let key = random_int(0, max);
+            let pieces[] = substr(keyspace, key, 1);
+            let iLoop += 1;
+        }
+
+        /*
+         * Implode the pieces and return the random string.
+         */
+        let str = "'" . (implode("", pieces)) . "'";
+
+		if (find == "RNDSTRING") {
+			return str_replace(find, str, arg);
+		}
+
+		return str_replace(find, str, arg);
+	}
+
 	public function processSessionRead(arg)
 	{
 		var splits, cleaned;
@@ -672,6 +720,8 @@ class Variables
 				return (new Encryption())->processHashVerify(arg);
 			case "HASH":
 				return (new Encryption())->processHash(arg);
+			case "RNDSTRING":
+				return this->processRndString(arg);
 			case "VALIDUSER":
 				return this->processValidUser(arg);
 			case "SANITISE":

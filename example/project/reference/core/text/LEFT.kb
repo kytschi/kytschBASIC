@@ -88,6 +88,14 @@ PRINT string$
 						PRINT "RIGHT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/RND"
+						PRINT "RND"
+					END LINK
+					PRINT " | "
+					LINK "/reference/RNDSTRING"
+						PRINT "RNDSTRING"
+					END LINK
+					PRINT " | "
 					LINK "/reference/RSET"
 						PRINT "RSET"
 					END LINK

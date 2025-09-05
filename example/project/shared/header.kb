@@ -358,11 +358,14 @@ HEADER
 		LINK "/reference/RGB#refRGB","Find out about the RGB command","nav-link",,"refRGB"
 			PRINT "RGB"
 		END LINK
-		LINK "/reference/RIGHT#refRIGHT","Find out about the DSORT command","nav-link",,"refRIGHT"
+		LINK "/reference/RIGHT#refRIGHT","Find out about the RIGHT command","nav-link",,"refRIGHT"
 			PRINT "RIGHT"
 		END LINK
-		LINK "/reference/RND#refRND","Find out about the RIGHT command","nav-link",,"refRND"
+		LINK "/reference/RND#refRND","Find out about the RND command","nav-link",,"refRND"
 			PRINT "RND"
+		END LINK
+		LINK "/reference/RNDSTRING#refRNDSTRING","Find out about the RNDSTRING command","nav-link",,"refRNDSTRING"
+			PRINT "RNDSTRING"
 		END LINK
 		LINK "/reference/RSET#refRSET","Find out about the RSET command","nav-link",,"refRSET"
 			PRINT "RSET"

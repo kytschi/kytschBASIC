@@ -413,8 +413,27 @@ $(document).ready(function() {
         playerKnocking();
     });
 
-    $("button[name=btnNewGame]").click(() => {
+    $("button[name=btnSetup]").click(() => {
+        $("#playerSelect").show();
+        $("#multiplayerSelect").hide();
+        $("#modalNewGame").show();
+    });
+
+    $("button[name=btnCloseModal]").click(() => {
+        $("#modalNewGame").hide();
+    });
+
+    $("button[name=btnSinglePlayer]").click(() => {
         window.location.reload();
+    });
+
+    $("button[name=btnMultiPlayer]").click(() => {
+        $("#playerSelect").hide();
+        $("#multiplayerSelect").show();
+    });
+    
+    $("button[name=btnMultiPlayerStart]").click(() => {
+        
     });
 });
 END JAVASCRIPT
@@ -500,19 +519,54 @@ SCREEN "sevens"
             BUTTON "btnNewGame", "btn-new-game"
                 PRINT "new game"
             END BUTTON
-            FORM "form_test"
-                LET no_players%=(no_players%+1)
-                DIV "no-players"
-                    PRINT "No. players"
-                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
-                END DIV
-                BUTTONSUBMIT "btnSubmit",  "btn-submit"
-                    PRINT "setup"
-                END BUTTON
-            END FORM
+            DIV "form_test"
+                BUTTON "btnSetup", "btn-submit",,"setup","Setup"
+            END DIV
             TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
         END WINDOW
     END WINDOW
+    DIV "modal fade", "modalNewGame"
+        DIV "modal-dialog"
+            DIV "modal-content"
+                DIV "modal-header"
+                    PRINT "Select game setup"
+                END DIV
+                DIV "modal-body"
+                    DIV "row", "playerSelect"
+                        LET no_players%=(no_players%+1)
+                        DEF game_code$=RNDSTRING
+                        DIV "row break"
+                            PRINT "No. players"
+                            NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
+                        END DIV
+                        DIV "row"
+                            PRINT "Game code"
+                            TEXTINPUT "game_code", game_code$, "form-input"
+                        END DIV
+                        DIV "row break"
+                        END DIV
+                        DIV "row"
+                            DIV "col-full"
+                                BUTTON "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single", "Single player"
+                                BUTTON "btnMultiPlayer", "btn-last-card", "btnMultiPlayer", "multi", "Multiplayer"
+                            END DIV
+                        END DIV
+                    END DIV
+                    DIV "row hide", "multiplayerSelect"
+                        PRINT "Multiplayer"
+                        TEXTINPUT "txtGameID",gameID$,"form-input","Please enter your name","txtPlayerName",true
+                        TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
+                        DIV "row break"
+                        END DIV
+                        BUTTON "btnMultiPlayerStart", "btn-new-game", "btnMultiPlayerStart", "multi", "Start"
+                    END DIV
+                END DIV
+                DIV "modal-footer"
+                    BUTTON "btnCloseModal", "btn-knocking", "btnCloseModal", "close", "Close"
+                END DIV
+            END DIV
+        END DIV
+    END DIV
 END SCREEN
 END BODY
 END
