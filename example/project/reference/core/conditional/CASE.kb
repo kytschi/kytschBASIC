@@ -18,7 +18,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-LET iLoop%=10
+DIM iLoop%=10
 WHILE (iLoop%>0)
     SELECT iLoop%
         CASE 2
