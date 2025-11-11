@@ -18,7 +18,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DIM iLoop%=10
+DEF iLoop%=10
 WHILE (iLoop%>0)
     SELECT iLoop%
         CASE 2
@@ -38,7 +38,7 @@ WEND
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					LET iLoop%=10
+					DEF iLoop%=10
 					WHILE (iLoop%>0)
 						SELECT iLoop%
 							CASE 2
