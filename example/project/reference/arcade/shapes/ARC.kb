@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "ARC","heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, RADIUS, START ANGLE, END ANGLE","heading-args"
+					PRINT "X, Y, START ANGLE, END ANGLE, RADIUS","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE
@@ -29,10 +29,10 @@ SCREEN
 	BITMAP 0,0,640,480
 		RGB 255,0,0
 
-		ARC 320,160,150,25,155
-		ARC 320,310,150,-155,-25
-		ARC 265,235,40,-75,75
-		ARC 375,235,40,105,-105
+		ARC 320,160,25,155,150
+		ARC 320,310,-155,-25,150
+		ARC 265,235,-75,75,40
+		ARC 375,235,105,-105,40
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -44,10 +44,10 @@ END SCREEN
 					BITMAP 0,0,640,480
 						RGB 255,0,0
 
-						ARC 320,160,150,25,155
-						ARC 320,310,150,-155,-25
-						ARC 265,235,40,-75,75
-						ARC 375,235,40,105,-105
+						ARC 320,160,25,155,150
+						ARC 320,310,-155,-25,150
+						ARC 265,235,-75,75,40
+						ARC 375,235,105,-105,40
 					END BITMAP
 				END SCREEN
 				HEADING 4
