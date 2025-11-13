@@ -37,7 +37,7 @@ SWRITE
 					WHITESPACE
 				END TCELL
 				TCELL
-					BUTTON "btn_test",,,"button"
+					BUTTON "btn_test",,,,"button"
 				END TCELL
 				TCELL
 					BUTTON "btn_test2"
@@ -70,7 +70,7 @@ END SWRITE
 										WHITESPACE
 									END TCELL
 									TCELL
-										BUTTON "btn_test",,, "button"
+										BUTTON "btn_test",,,,"button"
 									END TCELL
 									TCELL
 										BUTTON "btn_test2"
