@@ -21,12 +21,12 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT "Wait..."
-SLEEP 1000
+SLEEP 5000
 PRINT "OK ready!"
 				END CPRINT
 				DIV "kb-code-block"
 					PRINT "Wait..."
-					SLEEP 1000
+					SLEEP 5000
 					PRINT "OK ready!"
 				END DIV
 				HEADING 4

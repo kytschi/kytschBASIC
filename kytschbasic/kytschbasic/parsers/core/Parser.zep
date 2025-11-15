@@ -186,9 +186,8 @@ class Parser
 				} elseif (args[0] <= 0) {
 					let args[0] = 1000;
 				}
-				let args[0] = args[0] / 1000;
-				sleep(args[0]);
-				break;
+				let args[0] = args[0] * 1000;
+				return "<?php usleep(" . args[0] . "); ?>";
 			case "SHOWHTML":
 				let this->show_html = true;
 				return "<?php ob_start(); ?>";
