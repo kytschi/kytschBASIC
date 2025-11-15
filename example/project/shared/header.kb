@@ -406,6 +406,9 @@ HEADER
 		LINK "/reference/SIN#refSIN","Find out about the SIN command","nav-link",,"refSIN"
 			PRINT "SIN"
 		END LINK
+		LINK "/reference/SLEEP#refSLEEP","Find out about the SLEEP command","nav-link",,"refSLEEP"
+			PRINT "SLEEP"
+		END LINK
 		LINK "/reference/SORT#refSORT","Find out about the SORT command","nav-link",,"refSORT"
 			PRINT "SORT"
 		END LINK

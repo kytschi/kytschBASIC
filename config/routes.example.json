@@ -92,6 +92,10 @@
 		"template": "project/reference/core/function/DATEFORMAT.kb"
 	},
 	{
+		"url": "/reference/SLEEP",
+		"template": "project/reference/core/function/SLEEP.kb"
+	},
+	{
 		"url": "/reference/WRITEFILE",
 		"template": "project/reference/core/function/WRITEFILE.kb"
 	},

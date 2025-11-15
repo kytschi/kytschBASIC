@@ -178,6 +178,17 @@ class Parser
 		switch (command) {
 			case "REM":
 				return "";
+			case "SLEEP":
+				if (!isset(args[0])) {
+					let args[0] = 1000;
+				} elseif (empty(args[0])) {
+					let args[0] = 1000;
+				} elseif (args[0] <= 0) {
+					let args[0] = 1000;
+				}
+				let args[0] = args[0] / 1000;
+				sleep(args[0]);
+				break;
 			case "SHOWHTML":
 				let this->show_html = true;
 				return "<?php ob_start(); ?>";
