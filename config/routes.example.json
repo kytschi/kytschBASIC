@@ -46,7 +46,7 @@
 	},
 	{
 		"url": "/arcade/omega-doom",
-		"template": "project/arcade/omega_doom.kb"
+		"template": "project/arcade/omega_doom/index.kb"
 	},
 
 	{

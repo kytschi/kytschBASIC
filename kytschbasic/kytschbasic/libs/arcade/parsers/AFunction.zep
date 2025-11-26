@@ -70,7 +70,7 @@ class AFunction extends Command
 		if (animation) {
 			let output .= "$(document).ready(function() {" . args[0] . "();});";
 		}
-		let output .= (animation ? "async ": "") . "function " . args[0] . "(event";
+		let output .= "async function " . args[0] . "(event";
 		array_shift(args);
 
 		for arg in args {

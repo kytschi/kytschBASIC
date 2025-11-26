@@ -46,11 +46,30 @@ AFUNCTION "startNewGame"
             $("#omega-doom-game").fadeIn(
                 "2000",
                 () => {
-                    console.log("game start");
+                    progressSpeech(event, "game-intro-1");
                 }
             );
         }
     );
+END AFUNCTION
+
+AFUNCTION "progressSpeech", "id"
+    $("#omega-doom .progress .speech-progress").hide();
+    $("#omega-doom .progress .speech-progress button").hide();
+
+    var text = $("#omega-doom #" + id + " .speech p span").html();
+    $("#omega-doom #" + id + " .speech p span").html("");
+
+    $("#omega-doom .progress #" + id).show();
+    $("#omega-doom .progress #" + id + " .speech p span").show();
+    $("#omega-doom .progress #" + id + " button").show();
+
+    for (let char of text) {
+        await sleep(10);
+        $("#omega-doom #" + id + " .speech p span").append(char);
+    }
+
+    
 END AFUNCTION
 
 SCREEN "omega-doom-intro"
@@ -83,24 +102,7 @@ SCREEN "omega-doom-intro"
 END SCREEN
 
 SCREEN "omega-doom-game"
-    DIV ,"omega-doom-game-screen"
-        WINDOW "visuals"
-            DIV ,"gfx"
-                WINDOW "progress1", "progress"
-                    PRINT "Earth [Federation]","gfx-label"
-                    DIV "render"
-                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
-                    END DIV
-                END WINDOW
-            END DIV
-            WINDOW "text"
-                PRINT "text"
-            END WINDOW
-        END WINDOW
-        WINDOW "controls"
-            PRINT "controls"
-        END WINDOW
-    END DIV
+    LOAD "_ROOT/project/arcade/omega_doom/intro"
 END SCREEN
 END BODY
 END

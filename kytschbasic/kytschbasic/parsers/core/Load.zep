@@ -74,7 +74,7 @@ class Load extends Command
 				let args[0] = str_replace(constant("_ROOT"), "", args[0]);
 				return "<script src='" . args[0] . "'></script>";
 			default:
-				return (new Parser())->parse(args[0] . ".kb", false);
+				return (new Parser())->parse(rtrim(args[0], ".kb") . ".kb", false);
 		}
 	}
 }

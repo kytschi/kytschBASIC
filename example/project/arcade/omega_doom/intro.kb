@@ -1,0 +1,54 @@
+WINDOW "game-intro", "progress"
+    WINDOW ,"visuals"
+        DIV "gfx"
+            PRINT "Earth [Federation]","gfx-label"
+            DIV "render"
+                GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+            END DIV
+        END DIV
+        
+        DIV "speech-progress","game-intro-1"
+            DIV "text"
+                DIV "character"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Captain, incoming hail from Federation Command."
+                    END SWRITE
+                    BUTTON "btn_game-intro-1",,,,,"progressSpeech(event,'game-intro-2')"
+                        PRINT "["
+                        PRINT "space","button_key"
+                        PRINT "]&nbsp;Continue"
+                    END BUTTON
+                END DIV
+            END DIV
+        END DIV
+        DIV "speech-progress hide","game-intro-2"
+            DIV "text"
+                DIV "character"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Priority One message from Admiral Byrd sir."
+                    END SWRITE
+                    BUTTON "btn_game-intro-2",,,,,"progressSpeech(event,'game-intro-2')"
+                        PRINT "["
+                        PRINT "space","button_key"
+                        PRINT "]&nbsp;Continue"
+                    END BUTTON
+                END DIV
+            END DIV
+        END DIV
+    END WINDOW
+    WINDOW ,"controls"
+        PRINT "controls"
+    END WINDOW
+END WINDOW
