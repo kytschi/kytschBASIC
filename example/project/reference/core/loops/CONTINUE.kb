@@ -9,7 +9,7 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
-					PRINT "FOR","basic"
+					PRINT "CONTINUE","basic"
 				END HEADING 2
 				SWRITE
 					PRINT "Continue on with a loop."
