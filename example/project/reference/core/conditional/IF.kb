@@ -73,6 +73,10 @@ NEXT
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
 					END LINK
+					PRINT " | "
+					LINK "/reference/CONTINUE"
+						PRINT "CONTINUE"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

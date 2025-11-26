@@ -72,6 +72,10 @@ class Button extends Command
 			let output .= " value='button'";
 		}
 
+		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
+			let output .= " onclick=" . this->outputArg(args[5]);
+		}
+
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
 			let output .= "><span>\" . " . args[4] . " . \"</span></button>";
 		} else {

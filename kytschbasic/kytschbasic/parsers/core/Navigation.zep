@@ -49,7 +49,19 @@ class Navigation extends Command
 
 	private function processGoto(array args)
 	{
-		return "<?php header(\"Location: \" . " . args[0] . ");die(); ?>";
+		if (strpos("http:", args[0]) !== false || strpos("ftp:", args[0]) !== false) {
+			return "<?php header(\"Location: \" . " . args[0] . ");die(); ?>";
+		} else {
+			if (strpos(args[0], "[") !== false) {
+				return "<?php " . substr_replace(
+					substr_replace(args[0], "(", strpos(args[0], "["), 1), ")",
+					strlen(args[0]) - 1,
+					1
+				) . "; ?>";
+			} else {
+				return "<?php " . args[0] . "; ?>";
+			}
+		}
 	}
 
 	private function processLink(array args)

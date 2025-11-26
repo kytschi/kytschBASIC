@@ -44,6 +44,10 @@
 		"url": "/arcade/crossword",
 		"template": "project/arcade/crossword.kb"
 	},
+	{
+		"url": "/arcade/omega-doom",
+		"template": "project/arcade/omega_doom.kb"
+	},
 
 	{
 		"url": "/news",
@@ -94,10 +98,6 @@
 	{
 		"url": "/reference/SLEEP",
 		"template": "project/reference/core/function/SLEEP.kb"
-	},
-	{
-		"url": "/reference/WRITEFILE",
-		"template": "project/reference/core/function/WRITEFILE.kb"
 	},
 	{
 		"url": "/reference/LET",
@@ -171,7 +171,11 @@
 	
 	{
 		"url": "/reference/GOTO",
-		"template": "project/reference/core/conditional/GOTO.kb"
+		"template": "project/reference/core/navigation/GOTO.kb"
+	},
+	{
+		"url": "/reference/FUNCTION",
+		"template": "project/reference/core/function/FUNCTION.kb"
 	},
 	{
 		"url": "/reference/REM",
@@ -209,6 +213,10 @@
 	{
 		"url": "/reference/CASE",
 		"template": "project/reference/core/conditional/CASE.kb"
+	},
+	{
+		"url": "/reference/CONTINUE",
+		"template": "project/reference/core/loops/CONTINUE.kb"
 	},
 
 	{
@@ -402,6 +410,10 @@
 	},
 
 	{
+		"url": "/reference/ANIMATION",
+		"template": "project/reference/arcade/animation/ANIMATION.kb"
+	},
+	{
 		"url": "/reference/ARC",
 		"template": "project/reference/arcade/shapes/ARC.kb"
 	},
@@ -438,16 +450,8 @@
 		"template": "project/reference/arcade/shapes/CIRCLEF.kb"
 	},
 	{
-		"url": "/reference/COPYFILE",
-		"template": "project/reference/core/media/COPYFILE.kb"
-	},
-	{
 		"url": "/reference/COPYSHAPE",
 		"template": "project/reference/arcade/COPYSHAPE.kb"
-	},
-	{
-		"url": "/reference/COPYUPLOAD",
-		"template": "project/reference/core/media/COPYUPLOAD.kb"
 	},
 	{
 		"url": "/reference/ELLIPSE",
@@ -458,6 +462,10 @@
 		"template": "project/reference/arcade/shapes/ELLIPSEF.kb"
 	},
 	{
+		"url": "/reference/HIDE",
+		"template": "project/reference/arcade/animation/HIDE.kb"
+	},
+	{
 		"url": "/reference/LINE",
 		"template": "project/reference/arcade/shapes/LINE.kb"
 	},
@@ -466,8 +474,16 @@
 		"template": "project/reference/arcade/colors/RGB.kb"
 	},
 	{
+		"url": "/reference/RGBTOHEX",
+		"template": "project/reference/core/function/RGBTOHEX.kb"
+	},
+	{
 		"url": "/reference/SCREEN",
 		"template": "project/reference/arcade/screen/SCREEN.kb"
+	},
+	{
+		"url": "/reference/SHOW",
+		"template": "project/reference/arcade/animation/SHOW.kb"
 	},
 	{
 		"url": "/reference/SPRITE",
@@ -561,6 +577,10 @@
 	{
 		"url": "/reference/TAN",
 		"template": "project/reference/core/maths/TAN.kb"
+	},
+	{
+		"url": "/reference/TWODP",
+		"template": "project/reference/core/function/TWODP.kb"
 	},
 
 	{
@@ -692,6 +712,27 @@
 	{
 		"url": "/reference/SESSDESTORY",
 		"template": "project/reference/core/session/SESSDESTORY.kb"
+	},
+
+	{
+		"url": "/reference/COPYFILE",
+		"template": "project/reference/core/file/COPYFILE.kb"
+	},
+	{
+		"url": "/reference/COPYUPLOAD",
+		"template": "project/reference/core/file/COPYUPLOAD.kb"
+	},
+	{
+		"url": "/reference/OUTPUTFILE",
+		"template": "project/reference/core/file/OUTPUTFILE.kb"
+	},
+	{
+		"url": "/reference/READFILE",
+		"template": "project/reference/core/file/READFILE.kb"
+	},
+	{
+		"url": "/reference/WRITEFILE",
+		"template": "project/reference/core/file/WRITEFILE.kb"
 	},
 
 	{

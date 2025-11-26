@@ -24,7 +24,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test$="kytschBASIC is rubbish!"
+DEF test$="kytschBASIC is rubbish!"
 LET test$="kytschBASIC is awesome!"
 PRINT test$
 				END CPRINT
@@ -32,7 +32,7 @@ PRINT test$
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					DIM test$="kytschBASIC is rubbish!"
+					DEF test$="kytschBASIC is rubbish!"
 					LET test$="kytschBASIC is awesome!"
 					PRINT test$
 				END DIV
@@ -47,7 +47,7 @@ PRINT test$
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test%=0
+DEF test%=0
 LET test%=1337
 PRINT test%
 				END CPRINT
@@ -55,7 +55,7 @@ PRINT test%
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					DIM test%=0
+					DEF test%=0
 					LET test%=1337
 					PRINT test%
 				END DIV
@@ -70,7 +70,7 @@ PRINT test%
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test#=0
+DEF test#=0
 LET test#=1337.11
 PRINT test#
 				END CPRINT
@@ -78,7 +78,7 @@ PRINT test#
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					DIM test#=0
+					DEF test#=0
 					LET test#=1337.11
 					PRINT test#
 				END DIV
@@ -93,19 +93,18 @@ PRINT test#
 					PRINT "Example"
 				END SWRITE
 				CPRINT
-DIM test#=TWODP(1234.5678)
+DEF test#=TWODP(1234.5678)
 LET test#=TWODP(1337.1337)
-
+LINE BREAK
 REM or do it on the PRINT
 PRINT TWODP(test#)
-
 PRINT test#
 				END CPRINT
 				SWRITE "basic"
 					PRINT "Output"
 				END SWRITE
 				DIV "kb-code-block"
-					DIM test#=TWODP(1234.5678)
+					DEF test#=TWODP(1234.5678)
 					LET test#=TWODP(1337.1337)
 					PRINT test#
 				END DIV

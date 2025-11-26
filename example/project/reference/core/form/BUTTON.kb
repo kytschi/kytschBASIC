@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "BUTTON","heading-command basic"
 					LINE BREAK
-					PRINT "NAME, CLASS, ID, VALUE, LABEL","heading-args"
+					PRINT "NAME, CLASS, ID, VALUE, LABEL, ONCLICK","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a button."

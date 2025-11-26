@@ -41,7 +41,7 @@ class Variables
 
 	public function args(string line)
 	{
-		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display, maths;
+		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display, maths, subvar;
 		
 		let text = new Text();
 		let display = new Display();
@@ -119,13 +119,21 @@ class Variables
 			//Check to see if its a maths equation.
 			let subvars = maths->isEquation(arg);
 			if (count(subvars) > 1) {
+				// Replace the pluses if its a string join
+				for subvar in subvars {
+					if (is_string(subvar) || substr(subvar, strlen(subvar) - 0, 1) == "$") {
+						let arg = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*\Z)/", ".", arg);
+						break;
+					}
+				}
 				// Replace first unquoted (
 				let arg = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\(/", "|||KBBRACKETSTART|||", arg, 1);
-
+				
 				// Replace last unquoted ) by reversing the string twice
 				let cleaned = strrev(arg);
 				let cleaned = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\)/", strrev("|||KBBRACKETEND|||"), cleaned, 1);
 				let arg = strrev(cleaned);
+				
 			}
 
 			//Grab all array elements.
@@ -603,6 +611,64 @@ class Variables
 		return "<?php sort(" . this->cleanArg("NSORT", args[0]) . ", SORT_NUMERIC); ?>";
 	}
 
+	public function processReadFile(arg)
+	{
+		var splits, cleaned, args, output = "";
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid READFILE");
+		}
+
+		let cleaned = this->cleanArg("READFILE", splits[1]);
+		let args = this->commaSplit(cleaned);
+
+		let output .= "file_get_contents(";
+				
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= args[0];
+		} else {
+			throw new Exception("Missing the file to read");
+		}
+
+		let output .= ")";
+
+		return str_replace(splits[1], output, arg);
+	}
+
+	public function processRGBtoHex(arg)
+	{
+		var splits, cleaned, args;
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid RGBTOHEX");
+		}
+
+		let cleaned = this->cleanArg("RGBTOHEX", splits[1]);
+		let args = this->commaSplit(cleaned);
+
+		if (!isset(args[0]) || args[0] == "\"\"") {
+			throw new Exception("Invalid R value");
+		}
+		
+		if (!isset(args[1]) || args[1] == "\"\"") {
+			throw new Exception("Invalid G value");
+		}
+		
+		if (!isset(args[2]) || args[2] == "\"\"") {
+			throw new Exception("Invalid B value");
+		}
+
+		return str_replace(
+			splits[1],
+			"\"#\" . str_pad(dechex(" . args[0] . "), 2, '0', STR_PAD_LEFT)
+			. str_pad(dechex(" . args[1] . "), 2, '0', STR_PAD_LEFT)
+			. str_pad(dechex(" . args[2] . "), 2, '0', STR_PAD_LEFT)",
+			arg
+		);
+	}
+
 	public function processSessionRead(arg)
 	{
 		var splits, cleaned;
@@ -626,6 +692,35 @@ class Variables
 	{
 		let args[0] = this->cleanArg("SORT", args[0]);
 		return "<?php sort(" . args[0] . "); ?>";
+	}
+
+	public function processSplit(arg)
+	{
+		var splits, cleaned, args, output = "explode(";
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid SPLIT");
+		}
+
+		let cleaned = this->cleanArg("SPLIT", splits[1]);
+		let args = this->commaSplit(cleaned);
+				
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= args[1] . ", ";
+		} else {
+			throw new Exception("Missing the delimiter");
+		}
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= args[0];
+		} else {
+			throw new Exception("Missing the string to split");
+		}
+
+		let output .= ");";
+
+		return str_replace(splits[1], output, arg);
 	}
 
 	public function processSSort(args)
@@ -672,12 +767,18 @@ class Variables
 				return (new Encryption())->processHashVerify(arg);
 			case "HASH":
 				return (new Encryption())->processHash(arg);
+			case "READFILE":
+				return this->processReadFile(arg);
+			case "RGBTOHEX":
+				return this->processRGBtoHex(arg);
 			case "VALIDUSER":
 				return this->processValidUser(arg);
 			case "SANITISE":
 				return this->processSanitise(arg);
 			case "SESSREAD":
 				return this->processSessionRead(arg);
+			case "SPLIT":
+				return this->processSplit(arg);
 			case "TWODP":
 				return this->processTwoDP(arg);
 			case "UUID":

@@ -8,7 +8,6 @@
     src: url("../fonts/IBMPlexSans.ttf") format("truetype");
 }
 
-
 html, body {
     background-color: #fff;
     color: #000;
@@ -278,4 +277,8 @@ th, td {
     #mobile {
         display: block;
     }
+}
+
+.hide {
+    display: none;
 }

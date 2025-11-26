@@ -1,0 +1,106 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	CHARSET "UTF-8"
+    DESCRIPTION "A space scifi game written in kytschBASIC"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/omega_doom"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - Omega Doom | kytschBASIC"
+END HEAD
+BODY ,"omega-doom"
+
+FUNCTION "loadGFX", file$
+    CODE
+        DEF contents$=READFILE(file$)
+        DIM lines$=SPLIT(contents$, "\n")
+        FOR line$ IN lines$
+            DIM ansi$=SPLIT(line$, "[0m")
+            FOR data$ IN ansi$
+                DIM colours$=SPLIT(data$, ";")
+                DEF count%=COUNT(colours$)
+                IF count%<4 THEN
+                    CONTINUE
+                END IF
+                DIM colour_strings$=SPLIT(colours$[4], "m")
+                LET colours$[4]=colour_strings$[0]
+                DEF output$=colour_strings$[1]
+                LET output$=STRIPTRAIL(output$, 27)
+                DEF hex$=RGBTOHEX(colours$[2], colours$[3], colours$[4])
+                DEF style$="color:"+hex$
+                PRINT output$,,,,style$
+            NEXT
+            LINE BREAK
+        NEXT
+    END CODE
+END FUNCTION
+
+AFUNCTION "startNewGame"
+    $("#omega-doom-intro").fadeOut(
+        "2000",
+        () => {
+            $("#omega-doom-game").fadeIn(
+                "2000",
+                () => {
+                    console.log("game start");
+                }
+            );
+        }
+    );
+END AFUNCTION
+
+SCREEN "omega-doom-intro"
+    FOR iLoop%=1 TO 7
+        DEF intro$="intro_"+iLoop%
+        WINDOW intro$, "intro-window"
+            GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/game-title"+iLoop%+".gfx")
+        END WINDOW
+    NEXT
+    DIV ,"intro-controls"
+        DIV ,"intro-controls-buttons"
+            BUTTON "btn_start",,,,,"startNewGame()"
+                PRINT "["
+                PRINT "n","button_key"
+                PRINT "]&nbsp;New game"
+            END BUTTON
+        END DIV
+    END DIV
+    ANIMATION
+        FOR iLoop%=1 TO 7
+            LET intro$="intro_"+iLoop%
+            SHOW intro$
+            SLEEP 200
+            IF iLoop%!=7 THEN
+                HIDE intro$
+            END IF
+        NEXT
+        SHOW "intro-controls-buttons"
+    END ANIMATION
+END SCREEN
+
+SCREEN "omega-doom-game"
+    DIV ,"omega-doom-game-screen"
+        WINDOW "visuals"
+            DIV ,"gfx"
+                WINDOW "progress1", "progress"
+                    PRINT "Earth [Federation]","gfx-label"
+                    DIV "render"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                    END DIV
+                END WINDOW
+            END DIV
+            WINDOW "text"
+                PRINT "text"
+            END WINDOW
+        END WINDOW
+        WINDOW "controls"
+            PRINT "controls"
+        END WINDOW
+    END DIV
+END SCREEN
+END BODY
+END

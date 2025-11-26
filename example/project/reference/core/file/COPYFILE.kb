@@ -1,0 +1,50 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "COPYFILE statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "COPYFILE","heading-command basic"
+					LINE BREAK
+					PRINT "SOURCE, DESTINATION","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Copy a file locally. Make sure you have permissions to do so."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+COPYFILE "_ROOT/dump/my_file.jpg", "_ROOT/dump/my_copy.jpg"
+				END CPRINT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/COPYUPLOAD#refCOPYUPLOAD"
+						PRINT "COPYUPLOAD"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WRITEFILE#refWRITEFILE"
+						PRINT "WRITEFILE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/OUTPUTFILE#refOUTPUTFILE"
+						PRINT "OUTPUTFILE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/READFILE#refREADFILE"
+						PRINT "READFILE"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

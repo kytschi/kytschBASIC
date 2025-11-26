@@ -45,6 +45,10 @@ class Arcade extends Command
 			}
 			kb_cookie.display = [window.innerWidth, window.innerHeight];
 			Cookies.set(\"kb_HLPR\", JSON.stringify(kb_cookie));
+
+			function sleep(time) {
+				return new Promise((resolve) => setTimeout(resolve, time));
+			}
 		</script>";
 	}
 

@@ -37,6 +37,18 @@ COPYUPLOAD _FILES("file")("tmp_name"), "_ROOT/dump/"
 					LINK "/reference/FILEINPUT#refFILEINPUT"
 						PRINT "FILEINPUT"
 					END LINK
+					PRINT " | "
+					LINK "/reference/WRITEFILE#refWRITEFILE"
+						PRINT "WRITEFILE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/OUTPUTFILE#refOUTPUTFILE"
+						PRINT "OUTPUTFILE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/READFILE#refREADFILE"
+						PRINT "READFILE"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

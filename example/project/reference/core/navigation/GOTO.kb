@@ -1,33 +1,40 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "COPYFILE statment | kytschBASIC"
+	NAME "GOTO statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
 	MAIN
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "GOTO","basic"
+				END HEADING 2
 				SWRITE
-					PRINT "COPYFILE","heading-command basic"
-					LINE BREAK
-					PRINT "SOURCE, DESTINATION","heading-args"
-				END SWRITE
-				SWRITE
-					PRINT "Copy a file locally. Make sure you have permissions to do so."
+					PRINT "Redirect to another URL or will go to a function."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-COPYFILE "_ROOT/dump/my_file.jpg", "_ROOT/dump/my_copy.jpg"
+GOTO "/home"
+
+FUNCTION printMessage(message$)
+	PRINT message$
+END FUNCTION
+GOTO printMessage("Hello World!")
 				END CPRINT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
-					LINK "/reference/COPYUPLOAD#refCOPYUPLOAD"
-						PRINT "COPYUPLOAD"
+					LINK "/reference/PRINT"
+						PRINT "PRINT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SWRITE"
+						PRINT "SWRITE"
 					END LINK
 				END DIV
 			END DIV

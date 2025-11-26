@@ -1,0 +1,55 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "OUTPUTFILE statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "OUTPUTFILE","heading-command basic"
+					LINE BREAK
+					PRINT "FILE, SAVE_TO_VARIABLE","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This function will read the contents of a file and output it to the screen. "
+					PRINT "If the SAVE_TO_VARIABLE is set then the contents will be stored in that variable."
+				END SWRITE
+				SWRITE
+					PRINT "NOTE: ", "basic"
+					PRINT "you will need to set permissions so you can read the file from the local server."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+OUTPUTFILE "_ROOT/kytschi/omega_doom/gfx/intro/game-title1.gfx"
+				END CPRINT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/DEF#refDEF"
+						PRINT "DEF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DIM#refDIM"
+						PRINT "DIM"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WRITEFILE#refWRITEFILE"
+						PRINT "WRITEFILE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/READFILE#refREADFILE"
+						PRINT "READFILE"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

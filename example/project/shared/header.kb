@@ -43,11 +43,8 @@ HEADER
 		LINK "/reference/ACOS#refACOS","Find out about the ACOS command","nav-link",,"refACOS"
 			PRINT "ACOS"
 		END LINK
-		LINK "/reference/ASIN#refASIN","Find out about the ASIN command","nav-link",,"refASIN"
-			PRINT "ASIN"
-		END LINK
-		LINK "/reference/ATAN#refATAN","Find out about the ATAN command","nav-link",,"refATAN"
-			PRINT "ATAN"
+		LINK "/reference/ANIMATION#refANIMATION","Find out about the ANIMATION command","nav-link",,"refANIMATION"
+			PRINT "ANIMATION"
 		END LINK
 		LINK "/reference/ARC#refARC","Find out about the ARC command","nav-link",,"refARC"
 			PRINT "ARC"
@@ -57,6 +54,12 @@ HEADER
 		END LINK
 		LINK "/reference/ASC#refASC","Find out about the ASC command","nav-link",,"refASC"
 			PRINT "ASC"
+		END LINK
+		LINK "/reference/ASIN#refASIN","Find out about the ASIN command","nav-link",,"refASIN"
+			PRINT "ASIN"
+		END LINK
+		LINK "/reference/ATAN#refATAN","Find out about the ATAN command","nav-link",,"refATAN"
+			PRINT "ATAN"
 		END LINK
 		LINK "/reference/AUTHOR#refAUTHOR","Find out about the AUTHOR command","nav-link",,"refAUTHOR"
 			PRINT "AUTHOR"
@@ -117,6 +120,9 @@ HEADER
 		END LINK
 		LINK "/reference/CONTAINS#refCONTAINS","Find out about the CONTAINS command","nav-link",,"refCONTAINS"
 			PRINT "CONTAINS"
+		END LINK
+		LINK "/reference/CONTINUE#refCONTINUE","Find out about the CONTINUE command","nav-link",,"refCONTINUE"
+			PRINT "CONTINUE"
 		END LINK
 		LINK "/reference/COPYFILE#refCOPYFILE","Find out about the COPYFILE command","nav-link",,"refCOPYFILE"
 			PRINT "COPYFILE"
@@ -214,14 +220,14 @@ HEADER
 		LINK "/reference/FRAC#refFRAC","Find out about the FRAC command","nav-link",,"refFRAC"
 			PRINT "FRAC"
 		END LINK
-		LINK "/reference/FORM#refFORM","Find out about the FORM command","nav-link",,"refFORM"
-			PRINT "FORM"
-		END LINK
 		LINK "/reference/FOOTER#refFOOTER","Find out about the FOOTER command","nav-link",,"refFOOTER"
 			PRINT "FOOTER"
 		END LINK
-		LINK "/reference/FOR#refFOR","Find out about the FOR command","nav-link",,"refFOR"
-			PRINT "FOR"
+				LINK "/reference/FORM#refFORM","Find out about the FORM command","nav-link",,"refFORM"
+			PRINT "FORM"
+		END LINK
+		LINK "/reference/FUNCTION#refFUNCTION","Find out about the FUNCTION command","nav-link",,"refFUNCTION"
+			PRINT "FUNCTION"
 		END LINK
 		LINK "/reference/GOTO#refGOTO","Find out about the GOTO command","nav-link",,"refGOTO"
 			PRINT "GOTO"
@@ -246,6 +252,9 @@ HEADER
 		END LINK
 		LINK "/reference/HEX#refHEX","Find out about the HEX command","nav-link",,"refHEX"
 			PRINT "HEX"
+		END LINK
+		LINK "/reference/HIDE#refHIDE","Find out about the HIDE command","nav-link",,"refHIDE"
+			PRINT "HIDE"
 		END LINK
 		LINK "/reference/HSIN#refHSIN","Find out about the HSIN command","nav-link",,"refHSIN"
 			PRINT "HSIN"
@@ -337,6 +346,9 @@ HEADER
 		LINK "/reference/NSORT#refNSORT","Find out about the NSORT command","nav-link",,"refNSORT"
 			PRINT "NSORT"
 		END LINK
+		LINK "/reference/OUTPUTFILE#refOUTPUTFILE","Find out about the OUTPUTFILE command","nav-link",,"refOUTPUTFILE"
+			PRINT "OUTPUTFILE"
+		END LINK
 		LINK "/reference/PALETTE#refPALETTE","Find out about the PALETTE command","nav-link",,"refPALETTE"
 			PRINT "PALETTE"
 		END LINK
@@ -349,6 +361,9 @@ HEADER
 		LINK "/reference/POP#refPOP","Find out about the POP command","nav-link",,"refPOP"
 			PRINT "POP"
 		END LINK
+		LINK "/reference/READFILE#refREADFILE","Find out about the READFILE command","nav-link",,"refREADFILE"
+			PRINT "READFILE"
+		END LINK
 		LINK "/reference/REM#refREM","Find out about the REM command","nav-link",,"refREM"
 			PRINT "REM"
 		END LINK
@@ -357,6 +372,9 @@ HEADER
 		END LINK
 		LINK "/reference/RGB#refRGB","Find out about the RGB command","nav-link",,"refRGB"
 			PRINT "RGB"
+		END LINK
+		LINK "/reference/RGBTOHEX#refRGBTOHEX","Find out about the RGBTOHEX command","nav-link",,"refRGBTOHEX"
+			PRINT "RGBTOHEX"
 		END LINK
 		LINK "/reference/RIGHT#refRIGHT","Find out about the DSORT command","nav-link",,"refRIGHT"
 			PRINT "RIGHT"
@@ -399,6 +417,9 @@ HEADER
 		END LINK
 		LINK "/reference/SHIFT#refSHIFT","Find out about the SHIFT command","nav-link",,"refSHIFT"
 			PRINT "SHIFT"
+		END LINK
+		LINK "/reference/SHOW#refSHOW","Find out about the SHOW command","nav-link",,"refSHOW"
+			PRINT "SHOW"
 		END LINK
 		LINK "/reference/SHUFFLE#refSHUFFLE","Find out about the SHUFFLE command","nav-link",,"refSHUFFLE"
 			PRINT "SHUFFLE"
@@ -465,6 +486,9 @@ HEADER
 		END LINK
 		LINK "/reference/TROW#refTROW","Find out about the TROW command","nav-link",,"refTROW"
 			PRINT "TROW"
+		END LINK
+		LINK "/reference/TWODP#refTWODP","Find out about the TWODP command","nav-link",,"refTWODP"
+			PRINT "TWODP"
 		END LINK
 		LINK "/reference/UCASE#refUCASE","Find out about the UCASE command","nav-link",,"refUCASE"
 			PRINT "UCASE"

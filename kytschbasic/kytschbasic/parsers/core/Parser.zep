@@ -30,6 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Variables;
 use KytschBASIC\Libs\Arcade\Parsers\AFunction;
+use KytschBASIC\Parsers\Core\CoreFunc;
 
 class Parser
 {
@@ -37,6 +38,7 @@ class Parser
 	private newline = "\n";
 	private cprint = false;
 	private js = false;
+	private create_function = false;
 	private has_case = false;
 	private show_html = false;
 
@@ -87,6 +89,7 @@ class Parser
 
 		let this->cprint = false;
 		let this->js = false;
+		let this->create_function = false;
 		let this->controller = new Command();
 
 		if (show_html_mode) {
@@ -148,28 +151,70 @@ class Parser
 				if (!this->cprint) {
 					let this->js = true;
 					return "<script type='text/javascript'>";
+				} elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
 				}
 				break;
 			case "END JAVASCRIPT":
 				if (!this->cprint) {
 					let this->js = false;
 					return "</script>";
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
 				}
 				break;
 			case "AFUNCTION":
 				if (!this->cprint) {
 					let this->js = true;
 					return (new AFunction())->parse(line, command, args);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
 				}
 				break;
 			case "END AFUNCTION":
 				if (!this->cprint) {
 					let this->js = false;
 					return (new AFunction())->parse(line, command, args);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "FUNCTION":
+				if (!this->cprint) {
+					let this->create_function = true;
+					return (new CoreFunc())->parse(line, command, args);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END FUNCTION":
+				if (!this->cprint) {
+					let this->create_function = false;
+					return "<?php }\n?>";
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "ANIMATION":
+				if (!this->cprint) {
+					let this->js = true;
+					let this->create_function = true;
+					return (new AFunction())->parse(line, command, args);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END ANIMATION":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->create_function = false;
+					return (new AFunction())->parse(line, command, args);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
 				}
 				break;
 			default:
-				if (this->cprint || this->js) {
+				if (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
 				break;
@@ -179,21 +224,35 @@ class Parser
 			case "REM":
 				return "";
 			case "SLEEP":
-				if (!isset(args[0])) {
-					let args[0] = 1000;
-				} elseif (empty(args[0])) {
-					let args[0] = 1000;
-				} elseif (args[0] <= 0) {
-					let args[0] = 1000;
+				if (!this->js) {
+					if (!isset(args[0])) {
+						let args[0] = 1000;
+					} elseif (empty(args[0])) {
+						let args[0] = 1000;
+					} elseif (args[0] <= 0) {
+						let args[0] = 1000;
+					}
+					let args[0] = args[0] * 1000;
+					return "<?php usleep(" . args[0] . "); ?>";
+				} else {
+					return "\tawait sleep(" . args[0] . ");\n";
 				}
-				let args[0] = args[0] * 1000;
-				return "<?php usleep(" . args[0] . "); ?>";
 			case "SHOWHTML":
 				let this->show_html = true;
 				return "<?php ob_start(); ?>";
 			case "END SHOWHTML":
 				let this->show_html = false;
 				return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>";
+			case "CONTINUE":
+				return "<?php continue; ?>";
+			case "CODE":
+				return "<pre><code>";
+			case "END CODE":
+				return "</code></pre>";
+			case "SHOW":
+				return (new AFunction())->parse(line, command, args, this->js);
+			case "HIDE":
+				return (new AFunction())->parse(line, command, args, this->js);
 			case "IF":
 				return this->processIf(line, "if", args);
 			case "IFNTE":
