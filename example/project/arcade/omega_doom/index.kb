@@ -134,6 +134,7 @@ ADEF speech_text$=""
 ADEF user_input%=0
 ADIM user_input_enabled$=[]
 ADIM user_input_disabled$=[]
+ADEF speaking%=0
 
 AFUNCTION "startNewGame"
     $("#omega-doom-intro").fadeOut(
@@ -152,6 +153,7 @@ AFUNCTION "startNewGame"
 END AFUNCTION
 
 AFUNCTION "progressSpeech", "next_id", "prev_id"
+    speaking=1;
     if (prev_id) {
         current_process = prev_id;
     } else if (next_id) {
@@ -181,6 +183,7 @@ AFUNCTION "progressSpeech", "next_id", "prev_id"
             iLoop++;
         }
     }
+    speaking=0;
 END AFUNCTION
 
 JAVASCRIPT

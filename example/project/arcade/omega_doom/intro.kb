@@ -1274,7 +1274,7 @@ WINDOW "game-intro", "progress"
                     JAVASCRIPT
                         user_input_enabled.push("game-intro-24");
                         $("body").on("keypress", function(event) {
-                            if (current_process == "game-intro-24" && in_game && user_input) {
+                            if (current_process == "game-intro-24" && in_game && user_input && !speaking) {
                                 if (event.which == 50) {
                                     progressSpeech(event, "game-intro-25", null);
                                 } else if (event.which != 112 && event.which != 113) {
@@ -1452,7 +1452,7 @@ WINDOW "game-intro", "progress"
                     JAVASCRIPT
                         user_input_enabled.push("game-intro-27");
                         $("body").on("keypress", function(event) {
-                            if (current_process == "game-intro-27" && in_game && user_input) {
+                            if (current_process == "game-intro-27" && in_game && user_input && !speaking) {
                                 if (event.which == 101) {
                                     progressSpeech(event, "game-intro-28", null);
                                 } else if (event.which != 112 && event.which != 113) {
@@ -1514,7 +1514,7 @@ WINDOW "game-intro", "progress"
                     END BUTTON
                     JAVASCRIPT
                         $("body").on("keypress", function(event) {
-                            if (current_process == "game-intro-28" && in_game && user_input) {
+                            if (current_process == "game-intro-28" && in_game && user_input && !speaking) {
                                 if (event.which == 119) {
                                     progressSpeech(event, "game-intro-29", null);
                                 } else if (event.which != 112 && event.which != 113) {
