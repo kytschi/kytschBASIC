@@ -1,5 +1,6 @@
 WINDOW "game-intro", "progress"
     DIV "game-progress","game-intro-1"
+        PRINT "Captain, incoming hail from Federation Command.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -16,7 +17,7 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Captain, incoming hail from Federation Command."
+                        PRINT ""
                     END SWRITE
                     BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-2', null)"
                         PRINT "["
@@ -32,7 +33,7 @@ WINDOW "game-intro", "progress"
                 PRINT "["
                 PRINT "c","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Communications", "button-message"
+                PRINT "Communications", "button-message flash"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -66,7 +67,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-2"
+    DIV "game-progress","game-intro-2"
+        PRINT "Priority one message from Admiral Byrd sir.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -83,7 +85,7 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Priority One message from Admiral Byrd sir."
+                        PRINT ""
                     END SWRITE
                     BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
                         PRINT "["
@@ -101,11 +103,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
                 PRINT "c","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Communications", "button-message"
+                PRINT "Communications", "button-message flash"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -139,7 +141,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-3"
+    DIV "game-progress","game-intro-3"
+        PRINT "Onscreen.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -156,9 +159,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Onscreen."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-2')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -174,11 +177,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message flash"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -188,7 +191,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-4"
+    DIV "game-progress","game-intro-4"
+        PRINT "Admiral, I hope this isn't bad news?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -205,9 +209,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Admiral, I hope this isn't bad news?"
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-3')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -223,11 +227,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -237,7 +241,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-5"
+    DIV "game-progress","game-intro-5"
+        PRINT "My crew is in dire need of some R an...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -254,9 +259,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "My crew is in dire need of some R an..."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-4')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -272,11 +277,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -286,7 +291,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-6"
+    DIV "game-progress","game-intro-6"
+        PRINT "Sorry John, you'll have to delay that.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -303,9 +309,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Sorry John, you'll have to delay that."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-5')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -321,11 +327,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -335,7 +341,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-7"
+    DIV "game-progress","game-intro-7"
+        PRINT "We've lost contact with a research team at outpost 3366.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -352,9 +359,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "We've lost contact with a research team at outpost 3366."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-6')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -370,11 +377,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -384,7 +391,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-8"
+    DIV "game-progress","game-intro-8"
+        PRINT "Output 3366, I don't recall it?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -401,9 +409,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Output 3366, I don't recall it?"
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-7')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -419,11 +427,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -433,7 +441,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-9"
+    DIV "game-progress","game-intro-9"
+        PRINT "You wouldn't, strictly for top brass eyes only John.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -450,9 +459,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "You wouldn't, strictly for top brass eyes only John."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-8')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -468,11 +477,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -482,7 +491,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-10"
+    DIV "game-progress","game-intro-10"
+        PRINT "Your our closest Starship I'm afraid.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -499,9 +509,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Your our closest Starship I'm afraid."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-9')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -517,11 +527,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -531,7 +541,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-11"
+    DIV "game-progress","game-intro-11"
+        PRINT "Report to the co-ordinates 663993 691216.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -548,9 +559,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Report to the co-ordinates 663993 691216."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-10')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -566,11 +577,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -580,7 +591,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-12"
+    DIV "game-progress","game-intro-12"
+        PRINT "Sector 663993, Admiral that's on the Rosia Empire border?!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -597,9 +609,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Sector 663993, Admiral that's on the Rosia Empire border?!"
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-11')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -615,11 +627,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -629,7 +641,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-13"
+    DIV "game-progress","game-intro-13"
+        PRINT "I am well aware of that Captain!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -646,9 +659,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "I am well aware of that Captain!"
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-12')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -664,11 +677,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -678,7 +691,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-14"
+    DIV "game-progress","game-intro-14"
+        PRINT "Report back when you've arrived at the outpost.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -695,9 +709,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Report back when you've arrived at the outpost."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-13')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -713,11 +727,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -727,7 +741,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-15"
+    DIV "game-progress","game-intro-15"
+        PRINT "But Rich, the treaty? They'll see this as an act of...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -744,9 +759,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "But Rich, the treaty? They'll see this as an act of..."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-14')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -762,11 +777,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -776,7 +791,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-16"
+    DIV "game-progress","game-intro-16"
+        PRINT "You have your order's John...God speed.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -793,9 +809,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "You have your order's John...God speed."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-15')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -811,11 +827,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -825,7 +841,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-17"
+    DIV "game-progress","game-intro-17"
+        PRINT "Byrd out.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -842,9 +859,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Byrd out."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-16')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -860,11 +877,11 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "h","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message"
+                PRINT "Incoming Hail", "button-message selected"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -874,7 +891,8 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-18"
+    DIV "game-progress","game-intro-18"
+        PRINT "Helm...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
@@ -891,9 +909,9 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Helm..."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-17')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -915,11 +933,11 @@ WINDOW "game-intro", "progress"
                 PRINT "]", "button_key_end" 
                 PRINT "Communications", "button-message"
             END BUTTON
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
                 PRINT "n","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Navigation", "button-message"
+                PRINT "Navigation", "button-message flash"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -947,12 +965,13 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-19"
+    DIV "game-progress","game-intro-19"
+        PRINT "Aye sir.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Earth [Federation]","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -964,15 +983,15 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Aye sir."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-18')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-19')"
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-20')"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -982,11 +1001,17 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "m","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message"
+                PRINT "Map", "button-message flash"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -996,12 +1021,13 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
-    DIV "game-progress hide","game-intro-20"
+    DIV "game-progress","game-intro-20"
+        PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
-                DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1013,15 +1039,15 @@ WINDOW "game-intro", "progress"
                 END DIV
                 DIV "speech"
                     SWRITE
-                        PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp."
+                        PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-19')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-19')"
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-21')"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1031,11 +1057,17 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,"button-selected"
+            BUTTON
                 PRINT "["
-                PRINT "1","button_key"
+                PRINT "m","button_key"
                 PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message"
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
             END BUTTON
             BUTTON 
                 PRINT "["
@@ -1045,4 +1077,489 @@ WINDOW "game-intro", "progress"
             END BUTTON
         END WINDOW
     END DIV
+    DIV "game-progress","game-intro-21"
+        PRINT "Captain, the Admiral said to go to the outpost in Federation space on Rosia border.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-20')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-22')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-22"
+        PRINT "Your right Cyrus.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-21')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-23')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-23"
+        PRINT "Now, set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-22')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-24',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-24"
+        PRINT "Aye aye, setting course for the outpost in Federation space on Rosia border.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "federation")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-23')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-intro-24");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-intro-24" && in_game && user_input) {
+                                if (event.which == 50) {
+                                    progressSpeech(event, "game-intro-25", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    $("#game-intro-24 .original").html("I need to be selecting the Federation space from the map.");
+                                    progressSpeech(event, current_process, null);
+                                } 
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-25"
+        PRINT "Course set Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "federation")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-24')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-26',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-intro-25");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-26"
+        PRINT "Engage!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "", "federation")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-25')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-27',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message selected"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-27"
+        PRINT "Aye sir.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "", "federation")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-26')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-intro-27");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-intro-27" && in_game && user_input) {
+                                if (event.which == 101) {
+                                    progressSpeech(event, "game-intro-28", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    $("#game-intro-27 .original").html("I need to engage the engines.");
+                                    progressSpeech(event, current_process, null);
+                                }
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "m","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message"
+            END BUTTON
+            BUTTON ,,,,,"progressSpeech(event,'game-intro-28')"
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engines", "button-message flash"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-28"
+        PRINT "Engaging warp drive now.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Alpha Quadrant]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "", "federation")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-26')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-intro-28" && in_game && user_input) {
+                                if (event.which == 119) {
+                                    progressSpeech(event, "game-intro-29", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    $("#game-intro-28 .original").html("I need to engage the warp drive.");
+                                    progressSpeech(event, current_process, null);
+                                }
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,,,,,"progressSpeech(event,'game-intro-29')"
+                PRINT "["
+                PRINT "w","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Warp drive", "button-message flash"
+            END BUTTON
+            BUTTON
+                PRINT "["
+                PRINT "i","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Impuse drive", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-intro-29"
+        WINDOW ,"visuals full"
+            DIV "gfx"
+                PRINT "Warping to Federation border","gfx-label"
+                DIV "render", "warp"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/warp_effect/0.gfx")
+                END DIV
+            END DIV
+        END WINDOW
+    END DIV
 END WINDOW
+JAVASCRIPT
+    loading=0;
+    showIntroButtons();
+END JAVASCRIPT

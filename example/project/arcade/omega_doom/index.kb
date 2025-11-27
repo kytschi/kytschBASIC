@@ -39,10 +39,101 @@ FUNCTION "loadGFX", file$
     END CODE
 END FUNCTION
 
+FUNCTION "drawMap", file$, flash$=null, selected$=null
+    GOTO loadGFX(file$)
+    BUTTON ,"map-text","kazaria-syndicate-map",,,"navigation(event,'kazaria-syndicate')"
+        PRINT "["
+        PRINT "1","button_key"
+        PRINT "]", "button_key_end_small"
+        IF flash$="kazaria-syndicate" THEN
+            PRINT "Kazaria Syndicate", "button-message flash"
+        ELSEIF selected$="kazaria-syndicate" THEN
+            PRINT "Kazaria Syndicate", "button-message selected"
+        ELSE
+            PRINT "Kazaria Syndicate", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","federation-map",,,"navigation(event,'federation')"
+        PRINT "["
+        PRINT "2","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="federation" THEN
+            PRINT "Federation", "button-message flash"
+        ELSE
+            PRINT "Federation", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","rosia-empire-map",,,"navigation(event,'rosia-empire')"
+        PRINT "["
+        PRINT "3","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="rosia-empire" THEN
+            PRINT "Rosia Empire", "button-message flash"
+        ELSE
+            PRINT "Rosia Empire", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","aris-republic-map",,,"navigation(event,'aris-republic')"
+        PRINT "["
+        PRINT "4","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="aris-republic" THEN
+            PRINT "Aris Republic", "button-message flash"
+        ELSE
+            PRINT "Aris Republic", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","garis-republic-map",,,"navigation(event,'garis-republic')"
+        PRINT "["
+        PRINT "5","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="aris-republic" THEN
+            PRINT "Garis Republic", "button-message flash"
+        ELSE
+            PRINT "Garis Republic", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","stovacor-map",,,"navigation(event,'stovacor')"
+        PRINT "["
+        PRINT "6","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="stovacor" THEN
+            PRINT "Stovacor", "button-message flash"
+        ELSE
+            PRINT "Stovacor", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","house-of-moong-map",,,"navigation(event,'house-of-moong')"
+        PRINT "["
+        PRINT "7","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="house-of-moong" THEN
+            PRINT "House of Moong", "button-message flash"
+        ELSE
+            PRINT "House of Moong", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","the-void-map",,,"navigation(event,'the-void')"
+        PRINT "["
+        PRINT "8","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="house-of-moong" THEN
+            PRINT "The Void", "button-message flash"
+        ELSE
+            PRINT "The Void", "button-message"
+        END IF
+    END BUTTON
+END FUNCTION
+
 ADEF game_process$="game-intro"
 ADEF current_process$="game-intro-1"
+ADEF loading%=1
 ADEF in_game%=0
 ADEF controls_locked%=1
+ADEF speech_text$=""
+ADEF user_input%=0
+ADIM user_input_enabled$=[]
+ADIM user_input_disabled$=[]
 
 AFUNCTION "startNewGame"
     $("#omega-doom-intro").fadeOut(
@@ -51,9 +142,9 @@ AFUNCTION "startNewGame"
             $("#omega-doom-game").fadeIn(
                 "2000",
                 () => {
-                    $("#btn_start").removeClass("button-selected");
+                    $("#btn_start .button-message").removeClass("selected");
                     in_game = 1;
-                    progressSpeech(event, "game-intro-1");
+                    progressSpeech(event, "game-intro-29");
                 }
             );
         }
@@ -67,23 +158,28 @@ AFUNCTION "progressSpeech", "next_id", "prev_id"
         current_process = next_id;
     }
 
+    if (user_input_enabled.includes(current_process)) {
+        user_input = 1;
+    } else if (user_input_disabled.includes(current_process)) {
+        user_input = 0;
+    }
+
     await sleep(10);
-    $(".btn-continue").removeClass("button-selected");
-    $(".btn-previous").removeClass("button-selected");
+    $("#omega-doom .btn-continue .button-message").removeClass("selected");
+    $("#omega-doom .btn-previous .button-message").removeClass("selected");
     
     $("#omega-doom .progress .game-progress").hide();
-    $("#omega-doom .progress .speech-progress button").hide();
-
-    var text = $("#omega-doom #" + current_process + " .speech p span").html();
     $("#omega-doom #" + current_process + " .speech p span").html("");
+    $("#omega-doom .progress #" + current_process).css("display", "flex");
 
-    $("#omega-doom .progress #" + current_process).show();
-    $("#omega-doom .progress #" + current_process + " .speech p span").show();
-    $("#omega-doom .progress #" + current_process + " button").show();
-
-    for (let char of text) {
-        await sleep(10);
-        $("#omega-doom #" + current_process + " .speech p span").append(char);
+    speech_text = $("#omega-doom #" + current_process + " .original").html();
+    if (speech_text) {
+        var iLoop=0;
+        while (speech_text[iLoop]) {
+            $("#omega-doom #" + current_process + " .speech p span").append(speech_text[iLoop]);
+            await sleep(10);
+            iLoop++;
+        }
     }
 END AFUNCTION
 
@@ -91,10 +187,18 @@ JAVASCRIPT
     $(document).ready(function() {
         $("body").on("keypress", function(event) {
             var splits, prev_id;
-            console.log(event.which, current_process);
+
+            if (user_input_enabled.includes(current_process)) {
+                user_input = 1;
+            } else if (user_input_disabled.includes(current_process)) {
+                user_input = 0;
+            }
+
+            console.log(event.which, user_input);
             if (!controls_locked) {
-                if (event.which == 13 && in_game) {
-                    $("#" + current_process + " .btn-continue").addClass("button-selected");
+                if (event.which == 13 && in_game && !user_input) {
+                    speech_text="";
+                    $("#" + current_process + " .btn-continue .button-message").addClass("selected");
                     splits = current_process.split("-");
                     current_process = "";
                     splits.forEach((str) => {
@@ -105,9 +209,10 @@ JAVASCRIPT
                         }
                     });
                     
-                    progressSpeech(event, current_process, null);
+                    progressSpeech(event, current_process, null, user_input);
                 } else if (event.which == 112 && in_game) {
-                    $("#" + current_process + " .btn-previous").addClass("button-selected");
+                    speech_text="";
+                    $("#" + current_process + " .btn-previous .button-message").addClass("selected");
                     splits = current_process.split("-");
                     current_process = "";
                     splits.forEach((str) => {
@@ -118,23 +223,30 @@ JAVASCRIPT
                         }
                     });
                     
-                    progressSpeech(event, null, current_process);
+                    progressSpeech(event, null, current_process, user_input);
                 } else if (event.which == 110 && !in_game) {
-                    $("#btn_start").addClass("button-selected");
+                    $("#btn_start .button-message").addClass("selected");
                     startNewGame();
                 }
             }
         });
+                    
+        $("#intro").fadeIn(2000, () => {
+            controls_locked=0;
+            showIntroButtons();
+        });
     });
+    function showIntroButtons() {
+        if (!loading && !controls_locked) {
+            $("#intro-controls-buttons").show();
+        }
+    }
 END JAVASCRIPT
 
 SCREEN "omega-doom-intro"
-    FOR iLoop%=1 TO 7
-        DEF intro$="intro_"+iLoop%
-        WINDOW intro$, "intro-window"
-            GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/game-title"+iLoop%+".gfx")
-        END WINDOW
-    NEXT
+    WINDOW "intro"
+        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/game-title7.gfx")
+    END WINDOW
     DIV ,"intro-controls"
         DIV ,"intro-controls-buttons"
             BUTTON "btn_start",,"btn_start",,,"startNewGame()"
@@ -145,18 +257,6 @@ SCREEN "omega-doom-intro"
             END BUTTON
         END DIV
     END DIV
-    ANIMATION
-        FOR iLoop%=1 TO 7
-            LET intro$="intro_"+iLoop%
-            SHOW intro$
-            SLEEP 200
-            IF iLoop%!=7 THEN
-                HIDE intro$
-            END IF
-        NEXT
-        SHOW "intro-controls-buttons"
-        ALET controls_locked%=0
-    END ANIMATION
 END SCREEN
 
 SCREEN "omega-doom-game"

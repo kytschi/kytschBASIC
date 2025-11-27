@@ -3,6 +3,26 @@
     src: url("../fonts/Inconsolata.ttf") format("truetype");
 }
 
+@keyframes flash {
+  0% { color: #ff8700; }
+  50% { color: transparent; }
+  100% { color: #ff8700; }
+}
+
+@keyframes warp {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(90deg); }
+  20% { transform: rotate(180deg); }
+  30% { transform: rotate(270deg); }
+  40% { transform: rotate(0); }
+  50% { transform: rotate(90deg); }
+  60% { transform: rotate(180deg); }
+  70% { transform: rotate(270deg); }
+  80% { transform: rotate(0); }
+  90% { transform: rotate(90deg); }
+  100% { transform: rotate(180deg); }
+}
+
 html, body {
     padding: 0;
     margin: 0;
@@ -46,8 +66,8 @@ html, body {
     color:#ff8700;
     padding: 0px 4px;
 }
-#omega-doom button.button-selected .button-message {
-    color: #009dff !important;
+#omega-doom button .button-message.selected  {
+    color: #009dff;
 }
 #omega-doom button .button_key_end {
     padding-right: 15px;
@@ -80,10 +100,10 @@ html, body {
     text-align: center;
 }
 
-#omega-doom-intro .intro-window {
-    display: none;
+#omega-doom-intro #intro {
     width: 100%;
     padding-top: 10px;
+    display: none;
 }
 
 #omega-doom-game {
@@ -100,7 +120,7 @@ html, body {
 }
 
 #omega-doom-game .game-progress {
-    display: flex;
+    display: none;
     width: 100%;
     height: 100%;
 }
@@ -110,6 +130,24 @@ html, body {
     flex-direction: column;
     width: calc(100% - 300px);
     height: 100%;
+}
+
+#omega-doom-game .visuals.full {
+    width: 100%;
+}
+
+#omega-doom-game .visuals.full code {
+    text-align: center;
+    font-size: 12pt;
+    padding-top: 30px;
+}
+
+#omega-doom-game .visuals #warp {
+    text-align: center;
+    font-size: 12pt;
+    padding-top: 30px;
+    -webkit-animation: warp linear 1s infinite;
+    animation: warp linear 1s infinite;
 }
 
 #omega-doom-game .controls {
@@ -123,6 +161,11 @@ html, body {
 #omega-doom-game .controls button {
     text-align: left;
     width: 100%;
+}
+    
+#omega-doom-game .button-message.flash {
+    -webkit-animation: flash linear 2s infinite;
+    animation: flash linear 2s infinite;
 }
 
 #omega-doom-game .gfx, #omega-doom-game .text {
@@ -168,6 +211,7 @@ html, body {
 #omega-doom-game .text .character code {
     height: 300px !important;
     text-align: center;
+    font-size: 12pt;
 }
 
 #omega-doom p {
@@ -195,12 +239,77 @@ html, body {
 }
 
 #omega-doom-game .text .speech p span {
-    display: none;
     background-color: #fff;
     color: #000;
     padding: 0 5px;
 }
 
-#omega-doom-game .text .speech button {
-    display: none;
+#omega-doom-game #map code {
+    text-align: center;
+    font-size: 12pt;
+    padding-top: 30px;
+}
+
+#omega-doom #map .map-text {
+    padding: 10px 10px;
+    background-color: #000;
+    color: #fff;
+}
+
+#omega-doom #map #kazaria-syndicate-map {
+    position: absolute;
+    top: 90px;
+    left: calc(50% - 280px);
+}
+#omega-doom #map #federation-map {
+    position: absolute;
+    top: 230px;
+    left: calc(50% - 300px);
+}
+#omega-doom #map #rosia-empire-map {
+    position: absolute;
+    top: 260px;
+    left: calc(50% + 70px);
+}
+#omega-doom #map #aris-republic-map {
+    position: absolute;
+    top: 340px;
+    left: calc(50% - 560px);
+}
+#omega-doom #map #garis-republic-map {
+    position: absolute;
+    top: 400px;
+    left: calc(50% - 180px);
+}
+#omega-doom #map #stovacor-map {
+    position: absolute;
+    top: 440px;
+    left: calc(50% - 440px);
+}
+#omega-doom #map #house-of-moong-map {
+    position: absolute;
+    top: 480px;
+    left: calc(50% - 200px);
+}
+#omega-doom #map #the-void-map {
+    position: absolute;
+    top: 310px;
+    left: calc(50% - 210px);
+}
+
+@media only screen and (max-height: 720px) {
+    #omega-doom-game .gfx {
+        height: calc(100vh - 200px);
+    }
+
+    #omega-doom-game .text {
+        height: 200px;
+    }
+
+    #omega-doom-game .text .character code {
+        height: 200px !important;
+        font-size: 6pt;
+        position: relative;
+        margin-top: -60px;
+    }
 }
