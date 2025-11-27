@@ -1549,10 +1549,10 @@ WINDOW "game-intro", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-intro-29"
-        WINDOW ,"visuals full"
+        WINDOW "warp","visuals full"
             DIV "gfx"
                 PRINT "Warping to Federation border","gfx-label"
-                DIV "render", "warp"
+                DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/warp_effect/0.gfx")
                 END DIV
             END DIV
