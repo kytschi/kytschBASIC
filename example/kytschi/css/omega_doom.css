@@ -86,6 +86,7 @@ html, body {
 
 #omega-doom-intro #intro-controls-buttons {
     display: none;
+    flex-direction: column;
 }
 
 #omega-doom-intro pre code {

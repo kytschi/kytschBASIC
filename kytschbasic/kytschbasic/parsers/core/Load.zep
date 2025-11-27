@@ -66,15 +66,14 @@ class Load extends Command
 			throw new Exception("Invalid INCLUDE");
 		}
 
-		let args[0] = trim(args[0], "\"");
-		let ext = pathinfo(args[0], PATHINFO_EXTENSION);
+		let ext = pathinfo(trim(args[0], "\""), PATHINFO_EXTENSION);
 
 		switch (ext) {
 			case "js":
 				let args[0] = str_replace(constant("_ROOT"), "", args[0]);
-				return "<script src='" . args[0] . "'></script>";
+				return "<script src=" . args[0] . "></script>";
 			default:
-				return (new Parser())->parse(rtrim(args[0], ".kb") . ".kb", false);
+				return "<?php (new KytschBASIC\\Parsers\\Core\\Parser())->parse(rtrim(" . args[0] . ", \".kb\") . \".kb\", false); ?>";
 		}
 	}
 }

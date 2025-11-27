@@ -152,6 +152,22 @@ AFUNCTION "startNewGame"
     );
 END AFUNCTION
 
+AFUNCTION "continueGame"
+    $("#omega-doom-intro").fadeOut(
+        "2000",
+        () => {
+            $("#omega-doom-game").fadeIn(
+                "2000",
+                () => {
+                    $("#btn_continue .button-message").removeClass("selected");
+                    in_game = 1;
+                    progressSpeech(event, "game-progress-1");
+                }
+            );
+        }
+    );
+END AFUNCTION
+
 AFUNCTION "progressSpeech", "next_id", "prev_id"
     speaking=1;
     if (prev_id) {
@@ -230,6 +246,9 @@ JAVASCRIPT
                 } else if (event.which == 110 && !in_game) {
                     $("#btn_start .button-message").addClass("selected");
                     startNewGame();
+                } else if (event.which == 90 && !in_game) {
+                    $("#btn_continue .button-message").addClass("selected");
+                    continueGame();
                 }
             }
         });
@@ -241,17 +260,31 @@ JAVASCRIPT
     });
     function showIntroButtons() {
         if (!loading && !controls_locked) {
-            $("#intro-controls-buttons").show();
+            $("#intro-controls-buttons").css("display", "flex");
         }
     }
 END JAVASCRIPT
 
+SCREEN "omega-doom-game"
+    IFE _GET("progress") THEN
+        LOAD "_ROOT/project/arcade/omega_doom/intro"
+    ELSE
+        DEF file$="_ROOT/project/arcade/omega_doom/"+_GET("progress")
+        LOAD file$
+    END IF
+END SCREEN
 SCREEN "omega-doom-intro"
     WINDOW "intro"
         GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/game-title7.gfx")
     END WINDOW
     DIV ,"intro-controls"
         DIV ,"intro-controls-buttons"
+            BUTTON "btn_continue",,"btn_continue",,,"continueGame()"
+                PRINT "["
+                PRINT "c","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Continue game", "button-message"
+            END BUTTON
             BUTTON "btn_start",,"btn_start",,,"startNewGame()"
                 PRINT "["
                 PRINT "n","button_key"
@@ -260,10 +293,6 @@ SCREEN "omega-doom-intro"
             END BUTTON
         END DIV
     END DIV
-END SCREEN
-
-SCREEN "omega-doom-game"
-    LOAD "_ROOT/project/arcade/omega_doom/intro"
 END SCREEN
 END BODY
 END
