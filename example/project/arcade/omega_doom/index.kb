@@ -258,6 +258,7 @@ JAVASCRIPT
             showIntroButtons();
         });
     });
+
     function showIntroButtons() {
         if (!loading && !controls_locked) {
             $("#intro-controls-buttons").css("display", "flex");
