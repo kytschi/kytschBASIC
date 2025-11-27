@@ -223,6 +223,8 @@ class Parser
 		switch (command) {
 			case "REM":
 				return "";
+			case "ALET":
+				return (new AFunction())->processDef(line, args, true, true, true);
 			case "SLEEP":
 				if (!this->js) {
 					if (!isset(args[0])) {

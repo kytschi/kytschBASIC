@@ -39,6 +39,11 @@ FUNCTION "loadGFX", file$
     END CODE
 END FUNCTION
 
+ADEF game_process$="game-intro"
+ADEF current_process$="game-intro-1"
+ADEF in_game%=0
+ADEF controls_locked%=1
+
 AFUNCTION "startNewGame"
     $("#omega-doom-intro").fadeOut(
         "2000",
@@ -46,6 +51,8 @@ AFUNCTION "startNewGame"
             $("#omega-doom-game").fadeIn(
                 "2000",
                 () => {
+                    $("#btn_start").removeClass("button-selected");
+                    in_game = 1;
                     progressSpeech(event, "game-intro-1");
                 }
             );
@@ -53,24 +60,73 @@ AFUNCTION "startNewGame"
     );
 END AFUNCTION
 
-AFUNCTION "progressSpeech", "id"
-    $("#omega-doom .progress .speech-progress").hide();
+AFUNCTION "progressSpeech", "next_id", "prev_id"
+    if (prev_id) {
+        current_process = prev_id;
+    } else if (next_id) {
+        current_process = next_id;
+    }
+
+    await sleep(10);
+    $(".btn-continue").removeClass("button-selected");
+    $(".btn-previous").removeClass("button-selected");
+    
+    $("#omega-doom .progress .game-progress").hide();
     $("#omega-doom .progress .speech-progress button").hide();
 
-    var text = $("#omega-doom #" + id + " .speech p span").html();
-    $("#omega-doom #" + id + " .speech p span").html("");
+    var text = $("#omega-doom #" + current_process + " .speech p span").html();
+    $("#omega-doom #" + current_process + " .speech p span").html("");
 
-    $("#omega-doom .progress #" + id).show();
-    $("#omega-doom .progress #" + id + " .speech p span").show();
-    $("#omega-doom .progress #" + id + " button").show();
+    $("#omega-doom .progress #" + current_process).show();
+    $("#omega-doom .progress #" + current_process + " .speech p span").show();
+    $("#omega-doom .progress #" + current_process + " button").show();
 
     for (let char of text) {
         await sleep(10);
-        $("#omega-doom #" + id + " .speech p span").append(char);
+        $("#omega-doom #" + current_process + " .speech p span").append(char);
     }
-
-    
 END AFUNCTION
+
+JAVASCRIPT
+    $(document).ready(function() {
+        $("body").on("keypress", function(event) {
+            var splits, prev_id;
+            console.log(event.which, current_process);
+            if (!controls_locked) {
+                if (event.which == 13 && in_game) {
+                    $("#" + current_process + " .btn-continue").addClass("button-selected");
+                    splits = current_process.split("-");
+                    current_process = "";
+                    splits.forEach((str) => {
+                        if (parseInt(str)) {
+                            current_process += (parseInt(str)+1)
+                        } else {
+                            current_process += str + "-"
+                        }
+                    });
+                    
+                    progressSpeech(event, current_process, null);
+                } else if (event.which == 112 && in_game) {
+                    $("#" + current_process + " .btn-previous").addClass("button-selected");
+                    splits = current_process.split("-");
+                    current_process = "";
+                    splits.forEach((str) => {
+                        if (parseInt(str)) {
+                            current_process += (parseInt(str)-1)
+                        } else {
+                            current_process += str + "-"
+                        }
+                    });
+                    
+                    progressSpeech(event, null, current_process);
+                } else if (event.which == 110 && !in_game) {
+                    $("#btn_start").addClass("button-selected");
+                    startNewGame();
+                }
+            }
+        });
+    });
+END JAVASCRIPT
 
 SCREEN "omega-doom-intro"
     FOR iLoop%=1 TO 7
@@ -81,10 +137,11 @@ SCREEN "omega-doom-intro"
     NEXT
     DIV ,"intro-controls"
         DIV ,"intro-controls-buttons"
-            BUTTON "btn_start",,,,,"startNewGame()"
+            BUTTON "btn_start",,"btn_start",,,"startNewGame()"
                 PRINT "["
                 PRINT "n","button_key"
-                PRINT "]&nbsp;New game"
+                PRINT "]", "button_key_end" 
+                PRINT "New game", "button-message"
             END BUTTON
         END DIV
     END DIV
@@ -98,6 +155,7 @@ SCREEN "omega-doom-intro"
             END IF
         NEXT
         SHOW "intro-controls-buttons"
+        ALET controls_locked%=0
     END ANIMATION
 END SCREEN
 

@@ -1,54 +1,1048 @@
 WINDOW "game-intro", "progress"
-    WINDOW ,"visuals"
-        DIV "gfx"
-            PRINT "Earth [Federation]","gfx-label"
-            DIV "render"
-                GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+    DIV "game-progress","game-intro-1"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
             END DIV
-        END DIV
-        
-        DIV "speech-progress","game-intro-1"
             DIV "text"
                 DIV "character"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
                         PRINT "Captain, incoming hail from Federation Command."
                     END SWRITE
-                    BUTTON "btn_game-intro-1",,,,,"progressSpeech(event,'game-intro-2')"
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-2', null)"
                         PRINT "["
-                        PRINT "space","button_key"
-                        PRINT "]&nbsp;Continue"
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
                     END BUTTON
                 END DIV
             END DIV
-        END DIV
-        DIV "speech-progress hide","game-intro-2"
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "c","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Communications", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "n","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Navigation", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "s","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Sensors", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "w","button_key"
+                PRINT "]", "button_key_end_small" 
+                PRINT "Weapons", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engineering", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-2"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
             DIV "text"
                 DIV "character"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
                         PRINT "Priority One message from Admiral Byrd sir."
                     END SWRITE
-                    BUTTON "btn_game-intro-2",,,,,"progressSpeech(event,'game-intro-2')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
                         PRINT "["
-                        PRINT "space","button_key"
-                        PRINT "]&nbsp;Continue"
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-3',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
                     END BUTTON
                 END DIV
             END DIV
-        END DIV
-    END WINDOW
-    WINDOW ,"controls"
-        PRINT "controls"
-    END WINDOW
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "c","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Communications", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "n","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Navigation", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "s","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Sensors", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "w","button_key"
+                PRINT "]", "button_key_end_small" 
+                PRINT "Weapons", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engineering", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-3"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Onscreen."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-4')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-4"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Admiral, I hope this isn't bad news?"
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-5')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-5"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "My crew is in dire need of some R an..."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-6')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-6"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Sorry John, you'll have to delay that."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-7')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-7"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "We've lost contact with a research team at outpost 3366."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-8')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-8"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Output 3366, I don't recall it?"
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-9')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-9"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "You wouldn't, strictly for top brass eyes only John."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-10')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-10"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Your our closest Starship I'm afraid."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-11')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-11"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Report to the co-ordinates 663993 691216."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-12')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-12"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Sector 663993, Admiral that's on the Rosia Empire border?!"
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-13')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-13"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "I am well aware of that Captain!"
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-14')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-14"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Report back when you've arrived at the outpost."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-15')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-15"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "But Rich, the treaty? They'll see this as an act of..."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-16')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-16"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "You have your order's John...God speed."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-17')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-17"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Byrd out."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-18')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Incoming Hail", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-18"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Helm..."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-19')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "c","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Communications", "button-message"
+            END BUTTON
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "n","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Navigation", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "s","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Sensors", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "w","button_key"
+                PRINT "]", "button_key_end_small" 
+                PRINT "Weapons", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engineering", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-19"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Aye sir."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-19')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+    DIV "game-progress hide","game-intro-20"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp."
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-intro-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-19')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON ,"button-selected"
+                PRINT "["
+                PRINT "1","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Map", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
 END WINDOW

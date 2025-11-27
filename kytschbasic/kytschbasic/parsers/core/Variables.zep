@@ -447,7 +447,7 @@ class Variables
 		}
 	}
 
-	private function processDef(string line, args, bool let_var = false, bool javascript = false)
+	public function processDef(string line, args, bool let_var = false, bool javascript = false, bool in_javascript = false)
 	{
 		var arg, output = "<?php ", splits, cleaned;
 		
@@ -460,7 +460,7 @@ class Variables
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 		}
 
-		if (javascript) {
+		if (javascript && !in_javascript) {
 			let output = "<?= '<script type=\"text/javascript\">";
 		}
 
@@ -468,9 +468,15 @@ class Variables
 		preg_match("/[$\%#&](?=(?:(?:[^\"]*\"){2})*[^\"]*$)(?!(?:[^()]*\)))/", line, splits, PREG_OFFSET_CAPTURE);
 		if (empty(splits[0][0])) {
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
-		}	
+		}
 
-		let output .= (javascript ? "var " . ltrim(args[0], "$") : args[0]) . " = ";
+		if (javascript) {
+			let args[0] = ltrim(args[0], "$");
+			let output .= (let_var ? "" : "var ") . (in_javascript ? "echo \"" . args[0] . " = \"" : args[0] . " = ");
+		} else {
+			let output .= args[0] . " = ";
+		}
+
 		array_shift(args);
 
 		for arg in args {
@@ -482,7 +488,7 @@ class Variables
 					let cleaned = "(double)" . arg . "";
 					break;
 				default:
-					let cleaned = arg;
+					let cleaned = "\"" . this->outputArg(arg) . "\"";
 					break;
 			}
 
@@ -496,12 +502,15 @@ class Variables
 			}
 
 			let output .= (
-				javascript ? "' . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ") . ';" :
-				arg . ";"
+				javascript ? 
+					(in_javascript ? "" : "'") . 
+					" . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ")" .
+					(in_javascript ? "" : " . ';") :
+					arg . ";"
 			);
 		}
 
-		if (javascript) {
+		if (javascript && !in_javascript) {
 			let output .= "</script>';";
 		}
 
