@@ -144,7 +144,7 @@ AFUNCTION "startNewGame"
                 () => {
                     $("#btn_start .button-message").removeClass("selected");
                     in_game = 1;
-                    progressSpeech(event, "game-intro-29");
+                    progressSpeech(event, "game-intro-1");
                 }
             );
         }
