@@ -10,17 +10,18 @@
 }
 
 @keyframes warp {
-  0% { transform: rotate(0); }
-  10% { transform: rotate(90deg); }
-  20% { transform: rotate(180deg); }
-  30% { transform: rotate(270deg); }
-  40% { transform: rotate(0); }
-  50% { transform: rotate(90deg); }
-  60% { transform: rotate(180deg); }
-  70% { transform: rotate(270deg); }
-  80% { transform: rotate(0); }
-  90% { transform: rotate(90deg); }
-  100% { transform: rotate(180deg); }
+  0% { transform: rotate(90deg); }
+  10% { transform: rotate(180deg); }
+  20% { transform: rotate(270deg); }
+  30% { transform: rotate(0); }
+  40% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  60% { transform: rotate(270deg); }
+  70% { transform: rotate(0); }
+  80% { transform: rotate(90deg); }
+  90% { transform: rotate(180deg); }
+  95% { transform: rotate(270deg); }
+  100% { transform: rotate(0); }
 }
 
 html, body {
