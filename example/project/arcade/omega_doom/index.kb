@@ -59,6 +59,8 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "]", "button_key_end_small" 
         IF flash$="federation" THEN
             PRINT "Federation", "button-message flash"
+        ELSEIF selected$="kazaria-syndicate" THEN
+            PRINT "Kazaria Syndicate", "button-message selected"
         ELSE
             PRINT "Federation", "button-message"
         END IF
@@ -69,6 +71,8 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "]", "button_key_end_small" 
         IF flash$="rosia-empire" THEN
             PRINT "Rosia Empire", "button-message flash"
+        ELSEIF selected$="kazaria-syndicate" THEN
+            PRINT "Kazaria Syndicate", "button-message selected"
         ELSE
             PRINT "Rosia Empire", "button-message"
         END IF
@@ -79,6 +83,8 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "]", "button_key_end_small" 
         IF flash$="aris-republic" THEN
             PRINT "Aris Republic", "button-message flash"
+        ELSEIF selected$="aris-republic" THEN
+            PRINT "Aris Republic", "button-message selected"
         ELSE
             PRINT "Aris Republic", "button-message"
         END IF
@@ -87,8 +93,10 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "["
         PRINT "5","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="aris-republic" THEN
+        IF flash$="garis-republic" THEN
             PRINT "Garis Republic", "button-message flash"
+        ELSEIF selected$="garis-republic" THEN
+            PRINT "Garis Republic", "button-message selected"
         ELSE
             PRINT "Garis Republic", "button-message"
         END IF
@@ -99,6 +107,8 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "]", "button_key_end_small" 
         IF flash$="stovacor" THEN
             PRINT "Stovacor", "button-message flash"
+        ELSEIF selected$="stovacor" THEN
+            PRINT "Stovacor", "button-message selected"
         ELSE
             PRINT "Stovacor", "button-message"
         END IF
@@ -109,6 +119,8 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "]", "button_key_end_small" 
         IF flash$="house-of-moong" THEN
             PRINT "House of Moong", "button-message flash"
+        ELSEIF selected$="house-of-moong" THEN
+            PRINT "House of Moong", "button-message selected"
         ELSE
             PRINT "House of Moong", "button-message"
         END IF
@@ -119,6 +131,8 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
         PRINT "]", "button_key_end_small" 
         IF flash$="house-of-moong" THEN
             PRINT "The Void", "button-message flash"
+        ELSEIF selected$="the-void" THEN
+            PRINT "The Void", "button-message selected"
         ELSE
             PRINT "The Void", "button-message"
         END IF
@@ -139,76 +153,123 @@ FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
             PRINT "Earth", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","federation-map",,,"navigation(event,'federation')"
+    BUTTON ,"map-text","yidow-prime-map",,,"navigation(event,'yidow-prime')"
         PRINT "["
         PRINT "2","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="federation" THEN
-            PRINT "Federation", "button-message flash"
+        IF flash$="yidow-prime" THEN
+            PRINT "Yidow Prime", "button-message flash"
+        ELSEIF selected$="yidow-prime" THEN
+            PRINT "Yidow Prime", "button-message selected"
         ELSE
-            PRINT "Federation", "button-message"
+            PRINT "Yidow Prime", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","rosia-empire-map",,,"navigation(event,'rosia-empire')"
+    BUTTON ,"map-text","fasbon-prime-map",,,"navigation(event,'fasbon-prime')"
         PRINT "["
         PRINT "3","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="rosia-empire" THEN
-            PRINT "Rosia Empire", "button-message flash"
+        IF flash$="fasbon-prime" THEN
+            PRINT "Fasbon Prime", "button-message flash"
+        ELSEIF selected$="fasbon-prime" THEN
+            PRINT "Fasbon Prime", "button-message selected"
         ELSE
-            PRINT "Rosia Empire", "button-message"
+            PRINT "Fasbon Prime", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","aris-republic-map",,,"navigation(event,'aris-republic')"
+    BUTTON ,"map-text","cratol-moon-map",,,"navigation(event,'cratol-moon')"
         PRINT "["
         PRINT "4","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="aris-republic" THEN
-            PRINT "Aris Republic", "button-message flash"
+        IF flash$="cratol-moon" THEN
+            PRINT "Cratol Moon", "button-message flash"
+        ELSEIF selected$="cratol-moon" THEN
+            PRINT "Cratol Moon", "button-message selected"
         ELSE
-            PRINT "Aris Republic", "button-message"
+            PRINT "Cratol Moon", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","garis-republic-map",,,"navigation(event,'garis-republic')"
+    BUTTON ,"map-text","furia-prime-map",,,"navigation(event,'furia-prime')"
         PRINT "["
         PRINT "5","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="aris-republic" THEN
-            PRINT "Garis Republic", "button-message flash"
+        IF flash$="furia-prime" THEN
+            PRINT "Furia Prime", "button-message flash"
+        ELSEIF selected$="furia-prime" THEN
+            PRINT "Furia Prime", "button-message selected"
         ELSE
-            PRINT "Garis Republic", "button-message"
+            PRINT "Furia Prime", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","stovacor-map",,,"navigation(event,'stovacor')"
+    BUTTON ,"map-text","opalus-prime-map",,,"navigation(event,'opalus-prime')"
         PRINT "["
         PRINT "6","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="stovacor" THEN
-            PRINT "Stovacor", "button-message flash"
+        IF flash$="opalus-prime" THEN
+            PRINT "Opalus Prime", "button-message flash"
+        ELSEIF selected$="opalus-prime" THEN
+            PRINT "Opalus Prime", "button-message selected"
         ELSE
-            PRINT "Stovacor", "button-message"
+            PRINT "Opalus Prime", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","house-of-moong-map",,,"navigation(event,'house-of-moong')"
+    BUTTON ,"map-text","outpost-3366-map",,,"navigation(event,'outpost-3366')"
         PRINT "["
         PRINT "7","button_key"
         PRINT "]", "button_key_end_small" 
-        IF flash$="house-of-moong" THEN
-            PRINT "House of Moong", "button-message flash"
+        IF flash$="outpost-3366" THEN
+            PRINT "Outpost 3366", "button-message flash"
+        ELSEIF selected$="outpost-3366" THEN
+            PRINT "Outpost 3366", "button-message selected"
         ELSE
-            PRINT "House of Moong", "button-message"
+            PRINT "Outpost 3366", "button-message"
         END IF
     END BUTTON
-    BUTTON ,"map-text","the-void-map",,,"navigation(event,'the-void')"
-        PRINT "["
-        PRINT "8","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="house-of-moong" THEN
-            PRINT "The Void", "button-message flash"
-        ELSE
-            PRINT "The Void", "button-message"
-        END IF
-    END BUTTON
+END FUNCTION
+
+FUNCTION "drawStats", sector$, location$, tactical$, tactical_style$, shields$, shields_style$, shields_status$, shields_status_style$
+    DIV "controls-stats"
+        TABLE
+            TBODY
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "SECTOR"
+                    END TCELL
+                    TCELL
+                        PRINT sector$
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "LOCATION"
+                    END TCELL
+                    TCELL
+                        PRINT location$
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "TACTICAL"
+                    END TCELL
+                    TCELL
+                        PRINT tactical$, tactical_style$
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "SHIELDS"
+                    END TCELL
+                    TCELL
+                        PRINT shields$, shields_style$
+                        PRINT "&nbsp;"
+                        PRINT "[", shields_status_style$
+                        PRINT shields_status$, shields_status_style$
+                        PRINT "]", shields_status_style$
+                    END TCELL
+                END TROW
+            END TBODY
+        END TABLE
+    END DIV
 END FUNCTION
 
 ADEF game_process$="game-intro"
@@ -221,6 +282,11 @@ ADEF user_input%=0
 ADIM user_input_enabled$=[]
 ADIM user_input_disabled$=[]
 ADEF speaking%=0
+IFE _GET("progress") THEN
+    ADEF skip_intro%=0
+ELSE
+    ADEF skip_intro%=1
+END IF
 
 AFUNCTION "startNewGame"
     $("#omega-doom-intro").fadeOut(
@@ -231,7 +297,7 @@ AFUNCTION "startNewGame"
                 () => {
                     $("#btn_start .button-message").removeClass("selected");
                     in_game = 1;
-                    progressSpeech(event, "game-progress-25");
+                    progressSpeech(event, "game-progress-1");
                 }
             );
         }
@@ -247,7 +313,7 @@ AFUNCTION "continueGame"
                 () => {
                     $("#btn_continue .button-message").removeClass("selected");
                     in_game = 1;
-                    progressSpeech(event, "game-progress-25");
+                    progressSpeech(event, "game-progress-1");
                 }
             );
         }
@@ -339,11 +405,15 @@ JAVASCRIPT
                 }
             }
         });
-                    
-        $("#intro").fadeIn(2000, () => {
-            controls_locked=0;
-            showIntroButtons();
-        });
+
+        if (!skip_intro) {     
+            $("#intro").fadeIn(2000, () => {
+                controls_locked=0;
+                showIntroButtons();
+            });
+        } else {
+            continueGame();
+        }
     });
 
     function showIntroButtons() {

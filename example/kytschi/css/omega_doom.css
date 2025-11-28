@@ -64,7 +64,7 @@ html, body {
     color: #009dff;
 }
 #omega-doom button .button_key_end {
-    padding-right: 15px;
+    padding-right: 18px;
 }
 #omega-doom button .button_key_end_small {
     padding-right: 12px;
@@ -249,6 +249,27 @@ html, body {
     padding: 0 5px;
 }
 
+#omega-doom-game .controls-buttons {
+    height: calc(100vh - 200px);
+}
+
+#omega-doom-game .controls-stats {
+    text-transform: uppercase;
+    height: 200px;
+}
+
+#omega-doom-game .controls-stats .controls-stats-label {
+    color: #bab8b8;
+    padding-right: 20px;
+}
+
+#omega-doom-game .controls-stats .good {
+    color: #00ff2e;
+}
+#omega-doom-game .controls-stats .bad {
+    color: #ff0000;
+}
+
 #omega-doom-game #map code {
     text-align: center;
     font-size: 12pt;
@@ -306,6 +327,36 @@ html, body {
     position: absolute;
     top: 60px;
     left: calc(50% - 620px);
+}
+#omega-doom #map #yidow-prime-map {
+    position: absolute;
+    top: 120px;
+    left: calc(50% - 380px);
+}
+#omega-doom #map #fasbon-prime-map {
+    position: absolute;
+    top: 120px;
+    left: calc(50% + 60px);
+}
+#omega-doom #map #cratol-moon-map {
+    position: absolute;
+    top: 170px;
+    left: calc(50% - 590px);
+}
+#omega-doom #map #furia-prime-map {
+    position: absolute;
+    top: 390px;
+    left: calc(50% - 600px);
+}
+#omega-doom #map #opalus-prime-map {
+    position: absolute;
+    top: 310px;
+    left: calc(50% - 180px);
+}
+#omega-doom #map #outpost-3366-map {
+    position: absolute;
+    top: 380px;
+    left: calc(50% + 90px);
 }
 
 @media only screen and (max-height: 720px) {

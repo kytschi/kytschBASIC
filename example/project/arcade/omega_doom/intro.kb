@@ -29,42 +29,45 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "c","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Communications", "button-message flash"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "n","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Navigation", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "s","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Sensors", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "w","button_key"
-                PRINT "]", "button_key_end_small" 
-                PRINT "Weapons", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engineering", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message flash"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-2"
@@ -103,42 +106,45 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "c","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Communications", "button-message flash"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "n","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Navigation", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "s","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Sensors", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "w","button_key"
-                PRINT "]", "button_key_end_small" 
-                PRINT "Weapons", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engineering", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message flash"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-3"
@@ -177,18 +183,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message flash"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message flash"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-4"
@@ -227,18 +236,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-5"
@@ -277,18 +289,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-6"
@@ -327,18 +342,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-7"
@@ -377,18 +395,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-8"
@@ -427,18 +448,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-9"
@@ -477,18 +501,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-10"
@@ -527,18 +554,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-11"
@@ -577,18 +607,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-12"
@@ -627,18 +660,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-13"
@@ -677,18 +713,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-14"
@@ -727,18 +766,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-15"
@@ -777,18 +819,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-16"
@@ -827,18 +872,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-17"
@@ -877,18 +925,21 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "h","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Incoming Hail", "button-message selected"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-18"
@@ -927,42 +978,45 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "c","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Communications", "button-message"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "n","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Navigation", "button-message flash"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "s","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Sensors", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "w","button_key"
-                PRINT "]", "button_key_end_small" 
-                PRINT "Weapons", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engineering", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message flash"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-19"
@@ -1001,24 +1055,27 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message flash"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message flash"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-20"
@@ -1057,24 +1114,27 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-21"
@@ -1113,24 +1173,27 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-22"
@@ -1169,24 +1232,27 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-23"
@@ -1225,24 +1291,27 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-24"
@@ -1288,24 +1357,27 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-25"
@@ -1314,7 +1386,7 @@ WINDOW "game-intro", "progress"
             DIV "gfx"
                 PRINT "Map [Federation Sector]","gfx-label"
                 DIV "render", "map"
-                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "output-3366")
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "outpost-3366")
                 END DIV
             END DIV
             DIV "text"
@@ -1336,46 +1408,59 @@ WINDOW "game-intro", "progress"
                     END BUTTON
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-25");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-progress-25" && in_game && user_input && !speaking) {
+                                if (event.which == 55) {
+                                    progressSpeech(event, "game-progress-26", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    $("#game-progress-25 .original").html("I need to be selecting Outpost 3366 from the map.");
+                                    progressSpeech(event, current_process, null);
+                                } 
+                            }
+                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-26"
-        PRINT "Engage!","original hide"
+        PRINT "Course plotted Captain.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Map [Federation Sector]","gfx-label"
                 DIV "render", "map"
-                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "", "federation")
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
             END DIV
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Captain. Abrahams [SS Liberty]"
+                        PRINT "Lt. Cyrus [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1393,37 +1478,102 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-26");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message selected"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-27"
+        PRINT "Engage!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Map [Federation Sector]","gfx-label"
+                DIV "render", "map"
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-26')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-28',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-28"
         PRINT "Aye sir.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Map [Federation Sector]","gfx-label"
                 DIV "render", "map"
-                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "", "federation")
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
             END DIV
             DIV "text"
@@ -1437,18 +1587,18 @@ WINDOW "game-intro", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-26')"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-27')"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
                     JAVASCRIPT
-                        user_input_enabled.push("game-progress-27");
+                        user_input_enabled.push("game-progress-28");
                         $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-27" && in_game && user_input && !speaking) {
+                            if (current_process == "game-progress-28" && in_game && user_input && !speaking) {
                                 if (event.which == 101) {
-                                    progressSpeech(event, "game-progress-28", null);
+                                    progressSpeech(event, "game-progress-29", null);
                                 } else if (event.which != 112 && event.which != 113) {
                                     $("#game-progress-27 .original").html("I need to engage the engines.");
                                     progressSpeech(event, current_process, null);
@@ -1460,33 +1610,36 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "m","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Map", "button-message"
-            END BUTTON
-            BUTTON ,,,,,"progressSpeech(event,'game-progress-28')"
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engines", "button-message flash"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-29')"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message flash"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
-    DIV "game-progress","game-progress-28"
+    DIV "game-progress","game-progress-29"
         PRINT "Engaging warp drive now.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Map [Federation Sector]","gfx-label"
                 DIV "render", "map"
-                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "", "federation")
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
             END DIV
             DIV "text"
@@ -1508,9 +1661,12 @@ WINDOW "game-intro", "progress"
                     END BUTTON
                     JAVASCRIPT
                         $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-28" && in_game && user_input && !speaking) {
+                            if (current_process == "game-progress-29" && in_game && user_input && !speaking) {
                                 if (event.which == 119) {
-                                    progressSpeech(event, "game-progress-29", null);
+                                    progressSpeech(event, "game-progress-30", null);
+                                    setTimeout(() => {
+                                        window.location.href = "/arcade/omega-doom?progress=progress1";
+                                    }, 3000);
                                 } else if (event.which != 112 && event.which != 113) {
                                     $("#game-progress-28 .original").html("I need to engage the warp drive.");
                                     progressSpeech(event, current_process, null);
@@ -1522,30 +1678,33 @@ WINDOW "game-intro", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON ,,,,,"progressSpeech(event,'game-progress-29')"
-                PRINT "["
-                PRINT "w","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Warp drive", "button-message flash"
-            END BUTTON
-            BUTTON
-                PRINT "["
-                PRINT "i","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Impuse drive", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-30')"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Warp drive", "button-message flash"
+                END BUTTON
+                BUTTON
+                    PRINT "["
+                    PRINT "i","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Impuse drive", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
         END WINDOW
     END DIV
-    DIV "game-progress","game-progress-29"
+    DIV "game-progress","game-progress-30"
         WINDOW "warp","visuals full"
             DIV "gfx"
-                PRINT "Warping to Federation border","gfx-label"
+                PRINT "Warping to Output 3366","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/warp_effect/0.gfx")
                 END DIV

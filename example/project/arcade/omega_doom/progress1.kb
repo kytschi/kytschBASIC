@@ -29,42 +29,58 @@ WINDOW "game-window", "progress"
             END DIV
         END WINDOW
         WINDOW ,"controls"
-            BUTTON
-                PRINT "["
-                PRINT "c","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Communications", "button-message flash"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "n","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Navigation", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "s","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Sensors", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "w","button_key"
-                PRINT "]", "button_key_end_small" 
-                PRINT "Weapons", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "e","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Engineering", "button-message"
-            END BUTTON
-            BUTTON 
-                PRINT "["
-                PRINT "q","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Save & Quit", "button-message"
-            END BUTTON
+            DIV "controls-buttons"
+                BUTTON
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message flash"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            DIV "controls-stats"
+                TABLE
+                    TBODY
+                        TROW
+                            TCELL
+                                PRINT "SECTOR"
+                            END TCELL
+                            TCELL
+                                PRINT "FEDERATION"
+                            END TCELL
+                        END TROW
+                    END TBODY
+                END TABLE
+            END DIV
         END WINDOW
     END DIV
 END WINDOW
