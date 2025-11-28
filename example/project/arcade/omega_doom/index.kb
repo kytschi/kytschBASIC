@@ -287,21 +287,26 @@ IFE _GET("progress") THEN
 ELSE
     ADEF skip_intro%=1
 END IF
+ADEF save$=""
 
 AFUNCTION "startNewGame"
-    $("#omega-doom-intro").fadeOut(
-        "2000",
-        () => {
-            $("#omega-doom-game").fadeIn(
-                "2000",
-                () => {
-                    $("#btn_start .button-message").removeClass("selected");
-                    in_game = 1;
-                    progressSpeech(event, "game-progress-1");
-                }
-            );
-        }
-    );
+    if (!skip_intro) {
+        $("#omega-doom-intro").fadeOut(
+            "2000",
+            () => {
+                $("#omega-doom-game").fadeIn(
+                    "2000",
+                    () => {
+                        $("#btn_start .button-message").removeClass("selected");
+                        in_game = 1;
+                        progressSpeech(event, "game-progress-1");
+                    }
+                );
+            }
+        );
+    } else {
+        window.location.href = "/arcade/omega-doom";
+    }
 END AFUNCTION
 
 AFUNCTION "continueGame"
@@ -313,7 +318,35 @@ AFUNCTION "continueGame"
                 () => {
                     $("#btn_continue .button-message").removeClass("selected");
                     in_game = 1;
+                    controls_locked=0;
                     progressSpeech(event, "game-progress-1");
+                }
+            );
+        }
+    );
+END AFUNCTION
+
+AFUNCTION "invalidButton", "speech"
+    $("#" + current_process + " .original").html(speech);
+    progressSpeech(event, current_process, null);
+END AFUNCTION
+
+AFUNCTION "saveAndQuit", "progress=null"
+    console.log("Saving", progress);
+    $("#intro-controls-buttons").css("display", "none");
+    $("#omega-doom-game").fadeOut(
+        "2000",
+        () => {
+            $("#omega-doom-intro").fadeIn(
+                "2000",
+                () => {
+                    if (progress) {
+                        window.location.href = "/arcade/omega-doom?progress=" + progress;
+                    } else {
+                        in_game = 0;
+                        controls_locked=0;
+                        showIntroButtons();
+                    }
                 }
             );
         }
@@ -366,22 +399,26 @@ JAVASCRIPT
                 user_input = 0;
             }
 
-            console.log(event.which, user_input);
+            console.log(event.which, save);
             if (!controls_locked) {
                 if (event.which == 13 && in_game && !user_input) {
-                    speech_text="";
-                    $("#" + current_process + " .btn-continue .button-message").addClass("selected");
-                    splits = current_process.split("-");
-                    current_process = "";
-                    splits.forEach((str) => {
-                        if (parseInt(str)) {
-                            current_process += (parseInt(str)+1)
-                        } else {
-                            current_process += str + "-"
-                        }
-                    });
-                    
-                    progressSpeech(event, current_process, null, user_input);
+                    if (save) {
+                        saveAndQuit(event, save);
+                    } else {
+                        speech_text="";
+                        $("#" + current_process + " .btn-continue .button-message").addClass("selected");
+                        splits = current_process.split("-");
+                        current_process = "";
+                        splits.forEach((str) => {
+                            if (parseInt(str)) {
+                                current_process += (parseInt(str)+1)
+                            } else {
+                                current_process += str + "-"
+                            }
+                        });
+                        
+                        progressSpeech(event, current_process, null, user_input);
+                    }
                 } else if (event.which == 112 && in_game) {
                     speech_text="";
                     $("#" + current_process + " .btn-previous .button-message").addClass("selected");
@@ -412,7 +449,10 @@ JAVASCRIPT
                 showIntroButtons();
             });
         } else {
-            continueGame();
+            $("#intro").fadeIn(2000, () => {
+                controls_locked=0;
+                continueGame();
+            });
         }
     });
 

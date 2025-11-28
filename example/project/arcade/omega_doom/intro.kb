@@ -30,7 +30,7 @@ WINDOW "game-intro", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-2')"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
@@ -60,7 +60,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -107,7 +107,7 @@ WINDOW "game-intro", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-3')"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
@@ -137,7 +137,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -184,13 +184,13 @@ WINDOW "game-intro", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-4')"
                     PRINT "["
                     PRINT "h","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message flash"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -243,7 +243,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -296,7 +296,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -349,7 +349,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -402,7 +402,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -455,7 +455,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -508,7 +508,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -561,7 +561,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -614,7 +614,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -667,7 +667,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -720,7 +720,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -773,7 +773,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -826,7 +826,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -879,7 +879,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -932,7 +932,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Incoming Hail", "button-message selected"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -985,7 +985,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-19')"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
@@ -1009,7 +1009,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1056,7 +1056,7 @@ WINDOW "game-intro", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-20')"
                     PRINT "["
                     PRINT "m","button_key"
                     PRINT "]", "button_key_end" 
@@ -1068,7 +1068,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1127,7 +1127,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1186,7 +1186,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1245,7 +1245,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1304,7 +1304,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1370,7 +1370,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1436,7 +1436,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1498,7 +1498,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1557,7 +1557,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1623,7 +1623,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engines", "button-message flash"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1665,7 +1665,7 @@ WINDOW "game-intro", "progress"
                                 if (event.which == 119) {
                                     progressSpeech(event, "game-progress-30", null);
                                     setTimeout(() => {
-                                        window.location.href = "/arcade/omega-doom?progress=progress1";
+                                        saveAndQuit('progress1');
                                     }, 3000);
                                 } else if (event.which != 112 && event.which != 113) {
                                     $("#game-progress-28 .original").html("I need to engage the warp drive.");
@@ -1691,7 +1691,7 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Impuse drive", "button-message"
                 END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 

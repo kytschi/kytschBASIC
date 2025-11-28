@@ -1,11 +1,236 @@
 WINDOW "game-window", "progress"
     DIV "game-progress","game-progress-1"
-        PRINT "Progress 1","original hide"
+        PRINT "Captain, thats a Kazaria Syndicate outpost.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-2', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-2"
+        PRINT "What the hell is a Kazarian outpost doing in Federation space on the Rosia border?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-1')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-3', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-3"
+        PRINT "Ambrose, hail the outpost.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-2')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-4', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-4"
+        PRINT "Aye sir.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -19,7 +244,211 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-2', null)"
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-3')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-progress-4");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-progress-4" && in_game && user_input && !speaking) {
+                                if (event.which == 99) {
+                                    progressSpeech(event, "game-progress-5", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    invalidButton(event,'I need to be selecting communications.');
+                                } 
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-5',null)"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message flash"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-5"
+        PRINT "Opening channel with the outpost.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-4')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-progress-5");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-progress-5" && in_game && user_input && !speaking) {
+                                if (event.which == 49) {
+                                    progressSpeech(event, "game-progress-6", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    invalidButton(event,'I need to be hailing the outpost.');
+                                } 
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-6',null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail the outpost", "button-message flash"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-6"
+        PRINT "Outpost 3366, this is the SS Liberty.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-5')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-7',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-6");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-7',null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail the outpost", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-7"
+        PRINT "Outpost 3366, this is the SS Liberty, please respond.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-6')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-8',null)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -30,57 +459,1528 @@ WINDOW "game-window", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-8',null)"
                     PRINT "["
-                    PRINT "c","button_key"
+                    PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
-                    PRINT "Communications", "button-message flash"
+                    PRINT "Hail the outpost", "button-message selected"
                 END BUTTON
-                BUTTON 
-                    PRINT "["
-                    PRINT "n","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Navigation", "button-message"
-                END BUTTON
-                BUTTON 
-                    PRINT "["
-                    PRINT "s","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Sensors", "button-message"
-                END BUTTON
-                BUTTON 
-                    PRINT "["
-                    PRINT "w","button_key"
-                    PRINT "]", "button_key_end_small" 
-                    PRINT "Weapons", "button-message"
-                END BUTTON
-                BUTTON 
-                    PRINT "["
-                    PRINT "e","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Engineering", "button-message"
-                END BUTTON
-                BUTTON 
+                BUTTON ,,,,,"saveAndQuit()" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            DIV "controls-stats"
-                TABLE
-                    TBODY
-                        TROW
-                            TCELL
-                                PRINT "SECTOR"
-                            END TCELL
-                            TCELL
-                                PRINT "FEDERATION"
-                            END TCELL
-                        END TROW
-                    END TBODY
-                END TABLE
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-8"
+        PRINT "Outpost 3366, this is the SS Liberty, please respond.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
             END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-7')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-9',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-9',null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail the outpost", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-9"
+        PRINT "Outpost 3366, please respond.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-8')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-10',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-10',null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail the outpost", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-10"
+        PRINT "Captain, there is no response.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-9')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-11',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-11',null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail the outpost", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-11"
+        PRINT "Number one, scan the outpost for life signs.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-10')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-12',null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-12"
+        PRINT "Yes Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-11')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-progress-12");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-progress-12" && in_game && user_input && !speaking) {
+                                if (event.which == 115) {
+                                    progressSpeech(event, "game-progress-13", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    invalidButton(event,'I need to be selecting sensors.');
+                                } 
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event,'game-progress-14',null)"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message flash"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-13"
+        PRINT "Accessing sensors Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-11')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-progress-13");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-progress-13" && in_game && user_input && !speaking) {
+                                if (event.which == 49) {
+                                    progressSpeech(event, "game-progress-15", null);
+                                } else if (event.which == 50) {
+                                    progressSpeech(event, "game-progress-14", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    invalidButton(event,'I need to be scanning the outpost.');
+                                } 
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-15', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message flash"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-14"
+        PRINT "Nothing on long range sensors.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-13')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_enabled.push("game-progress-14");
+                        $("body").on("keypress", function(event) {
+                            if (current_process == "game-progress-14" && in_game && user_input && !speaking) {
+                                if (event.which == 49) {
+                                    progressSpeech(event, "game-progress-15", null);
+                                } else if (event.which == 50) {
+                                    progressSpeech(event, "game-progress-14", null);
+                                } else if (event.which != 112 && event.which != 113) {
+                                    invalidButton(event,'I need to be scanning the outpost.');
+                                } 
+                            }
+                        });
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-15', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-15"
+        PRINT "Scanning the outpost Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-13')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-16', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-15");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-16', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-16"
+        PRINT "No life signs.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-15')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-17', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-15");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-17', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-17"
+        PRINT "But I am reading an anomaly on sensors.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-16')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-18', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-17");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-18', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-18"
+        PRINT "Baring 20 08 74.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-17')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-19', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-18");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-19', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-19"
+        PRINT "Mr Simons you seeing anything?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-18')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-20', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-19");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-20', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-20"
+        PRINT "Negative Captain...wait!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-19')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-21', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-20");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-21', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-21"
+        PRINT "What is it?!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-20')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-22', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-21");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-22', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-22"
+        PRINT "I'm not sure Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-21')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-23', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-22");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-23', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-23"
+        PRINT "First there was a sensor reading then there wasn't.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-22')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-24', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-23");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-24', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-24"
+        PRINT "Cloaked ship?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-23')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-25', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-24");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-25', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-25"
+        PRINT "Doubtful.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-24')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-26', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-25");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-26', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-26"
+        PRINT "Sensors are getting a strong reading but only for a fraction of a second.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-25')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-27', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-26");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-27', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-27"
+        PRINT "Captain! There it is again!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-26')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-28', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-27");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-28', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-28"
+        PRINT "Shields up!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-27')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-29', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-28");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-29', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "down", "bad")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-29"
+        PRINT "I'm not taking any chances.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-28')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-30', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-29");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-30', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "up", "good")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-30"
+        PRINT "Mr Thomas, link with the outpost's computer and start downloading whatever you can.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-29')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-31', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-30");
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-31', null)"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "up", "good")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-31"
+        PRINT "Aye Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366 [Federation Border]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-30')"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue",,,,"saveAndQuit('progress2')"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-31");
+                        save="progress2";
+                    END JAVASCRIPT
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"saveAndQuit('progress2')"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the Outpost 3366", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Scan the region", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"saveAndQuit()" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "normal", "good", "100%", "good", "up", "good")
         END WINDOW
     END DIV
 END WINDOW
