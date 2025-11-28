@@ -62,17 +62,33 @@ class Variables
 		}
 		
 		// Grab all form vars.
-		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
+		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\(([^)]+)\\)/", line, vars, PREG_OFFSET_CAPTURE);
+		//preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
 		// Add some padding to handle the extra char.
 		let arg = 0;
-		for str in vars[1] {
-			let line = substr_replace(
-				line,
-				"$" . str[0],
-				intval(str[1]) + arg,
-				strlen(str[0])
-			);
-			let arg += 1;
+		if (vars) {
+			for str in vars[0] {
+				let arg = "$" . str_replace(")", "]", str_replace("(", "[", str[0]));
+				ob_start();
+				eval("if (isset(" . arg . ")) {echo " . arg . ";}");
+				let find = ob_get_clean();
+				if (find) {
+					if (substr(line, 0, 1) == "\"") {
+						let line = str_replace(str[0], find, line);
+					} else {
+						let line = str_replace(str[0], "\"" . find . "\"", line);
+					}
+				} else {
+					let line = str_replace(str[0], arg, line);
+					/*let line = substr_replace(
+						line,
+						"$" . str[0],
+						intval(str[1]) + arg,
+						strlen(str[0])
+					);
+					let arg += 1;*/
+				}
+			}
 		}
 
 		// Grab all constants.

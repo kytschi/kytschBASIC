@@ -1,0 +1,74 @@
+WINDOW "game-window", "progress"
+    DIV "game-progress","game-progress-1"
+        PRINT "Progress 1","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth [Federation]","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sector/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-intro-2', null)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            BUTTON
+                PRINT "["
+                PRINT "c","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Communications", "button-message flash"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "n","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Navigation", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "s","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Sensors", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "w","button_key"
+                PRINT "]", "button_key_end_small" 
+                PRINT "Weapons", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "e","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Engineering", "button-message"
+            END BUTTON
+            BUTTON 
+                PRINT "["
+                PRINT "q","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Save & Quit", "button-message"
+            END BUTTON
+        END WINDOW
+    END DIV
+END WINDOW
+JAVASCRIPT
+    loading=0;
+    showIntroButtons();
+END JAVASCRIPT

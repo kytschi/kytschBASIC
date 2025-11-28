@@ -60,8 +60,7 @@ class Load extends Command
 
 	private function parseLoad(array args)
 	{
-		var ext;
-
+		var ext, err;
 		if(empty(args[0])) {
 			throw new Exception("Invalid INCLUDE");
 		}
@@ -74,7 +73,12 @@ class Load extends Command
 				let args[0] = str_replace(constant("_ROOT"), "", args[0]);
 				return "<script src=" . args[0] . "></script>";
 			default:
-				return (new Parser())->parse(rtrim(args[0], ".kb") . ".kb", false);
+				try {
+					return (new Parser())->parse(rtrim(args[0], ".kb") . ".kb", false);
+				} catch \Exception, err {
+					let err = err;
+					// Do nothing
+				}
 		}
 	}
 }

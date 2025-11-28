@@ -302,6 +302,12 @@ html, body {
     left: calc(50% - 210px);
 }
 
+#omega-doom #map #earth-map {
+    position: absolute;
+    top: 60px;
+    left: calc(50% - 620px);
+}
+
 @media only screen and (max-height: 720px) {
     #omega-doom-game .gfx {
         height: calc(100vh - 200px);

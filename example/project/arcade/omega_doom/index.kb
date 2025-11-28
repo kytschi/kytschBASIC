@@ -125,6 +125,92 @@ FUNCTION "drawMap", file$, flash$=null, selected$=null
     END BUTTON
 END FUNCTION
 
+FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
+    GOTO loadGFX(file$)
+    BUTTON ,"map-text","earth-map",,,"navigation(event,'earth')"
+        PRINT "["
+        PRINT "1","button_key"
+        PRINT "]", "button_key_end_small"
+        IF flash$="earth" THEN
+            PRINT "Earth", "button-message flash"
+        ELSEIF selected$="earth" THEN
+            PRINT "Earth", "button-message selected"
+        ELSE
+            PRINT "Earth", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","federation-map",,,"navigation(event,'federation')"
+        PRINT "["
+        PRINT "2","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="federation" THEN
+            PRINT "Federation", "button-message flash"
+        ELSE
+            PRINT "Federation", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","rosia-empire-map",,,"navigation(event,'rosia-empire')"
+        PRINT "["
+        PRINT "3","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="rosia-empire" THEN
+            PRINT "Rosia Empire", "button-message flash"
+        ELSE
+            PRINT "Rosia Empire", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","aris-republic-map",,,"navigation(event,'aris-republic')"
+        PRINT "["
+        PRINT "4","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="aris-republic" THEN
+            PRINT "Aris Republic", "button-message flash"
+        ELSE
+            PRINT "Aris Republic", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","garis-republic-map",,,"navigation(event,'garis-republic')"
+        PRINT "["
+        PRINT "5","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="aris-republic" THEN
+            PRINT "Garis Republic", "button-message flash"
+        ELSE
+            PRINT "Garis Republic", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","stovacor-map",,,"navigation(event,'stovacor')"
+        PRINT "["
+        PRINT "6","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="stovacor" THEN
+            PRINT "Stovacor", "button-message flash"
+        ELSE
+            PRINT "Stovacor", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","house-of-moong-map",,,"navigation(event,'house-of-moong')"
+        PRINT "["
+        PRINT "7","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="house-of-moong" THEN
+            PRINT "House of Moong", "button-message flash"
+        ELSE
+            PRINT "House of Moong", "button-message"
+        END IF
+    END BUTTON
+    BUTTON ,"map-text","the-void-map",,,"navigation(event,'the-void')"
+        PRINT "["
+        PRINT "8","button_key"
+        PRINT "]", "button_key_end_small" 
+        IF flash$="house-of-moong" THEN
+            PRINT "The Void", "button-message flash"
+        ELSE
+            PRINT "The Void", "button-message"
+        END IF
+    END BUTTON
+END FUNCTION
+
 ADEF game_process$="game-intro"
 ADEF current_process$="game-intro-1"
 ADEF loading%=1
@@ -145,7 +231,7 @@ AFUNCTION "startNewGame"
                 () => {
                     $("#btn_start .button-message").removeClass("selected");
                     in_game = 1;
-                    progressSpeech(event, "game-intro-1");
+                    progressSpeech(event, "game-progress-25");
                 }
             );
         }
@@ -161,7 +247,7 @@ AFUNCTION "continueGame"
                 () => {
                     $("#btn_continue .button-message").removeClass("selected");
                     in_game = 1;
-                    progressSpeech(event, "game-progress-1");
+                    progressSpeech(event, "game-progress-25");
                 }
             );
         }
@@ -189,6 +275,7 @@ AFUNCTION "progressSpeech", "next_id", "prev_id"
     $("#omega-doom .progress .game-progress").hide();
     $("#omega-doom #" + current_process + " .speech p span").html("");
     $("#omega-doom .progress #" + current_process).css("display", "flex");
+    console.log(current_process);
 
     speech_text = $("#omega-doom #" + current_process + " .original").html();
     if (speech_text) {
@@ -246,7 +333,7 @@ JAVASCRIPT
                 } else if (event.which == 110 && !in_game) {
                     $("#btn_start .button-message").addClass("selected");
                     startNewGame();
-                } else if (event.which == 90 && !in_game) {
+                } else if (event.which == 99 && !in_game) {
                     $("#btn_continue .button-message").addClass("selected");
                     continueGame();
                 }
@@ -270,8 +357,7 @@ SCREEN "omega-doom-game"
     IFE _GET("progress") THEN
         LOAD "_ROOT/project/arcade/omega_doom/intro"
     ELSE
-        DEF file$="_ROOT/project/arcade/omega_doom/"+_GET("progress")
-        LOAD file$
+        LOAD "_ROOT/project/arcade/omega_doom/_GET("progress")"
     END IF
 END SCREEN
 SCREEN "omega-doom-intro"
