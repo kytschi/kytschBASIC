@@ -1,11 +1,11 @@
 /**
- * SCREEN parser
+ * Effects parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Screen\Screen
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Animation\Effects
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.2
+ * @version     0.0.1
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -23,38 +23,46 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Libs\Arcade\Parsers\Screen;
+namespace KytschBASIC\Libs\Arcade\Parsers\Animation;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
-class Screen extends Command
+class Effects extends Command
 {
 	public function parse(string line, string command, array args, bool in_javascript = false)
 	{
-		switch(command) {
-			case "SCREEN":
-				return this->parseScreen(args);
-			case "END SCREEN":
-				return "</div>";
+		switch (command) {
+			case "SPIN":
+				return this->processSpin(args, in_javascript);
 			default:
 				return null;
 		}
 	}
 
-	public function parseScreen(array args)
+	public function processSpin(args, bool in_javascript = false)
 	{
-		var output = "<?= \"<div";
+		var output = "<script type='text/javascript'>$(document).ready(function() {", milliseconds = 500;
 
-		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[0]);
-		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-screen"), true);
-		}
-
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " class=" . this->outputArg(args[1]);
+		if (in_javascript) {
+			let output = "";
 		}
 		
-		return output . ">\"; ?>";
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let milliseconds = intval(args[1]);
+		}
+
+		if (milliseconds < 0) {
+			let milliseconds = 500;
+		}
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= "$('#" . trim(args[0], "\"") . "').css('-webkit-animation', 'KBSPIN linear " . milliseconds . "ms infinite')";
+			let output .= ".css('animation', 'KBSPIN linear " . milliseconds . "ms infinite');";
+		} else {
+			throw new Exception("Invalid SPIN, target not set.");
+		}
+
+		return output . (in_javascript ? "" : "});</script>");
 	}
 }

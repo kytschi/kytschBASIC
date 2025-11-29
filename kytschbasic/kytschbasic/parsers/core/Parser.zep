@@ -31,6 +31,7 @@ use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Variables;
 use KytschBASIC\Libs\Arcade\Parsers\AFunction;
 use KytschBASIC\Parsers\Core\CoreFunc;
+use KytschBASIC\Parsers\Core\Input\InputEvents;
 
 class Parser
 {
@@ -38,6 +39,7 @@ class Parser
 	private newline = "\n";
 	private cprint = false;
 	private js = false;
+	private process_as_js = false;
 	private create_function = false;
 	private has_case = false;
 	private show_html = false;
@@ -67,6 +69,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Session",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Websocket\\Websocket",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Animation\\Effects",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
@@ -148,25 +151,25 @@ class Parser
 				let this->cprint = false;
 				return "</code></pre>";
 			case "JAVASCRIPT":
-				if (!this->cprint) {
+				if (!this->cprint && !this->js) {
 					let this->js = true;
-					return "<script type='text/javascript'>";
-				} elseif (this->cprint || (this->js && !this->create_function)) {
+					return "<script type='text/javascript'>\n$(document).ready(function() {\n";
+				} elseif (this->cprint) {
 					return line . this->newline;
 				}
 				break;
 			case "END JAVASCRIPT":
-				if (!this->cprint) {
+				if (!this->cprint && this->js) {
 					let this->js = false;
-					return "</script>";
-				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return "\n});\n</script>";
+				}  elseif (this->cprint) {
 					return line . this->newline;
 				}
 				break;
 			case "AFUNCTION":
 				if (!this->cprint) {
 					let this->js = true;
-					return (new AFunction())->parse(line, command, args);
+					return (new AFunction())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
@@ -174,7 +177,7 @@ class Parser
 			case "END AFUNCTION":
 				if (!this->cprint) {
 					let this->js = false;
-					return (new AFunction())->parse(line, command, args);
+					return (new AFunction())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
@@ -182,7 +185,7 @@ class Parser
 			case "FUNCTION":
 				if (!this->cprint) {
 					let this->create_function = true;
-					return (new CoreFunc())->parse(line, command, args);
+					return (new CoreFunc())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
@@ -199,7 +202,7 @@ class Parser
 				if (!this->cprint) {
 					let this->js = true;
 					let this->create_function = true;
-					return (new AFunction())->parse(line, command, args);
+					return (new AFunction())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
@@ -208,13 +211,31 @@ class Parser
 				if (!this->cprint) {
 					let this->js = false;
 					let this->create_function = false;
-					return (new AFunction())->parse(line, command, args);
+					return (new AFunction())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
 				break;
+			case "KEYBOARDEVENT":
+				if (!this->cprint) {
+					let this->js = true;
+					let this->process_as_js = true;
+					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END KEYBOARDEVENT":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
 			default:
-				if (this->cprint || (this->js && !this->create_function)) {
+				if (this->cprint || (this->js && !this->create_function && !this->process_as_js)) {
 					return line . this->newline;
 				}
 				break;
@@ -264,9 +285,17 @@ class Parser
 			case "ELSEIF":
 				return this->processIf(line, "elseif", args);
 			case "ELSE":
-				return "<?php else : ?>";
+				if (!this->process_as_js) {
+					return "<?php else : ?>";
+				} else {
+					return "\t} else {\n";
+				}
 			case "END IF":
-				return "<?php endif; ?>";
+				if (!this->process_as_js) {
+					return "<?php endif; ?>";
+				} else {
+					return "\t}\n";
+				}
 			case "BREAK":
 				return "<?php break; ?>";
 			case "CASE":
@@ -305,7 +334,7 @@ class Parser
 		}
 		
 		for parser in this->available {
-			let cleaned = (new {parser}())->parse(line, command, args);
+			let cleaned = (new {parser}())->parse(line, command, args, this->js);
 			if (cleaned !== null) {
 				let output .= cleaned . this->newline;
 				if (substr(cleaned, strlen(cleaned) - 2, 2) == "?>" && this->show_html) {
@@ -325,7 +354,13 @@ class Parser
 			throw new Exception("Invalid IF statement");
 		}
 		
-		let output = "<?php " . command . " (";
+		if (!this->process_as_js) {
+			let output = "<?php ";
+		} else {
+			let output = "\t";
+		}
+
+		let output .= command . " (";
 
 		let splits = preg_split("/THEN(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
 		if (!count(splits)) {
@@ -333,16 +368,33 @@ class Parser
 		}
 
 		let splits[0] = this->controller->setDoubleEquals(trim(splits[0]));
+		let splits[0] = preg_replace(
+			"/\\$\\$(?=(?:[^'\"]|['][^']*[']|[\"][^\"]*[\"])*$)/",
+			"&&",
+			splits[0]
+		);
 						
 		if (not_empty) {
-			let output .= "!empty(" . splits[0] . ")";
+			if (!this->process_as_js) {
+				let output .= "!empty(" . splits[0] . ")";
+			} else {
+				let output .= splits[0];
+			}
 		} elseif (is_empty) {
-			let output .= "empty(" . splits[0] . ")";
+			if (!this->process_as_js) {
+				let output .= "empty(" . splits[0] . ")";
+			} else {
+				let output .= "!" . splits[0];
+			}
 		} else {
 			let output .= splits[0];
 		}
 
-		let output .= ") : ?>";
+		if (!this->process_as_js) {
+			let output .= ") : ?>";
+		} else {
+			let output .= ") {\n";
+		}
 		
 		return output;
 	}

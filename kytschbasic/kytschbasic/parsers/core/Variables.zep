@@ -63,7 +63,6 @@ class Variables
 		
 		// Grab all form vars.
 		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\(([^)]+)\\)/", line, vars, PREG_OFFSET_CAPTURE);
-		//preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
 		// Add some padding to handle the extra char.
 		let arg = 0;
 		if (vars) {
@@ -80,13 +79,6 @@ class Variables
 					}
 				} else {
 					let line = str_replace(str[0], arg, line);
-					/*let line = substr_replace(
-						line,
-						"$" . str[0],
-						intval(str[1]) + arg,
-						strlen(str[0])
-					);
-					let arg += 1;*/
 				}
 			}
 		}
@@ -342,7 +334,7 @@ class Variables
 		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
 	}	
 
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false)
 	{
 		switch (command) {
 			case "ADEF":

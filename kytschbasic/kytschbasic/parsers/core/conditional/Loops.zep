@@ -31,7 +31,7 @@ use KytschBASIC\Parsers\Core\Maths;
 
 class Loops extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false)
 	{
 		switch (command) {
 			case "FOR":

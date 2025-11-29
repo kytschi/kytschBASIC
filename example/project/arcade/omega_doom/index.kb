@@ -284,13 +284,26 @@ ADIM user_input_disabled$=[]
 ADEF speaking%=0
 IFE _GET("progress") THEN
     ADEF skip_intro%=0
+    JAVASCRIPT
+        $("#intro").fadeIn(2000, () => {
+            controls_locked=0;
+            showIntroButtons(event);
+        });
+    END JAVASCRIPT
 ELSE
     ADEF skip_intro%=1
+    JAVASCRIPT
+        $("#intro").fadeIn(2000, () => {
+            controls_locked=0;
+            continueGame(event);
+        });
+    END JAVASCRIPT
 END IF
 ADEF save$=""
 
 AFUNCTION "startNewGame"
     if (!skip_intro) {
+        $("#btn_start .button-message").addClass("selected");
         $("#omega-doom-intro").fadeOut(
             "2000",
             () => {
@@ -310,6 +323,7 @@ AFUNCTION "startNewGame"
 END AFUNCTION
 
 AFUNCTION "continueGame"
+    $("#btn_continue .button-message").addClass("selected");
     $("#omega-doom-intro").fadeOut(
         "2000",
         () => {
@@ -345,7 +359,7 @@ AFUNCTION "saveAndQuit", "progress=null"
                     } else {
                         in_game = 0;
                         controls_locked=0;
-                        showIntroButtons();
+                        showIntroButtons(event);
                     }
                 }
             );
@@ -374,7 +388,6 @@ AFUNCTION "progressSpeech", "next_id", "prev_id"
     $("#omega-doom .progress .game-progress").hide();
     $("#omega-doom #" + current_process + " .speech p span").html("");
     $("#omega-doom .progress #" + current_process).css("display", "flex");
-    console.log(current_process);
 
     speech_text = $("#omega-doom #" + current_process + " .original").html();
     if (speech_text) {
@@ -388,80 +401,89 @@ AFUNCTION "progressSpeech", "next_id", "prev_id"
     speaking=0;
 END AFUNCTION
 
-JAVASCRIPT
-    $(document).ready(function() {
-        $("body").on("keypress", function(event) {
-            var splits, prev_id;
-
-            if (user_input_enabled.includes(current_process)) {
-                user_input = 1;
-            } else if (user_input_disabled.includes(current_process)) {
-                user_input = 0;
-            }
-
-            console.log(event.which, save);
-            if (!controls_locked) {
-                if (event.which == 13 && in_game && !user_input) {
-                    if (save) {
-                        saveAndQuit(event, save);
-                    } else {
-                        speech_text="";
-                        $("#" + current_process + " .btn-continue .button-message").addClass("selected");
-                        splits = current_process.split("-");
-                        current_process = "";
-                        splits.forEach((str) => {
-                            if (parseInt(str)) {
-                                current_process += (parseInt(str)+1)
-                            } else {
-                                current_process += str + "-"
-                            }
-                        });
-                        
-                        progressSpeech(event, current_process, null, user_input);
-                    }
-                } else if (event.which == 112 && in_game) {
-                    speech_text="";
-                    $("#" + current_process + " .btn-previous .button-message").addClass("selected");
-                    splits = current_process.split("-");
-                    current_process = "";
-                    splits.forEach((str) => {
-                        if (parseInt(str)) {
-                            current_process += (parseInt(str)-1)
-                        } else {
-                            current_process += str + "-"
-                        }
-                    });
-                    
-                    progressSpeech(event, null, current_process, user_input);
-                } else if (event.which == 110 && !in_game) {
-                    $("#btn_start .button-message").addClass("selected");
-                    startNewGame();
-                } else if (event.which == 99 && !in_game) {
-                    $("#btn_continue .button-message").addClass("selected");
-                    continueGame();
-                }
-            }
-        });
-
-        if (!skip_intro) {     
-            $("#intro").fadeIn(2000, () => {
-                controls_locked=0;
-                showIntroButtons();
-            });
+AFUNCTION "nextProgress"
+    speech_text = "";
+    $("#" + current_process + " .btn-continue .button-message").addClass("selected");
+    var splits = current_process.split("-");
+    current_process = "";
+    splits.forEach((str) => {
+        if (parseInt(str)) {
+            current_process += (parseInt(str)+1)
         } else {
-            $("#intro").fadeIn(2000, () => {
-                controls_locked=0;
-                continueGame();
-            });
+            current_process += str + "-"
         }
     });
-
-    function showIntroButtons() {
-        if (!loading && !controls_locked) {
-            $("#intro-controls-buttons").css("display", "flex");
+END AFUNCTION
+AFUNCTION "prevProgress"
+    speech_text = "";
+    $("#" + current_process + " .btn-continue .button-message").addClass("selected");
+    var splits = current_process.split("-");
+    current_process = "";
+    splits.forEach((str) => {
+        if (parseInt(str)) {
+            current_process += (parseInt(str)-1)
+        } else {
+            current_process += str + "-"
         }
+    });
+END AFUNCTION
+
+AFUNCTION "showIntroButtons"
+    if (!loading && !controls_locked) {
+        $("#intro-controls-buttons").css("display", "flex");
     }
-END JAVASCRIPT
+END AFUNCTION
+
+AFUNCTION "userInput"
+    if (user_input_enabled.includes(current_process)) {
+        user_input = 1;
+    } else if (user_input_disabled.includes(current_process)) {
+        user_input = 0;
+    }
+END AFUNCTION
+
+KEYBOARDEVENT "enter"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IF in_game && !user_input THEN
+            IF save THEN
+                GOTO saveAndQuit(save)
+            ELSE
+                GOTO nextProgress()
+                GOTO progressSpeech(current_process, null, user_input)
+            END IF
+                
+        END IF
+    END IF
+END KEYBOARDEVENT
+
+KEYBOARDEVENT "p"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IF in_game THEN
+            GOTO prevProgress()
+            GOTO progressSpeech(null, current_process, user_input)
+        END IF
+    END IF
+END KEYBOARDEVENT
+
+KEYBOARDEVENT "n"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IFE in_game THEN
+            GOTO startNewGame()
+        END IF
+    END IF
+END KEYBOARDEVENT
+
+KEYBOARDEVENT "c"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IFE in_game THEN
+            GOTO continueGame()
+        END IF
+    END IF
+END KEYBOARDEVENT
 
 SCREEN "omega-doom-game"
     IFE _GET("progress") THEN

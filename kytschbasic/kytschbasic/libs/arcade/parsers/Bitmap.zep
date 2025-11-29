@@ -33,7 +33,7 @@ class Bitmap extends Command
 	private image = null;
 	private copy = null;
 
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false)
 	{
 		switch (command) {
 			case "BITMAP":

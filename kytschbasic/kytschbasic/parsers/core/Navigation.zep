@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Navigation extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false)
 	{
 		switch(command) {
 			case "END LINK":
@@ -37,7 +37,7 @@ class Navigation extends Command
 			case "END MENU":
 				return "</nav>";
 			case "GOTO":
-				return this->processGoto(args);
+				return this->processGoto(args, in_javascript);
 			case "LINK":
 				return this->processLink(args);
 			case "MENU":
@@ -47,19 +47,46 @@ class Navigation extends Command
 		}
 	}
 
-	private function processGoto(array args)
+	private function processGoto(array args, bool in_javascript = false)
 	{
+		var output = "", splits, str;
+
 		if (strpos("http:", args[0]) !== false || strpos("ftp:", args[0]) !== false) {
 			return "<?php header(\"Location: \" . " . args[0] . ");die(); ?>";
 		} else {
 			if (strpos(args[0], "[") !== false) {
-				return "<?php " . substr_replace(
+				let output = substr_replace(
 					substr_replace(args[0], "(", strpos(args[0], "["), 1), ")",
 					strlen(args[0]) - 1,
 					1
-				) . "; ?>";
+				);
+
+				let output = rtrim(output, ";");
+
+				if (in_javascript) {
+					let splits = preg_split("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\(/", output);
+					if (splits) {
+						let output = splits[0] . "(event";
+						array_shift(splits);
+						for (str in splits) {
+							if (str != ")") {
+								let output .= ", " . str;
+							} else {
+								let output .= str;
+							}
+						}
+					}
+					return output . ";";
+				} else {
+					return "<?php " . output . "; ?>";
+				}
 			} else {
-				return "<?php " . args[0] . "; ?>";
+				let output = rtrim(args[0], ";");
+				if (in_javascript) {
+					return output . "(event);";
+				} else {
+					return "<?php " . output . "(); ?>";
+				}
 			}
 		}
 	}

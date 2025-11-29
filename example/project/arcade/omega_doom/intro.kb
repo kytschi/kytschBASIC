@@ -1705,11 +1705,14 @@ WINDOW "game-intro", "progress"
         WINDOW "warp","visuals full"
             DIV "gfx"
                 PRINT "Warping to Output 3366","gfx-label"
-                DIV "render"
+                DIV "render", "warp-effect"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/warp_effect/0.gfx")
                 END DIV
             END DIV
         END WINDOW
+        ANIMATION
+            SPIN "warp-effect"
+        END ANIMATION
     END DIV
 END WINDOW
 JAVASCRIPT

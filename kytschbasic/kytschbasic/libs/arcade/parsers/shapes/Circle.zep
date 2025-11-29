@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Circle extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false)
 	{
 		switch (command) {
 			case "CIRCLE":
