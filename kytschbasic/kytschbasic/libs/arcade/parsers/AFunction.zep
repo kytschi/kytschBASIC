@@ -37,9 +37,13 @@ class AFunction extends Command
 				return this->parseFunction(line, args);
 			case "ANIMATION":
 				return this->parseFunction(line, args, true);
+			case "ASYNCFUNCTION":
+				return this->parseFunction(line, args, false, true);
 			case "END AFUNCTION":
 				return "}</script>";
 			case "END ANIMATION":
+				return "}</script>";
+			case "END ASYNCFUNCTION":
 				return "}</script>";
 			case "SHOW":
 				return this->parseShow(line, args, in_javascript);
@@ -50,13 +54,13 @@ class AFunction extends Command
 		}
 	}
 
-	private function parseFunction(string line, array args, bool animation = false)
+	private function parseFunction(string line, array args, bool animation = false, bool async = false)
 	{
 		var output = "<script type=\"text/javascript\">", key, str, splits, arg, args;
 
 		if (empty(args) || args[0] == "\"\"") {
 			if (!animation) {
-				throw new Exception("Invalid AFUNCTION");
+				throw new Exception("Invalid " . (async ? "ASYNCFUNCTION" : "AFUNCTION"));
 			} else {
 				let args[0] = "KB_ANIMATION_" . rand(10000, getrandmax());
 			}
@@ -70,7 +74,10 @@ class AFunction extends Command
 		if (animation) {
 			let output .= "$(document).ready(function() {" . args[0] . "();});";
 		}
-		let output .= "async function " . args[0] . "(event";
+		if (async) {
+			let output .= "async ";
+		}
+		let output .= "function " . args[0] . "(event";
 		array_shift(args);
 
 		for arg in args {

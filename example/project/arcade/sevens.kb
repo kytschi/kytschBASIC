@@ -85,6 +85,7 @@ AFUNCTION "computerPlay"
 
     var value = "";
     var played = false;
+    var status = false;
 
     sleep(500).then(() => {
         hands[turn].sort(() => Math.random() - .5);
@@ -139,7 +140,7 @@ END AFUNCTION
 
 AFUNCTION "updateDeck", "cards", "value", "check=false"
     let status = false;
-
+    
     if (window["deck_" + cards].length == 1) {
         if (value != 7 && deck_suit != "diamonds" && start == 1) {
             gameInfo(event, "Start with the 7 of diamonds", true);
@@ -157,7 +158,7 @@ AFUNCTION "updateDeck", "cards", "value", "check=false"
         }
     } else {
         window["deck_" + cards].forEach((face, index) => {
-            if (face == value) {
+            if (face == parseInt(value)) {
                 if (!check) {
                     $("button[name=btnLastCard]").removeAttr("disabled");
                     window["deck_" + cards][index] = window["deck_" + cards][index] + ((face < 7) ? -1 : 1);
@@ -369,49 +370,47 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
-$(document).ready(function() {
-    var played = false;
+var played = false;
 
-    if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
-        for (const [player, value] of Object.entries(kb_cookie.kb_sevens_scores)) {
-            $("#player-" + player + "-score span").html(value.score);
-        }
+if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
+    for (const [player, value] of Object.entries(kb_cookie.kb_sevens_scores)) {
+        $("#player-" + player + "-score span").html(value.score);
     }
+}
 
-    for (iLoop = 0; iLoop <= hands.length - 1; iLoop++) {
-        turn = iLoop;
-        hands[turn].forEach((card, index) => {
-            if (!played) {
-                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
-                let card_details = selected_card.split("_");
-                deck_suit = card_details[0];
-                value = card_details[1];   
-                if (deck_suit == "diamonds" && value == "7") {
-                    played = true;
-                    playCard(event, value);
-                    hands[turn].splice(index, 1);
-                    updateDeck(event, "diamonds", value);
-                    updateTurn();
-                }
+for (iLoop = 0; iLoop <= hands.length - 1; iLoop++) {
+    turn = iLoop;
+    hands[turn].forEach((card, index) => {
+        if (!played) {
+            selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            let card_details = selected_card.split("_");
+            deck_suit = card_details[0];
+            value = card_details[1];   
+            if (deck_suit == "diamonds" && value == "7") {
+                played = true;
+                playCard(event, value);
+                hands[turn].splice(index, 1);
+                updateDeck(event, "diamonds", value);
+                updateTurn();
             }
-        });
-
-        if (played) {
-            break;
         }
-    }
-
-    if (!played) {
-        turn = 0;
-    }
-
-    $("button[name=btnKnock]").click(() => {
-        playerKnocking();
     });
 
-    $("button[name=btnNewGame]").click(() => {
-        window.location.reload();
-    });
+    if (played) {
+        break;
+    }
+}
+
+if (!played) {
+    turn = 0;
+}
+
+$("button[name=btnKnock]").click(() => {
+    playerKnocking();
+});
+
+$("button[name=btnNewGame]").click(() => {
+    window.location.reload();
 });
 END JAVASCRIPT
 

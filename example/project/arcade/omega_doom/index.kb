@@ -367,7 +367,7 @@ AFUNCTION "saveAndQuit", "progress=null"
     );
 END AFUNCTION
 
-AFUNCTION "progressSpeech", "next_id", "prev_id"
+ASYNCFUNCTION "progressSpeech", "next_id", "prev_id"
     speaking=1;
     if (prev_id) {
         current_process = prev_id;
@@ -399,7 +399,7 @@ AFUNCTION "progressSpeech", "next_id", "prev_id"
         }
     }
     speaking=0;
-END AFUNCTION
+END ASYNCFUNCTION
 
 AFUNCTION "nextProgress"
     speech_text = "";

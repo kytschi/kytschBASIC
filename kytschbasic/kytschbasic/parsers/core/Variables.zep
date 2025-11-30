@@ -41,14 +41,14 @@ class Variables
 
 	public function args(string line)
 	{
-		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display, maths, subvar;
+		var args = [], arg, vars, str, splits, subvars, cleaned, find, text, display, maths;
 		
 		let text = new Text();
 		let display = new Display();
 		let maths = new Maths();
 
 		// Clean any + used for string join.
-		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", ".", line);
+		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", " . ", line);
 
 		// Grab all vars.
 		preg_match_all("/(?<!\\\\)\"(?:\\\\\"|.)*?\"(*SKIP)(*FAIL)|([a-zA-Z0-9_]*)([\$#%&])(?:\()?/", line, vars, PREG_OFFSET_CAPTURE);
@@ -127,13 +127,14 @@ class Variables
 			//Check to see if its a maths equation.
 			let subvars = maths->isEquation(arg);
 			if (count(subvars) > 1) {
+				/*
 				// Replace the pluses if its a string join
 				for subvar in subvars {
 					if (is_string(subvar) || substr(subvar, strlen(subvar) - 0, 1) == "$") {
-						let arg = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*\Z)/", ".", arg);
+						let arg = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*\Z)/", " . ", arg);
 						break;
 					}
-				}
+				}*/
 				// Replace first unquoted (
 				let arg = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\(/", "|||KBBRACKETSTART|||", arg, 1);
 				

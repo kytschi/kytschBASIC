@@ -182,6 +182,22 @@ class Parser
 					return line . this->newline;
 				}
 				break;
+			case "ASYNCFUNCTION":
+				if (!this->cprint) {
+					let this->js = true;
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END ASYNCFUNCTION":
+				if (!this->cprint) {
+					let this->js = false;
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
 			case "FUNCTION":
 				if (!this->cprint) {
 					let this->create_function = true;
