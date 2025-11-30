@@ -1,0 +1,89 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "ASYNCFUNCTION statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "ASYNCFUNCTION","heading-command basic"
+					LINE BREAK
+					PRINT "NAME, ARGUMENTS (optional)","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				END SWRITE
+				SWRITE
+					PRINT "This will allow you to create an arcade function which is an async javascript function with jquery support."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+ASYNCFUNCTION "updateText", "text='Arcade support'"
+	await sleep(3000);
+	$("#arcade-text").html(text);
+END ASYNCFUNCTION
+LINE BREAK
+JAVASCRIPT
+	updateText(event, "Arcade support enabled");
+END JAVASCRIPT
+LINE BREAK
+SCREEN "arcade"
+	PRINT "Arcade support",,"arcade-text"
+END SCREEN
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				SHOWHTML
+					ASYNCFUNCTION "updateText", "text='Arcade support'"
+						await sleep(3000);
+						$("#arcade-text").html(text);
+					END ASYNCFUNCTION
+					LINE BREAK
+					JAVASCRIPT
+						updateText(event, "Arcade support enabled");
+					END JAVASCRIPT
+					LINE BREAK
+					SCREEN "arcade"
+						PRINT "Arcade support",,"arcade-text"
+					END SCREEN
+				END SHOWHTML
+				HEADING 4
+					PRINT "Demo"
+				END HEADING 4
+				ASYNCFUNCTION "updateText", "text='Arcade support'"
+					await sleep(3000);
+					$("#arcade-text").html(text);
+				END ASYNCFUNCTION
+				LINE BREAK
+				JAVASCRIPT
+					updateText(event, "Arcade support enabled");
+				END JAVASCRIPT
+				LINE BREAK
+				SCREEN "arcade"
+					PRINT "Arcade support",,"arcade-text"
+				END SCREEN
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/AFUNCTION"
+						PRINT "AFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

@@ -74,7 +74,7 @@ class AFunction extends Command
 		if (animation) {
 			let output .= "$(document).ready(function() {" . args[0] . "();});";
 		}
-		if (async) {
+		if (async || animation) {
 			let output .= "async ";
 		}
 		let output .= "function " . args[0] . "(event";

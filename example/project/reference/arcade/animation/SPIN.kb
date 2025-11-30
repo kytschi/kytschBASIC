@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
-	NAME "BITMAP statment | kytschBASIC"
+	NAME "SPIN statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -10,23 +10,26 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "BITMAP","heading-command basic"
+					PRINT "SPIN","heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, WIDTH, HEIGHT, ID (optional)","heading-args"
+					PRINT "ID, SPEED (default 500ms), DIRECTION (default clockwise)","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
-					PRINT "The ability to draw a bitmap and display it on screen as an image."
+					PRINT "This will create a spin animation on a given element."
+				END SWRITE
+				SWRITE
+					PRINT "Direction can be 'clockwise' or 'anti-clockwise'."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-SCREEN
+SCREEN "show_me"
 	RGB 0,0,0
-	BITMAP 0,0,640,480
+	BITMAP 0,0,640,480,"spin-me"
 		RGB 255,0,0
 
 		LINE 120,120,120,200
@@ -47,13 +50,17 @@ SCREEN
 		ARC 400,160,25,150,155
 	END BITMAP
 END SCREEN
+ANIMATION
+	SLEEP 1000
+	SPIN "spin-me", "3000", "anti-clockwise"
+END ANIMATION
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				SCREEN
+				SCREEN "show_me"
 					RGB 0,0,0
-					BITMAP 0,0,640,480
+					BITMAP 0,0,640,480,"spin-me"
 						RGB 255,0,0
 
 						LINE 120,120,120,200
@@ -74,81 +81,10 @@ END SCREEN
 						ARC 400,160,25,150,155
 					END BITMAP
 				END SCREEN
-				HEADING 4
-					PRINT "Parameters"
-				END HEADING 4
-				TABLE
-					THEAD
-						TROW
-							THEADCELL "140px"
-								PRINT "Parameter"
-							END THEADCELL
-							THEADCELL "200px"
-								PRINT "Type"
-							END THEADCELL
-							THEADCELL
-								PRINT "Description"
-							END THEADCELL
-						END TROW
-					END THEAD
-					TBODY
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "X"
-							END TCELL
-							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "X position"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "Y"
-							END TCELL
-							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "Y position"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "WIDTH"
-							END TCELL
-							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "Width of the bitmap"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "HEIGHT"
-							END TCELL
-							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "Height of the bitmap"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "ID (optional)"
-							END TCELL
-							TCELL
-								PRINT "string"
-							END TCELL
-							TCELL
-								PRINT "ID of the bitmap"
-							END TCELL
-						END TROW
-					END TBODY
-				END TABLE
+				ANIMATION
+					SLEEP 1000
+					SPIN "spin-me", "3000", "anti-clockwise"
+				END ANIMATION
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
@@ -197,6 +133,10 @@ END SCREEN
 						PRINT "Globals"
 					END LINK
 					PRINT " | "
+					LINK "/reference/HIDE"
+						PRINT "HIDE"
+					END LINK
+					PRINT " | "
 					LINK "/reference/LINE"
 						PRINT "LINE"
 					END LINK
@@ -207,6 +147,10 @@ END SCREEN
 					PRINT " | "
 					LINK "/reference/SCREEN"
 						PRINT "SCREEN"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SHOW"
+						PRINT "SHOW"
 					END LINK
 					PRINT " | "
 					LINK "/reference/WINDOW"

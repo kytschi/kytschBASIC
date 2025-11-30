@@ -43,6 +43,9 @@ HEADER
 		LINK "/reference/ACOS#refACOS","Find out about the ACOS command","nav-link",,"refACOS"
 			PRINT "ACOS"
 		END LINK
+		LINK "/reference/AFUNCTION#refAFUNCTION","Find out about the AFUNCTION command","nav-link",,"refAFUNCTION"
+			PRINT "AFUNCTION"
+		END LINK
 		LINK "/reference/ANIMATION#refANIMATION","Find out about the ANIMATION command","nav-link",,"refANIMATION"
 			PRINT "ANIMATION"
 		END LINK
@@ -57,6 +60,9 @@ HEADER
 		END LINK
 		LINK "/reference/ASIN#refASIN","Find out about the ASIN command","nav-link",,"refASIN"
 			PRINT "ASIN"
+		END LINK
+		LINK "/reference/ASYNCFUNCTION#refASYNCFUNCTION","Find out about the ASYNCFUNCTION command","nav-link",,"refASYNCFUNCTION"
+			PRINT "ASYNCFUNCTION"
 		END LINK
 		LINK "/reference/ATAN#refATAN","Find out about the ATAN command","nav-link",,"refATAN"
 			PRINT "ATAN"
@@ -286,6 +292,9 @@ HEADER
 		LINK "/reference/KEYWORDS#refKEYWORDS","Find out about the KEYWORDS command","nav-link",,"refKEYWORDS"
 			PRINT "KEYWORDS"
 		END LINK
+		LINK "/reference/JAVASCRIPT#refJAVASCRIPT","Find out about the JAVASCRIPT command","nav-link",,"refJAVASCRIPT"
+			PRINT "JAVASCRIPT"
+		END LINK
 		LINK "/reference/LCASE#refLCASE","Find out about the LCASE command","nav-link",,"refLCASE"
 			PRINT "LCASE"
 		END LINK
@@ -436,10 +445,13 @@ HEADER
 		LINK "/reference/SSORT#refSSORT","Find out about the SSORT command","nav-link",,"refSSORT"
 			PRINT "SSORT"
 		END LINK
+		LINK "/reference/SPIN#refSPIN","Find out about the SPIN command","nav-link",,"refSPIN"
+			PRINT "SPIN"
+		END LINK
 		LINK "/reference/SPRINT#refSPRINT","Find out about the SPRINT command","nav-link",,"refSPRINT"
 			PRINT "SPRINT"
 		END LINK
-				LINK "/reference/SPRITE#refSPRITE","Find out about the SPRITE command","nav-link",,"refSPRITE"
+		LINK "/reference/SPRITE#refSPRITE","Find out about the SPRITE command","nav-link",,"refSPRITE"
 			PRINT "SPRITE"
 		END LINK
 		LINK "/reference/SQR#refSQR","Find out about the SQR command","nav-link",,"refSQR"

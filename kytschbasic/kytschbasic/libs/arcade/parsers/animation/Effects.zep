@@ -42,23 +42,36 @@ class Effects extends Command
 
 	public function processSpin(args, bool in_javascript = false)
 	{
-		var output = "<script type='text/javascript'>$(document).ready(function() {", milliseconds = 500;
+		var output = "<script type='text/javascript'>$(document).ready(function() {", milliseconds = 500, direction = "clockwise";
 
 		if (in_javascript) {
 			let output = "";
 		}
 		
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let milliseconds = intval(args[1]);
+			let milliseconds = intval(trim(args[1], "\""));
 		}
 
 		if (milliseconds < 0) {
 			let milliseconds = 500;
 		}
 
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let direction = strtolower(trim(args[2], "\""));
+			if (!in_array(direction, ["clockwise", "anti-clockwise"])) {
+				let direction = "clockwise";
+			}
+		}
+
+		if (direction == "anti-clockwise") {
+			let direction = "KBSPINANTI";
+		} else {
+			let direction = "KBSPIN";
+		}
+
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= "$('#" . trim(args[0], "\"") . "').css('-webkit-animation', 'KBSPIN linear " . milliseconds . "ms infinite')";
-			let output .= ".css('animation', 'KBSPIN linear " . milliseconds . "ms infinite');";
+			let output .= "$('#" . trim(args[0], "\"") . "').css('-webkit-animation', '" . direction. " linear " . milliseconds . "ms infinite')";
+			let output .= ".css('animation', '" . direction. " linear " . milliseconds . "ms infinite');";
 		} else {
 			throw new Exception("Invalid SPIN, target not set.");
 		}

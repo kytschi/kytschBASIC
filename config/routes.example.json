@@ -410,6 +410,10 @@
 	},
 
 	{
+		"url": "/reference/AFUNCTION",
+		"template": "project/reference/arcade/function/AFUNCTION.kb"
+	},
+	{
 		"url": "/reference/ANIMATION",
 		"template": "project/reference/arcade/animation/ANIMATION.kb"
 	},
@@ -420,6 +424,10 @@
 	{
 		"url": "/reference/ARCF",
 		"template": "project/reference/arcade/shapes/ARCF.kb"
+	},
+	{
+		"url": "/reference/ASYNCFUNCTION",
+		"template": "project/reference/arcade/function/ASYNCFUNCTION.kb"
 	},
 	{
 		"url": "/reference/BITMAP",
@@ -466,6 +474,10 @@
 		"template": "project/reference/arcade/animation/HIDE.kb"
 	},
 	{
+		"url": "/reference/JAVASCRIPT",
+		"template": "project/reference/arcade/function/JAVASCRIPT.kb"
+	},
+	{
 		"url": "/reference/LINE",
 		"template": "project/reference/arcade/shapes/LINE.kb"
 	},
@@ -484,6 +496,10 @@
 	{
 		"url": "/reference/SHOW",
 		"template": "project/reference/arcade/animation/SHOW.kb"
+	},
+	{
+		"url": "/reference/SPIN",
+		"template": "project/reference/arcade/animation/SPIN.kb"
 	},
 	{
 		"url": "/reference/SPRITE",
