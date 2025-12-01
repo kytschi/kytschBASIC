@@ -56,7 +56,8 @@ class Navigation extends Command
 		} else {
 			if (strpos(args[0], "[") !== false) {
 				let output = substr_replace(
-					substr_replace(args[0], "(", strpos(args[0], "["), 1), ")",
+					substr_replace(args[0], "(", strpos(args[0], "["), 1),
+					")",
 					strlen(args[0]) - 1,
 					1
 				);

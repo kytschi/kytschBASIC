@@ -19,6 +19,14 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "This will allow you to create an arcade function which is a javascript function with jquery support."
 				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " when a function is created the first argument is always the "
+					PRINT "event","basic"
+					PRINT " parameter. So when you call the function from javascript remember to supply the "
+					PRINT "event","basic"
+					PRINT " parameter as the first argument. Using the GOTO command from say ANIMATION you don't have to supply the event."
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3

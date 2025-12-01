@@ -279,9 +279,11 @@ ADEF in_game%=0
 ADEF controls_locked%=1
 ADEF speech_text$=""
 ADEF user_input%=0
-ADIM user_input_enabled$=[]
-ADIM user_input_disabled$=[]
+ADIM user_input_enabled$=()
+ADIM user_input_disabled$=()
 ADEF speaking%=0
+ADIM save_on$=("", "")
+ADIM animation_trigger$=()
 IFE _GET("progress") THEN
     ADEF skip_intro%=0
     JAVASCRIPT
@@ -299,7 +301,6 @@ ELSE
         });
     END JAVASCRIPT
 END IF
-ADEF save$=""
 
 AFUNCTION "startNewGame"
     if (!skip_intro) {
@@ -312,7 +313,7 @@ AFUNCTION "startNewGame"
                     () => {
                         $("#btn_start .button-message").removeClass("selected");
                         in_game = 1;
-                        progressSpeech(event, "game-progress-24");
+                        progressSpeech(event, "game-progress-1");
                     }
                 );
             }
@@ -333,7 +334,7 @@ AFUNCTION "continueGame"
                     $("#btn_continue .button-message").removeClass("selected");
                     in_game = 1;
                     controls_locked=0;
-                    progressSpeech(event, "game-progress-1");
+                    progressSpeech(event, "game-progress-18");
                 }
             );
         }
@@ -348,23 +349,23 @@ END AFUNCTION
 AFUNCTION "saveAndQuit", "progress=null"
     console.log("Saving", progress);
     $("#intro-controls-buttons").css("display", "none");
-    $("#omega-doom-game").fadeOut(
-        "2000",
-        () => {
-            $("#omega-doom-intro").fadeIn(
-                "2000",
-                () => {
-                    if (progress) {
-                        window.location.href = "/arcade/omega-doom?progress=" + progress;
-                    } else {
+    if (progress) {
+        window.location.href = "/arcade/omega-doom?progress=" + progress;
+    } else {
+        $("#omega-doom-game").fadeOut(
+            "2000",
+            () => {
+                $("#omega-doom-intro").fadeIn(
+                    "2000",
+                    () => {
                         in_game = 0;
                         controls_locked=0;
                         showIntroButtons(event);
                     }
-                }
-            );
-        }
-    );
+                );
+            }
+        );
+    }
 END AFUNCTION
 
 ASYNCFUNCTION "progressSpeech", "next_id", "prev_id"
@@ -401,7 +402,10 @@ ASYNCFUNCTION "progressSpeech", "next_id", "prev_id"
     speaking=0;
 END ASYNCFUNCTION
 
-AFUNCTION "nextProgress"
+AFUNCTION "nextProgress", "animation=null"
+    if (save_on[0] == current_process) {
+        saveAndQuit(event, save_on[1]);
+    }
     speech_text = "";
     $("#" + current_process + " .btn-continue .button-message").addClass("selected");
     var splits = current_process.split("-");
@@ -413,8 +417,26 @@ AFUNCTION "nextProgress"
             current_process += str + "-"
         }
     });
+
+    if (!animation && animation_trigger.length) {
+        animation_trigger.forEach((func_call, index) => {
+            if (func_call[0] == current_process) {
+                animation = func_call[1];
+                return;
+            }
+        });
+    }
+
+    if (animation) {
+        $("#omega-doom .progress .game-progress").hide();
+        $("#omega-doom .progress #" + current_process).css("display", "flex");
+        window[animation](event);
+    } else {
+        progressSpeech(event, current_process, null, user_input);
+    }
 END AFUNCTION
-AFUNCTION "prevProgress"
+
+AFUNCTION "prevProgress", "animation=null"
     speech_text = "";
     $("#" + current_process + " .btn-continue .button-message").addClass("selected");
     var splits = current_process.split("-");
@@ -426,6 +448,23 @@ AFUNCTION "prevProgress"
             current_process += str + "-"
         }
     });
+    
+    if (!animation && animation_trigger.length) {
+        animation_trigger.forEach((func_call, index) => {
+            if (func_call[0] == current_process) {
+                animation = func_call[1];
+                return;
+            }
+        });
+    }
+
+    if (animation) {
+        $("#omega-doom .progress .game-progress").hide();
+        $("#omega-doom .progress #" + current_process).css("display", "flex");
+        window[animation](event);
+    } else {
+        progressSpeech(event, null, current_process, user_input);
+    }
 END AFUNCTION
 
 AFUNCTION "showIntroButtons"
@@ -450,27 +489,16 @@ KEYBOARDEVENT "enter"
     GOTO userInput()
     IFE controls_locked THEN
         IF in_game && !user_input THEN
-            IF save THEN
-                GOTO saveAndQuit(save)
-            ELSE
-                GOTO nextProgress()
-                GOTO progressSpeech(current_process, null, user_input)
-            END IF
-                
+            GOTO nextProgress()
         END IF
     END IF
-END KEYBOARDEVENT
-
 KEYBOARDEVENT "p"
     GOTO userInput()
     IFE controls_locked THEN
         IF in_game THEN
             GOTO prevProgress()
-            GOTO progressSpeech(null, current_process, user_input)
         END IF
     END IF
-END KEYBOARDEVENT
-
 KEYBOARDEVENT "n"
     GOTO userInput()
     IFE controls_locked THEN
@@ -478,14 +506,16 @@ KEYBOARDEVENT "n"
             GOTO startNewGame()
         END IF
     END IF
-END KEYBOARDEVENT
-
 KEYBOARDEVENT "c"
     GOTO userInput()
     IFE controls_locked THEN
         IFE in_game THEN
             GOTO continueGame()
         END IF
+    END IF
+KEYBOARDEVENT "q"
+    IF in_game THEN
+        GOTO saveAndQuit()
     END IF
 END KEYBOARDEVENT
 

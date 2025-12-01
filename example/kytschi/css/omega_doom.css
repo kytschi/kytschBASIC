@@ -115,7 +115,7 @@ html, body {
 #omega-doom-game .visuals {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 300px);
+    width: calc(100% - 360px);
     height: 100%;
 }
 
@@ -149,7 +149,7 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: calc(300px - 40px);
+    width: calc(360px - 40px);
     height: calc(100% - 42px);
     border: 1px dashed #00ff3c;
 }
@@ -280,7 +280,7 @@ html, body {
 #omega-doom #map #federation-map {
     position: absolute;
     top: 230px;
-    left: calc(50% - 300px);
+    left: calc(50% - 360px);
 }
 #omega-doom #map #rosia-empire-map {
     position: absolute;

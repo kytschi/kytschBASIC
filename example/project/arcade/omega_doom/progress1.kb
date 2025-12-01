@@ -25,6 +25,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-1");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -60,7 +63,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -90,7 +93,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-1')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -102,6 +105,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-2");
+                END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -137,7 +143,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -167,7 +173,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-2')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -179,6 +185,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-3");
+                END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -214,7 +223,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -244,23 +253,29 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-3')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "c"
+                        IFE controls_locked THEN
+                            IF in_game && current_process="game-progress-4" THEN
+                                GOTO progressSpeech("game-progress-5")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-4" && in_game && user_input && !speaking THEN
+                            GOTO invalidButton("I need to be selecting communications.")
+                        END IF
+                    KEYBOARDEVENT "q"
+                        IF current_process="game-progress-4" && in_game && user_input && !speaking THEN
+                            GOTO saveAndQuit()
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-4");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-4" && in_game && user_input && !speaking) {
-                                if (event.which == 99) {
-                                    progressSpeech(event, "game-progress-5", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    invalidButton(event,'I need to be selecting communications.');
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -297,7 +312,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()"
+                BUTTON ,,,,,"saveAndQuit(event)"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -327,23 +342,25 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-4')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "1"
+                        IFE controls_locked THEN
+                            IF in_game && current_process="game-progress-5" THEN
+                                GOTO progressSpeech("game-progress-6")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-5" && in_game && user_input && !speaking THEN
+                            GOTO invalidButton("I need to be hailing the outpost.")
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-5");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-5" && in_game && user_input && !speaking) {
-                                if (event.which == 49) {
-                                    progressSpeech(event, "game-progress-6", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    invalidButton(event,'I need to be hailing the outpost.');
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -356,7 +373,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail the outpost", "button-message flash"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -386,7 +403,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-5')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -412,7 +429,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail the outpost", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -442,7 +459,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-6')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -454,6 +471,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-7");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -465,7 +485,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail the outpost", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -495,7 +515,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-7')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -507,6 +527,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-8");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -518,7 +541,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail the outpost", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -548,7 +571,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-8')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -560,6 +583,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-9");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -571,7 +597,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail the outpost", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -601,7 +627,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-9')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -613,6 +639,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-10");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -624,7 +653,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail the outpost", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -654,7 +683,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-10')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -666,6 +695,9 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
+                    JAVASCRIPT
+                        user_input_disabled.push("game-progress-11");
+                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -701,7 +733,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -731,23 +763,25 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-11')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "s"
+                        IFE controls_locked THEN
+                            IF in_game && current_process="game-progress-12" THEN
+                                GOTO progressSpeech("game-progress-13")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-12" && in_game && user_input && !speaking THEN
+                            GOTO invalidButton("I need to be selecting sensors.")
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-12");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-12" && in_game && user_input && !speaking) {
-                                if (event.which == 115) {
-                                    progressSpeech(event, "game-progress-13", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    invalidButton(event,'I need to be selecting sensors.');
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -784,7 +818,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -814,25 +848,31 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-11')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "1"
+                        IFE controls_locked THEN
+                            IF in_game && current_process="game-progress-13" THEN
+                                GOTO progressSpeech("game-progress-15")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "2"
+                        IFE controls_locked THEN
+                            IF in_game THEN
+                                GOTO progressSpeech("game-progress-14")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-13" && in_game && user_input && !speaking THEN
+                            GOTO invalidButton("I need to be scanning the outpost.")
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-13");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-13" && in_game && user_input && !speaking) {
-                                if (event.which == 49) {
-                                    progressSpeech(event, "game-progress-15", null);
-                                } else if (event.which == 50) {
-                                    progressSpeech(event, "game-progress-14", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    invalidButton(event,'I need to be scanning the outpost.');
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -851,7 +891,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -881,25 +921,31 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-13')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "1"
+                        IFE controls_locked THEN
+                            IF in_game && current_process="game-progress-14" THEN
+                                GOTO progressSpeech("game-progress-15")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "2"
+                        IFE controls_locked THEN
+                            IF in_game THEN
+                                GOTO progressSpeech("game-progress-14")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-14" && in_game && user_input && !speaking THEN
+                            GOTO invalidButton("I need to be scanning the outpost.")
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-14");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-14" && in_game && user_input && !speaking) {
-                                if (event.which == 49) {
-                                    progressSpeech(event, "game-progress-15", null);
-                                } else if (event.which == 50) {
-                                    progressSpeech(event, "game-progress-14", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    invalidButton(event,'I need to be scanning the outpost.');
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -918,7 +964,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -948,7 +994,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-13')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -980,7 +1026,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1010,7 +1056,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-15')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1023,7 +1069,7 @@ WINDOW "game-window", "progress"
                         PRINT "Continue", "button-message"
                     END BUTTON
                     JAVASCRIPT
-                        user_input_disabled.push("game-progress-15");
+                        user_input_disabled.push("game-progress-16");
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -1042,7 +1088,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1072,7 +1118,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-16')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1104,7 +1150,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1134,7 +1180,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-17')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1166,7 +1212,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1196,7 +1242,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-18')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1228,7 +1274,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1258,7 +1304,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-19')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1290,7 +1336,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1320,7 +1366,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-20')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1352,7 +1398,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1382,7 +1428,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-21')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1414,7 +1460,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1444,7 +1490,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-22')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1476,7 +1522,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1506,7 +1552,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-23')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1538,7 +1584,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1568,7 +1614,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-24')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1600,7 +1646,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1630,7 +1676,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-25')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1662,7 +1708,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1692,7 +1738,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-26')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1724,7 +1770,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1754,7 +1800,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-27')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1786,7 +1832,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1816,7 +1862,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-28')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1848,7 +1894,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1878,7 +1924,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-29')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1910,7 +1956,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1921,7 +1967,7 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-31"
-        PRINT "Aye Captain.","original hide"
+        PRINT "Aye Captain. Downloading now.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366 [Federation Border]","gfx-label"
@@ -1940,13 +1986,13 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous",,,,"progressSpeech(event,null,'game-progress-30')"
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
                         PRINT "["
                         PRINT "p","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"saveAndQuit('progress2')"
+                    BUTTON ,"btn-continue",,,,"saveAndQuit(event, 'progress2')"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1954,14 +2000,14 @@ WINDOW "game-window", "progress"
                     END BUTTON
                     JAVASCRIPT
                         user_input_disabled.push("game-progress-31");
-                        save="progress2";
+                        save_on=["game-progress-31", "progress2"];
                     END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"saveAndQuit('progress2')"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-15', null)"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
@@ -1973,7 +2019,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit()" 
+                BUTTON ,,,,,"saveAndQuit(event, 'progress1')" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1986,5 +2032,4 @@ WINDOW "game-window", "progress"
 END WINDOW
 JAVASCRIPT
     loading=0;
-    showIntroButtons();
 END JAVASCRIPT
