@@ -312,7 +312,7 @@ AFUNCTION "startNewGame"
                     () => {
                         $("#btn_start .button-message").removeClass("selected");
                         in_game = 1;
-                        progressSpeech(event, "game-progress-1");
+                        progressSpeech(event, "game-progress-24");
                     }
                 );
             }
@@ -440,6 +440,10 @@ AFUNCTION "userInput"
     } else if (user_input_disabled.includes(current_process)) {
         user_input = 0;
     }
+END AFUNCTION
+
+AFUNCTION "updateOriginal", "progress", "text"
+$("#" + progress + " .original").html(text);
 END AFUNCTION
 
 KEYBOARDEVENT "enter"

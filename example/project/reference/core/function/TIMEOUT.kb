@@ -1,0 +1,63 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "TIMEOUT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "TIMEOUT","heading-command basic"
+					LINE BREAK
+					PRINT "MILLISECONDS","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This function allow you to create a timeout function."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+PRINT "Timeout running",,"timeout-text"
+AFUNCTION "updateText", "text"
+$("#timeout-text").html(text);
+END AFUNCTION
+ANIMATION "timeoutExample"
+    TIMEOUT "3000"
+        GOTO updateText('Timeout complete')
+    END TIMEOUT
+END ANIMATION
+				END CPRINT
+				DIV "kb-code-block"
+					PRINT "Timeout running",,"timeout-text"
+					AFUNCTION "updateText", "text"
+						$("#timeout-text").html(text);
+					END AFUNCTION
+					ANIMATION "timeoutExample"
+						TIMEOUT "3000"
+							GOTO updateText('Timeout complete')
+						END TIMEOUT
+					END ANIMATION
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/ANIMATION#refANIMATION"
+						PRINT "ANIMATION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SLEEP#refSLEEP"
+						PRINT "SLEEP"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

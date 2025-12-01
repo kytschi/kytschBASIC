@@ -289,6 +289,9 @@ HEADER
 		LINK "/reference/INT#refINT","Find out about the INT command","nav-link",,"refINT"
 			PRINT "INT"
 		END LINK
+		LINK "/reference/KEYBOARDEVENT#refKEYBOARDEVENT","Find out about the KEYBOARDEVENT command","nav-link",,"refKEYBOARDEVENT"
+			PRINT "KEYBOARDEVENT"
+		END LINK
 		LINK "/reference/KEYWORDS#refKEYWORDS","Find out about the KEYWORDS command","nav-link",,"refKEYWORDS"
 			PRINT "KEYWORDS"
 		END LINK
@@ -495,6 +498,9 @@ HEADER
 		END LINK
 		LINK "/reference/THEADCELL#refTHEADCELL","Find out about the THEADCELL command","nav-link",,"refTHEADCELL"
 			PRINT "THEADCELL"
+		END LINK
+		LINK "/reference/TIMEOUT#refTIMEOUT","Find out about the TIMEOUT command","nav-link",,"refTIMEOUT"
+			PRINT "TIMEOUT"
 		END LINK
 		LINK "/reference/TROW#refTROW","Find out about the TROW command","nav-link",,"refTROW"
 			PRINT "TROW"

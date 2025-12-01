@@ -77,6 +77,10 @@ END SCREEN
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK
+					PRINT " | "
+					LINK "/reference/KEYBOARDEVENT"
+						PRINT "KEYBOARDEVENT"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

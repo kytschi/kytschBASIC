@@ -335,7 +335,7 @@ class Variables
 		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
 	}	
 
-	public function parse(string line, string command, array args, bool in_javascript = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
 	{
 		switch (command) {
 			case "ADEF":

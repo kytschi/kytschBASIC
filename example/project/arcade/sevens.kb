@@ -86,7 +86,7 @@ AFUNCTION "computerPlay"
     var value = "";
     var played = false;
     var status = false;
-
+    
     sleep(500).then(() => {
         hands[turn].sort(() => Math.random() - .5);
 

@@ -117,9 +117,10 @@ class InputEvents extends Command
 		"t": 116,
 		"u": 117,
 		"v": 118,
-		"x": 119,
-		"y": 120,
-		"z": 121,
+		"w": 119,
+		"x": 120,
+		"y": 121,
+		"z": 122,
 		"{": 123,
 		"|": 124,
 		"}": 125,
@@ -128,11 +129,11 @@ class InputEvents extends Command
 		"¬": 172
 	];
 
-	public function parse(string line, string command, array args, bool in_javascript = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
 	{
 		switch(command) {
 			case "KEYBOARDEVENT":
-				return this->processKeyboardEvent(args);
+				return this->processKeyboardEvent(args, in_event);
 			case "END KEYBOARDEVENT":
 				return "}});});</script>";
 			default:
@@ -140,17 +141,49 @@ class InputEvents extends Command
 		}
 	}
 
-	private function processKeyboardEvent(array args)
+	private function processKeyboardEvent(array args, bool in_event = false)
 	{
-		var output = "<script type='text/javascript'>$(document).ready(function() {$('body').on('keypress', function(event) {";
+		var output = "<script type='text/javascript'>$(document).ready(function() {$('body').on('keypress', function(event) {",
+			splits, split, cleaned, replace_str;
+
+		if (in_event) {
+			let output = "";
+		}
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let args[0] = trim(args[0], "\"");
-			if (!isset(this->keys[args[0]])) {
-				throw new Exception("Invalid KEYBOARDEVENT, key not supported.");
+			let splits = preg_split("/[\&\&]|[\|\|]/", args[0], -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
+
+			if (in_event) {
+				let output .= "} else if (";
+			} else {
+				let output .= "if (";
 			}
 
-			let output .= "if (event.which == " . this->keys[args[0]] . ") {";
+			for (split in splits) {
+				let split[0] = trim(split[0]);
+				let cleaned = ltrim(trim(split[0]), "!");
+				if (!isset(this->keys[cleaned])) {
+					throw new Exception("Invalid KEYBOARDEVENT, key '" . cleaned . "' not supported.");
+				}
+
+				let replace_str = "event.which";
+				if (substr(split[0], 0, 1) == "!") {
+					let replace_str .= " != ";
+				} else {
+					let replace_str .= " == ";
+				}
+				
+				let replace_str .= this->keys[cleaned];
+
+				let args[0] = str_replace(
+					split[0],
+					replace_str,
+					args[0]
+				);
+			}
+
+			let output .= trim(args[0])  . ") {";
 		} else {
 			throw new Exception("Invalid KEYBOARDEVENT.");
 		}

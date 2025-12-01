@@ -1340,18 +1340,20 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "2"
+                        IFE controls_locked THEN
+                            IF in_game THEN
+                                GOTO progressSpeech("game-progress-25")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-24" && in_game && user_input && !speaking THEN
+                            GOTO updateOriginal("game-progress-24", "I need to be selecting the Federation space from the map.")
+                            GOTO progressSpeech(current_process)
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-24");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-24" && in_game && user_input && !speaking) {
-                                if (event.which == 50) {
-                                    progressSpeech(event, "game-progress-25", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    $("#game-progress-24 .original").html("I need to be selecting the Federation space from the map.");
-                                    progressSpeech(event, current_process, null);
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -1406,18 +1408,20 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "7"
+                        IFE controls_locked THEN
+                            IF in_game THEN
+                                GOTO progressSpeech("game-progress-26")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-25" && in_game && user_input && !speaking THEN
+                            GOTO updateOriginal("game-progress-25", "I need to be selecting Outpost 3366 from the map.")
+                            GOTO progressSpeech(current_process)
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-25");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-25" && in_game && user_input && !speaking) {
-                                if (event.which == 55) {
-                                    progressSpeech(event, "game-progress-26", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    $("#game-progress-25 .original").html("I need to be selecting Outpost 3366 from the map.");
-                                    progressSpeech(event, current_process, null);
-                                } 
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -1593,18 +1597,20 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "e"
+                        IFE controls_locked THEN
+                            IF in_game THEN
+                                GOTO progressSpeech("game-progress-29")
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-28" && in_game && user_input && !speaking THEN
+                            GOTO updateOriginal("game-progress-28", "I need to engage the engines.")
+                            GOTO progressSpeech(current_process)
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-28");
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-28" && in_game && user_input && !speaking) {
-                                if (event.which == 101) {
-                                    progressSpeech(event, "game-progress-29", null);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    $("#game-progress-27 .original").html("I need to engage the engines.");
-                                    progressSpeech(event, current_process, null);
-                                }
-                            }
-                        });
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -1659,20 +1665,21 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
+                    KEYBOARDEVENT "w"
+                        IFE controls_locked THEN
+                            IF in_game THEN
+                                GOTO progressSpeech("game-progress-30")
+                                GOTO animationWarp()
+                            END IF
+                        END IF
+                    KEYBOARDEVENT "!p && !q"
+                        IF current_process="game-progress-29" && in_game && user_input && !speaking THEN
+                            GOTO updateOriginal("game-progress-29", "I need to engage the warp drive.")
+                            GOTO progressSpeech(current_process)
+                        END IF
+                    END KEYBOARDEVENT
                     JAVASCRIPT
-                        $("body").on("keypress", function(event) {
-                            if (current_process == "game-progress-29" && in_game && user_input && !speaking) {
-                                if (event.which == 119) {
-                                    progressSpeech(event, "game-progress-30", null);
-                                    setTimeout(() => {
-                                        saveAndQuit('progress1');
-                                    }, 3000);
-                                } else if (event.which != 112 && event.which != 113) {
-                                    $("#game-progress-28 .original").html("I need to engage the warp drive.");
-                                    progressSpeech(event, current_process, null);
-                                }
-                            }
-                        });
+                        user_input_enabled.push("game-progress-29");
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -1710,8 +1717,11 @@ WINDOW "game-intro", "progress"
                 END DIV
             END DIV
         END WINDOW
-        ANIMATION
+        ANIMATION "animationWarp", "false"
             SPIN "warp-effect"
+            TIMEOUT "3000"
+                GOTO saveAndQuit('progress1')
+            END TIMEOUT
         END ANIMATION
     END DIV
 END WINDOW

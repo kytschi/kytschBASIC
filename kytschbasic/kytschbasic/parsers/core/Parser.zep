@@ -41,8 +41,10 @@ class Parser
 	private js = false;
 	private process_as_js = false;
 	private create_function = false;
+	private keyboard_event = false;
 	private has_case = false;
 	private show_html = false;
+	private timeouts = [];
 
 	private websocket_server = null;
 
@@ -236,7 +238,9 @@ class Parser
 				if (!this->cprint) {
 					let this->js = true;
 					let this->process_as_js = true;
-					return (new InputEvents())->parse(line, command, args, this->js);
+					let output = (new InputEvents())->parse(line, command, args, this->js, this->keyboard_event);
+					let this->keyboard_event = true;
+					return output;
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
 				}
@@ -245,7 +249,42 @@ class Parser
 				if (!this->cprint) {
 					let this->js = false;
 					let this->process_as_js = false;
+					let this->keyboard_event = false;
 					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "TIMEOUT":
+				if (!this->cprint) {
+					let cleaned = 1000;
+					if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+						let cleaned = intval(trim(args[0], "\""));
+					}
+
+					if (cleaned < 0) {
+						let cleaned = 1000;
+					}
+					let this->timeouts[] = cleaned;
+					if (!this->js) {
+						let output .= "<script type='text/javascript'>$(document).ready(function() {";
+					}
+					let output .= "\tsetTimeout(() => {\n";
+					return output;
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END TIMEOUT":
+				if (!this->cprint) {
+					if (count(this->timeouts)) {
+						let output = "}, " . this->timeouts[count(this->timeouts) - 1] . ");";
+						array_shift(this->timeouts);
+						if (!this->js) {
+							let output .= "\n});</script>";
+						}
+					}
+					return output;
 				}  elseif (this->cprint) {
 					return line . this->newline;
 				}

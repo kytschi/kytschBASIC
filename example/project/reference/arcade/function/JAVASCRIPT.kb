@@ -78,6 +78,10 @@ END SCREEN
 					LINK "/reference/ASYNCFUNCTION"
 						PRINT "ASYNCFUNCTION"
 					END LINK
+					PRINT " | "
+					LINK "/reference/KEYBOARDEVENT"
+						PRINT "KEYBOARDEVENT"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

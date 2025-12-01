@@ -478,6 +478,10 @@
 		"template": "project/reference/arcade/function/JAVASCRIPT.kb"
 	},
 	{
+		"url": "/reference/KEYBOARDEVENT",
+		"template": "project/reference/arcade/events/KEYBOARDEVENT.kb"
+	},
+	{
 		"url": "/reference/LINE",
 		"template": "project/reference/arcade/shapes/LINE.kb"
 	},
@@ -593,6 +597,10 @@
 	{
 		"url": "/reference/TAN",
 		"template": "project/reference/core/maths/TAN.kb"
+	},
+	{
+		"url": "/reference/TIMEOUT",
+		"template": "project/reference/core/function/TIMEOUT.kb"
 	},
 	{
 		"url": "/reference/TWODP",

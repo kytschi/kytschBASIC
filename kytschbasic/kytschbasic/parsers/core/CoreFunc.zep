@@ -1,7 +1,7 @@
 /**
- * FUNCTION parser
+ * CoreFunc parser
  *
- * @package     KytschBASIC\Libs\Arcade\Parsers\Function
+ * @package     KytschBASIC\Libs\Arcade\Parsers\Core\CoreFunc
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class CoreFunc extends Command
 {
-	public function parse(string line, string command, array args, bool in_javascript = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
 	{
 		switch(command) {
 			case "FUNCTION":
