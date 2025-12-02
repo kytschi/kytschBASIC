@@ -240,24 +240,43 @@ html, body {
 }
 
 #omega-doom-game .controls-buttons {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 200px - 40px) !important;
 }
 
 #omega-doom-game .controls-stats {
     text-transform: uppercase;
-    height: 200px;
+    height: 200px !important;
+    width: 100%;
 }
 
 #omega-doom-game .controls-stats .controls-stats-label {
     color: #bab8b8;
-    padding-right: 20px;
+    width: 120px;
 }
 
-#omega-doom-game .controls-stats .good {
+#omega-doom-game .controls-stats .normal {
     color: #00ff2e;
 }
-#omega-doom-game .controls-stats .bad {
+#omega-doom.alert-normal .text .character,
+#omega-doom.alert-normal .text,
+#omega-doom.alert-normal .controls {
+    border-color: #00ff2e !important;
+}
+#omega-doom-game .controls-stats .yellow {
+    color: #ffd900;
+}
+#omega-doom.alert-yellow .text .character,
+#omega-doom.alert-yellow .text,
+#omega-doom.alert-yellow .controls {
+    border-color: #ffd900 !important;
+}
+#omega-doom-game .controls-stats .red {
     color: #ff0000;
+}
+#omega-doom.alert-red .text .character,
+#omega-doom.alert-red .text,
+#omega-doom.alert-red .controls {
+    border-color: #ff0000 !important;
 }
 
 #omega-doom-game #map code {

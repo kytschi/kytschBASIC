@@ -227,7 +227,7 @@ FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
     END BUTTON
 END FUNCTION
 
-FUNCTION "drawStats", sector$, location$, tactical$, tactical_style$, shields$, shields_style$, shields_status$, shields_status_style$
+FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shields_status$="offline", ftl$="online", impulse$="online", weapons$="online"
     DIV "controls-stats"
         TABLE
             TBODY
@@ -238,6 +238,9 @@ FUNCTION "drawStats", sector$, location$, tactical$, tactical_style$, shields$, 
                     TCELL
                         PRINT sector$
                     END TCELL
+                    TCELL ,"controls-stats-status"
+                        PRINT "&nbsp;"
+                    END TCELL
                 END TROW
                 TROW
                     TCELL ,"controls-stats-label"
@@ -246,25 +249,83 @@ FUNCTION "drawStats", sector$, location$, tactical$, tactical_style$, shields$, 
                     TCELL
                         PRINT location$
                     END TCELL
+                    TCELL ,"controls-stats-status"
+                        PRINT "&nbsp;"
+                    END TCELL
                 END TROW
                 TROW
                     TCELL ,"controls-stats-label"
                         PRINT "TACTICAL"
                     END TCELL
                     TCELL
-                        PRINT tactical$, tactical_style$
+                        IF tactical$="yellow alert" THEN
+                            PRINT tactical$, "yellow"
+                        ELSEIF tactical$="red alert" THEN
+                            PRINT tactical$, "red"
+                        ELSE
+                            PRINT tactical$, "normal"
+                        END IF
                     END TCELL
                 END TROW
                 TROW
                     TCELL ,"controls-stats-label"
                         PRINT "SHIELDS"
                     END TCELL
-                    TCELL
-                        PRINT shields$, shields_style$
-                        PRINT "&nbsp;"
-                        PRINT "[", shields_status_style$
-                        PRINT shields_status$, shields_status_style$
-                        PRINT "]", shields_status_style$
+                    TCELL ,"controls-stats-status"
+                        IF shields%=0 THEN
+                            PRINT shields$, "red"
+                            PRINT "&percnt;&nbsp;[OFFLINE]", "red"
+                        ELSEIF shields%<=39 && shields%>0 THEN
+                            PRINT shields$, "red"
+                            PRINT "&percnt;&nbsp;[ONLINE]", "red"
+                        ELSEIF shields%<=60 && shields%>=40 THEN
+                            PRINT shields$, "yellow"
+                            PRINT "&percnt;&nbsp;[ONLINE]", "yellow"
+                        ELSE
+                            PRINT shields$, "normal"
+                            PRINT "&percnt;&nbsp;", "normal"
+                            IF tactical$="normal" THEN
+                                PRINT "[OFFLINE]", "red"
+                            ELSE
+                                PRINT "[ONLINE]", "normal"
+                            END IF
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "FTL drive"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF ftl$="offline" THEN
+                            PRINT ftl$, "red"
+                        ELSE
+                            PRINT ftl$, "normal"
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "Impulse drive"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF impulse$="offline" THEN
+                            PRINT impulse$, "red"
+                        ELSE
+                            PRINT impulse$, "normal"
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "WEAPONS"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF weapons$="offline" THEN
+                            PRINT weapons$, "red"
+                        ELSE
+                            PRINT weapons$, "normal"
+                        END IF
                     END TCELL
                 END TROW
             END TBODY
@@ -272,8 +333,7 @@ FUNCTION "drawStats", sector$, location$, tactical$, tactical_style$, shields$, 
     END DIV
 END FUNCTION
 
-ADEF game_process$="game-intro"
-ADEF current_process$="game-intro-1"
+ADEF current_process$="game-progress-1"
 ADEF loading%=1
 ADEF in_game%=0
 ADEF controls_locked%=1
@@ -284,6 +344,8 @@ ADIM user_input_disabled$=()
 ADEF speaking%=0
 ADIM save_on$=("", "")
 ADIM animation_trigger$=()
+ADIM ship_status_trigger$=()
+
 IFE _GET("progress") THEN
     ADEF skip_intro%=0
     JAVASCRIPT
@@ -313,7 +375,7 @@ AFUNCTION "startNewGame"
                     () => {
                         $("#btn_start .button-message").removeClass("selected");
                         in_game = 1;
-                        progressSpeech(event, "game-progress-1");
+                        progressSpeech(event, current_process);
                     }
                 );
             }
@@ -334,7 +396,7 @@ AFUNCTION "continueGame"
                     $("#btn_continue .button-message").removeClass("selected");
                     in_game = 1;
                     controls_locked=0;
-                    progressSpeech(event, "game-progress-18");
+                    progressSpeech(event, current_process);
                 }
             );
         }
@@ -344,6 +406,17 @@ END AFUNCTION
 AFUNCTION "invalidButton", "speech"
     $("#" + current_process + " .original").html(speech);
     progressSpeech(event, current_process, null);
+END AFUNCTION
+
+AFUNCTION "shipStatus"
+if (ship_status_trigger.length) {
+    ship_status_trigger.forEach((func_call, index) => {
+        if (func_call[0] == current_process) {
+            $("body").addClass("alert-" + func_call[1]);
+            return;
+        }
+    });
+}
 END AFUNCTION
 
 AFUNCTION "saveAndQuit", "progress=null"
@@ -369,6 +442,8 @@ AFUNCTION "saveAndQuit", "progress=null"
 END AFUNCTION
 
 ASYNCFUNCTION "progressSpeech", "next_id", "prev_id"
+    shipStatus(event);
+    
     speaking=1;
     if (prev_id) {
         current_process = prev_id;
@@ -393,7 +468,7 @@ ASYNCFUNCTION "progressSpeech", "next_id", "prev_id"
     speech_text = $("#omega-doom #" + current_process + " .original").html();
     if (speech_text) {
         var iLoop=0;
-        while (speech_text[iLoop]) {
+        while (typeof(speech_text[iLoop]) != "undefined") {
             $("#omega-doom #" + current_process + " .speech p span").append(speech_text[iLoop]);
             await sleep(10);
             iLoop++;
@@ -405,7 +480,9 @@ END ASYNCFUNCTION
 AFUNCTION "nextProgress", "animation=null"
     if (save_on[0] == current_process) {
         saveAndQuit(event, save_on[1]);
+        return;
     }
+
     speech_text = "";
     $("#" + current_process + " .btn-continue .button-message").addClass("selected");
     var splits = current_process.split("-");
@@ -427,10 +504,13 @@ AFUNCTION "nextProgress", "animation=null"
         });
     }
 
+    console.log("Animation: ", animation);
+
     if (animation) {
         $("#omega-doom .progress .game-progress").hide();
         $("#omega-doom .progress #" + current_process).css("display", "flex");
         window[animation](event);
+        shipStatus(event);
     } else {
         progressSpeech(event, current_process, null, user_input);
     }
@@ -438,6 +518,7 @@ END AFUNCTION
 
 AFUNCTION "prevProgress", "animation=null"
     speech_text = "";
+
     $("#" + current_process + " .btn-continue .button-message").addClass("selected");
     var splits = current_process.split("-");
     current_process = "";
@@ -462,6 +543,7 @@ AFUNCTION "prevProgress", "animation=null"
         $("#omega-doom .progress .game-progress").hide();
         $("#omega-doom .progress #" + current_process).css("display", "flex");
         window[animation](event);
+        shipStatus(event);
     } else {
         progressSpeech(event, null, current_process, user_input);
     }
@@ -511,6 +593,13 @@ KEYBOARDEVENT "c"
     IFE controls_locked THEN
         IFE in_game THEN
             GOTO continueGame()
+        END IF
+    END IF
+KEYBOARDEVENT "b"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IF in_game && !speaking THEN
+            GOTO prevProgress()
         END IF
     END IF
 KEYBOARDEVENT "q"

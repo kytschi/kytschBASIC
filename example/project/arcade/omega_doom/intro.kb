@@ -3,7 +3,7 @@ WINDOW "game-intro", "progress"
         PRINT "Captain, incoming hail from Federation Command.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -19,7 +19,7 @@ WINDOW "game-intro", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-2', null)"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -67,14 +67,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-2"
         PRINT "Priority one message from Admiral Byrd sir.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -96,7 +96,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-3',null)"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -144,14 +144,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-3"
         PRINT "Onscreen.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -173,7 +173,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-4')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -197,14 +197,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-4"
         PRINT "Admiral, I hope this isn't bad news?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -226,7 +226,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-5')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -250,14 +250,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-5"
         PRINT "My crew is in dire need of some R an...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -279,7 +279,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-6')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -303,14 +303,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-6"
         PRINT "Sorry John, you'll have to delay that.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -332,7 +332,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-7')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -356,14 +356,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-7"
         PRINT "We've lost contact with a research team at outpost 3366.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -385,7 +385,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-8')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -409,14 +409,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-8"
         PRINT "Output 3366, I don't recall it?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -438,7 +438,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-9')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -462,14 +462,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-9"
         PRINT "You wouldn't, strictly for top brass eyes only John.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -491,7 +491,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-10')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -515,14 +515,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-10"
         PRINT "Your our closest Starship I'm afraid.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -544,7 +544,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-11')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -568,14 +568,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-11"
         PRINT "Report to the co-ordinates 663993 691216.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -597,7 +597,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-12')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -621,14 +621,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-12"
         PRINT "Sector 663993, Admiral that's on the Rosia Empire border?!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -650,7 +650,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-13')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -674,14 +674,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-13"
         PRINT "I am well aware of that Captain!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -703,7 +703,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-14')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -727,14 +727,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-14"
         PRINT "Report back when you've arrived at the outpost.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -756,7 +756,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-15')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -780,14 +780,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-15"
         PRINT "But Rich, the treaty? They'll see this as an act of...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -809,7 +809,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-16')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -833,14 +833,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-16"
         PRINT "You have your order's John...God speed.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -862,7 +862,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-17')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -886,14 +886,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-17"
         PRINT "Byrd out.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -915,7 +915,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-18')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -939,14 +939,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-18"
         PRINT "Helm...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -968,7 +968,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-19')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1016,14 +1016,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-19"
         PRINT "Aye sir.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Earth [Federation]","gfx-label"
+                PRINT "Earth","gfx-label"
                 DIV "render"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
                 END DIV
@@ -1045,7 +1045,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-20')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1075,14 +1075,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-20"
         PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Alpha Quadrant Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
                 END DIV
@@ -1104,7 +1104,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-21')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1134,14 +1134,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-21"
         PRINT "Captain, the Admiral said to go to the outpost in Federation space on Rosia border.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Alpha Quadrant Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
                 END DIV
@@ -1163,7 +1163,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-22')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1193,14 +1193,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-22"
         PRINT "Your right Cyrus.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Alpha Quadrant Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
                 END DIV
@@ -1222,7 +1222,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-23')"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1252,14 +1252,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-23"
         PRINT "Now, set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Alpha Quadrant Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
                 END DIV
@@ -1281,7 +1281,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-24',null)"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1311,14 +1311,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-24"
         PRINT "Aye aye, setting course for the outpost in Federation space on Rosia border.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Alpha Quadrant]","gfx-label"
+                PRINT "Alpha Quadrant Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "federation")
                 END DIV
@@ -1342,7 +1342,7 @@ WINDOW "game-intro", "progress"
                     END BUTTON
                     KEYBOARDEVENT "2"
                         IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-24" THEN
+                            IF in_game && current_process="game-progress-24" && !speaking THEN
                                 GOTO progressSpeech("game-progress-25")
                             END IF
                         END IF
@@ -1378,14 +1378,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-25"
         PRINT "Plotting course Captain.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Federation Sector]","gfx-label"
+                PRINT "Federation Sector Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "outpost-3366")
                 END DIV
@@ -1409,7 +1409,7 @@ WINDOW "game-intro", "progress"
                     END BUTTON
                     KEYBOARDEVENT "7"
                         IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-25" THEN
+                            IF in_game && current_process="game-progress-25" && !speaking THEN
                                 GOTO progressSpeech("game-progress-26")
                             END IF
                         END IF
@@ -1445,14 +1445,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-26"
         PRINT "Course plotted Captain.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Federation Sector]","gfx-label"
+                PRINT "Federation Sector Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
@@ -1474,7 +1474,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-27',null)"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1507,14 +1507,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-27"
         PRINT "Engage!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Federation Sector]","gfx-label"
+                PRINT "Federation Sector Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
@@ -1536,7 +1536,7 @@ WINDOW "game-intro", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"progressSpeech(event,'game-progress-28',null)"
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -1566,14 +1566,14 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-28"
         PRINT "Aye sir.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Federation Sector]","gfx-label"
+                PRINT "Federation Sector Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
@@ -1623,7 +1623,7 @@ WINDOW "game-intro", "progress"
                 END BUTTON
                 KEYBOARDEVENT "e"
                     IFE controls_locked THEN
-                        IF in_game && current_process="game-progress-28" THEN
+                        IF in_game && current_process="game-progress-28" && !speaking THEN
                             GOTO progressSpeech("game-progress-29")
                         END IF
                     END IF
@@ -1633,14 +1633,14 @@ WINDOW "game-intro", "progress"
                     END IF
                 END KEYBOARDEVENT
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-29"
-        PRINT "Engaging warp drive now.","original hide"
+        PRINT "Engaging FTL drive now.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
-                PRINT "Map [Federation Sector]","gfx-label"
+                PRINT "Federation Sector Map","gfx-label"
                 DIV "render", "map"
                     GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
                 END DIV
@@ -1672,9 +1672,9 @@ WINDOW "game-intro", "progress"
             DIV "controls-buttons"
                 BUTTON ,,,,,"progressSpeech(event,'game-progress-30')"
                     PRINT "["
-                    PRINT "w","button_key"
+                    PRINT "f","button_key"
                     PRINT "]", "button_key_end" 
-                    PRINT "Warp drive", "button-message flash"
+                    PRINT "FTL drive", "button-message flash"
                 END BUTTON
                 BUTTON
                     PRINT "["
@@ -1688,20 +1688,20 @@ WINDOW "game-intro", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
-                KEYBOARDEVENT "w"
+                KEYBOARDEVENT "f"
                     IFE controls_locked THEN
-                        IF in_game && current_process="game-progress-29" THEN
+                        IF in_game && current_process="game-progress-29" && !speaking THEN
                             GOTO progressSpeech("game-progress-30")
                             GOTO animationWarp()
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
                     IF current_process="game-progress-29" && in_game && user_input && !speaking THEN
-                        GOTO invalidButton("I need to engage the warp drive.")
+                        GOTO invalidButton("I need to engage the FTL drive.")
                     END IF
                 END KEYBOARDEVENT
             END DIV
-            GOTO drawStats("federation", "earth", "normal", "good", "100%", "good", "down", "bad")
+            GOTO drawStats("federation", "earth")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-30"
