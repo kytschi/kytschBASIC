@@ -61,16 +61,18 @@ html, body {
 #omega-doom button .button_key_end_small {
     padding-right: 12px;
 }
+#omega-doom button.locked {
+    opacity: 0.5 !important;
+}
 
-#omega-doom-intro {
+#omega-doom-intro, #omega-doom-gameover {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    display: none;
 }
 
-#omega-doom-intro pre, #omega-doom-intro #intro-controls {
+#omega-doom-intro pre, #omega-doom-intro #intro-controls, #omega-doom-gameover pre {
     display: flex;
     font-family: 'Body', monospace;
     justify-content: center;
@@ -81,16 +83,17 @@ html, body {
     flex-direction: column;
 }
 
-#omega-doom-intro pre code {
+#omega-doom-intro pre code, #omega-doom-gameover pre code {
     margin-top: 50px;
     width: 800px !important;
     text-align: center;
 }
 
-#omega-doom-intro #intro {
+#omega-doom-intro #intro, #omega-doom-gameover #gameover {
     width: 100%;
     padding-top: 10px;
-    display: none;
+    display: flex;
+    flex-direction: column;
 }
 
 #omega-doom-game {

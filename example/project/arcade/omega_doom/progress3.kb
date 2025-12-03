@@ -1756,3 +1756,11 @@ END WINDOW
 JAVASCRIPT
     loading=0;
 END JAVASCRIPT
+KEYBOARDEVENT "b"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IF in_game && !speaking THEN
+            GOTO prevProgress()
+        END IF
+    END IF
+END KEYBOARDEVENT
