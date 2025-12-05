@@ -50,6 +50,37 @@ class Arcade extends Command
 			function sleep(time) {
 				return new Promise((resolve) => setTimeout(resolve, time));
 			}
+
+			function WRITECOOKIE(cookie_name, var_to_set=null, var_value=null) {
+				let kb_cookie_get = JSON.parse(Cookies.get(cookie_name));
+
+				if (typeof(kb_cookie_get) == 'undefined') {
+					kb_cookie_get = {};
+				}
+
+				kb_cookie_get[var_to_set] = var_value;
+
+				Cookies.set(cookie_name, JSON.stringify(kb_cookie_get));
+			}
+
+			function READCOOKIE(cookie_name, var_to_set=null) {
+				let kb_cookie_get = JSON.parse(Cookies.get(cookie_name));
+
+				if (typeof(kb_cookie_get) == 'undefined') {
+					console.log('[KB ERROR]', 'Cookie not found');
+					return;
+				}
+
+				if (var_to_set == null) {
+					return kb_cookie_get;
+				}
+
+				if (typeof(kb_cookie_get[var_to_set]) == 'undefined') {
+					return null;
+				}
+				
+				return kb_cookie_get[var_to_set];
+			}
 		</script>";
 	}
 

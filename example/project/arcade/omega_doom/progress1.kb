@@ -25,39 +25,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-1");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-2',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -71,6 +68,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-1");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-2"
@@ -105,39 +105,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-2");
-                END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-3',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -151,6 +148,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-2");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-3"
@@ -185,39 +185,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-3");
-                END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -231,6 +228,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-3");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-4"
@@ -259,24 +259,6 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    KEYBOARDEVENT "c"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-4" && !speaking THEN
-                                GOTO progressSpeech("game-progress-5")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "!p && !q"
-                        IF current_process="game-progress-4" && in_game && user_input && !speaking THEN
-                            GOTO invalidButton("I need to be selecting communications.")
-                        END IF
-                    KEYBOARDEVENT "q"
-                        IF current_process="game-progress-4" && in_game && user_input && !speaking THEN
-                            GOTO saveAndQuit()
-                        END IF
-                    END KEYBOARDEVENT
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-4");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -318,6 +300,24 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
+                KEYBOARDEVENT "c"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-4" && !speaking THEN
+                            GOTO progressSpeech("game-progress-5")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_progress="game-progress-4" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to be selecting communications.")
+                    END IF
+                KEYBOARDEVENT "q"
+                    IF game_progress="game-progress-4" && in_game && user_input && !speaking THEN
+                        GOTO saveAndQuit()
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-4");
+                END JAVASCRIPT
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
         END WINDOW
@@ -348,20 +348,6 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    KEYBOARDEVENT "1"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-5" && !speaking THEN
-                                GOTO progressSpeech("game-progress-6")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "!p && !q"
-                        IF current_process="game-progress-5" && in_game && user_input && !speaking THEN
-                            GOTO invalidButton("I need to be hailing the outpost.")
-                        END IF
-                    END KEYBOARDEVENT
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-5");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -379,6 +365,20 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
+                KEYBOARDEVENT "1"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-5" && !speaking THEN
+                            GOTO progressSpeech("game-progress-6")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_progress="game-progress-5" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to be hailing the outpost.")
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-5");
+                END JAVASCRIPT
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
         END WINDOW
@@ -415,15 +415,12 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-6");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-7',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
@@ -437,6 +434,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-6");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-7"
@@ -471,15 +471,12 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-7");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-8',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
@@ -493,6 +490,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-7");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-8"
@@ -527,15 +527,12 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-8");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-9',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
@@ -549,6 +546,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-8");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-9"
@@ -583,15 +583,12 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-9");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-10',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
@@ -605,6 +602,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-9");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-10"
@@ -639,15 +639,12 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-10");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-11',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
@@ -661,6 +658,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-10");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-11"
@@ -695,39 +695,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-11");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -741,6 +738,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-11");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-12"
@@ -769,20 +769,6 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    KEYBOARDEVENT "s"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-12" && !speaking THEN
-                                GOTO progressSpeech("game-progress-13")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "!p && !q"
-                        IF current_process="game-progress-12" && in_game && user_input && !speaking THEN
-                            GOTO invalidButton("I need to be selecting sensors.")
-                        END IF
-                    END KEYBOARDEVENT
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-12");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -824,6 +810,20 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
+                KEYBOARDEVENT "s"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-12" && !speaking THEN
+                            GOTO progressSpeech("game-progress-13")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_progress="game-progress-12" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to be selecting sensors.")
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-12");
+                END JAVASCRIPT
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
         END WINDOW
@@ -854,26 +854,6 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    KEYBOARDEVENT "1"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-13" && !speaking THEN
-                                GOTO progressSpeech("game-progress-15")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "2"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-13" && !speaking THEN
-                                GOTO progressSpeech("game-progress-14")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "!p && !q"
-                        IF current_process="game-progress-13" && in_game && user_input && !speaking THEN
-                            GOTO invalidButton("I need to be scanning the outpost.")
-                        END IF
-                    END KEYBOARDEVENT
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-13");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -897,6 +877,26 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
+                KEYBOARDEVENT "1"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-13" && !speaking THEN
+                            GOTO progressSpeech("game-progress-15")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "2"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-13" && !speaking THEN
+                            GOTO progressSpeech("game-progress-14")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_progress="game-progress-13" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to be scanning the outpost.")
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-13");
+                END JAVASCRIPT
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
         END WINDOW
@@ -927,26 +927,6 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    KEYBOARDEVENT "1"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-14" && !speaking THEN
-                                GOTO progressSpeech("game-progress-15")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "2"
-                        IFE controls_locked THEN
-                            IF in_game && current_process="game-progress-14" && !speaking THEN
-                                GOTO progressSpeech("game-progress-14")
-                            END IF
-                        END IF
-                    KEYBOARDEVENT "!p && !q"
-                        IF current_process="game-progress-14" && in_game && user_input && !speaking THEN
-                            GOTO invalidButton("I need to be scanning the outpost.")
-                        END IF
-                    END KEYBOARDEVENT
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-14");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -970,6 +950,26 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
+                KEYBOARDEVENT "1"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-14" && !speaking THEN
+                            GOTO progressSpeech("game-progress-15")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "2"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-14" && !speaking THEN
+                            GOTO progressSpeech("game-progress-14")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_progress="game-progress-14" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to be scanning the outpost.")
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-14");
+                END JAVASCRIPT
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
         END WINDOW
@@ -1006,21 +1006,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-15");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1034,6 +1031,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-15");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-16"
@@ -1068,21 +1068,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-16");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1096,6 +1093,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-16");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-17"
@@ -1130,21 +1130,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-17");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1158,6 +1155,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-17");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-18"
@@ -1192,21 +1192,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-18");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1220,6 +1217,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-18");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-19"
@@ -1254,21 +1254,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-19");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1282,6 +1279,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-19");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-20"
@@ -1316,21 +1316,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-20");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1344,6 +1341,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-20");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-21"
@@ -1378,21 +1378,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-21");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1406,6 +1403,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-21");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-22"
@@ -1440,21 +1440,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-22");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1468,6 +1465,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-22");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-23"
@@ -1502,21 +1502,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-23");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1530,6 +1527,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-23");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-24"
@@ -1564,21 +1564,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-24");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1592,6 +1589,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-24");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-25"
@@ -1626,21 +1626,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-25");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1654,6 +1651,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-25");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-26"
@@ -1688,21 +1688,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-26");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1716,6 +1713,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-26");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-27"
@@ -1750,21 +1750,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-27");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1778,6 +1775,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-27");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-28"
@@ -1812,21 +1812,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-28");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1840,6 +1837,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-28");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-29"
@@ -1874,21 +1874,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-29");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1902,6 +1899,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-29");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-30"
@@ -1936,22 +1936,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-30");
-                        ship_status_trigger.push(["game-progress-30", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -1965,6 +1961,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-30");
+                ship_status_trigger.push(["game-progress-30", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-31"
@@ -1999,22 +1999,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-31");
-                        ship_status_trigger.push(["game-progress-31", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -2028,6 +2024,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-31");
+                ship_status_trigger.push(["game-progress-31", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-32"
@@ -2062,22 +2062,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-32");
-                        ship_status_trigger.push(["game-progress-32", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -2091,6 +2087,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-32");
+                ship_status_trigger.push(["game-progress-32", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-33"
@@ -2125,23 +2125,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-33");
-                        save_on=["game-progress-33", "progress2"];
-                        ship_status_trigger.push(["game-progress-33", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"saveAndQuit(event, 'progress2')" 
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the Outpost 3366", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "2","button_key"
                     PRINT "]", "button_key_end" 
@@ -2155,6 +2150,11 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-33");
+                save_on=["game-progress-33", "progress2"];
+                ship_status_trigger.push(["game-progress-33", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
 END WINDOW

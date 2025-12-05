@@ -66,18 +66,18 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "c"
                     IFE controls_locked THEN
-                        IF in_game && current_process="game-progress-1" && !speaking THEN
+                        IF in_game && game_progress="game-progress-1" && !speaking THEN
                             GOTO progressSpeech("game-progress-2")
                         END IF
                     END IF
                 KEYBOARDEVENT "n"
                     IFE controls_locked THEN
-                        IF in_game && current_process="game-progress-1" && !speaking THEN
+                        IF in_game && game_progress="game-progress-1" && !speaking THEN
                             GOTO progressSpeech("game-progress-4")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF current_process="game-progress-1" && in_game && user_input && !speaking THEN
+                    IF game_progress="game-progress-1" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be selecting one of the crew.")
                     END IF
                 END KEYBOARDEVENT
@@ -153,7 +153,7 @@ WINDOW "game-window", "progress"
                 KEYBOARDEVENT "b"
                     GOTO userInput()
                     IFE controls_locked THEN
-                        IF current_process="game-progress-2" && in_game && !speaking THEN
+                        IF game_progress="game-progress-2" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-1")
                         END IF
                     END IF
@@ -224,7 +224,7 @@ WINDOW "game-window", "progress"
                 KEYBOARDEVENT "b"
                     GOTO userInput()
                     IFE controls_locked THEN
-                        IF current_process="game-progress-3" && in_game && !speaking THEN
+                        IF game_progress="game-progress-3" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-1")
                         END IF
                     END IF
@@ -295,21 +295,21 @@ WINDOW "game-window", "progress"
                 KEYBOARDEVENT "1"
                     GOTO userInput()
                     IFE controls_locked THEN
-                        IF current_process="game-progress-4" && in_game && !speaking THEN
+                        IF game_progress="game-progress-4" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-5")
                         END IF
                     END IF
                 KEYBOARDEVENT "2"
                     GOTO userInput()
                     IFE controls_locked THEN
-                        IF current_process="game-progress-4" && in_game && !speaking THEN
+                        IF game_progress="game-progress-4" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-7")
                         END IF
                     END IF
                 KEYBOARDEVENT "b"
                     GOTO userInput()
                     IFE controls_locked THEN
-                        IF current_process="game-progress-4" && in_game && !speaking THEN
+                        IF game_progress="game-progress-4" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-1")
                         END IF
                     END IF

@@ -333,7 +333,10 @@ FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shie
     END DIV
 END FUNCTION
 
-ADEF current_process$="game-progress-1"
+INITCOOKIE "kb_OMEGA"
+
+ADEF story_progress$="intro"
+ADEF game_progress$="game-progress-1"
 ADEF loading%=1
 ADEF in_game%=0
 ADEF controls_locked%=1
@@ -396,12 +399,14 @@ AFUNCTION "startNewGame"
         $("#omega-doom-intro").fadeOut(
             2000,
             () => {
+                game_progress = "game-progress-1";
+                progressSpeech(event, game_progress, null, 1);
                 $("#omega-doom-game").fadeIn(
                     2000,
                     () => {
                         $("#btn_start .button-message").removeClass("selected");
                         in_game = 1;
-                        progressSpeech(event, current_process);
+                        progressSpeech(event, game_progress);
                     }
                 );
             }
@@ -416,14 +421,14 @@ AFUNCTION "continueGame"
     $("#omega-doom-intro").fadeOut(
         2000,
         () => {
-            progressSpeech(event, current_process, null, 1);
+            progressSpeech(event, game_progress, null, 1);
             $("#omega-doom-game").fadeIn(
                 2000,
                 () => {
                     $("#btn_continue .button-message").removeClass("selected");
                     in_game = 1;
                     controls_locked=0;
-                    progressSpeech(event, current_process);
+                    progressSpeech(event, game_progress);
                 }
             );
         }
@@ -431,14 +436,14 @@ AFUNCTION "continueGame"
 END AFUNCTION
 
 AFUNCTION "invalidButton", "speech"
-    $("#" + current_process + " .original").html(speech);
-    progressSpeech(event, current_process, null);
+    $("#" + game_progress + " .original").html(speech);
+    progressSpeech(event, game_progress, null);
 END AFUNCTION
 
 AFUNCTION "shipStatus"
 if (ship_status_trigger.length) {
     ship_status_trigger.forEach((func_call, index) => {
-        if (func_call[0] == current_process) {
+        if (func_call[0] == game_progress) {
             $("body").addClass("alert-" + func_call[1]);
             return;
         }
@@ -450,9 +455,9 @@ AFUNCTION "userContinue"
 var user_continue_set=0;
 if (user_continue.length) {
     user_continue.forEach((goto, index) => {
-        if (goto[0] == current_process && !user_continue_set) {
-            //console.log(goto[0], current_process, goto[1]);
-            current_process = goto[1];
+        if (goto[0] == game_progress && !user_continue_set) {
+            //console.log(goto[0], game_progress, goto[1]);
+            game_progress = goto[1];
             user_continue_set=1;
             return;
         }
@@ -464,9 +469,14 @@ END AFUNCTION
 AFUNCTION "saveAndQuit", "progress=null"
     console.log("Saving", progress);
     $("#intro-controls-buttons").css("display", "none");
+
+    WRITECOOKIE("kb_OMEGA", "story_progress", (progress ? progress : story_progress));
+    
     if (progress) {
+        WRITECOOKIE("kb_OMEGA", "game_progress", "game-progress-1");
         window.location.href = "/arcade/omega-doom?progress=" + progress;
     } else {
+        WRITECOOKIE("kb_OMEGA", "game_progress", game_progress);
         $("#omega-doom-game").fadeOut(
             2000,
             () => {
@@ -475,6 +485,9 @@ AFUNCTION "saveAndQuit", "progress=null"
                     () => {
                         in_game = 0;
                         controls_locked=0;
+                        if (READCOOKIE("kb_OMEGA", "story_progress")) {
+                            $("#btn_continue").show();
+                        }
                         showIntroButtons(event);
                     }
                 );
@@ -488,16 +501,16 @@ ASYNCFUNCTION "progressSpeech", "next_id", "prev_id", "blank_text=0"
     shipStatus(event);
 
     if (prev_id) {
-        current_process = prev_id;
+        game_progress = prev_id;
     } else if (next_id) {
-        current_process = next_id;
+        game_progress = next_id;
     }
 
-    //console.log("progressSpeech", current_process);
+    //console.log("progressSpeech", game_progress);
 
-    if (user_input_enabled.includes(current_process)) {
+    if (user_input_enabled.includes(game_progress)) {
         user_input = 1;
-    } else if (user_input_disabled.includes(current_process)) {
+    } else if (user_input_disabled.includes(game_progress)) {
         user_input = 0;
     }
 
@@ -506,15 +519,15 @@ ASYNCFUNCTION "progressSpeech", "next_id", "prev_id", "blank_text=0"
     $("#omega-doom .btn-previous .button-message").removeClass("selected");
     
     $("#omega-doom .progress .game-progress").hide();
-    $("#omega-doom #" + current_process + " .speech p span").html("");
-    $("#omega-doom .progress #" + current_process).css("display", "flex");
+    $("#omega-doom #" + game_progress + " .speech p span").html("");
+    $("#omega-doom .progress #" + game_progress).css("display", "flex");
 
     if (!blank_text) {
-        speech_text = $("#omega-doom #" + current_process + " .original").html();
+        speech_text = $("#omega-doom #" + game_progress + " .original").html();
         if (speech_text) {
             var iLoop=0;
             while (typeof(speech_text[iLoop]) != "undefined") {
-                $("#omega-doom #" + current_process + " .speech p span").append(speech_text[iLoop]);
+                $("#omega-doom #" + game_progress + " .speech p span").append(speech_text[iLoop]);
                 await sleep(10);
                 iLoop++;
             }
@@ -524,29 +537,29 @@ ASYNCFUNCTION "progressSpeech", "next_id", "prev_id", "blank_text=0"
 END ASYNCFUNCTION
 
 AFUNCTION "nextProgress", "animation=null"
-    if (save_on[0] == current_process) {
+    if (save_on[0] == game_progress) {
         saveAndQuit(event, save_on[1]);
         return;
     }
 
     speech_text = "";
-    $("#" + current_process + " .btn-continue .button-message").addClass("selected");
+    $("#" + game_progress + " .btn-continue .button-message").addClass("selected");
 
     if (!userContinue(event)) {
-        var splits = current_process.split("-");
-        current_process = "";
+        var splits = game_progress.split("-");
+        game_progress = "";
         splits.forEach((str) => {
             if (parseInt(str)) {
-                current_process += (parseInt(str)+1)
+                game_progress += (parseInt(str)+1)
             } else {
-                current_process += str + "-"
+                game_progress += str + "-"
             }
         });
     }
 
     if (!animation && animation_trigger.length) {
         animation_trigger.forEach((func_call, index) => {
-            if (func_call[0] == current_process) {
+            if (func_call[0] == game_progress) {
                 animation = func_call[1];
                 return;
             }
@@ -555,34 +568,34 @@ AFUNCTION "nextProgress", "animation=null"
 
     if (animation) {
         $("#omega-doom .progress .game-progress").hide();
-        $("#omega-doom .progress #" + current_process).css("display", "flex");
+        $("#omega-doom .progress #" + game_progress).css("display", "flex");
         window[animation](event);
         shipStatus(event);
     } else {
-        progressSpeech(event, current_process, null, user_input);
+        progressSpeech(event, game_progress, null, user_input);
     }
 END AFUNCTION
 
 AFUNCTION "prevProgress", "animation=null"
     speech_text = "";
 
-    $("#" + current_process + " .btn-continue .button-message").addClass("selected");
+    $("#" + game_progress + " .btn-continue .button-message").addClass("selected");
 
     if (!userContinue(event)) {
-        var splits = current_process.split("-");
-        current_process = "";
+        var splits = game_progress.split("-");
+        game_progress = "";
         splits.forEach((str) => {
             if (parseInt(str)) {
-                current_process += (parseInt(str)-1)
+                game_progress += (parseInt(str)-1)
             } else {
-                current_process += str + "-"
+                game_progress += str + "-"
             }
         });
     }
     
     if (!animation && animation_trigger.length) {
         animation_trigger.forEach((func_call, index) => {
-            if (func_call[0] == current_process) {
+            if (func_call[0] == game_progress) {
                 animation = func_call[1];
                 return;
             }
@@ -591,11 +604,11 @@ AFUNCTION "prevProgress", "animation=null"
 
     if (animation) {
         $("#omega-doom .progress .game-progress").hide();
-        $("#omega-doom .progress #" + current_process).css("display", "flex");
+        $("#omega-doom .progress #" + game_progress).css("display", "flex");
         window[animation](event);
         shipStatus(event);
     } else {
-        progressSpeech(event, null, current_process, user_input);
+        progressSpeech(event, null, game_progress, user_input);
     }
 END AFUNCTION
 
@@ -606,9 +619,9 @@ AFUNCTION "showIntroButtons"
 END AFUNCTION
 
 AFUNCTION "userInput"
-    if (user_input_enabled.includes(current_process)) {
+    if (user_input_enabled.includes(game_progress)) {
         user_input = 1;
-    } else if (user_input_disabled.includes(current_process)) {
+    } else if (user_input_disabled.includes(game_progress)) {
         user_input = 0;
     }
 END AFUNCTION
@@ -650,6 +663,17 @@ KEYBOARDEVENT "q"
         GOTO saveAndQuit()
     END IF
 END KEYBOARDEVENT
+
+JAVASCRIPT
+var cookie_progress = READCOOKIE("kb_OMEGA");
+
+if (cookie_progress) {
+    story_progress = cookie_progress.story_progress;
+    game_progress = cookie_progress.game_progress;
+} else {
+    $("#btn_continue").hide();
+}
+END JAVASCRIPT
 
 SCREEN "omega-doom-game"
     IFE _GET("progress") THEN

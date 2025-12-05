@@ -467,12 +467,12 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "e"
                     IFE controls_locked THEN
-                        IF in_game && current_process="game-progress-7" && !speaking THEN
+                        IF in_game && game_progress="game-progress-7" && !speaking THEN
                             GOTO nextProgress()
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF current_process="game-progress-7" && in_game && user_input && !speaking THEN
+                    IF game_progress="game-progress-7" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to select engineering.")
                     END IF
                 END KEYBOARDEVENT
@@ -541,12 +541,12 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "1"
                     IFE controls_locked THEN
-                        IF in_game && current_process="game-progress-8" && !speaking THEN
+                        IF in_game && game_progress="game-progress-8" && !speaking THEN
                             GOTO nextProgress()
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF current_process="game-progress-8" && in_game && user_input && !speaking THEN
+                    IF game_progress="game-progress-8" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to ask for a status report.")
                     END IF
                 END KEYBOARDEVENT
