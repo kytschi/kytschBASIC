@@ -468,9 +468,10 @@ END AFUNCTION
 
 AFUNCTION "saveAndQuit", "progress=null"
     console.log("Saving", progress);
+    $("button.btn-save-quit .button-message").addClass("selected");
     $("#intro-controls-buttons").css("display", "none");
 
-    WRITECOOKIE("kb_OMEGA", "story_progress", (progress ? progress : story_progress));
+    CREATECOOKIE("kb_OMEGA", {"story_progress": (progress ? progress : story_progress), "game_progress": game_progress});
     
     if (progress) {
         WRITECOOKIE("kb_OMEGA", "game_progress", "game-progress-1");
@@ -480,6 +481,7 @@ AFUNCTION "saveAndQuit", "progress=null"
         $("#omega-doom-game").fadeOut(
             2000,
             () => {
+                $("button.btn-save-quit .button-message").removeClass("selected");
                 $("#omega-doom-intro").fadeIn(
                     2000,
                     () => {

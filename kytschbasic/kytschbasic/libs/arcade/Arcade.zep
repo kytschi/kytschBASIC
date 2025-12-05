@@ -51,8 +51,15 @@ class Arcade extends Command
 				return new Promise((resolve) => setTimeout(resolve, time));
 			}
 
+			function CREATECOOKIE(cookie_name, data) {
+				Cookies.set(cookie_name, JSON.stringify(data));
+			}
+
 			function WRITECOOKIE(cookie_name, var_to_set=null, var_value=null) {
-				let kb_cookie_get = JSON.parse(Cookies.get(cookie_name));
+				let kb_cookie_get = READCOOKIE(cookie_name);
+				if (kb_cookie_get == null) {
+					return null;
+				}
 
 				if (typeof(kb_cookie_get) == 'undefined') {
 					kb_cookie_get = {};
@@ -64,12 +71,14 @@ class Arcade extends Command
 			}
 
 			function READCOOKIE(cookie_name, var_to_set=null) {
-				let kb_cookie_get = JSON.parse(Cookies.get(cookie_name));
+				let kb_cookie_get = Cookies.get(cookie_name);
 
 				if (typeof(kb_cookie_get) == 'undefined') {
 					console.log('[KB ERROR]', 'Cookie not found');
-					return;
+					return null;
 				}
+
+				kb_cookie_get = JSON.parse(kb_cookie_get);
 
 				if (var_to_set == null) {
 					return kb_cookie_get;

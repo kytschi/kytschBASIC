@@ -60,7 +60,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Engineering", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -117,7 +117,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -174,7 +174,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -225,13 +225,13 @@ WINDOW "game-window", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-4',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -246,7 +246,7 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-5"
-        PRINT "...we are downloading what we can from their computers...","original hide"
+        PRINT "...we are downloading what we can from their computers.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
@@ -288,7 +288,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -345,7 +345,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -402,7 +402,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -448,22 +448,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-8");
-                        ship_status_trigger.push(["game-progress-8", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-9',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -471,6 +467,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-8");
+                ship_status_trigger.push(["game-progress-8", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-9"
@@ -505,22 +505,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-9");
-                        ship_status_trigger.push(["game-progress-9", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-10',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -528,6 +524,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-9");
+                ship_status_trigger.push(["game-progress-9", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-10"
@@ -562,22 +562,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-10");
-                        ship_status_trigger.push(["game-progress-10", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-11',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -585,6 +581,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-10");
+                ship_status_trigger.push(["game-progress-10", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-11"
@@ -619,22 +619,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-11");
-                        ship_status_trigger.push(["game-progress-11", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-12',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -642,6 +638,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-11");
+                ship_status_trigger.push(["game-progress-11", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-12"
@@ -676,22 +676,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-12");
-                        ship_status_trigger.push(["game-progress-12", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-13',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -699,6 +695,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-12");
+                ship_status_trigger.push(["game-progress-12", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-13"
@@ -733,22 +733,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-13");
-                        ship_status_trigger.push(["game-progress-13", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-14',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -756,6 +752,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-13");
+                ship_status_trigger.push(["game-progress-13", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-14"
@@ -790,22 +790,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-14");
-                        ship_status_trigger.push(["game-progress-14", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-15',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -813,10 +809,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-14");
+                ship_status_trigger.push(["game-progress-14", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-15"
-        PRINT "Damn it John! Why did you have to go and download that data?!","original hide"
+        PRINT "John, why did you have to go and download that data!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
@@ -847,22 +847,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-15");
-                        ship_status_trigger.push(["game-progress-15", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-16',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -870,10 +866,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-15");
+                ship_status_trigger.push(["game-progress-15", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-16"
-        PRINT "Rich? Am I missing something here?","original hide"
+        PRINT "Rich. Am I missing something here?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
@@ -904,22 +904,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-16");
-                        ship_status_trigger.push(["game-progress-16", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-17',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -927,6 +923,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-16");
+                ship_status_trigger.push(["game-progress-16", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-17"
@@ -961,22 +961,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-17");
-                        ship_status_trigger.push(["game-progress-17", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-18',null)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -984,6 +980,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-17");
+                ship_status_trigger.push(["game-progress-17", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-18"
@@ -1018,22 +1018,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-18");
-                        ship_status_trigger.push(["game-progress-18", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event,'omegaDoomBlink')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1041,6 +1037,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-18");
+                ship_status_trigger.push(["game-progress-18", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-19"
@@ -1125,22 +1125,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-20");
-                        ship_status_trigger.push(["game-progress-20", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1148,6 +1144,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-20");
+                ship_status_trigger.push(["game-progress-20", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-21"
@@ -1182,22 +1182,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-21");
-                        ship_status_trigger.push(["game-progress-21", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1205,6 +1201,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-21");
+                ship_status_trigger.push(["game-progress-21", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-22"
@@ -1239,22 +1239,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-22");
-                        ship_status_trigger.push(["game-progress-22", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1262,6 +1258,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-22");
+                ship_status_trigger.push(["game-progress-22", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-23"
@@ -1296,22 +1296,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-23");
-                        ship_status_trigger.push(["game-progress-23", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1319,6 +1315,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-23");
+                ship_status_trigger.push(["game-progress-23", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-24"
@@ -1353,22 +1353,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-24");
-                        ship_status_trigger.push(["game-progress-24", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1376,6 +1372,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-24");
+                ship_status_trigger.push(["game-progress-24", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-25"
@@ -1410,22 +1410,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-25");
-                        ship_status_trigger.push(["game-progress-25", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1433,6 +1429,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+             JAVASCRIPT
+                user_input_disabled.push("game-progress-25");
+                ship_status_trigger.push(["game-progress-25", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-26"
@@ -1467,22 +1467,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-26");
-                        ship_status_trigger.push(["game-progress-26", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1490,6 +1486,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-26");
+                ship_status_trigger.push(["game-progress-26", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-27"
@@ -1524,23 +1524,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-27");
-                        save_on=["game-progress-27", "progress3"];
-                        ship_status_trigger.push(["game-progress-27", "yellow"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"saveAndQuit(event, 'progress3')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Hail Federation Command", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event)" 
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
@@ -1548,6 +1543,11 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-27");
+                save_on=["game-progress-27", "progress3"];
+                ship_status_trigger.push(["game-progress-27", "yellow"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
 END WINDOW
