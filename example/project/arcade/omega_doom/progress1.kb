@@ -1099,7 +1099,7 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-17"
-        PRINT "The outpost's nuclear core is showing extensive damage...","original hide"
+        PRINT "The outpost's nuclear power core is showing extensive damage...","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
@@ -1471,7 +1471,7 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-23"
-        PRINT "What is it?!","original hide"
+        PRINT "Report Mr Simons?!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
@@ -1657,7 +1657,7 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-26"
-        PRINT "Cloaked ship?","original hide"
+        PRINT "A cloaked ship?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
@@ -1719,7 +1719,7 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-27"
-        PRINT "Doubtful.","original hide"
+        PRINT "Doubtful Captain.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"

@@ -142,7 +142,6 @@ class Variables
 				let cleaned = strrev(arg);
 				let cleaned = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\)/", strrev("|||KBBRACKETEND|||"), cleaned, 1);
 				let arg = strrev(cleaned);
-				
 			}
 
 			//Grab all array elements.
@@ -160,7 +159,7 @@ class Variables
 					if (find != null) {
 						let cleaned = find;
 					} else {
-						let find = display->parse(cleaned);
+						let find = display->parse(line, cleaned, []);
 						if (find != null) {
 							let cleaned = find;
 						} else {
