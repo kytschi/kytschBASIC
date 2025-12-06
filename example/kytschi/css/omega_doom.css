@@ -78,6 +78,11 @@ html, body {
     justify-content: center;
 }
 
+#omega-doom-gameover .gfx-label {
+    text-align: center;
+    color: #00ff3c;
+}
+
 #omega-doom-intro #intro-controls-buttons {
     display: none;
     flex-direction: column;

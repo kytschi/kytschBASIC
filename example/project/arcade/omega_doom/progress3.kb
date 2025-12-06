@@ -25,40 +25,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-1");
-                        ship_status_trigger.push(["game-progress-1", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -72,6 +68,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-1");
+                ship_status_trigger.push(["game-progress-1", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-2"
@@ -106,41 +106,37 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-2");
-                        ship_status_trigger.push(["game-progress-2", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
                 DIV "controls-buttons"
-                    BUTTON ,,,,,"nextProgress(event)"
+                    BUTTON ,"locked"
                         PRINT "["
                         PRINT "c","button_key"
                         PRINT "]", "button_key_end" 
                         PRINT "Communications", "button-message"
                     END BUTTON
-                    BUTTON ,,,,,"nextProgress(event)"
+                    BUTTON ,"locked"
                         PRINT "["
                         PRINT "n","button_key"
                         PRINT "]", "button_key_end" 
                         PRINT "Navigation", "button-message"
                     END BUTTON
-                    BUTTON ,,,,,"nextProgress(event)"
+                    BUTTON ,"locked"
                         PRINT "["
                         PRINT "s","button_key"
                         PRINT "]", "button_key_end" 
                         PRINT "Sensors", "button-message"
                     END BUTTON
-                    BUTTON ,,,,,"nextProgress(event)"
+                    BUTTON ,"locked"
                         PRINT "["
                         PRINT "w","button_key"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Weapons", "button-message"
                     END BUTTON
-                    BUTTON ,,,,,"nextProgress(event)"
+                    BUTTON ,"locked"
                         PRINT "["
                         PRINT "e","button_key"
                         PRINT "]", "button_key_end" 
@@ -155,6 +151,10 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-2");
+                ship_status_trigger.push(["game-progress-2", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-3"
@@ -189,39 +189,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-3");
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -235,6 +232,9 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-3");
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-4"
@@ -306,40 +306,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-5");
-                        ship_status_trigger.push(["game-progress-5", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -353,6 +349,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-5");
+                ship_status_trigger.push(["game-progress-5", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-6"
@@ -414,46 +414,36 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
-                        PRINT "["
-                        PRINT "enter","button_key"
-                        PRINT "]", "button_key_end_small" 
-                        PRINT "Continue", "button-message"
-                    END BUTTON
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-7");
-                        ship_status_trigger.push(["game-progress-7", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,,,,,"invalidButton('I need to select engineering.')" 
                     PRINT "["
                     PRINT "c","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Communications", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,,,,,"invalidButton('I need to select engineering.')" 
                     PRINT "["
                     PRINT "n","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Navigation", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,,,,,"invalidButton('I need to select engineering.')" 
                     PRINT "["
                     PRINT "s","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,,,,,"invalidButton('I need to select engineering.')" 
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
                     PRINT "Weapons", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,,,,,"nextProgress(event)" 
                     PRINT "["
                     PRINT "e","button_key"
                     PRINT "]", "button_key_end" 
@@ -476,12 +466,16 @@ WINDOW "game-window", "progress"
                         GOTO invalidButton("I need to select engineering.")
                     END IF
                 END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-7");
+                    ship_status_trigger.push(["game-progress-7", "red"]);
+                END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-8"
-        PRINT "Cheif, what the status?","original hide"
+        PRINT "Chief, what the status?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -506,16 +500,6 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Previous", "button-message"
                     END BUTTON
-                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
-                        PRINT "["
-                        PRINT "enter","button_key"
-                        PRINT "]", "button_key_end_small" 
-                        PRINT "Continue", "button-message"
-                    END BUTTON
-                    JAVASCRIPT
-                        user_input_enabled.push("game-progress-8");
-                        ship_status_trigger.push(["game-progress-8", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
@@ -550,8 +534,12 @@ WINDOW "game-window", "progress"
                         GOTO invalidButton("I need to ask for a status report.")
                     END IF
                 END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-8");
+                    ship_status_trigger.push(["game-progress-8", "red"]);
+                END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-9"
@@ -586,22 +574,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-9");
-                        ship_status_trigger.push(["game-progress-9", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -614,11 +598,15 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-9");
+                ship_status_trigger.push(["game-progress-9", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-10"
-        PRINT "Whatever that beam was it completely ripped through our shields like butter!","original hide"
+        PRINT "Whatever that beam was it completely ripped through our shields!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -649,22 +637,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-10");
-                        ship_status_trigger.push(["game-progress-10", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -677,11 +661,15 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-10");
+                ship_status_trigger.push(["game-progress-10", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-11"
-        PRINT "They've completely destoryed the FTL drive.","original hide"
+        PRINT "We've took major damage to the core resulting in collapsing the FTL drive field.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -712,22 +700,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-11");
-                        ship_status_trigger.push(["game-progress-11", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -740,11 +724,15 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-11");
+                ship_status_trigger.push(["game-progress-11", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-12"
-        PRINT "Shields took a beating but are holding at 40 percent efficiency.","original hide"
+        PRINT "Shields are failing and life support isn't fairing much better!","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -775,22 +763,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-12");
-                        ship_status_trigger.push(["game-progress-12", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -803,11 +787,15 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-12");
+                ship_status_trigger.push(["game-progress-12", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-13"
-        PRINT "There are reports from all over the ship that systems are offline...","original hide"
+        PRINT "Lifepods?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -818,9 +806,9 @@ WINDOW "game-window", "progress"
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Chief. Peters [SS Liberty]"
+                        PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/peters.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -838,22 +826,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-13");
-                        ship_status_trigger.push(["game-progress-13", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -866,11 +850,15 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-13");
+                ship_status_trigger.push(["game-progress-13", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-14"
-        PRINT "...and in some sections they reporting catastrophic structural damages.","original hide"
+        PRINT "Out of action and in some sections we have catastrophic structural damages.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -901,22 +889,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-14");
-                        ship_status_trigger.push(["game-progress-14", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -929,11 +913,15 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-14");
+                ship_status_trigger.push(["game-progress-14", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-15"
-        PRINT "Most the damage is confined to the port side.","original hide"
+        PRINT "Most the damage is confined to the port (left) side.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -964,22 +952,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-15");
-                        ship_status_trigger.push(["game-progress-15", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -992,7 +976,11 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-15");
+                ship_status_trigger.push(["game-progress-15", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-16"
@@ -1027,22 +1015,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-16");
-                        ship_status_trigger.push(["game-progress-16", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1055,7 +1039,11 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-16");
+                ship_status_trigger.push(["game-progress-16", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-17"
@@ -1090,22 +1078,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-17");
-                        ship_status_trigger.push(["game-progress-17", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1118,7 +1102,11 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 40, "online", "offline", "online", "offline")
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-17");
+                ship_status_trigger.push(["game-progress-17", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-18"
@@ -1153,22 +1141,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-18");
-                        ship_status_trigger.push(["game-progress-18", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1182,6 +1166,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-18");
+                ship_status_trigger.push(["game-progress-18", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-19"
@@ -1216,22 +1204,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-19");
-                        ship_status_trigger.push(["game-progress-19", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1245,6 +1229,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-19");
+                ship_status_trigger.push(["game-progress-19", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-20"
@@ -1279,22 +1267,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-20");
-                        ship_status_trigger.push(["game-progress-20", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1308,10 +1292,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-20");
+                ship_status_trigger.push(["game-progress-20", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-21"
-        PRINT "Yes Cheif?","original hide"
+        PRINT "Yes Chief?","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -1342,22 +1330,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-21");
-                        ship_status_trigger.push(["game-progress-21", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1371,6 +1355,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-21");
+                ship_status_trigger.push(["game-progress-21", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-22"
@@ -1405,22 +1393,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-22");
-                        ship_status_trigger.push(["game-progress-22", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1434,10 +1418,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-22");
+                ship_status_trigger.push(["game-progress-22", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-23"
-        PRINT "...but that'll be our shields all but gone.","original hide"
+        PRINT "...but that'll be our shields gone and I'm unsure the hull will hold up.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -1468,22 +1456,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-23");
-                        ship_status_trigger.push(["game-progress-23", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1497,10 +1481,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-23");
+                ship_status_trigger.push(["game-progress-23", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-24"
-        PRINT "That energy is just too powerful for them.","original hide"
+        PRINT "That energy is just too powerful.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -1531,22 +1519,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-24");
-                        ship_status_trigger.push(["game-progress-24", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1560,10 +1544,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-24");
+                ship_status_trigger.push(["game-progress-24", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-25"
-        PRINT "It's not like a blast from a nuclear core shockwave.","original hide"
+        PRINT "It's not like a blast from a nuclear power core shockwave.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -1594,22 +1582,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-25");
-                        ship_status_trigger.push(["game-progress-25", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1623,6 +1607,10 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-25");
+                ship_status_trigger.push(["game-progress-25", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-26"
@@ -1657,22 +1645,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-26");
-                        ship_status_trigger.push(["game-progress-26", "red"]);
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1686,10 +1670,14 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-26");
+                ship_status_trigger.push(["game-progress-26", "red"]);
+            END JAVASCRIPT
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-27"
-        PRINT "Understood Chief, Abrahams out.","original hide"
+        PRINT "Understood Chief. Abrahams out.","original hide"
         WINDOW ,"visuals"
             DIV "gfx"
                 PRINT "Omega Doom","gfx-label"
@@ -1720,23 +1708,18 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end_small" 
                         PRINT "Continue", "button-message"
                     END BUTTON
-                    JAVASCRIPT
-                        user_input_disabled.push("game-progress-27");
-                        ship_status_trigger.push(["game-progress-27", "red"]);
-                        save_on=["game-progress-27", "progress4"];
-                    END JAVASCRIPT
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"saveAndQuit(event, 'progress4')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "1","button_key"
                     PRINT "]", "button_key_end" 
                     PRINT "Status report", "button-message selected"
                 END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, null, 'game-progress-7')"
+                BUTTON ,"locked"
                     PRINT "["
                     PRINT "b","button_key"
                     PRINT "]", "button_key_end" 
@@ -1750,6 +1733,11 @@ WINDOW "game-window", "progress"
                 END BUTTON
             END DIV
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-27");
+                ship_status_trigger.push(["game-progress-27", "red"]);
+                save_on=["game-progress-27", "progress4"];
+            END JAVASCRIPT
         END WINDOW
     END DIV
 END WINDOW
