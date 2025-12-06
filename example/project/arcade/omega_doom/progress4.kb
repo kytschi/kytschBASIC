@@ -46,7 +46,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Sensors", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"nextProgress(event)"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-26')"
                     PRINT "["
                     PRINT "w","button_key"
                     PRINT "]", "button_key_end_small" 
@@ -80,6 +80,12 @@ WINDOW "game-window", "progress"
                     IFE controls_locked THEN
                         IF in_game && game_progress="game-progress-1" && !speaking THEN
                             GOTO progressSpeech("game-progress-11")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "n"
+                    IFE controls_locked THEN
+                        IF in_game && game_progress="game-progress-1" && !speaking THEN
+                            GOTO progressSpeech("game-progress-26")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
@@ -250,9 +256,9 @@ WINDOW "game-window", "progress"
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Lt. Simons [SS Liberty]"
+                        PRINT "Lt. Cyrus [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -326,9 +332,9 @@ WINDOW "game-window", "progress"
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Lt. Simons [SS Liberty]"
+                        PRINT "Lt. Cyrus [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -397,9 +403,9 @@ WINDOW "game-window", "progress"
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Lt. Simons [SS Liberty]"
+                        PRINT "Lt. Cyrus [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -468,9 +474,9 @@ WINDOW "game-window", "progress"
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Lt. Simons [SS Liberty]"
+                        PRINT "Lt. Cyrus [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -538,9 +544,9 @@ WINDOW "game-window", "progress"
             DIV "text"
                 DIV "character"
                     SWRITE
-                        PRINT "Lt. Simons [SS Liberty]"
+                        PRINT "Lt. Cyrus [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1887,7 +1893,269 @@ WINDOW "game-window", "progress"
             GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
         END WINDOW
     END DIV
+    DIV "game-progress","game-progress-26"
+        PRINT "Yes Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Omega Doom","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-27')"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Omega Doom", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-19')"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Outpost", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-1')"
+                    PRINT "["
+                    PRINT "b","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Back", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "1"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-26" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-27")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "2"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-26" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-19")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "b"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-26" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-1")
+                        END IF
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-26");
+                    ship_status_trigger.push(["game-progress-26", "red"]);
+                END JAVASCRIPT
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-27"
+        PRINT "Targetting the Omega Doom.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Omega Doom","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-28')"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Engines", "button-message"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-28')"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Shields", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-28')"
+                    PRINT "["
+                    PRINT "3","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Sensors", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-28')"
+                    PRINT "["
+                    PRINT "4","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Weapons", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-1')"
+                    PRINT "["
+                    PRINT "b","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Back", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "1"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-27" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-28")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "2"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-27" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-19")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "b"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-27" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-1")
+                        END IF
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-27");
+                    ship_status_trigger.push(["game-progress-27", "red"]);
+                END JAVASCRIPT
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-28"
+        PRINT "Targeting the engines...FIRING!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Omega Doom","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous",,,,"prevProgress(event)"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Engines", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "2","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Shields", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "3","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Sensors", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "4","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Target the Weapons", "button-message selected"
+                END BUTTON
+                BUTTON ,,,,,"progressSpeech(event, 'game-progress-27')"
+                    PRINT "["
+                    PRINT "b","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Back", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit",,,,"saveAndQuit(event)" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "b"
+                    IFE controls_locked THEN
+                        IF game_progress="game-progress-28" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-27")
+                        END IF
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-28");
+                    ship_status_trigger.push(["game-progress-28", "red"]);
+                END JAVASCRIPT
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+        END WINDOW
+    END DIV
 END WINDOW
 JAVASCRIPT
     loading=0;
 END JAVASCRIPT
+AFUNCTION "updateOmegaShip", "var_name", "var_value"
+    game_data[var_name] = var_value;
+    WRITECOOKIE("kb_OMEGA", var_name, var_value);
+END AFUNCTION

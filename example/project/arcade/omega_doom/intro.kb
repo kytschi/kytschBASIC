@@ -1434,12 +1434,12 @@ WINDOW "game-intro", "progress"
                 END BUTTON
                 KEYBOARDEVENT "2"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-24" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-24" && !speaking THEN
                             GOTO progressSpeech("game-progress-25")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-24" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-24" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be selecting the Federation space from the map.")
                     END IF
                 END KEYBOARDEVENT
@@ -1503,12 +1503,12 @@ WINDOW "game-intro", "progress"
             GOTO drawStats("federation", "earth")
             KEYBOARDEVENT "7"
                 IFE controls_locked THEN
-                    IF in_game && game_progress="game-progress-25" && !speaking THEN
+                    IF in_game && game_data.game_progress="game-progress-25" && !speaking THEN
                         GOTO progressSpeech("game-progress-26")
                     END IF
                 END IF
             KEYBOARDEVENT "!p && !q"
-                IF game_progress="game-progress-25" && in_game && user_input && !speaking THEN
+                IF game_data.game_progress="game-progress-25" && in_game && user_input && !speaking THEN
                     GOTO invalidButton("I need to be selecting Outpost 3366 from the map.")
                 END IF
             END KEYBOARDEVENT
@@ -1692,12 +1692,12 @@ WINDOW "game-intro", "progress"
                 END BUTTON
                 KEYBOARDEVENT "e"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-28" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-28" && !speaking THEN
                             GOTO progressSpeech("game-progress-29")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-28" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-28" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to engage the engines.")
                     END IF
                 END KEYBOARDEVENT
@@ -1759,13 +1759,13 @@ WINDOW "game-intro", "progress"
                 END BUTTON
                 KEYBOARDEVENT "f"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-29" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-29" && !speaking THEN
                             GOTO progressSpeech("game-progress-30")
                             GOTO animationWarp()
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-29" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-29" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to engage the FTL drive.")
                     END IF
                 END KEYBOARDEVENT

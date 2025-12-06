@@ -301,7 +301,7 @@ class Parser
 			case "REM":
 				return "";
 			case "ALET":
-				return (new AFunction())->processDef(line, args, true, true, true);
+				return (new AFunction())->processDef(line, args, true, true, this->js);
 			case "SLEEP":
 				if (!this->js) {
 					if (!isset(args[0])) {
