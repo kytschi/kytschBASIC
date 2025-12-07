@@ -98,6 +98,14 @@ END FORM
 						PRINT "CAPTCHA"
 					END LINK
 					PRINT " | "
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEEVENT"
+						PRINT "MOUSEEVENT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/TEXTINPUT"
 						PRINT "TEXTINPUT"
 					END LINK

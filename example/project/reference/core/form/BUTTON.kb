@@ -98,6 +98,14 @@ END SWRITE
 						PRINT "TEXTAREA"
 					END LINK
 					PRINT " | "
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEEVENT"
+						PRINT "MOUSEEVENT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/NUMBERINPUT"
 						PRINT "NUMBERINPUT"
 					END LINK

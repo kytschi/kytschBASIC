@@ -77,6 +77,14 @@ END KEYBOARDEVENT
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEEVENT"
+						PRINT "MOUSEEVENT"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

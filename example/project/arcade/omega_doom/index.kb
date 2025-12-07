@@ -41,190 +41,207 @@ END FUNCTION
 
 FUNCTION "drawMap", file$, flash$=null, selected$=null
     GOTO loadGFX(file$)
-    BUTTON ,"map-text","kazaria-syndicate-map",,,"navigation(event,'kazaria-syndicate')"
-        PRINT "["
-        PRINT "1","button_key"
-        PRINT "]", "button_key_end_small"
-        IF flash$="kazaria-syndicate" THEN
-            PRINT "Kazaria Syndicate", "button-message flash"
-        ELSEIF selected$="kazaria-syndicate" THEN
-            PRINT "Kazaria Syndicate", "button-message selected"
-        ELSE
-            PRINT "Kazaria Syndicate", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","federation-map",,,"navigation(event,'federation')"
-        PRINT "["
-        PRINT "2","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="federation" THEN
-            PRINT "Federation", "button-message flash"
-        ELSEIF selected$="kazaria-syndicate" THEN
-            PRINT "Kazaria Syndicate", "button-message selected"
-        ELSE
-            PRINT "Federation", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","rosia-empire-map",,,"navigation(event,'rosia-empire')"
-        PRINT "["
-        PRINT "3","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="rosia-empire" THEN
-            PRINT "Rosia Empire", "button-message flash"
-        ELSEIF selected$="kazaria-syndicate" THEN
-            PRINT "Kazaria Syndicate", "button-message selected"
-        ELSE
-            PRINT "Rosia Empire", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","aris-republic-map",,,"navigation(event,'aris-republic')"
-        PRINT "["
-        PRINT "4","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="aris-republic" THEN
-            PRINT "Aris Republic", "button-message flash"
-        ELSEIF selected$="aris-republic" THEN
-            PRINT "Aris Republic", "button-message selected"
-        ELSE
-            PRINT "Aris Republic", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","garis-republic-map",,,"navigation(event,'garis-republic')"
-        PRINT "["
-        PRINT "5","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="garis-republic" THEN
-            PRINT "Garis Republic", "button-message flash"
-        ELSEIF selected$="garis-republic" THEN
-            PRINT "Garis Republic", "button-message selected"
-        ELSE
-            PRINT "Garis Republic", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","stovacor-map",,,"navigation(event,'stovacor')"
-        PRINT "["
-        PRINT "6","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="stovacor" THEN
-            PRINT "Stovacor", "button-message flash"
-        ELSEIF selected$="stovacor" THEN
-            PRINT "Stovacor", "button-message selected"
-        ELSE
-            PRINT "Stovacor", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","house-of-moong-map",,,"navigation(event,'house-of-moong')"
-        PRINT "["
-        PRINT "7","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="house-of-moong" THEN
-            PRINT "House of Moong", "button-message flash"
-        ELSEIF selected$="house-of-moong" THEN
-            PRINT "House of Moong", "button-message selected"
-        ELSE
-            PRINT "House of Moong", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","the-void-map",,,"navigation(event,'the-void')"
-        PRINT "["
-        PRINT "8","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="house-of-moong" THEN
-            PRINT "The Void", "button-message flash"
-        ELSEIF selected$="the-void" THEN
-            PRINT "The Void", "button-message selected"
-        ELSE
-            PRINT "The Void", "button-message"
-        END IF
-    END BUTTON
+    MOUSEACTION "navigation('kazaria-syndicate')"
+        BUTTON ,"map-text","kazaria-syndicate-map"
+            PRINT "["
+            PRINT "1","button_key"
+            PRINT "]", "button_key_end_small"
+            IF flash$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message flash"
+            ELSEIF selected$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message selected"
+            ELSE
+                PRINT "Kazaria Syndicate", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('federation')"
+        BUTTON ,"map-text","federation-map"
+            PRINT "["
+            PRINT "2","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="federation" THEN
+                PRINT "Federation", "button-message flash"
+            ELSEIF selected$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message selected"
+            ELSE
+                PRINT "Federation", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('rosia-empire')"
+        BUTTON ,"map-text","rosia-empire-map"
+            PRINT "["
+            PRINT "3","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="rosia-empire" THEN
+                PRINT "Rosia Empire", "button-message flash"
+            ELSEIF selected$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message selected"
+            ELSE
+                PRINT "Rosia Empire", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('aris-republic')"
+        BUTTON ,"map-text","aris-republic-map"
+            PRINT "["
+            PRINT "4","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="aris-republic" THEN
+                PRINT "Aris Republic", "button-message flash"
+            ELSEIF selected$="aris-republic" THEN
+                PRINT "Aris Republic", "button-message selected"
+            ELSE
+                PRINT "Aris Republic", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('garis-republic')"
+        BUTTON ,"map-text","garis-republic-map"
+            PRINT "["
+            PRINT "5","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="garis-republic" THEN
+                PRINT "Garis Republic", "button-message flash"
+            ELSEIF selected$="garis-republic" THEN
+                PRINT "Garis Republic", "button-message selected"
+            ELSE
+                PRINT "Garis Republic", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('stovacor')"
+        BUTTON ,"map-text","stovacor-map"
+            PRINT "["
+            PRINT "6","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="stovacor" THEN
+                PRINT "Stovacor", "button-message flash"
+            ELSEIF selected$="stovacor" THEN
+                PRINT "Stovacor", "button-message selected"
+            ELSE
+                PRINT "Stovacor", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('house-of-moong')"
+        BUTTON ,"map-text","house-of-moong-map"
+            PRINT "["
+            PRINT "7","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="house-of-moong" THEN
+                PRINT "House of Moong", "button-message flash"
+            ELSEIF selected$="house-of-moong" THEN
+                PRINT "House of Moong", "button-message selected"
+            ELSE
+                PRINT "House of Moong", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('the-void')"
+        BUTTON ,"map-text","the-void-map",,,"navigation(event,'the-void')"
+            PRINT "["
+            PRINT "8","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="house-of-moong" THEN
+                PRINT "The Void", "button-message flash"
+            ELSEIF selected$="the-void" THEN
+                PRINT "The Void", "button-message selected"
+            ELSE
+                PRINT "The Void", "button-message"
+            END IF
+        END BUTTON
+    END MOUSEACTION
 END FUNCTION
 
 FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
     GOTO loadGFX(file$)
-    BUTTON ,"map-text","earth-map",,,"navigation(event,'earth')"
-        PRINT "["
-        PRINT "1","button_key"
-        PRINT "]", "button_key_end_small"
-        IF flash$="earth" THEN
-            PRINT "Earth", "button-message flash"
-        ELSEIF selected$="earth" THEN
-            PRINT "Earth", "button-message selected"
-        ELSE
-            PRINT "Earth", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","yidow-prime-map",,,"navigation(event,'yidow-prime')"
-        PRINT "["
-        PRINT "2","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="yidow-prime" THEN
-            PRINT "Yidow Prime", "button-message flash"
-        ELSEIF selected$="yidow-prime" THEN
-            PRINT "Yidow Prime", "button-message selected"
-        ELSE
-            PRINT "Yidow Prime", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","fasbon-prime-map",,,"navigation(event,'fasbon-prime')"
-        PRINT "["
-        PRINT "3","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="fasbon-prime" THEN
-            PRINT "Fasbon Prime", "button-message flash"
-        ELSEIF selected$="fasbon-prime" THEN
-            PRINT "Fasbon Prime", "button-message selected"
-        ELSE
-            PRINT "Fasbon Prime", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","cratol-moon-map",,,"navigation(event,'cratol-moon')"
-        PRINT "["
-        PRINT "4","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="cratol-moon" THEN
-            PRINT "Cratol Moon", "button-message flash"
-        ELSEIF selected$="cratol-moon" THEN
-            PRINT "Cratol Moon", "button-message selected"
-        ELSE
-            PRINT "Cratol Moon", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","furia-prime-map",,,"navigation(event,'furia-prime')"
-        PRINT "["
-        PRINT "5","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="furia-prime" THEN
-            PRINT "Furia Prime", "button-message flash"
-        ELSEIF selected$="furia-prime" THEN
-            PRINT "Furia Prime", "button-message selected"
-        ELSE
-            PRINT "Furia Prime", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","opalus-prime-map",,,"navigation(event,'opalus-prime')"
-        PRINT "["
-        PRINT "6","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="opalus-prime" THEN
-            PRINT "Opalus Prime", "button-message flash"
-        ELSEIF selected$="opalus-prime" THEN
-            PRINT "Opalus Prime", "button-message selected"
-        ELSE
-            PRINT "Opalus Prime", "button-message"
-        END IF
-    END BUTTON
-    BUTTON ,"map-text","outpost-3366-map",,,"navigation(event,'outpost-3366')"
-        PRINT "["
-        PRINT "7","button_key"
-        PRINT "]", "button_key_end_small" 
-        IF flash$="outpost-3366" THEN
-            PRINT "Outpost 3366", "button-message flash"
-        ELSEIF selected$="outpost-3366" THEN
-            PRINT "Outpost 3366", "button-message selected"
-        ELSE
-            PRINT "Outpost 3366", "button-message"
-        END IF
-    END BUTTON
+    MOUSEACTION "navigation('earth')"
+        BUTTON ,"map-text","earth-map"
+            PRINT "["
+            PRINT "1","button_key"
+            PRINT "]", "button_key_end_small"
+            IF flash$="earth" THEN
+                PRINT "Earth", "button-message flash"
+            ELSEIF selected$="earth" THEN
+                PRINT "Earth", "button-message selected"
+            ELSE
+                PRINT "Earth", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('yidow-prime')"
+        BUTTON ,"map-text","yidow-prime-map"
+            PRINT "["
+            PRINT "2","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="yidow-prime" THEN
+                PRINT "Yidow Prime", "button-message flash"
+            ELSEIF selected$="yidow-prime" THEN
+                PRINT "Yidow Prime", "button-message selected"
+            ELSE
+                PRINT "Yidow Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('fasbon-prime')"
+        BUTTON ,"map-text","fasbon-prime-map"
+            PRINT "["
+            PRINT "3","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="fasbon-prime" THEN
+                PRINT "Fasbon Prime", "button-message flash"
+            ELSEIF selected$="fasbon-prime" THEN
+                PRINT "Fasbon Prime", "button-message selected"
+            ELSE
+                PRINT "Fasbon Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('cratol-moon')"
+        BUTTON ,"map-text","cratol-moon-map"
+            PRINT "["
+            PRINT "4","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="cratol-moon" THEN
+                PRINT "Cratol Moon", "button-message flash"
+            ELSEIF selected$="cratol-moon" THEN
+                PRINT "Cratol Moon", "button-message selected"
+            ELSE
+                PRINT "Cratol Moon", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('furia-prime')"
+        BUTTON ,"map-text","furia-prime-map"
+            PRINT "["
+            PRINT "5","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="furia-prime" THEN
+                PRINT "Furia Prime", "button-message flash"
+            ELSEIF selected$="furia-prime" THEN
+                PRINT "Furia Prime", "button-message selected"
+            ELSE
+                PRINT "Furia Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('opalus-prime')"
+        BUTTON ,"map-text","opalus-prime-map"
+            PRINT "["
+            PRINT "6","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="opalus-prime" THEN
+                PRINT "Opalus Prime", "button-message flash"
+            ELSEIF selected$="opalus-prime" THEN
+                PRINT "Opalus Prime", "button-message selected"
+            ELSE
+                PRINT "Opalus Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('outpost-3366')"
+        BUTTON ,"map-text","outpost-3366-map"
+            PRINT "["
+            PRINT "7","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="outpost-3366" THEN
+                PRINT "Outpost 3366", "button-message flash"
+            ELSEIF selected$="outpost-3366" THEN
+                PRINT "Outpost 3366", "button-message selected"
+            ELSE
+                PRINT "Outpost 3366", "button-message"
+            END IF
+        END BUTTON
+    END MOUSEACTION
 END FUNCTION
 
 FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shields_status$="offline", ftl$="online", impulse$="online", weapons$="online"
@@ -387,26 +404,26 @@ AFUNCTION "gameover", "title"
 END AFUNCTION
 
 AFUNCTION "startNewGame"
-    if (!skip_intro) {
-        $("#btn_start .button-message").addClass("selected");
-        $("#omega-doom-intro").fadeOut(
-            2000,
-            () => {
-                game_data.game_progress = "game-progress-1";
-                progressSpeech(event, game_data.game_progress, null, 1);
-                $("#omega-doom-game").fadeIn(
-                    2000,
-                    () => {
-                        $("#btn_start .button-message").removeClass("selected");
-                        in_game = 1;
-                        progressSpeech(event, game_data.game_progress);
-                    }
-                );
+    $("#btn_start .button-message").addClass("selected");
+    $("#omega-doom-intro").fadeOut(
+        2000,
+        () => {
+            if (game_data.story_progress != "intro") {
+                createCookie(event);
+                window.location.href = "/arcade/omega-doom?progress=intro";
+                return;
             }
-        );
-    } else {
-        window.location.href = "/arcade/omega-doom";
-    }
+            progressSpeech(event, game_data.game_progress, null, 1);
+            $("#omega-doom-game").fadeIn(
+                2000,
+                () => {
+                    $("#btn_start .button-message").removeClass("selected");
+                    in_game = 1;
+                    progressSpeech(event, game_data.game_progress);
+                }
+            );
+        }
+    );
 END AFUNCTION
 
 AFUNCTION "continueGame"
@@ -516,6 +533,7 @@ AFUNCTION "saveAndQuit", "progress=null"
 
     if (progress) {
         game_data.story_progress = progress;
+        game_data.game_progress = "game-progress-1";
         WRITECOOKIE("kb_OMEGA", game_data);
         window.location.href = "/arcade/omega-doom?progress=" + progress;
     } else {
@@ -714,14 +732,18 @@ KEYBOARDEVENT "q"
     END IF
 END KEYBOARDEVENT
 
-JAVASCRIPT
-game_data = READCOOKIE("kb_OMEGA");
+MOUSEEVENT ".btn-save-quit"
+    GOTO saveAndQuit()
+END MOUSEEVENT
 
-if (!game_data) {
-    createCookie(event);
-    $("#btn_continue").hide();
-}
-//rebuildGameData(event);
+JAVASCRIPT
+    game_data = READCOOKIE("kb_OMEGA");
+
+    if (!game_data) {
+        createCookie(event);
+        $("#btn_continue").hide();
+    }
+    //rebuildGameData(event);
 END JAVASCRIPT
 IFE _GET("progress") THEN
     JAVASCRIPT

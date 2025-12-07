@@ -1,0 +1,72 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "MOUSEEVENT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "MOUSEEVENT","heading-command basic"
+					LINE BREAK
+					PRINT "CALL FUNCTION, DOUBLE CLICK (optional)","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This will allow you to listen for a mouse click or a mouse double click."
+				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " to enable double click set the argument to "
+					PRINT "true","basic"
+					PRINT "."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+AFUNCTION "popup"
+	alert("Hi there!");
+END AFUNCTION
+MOUSEEVENT "popup()"
+    BUTTON
+        PRINT "Click to see popup"
+    END BUTTON
+END MOUSEEVENT
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				AFUNCTION "popup"
+					alert("Hi there!");
+				END AFUNCTION
+				MOUSEEVENT "popup()"
+					BUTTON
+						PRINT "Click to see popup"
+					END BUTTON
+				END MOUSEEVENT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/AFUNCTION"
+						PRINT "AFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ASYNCFUNCTION"
+						PRINT "ASYNCFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

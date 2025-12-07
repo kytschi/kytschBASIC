@@ -32,7 +32,7 @@ use KytschBASIC\Parsers\Core\Parser;
 
 class Load extends Command
 {
-	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "LOAD":

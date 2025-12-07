@@ -244,9 +244,11 @@ class Variables
 		return preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", line);
 	}
 
-	public function dump(output, bool html = false)
+	public function dump(output, bool html = false, bool in_javascript = false)
 	{
-		if (html) {
+		if (in_javascript) {
+			return "\tconsole.log('" . trim(output, "\"") . "');";
+		} elseif (html) {
 			return "<?php echo \"<pre>\"; var_dump(" . output . "); echo \"</pre>\"; ?>";
 		}
 
@@ -334,7 +336,7 @@ class Variables
 		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
 	}	
 
-	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "ADEF":
@@ -349,7 +351,7 @@ class Variables
 				return this->processDim(line, args);
 			case "DUMP":
 				let args[0] = this->cleanArg("DUMP", args[0]);
-				return this->dump(args[0], true);
+				return this->dump(args[0], true, in_javascript);
 			case "ERASE":
 				return this->processErase(args);
 			case "LET":

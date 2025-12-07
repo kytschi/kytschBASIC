@@ -38,7 +38,7 @@ class Database extends Command
 		return str_replace("]", ")", arg);*/
 	}
 
-	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		var err;
 

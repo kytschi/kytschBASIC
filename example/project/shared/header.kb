@@ -352,6 +352,12 @@ HEADER
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK
+		LINK "/reference/MOUSEACTION#refMOUSEACTION","Find out about the MOUSEACTION command","nav-link",,"refMOUSEACTION"
+			PRINT "MOUSEACTION"
+		END LINK
+		LINK "/reference/MOUSEEVENT#refMOUSEEVENT","Find out about the MOUSEEVENT command","nav-link",,"refMOUSEEVENT"
+			PRINT "MOUSEEVENT"
+		END LINK
 		LINK "/reference/NATSORT#refNATSORT","Find out about the NATSORT command","nav-link",,"refNATSORT"
 			PRINT "NATSORT"
 		END LINK

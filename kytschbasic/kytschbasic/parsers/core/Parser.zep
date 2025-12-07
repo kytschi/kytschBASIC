@@ -41,7 +41,8 @@ class Parser
 	private js = false;
 	private process_as_js = false;
 	private create_function = false;
-	private keyboard_event = false;
+	private input_event = false;
+	private mouse_event = false;
 	private has_case = false;
 	private show_html = false;
 	private timeouts = [];
@@ -239,8 +240,8 @@ class Parser
 				if (!this->cprint) {
 					let this->js = true;
 					let this->process_as_js = true;
-					let output = (new InputEvents())->parse(line, command, args, this->js, this->keyboard_event);
-					let this->keyboard_event = true;
+					let output = (new InputEvents())->parse(line, command, args, this->js, this->input_event);
+					let this->input_event = true;
 					return output;
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
@@ -250,8 +251,49 @@ class Parser
 				if (!this->cprint) {
 					let this->js = false;
 					let this->process_as_js = false;
-					let this->keyboard_event = false;
+					let this->input_event = false;
 					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "MOUSEEVENT":
+				if (!this->cprint) {
+					let this->js = true;
+					let this->process_as_js = true;
+					let output = (new InputEvents())->parse(line, command, args, this->js, this->input_event);
+					let this->input_event = true;
+					return output;
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END MOUSEEVENT":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = false;
+					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "MOUSEACTION":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = args;
+					return "";
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END MOUSEACTION":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = false;
+					return "";
 				}  elseif (this->cprint) {
 					return line . this->newline;
 				}
@@ -390,7 +432,7 @@ class Parser
 		}
 		
 		for parser in this->available {
-			let cleaned = (new {parser}())->parse(line, command, args, this->js);
+			let cleaned = (new {parser}())->parse(line, command, args, this->js, this->input_event);
 			if (cleaned !== null) {
 				let output .= cleaned . this->newline;
 				if (substr(cleaned, strlen(cleaned) - 2, 2) == "?>" && this->show_html) {

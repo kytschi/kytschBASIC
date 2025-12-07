@@ -486,6 +486,14 @@
 		"template": "project/reference/arcade/shapes/LINE.kb"
 	},
 	{
+		"url": "/reference/MOUSEACTION",
+		"template": "project/reference/arcade/events/MOUSEACTION.kb"
+	},
+	{
+		"url": "/reference/MOUSEEVENT",
+		"template": "project/reference/arcade/events/MOUSEEVENT.kb"
+	},
+	{
 		"url": "/reference/RGB",
 		"template": "project/reference/arcade/colors/RGB.kb"
 	},

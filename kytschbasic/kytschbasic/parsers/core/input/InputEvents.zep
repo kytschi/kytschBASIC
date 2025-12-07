@@ -129,19 +129,23 @@ class InputEvents extends Command
 		"¬": 172
 	];
 
-	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
 			case "KEYBOARDEVENT":
 				return this->processKeyboardEvent(args, in_event);
 			case "END KEYBOARDEVENT":
-				return "}});});</script>";
+				return in_event ? "}" : "}});});</script>";
+			case "MOUSEEVENT":
+				return this->processMouseEvent(args, in_event);
+			case "END MOUSEEVENT":
+				return in_event ? "});" : "});});</script>";
 			default:
 				return null;
 		}
 	}
 
-	private function processKeyboardEvent(array args, bool in_event = false)
+	private function processKeyboardEvent(array args, in_event = false)
 	{
 		var output = "<script type='text/javascript'>$(document).ready(function() {$('body').on('keypress', function(event) {",
 			splits, split, cleaned, replace_str;
@@ -186,6 +190,28 @@ class InputEvents extends Command
 			let output .= trim(args[0])  . ") {";
 		} else {
 			throw new Exception("Invalid KEYBOARDEVENT.");
+		}
+
+		return output;
+	}
+
+	private function processMouseEvent(array args, in_event = false)
+	{
+		var output = "<script type='text/javascript'>$(document).ready(function() {",
+			type="click";
+
+		if (in_event) {
+			let output = "";
+		}
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"" && args[1] == "true") {
+			let type = "dblclick";
+		}
+		
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= "$('" . trim(args[0], "\"") . "').on('" . type . "', function(event) {";
+		} else {
+			throw new Exception("Invalid MOUSEEVENT.");
 		}
 
 		return output;

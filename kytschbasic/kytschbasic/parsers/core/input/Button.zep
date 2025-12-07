@@ -29,13 +29,13 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Button extends Command
 {
-	public function parse(string line, string command, array args, bool in_javascript = false, bool in_event = false)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
 			case "BUTTON":
-				return this->processButton(args);
+				return this->processButton(args, false, in_event);
 			case "BUTTONSUBMIT":
-				return this->processButton(args, true);
+				return this->processButton(args, true, in_event);
 			case "END BUTTON":
 				return "</button>";
 			default:
@@ -43,7 +43,7 @@ class Button extends Command
 		}
 	}
 
-	private function processButton(array args, bool submit = false)
+	private function processButton(array args, bool submit = false, in_event = false)
 	{
 		var output = "<?= \"<button", type = "\"button\"";
 		
@@ -74,6 +74,27 @@ class Button extends Command
 
 		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
 			let output .= " onclick=" . this->outputArg(args[5]);
+		} elseif (in_event) {
+			if (isset(in_event[0]) && !empty(in_event[0]) && in_event[0] != "\"\"") {
+				var str, splits = preg_split("/\'[^\']*\'(*SKIP)(*FAIL)|\K\(/", trim(in_event[0], "\""));
+				if (splits) {
+					if (isset(in_event[1]) && !empty(in_event[1]) && in_event[1] != "\"\"" && in_event[1] == "\"true\"") {
+						let output .= " ondblclick=\\\"";
+					} else {
+						let output .= " onclick=\\\"";
+					}
+					let output .= splits[0] . "(event";
+					array_shift(splits);
+					for (str in splits) {
+						if (str != ")") {
+							let output .= ", " . str;
+						} else {
+							let output .= str;
+						}
+					}
+				}
+				let output = rtrim(output, ")") . ");\\\"";
+			}
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
