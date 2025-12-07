@@ -341,6 +341,7 @@ ADEF speech_text$=""
 ADEF user_input%=0
 ADIM user_input_enabled$=()
 ADIM user_input_disabled$=()
+ADEF user_input_enter%=0
 ADEF speaking%=0
 ADIM save_on$=("", "")
 ADIM animation_trigger$=()
@@ -476,20 +477,34 @@ AFUNCTION "userContinue", "continue_selected=1"
     return user_continue_set;
 END AFUNCTION
 
-AFUNCTION "createCookie"
+AFUNCTION "createCookie", "return_data=0"
     var data = {};
     data.story_progress = "intro";
     data.game_progress = "game-progress-1";
     data.ship_shields = 100;
     data.ship_ftl_engines = 1;
     data.ship_impulse_engines = 1;
+    data.ship_tactical = "normal";
     data.omega_shields = 100;
     data.omega_ftl_engines = 1;
     data.omega_impulse_engines = 1;
 
+    if (return_data) {
+        return data;
+    }
+
     CREATECOOKIE("kb_OMEGA", data);
 
     game_data = data;
+END AFUNCTION
+
+AFUNCTION "rebuildGameData"
+    var data = createCookie(event, 1);
+    data.story_progress = "progress4";
+    data.game_progress = "game-progress-1";
+
+    game_data = data;
+    WRITECOOKIE("kb_OMEGA", game_data);
 END AFUNCTION
 
 AFUNCTION "saveAndQuit", "progress=null"
@@ -500,11 +515,11 @@ AFUNCTION "saveAndQuit", "progress=null"
     $("#intro-controls-buttons").css("display", "none");
 
     if (progress) {
-        WRITECOOKIE("kb_OMEGA", "game_progress", "game-progress-1");
-        WRITECOOKIE("kb_OMEGA", "story_progress", progress);
+        game_data.story_progress = progress;
+        WRITECOOKIE("kb_OMEGA", game_data);
         window.location.href = "/arcade/omega-doom?progress=" + progress;
     } else {
-        WRITECOOKIE("kb_OMEGA", "game_progress", game_data.game_progress);
+        WRITECOOKIE("kb_OMEGA", game_data);
         $("#omega-doom-game").fadeOut(
             2000,
             () => {
@@ -623,7 +638,7 @@ AFUNCTION "prevProgress", "animation=null"
     
     if (!animation && animation_trigger.length) {
         animation_trigger.forEach((func_call, index) => {
-            if (func_call[0] == game_progress) {
+            if (func_call[0] == game_data.game_progress) {
                 animation = func_call[1];
                 return;
             }
@@ -654,14 +669,21 @@ AFUNCTION "userInput"
     }
 END AFUNCTION
 
+AFUNCTION "userInputEnter"
+    user_input_enter = 0;
+    if ($("#" + game_data.game_progress + " .btn-continue").html()) {
+        user_input_enter = 1;
+    }
+END AFUNCTION
+
 AFUNCTION "updateOriginal", "progress", "text"
     $("#" + progress + " .original").html(text);
 END AFUNCTION
 
 KEYBOARDEVENT "enter"
-    GOTO userInput()
+    GOTO userInputEnter()
     IFE controls_locked THEN
-        IF in_game && user_input THEN
+        IF in_game && user_input_enter THEN
             GOTO nextProgress()
         END IF
     END IF
@@ -699,6 +721,7 @@ if (!game_data) {
     createCookie(event);
     $("#btn_continue").hide();
 }
+//rebuildGameData(event);
 END JAVASCRIPT
 IFE _GET("progress") THEN
     JAVASCRIPT

@@ -302,12 +302,12 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "c"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-4" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-4" && !speaking THEN
                             GOTO progressSpeech("game-progress-5")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-4" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-4" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be selecting communications.")
                     END IF
                 END KEYBOARDEVENT
@@ -363,12 +363,12 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "1"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-5" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-5" && !speaking THEN
                             GOTO progressSpeech("game-progress-6")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-5" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-5" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be hailing the outpost.")
                     END IF
                 END KEYBOARDEVENT
@@ -808,12 +808,12 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "s"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-12" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-12" && !speaking THEN
                             GOTO progressSpeech("game-progress-13")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-12" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-12" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be selecting sensors.")
                     END IF
                 END KEYBOARDEVENT
@@ -875,18 +875,18 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "1"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-13" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-13" && !speaking THEN
                             GOTO progressSpeech("game-progress-15")
                         END IF
                     END IF
                 KEYBOARDEVENT "2"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-13" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-13" && !speaking THEN
                             GOTO progressSpeech("game-progress-14")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-13" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-13" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be scanning the outpost.")
                     END IF
                 END KEYBOARDEVENT
@@ -948,18 +948,18 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "1"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-14" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-14" && !speaking THEN
                             GOTO progressSpeech("game-progress-15")
                         END IF
                     END IF
                 KEYBOARDEVENT "2"
                     IFE controls_locked THEN
-                        IF in_game && game_progress="game-progress-14" && !speaking THEN
+                        IF in_game && game_data.game_progress="game-progress-14" && !speaking THEN
                             GOTO progressSpeech("game-progress-14")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
-                    IF game_progress="game-progress-14" && in_game && user_input && !speaking THEN
+                    IF game_data.game_progress="game-progress-14" && in_game && user_input && !speaking THEN
                         GOTO invalidButton("I need to be scanning the outpost.")
                     END IF
                 END KEYBOARDEVENT

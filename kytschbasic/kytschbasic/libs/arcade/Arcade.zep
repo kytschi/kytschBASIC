@@ -55,7 +55,7 @@ class Arcade extends Command
 				Cookies.set(cookie_name, JSON.stringify(data));
 			}
 
-			function WRITECOOKIE(cookie_name, var_to_set=null, var_value=null) {
+			function WRITECOOKIE(cookie_name, var_to_set, var_value=null) {
 				let kb_cookie_get = READCOOKIE(cookie_name);
 				if (kb_cookie_get == null) {
 					return null;
@@ -65,7 +65,11 @@ class Arcade extends Command
 					kb_cookie_get = {};
 				}
 
-				kb_cookie_get[var_to_set] = var_value;
+				if (var_value) {
+					kb_cookie_get[var_to_set] = var_value;
+				} else {
+					kb_cookie_get = var_to_set;
+				}
 
 				Cookies.set(cookie_name, JSON.stringify(kb_cookie_get));
 			}
