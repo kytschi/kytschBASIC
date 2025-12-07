@@ -1,0 +1,94 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "KEYBOARDEVENT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "KEYBOARDEVENT","heading-command basic"
+					LINE BREAK
+					PRINT "KEY","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This will allow you to listen for a particular keypress and carry out various actions."
+				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " the "
+					PRINT "enter","basic"
+					PRINT " and "
+					PRINT "return","basic"
+					PRINT " key are represented by the KEY "
+					PRINT "enter","heading-args"
+					PRINT "."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+AFUNCTION "updateText", "text"
+$("#keytext").html(text);
+END AFUNCTION
+PRINT "Press either q or w",,"keytext"
+KEYBOARDEVENT "q || Q"
+	GOTO updateText("q was pressed")
+KEYBOARDEVENT "w || W"
+	GOTO updateText("w was pressed")
+KEYBOARDEVENT "enter"
+	GOTO updateText("enter was pressed")
+KEYBOARDEVENT "!w && !q && !W && !Q"
+	GOTO updateText("q and w were not pressed")
+END KEYBOARDEVENT
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				AFUNCTION "updateText", "text"
+				$("#keytext").html(text);
+				END AFUNCTION
+				PRINT "Press either q or w",,"keytext"
+				KEYBOARDEVENT "q || Q"
+					GOTO updateText("q was pressed")
+				KEYBOARDEVENT "w || W"
+					GOTO updateText("w was pressed")
+				KEYBOARDEVENT "enter"
+					GOTO updateText("enter was pressed")
+				KEYBOARDEVENT "!w && !q && !W && !Q"
+					GOTO updateText("q and w were not pressed")
+				END KEYBOARDEVENT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/AFUNCTION"
+						PRINT "AFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ASYNCFUNCTION"
+						PRINT "ASYNCFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEEVENT"
+						PRINT "MOUSEEVENT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

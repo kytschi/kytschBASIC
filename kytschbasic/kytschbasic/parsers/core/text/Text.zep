@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Text extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
 			case "END SWRITE":
@@ -57,18 +57,22 @@ class Text extends Command
 
 		let value = args[0];
 						
-		if (isset(args[1]) && !empty(args[1])) {
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[1]);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[2]);
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
 		}
 
-		if (isset(args[3]) && !empty(args[3])) {
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
 			let output .= " title=" . this->outputArg(args[3]);
+		}
+
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= " style=" . this->outputArg(args[4]);
 		}
 		
 		return output . ">\" . " . args[0] . " . \"</span>\";?>";

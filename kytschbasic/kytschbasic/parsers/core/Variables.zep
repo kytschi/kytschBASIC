@@ -31,6 +31,7 @@ use KytschBASIC\Parsers\Core\Input\Form;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Security\Encryption;
 use KytschBASIC\Parsers\Core\Session;
+use KytschBASIC\Parsers\Core\Storage\Cookie;
 use KytschBASIC\Parsers\Core\Text\Text;
 
 class Variables
@@ -48,7 +49,7 @@ class Variables
 		let maths = new Maths();
 
 		// Clean any + used for string join.
-		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", ".", line);
+		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", " . ", line);
 
 		// Grab all vars.
 		preg_match_all("/(?<!\\\\)\"(?:\\\\\"|.)*?\"(*SKIP)(*FAIL)|([a-zA-Z0-9_]*)([\$#%&])(?:\()?/", line, vars, PREG_OFFSET_CAPTURE);
@@ -62,17 +63,25 @@ class Variables
 		}
 		
 		// Grab all form vars.
-		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\b(?=(?:[^\"']|[\"'][^\"']*[\"'])*$)/", line, vars, PREG_OFFSET_CAPTURE);
+		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\(([^)]+)\\)/", line, vars, PREG_OFFSET_CAPTURE);
 		// Add some padding to handle the extra char.
 		let arg = 0;
-		for str in vars[1] {
-			let line = substr_replace(
-				line,
-				"$" . str[0],
-				intval(str[1]) + arg,
-				strlen(str[0])
-			);
-			let arg += 1;
+		if (vars) {
+			for str in vars[0] {
+				let arg = "$" . str_replace(")", "]", str_replace("(", "[", str[0]));
+				ob_start();
+				eval("if (isset(" . arg . ")) {echo " . arg . ";}");
+				let find = ob_get_clean();
+				if (find) {
+					if (substr(line, 0, 1) == "\"") {
+						let line = str_replace(str[0], find, line);
+					} else {
+						let line = str_replace(str[0], "\"" . find . "\"", line);
+					}
+				} else {
+					let line = str_replace(str[0], arg, line);
+				}
+			}
 		}
 
 		// Grab all constants.
@@ -119,9 +128,17 @@ class Variables
 			//Check to see if its a maths equation.
 			let subvars = maths->isEquation(arg);
 			if (count(subvars) > 1) {
+				/*
+				// Replace the pluses if its a string join
+				for subvar in subvars {
+					if (is_string(subvar) || substr(subvar, strlen(subvar) - 0, 1) == "$") {
+						let arg = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*\Z)/", " . ", arg);
+						break;
+					}
+				}*/
 				// Replace first unquoted (
 				let arg = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\(/", "|||KBBRACKETSTART|||", arg, 1);
-
+				
 				// Replace last unquoted ) by reversing the string twice
 				let cleaned = strrev(arg);
 				let cleaned = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\)/", strrev("|||KBBRACKETEND|||"), cleaned, 1);
@@ -143,7 +160,7 @@ class Variables
 					if (find != null) {
 						let cleaned = find;
 					} else {
-						let find = display->parse(cleaned);
+						let find = display->parse(line, cleaned, []);
 						if (find != null) {
 							let cleaned = find;
 						} else {
@@ -228,9 +245,11 @@ class Variables
 		return preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", line);
 	}
 
-	public function dump(output, bool html = false)
+	public function dump(output, bool html = false, bool in_javascript = false)
 	{
-		if (html) {
+		if (in_javascript) {
+			return "\tconsole.log('" . trim(output, "\"") . "');";
+		} elseif (html) {
 			return "<?php echo \"<pre>\"; var_dump(" . output . "); echo \"</pre>\"; ?>";
 		}
 
@@ -318,7 +337,7 @@ class Variables
 		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
 	}	
 
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "ADEF":
@@ -333,7 +352,7 @@ class Variables
 				return this->processDim(line, args);
 			case "DUMP":
 				let args[0] = this->cleanArg("DUMP", args[0]);
-				return this->dump(args[0], true);
+				return this->dump(args[0], true, in_javascript);
 			case "ERASE":
 				return this->processErase(args);
 			case "LET":
@@ -439,7 +458,7 @@ class Variables
 		}
 	}
 
-	private function processDef(string line, args, bool let_var = false, bool javascript = false)
+	public function processDef(string line, args, bool let_var = false, bool javascript = false, bool in_javascript = false)
 	{
 		var arg, output = "<?php ", splits, cleaned;
 		
@@ -452,7 +471,7 @@ class Variables
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
 		}
 
-		if (javascript) {
+		if (javascript && !in_javascript) {
 			let output = "<?= '<script type=\"text/javascript\">";
 		}
 
@@ -460,9 +479,15 @@ class Variables
 		preg_match("/[$\%#&](?=(?:(?:[^\"]*\"){2})*[^\"]*$)(?!(?:[^()]*\)))/", line, splits, PREG_OFFSET_CAPTURE);
 		if (empty(splits[0][0])) {
 			throw new Exception("Invalid " . (let_var ? "LET" : "DEF"));
-		}	
+		}
 
-		let output .= (javascript ? "var " . ltrim(args[0], "$") : args[0]) . " = ";
+		if (javascript) {
+			let args[0] = ltrim(args[0], "$");
+			let output .= (let_var ? "" : "var ") . (in_javascript ? "echo \"" . args[0] . " = \"" : args[0] . " = ");
+		} else {
+			let output .= args[0] . " = ";
+		}
+
 		array_shift(args);
 
 		for arg in args {
@@ -474,7 +499,7 @@ class Variables
 					let cleaned = "(double)" . arg . "";
 					break;
 				default:
-					let cleaned = arg;
+					let cleaned = "\"" . this->outputArg(arg) . "\"";
 					break;
 			}
 
@@ -488,12 +513,15 @@ class Variables
 			}
 
 			let output .= (
-				javascript ? "' . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ") . ';" :
-				arg . ";"
+				javascript ? 
+					(in_javascript ? "" : "'") . 
+					" . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ")" .
+					(in_javascript ? "" : " . ';") :
+					arg . ";"
 			);
 		}
 
-		if (javascript) {
+		if (javascript && !in_javascript) {
 			let output .= "</script>';";
 		}
 
@@ -603,52 +631,62 @@ class Variables
 		return "<?php sort(" . this->cleanArg("NSORT", args[0]) . ", SORT_NUMERIC); ?>";
 	}
 
-	public function processRndString(arg)
+	public function processReadFile(arg)
 	{
-		var find, length = 8, args,
-		keyspace = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-		pieces = [], max, iLoop = 0, key, str;
+		var splits, cleaned, args, output = "";
 
-		let find = arg;
-		let args = this->equalsSplit(arg);
-		if (count(args) > 1) {
-			let find = args[1];
+		let splits = this->equalsSplit(arg);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid READFILE");
+		}
+
+		let cleaned = this->cleanArg("READFILE", splits[1]);
+		let args = this->commaSplit(cleaned);
+
+		let output .= "file_get_contents(";
+				
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= args[0];
+		} else {
+			throw new Exception("Missing the file to read");
+		}
+
+		let output .= ")";
+
+		return str_replace(splits[1], output, arg);
+	}
+
+	public function processRGBtoHex(arg)
+	{
+		var splits, cleaned, args;
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid RGBTOHEX");
+		}
+
+		let cleaned = this->cleanArg("RGBTOHEX", splits[1]);
+		let args = this->commaSplit(cleaned);
+
+		if (!isset(args[0]) || args[0] == "\"\"") {
+			throw new Exception("Invalid R value");
 		}
 		
-		/*
-         * If the length is less than one set to default length of 8.
-         */
-		if (find != "RNDSTRING") {
-			let length = intval(this->cleanArg("RNDSTRING", find));
-			if (length < 1) {
-				let length = 8;
-			}
+		if (!isset(args[1]) || args[1] == "\"\"") {
+			throw new Exception("Invalid G value");
+		}
+		
+		if (!isset(args[2]) || args[2] == "\"\"") {
+			throw new Exception("Invalid B value");
 		}
 
-        /*
-         * Generate a max length passed on the keyspace.
-         */
-        let max = mb_strlen(keyspace, "8bit") - 1;
-
-        /*
-         * Loop through and build pieces.
-         */
-        while (iLoop < length) {
-            let key = random_int(0, max);
-            let pieces[] = substr(keyspace, key, 1);
-            let iLoop += 1;
-        }
-
-        /*
-         * Implode the pieces and return the random string.
-         */
-        let str = "'" . (implode("", pieces)) . "'";
-
-		if (find == "RNDSTRING") {
-			return str_replace(find, str, arg);
-		}
-
-		return str_replace(find, str, arg);
+		return str_replace(
+			splits[1],
+			"\"#\" . str_pad(dechex(" . args[0] . "), 2, '0', STR_PAD_LEFT)
+			. str_pad(dechex(" . args[1] . "), 2, '0', STR_PAD_LEFT)
+			. str_pad(dechex(" . args[2] . "), 2, '0', STR_PAD_LEFT)",
+			arg
+		);
 	}
 
 	public function processSessionRead(arg)
@@ -674,6 +712,35 @@ class Variables
 	{
 		let args[0] = this->cleanArg("SORT", args[0]);
 		return "<?php sort(" . args[0] . "); ?>";
+	}
+
+	public function processSplit(arg)
+	{
+		var splits, cleaned, args, output = "explode(";
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) <= 1) {
+			throw new Exception("Invalid SPLIT");
+		}
+
+		let cleaned = this->cleanArg("SPLIT", splits[1]);
+		let args = this->commaSplit(cleaned);
+				
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= args[1] . ", ";
+		} else {
+			throw new Exception("Missing the delimiter");
+		}
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= args[0];
+		} else {
+			throw new Exception("Missing the string to split");
+		}
+
+		let output .= ");";
+
+		return str_replace(splits[1], output, arg);
 	}
 
 	public function processSSort(args)
@@ -720,14 +787,20 @@ class Variables
 				return (new Encryption())->processHashVerify(arg);
 			case "HASH":
 				return (new Encryption())->processHash(arg);
-			case "RNDSTRING":
-				return this->processRndString(arg);
+			case "READCOOKIE":
+				return (new Cookie())->processRead(arg);
+			case "READFILE":
+				return this->processReadFile(arg);
+			case "RGBTOHEX":
+				return this->processRGBtoHex(arg);
 			case "VALIDUSER":
 				return this->processValidUser(arg);
 			case "SANITISE":
 				return this->processSanitise(arg);
 			case "SESSREAD":
 				return this->processSessionRead(arg);
+			case "SPLIT":
+				return this->processSplit(arg);
 			case "TWODP":
 				return this->processTwoDP(arg);
 			case "UUID":

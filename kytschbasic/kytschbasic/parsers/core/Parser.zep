@@ -30,6 +30,8 @@ use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Variables;
 use KytschBASIC\Libs\Arcade\Parsers\AFunction;
+use KytschBASIC\Parsers\Core\CoreFunc;
+use KytschBASIC\Parsers\Core\Input\InputEvents;
 
 class Parser
 {
@@ -37,8 +39,13 @@ class Parser
 	private newline = "\n";
 	private cprint = false;
 	private js = false;
+	private process_as_js = false;
+	private create_function = false;
+	private input_event = false;
+	private mouse_event = false;
 	private has_case = false;
 	private show_html = false;
+	private timeouts = [];
 
 	private websocket_server = null;
 
@@ -61,15 +68,18 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
 		"KytschBASIC\\Parsers\\Core\\Load",
-		"KytschBASIC\\Parsers\\Core\\Database",
 		"KytschBASIC\\Parsers\\Core\\Session",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Mail",
 		"KytschBASIC\\Parsers\\Core\\Communication\\Websocket\\Websocket",
+		"KytschBASIC\\Parsers\\Core\\Storage\\Cookie",
+		"KytschBASIC\\Parsers\\Core\\Storage\\Database",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Animation\\Effects",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Circle",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Display",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Ellipse",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Line",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Screen\\Screen",
@@ -87,6 +97,7 @@ class Parser
 
 		let this->cprint = false;
 		let this->js = false;
+		let this->create_function = false;
 		let this->controller = new Command();
 
 		if (show_html_mode) {
@@ -145,31 +156,185 @@ class Parser
 				let this->cprint = false;
 				return "</code></pre>";
 			case "JAVASCRIPT":
-				if (!this->cprint) {
+				if (!this->cprint && !this->js) {
 					let this->js = true;
-					return "<script type='text/javascript'>";
+					return "<script type='text/javascript'>\n$(document).ready(function() {\n";
+				} elseif (this->cprint) {
+					return line . this->newline;
 				}
 				break;
 			case "END JAVASCRIPT":
-				if (!this->cprint) {
+				if (!this->cprint && this->js) {
 					let this->js = false;
-					return "</script>";
+					return "\n});\n</script>";
+				}  elseif (this->cprint) {
+					return line . this->newline;
 				}
 				break;
 			case "AFUNCTION":
 				if (!this->cprint) {
 					let this->js = true;
-					return (new AFunction())->parse(line, command, args);
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
 				}
 				break;
 			case "END AFUNCTION":
 				if (!this->cprint) {
 					let this->js = false;
-					return (new AFunction())->parse(line, command, args);
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "ASYNCFUNCTION":
+				if (!this->cprint) {
+					let this->js = true;
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END ASYNCFUNCTION":
+				if (!this->cprint) {
+					let this->js = false;
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "FUNCTION":
+				if (!this->cprint) {
+					let this->create_function = true;
+					return (new CoreFunc())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END FUNCTION":
+				if (!this->cprint) {
+					let this->create_function = false;
+					return "<?php }\n?>";
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "ANIMATION":
+				if (!this->cprint) {
+					let this->js = true;
+					let this->create_function = true;
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END ANIMATION":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->create_function = false;
+					return (new AFunction())->parse(line, command, args, this->js);
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "KEYBOARDEVENT":
+				if (!this->cprint) {
+					let this->js = true;
+					let this->process_as_js = true;
+					let output = (new InputEvents())->parse(line, command, args, this->js, this->input_event);
+					let this->input_event = true;
+					return output;
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END KEYBOARDEVENT":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = false;
+					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "MOUSEEVENT":
+				if (!this->cprint) {
+					let this->js = true;
+					let this->process_as_js = true;
+					let output = (new InputEvents())->parse(line, command, args, this->js, this->input_event);
+					let this->input_event = true;
+					return output;
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END MOUSEEVENT":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = false;
+					return (new InputEvents())->parse(line, command, args, this->js);
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "MOUSEACTION":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = args;
+					return "";
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END MOUSEACTION":
+				if (!this->cprint) {
+					let this->js = false;
+					let this->process_as_js = false;
+					let this->input_event = false;
+					return "";
+				}  elseif (this->cprint) {
+					return line . this->newline;
+				}
+				break;
+			case "TIMEOUT":
+				if (!this->cprint) {
+					let cleaned = 1000;
+					if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+						let cleaned = intval(trim(args[0], "\""));
+					}
+
+					if (cleaned < 0) {
+						let cleaned = 1000;
+					}
+					let this->timeouts[] = cleaned;
+					if (!this->js) {
+						let output .= "<script type='text/javascript'>$(document).ready(function() {";
+					}
+					let output .= "\tsetTimeout(() => {\n";
+					return output;
+				}  elseif (this->cprint || (this->js && !this->create_function)) {
+					return line . this->newline;
+				}
+				break;
+			case "END TIMEOUT":
+				if (!this->cprint) {
+					if (count(this->timeouts)) {
+						let output = "}, " . this->timeouts[count(this->timeouts) - 1] . ");";
+						array_shift(this->timeouts);
+						if (!this->js) {
+							let output .= "\n});</script>";
+						}
+					}
+					return output;
+				}  elseif (this->cprint) {
+					return line . this->newline;
 				}
 				break;
 			default:
-				if (this->cprint || this->js) {
+				if (this->cprint || (this->js && !this->create_function && !this->process_as_js)) {
 					return line . this->newline;
 				}
 				break;
@@ -178,12 +343,38 @@ class Parser
 		switch (command) {
 			case "REM":
 				return "";
+			case "ALET":
+				return (new AFunction())->processDef(line, args, true, true, this->js);
+			case "SLEEP":
+				if (!this->js) {
+					if (!isset(args[0])) {
+						let args[0] = 1000;
+					} elseif (empty(args[0])) {
+						let args[0] = 1000;
+					} elseif (args[0] <= 0) {
+						let args[0] = 1000;
+					}
+					let args[0] = args[0] * 1000;
+					return "<?php usleep(" . args[0] . "); ?>";
+				} else {
+					return "\tawait sleep(" . args[0] . ");\n";
+				}
 			case "SHOWHTML":
 				let this->show_html = true;
 				return "<?php ob_start(); ?>";
 			case "END SHOWHTML":
 				let this->show_html = false;
 				return "<?php $KBHTMLENCODE = ob_get_clean();echo '<pre><code>' . htmlentities($KBHTMLENCODE) . '</code></pre>'; ?>";
+			case "CONTINUE":
+				return "<?php continue; ?>";
+			case "CODE":
+				return "<pre><code>";
+			case "END CODE":
+				return "</code></pre>";
+			case "SHOW":
+				return (new AFunction())->parse(line, command, args, this->js);
+			case "HIDE":
+				return (new AFunction())->parse(line, command, args, this->js);
 			case "IF":
 				return this->processIf(line, "if", args);
 			case "IFNTE":
@@ -193,9 +384,17 @@ class Parser
 			case "ELSEIF":
 				return this->processIf(line, "elseif", args);
 			case "ELSE":
-				return "<?php else : ?>";
+				if (!this->process_as_js) {
+					return "<?php else : ?>";
+				} else {
+					return "\t} else {\n";
+				}
 			case "END IF":
-				return "<?php endif; ?>";
+				if (!this->process_as_js) {
+					return "<?php endif; ?>";
+				} else {
+					return "\t}\n";
+				}
 			case "BREAK":
 				return "<?php break; ?>";
 			case "CASE":
@@ -234,7 +433,7 @@ class Parser
 		}
 		
 		for parser in this->available {
-			let cleaned = (new {parser}())->parse(line, command, args);
+			let cleaned = (new {parser}())->parse(line, command, args, this->js, this->input_event);
 			if (cleaned !== null) {
 				let output .= cleaned . this->newline;
 				if (substr(cleaned, strlen(cleaned) - 2, 2) == "?>" && this->show_html) {
@@ -254,7 +453,13 @@ class Parser
 			throw new Exception("Invalid IF statement");
 		}
 		
-		let output = "<?php " . command . " (";
+		if (!this->process_as_js) {
+			let output = "<?php ";
+		} else {
+			let output = "\t";
+		}
+
+		let output .= command . " (";
 
 		let splits = preg_split("/THEN(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", args[0]);
 		if (!count(splits)) {
@@ -262,16 +467,33 @@ class Parser
 		}
 
 		let splits[0] = this->controller->setDoubleEquals(trim(splits[0]));
+		let splits[0] = preg_replace(
+			"/\\$\\$(?=(?:[^'\"]|['][^']*[']|[\"][^\"]*[\"])*$)/",
+			"&&",
+			splits[0]
+		);
 						
 		if (not_empty) {
-			let output .= "!empty(" . splits[0] . ")";
+			if (!this->process_as_js) {
+				let output .= "!empty(" . splits[0] . ")";
+			} else {
+				let output .= splits[0];
+			}
 		} elseif (is_empty) {
-			let output .= "empty(" . splits[0] . ")";
+			if (!this->process_as_js) {
+				let output .= "empty(" . splits[0] . ")";
+			} else {
+				let output .= "!" . splits[0];
+			}
 		} else {
 			let output .= splits[0];
 		}
 
-		let output .= ") : ?>";
+		if (!this->process_as_js) {
+			let output .= ") : ?>";
+		} else {
+			let output .= ") {\n";
+		}
 		
 		return output;
 	}

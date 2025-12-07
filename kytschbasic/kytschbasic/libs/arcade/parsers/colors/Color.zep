@@ -29,16 +29,17 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Color extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
-		if (command == "RGB") {
-			return this->parseRgb(args);
+		switch (command) {
+			case "RGB":
+				return this->processRGB(args);
+			default:
+				return null;
 		}
-
-		return null;
 	}
 
-	public function parseRgb(args)
+	public function processRGB(args)
 	{
 		var output = "<?php $KBRGB=[";
 						

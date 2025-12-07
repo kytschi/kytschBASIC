@@ -68,6 +68,11 @@ END HEAD
 						PRINT "Switch card game"
 					END LINK
 				END SWRITE
+				SWRITE
+					LINK "/arcade/omega-doom"
+						PRINT "Omega Doom. A space adventure game. Note, it's a work in progress"
+					END LINK
+				END SWRITE
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

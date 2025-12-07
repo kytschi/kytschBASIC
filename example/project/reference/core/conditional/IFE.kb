@@ -42,6 +42,10 @@ END IF
 					LINK "/reference/IFNTE"
 						PRINT "IFNTE"
 					END LINK
+					PRINT " | "
+					LINK "/reference/CONTINUE"
+						PRINT "CONTINUE"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

@@ -33,7 +33,7 @@ class Bitmap extends Command
 	private image = null;
 	private copy = null;
 
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "BITMAP":
@@ -51,26 +51,33 @@ class Bitmap extends Command
 
 	private function processBitmap(array args)
 	{
-		var x=0, y=0, width=320, height=240;
+		var x=0, y=0, width=320, height=240, id;
 
-		if (isset(args[0])) {
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let x = "intval(\"" . args[0] . "\")";
 		}
 
-		if (isset(args[1])) {
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let y = "intval(\"" . args[1] . "\")";
 		}
 
-		if (isset(args[2])) {
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
 			let width = "intval(\"" . args[2] . "\")";
 		}
 
-		if (isset(args[3])) {
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
 			let height = "intval(\"" . args[3] . "\")";
+		}
+
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let id = trim(args[4], "\"");
+		} else {
+			let id = "KB_BITMAP_" . rand(10000, getrandmax());
 		}
 
 		return "<?php 
 		$KBSHAPES = [];
+		$KBBITMAPID = '" . id . "';
 		$KBBITMAPWIDTH = " . width . ";
 		$KBBITMAPHEIGHT = " . height . ";
 		$KBBITMAPX = " . x . ";
@@ -165,6 +172,6 @@ class Bitmap extends Command
 			imagepng($KBBITMAP);
 			$KBBITMAP = ob_get_contents();
 			ob_end_clean(); ?>
-			<img src=\"data:image/png;base64,<?= base64_encode($KBBITMAP); ?>\">";
+			<img id=\"<?= $KBBITMAPID; ?>\" src=\"data:image/png;base64,<?= base64_encode($KBBITMAP); ?>\">";
 	}
 }

@@ -1,0 +1,57 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "SLEEP statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "SLEEP","heading-command basic"
+					LINE BREAK
+					PRINT "MILLISECONDS","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This function will cause the program to stop for the number of milliseconds entered."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+PRINT "Wait..."
+SLEEP 5000
+PRINT "OK ready!"
+				END CPRINT
+				DIV "kb-code-block"
+					PRINT "Wait..."
+					SLEEP 5000
+					PRINT "OK ready!"
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/DEF#refDEF"
+						PRINT "DEF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DIM#refDIM"
+						PRINT "DIM"
+					END LINK
+					PRINT " | "
+					LINK "/reference/COUNT#refCOUNT"
+						PRINT "COUNT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DATEFORMAT#refDATEFORMAT"
+						PRINT "DATEFORMAT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

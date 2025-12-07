@@ -1,0 +1,101 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "TWODP statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "TWODP","heading-command basic"
+					LINE BREAK
+					PRINT "DECIMAL NUMBER","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Rounds a decimal number to two decimal places."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+DEF test#=TWODP(1337.737)
+PRINT test#
+LINE BREAK
+REM or do it on the PRINT
+LET test#=TWODP(1337.337)
+PRINT TWODP(test#)
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DEF test#=TWODP(1337.737)
+				PRINT test#
+				LINE BREAK
+				REM or do it on the PRINT
+				LET test#=TWODP(1337.337)
+				PRINT TWODP(test#)
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ARCF"
+						PRINT "ARCF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAP"
+						PRINT "BITMAP"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAPFONT"
+						PRINT "BITMAPFONT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAPTEXT"
+						PRINT "BITMAPTEXT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BOX"
+						PRINT "BOX"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BOXF"
+						PRINT "BOXF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					END LINK
+					PRINT " | "
+					LINK "/globals"
+						PRINT "Globals"
+					END LINK
+					PRINT " | "
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SCREEN"
+						PRINT "SCREEN"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

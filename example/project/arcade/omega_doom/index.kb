@@ -1,0 +1,805 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	CHARSET "UTF-8"
+    DESCRIPTION "A space scifi game written in kytschBASIC"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/omega_doom"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - Omega Doom | kytschBASIC"
+END HEAD
+BODY ,"omega-doom"
+
+FUNCTION "loadGFX", file$
+    CODE
+        DEF contents$=READFILE(file$)
+        DIM lines$=SPLIT(contents$, "\n")
+        FOR line$ IN lines$
+            DIM ansi$=SPLIT(line$, "[0m")
+            FOR data$ IN ansi$
+                DIM colours$=SPLIT(data$, ";")
+                DEF count%=COUNT(colours$)
+                IF count%<4 THEN
+                    CONTINUE
+                END IF
+                DIM colour_strings$=SPLIT(colours$[4], "m")
+                LET colours$[4]=colour_strings$[0]
+                DEF output$=colour_strings$[1]
+                LET output$=STRIPTRAIL(output$, 27)
+                DEF hex$=RGBTOHEX(colours$[2], colours$[3], colours$[4])
+                DEF style$="color:"+hex$
+                PRINT output$,,,,style$
+            NEXT
+            LINE BREAK
+        NEXT
+    END CODE
+END FUNCTION
+
+FUNCTION "drawMap", file$, flash$=null, selected$=null
+    GOTO loadGFX(file$)
+    MOUSEACTION "navigation('kazaria-syndicate')"
+        BUTTON ,"map-text","kazaria-syndicate-map"
+            PRINT "["
+            PRINT "1","button_key"
+            PRINT "]", "button_key_end_small"
+            IF flash$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message flash"
+            ELSEIF selected$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message selected"
+            ELSE
+                PRINT "Kazaria Syndicate", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('federation')"
+        BUTTON ,"map-text","federation-map"
+            PRINT "["
+            PRINT "2","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="federation" THEN
+                PRINT "Federation", "button-message flash"
+            ELSEIF selected$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message selected"
+            ELSE
+                PRINT "Federation", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('rosia-empire')"
+        BUTTON ,"map-text","rosia-empire-map"
+            PRINT "["
+            PRINT "3","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="rosia-empire" THEN
+                PRINT "Rosia Empire", "button-message flash"
+            ELSEIF selected$="kazaria-syndicate" THEN
+                PRINT "Kazaria Syndicate", "button-message selected"
+            ELSE
+                PRINT "Rosia Empire", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('aris-republic')"
+        BUTTON ,"map-text","aris-republic-map"
+            PRINT "["
+            PRINT "4","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="aris-republic" THEN
+                PRINT "Aris Republic", "button-message flash"
+            ELSEIF selected$="aris-republic" THEN
+                PRINT "Aris Republic", "button-message selected"
+            ELSE
+                PRINT "Aris Republic", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('garis-republic')"
+        BUTTON ,"map-text","garis-republic-map"
+            PRINT "["
+            PRINT "5","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="garis-republic" THEN
+                PRINT "Garis Republic", "button-message flash"
+            ELSEIF selected$="garis-republic" THEN
+                PRINT "Garis Republic", "button-message selected"
+            ELSE
+                PRINT "Garis Republic", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('stovacor')"
+        BUTTON ,"map-text","stovacor-map"
+            PRINT "["
+            PRINT "6","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="stovacor" THEN
+                PRINT "Stovacor", "button-message flash"
+            ELSEIF selected$="stovacor" THEN
+                PRINT "Stovacor", "button-message selected"
+            ELSE
+                PRINT "Stovacor", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('house-of-moong')"
+        BUTTON ,"map-text","house-of-moong-map"
+            PRINT "["
+            PRINT "7","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="house-of-moong" THEN
+                PRINT "House of Moong", "button-message flash"
+            ELSEIF selected$="house-of-moong" THEN
+                PRINT "House of Moong", "button-message selected"
+            ELSE
+                PRINT "House of Moong", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('the-void')"
+        BUTTON ,"map-text","the-void-map",,,"navigation(event,'the-void')"
+            PRINT "["
+            PRINT "8","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="house-of-moong" THEN
+                PRINT "The Void", "button-message flash"
+            ELSEIF selected$="the-void" THEN
+                PRINT "The Void", "button-message selected"
+            ELSE
+                PRINT "The Void", "button-message"
+            END IF
+        END BUTTON
+    END MOUSEACTION
+END FUNCTION
+
+FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
+    GOTO loadGFX(file$)
+    MOUSEACTION "navigation('earth')"
+        BUTTON ,"map-text","earth-map"
+            PRINT "["
+            PRINT "1","button_key"
+            PRINT "]", "button_key_end_small"
+            IF flash$="earth" THEN
+                PRINT "Earth", "button-message flash"
+            ELSEIF selected$="earth" THEN
+                PRINT "Earth", "button-message selected"
+            ELSE
+                PRINT "Earth", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('yidow-prime')"
+        BUTTON ,"map-text","yidow-prime-map"
+            PRINT "["
+            PRINT "2","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="yidow-prime" THEN
+                PRINT "Yidow Prime", "button-message flash"
+            ELSEIF selected$="yidow-prime" THEN
+                PRINT "Yidow Prime", "button-message selected"
+            ELSE
+                PRINT "Yidow Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('fasbon-prime')"
+        BUTTON ,"map-text","fasbon-prime-map"
+            PRINT "["
+            PRINT "3","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="fasbon-prime" THEN
+                PRINT "Fasbon Prime", "button-message flash"
+            ELSEIF selected$="fasbon-prime" THEN
+                PRINT "Fasbon Prime", "button-message selected"
+            ELSE
+                PRINT "Fasbon Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('cratol-moon')"
+        BUTTON ,"map-text","cratol-moon-map"
+            PRINT "["
+            PRINT "4","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="cratol-moon" THEN
+                PRINT "Cratol Moon", "button-message flash"
+            ELSEIF selected$="cratol-moon" THEN
+                PRINT "Cratol Moon", "button-message selected"
+            ELSE
+                PRINT "Cratol Moon", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('furia-prime')"
+        BUTTON ,"map-text","furia-prime-map"
+            PRINT "["
+            PRINT "5","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="furia-prime" THEN
+                PRINT "Furia Prime", "button-message flash"
+            ELSEIF selected$="furia-prime" THEN
+                PRINT "Furia Prime", "button-message selected"
+            ELSE
+                PRINT "Furia Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('opalus-prime')"
+        BUTTON ,"map-text","opalus-prime-map"
+            PRINT "["
+            PRINT "6","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="opalus-prime" THEN
+                PRINT "Opalus Prime", "button-message flash"
+            ELSEIF selected$="opalus-prime" THEN
+                PRINT "Opalus Prime", "button-message selected"
+            ELSE
+                PRINT "Opalus Prime", "button-message"
+            END IF
+        END BUTTON
+    MOUSEACTION "navigation('outpost-3366')"
+        BUTTON ,"map-text","outpost-3366-map"
+            PRINT "["
+            PRINT "7","button_key"
+            PRINT "]", "button_key_end_small" 
+            IF flash$="outpost-3366" THEN
+                PRINT "Outpost 3366", "button-message flash"
+            ELSEIF selected$="outpost-3366" THEN
+                PRINT "Outpost 3366", "button-message selected"
+            ELSE
+                PRINT "Outpost 3366", "button-message"
+            END IF
+        END BUTTON
+    END MOUSEACTION
+END FUNCTION
+
+FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shields_status$="offline", ftl$="online", impulse$="online", weapons$="online"
+    DIV "controls-stats"
+        TABLE
+            TBODY
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "SECTOR"
+                    END TCELL
+                    TCELL
+                        PRINT sector$
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        PRINT "&nbsp;"
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "LOCATION"
+                    END TCELL
+                    TCELL
+                        PRINT location$
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        PRINT "&nbsp;"
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "TACTICAL"
+                    END TCELL
+                    TCELL
+                        IF tactical$="yellow alert" THEN
+                            PRINT tactical$, "yellow"
+                        ELSEIF tactical$="red alert" THEN
+                            PRINT tactical$, "red"
+                        ELSE
+                            PRINT tactical$, "normal"
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "SHIELDS"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF shields%=0 THEN
+                            PRINT shields$, "red"
+                            PRINT "&percnt;&nbsp;[OFFLINE]", "red"
+                        ELSEIF shields%<=39 && shields%>0 THEN
+                            PRINT shields$, "red"
+                            PRINT "&percnt;&nbsp;[ONLINE]", "red"
+                        ELSEIF shields%<=60 && shields%>=40 THEN
+                            PRINT shields$, "yellow"
+                            PRINT "&percnt;&nbsp;[ONLINE]", "yellow"
+                        ELSE
+                            PRINT shields$, "normal"
+                            PRINT "&percnt;&nbsp;", "normal"
+                            IF tactical$="normal" THEN
+                                PRINT "[OFFLINE]", "red"
+                            ELSE
+                                PRINT "[ONLINE]", "normal"
+                            END IF
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "FTL drive"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF ftl$="offline" THEN
+                            PRINT ftl$, "red"
+                        ELSE
+                            PRINT ftl$, "normal"
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "Impulse drive"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF impulse$="offline" THEN
+                            PRINT impulse$, "red"
+                        ELSE
+                            PRINT impulse$, "normal"
+                        END IF
+                    END TCELL
+                END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "WEAPONS"
+                    END TCELL
+                    TCELL ,"controls-stats-status"
+                        IF weapons$="offline" THEN
+                            PRINT weapons$, "red"
+                        ELSE
+                            PRINT weapons$, "normal"
+                        END IF
+                    END TCELL
+                END TROW
+            END TBODY
+        END TABLE
+    END DIV
+    WRITECOOKIE("kb_OMEGA", "game_data.tactical", tactical$)
+END FUNCTION
+
+ADEF current_progress$="intro"
+ADEF loading%=1
+ADEF in_game%=0
+ADEF controls_locked%=1
+ADEF speech_text$=""
+ADEF user_input%=0
+ADIM user_input_enabled$=()
+ADIM user_input_disabled$=()
+ADEF user_input_enter%=0
+ADEF speaking%=0
+ADIM save_on$=("", "")
+ADIM animation_trigger$=()
+ADIM ship_status_trigger$=()
+ADIM user_continue$=()
+ADIM user_prev$=()
+ADEF game_data$=""
+
+IFE _GET("progress") THEN
+    ADEF skip_intro%=0
+ELSE
+    ADEF skip_intro%=1
+END IF
+
+AFUNCTION "gameover", "title"
+    in_game = 0;
+    controls_locked=1;
+
+    $("#omega-doom-gameover #gameover-title").html(title);
+
+    $("#omega-doom-game").fadeOut(
+        2000,
+        () => {
+            $("#omega-doom-gameover").fadeIn(
+                2000,
+                () => {
+                    $("#omega-doom-gameover").fadeOut(
+                        2000,
+                        () => {
+                            $("#omega-doom-intro").fadeIn(
+                                2000,
+                                () => {
+                                    controls_locked=0;
+                                    showIntroButtons(event);
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+        }
+    );
+END AFUNCTION
+
+AFUNCTION "startNewGame"
+    $("#btn_start .button-message").addClass("selected");
+    $("#omega-doom-intro").fadeOut(
+        2000,
+        () => {
+            if (game_data.story_progress != "intro") {
+                createCookie(event);
+                window.location.href = "/arcade/omega-doom?progress=intro";
+                return;
+            }
+            progressSpeech(event, game_data.game_progress, null, 1);
+            $("#omega-doom-game").fadeIn(
+                2000,
+                () => {
+                    $("#btn_start .button-message").removeClass("selected");
+                    in_game = 1;
+                    progressSpeech(event, game_data.game_progress);
+                }
+            );
+        }
+    );
+END AFUNCTION
+
+AFUNCTION "continueGame"
+    $("#btn_continue .button-message").addClass("selected");
+    $("#omega-doom-intro").fadeOut(
+        2000,
+        () => {
+            if (current_progress && game_data.story_progress != current_progress) {
+                window.location.href = "/arcade/omega-doom?progress=" + game_data.story_progress;
+                return;
+            }
+
+            progressSpeech(event, game_data.game_progress, null, 1);
+            $("#omega-doom-game").fadeIn(
+                2000,
+                () => {
+                    $("#btn_continue .button-message").removeClass("selected");
+                    in_game = 1;
+                    controls_locked=0;
+                    progressSpeech(event, game_data.game_progress);
+                }
+            );
+        }
+    );
+END AFUNCTION
+
+AFUNCTION "invalidButton", "speech"
+    $("#" + game_data.game_progress + " .original").html(speech);
+    progressSpeech(event, game_data.game_progress, null);
+END AFUNCTION
+
+AFUNCTION "shipStatus"
+    if (ship_status_trigger.length) {
+        ship_status_trigger.forEach((func_call, index) => {
+            if (func_call[0] == game_data.game_progress) {
+                $("body").addClass("alert-" + func_call[1]);
+                return;
+            }
+        });
+    }
+END AFUNCTION
+
+AFUNCTION "userContinue", "continue_selected=1"
+    var user_continue_set=0;
+    if (continue_selected) {
+        if (user_continue.length) {
+            user_continue.forEach((goto, index) => {
+                if (goto[0] == game_data.game_progress && !user_continue_set) {
+                    //console.log(goto[0], game_data.game_progress, goto[1]);
+                    game_data.game_progress = goto[1];
+                    user_continue_set=1;
+                    return;
+                }
+            });
+        }
+    } else {
+        if (user_prev.length) {
+            user_prev.forEach((goto, index) => {
+                if (goto[0] == game_data.game_progress && !user_continue_set) {
+                    //console.log(goto[0], game_data.game_progress, goto[1]);
+                    game_data.game_progress = goto[1];
+                    user_continue_set=1;
+                    return;
+                }
+            });
+        }
+    }
+    return user_continue_set;
+END AFUNCTION
+
+AFUNCTION "createCookie", "return_data=0"
+    var data = {};
+    data.story_progress = "intro";
+    data.game_progress = "game-progress-1";
+    data.ship_shields = 100;
+    data.ship_ftl_engines = 1;
+    data.ship_impulse_engines = 1;
+    data.ship_tactical = "normal";
+    data.omega_shields = 100;
+    data.omega_ftl_engines = 1;
+    data.omega_impulse_engines = 1;
+
+    if (return_data) {
+        return data;
+    }
+
+    CREATECOOKIE("kb_OMEGA", data);
+
+    game_data = data;
+END AFUNCTION
+
+AFUNCTION "rebuildGameData"
+    var data = createCookie(event, 1);
+    data.story_progress = "progress4";
+    data.game_progress = "game-progress-1";
+
+    game_data = data;
+    WRITECOOKIE("kb_OMEGA", game_data);
+END AFUNCTION
+
+AFUNCTION "saveAndQuit", "progress=null"
+    //console.log("Saving", progress);
+    in_game = 0;
+    controls_locked=1;
+    $("button.btn-save-quit .button-message").addClass("selected");
+    $("#intro-controls-buttons").css("display", "none");
+
+    if (progress) {
+        game_data.story_progress = progress;
+        game_data.game_progress = "game-progress-1";
+        WRITECOOKIE("kb_OMEGA", game_data);
+        window.location.href = "/arcade/omega-doom?progress=" + progress;
+    } else {
+        WRITECOOKIE("kb_OMEGA", game_data);
+        $("#omega-doom-game").fadeOut(
+            2000,
+            () => {
+                $("button.btn-save-quit .button-message").removeClass("selected");
+                $("#omega-doom-intro").fadeIn(
+                    2000,
+                    () => {
+                        controls_locked=0;
+                        if (READCOOKIE("kb_OMEGA", "story_progress")) {
+                            $("#btn_continue").show();
+                        }
+                        showIntroButtons(event);
+                    }
+                );
+            }
+        );
+    }
+END AFUNCTION
+
+ASYNCFUNCTION "progressSpeech", "next_id", "prev_id", "blank_text=0"
+    speaking=1;
+    shipStatus(event);
+
+    if (prev_id) {
+        game_data.game_progress = prev_id;
+    } else if (next_id) {
+        game_data.game_progress = next_id;
+    }
+
+    //console.log("progressSpeech", game_data.game_progress, "blank", blank_text);
+
+    if (user_input_enabled.includes(game_data.game_progress)) {
+        user_input = 1;
+    } else if (user_input_disabled.includes(game_data.game_progress)) {
+        user_input = 0;
+    }
+
+    await sleep(10);
+    $("#omega-doom .btn-continue .button-message").removeClass("selected");
+    $("#omega-doom .btn-previous .button-message").removeClass("selected");
+    
+    $("#omega-doom .progress .game-progress").hide();
+    $("#omega-doom #" + game_data.game_progress + " .speech p span").html("");
+    $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+
+    if (!blank_text) {
+        speech_text = $("#omega-doom #" + game_data.game_progress + " .original").html();
+        if (speech_text) {
+            var iLoop=0;
+            while (typeof(speech_text[iLoop]) != "undefined") {
+                $("#omega-doom #" + game_data.game_progress + " .speech p span").append(speech_text[iLoop]);
+                await sleep(10);
+                iLoop++;
+            }
+        }
+    }
+    speaking=0;
+END ASYNCFUNCTION
+
+AFUNCTION "nextProgress", "animation=null"
+    if (save_on[0] == game_data.game_progress) {
+        saveAndQuit(event, save_on[1]);
+        return;
+    }
+
+    speech_text = "";
+    $("#" + game_data.game_progress + " .btn-continue .button-message").addClass("selected");
+
+    if (!userContinue(event)) {
+        var splits = game_data.game_progress.split("-");
+        game_data.game_progress = "";
+        splits.forEach((str) => {
+            if (parseInt(str)) {
+                game_data.game_progress += (parseInt(str)+1)
+            } else {
+                game_data.game_progress += str + "-"
+            }
+        });
+    }
+
+    if (!animation && animation_trigger.length) {
+        animation_trigger.forEach((func_call, index) => {
+            if (func_call[0] == game_data.game_progress) {
+                animation = func_call[1];
+                return;
+            }
+        });
+    }
+
+    if (animation) {
+        $("#omega-doom .progress .game-progress").hide();
+        $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+        window[animation](event);
+        shipStatus(event);
+    } else {
+        progressSpeech(event, game_data.game_progress, null);
+    }
+END AFUNCTION
+
+AFUNCTION "prevProgress", "animation=null"
+    speech_text = "";
+
+    $("#" + game_data.game_progress + " .btn-continue .button-message").addClass("selected");
+
+    if (!userContinue(event, 0)) {
+        var splits = game_data.game_progress.split("-");
+        game_data.game_progress = "";
+        splits.forEach((str) => {
+            if (parseInt(str)) {
+                game_data.game_progress += (parseInt(str)-1)
+            } else {
+                game_data.game_progress += str + "-"
+            }
+        });
+    }
+    
+    if (!animation && animation_trigger.length) {
+        animation_trigger.forEach((func_call, index) => {
+            if (func_call[0] == game_data.game_progress) {
+                animation = func_call[1];
+                return;
+            }
+        });
+    }
+
+    if (animation) {
+        $("#omega-doom .progress .game-progress").hide();
+        $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+        window[animation](event);
+        shipStatus(event);
+    } else {
+        progressSpeech(event, null, game_data.game_progress);
+    }
+END AFUNCTION
+
+AFUNCTION "showIntroButtons"
+    if (!loading && !controls_locked) {
+        $("#intro-controls-buttons").css("display", "flex");
+    }
+END AFUNCTION
+
+AFUNCTION "userInput"
+    if (user_input_enabled.includes(game_data.game_progress)) {
+        user_input = 1;
+    } else if (user_input_disabled.includes(game_data.game_progress)) {
+        user_input = 0;
+    }
+END AFUNCTION
+
+AFUNCTION "userInputEnter"
+    user_input_enter = 0;
+    if ($("#" + game_data.game_progress + " .btn-continue").html()) {
+        user_input_enter = 1;
+    }
+END AFUNCTION
+
+AFUNCTION "updateOriginal", "progress", "text"
+    $("#" + progress + " .original").html(text);
+END AFUNCTION
+
+KEYBOARDEVENT "enter"
+    GOTO userInputEnter()
+    IFE controls_locked THEN
+        IF in_game && user_input_enter THEN
+            GOTO nextProgress()
+        END IF
+    END IF
+KEYBOARDEVENT "p"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IF in_game && user_input THEN
+            GOTO prevProgress()
+        END IF
+    END IF
+KEYBOARDEVENT "n"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IFE in_game THEN
+            GOTO startNewGame()
+        END IF
+    END IF
+KEYBOARDEVENT "c"
+    GOTO userInput()
+    IFE controls_locked THEN
+        IFE in_game THEN
+            GOTO continueGame()
+        END IF
+    END IF
+KEYBOARDEVENT "q"
+    IF in_game THEN
+        GOTO saveAndQuit()
+    END IF
+END KEYBOARDEVENT
+
+MOUSEEVENT ".btn-save-quit"
+    GOTO saveAndQuit()
+MOUSEEVENT ".btn-next-progress"
+    GOTO nextProgress()
+MOUSEEVENT ".btn-previous-progress"
+    GOTO prevProgress()
+END MOUSEEVENT
+
+JAVASCRIPT
+    game_data = READCOOKIE("kb_OMEGA");
+
+    if (!game_data) {
+        createCookie(event);
+        $("#btn_continue").hide();
+    }
+    //rebuildGameData(event);
+END JAVASCRIPT
+IFE _GET("progress") THEN
+    JAVASCRIPT
+        $("#omega-doom-intro").fadeIn(2000, () => {
+            controls_locked=0;
+            showIntroButtons(event);
+        });
+    END JAVASCRIPT
+ELSE
+    ALET current_progress$=_GET("progress")
+    JAVASCRIPT
+        $("#omega-doom-intro").fadeIn(2000, () => {
+            controls_locked=0;
+            continueGame(event);
+        });
+    END JAVASCRIPT
+END IF
+
+SCREEN "omega-doom-game"
+    IFE _GET("progress") THEN
+        LOAD "_ROOT/project/arcade/omega_doom/intro"
+    ELSE
+        LOAD "_ROOT/project/arcade/omega_doom/_GET("progress")"
+    END IF
+END SCREEN
+SCREEN "omega-doom-intro"
+    WINDOW "intro"
+        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/gameintro.gfx")
+    END WINDOW
+    DIV ,"intro-controls"
+        DIV ,"intro-controls-buttons"
+            BUTTON "btn_continue",,"btn_continue",,,"continueGame()"
+                PRINT "["
+                PRINT "c","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "Continue game", "button-message"
+            END BUTTON
+            BUTTON "btn_start",,"btn_start",,,"startNewGame()"
+                PRINT "["
+                PRINT "n","button_key"
+                PRINT "]", "button_key_end" 
+                PRINT "New game", "button-message"
+            END BUTTON
+        END DIV
+    END DIV
+END SCREEN
+SCREEN "omega-doom-gameover"
+    WINDOW "gameover"
+        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/gameover/gameover.gfx")
+        PRINT "Game over","gfx-label","gameover-title"
+    END WINDOW
+END SCREEN
+END BODY
+END

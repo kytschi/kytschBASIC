@@ -29,7 +29,7 @@ use KytschBASIC\Helpers\Cookie;
 
 class Display
 {
-	public function parse(string command)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "DISPHEIGHT":

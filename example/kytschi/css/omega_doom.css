@@ -1,0 +1,394 @@
+@font-face {
+    font-family: 'Body';
+    src: url("../fonts/Inconsolata.ttf") format("truetype");
+}
+
+@keyframes flash {
+  0% { color: #ff8700; }
+  50% { color: transparent; }
+  100% { color: #ff8700; }
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Body', monospace;
+    font-size: 12pt;
+}
+
+#omega-doom .hide {
+    display: none;
+}
+
+#omega-doom pre, #omega-doom code {
+    padding: 0;
+    margin: 0;
+    display: block;
+    font-size: 8pt;
+    font-family: 'Body', monospace;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    line-height: 6pt;
+    letter-spacing: 1pt;
+}
+
+#omega-doom button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14pt;
+    line-height: 14pt;
+    margin-bottom: 10px;
+    cursor: pointer;
+    letter-spacing: 0pt;
+}
+#omega-doom button .button_key {
+    color:#ff8700;
+    padding: 0px 4px;
+}
+#omega-doom button .button-message.selected  {
+    color: #009dff;
+}
+#omega-doom button .button_key_end {
+    padding-right: 18px;
+}
+#omega-doom button .button_key_end_small {
+    padding-right: 12px;
+}
+#omega-doom button.locked {
+    opacity: 0.5 !important;
+}
+
+#omega-doom-intro, #omega-doom-gameover {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: none;
+}
+
+#omega-doom-intro pre, #omega-doom-intro #intro-controls, #omega-doom-gameover pre {
+    display: flex;
+    font-family: 'Body', monospace;
+    justify-content: center;
+}
+
+#omega-doom-gameover .gfx-label {
+    text-align: center;
+    color: #00ff3c;
+}
+
+#omega-doom-intro #intro-controls-buttons {
+    display: none;
+    flex-direction: column;
+}
+
+#omega-doom-intro pre code, #omega-doom-gameover pre code {
+    margin-top: 50px;
+    width: 800px !important;
+    text-align: center;
+}
+
+#omega-doom-intro #intro, #omega-doom-gameover #gameover {
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#omega-doom-game {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    display: none;
+}
+
+#omega-doom-game .progress {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+#omega-doom-game .game-progress {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+#omega-doom-game .visuals {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 360px);
+    height: 100%;
+}
+
+#omega-doom-game .visuals.full {
+    width: 100%;
+    height: 100vh;
+}
+
+#omega-doom-game .visuals.full pre, #omega-doom-game .visuals.full code {
+    text-align: center;
+    font-size: 12pt;
+    padding-top: 0px;
+    width: 100%;
+    height: 100vh;
+}
+
+#omega-doom-game #warp .render {
+    text-align: center;
+    font-size: 12pt;
+    padding-top: 30px;
+    width: 100%;
+    height: 100vh;
+}
+
+#omega-doom-game #warp .gfx {
+    width: 100%;
+    height: 100vh;
+}
+
+#omega-doom-game .controls {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: calc(360px - 40px);
+    height: calc(100% - 42px);
+    border: 1px dashed #00ff3c;
+}
+#omega-doom-game .controls button {
+    text-align: left;
+    width: 100%;
+}
+    
+#omega-doom-game .button-message.flash {
+    -webkit-animation: flash linear 2s infinite;
+    animation: flash linear 2s infinite;
+}
+
+#omega-doom-game .gfx, #omega-doom-game .text {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#omega-doom-game .gfx {
+    height: calc(100vh - 300px);
+}
+
+#omega-doom-game .text {
+    border-top: 1px dashed #00ff3c;
+    height: 300px;
+}
+
+#omega-doom-game .gfx .gfx-label {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #00ff3c;
+}
+
+#omega-doom-game .gfx .render {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#omega-doom-game .text .character {
+    display: block;
+    overflow: hidden;
+    width: calc(400px - 40px);
+    height: calc(100% - 40px);
+    padding: 20px 20px;
+    border-right: 1px dashed #00ff3c;
+}
+
+#omega-doom-game .text .character code {
+    height: 300px !important;
+    text-align: center;
+    font-size: 12pt;
+}
+
+#omega-doom p {
+    margin: 0;
+}
+
+#omega-doom-game .text .character p {
+    display: block;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    padding: 0 5px;
+}
+
+#omega-doom-game .text .speech {
+    display: block;
+    overflow: hidden;
+    width: calc(100% - 440px);
+    height: calc(100% - 20px);
+    padding: 20px 20px;
+}
+
+#omega-doom-game .text .speech p {
+    margin-bottom: 10px;
+}
+
+#omega-doom-game .text .speech p span {
+    background-color: #fff;
+    color: #000;
+    padding: 0 5px;
+}
+
+#omega-doom-game .controls-buttons {
+    height: calc(100vh - 200px - 40px) !important;
+}
+
+#omega-doom-game .controls-stats {
+    text-transform: uppercase;
+    height: 200px !important;
+    width: 100%;
+}
+
+#omega-doom-game .controls-stats .controls-stats-label {
+    color: #bab8b8;
+    width: 120px;
+}
+
+#omega-doom-game .controls-stats .normal {
+    color: #00ff2e;
+}
+#omega-doom.alert-normal .text .character,
+#omega-doom.alert-normal .text,
+#omega-doom.alert-normal .controls {
+    border-color: #00ff2e !important;
+}
+#omega-doom-game .controls-stats .yellow {
+    color: #ffd900;
+}
+#omega-doom.alert-yellow .text .character,
+#omega-doom.alert-yellow .text,
+#omega-doom.alert-yellow .controls {
+    border-color: #ffd900 !important;
+}
+#omega-doom-game .controls-stats .red {
+    color: #ff0000;
+}
+#omega-doom.alert-red .text .character,
+#omega-doom.alert-red .text,
+#omega-doom.alert-red .controls {
+    border-color: #ff0000 !important;
+}
+
+#omega-doom-game #map code {
+    text-align: center;
+    font-size: 12pt;
+    padding-top: 30px;
+}
+
+#omega-doom #map .map-text {
+    padding: 10px 10px;
+    background-color: #000;
+    color: #fff;
+}
+
+#omega-doom #map #kazaria-syndicate-map {
+    position: absolute;
+    top: 90px;
+    left: calc(50% - 280px);
+}
+#omega-doom #map #federation-map {
+    position: absolute;
+    top: 230px;
+    left: calc(50% - 360px);
+}
+#omega-doom #map #rosia-empire-map {
+    position: absolute;
+    top: 260px;
+    left: calc(50% + 70px);
+}
+#omega-doom #map #aris-republic-map {
+    position: absolute;
+    top: 340px;
+    left: calc(50% - 560px);
+}
+#omega-doom #map #garis-republic-map {
+    position: absolute;
+    top: 400px;
+    left: calc(50% - 180px);
+}
+#omega-doom #map #stovacor-map {
+    position: absolute;
+    top: 440px;
+    left: calc(50% - 440px);
+}
+#omega-doom #map #house-of-moong-map {
+    position: absolute;
+    top: 480px;
+    left: calc(50% - 200px);
+}
+#omega-doom #map #the-void-map {
+    position: absolute;
+    top: 310px;
+    left: calc(50% - 210px);
+}
+
+#omega-doom #map #earth-map {
+    position: absolute;
+    top: 60px;
+    left: calc(50% - 620px);
+}
+#omega-doom #map #yidow-prime-map {
+    position: absolute;
+    top: 120px;
+    left: calc(50% - 380px);
+}
+#omega-doom #map #fasbon-prime-map {
+    position: absolute;
+    top: 120px;
+    left: calc(50% + 60px);
+}
+#omega-doom #map #cratol-moon-map {
+    position: absolute;
+    top: 170px;
+    left: calc(50% - 590px);
+}
+#omega-doom #map #furia-prime-map {
+    position: absolute;
+    top: 390px;
+    left: calc(50% - 600px);
+}
+#omega-doom #map #opalus-prime-map {
+    position: absolute;
+    top: 310px;
+    left: calc(50% - 180px);
+}
+#omega-doom #map #outpost-3366-map {
+    position: absolute;
+    top: 380px;
+    left: calc(50% + 90px);
+}
+
+@media only screen and (max-height: 720px) {
+    #omega-doom-game .gfx {
+        height: calc(100vh - 200px);
+    }
+
+    #omega-doom-game .text {
+        height: 200px;
+    }
+
+    #omega-doom-game .text .character code {
+        height: 200px !important;
+        font-size: 6pt;
+        position: relative;
+        margin-top: -60px;
+    }
+}

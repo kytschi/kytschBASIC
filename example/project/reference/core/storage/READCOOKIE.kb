@@ -1,0 +1,78 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "READCOOKIE statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "READCOOKIE","basic"
+				END HEADING 2
+				SWRITE
+					PRINT "When performing a query you often need to pass data in to said query, this is where the bind command comes into play."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/installation#configuration"
+						PRINT "configuration"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DATA"
+						PRINT "DATA"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DOPEN"
+						PRINT "DOPEN"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DSELECT"
+						PRINT "DSELECT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DSORT"
+						PRINT "DSORT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DSET"
+						PRINT "DSET"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DINSERT"
+						PRINT "DINSERT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DWHERE"
+						PRINT "DWHERE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WRITECOOKIE"
+						PRINT "WRITECOOKIE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CREATECOOKIE"
+						PRINT "CREATECOOKIE"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

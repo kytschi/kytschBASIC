@@ -69,6 +69,10 @@ END WHILE
 					LINK "/reference/WHILE"
 						PRINT "WHILE"
 					END LINK
+					PRINT " | "
+					LINK "/reference/CONTINUE"
+						PRINT "CONTINUE"
+					END LINK
 				END DIV
 			END DIV
 		END DIV

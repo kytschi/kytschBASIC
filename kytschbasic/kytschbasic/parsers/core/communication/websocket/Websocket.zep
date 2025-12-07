@@ -31,7 +31,7 @@ use KytschBASIC\Parsers\Core\Communication\Websocket\Chat;
 
 class Websocket extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		var controller;
 

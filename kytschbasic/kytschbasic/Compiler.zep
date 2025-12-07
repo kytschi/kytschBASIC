@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.15 alpha
+ * @version     0.0.16 alpha
  *
  * Copyright 2025 Mike Welsh
  * This library is free software; you can redistribute it and/or
@@ -40,7 +40,7 @@ class Compiler
 
 	private start_time;
 	
-	private version = "0.0.15 alpha";
+	private version = "0.0.16 alpha";
 
 	private cli;
 
@@ -142,12 +142,11 @@ class Compiler
 
 	private function compile(route)
 	{
-		var err, output = "";
+		var err;
 
 		try {
 			var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
-			let output = "<!DOCTYPE html>" . parsed;
-			file_put_contents(constant("_ROOT") . "/compiled.php", output);
+			file_put_contents(constant("_ROOT") . "/compiled.php", "<!DOCTYPE html>\n" . parsed);
 			require_once(constant("_ROOT") . "/compiled.php");
 			return "";
 		} catch Exception, err {

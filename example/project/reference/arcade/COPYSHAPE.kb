@@ -24,40 +24,44 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-RGB 0,0,0
-BITMAP 0,0,640,480
-	REM Create a circle
-	RGB 255,0,0
-	CIRCLE 280,220,40
+SCREEN
+	RGB 0,0,0
+	BITMAP 0,0,640,480
+		REM Create a circle
+		RGB 255,0,0
+		CIRCLE 280,220,40
 
-	REM Copy the freshly drawn circle and create a new one
-	COPYSHAPE 0,1
+		REM Copy the freshly drawn circle and create a new one
+		COPYSHAPE 0,1
 
-	REM Move the copied circle's X and Y
-	MOVESHAPE 360,300
+		REM Move the copied circle's X and Y
+		MOVESHAPE 360,300
 
-	REM Draw the newly copied shape
-	DRAWSHAPE
-END BITMAP
+		REM Draw the newly copied shape
+		DRAWSHAPE
+	END BITMAP
+END SCREEN
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				RGB 0,0,0
-				BITMAP 0,0,640,480
-					REM Create a circle
-					RGB 255,0,0
-					CIRCLE 280,220,40
+				SCREEN
+					RGB 0,0,0
+					BITMAP 0,0,640,480
+						REM Create a circle
+						RGB 255,0,0
+						CIRCLE 280,220,40
 
-					REM Copy the freshly drawn circle and create a new one
-					COPYSHAPE 0,1
+						REM Copy the freshly drawn circle and create a new one
+						COPYSHAPE 0,1
 
-					REM Move the copied circle's X and Y
-					MOVESHAPE 360,300
+						REM Move the copied circle's X and Y
+						MOVESHAPE 360,300
 
-					REM Draw the newly copied shape
-					DRAWSHAPE
-				END BITMAP
+						REM Draw the newly copied shape
+						DRAWSHAPE
+					END BITMAP
+				END SCREEN
 				HEADING 4
 					PRINT "Parameters"
 				END HEADING 4

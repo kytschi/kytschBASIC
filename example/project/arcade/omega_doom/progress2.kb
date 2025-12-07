@@ -1,0 +1,1556 @@
+WINDOW "game-window", "progress"
+    DIV "game-progress","game-progress-1"
+        PRINT "Ambrose, contact Federation Command, put me through to Admiral Byrd.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-1");
+                ship_status_trigger.push(["game-progress-1", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-2"
+        PRINT "Yes Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-2");
+                ship_status_trigger.push(["game-progress-2", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-3"
+        PRINT "Channel open.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-3");
+                ship_status_trigger.push(["game-progress-3", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-4"
+        PRINT "Admiral, no life signs at the outpost...","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-4");
+                ship_status_trigger.push(["game-progress-4", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-5"
+        PRINT "...we are downloading what we can from their computers.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-5");
+                ship_status_trigger.push(["game-progress-5", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-6"
+        PRINT "I said report back and not to do anything else!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-6");
+                ship_status_trigger.push(["game-progress-6", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-7"
+        PRINT "Damn it John!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-7");
+                ship_status_trigger.push(["game-progress-7", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-8"
+        PRINT "Captain! The sensor anomaly, it's moving closer.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-8");
+                ship_status_trigger.push(["game-progress-8", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-9"
+        PRINT "What sensor anomaly?!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-9");
+                ship_status_trigger.push(["game-progress-9", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-10"
+        PRINT "We've picked up some anomaly on our sensors...","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-10");
+                ship_status_trigger.push(["game-progress-10", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-11"
+        PRINT "...Mr Thomas if you please.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-11");
+                ship_status_trigger.push(["game-progress-11", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-12"
+        PRINT "Admiral, sensors indicate a solid mass but only for a fraction of a second.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-12");
+                ship_status_trigger.push(["game-progress-12", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-13"
+        PRINT "I am also picking up neutronic radiation.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-13");
+                ship_status_trigger.push(["game-progress-13", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-14"
+        PRINT "As if a sigularity is near by...","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-14");
+                ship_status_trigger.push(["game-progress-14", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-15"
+        PRINT "John, why did you have to go and download that data!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-15");
+                ship_status_trigger.push(["game-progress-15", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-16"
+        PRINT "Rich. Am I missing something here?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-16");
+                ship_status_trigger.push(["game-progress-16", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-17"
+        PRINT "Captain, I'm reading a sigularity forming.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-17");
+                ship_status_trigger.push(["game-progress-17", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-18"
+        PRINT "Onscreen Mr Thomas.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Outpost 3366","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-18");
+                ship_status_trigger.push(["game-progress-18", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-19"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    DIV "hide","blink-frame1"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria_blink1.gfx")
+                    END DIV
+                    DIV "hide","blink-frame2"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria_blink2.gfx")
+                    END DIV
+                    DIV "hide","blink-frame3"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria_blink3.gfx")
+                    END DIV
+                    DIV "hide","blink-frame4"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria_blink4.gfx")
+                    END DIV
+                    DIV "hide","blink-frame5"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria_blink5.gfx")
+                    END DIV
+                    DIV "hide","blink-frame6"
+                        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                    END DIV
+                END DIV
+            END DIV
+        END WINDOW
+        ANIMATION "omegaDoomBlink", "false"
+            SHOW "blink-frame1"
+            SLEEP 10
+            HIDE "blink-frame1"
+            SHOW "blink-frame2"
+            SLEEP 10
+            HIDE "blink-frame2"
+            SHOW "blink-frame3"
+            SLEEP 10
+            HIDE "blink-frame3"
+            SHOW "blink-frame4"
+            SLEEP 10
+            HIDE "blink-frame4"
+            SHOW "blink-frame5"
+            SLEEP 10
+            HIDE "blink-frame5"
+            SHOW "blink-frame6"
+            SLEEP 1000
+            GOTO nextProgress()
+        END ANIMATION
+        JAVASCRIPT
+            animation_trigger.push(["game-progress-19", "omegaDoomBlink"]);
+        END JAVASCRIPT
+    END DIV
+    DIV "game-progress","game-progress-20"
+        PRINT "It just appeared out of nowhere!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-20");
+                ship_status_trigger.push(["game-progress-20", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-21"
+        PRINT "What the hell kind of ship is that?!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-21");
+                ship_status_trigger.push(["game-progress-21", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-22"
+        PRINT "Unknown Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-22");
+                ship_status_trigger.push(["game-progress-22", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-23"
+        PRINT "But it's the source of the neutronic radiation.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Cmdr. Thomas [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-23");
+                ship_status_trigger.push(["game-progress-23", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-24"
+        PRINT "They call it the Omega Doom...","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-24");
+                ship_status_trigger.push(["game-progress-24", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-25"
+        PRINT "...John, I'm sorry. This is out of my control.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "UNKNOWN","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+             JAVASCRIPT
+                user_input_disabled.push("game-progress-25");
+                ship_status_trigger.push(["game-progress-25", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-26"
+        PRINT "What is it Rich? What is the Omega Doom?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Omega Doom","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-26");
+                ship_status_trigger.push(["game-progress-26", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-27"
+        PRINT "May God welcome you all. Byrd out.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Omega Doom","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "1","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Hail Federation Command", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-27");
+                save_on=["game-progress-27", "progress3"];
+                ship_status_trigger.push(["game-progress-27", "yellow"]);
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+END WINDOW
+JAVASCRIPT
+    loading=0;
+END JAVASCRIPT

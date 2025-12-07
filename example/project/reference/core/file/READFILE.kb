@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
-	NAME "WRITEFILE statment | kytschBASIC"
+	NAME "READFILE statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -9,22 +9,22 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "WRITEFILE","heading-command basic"
+					PRINT "READFILE","heading-command basic"
 					LINE BREAK
-					PRINT "FILE, CONTENT, APPEND (Optional)","heading-args"
+					PRINT "SAVE_TO_VARIABLE, FILE","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "This function will write some content to a file."
+					PRINT "This function will read the contents of a file and save them to a varaible."
 				END SWRITE
 				SWRITE
 					PRINT "NOTE: ", "basic"
-					PRINT "you will need to set permission to the folder you want to write the file into."
+					PRINT "you will need to set permissions so you can read the file from the local server."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-WRITEFILE "_ROOT/robots.txt", "User-agent: *\n Disallow:"
+DEF contents$=READFILE("_ROOT/kytschi/omega_doom/gfx/intro/game-title1.gfx")
 				END CPRINT
 				HEADING 4
 					PRINT "See also"
@@ -34,16 +34,20 @@ WRITEFILE "_ROOT/robots.txt", "User-agent: *\n Disallow:"
 						PRINT "DEF"
 					END LINK
 					PRINT " | "
-					LINK "/reference/DIM#refDIM"
-						PRINT "DIM"
+					LINK "/reference/COPYFILE#refCOPYFILE"
+						PRINT "COPYFILE"
 					END LINK
 					PRINT " | "
-					LINK "/reference/COUNT#refCOUNT"
-						PRINT "COUNT"
+					LINK "/reference/COPYUPLOAD#refCOPYUPLOAD"
+						PRINT "COPYUPLOAD"
 					END LINK
 					PRINT " | "
-					LINK "/reference/DATEFORMAT#refDATEFORMAT"
-						PRINT "DATEFORMAT"
+					LINK "/reference/WRITEFILE#refWRITEFILE"
+						PRINT "WRITEFILE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/OUTPUTFILE#refOUTPUTFILE"
+						PRINT "OUTPUTFILE"
 					END LINK
 				END DIV
 			END DIV

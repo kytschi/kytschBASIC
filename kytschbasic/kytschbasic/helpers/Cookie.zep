@@ -36,6 +36,7 @@ class Cookie
 
 		var cookie, data;
 		let cookie = _COOKIE[this->cookie_name];
+		
 		if (cookie) {
 			let data = json_decode(str_replace("\\\"", "\"", trim(cookie, "\"")));
 		} else {

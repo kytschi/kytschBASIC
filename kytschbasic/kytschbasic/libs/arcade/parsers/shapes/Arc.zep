@@ -29,7 +29,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Arc extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "ARC":
@@ -48,10 +48,10 @@ class Arc extends Command
 			'shape' => '" . (filled ? "imagefilledarc" : "imagearc") . "',
 			'x' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
 			'y' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
-			'width' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
-			'height' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
-			's_angle' => " . (isset(args[3]) ? intval(args[3]) : 0) . ",
-			'e_angle' => " . (isset(args[4]) ? intval(args[4]) : 0) . ",
+			's_angle' => " . (isset(args[2]) ? intval(args[2]) : 0) . ",
+			'e_angle' => " . (isset(args[3]) ? intval(args[3]) : 0) . ",
+			'width' => " . (isset(args[4]) ? intval(args[4]) : 10) . ",
+			'height' => " . (isset(args[4]) ? intval(args[4]) : 10) . ",
 			'style' => " . (isset(args[5]) ? args[5] : "IMG_ARC_NOFILL") . ",
 		]; ?>";
 	}

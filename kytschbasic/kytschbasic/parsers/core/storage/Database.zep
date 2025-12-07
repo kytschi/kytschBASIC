@@ -1,7 +1,7 @@
 /**
  * Database parser
  *
- * @package     KytschBASIC\Parsers\Core\Database
+ * @package     KytschBASIC\Parsers\Core\Storage\Database
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -23,7 +23,7 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  */
-namespace KytschBASIC\Parsers\Core;
+namespace KytschBASIC\Parsers\Core\Storage;
 
 use KytschBASIC\Exceptions\DatabaseException;
 use KytschBASIC\Exceptions\Exception;
@@ -38,7 +38,7 @@ class Database extends Command
 		return str_replace("]", ")", arg);*/
 	}
 
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		var err;
 

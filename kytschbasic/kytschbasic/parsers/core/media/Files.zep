@@ -30,13 +30,15 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Files extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
 			case "COPYFILE":
 				return this->processCopyFile(args);
 			case "COPYUPLOAD":
 				return this->processCopyFileUpload(args);
+			case "OUTPUTFILE":
+				return this->processOutputFile(args);
 			case "WRITEFILE":
 				return this->processWriteFile(args);
 			default:
@@ -83,6 +85,30 @@ class Files extends Command
 				}
 			}
 		} ?>";
+	}
+
+	private function processOutputFile(array args)
+	{
+		var output = "<?php ", printing = 1;
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= args[1] . " = ";
+			let printing = 0;
+		} else {
+			let output .= "printf(";
+		}
+
+		let output .= "file_get_contents(";
+				
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= args[0];
+		}
+
+		if (printing) {
+			let output .= ")";
+		}
+
+		return output . "); ?>";
 	}
 
 	private function processWriteFile(array args)

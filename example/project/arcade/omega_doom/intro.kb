@@ -1,0 +1,1819 @@
+WINDOW "game-intro", "progress"
+    DIV "game-progress","game-progress-1"
+        PRINT "Captain, incoming hail from Federation Command.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-1");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-2"
+        PRINT "Priority one message from Admiral Byrd sir.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Ambrose [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-2");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-3"
+        PRINT "Onscreen.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-3");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-4"
+        PRINT "Admiral, I hope this isn't bad news?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-4");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-5"
+        PRINT "My crew is in dire need of some R an...","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-5");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-6"
+        PRINT "Sorry John, you'll have to delay that.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-6");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-7"
+        PRINT "We've lost contact with a research team at outpost 3366.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit"
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-7");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-8"
+        PRINT "Output 3366, I don't recall it?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-8");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-9"
+        PRINT "You wouldn't, strictly for top brass eyes only John.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-9");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-10"
+        PRINT "Your our closest Starship I'm afraid.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-10");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-11"
+        PRINT "Report to the co-ordinates 663993 691216.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-11");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-12"
+        PRINT "Sector 663993, Admiral that's in the Federation and Rosia Empire border exclusion zone?!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-12");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-13"
+        PRINT "I am well aware of that Captain!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-13");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-14"
+        PRINT "Report back when you've arrived at the outpost.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-14");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-15"
+        PRINT "But Rich, the treaty?","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-15");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-16"
+        PRINT "You have your order's John...God speed.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-16");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-17"
+        PRINT "Byrd out.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Adm. Byrd [Federation Command]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/federation_command/byrd.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "h","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Incoming Hail", "button-message selected"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-17");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-18"
+        PRINT "Helm...","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Communications", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Navigation", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "s","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Sensors", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "w","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Weapons", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engineering", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-18");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-19"
+        PRINT "Aye sir.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Earth","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/sol-earth.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-19");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-20"
+        PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Alpha Quadrant Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-20");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-21"
+        PRINT "Captain, the Admiral said to go to the outpost in Federation and Rosia border exclusion zone.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Alpha Quadrant Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-21");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-22"
+        PRINT "Your right Cyrus.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Alpha Quadrant Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-22");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-23"
+        PRINT "Now, set a course for 663993 691216. Maximum speed.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Alpha Quadrant Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-23");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-24"
+        PRINT "Aye aye, setting course for the outpost in Federation space on Rosia border.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Alpha Quadrant Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawMap("_ROOT/kytschi/omega_doom/gfx/universe/quadrant/alpha.gfx", "federation")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "2"
+                    IFE controls_locked THEN
+                        IF in_game && game_data.game_progress="game-progress-24" && !speaking THEN
+                            GOTO progressSpeech("game-progress-25")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_data.game_progress="game-progress-24" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to be selecting the Federation space from the map.")
+                    END IF
+                END KEYBOARDEVENT
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_enabled.push("game-progress-24");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-25"
+        PRINT "Plotting course Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Federation Sector Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "outpost-3366")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end_small" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            KEYBOARDEVENT "7"
+                IFE controls_locked THEN
+                    IF in_game && game_data.game_progress="game-progress-25" && !speaking THEN
+                        GOTO progressSpeech("game-progress-26")
+                    END IF
+                END IF
+            KEYBOARDEVENT "!p && !q"
+                IF game_data.game_progress="game-progress-25" && in_game && user_input && !speaking THEN
+                    GOTO invalidButton("I need to be selecting Outpost 3366 from the map.")
+                END IF
+            END KEYBOARDEVENT
+            JAVASCRIPT
+                user_input_enabled.push("game-progress-24");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-26"
+        PRINT "Course plotted Captain.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Federation Sector Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-26");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-27"
+        PRINT "Engage!","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Federation Sector Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Captain. Abrahams [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message selected"
+                END BUTTON
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "e","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Engines", "button-message"
+                END BUTTON
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_disabled.push("game-progress-27");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-28"
+        PRINT "Aye sir.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Federation Sector Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                BUTTON ,"locked"
+                    PRINT "["
+                    PRINT "m","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Map", "button-message"
+                END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-29')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "e","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Engines", "button-message flash"
+                    END BUTTON
+                END MOUSEACTION
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "e"
+                    IFE controls_locked THEN
+                        IF in_game && game_data.game_progress="game-progress-28" && !speaking THEN
+                            GOTO progressSpeech("game-progress-29")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_data.game_progress="game-progress-28" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to engage the engines.")
+                    END IF
+                END KEYBOARDEVENT
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_enabled.push("game-progress-28");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-29"
+        PRINT "Engaging FTL drive now.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Federation Sector Map","gfx-label"
+                DIV "render", "map"
+                    GOTO drawFederationMap("_ROOT/kytschi/omega_doom/gfx/universe/federation/federation-map.gfx", "", "outpost-3366")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Cyrus [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/cyrus.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                MOUSEACTION "triggerAnimation"
+                    BUTTON
+                        PRINT "["
+                        PRINT "f","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "FTL drive", "button-message flash"
+                    END BUTTON
+                MOUSEACTION "invalidButton('I need to engage the FTL drive.')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "i","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Impuse drive", "button-message"
+                    END BUTTON
+                END MOUSEACTION
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "f"
+                    IFE controls_locked THEN
+                        IF in_game && game_data.game_progress="game-progress-29" && !speaking THEN
+                            GOTO triggerAnimation()
+                        END IF
+                    END IF
+                KEYBOARDEVENT "!p && !q"
+                    IF game_data.game_progress="game-progress-29" && in_game && user_input && !speaking THEN
+                        GOTO invalidButton("I need to engage the FTL drive.")
+                    END IF
+                END KEYBOARDEVENT
+            END DIV
+            GOTO drawStats("federation", "earth")
+            JAVASCRIPT
+                user_input_enabled.push("game-progress-29");
+            END JAVASCRIPT
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-30"
+        WINDOW "warp","visuals full"
+            DIV "gfx"
+                PRINT "Warping to Output 3366","gfx-label"
+                DIV "render", "warp-effect"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/warp_effect/0.gfx")
+                END DIV
+            END DIV
+        END WINDOW
+        ANIMATION "animationWarp", "false"
+            SPIN "warp-effect"
+            TIMEOUT "3000"
+                GOTO saveAndQuit('progress1')
+            END TIMEOUT
+        END ANIMATION
+    END DIV
+END WINDOW
+JAVASCRIPT
+    loading=0;
+END JAVASCRIPT
+AFUNCTION "triggerAnimation"
+    progressSpeech(event,'game-progress-30');
+    animationWarp(event);
+END AFUNCTION
+AFUNCTION "navigation", "location"
+    if (location == "federation" || location == "outpost-3366") {
+        nextProgress(event);
+    } else {
+        invalidButton(event, "I need to be selecting Outpost 3366 in Federation space from the map.")
+    }
+END AFUNCTION

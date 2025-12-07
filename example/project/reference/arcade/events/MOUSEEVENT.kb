@@ -1,0 +1,137 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "MOUSEEVENT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "MOUSEEVENT","heading-command basic"
+					LINE BREAK
+					PRINT "ELEMENT, DOUBLE CLICK (optional)","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "This will allow you to listen for a mouse click or a mouse double click."
+				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " to enable double click set the argument to "
+					PRINT "true","basic"
+					PRINT "."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+AFUNCTION "popup", "message"
+	alert(message);
+END AFUNCTION
+MOUSEEVENT "#btn-mouse-event"
+    GOTO popup("Click by ID")
+MOUSEEVENT ".btn-mouse-event"
+    GOTO popup("Click by CLASS")
+MOUSEEVENT "button p"
+    GOTO popup("Click by TAG")
+END MOUSEEVENT
+BUTTON "btn-mouse-event"
+	PRINT "Click to see popup by ID"
+END BUTTON
+BUTTON ,"btn-mouse-event"
+	PRINT "Click to see popup by CLASS"
+END BUTTON
+BUTTON
+	PRINT "Click to see popup by TAG"
+END BUTTON
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				AFUNCTION "popup", "message"
+					alert(message);
+				END AFUNCTION
+				MOUSEEVENT "#btn-mouse-event"
+					GOTO popup("Click by ID")
+				MOUSEEVENT ".btn-mouse-event"
+					GOTO popup("Click by CLASS")
+				MOUSEEVENT "button p"
+					GOTO popup("Click by TAG")
+				END MOUSEEVENT
+				BUTTON ,,"btn-mouse-event"
+					PRINT "Click to see popup by ID"
+				END BUTTON
+				BUTTON ,"btn-mouse-event"
+					PRINT "Click to see popup by CLASS"
+				END BUTTON
+				BUTTON
+					SWRITE
+						PRINT "Click to see popup by TAG"
+					END SWRITE
+				END BUTTON
+				HEADING 4
+					PRINT "Information on the ELEMENT argument"
+				END HEADING 4
+				SWRITE
+					PRINT "ELEMENT","basic"
+					PRINT " can be an ID, a CLASS, or a TAG."
+					LINE BREAK
+					PRINT "Below is how to access the element by their different identifiers."
+				END SWRITE
+				DIV "kb-col kb-col-24 kb-code-block"
+					SWRITE
+						TABLE "table-border"
+							TBODY
+								TROW
+									TCELL
+										PRINT "ID"
+									END TCELL
+									TCELL ,, 2
+										PRINT "#element-id"
+									END TCELL
+								END TROW
+								TROW
+									TCELL
+										PRINT "CLASS"
+									END TCELL
+									TCELL ,, 2
+										PRINT ".element-class"
+									END TCELL
+								END TROW
+								TROW
+									TCELL
+										PRINT "TAG"
+									END TCELL
+									TCELL ,, 2
+										PRINT "button"
+									END TCELL
+								END TROW
+							END TBODY
+						END TABLE
+					END SWRITE
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/AFUNCTION"
+						PRINT "AFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ASYNCFUNCTION"
+						PRINT "ASYNCFUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

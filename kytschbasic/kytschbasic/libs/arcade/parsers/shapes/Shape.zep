@@ -30,7 +30,7 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Shape extends Command
 {
-	public function parse(string line, string command, array args)
+	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
 			case "COPYSHAPE":

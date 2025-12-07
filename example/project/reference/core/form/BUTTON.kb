@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "BUTTON","heading-command basic"
 					LINE BREAK
-					PRINT "NAME, CLASS, ID, VALUE, LABEL","heading-args"
+					PRINT "NAME, CLASS, ID, VALUE, LABEL, ONCLICK","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Create a button."
@@ -37,7 +37,7 @@ SWRITE
 					WHITESPACE
 				END TCELL
 				TCELL
-					BUTTON "btn_test",,,"button"
+					BUTTON "btn_test",,,,"button"
 				END TCELL
 				TCELL
 					BUTTON "btn_test2"
@@ -70,7 +70,7 @@ END SWRITE
 										WHITESPACE
 									END TCELL
 									TCELL
-										BUTTON "btn_test",,,"button","button"
+										BUTTON "button","btn_test"
 									END TCELL
 									TCELL
 										BUTTON "btn_test2"
@@ -96,6 +96,14 @@ END SWRITE
 					PRINT " | "
 					LINK "/reference/TEXTAREA"
 						PRINT "TEXTAREA"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEEVENT"
+						PRINT "MOUSEEVENT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/NUMBERINPUT"

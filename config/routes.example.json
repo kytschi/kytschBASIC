@@ -44,6 +44,10 @@
 		"url": "/arcade/crossword",
 		"template": "project/arcade/crossword.kb"
 	},
+	{
+		"url": "/arcade/omega-doom",
+		"template": "project/arcade/omega_doom/index.kb"
+	},
 
 	{
 		"url": "/news",
@@ -92,8 +96,8 @@
 		"template": "project/reference/core/function/DATEFORMAT.kb"
 	},
 	{
-		"url": "/reference/WRITEFILE",
-		"template": "project/reference/core/function/WRITEFILE.kb"
+		"url": "/reference/SLEEP",
+		"template": "project/reference/core/function/SLEEP.kb"
 	},
 	{
 		"url": "/reference/LET",
@@ -167,7 +171,11 @@
 	
 	{
 		"url": "/reference/GOTO",
-		"template": "project/reference/core/conditional/GOTO.kb"
+		"template": "project/reference/core/navigation/GOTO.kb"
+	},
+	{
+		"url": "/reference/FUNCTION",
+		"template": "project/reference/core/function/FUNCTION.kb"
 	},
 	{
 		"url": "/reference/REM",
@@ -206,54 +214,71 @@
 		"url": "/reference/CASE",
 		"template": "project/reference/core/conditional/CASE.kb"
 	},
+	{
+		"url": "/reference/CONTINUE",
+		"template": "project/reference/core/loops/CONTINUE.kb"
+	},
 
 	{
 		"url": "/reference/DBIND",
-		"template": "project/reference/core/database/DBIND.kb"
+		"template": "project/reference/core/storage/database/DBIND.kb"
 	},
 	{
 		"url": "/reference/DINSERT",
-		"template": "project/reference/core/database/DINSERT.kb"
+		"template": "project/reference/core/storage/database/DINSERT.kb"
 	},
 	{
 		"url": "/reference/DLIMIT",
-		"template": "project/reference/core/database/DLIMIT.kb"
+		"template": "project/reference/core/storage/database/DLIMIT.kb"
 	},
 	{
 		"url": "/reference/DJOIN",
-		"template": "project/reference/core/database/DJOIN.kb"
+		"template": "project/reference/core/storage/database/DJOIN.kb"
 	},
 	{
 		"url": "/reference/DLJOIN",
-		"template": "project/reference/core/database/DLJOIN.kb"
+		"template": "project/reference/core/storage/database/DLJOIN.kb"
 	},
 	{
 		"url": "/reference/DRJOIN",
-		"template": "project/reference/core/database/DRJOIN.kb"
+		"template": "project/reference/core/storage/database/DRJOIN.kb"
 	},
 	{
 		"url": "/reference/DOPEN",
-		"template": "project/reference/core/database/DOPEN.kb"
+		"template": "project/reference/core/storage/database/DOPEN.kb"
 	},
 	{
 		"url": "/reference/DREAD",
-		"template": "project/reference/core/database/DREAD.kb"
+		"template": "project/reference/core/storage/database/DREAD.kb"
 	},
 	{
 		"url": "/reference/DSELECT",
-		"template": "project/reference/core/database/DSELECT.kb"
+		"template": "project/reference/core/storage/database/DSELECT.kb"
 	},
 	{
 		"url": "/reference/DSET",
-		"template": "project/reference/core/database/DSET.kb"
+		"template": "project/reference/core/storage/database/DSET.kb"
 	},
 	{
 		"url": "/reference/DSORT",
-		"template": "project/reference/core/database/DSORT.kb"
+		"template": "project/reference/core/storage/database/DSORT.kb"
 	},
 	{
 		"url": "/reference/DWHERE",
-		"template": "project/reference/core/database/DWHERE.kb"
+		"template": "project/reference/core/storage/database/DWHERE.kb"
+	},
+
+	{
+		"url": "/reference/CREATECOOKIE",
+		"template": "project/reference/core/storage/CREATECOOKIE.kb"
+	},
+	{
+		"url": "/reference/READCOOKIE",
+		"template": "project/reference/core/storage/READCOOKIE.kb"
+	},
+	{
+		"url": "/reference/WRITECOOKIE",
+		"template": "project/reference/core/storage/WRITECOOKIE.kb"
 	},
 
 	{
@@ -398,12 +423,24 @@
 	},
 
 	{
+		"url": "/reference/AFUNCTION",
+		"template": "project/reference/arcade/function/AFUNCTION.kb"
+	},
+	{
+		"url": "/reference/ANIMATION",
+		"template": "project/reference/arcade/animation/ANIMATION.kb"
+	},
+	{
 		"url": "/reference/ARC",
 		"template": "project/reference/arcade/shapes/ARC.kb"
 	},
 	{
 		"url": "/reference/ARCF",
 		"template": "project/reference/arcade/shapes/ARCF.kb"
+	},
+	{
+		"url": "/reference/ASYNCFUNCTION",
+		"template": "project/reference/arcade/function/ASYNCFUNCTION.kb"
 	},
 	{
 		"url": "/reference/BITMAP",
@@ -434,16 +471,8 @@
 		"template": "project/reference/arcade/shapes/CIRCLEF.kb"
 	},
 	{
-		"url": "/reference/COPYFILE",
-		"template": "project/reference/core/media/COPYFILE.kb"
-	},
-	{
 		"url": "/reference/COPYSHAPE",
 		"template": "project/reference/arcade/COPYSHAPE.kb"
-	},
-	{
-		"url": "/reference/COPYUPLOAD",
-		"template": "project/reference/core/media/COPYUPLOAD.kb"
 	},
 	{
 		"url": "/reference/ELLIPSE",
@@ -454,16 +483,48 @@
 		"template": "project/reference/arcade/shapes/ELLIPSEF.kb"
 	},
 	{
+		"url": "/reference/HIDE",
+		"template": "project/reference/arcade/animation/HIDE.kb"
+	},
+	{
+		"url": "/reference/JAVASCRIPT",
+		"template": "project/reference/arcade/function/JAVASCRIPT.kb"
+	},
+	{
+		"url": "/reference/KEYBOARDEVENT",
+		"template": "project/reference/arcade/events/KEYBOARDEVENT.kb"
+	},
+	{
 		"url": "/reference/LINE",
 		"template": "project/reference/arcade/shapes/LINE.kb"
+	},
+	{
+		"url": "/reference/MOUSEACTION",
+		"template": "project/reference/arcade/events/MOUSEACTION.kb"
+	},
+	{
+		"url": "/reference/MOUSEEVENT",
+		"template": "project/reference/arcade/events/MOUSEEVENT.kb"
 	},
 	{
 		"url": "/reference/RGB",
 		"template": "project/reference/arcade/colors/RGB.kb"
 	},
 	{
+		"url": "/reference/RGBTOHEX",
+		"template": "project/reference/core/function/RGBTOHEX.kb"
+	},
+	{
 		"url": "/reference/SCREEN",
 		"template": "project/reference/arcade/screen/SCREEN.kb"
+	},
+	{
+		"url": "/reference/SHOW",
+		"template": "project/reference/arcade/animation/SHOW.kb"
+	},
+	{
+		"url": "/reference/SPIN",
+		"template": "project/reference/arcade/animation/SPIN.kb"
 	},
 	{
 		"url": "/reference/SPRITE",
@@ -561,6 +622,14 @@
 	{
 		"url": "/reference/TAN",
 		"template": "project/reference/core/maths/TAN.kb"
+	},
+	{
+		"url": "/reference/TIMEOUT",
+		"template": "project/reference/core/function/TIMEOUT.kb"
+	},
+	{
+		"url": "/reference/TWODP",
+		"template": "project/reference/core/function/TWODP.kb"
 	},
 
 	{
@@ -692,6 +761,27 @@
 	{
 		"url": "/reference/SESSDESTORY",
 		"template": "project/reference/core/session/SESSDESTORY.kb"
+	},
+
+	{
+		"url": "/reference/COPYFILE",
+		"template": "project/reference/core/file/COPYFILE.kb"
+	},
+	{
+		"url": "/reference/COPYUPLOAD",
+		"template": "project/reference/core/file/COPYUPLOAD.kb"
+	},
+	{
+		"url": "/reference/OUTPUTFILE",
+		"template": "project/reference/core/file/OUTPUTFILE.kb"
+	},
+	{
+		"url": "/reference/READFILE",
+		"template": "project/reference/core/file/READFILE.kb"
+	},
+	{
+		"url": "/reference/WRITEFILE",
+		"template": "project/reference/core/file/WRITEFILE.kb"
 	},
 
 	{

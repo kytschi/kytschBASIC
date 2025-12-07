@@ -118,6 +118,14 @@ END FORM
 						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/MOUSEEVENT"
+						PRINT "MOUSEEVENT"
+					END LINK
+					PRINT " | "
 					LINK "/reference/FILEINPUT"
 						PRINT "FILEINPUT"
 					END LINK

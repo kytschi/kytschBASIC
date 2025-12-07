@@ -1,0 +1,165 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "SPIN statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "SPIN","heading-command basic"
+					LINE BREAK
+					PRINT "ID, SPEED (default 500ms), DIRECTION (default clockwise)","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				END SWRITE
+				SWRITE
+					PRINT "This will create a spin animation on a given element."
+				END SWRITE
+				SWRITE
+					PRINT "Direction can be 'clockwise' or 'anti-clockwise'."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+SCREEN "show_me"
+	RGB 0,0,0
+	BITMAP 0,0,640,480,"spin-me"
+		RGB 255,0,0
+
+		LINE 120,120,120,200
+		LINE 180,120,180,200
+		LINE 120,160,180,160
+
+		LINE 200,160,200,165
+		LINE 200,170,200,200
+
+		LINE 230,120,230,180
+		CIRCLE 230,195,10
+
+		CIRCLE 400,180,220
+
+		CIRCLE 425,150,40
+		CIRCLE 375,150,40
+
+		ARC 400,160,25,150,155
+	END BITMAP
+END SCREEN
+ANIMATION
+	SLEEP 1000
+	SPIN "spin-me", "3000", "anti-clockwise"
+END ANIMATION
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				SCREEN "show_me"
+					RGB 0,0,0
+					BITMAP 0,0,640,480,"spin-me"
+						RGB 255,0,0
+
+						LINE 120,120,120,200
+						LINE 180,120,180,200
+						LINE 120,160,180,160
+
+						LINE 200,160,200,165
+						LINE 200,170,200,200
+
+						LINE 230,120,230,180
+						CIRCLE 230,195,10
+
+						CIRCLE 400,180,220
+
+						CIRCLE 425,150,40
+						CIRCLE 375,150,40
+
+						ARC 400,160,25,150,155
+					END BITMAP
+				END SCREEN
+				ANIMATION
+					SLEEP 1000
+					SPIN "spin-me", "3000", "anti-clockwise"
+				END ANIMATION
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ARCF"
+						PRINT "ARCF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAPFONT"
+						PRINT "BITMAPFONT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAPTEXT"
+						PRINT "BITMAPTEXT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BOX"
+						PRINT "BOX"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BOXF"
+						PRINT "BOXF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ELLIPSE"
+						PRINT "ELLIPSE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ELLIPSEF"
+						PRINT "ELLIPSEF"
+					END LINK
+					PRINT " | "
+					LINK "/globals"
+						PRINT "Globals"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HIDE"
+						PRINT "HIDE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/RGB"
+						PRINT "RGB"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SCREEN"
+						PRINT "SCREEN"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SHOW"
+						PRINT "SHOW"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

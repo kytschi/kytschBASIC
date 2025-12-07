@@ -1,0 +1,150 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "SPLIT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "SPLIT","heading-command basic"
+					LINE BREAK
+					PRINT "STRING, DELIMITER","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Split a string by a delimiter."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+DIM splits$=SPLIT("String to split", " ")
+FOR val$ IN splits$
+	PRINT val$
+	LINE BREAK
+NEXT
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DEF hex$=RGBTOHEX(0,255,0)
+				LET hex$="color:"+hex$
+				PRINT "Green",,,,hex$
+				HEADING 4
+					PRINT "Parameters"
+				END HEADING 4
+				TABLE
+					THEAD
+						TROW
+							THEADCELL "140px"
+								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "200px"
+								PRINT "Type"
+							END THEADCELL
+							THEADCELL
+								PRINT "Description"
+							END THEADCELL
+						END TROW
+					END THEAD
+					TBODY
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "RED"
+							END TCELL
+							TCELL
+								PRINT "integer"
+							END TCELL
+							TCELL
+								PRINT "Red colour from 0 to 255"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "GREEN"
+							END TCELL
+							TCELL
+								PRINT "integer"
+							END TCELL
+							TCELL
+								PRINT "Green colour from 0 to 255"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "BLUE"
+							END TCELL
+							TCELL
+								PRINT "integer"
+							END TCELL
+							TCELL
+								PRINT "Blue colour from 0 to 255"
+							END TCELL
+						END TROW
+					END TBODY
+				END TABLE
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/ARC"
+						PRINT "ARC"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ARCF"
+						PRINT "ARCF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAP"
+						PRINT "BITMAP"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAPFONT"
+						PRINT "BITMAPFONT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BITMAPTEXT"
+						PRINT "BITMAPTEXT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BOX"
+						PRINT "BOX"
+					END LINK
+					PRINT " | "
+					LINK "/reference/BOXF"
+						PRINT "BOXF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/CIRCLEF"
+						PRINT "CIRCLEF"
+					END LINK
+					PRINT " | "
+					LINK "/globals"
+						PRINT "Globals"
+					END LINK
+					PRINT " | "
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SCREEN"
+						PRINT "SCREEN"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

@@ -85,7 +85,8 @@ AFUNCTION "computerPlay"
 
     var value = "";
     var played = false;
-
+    var status = false;
+    
     sleep(500).then(() => {
         hands[turn].sort(() => Math.random() - .5);
 
@@ -139,7 +140,7 @@ END AFUNCTION
 
 AFUNCTION "updateDeck", "cards", "value", "check=false"
     let status = false;
-
+    
     if (window["deck_" + cards].length == 1) {
         if (value != 7 && deck_suit != "diamonds" && start == 1) {
             gameInfo(event, "Start with the 7 of diamonds", true);
@@ -157,7 +158,7 @@ AFUNCTION "updateDeck", "cards", "value", "check=false"
         }
     } else {
         window["deck_" + cards].forEach((face, index) => {
-            if (face == value) {
+            if (face == parseInt(value)) {
                 if (!check) {
                     $("button[name=btnLastCard]").removeAttr("disabled");
                     window["deck_" + cards][index] = window["deck_" + cards][index] + ((face < 7) ? -1 : 1);
@@ -369,11 +370,6 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
-function sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-}
-
-$(document).ready(function() {
     var played = false;
 
     if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
@@ -409,10 +405,6 @@ $(document).ready(function() {
         turn = 0;
     }
 
-    $("button[name=btnKnock]").click(() => {
-        playerKnocking();
-    });
-
     $("button[name=btnSetup]").click(() => {
         $("#playerSelect").show();
         $("#multiplayerSelect").hide();
@@ -435,7 +427,6 @@ $(document).ready(function() {
     $("button[name=btnMultiPlayerStart]").click(() => {
         
     });
-});
 END JAVASCRIPT
 
 SCREEN "sevens"
