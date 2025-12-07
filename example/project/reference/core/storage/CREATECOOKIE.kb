@@ -1,0 +1,90 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "CREATECOOKIE statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				HEADING 2
+					PRINT "CREATECOOKIE","basic"
+				END HEADING 2
+				SWRITE
+					PRINT "Create a browser cookie for local storage."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+CREATECOOKIE("kb_test", "{'data':'test'}")
+
+REM Using a variable
+DIM test$=[]
+LET test$["data"]="test"
+
+CREATECOOKIE("kb_test", test$)
+
+REM Without the brackets
+CREATECOOKIE "kb_test", test$
+
+REM Creating a cookie with simple data
+CREATECOOKIE "kb_test", "test"
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+				CREATECOOKIE("kb_test", "{'data':'test'}")
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/installation#configuration"
+						PRINT "configuration"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DATA"
+						PRINT "DATA"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DOPEN"
+						PRINT "DOPEN"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DSELECT"
+						PRINT "DSELECT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DSORT"
+						PRINT "DSORT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DSET"
+						PRINT "DSET"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DINSERT"
+						PRINT "DINSERT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DWHERE"
+						PRINT "DWHERE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/READCOOKIE"
+						PRINT "READCOOKIE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WRITECOOKIE"
+						PRINT "WRITECOOKIE"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

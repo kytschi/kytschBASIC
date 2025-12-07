@@ -31,6 +31,7 @@ use KytschBASIC\Parsers\Core\Input\Form;
 use KytschBASIC\Parsers\Core\Maths;
 use KytschBASIC\Parsers\Core\Security\Encryption;
 use KytschBASIC\Parsers\Core\Session;
+use KytschBASIC\Parsers\Core\Storage\Cookie;
 use KytschBASIC\Parsers\Core\Text\Text;
 
 class Variables
@@ -786,6 +787,8 @@ class Variables
 				return (new Encryption())->processHashVerify(arg);
 			case "HASH":
 				return (new Encryption())->processHash(arg);
+			case "READCOOKIE":
+				return (new Cookie())->processRead(arg);
 			case "READFILE":
 				return this->processReadFile(arg);
 			case "RGBTOHEX":

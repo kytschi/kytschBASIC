@@ -51,7 +51,10 @@ class Arcade extends Command
 				return new Promise((resolve) => setTimeout(resolve, time));
 			}
 
-			function CREATECOOKIE(cookie_name, data) {
+			function CREATECOOKIE(cookie_name, data=null) {
+				if (!data) {
+					data = {};
+				}
 				Cookies.set(cookie_name, JSON.stringify(data));
 			}
 

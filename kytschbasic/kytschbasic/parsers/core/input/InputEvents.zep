@@ -209,6 +209,9 @@ class InputEvents extends Command
 		}
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			if (in_event) {
+				let output .= "}); ";
+			}
 			let output .= "$('" . trim(args[0], "\"") . "').on('" . type . "', function(event) {";
 		} else {
 			throw new Exception("Invalid MOUSEEVENT.");

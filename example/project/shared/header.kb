@@ -148,6 +148,9 @@ HEADER
 		LINK "/reference/CPRINT#refCPRINT","Find out about the CPRINT command","nav-link",,"refCPRINT"
 			PRINT "CPRINT"
 		END LINK
+		LINK "/reference/CREATECOOKIE#refCREATECOOKIE","Find out about the CREATECOOKIE command","nav-link",,"refCREATECOOKIE"
+			PRINT "CREATECOOKIE"
+		END LINK
 		LINK "/reference/DATEFORMAT#refDATEFORMAT","Find out about the DATEFORMAT command","nav-link",,"refDATEFORMAT"
 			PRINT "DATEFORMAT"
 		END LINK
@@ -379,6 +382,9 @@ HEADER
 		LINK "/reference/POP#refPOP","Find out about the POP command","nav-link",,"refPOP"
 			PRINT "POP"
 		END LINK
+		LINK "/reference/READCOOKIE#refREADCOOKIE","Find out about the READCOOKIE command","nav-link",,"refREADCOOKIE"
+			PRINT "READCOOKIE"
+		END LINK
 		LINK "/reference/READFILE#refREADFILE","Find out about the READFILE command","nav-link",,"refREADFILE"
 			PRINT "READFILE"
 		END LINK
@@ -540,6 +546,9 @@ HEADER
 		END LINK
 		LINK "/reference/WINDOW#refWINDOW","Find out about the WINDOW command","nav-link",,"refWINDOW"
 			PRINT "WINDOW"
+		END LINK
+		LINK "/reference/WRITECOOKIE#refWRITECOOKIE","Find out about the WRITECOOKIE command","nav-link",,"refWRITECOOKIE"
+			PRINT "WRITECOOKIE"
 		END LINK
 		LINK "/reference/WRITEFILE#refWRITEFILE","Find out about the WRITEFILE command","nav-link",,"refWRITEFILE"
 			PRINT "WRITEFILE"

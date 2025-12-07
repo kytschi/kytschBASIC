@@ -221,51 +221,64 @@
 
 	{
 		"url": "/reference/DBIND",
-		"template": "project/reference/core/database/DBIND.kb"
+		"template": "project/reference/core/storage/database/DBIND.kb"
 	},
 	{
 		"url": "/reference/DINSERT",
-		"template": "project/reference/core/database/DINSERT.kb"
+		"template": "project/reference/core/storage/database/DINSERT.kb"
 	},
 	{
 		"url": "/reference/DLIMIT",
-		"template": "project/reference/core/database/DLIMIT.kb"
+		"template": "project/reference/core/storage/database/DLIMIT.kb"
 	},
 	{
 		"url": "/reference/DJOIN",
-		"template": "project/reference/core/database/DJOIN.kb"
+		"template": "project/reference/core/storage/database/DJOIN.kb"
 	},
 	{
 		"url": "/reference/DLJOIN",
-		"template": "project/reference/core/database/DLJOIN.kb"
+		"template": "project/reference/core/storage/database/DLJOIN.kb"
 	},
 	{
 		"url": "/reference/DRJOIN",
-		"template": "project/reference/core/database/DRJOIN.kb"
+		"template": "project/reference/core/storage/database/DRJOIN.kb"
 	},
 	{
 		"url": "/reference/DOPEN",
-		"template": "project/reference/core/database/DOPEN.kb"
+		"template": "project/reference/core/storage/database/DOPEN.kb"
 	},
 	{
 		"url": "/reference/DREAD",
-		"template": "project/reference/core/database/DREAD.kb"
+		"template": "project/reference/core/storage/database/DREAD.kb"
 	},
 	{
 		"url": "/reference/DSELECT",
-		"template": "project/reference/core/database/DSELECT.kb"
+		"template": "project/reference/core/storage/database/DSELECT.kb"
 	},
 	{
 		"url": "/reference/DSET",
-		"template": "project/reference/core/database/DSET.kb"
+		"template": "project/reference/core/storage/database/DSET.kb"
 	},
 	{
 		"url": "/reference/DSORT",
-		"template": "project/reference/core/database/DSORT.kb"
+		"template": "project/reference/core/storage/database/DSORT.kb"
 	},
 	{
 		"url": "/reference/DWHERE",
-		"template": "project/reference/core/database/DWHERE.kb"
+		"template": "project/reference/core/storage/database/DWHERE.kb"
+	},
+
+	{
+		"url": "/reference/CREATECOOKIE",
+		"template": "project/reference/core/storage/CREATECOOKIE.kb"
+	},
+	{
+		"url": "/reference/READCOOKIE",
+		"template": "project/reference/core/storage/READCOOKIE.kb"
+	},
+	{
+		"url": "/reference/WRITECOOKIE",
+		"template": "project/reference/core/storage/WRITECOOKIE.kb"
 	},
 
 	{

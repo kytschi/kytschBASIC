@@ -348,6 +348,7 @@ FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shie
             END TBODY
         END TABLE
     END DIV
+    WRITECOOKIE("kb_OMEGA", "game_data.tactical", tactical$)
 END FUNCTION
 
 ADEF current_progress$="intro"
@@ -734,6 +735,10 @@ END KEYBOARDEVENT
 
 MOUSEEVENT ".btn-save-quit"
     GOTO saveAndQuit()
+MOUSEEVENT ".btn-next-progress"
+    GOTO nextProgress()
+MOUSEEVENT ".btn-previous-progress"
+    GOTO prevProgress()
 END MOUSEEVENT
 
 JAVASCRIPT

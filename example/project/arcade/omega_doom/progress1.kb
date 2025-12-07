@@ -19,7 +19,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-continue",,,,"nextProgress(event)"
+                    BUTTON ,"btn-continue btn-next-progress"
                         PRINT "["
                         PRINT "enter","button_key"
                         PRINT "]", "button_key_end_small" 
@@ -93,21 +93,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -176,21 +173,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -259,49 +253,50 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-5',null)"
-                    PRINT "["
-                    PRINT "c","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Communications", "button-message flash"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
-                    PRINT "["
-                    PRINT "n","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Navigation", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
-                    PRINT "["
-                    PRINT "s","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Sensors", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
-                    PRINT "["
-                    PRINT "w","button_key"
-                    PRINT "]", "button_key_end_small" 
-                    PRINT "Weapons", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting communications.')"
-                    PRINT "["
-                    PRINT "e","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Engineering", "button-message"
-                END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-5')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "c","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Communications", "button-message flash"
+                    END BUTTON
+                MOUSEACTION "invalidButton('I need to be selecting communications.')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "n","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Navigation", "button-message"
+                    END BUTTON
+                    BUTTON
+                        PRINT "["
+                        PRINT "s","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Sensors", "button-message"
+                    END BUTTON
+                    BUTTON
+                        PRINT "["
+                        PRINT "w","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Weapons", "button-message"
+                    END BUTTON
+                    BUTTON
+                        PRINT "["
+                        PRINT "e","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Engineering", "button-message"
+                    END BUTTON
+                END MOUSEACTION
                 BUTTON ,"btn-save-quit"
                     PRINT "["
                     PRINT "q","button_key"
@@ -346,25 +341,25 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-6',null)"
-                    PRINT "["
-                    PRINT "1","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Hail the outpost", "button-message flash"
-                END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-6')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "1","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Hail the outpost", "button-message flash"
+                    END BUTTON
+                END MOUSEACTION
                 BUTTON ,"btn-save-quit" 
                     PRINT "["
                     PRINT "q","button_key"
@@ -409,21 +404,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -468,21 +460,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -527,21 +516,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -586,21 +572,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -645,21 +628,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -704,21 +684,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -787,49 +764,51 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
-                    PRINT "["
-                    PRINT "c","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Communications", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
-                    PRINT "["
-                    PRINT "n","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Navigation", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"progressSpeech(event,'game-progress-14',null)"
-                    PRINT "["
-                    PRINT "s","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Sensors", "button-message flash"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
-                    PRINT "["
-                    PRINT "w","button_key"
-                    PRINT "]", "button_key_end_small" 
-                    PRINT "Weapons", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"invalidButton(event,'I need to be selecting sensors.')"
-                    PRINT "["
-                    PRINT "e","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Engineering", "button-message"
-                END BUTTON
+                MOUSEACTION "invalidButton(event,'I need to be selecting sensors.')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "c","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Communications", "button-message"
+                    END BUTTON
+                    BUTTON
+                        PRINT "["
+                        PRINT "n","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Navigation", "button-message"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-13')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "s","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Sensors", "button-message flash"
+                    END BUTTON
+                MOUSEACTION "invalidButton(event,'I need to be selecting sensors.')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "w","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Weapons", "button-message"
+                    END BUTTON
+                    BUTTON
+                        PRINT "["
+                        PRINT "e","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Engineering", "button-message"
+                    END BUTTON
+                END MOUSEACTION
                 BUTTON ,"btn-save-quit" 
                     PRINT "["
                     PRINT "q","button_key"
@@ -874,31 +853,32 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-15', null)"
-                    PRINT "["
-                    PRINT "1","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Scan the Outpost 3366", "button-message flash"
-                END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
-                    PRINT "["
-                    PRINT "2","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Scan the region", "button-message"
-                END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-15')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "1","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Scan the Outpost 3366", "button-message flash"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-14')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "2","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Scan the region", "button-message"
+                    END BUTTON
+                END MOUSEACTION
                 BUTTON ,"btn-save-quit" 
                     PRINT "["
                     PRINT "q","button_key"
@@ -949,31 +929,32 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-15', null)"
-                    PRINT "["
-                    PRINT "1","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Scan the Outpost 3366", "button-message"
-                END BUTTON
-                BUTTON ,,,,,"progressSpeech(event, 'game-progress-14', null)"
-                    PRINT "["
-                    PRINT "2","button_key"
-                    PRINT "]", "button_key_end" 
-                    PRINT "Scan the region", "button-message selected"
-                END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-15')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "1","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Scan the Outpost 3366", "button-message"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-14')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "2","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Scan the region", "button-message selected"
+                    END BUTTON
+                END MOUSEACTION
                 BUTTON ,"btn-save-quit" 
                     PRINT "["
                     PRINT "q","button_key"
@@ -1024,21 +1005,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1089,21 +1067,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1154,21 +1129,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1219,21 +1191,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1284,21 +1253,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1349,21 +1315,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1414,21 +1377,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1479,21 +1439,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1544,21 +1501,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1609,21 +1563,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1674,21 +1625,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1739,21 +1687,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1804,21 +1749,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1869,21 +1811,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1934,21 +1873,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -1999,21 +1935,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -2065,21 +1998,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -2131,21 +2061,18 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
-                    MOUSEACTION "nextProgress()"
-                        BUTTON ,"btn-continue"
-                            PRINT "["
-                            PRINT "enter","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Continue", "button-message"
-                        END BUTTON
-                    END MOUSEACTION
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
                 END DIV
             END DIV
         END WINDOW
@@ -2197,13 +2124,12 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    MOUSEACTION "prevProgress()"
-                        BUTTON ,"btn-previous"
-                            PRINT "["
-                            PRINT "p","button_key"
-                            PRINT "]", "button_key_end_small" 
-                            PRINT "Previous", "button-message"
-                        END BUTTON
+                    BUTTON ,"btn-previous btn-previous-progress"
+                        PRINT "["
+                        PRINT "p","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Previous", "button-message"
+                    END BUTTON
                     MOUSEACTION "saveAndQuit('progress2')"
                         BUTTON ,"btn-continue"
                             PRINT "["
