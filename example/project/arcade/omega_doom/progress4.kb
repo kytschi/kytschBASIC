@@ -2180,5 +2180,5 @@ JAVASCRIPT
 END JAVASCRIPT
 AFUNCTION "updateOmegaShip", "var_name", "var_value"
     game_data[var_name] = var_value;
-    WRITECOOKIE("kb_OMEGA", var_name, var_value);
+    REM WRITECOOKIE("kb_OMEGA", var_name, var_value);
 END AFUNCTION

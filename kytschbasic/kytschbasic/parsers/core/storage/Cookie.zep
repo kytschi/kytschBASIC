@@ -36,7 +36,7 @@ class Cookie extends Command
 			case "CREATECOOKIE":
 				return this->processCreate(args);
 			case "WRITECOOKIE":
-				return this->processWrite(args);
+				return this->processWrite(args, in_javascript);
 			default:
 				return null;
 		}
@@ -117,9 +117,13 @@ class Cookie extends Command
 		); 
 	}
 
-	public function processWrite(args)
+	public function processWrite(args, bool in_javascript = false)
 	{
-		var data, cookie_name, var_name = "", output = "<?php ";
+		var var_name = "", output = "<script type=\"text/javascript\">";
+
+		if (in_javascript) {
+			let output = "";
+		}
 
 		if (count(args) == 1) {
 			let args[0] = rtrim(ltrim(args[0], "["), "]");
@@ -131,36 +135,33 @@ class Cookie extends Command
 			if (substr(var_name, 0, 1) != "$") {
 				let var_name = "\"" . var_name . "\"";
 			}
+			else {
+				let var_name = "\"<?= " . var_name . "; ?>\"";
+			}
 		}
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let cookie_name = trim(args[0], "\"");
-			if (substr(cookie_name, 0, 1) != "$") {
-				let cookie_name = "\"" . cookie_name . "\"";
+			let args[0] = trim(args[0], "\"");
+			if (substr(args[0], 0, 1) != "$") {
+				let args[0] = "\"" . args[0] . "\"";
+			} else {
+				let args[0] = "\"<?= " . args[0] . "; ?>\"";
 			}
-
-			let output .= "$KBCOOKIETMP = (!isset($_COOKIE[" . cookie_name . "]) ? '' : (($KBCOOKIETMP = json_decode($_COOKIE[" . cookie_name . "], true)) ? $KBCOOKIETMP : $_COOKIE[" . cookie_name . "]));";
 
 			if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 				let args[1] = trim(args[1], "\"");
-			}
-			if (substr(args[1], 0, 1) == "$") {
-				let data = args[1];
-			} else  {
-				let data = "\"" . args[1] . "\"";
+				if (substr(args[1], 0, 1) != "$") {
+					let args[1] = "\"" . args[1] . "\"";
+				} else {
+					let args[1] = "\"<?= " . args[1] . "; ?>\"";
+				}
 			}
 
-			if (var_name) {
-				let output .= "if(is_array($KBCOOKIETMP) && isset($KBCOOKIETMP[" . var_name . "])) {$KBCOOKIETMP[" . var_name . "] = " . data . ";} ";
-			} else {
-				let output .= "$KBCOOKIETMP = " . data . "; ";
-			}
-			
-			let output .= "setcookie(" . cookie_name . ", (!is_string($KBCOOKIETMP) ? json_encode($KBCOOKIETMP) : $KBCOOKIETMP));";
+			let output .= "\tWRITECOOKIE(" . args[0] . ", " . args[1] . ", " . var_name . ");\n";
 		}  else {
 			throw new Exception("Invalid WRITECOOKIE, missing cookie name");
 		}
 
-		return output . " ?>";
+		return output . (in_javascript ? "" : "</script>");
 	}
 }

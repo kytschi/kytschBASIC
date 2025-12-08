@@ -348,7 +348,7 @@ FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shie
             END TBODY
         END TABLE
     END DIV
-    WRITECOOKIE("kb_OMEGA", "game_data.tactical", tactical$)
+    WRITECOOKIE("kb_OMEGA", tactical$, "ship_tactical")
 END FUNCTION
 
 ADEF current_progress$="intro"

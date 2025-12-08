@@ -2155,7 +2155,7 @@ WINDOW "game-window", "progress"
                     PRINT "]", "button_key_end" 
                     PRINT "Scan the region", "button-message"
                 END BUTTON
-                BUTTON ,,,,,"saveAndQuit(event, 'progress1')" 
+                BUTTON ,"btn-save-quit"
                     PRINT "["
                     PRINT "q","button_key"
                     PRINT "]", "button_key_end" 
