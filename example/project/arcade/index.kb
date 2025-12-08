@@ -59,18 +59,18 @@ END HEAD
 					PRINT "BASIC", "basic"
 				END HEADING 3
 				SWRITE
-					LINK "/arcade/sevens"
+					LINK "/arcade/sevens","Play the card game sevens",,"_blank"
 						PRINT "Sevens card game"
 					END LINK
 				END SWRITE
 				SWRITE
-					LINK "/arcade/switch"
+					LINK "/arcade/switch","Play the card game switch",,"_blank"
 						PRINT "Switch card game"
 					END LINK
 				END SWRITE
 				SWRITE
-					LINK "/arcade/omega-doom"
-						PRINT "Omega Doom. A space adventure game. Note, it's a work in progress"
+					LINK "/arcade/omega-doom","Play the space adventure Omega Doom",,"_blank"
+						PRINT "Omega Doom. An ASCII space adventure game. Note, it's a work in progress"
 					END LINK
 				END SWRITE
 			END DIV

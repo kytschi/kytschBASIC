@@ -14,10 +14,11 @@ BODY
 					PRINT "BASIC","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "kytschBASIC is a PHP module that will allow you to write BASIC code to render flat html. kytschBASIC is heavily inspired by Amiga BASIC a language I loved on a machine that is still amazing."
+					PRINT "kytschBASIC (KB) is a PHP module that will allow you to write BASIC code to render flat html. "
+					PRINT "kytschBASIC is heavily inspired by Amiga BASIC a language I loved on a machine that is still amazing."
 				END SWRITE
 				SWRITE
-					PRINT "The project is still in its early days but you can check it out at the link below."
+					PRINT "The project is still in it's early development days but you can check it out at the link below."
 				END SWRITE
 				SWRITE
 					LINK "https://github.com/kytschi/kytschBASIC","Link to the source",,"_blank"

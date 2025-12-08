@@ -221,7 +221,7 @@ html, body {
     margin: 0;
 }
 
-#omega-doom-game .text .character p {
+#omega-doom-game .text .character p, #omega-doom-game .control-stats-ship p {
     display: block;
     text-align: center;
     background-color: #fff;
@@ -248,12 +248,15 @@ html, body {
 }
 
 #omega-doom-game .controls-buttons {
-    height: calc(100vh - 200px - 40px) !important;
+    flex-grow: 1;
 }
 
 #omega-doom-game .controls-stats {
     text-transform: uppercase;
-    height: 200px !important;
+    width: 100%;
+}
+
+#omega-doom-game .controls-stats table {
     width: 100%;
 }
 

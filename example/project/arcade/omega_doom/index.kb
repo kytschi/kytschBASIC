@@ -244,10 +244,17 @@ FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
     END MOUSEACTION
 END FUNCTION
 
-FUNCTION "drawStats", sector$, location$, tactical$="normal", shields%=100, shields_status$="offline", ftl$="online", impulse$="online", weapons$="online"
+FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=100, shields_status$="offline", ftl$="online", impulse$="online", weapons$="online"
     DIV "controls-stats"
         TABLE
             TBODY
+                TROW
+                    TCELL ,"control-stats-ship","3"
+                        SWRITE
+                            PRINT ship$
+                        END SWRITE
+                    END TCELL
+                END TROW
                 TROW
                     TCELL ,"controls-stats-label"
                         PRINT "SECTOR"
@@ -428,6 +435,7 @@ AFUNCTION "startNewGame"
 END AFUNCTION
 
 AFUNCTION "continueGame"
+    game_data = READCOOKIE("kb_OMEGA");
     $("#btn_continue .button-message").addClass("selected");
     $("#omega-doom-intro").fadeOut(
         2000,
