@@ -1,3 +1,7 @@
+DIM test$=[]
+LET test$["data"]="test"
+CREATECOOKIE("kb_test", test$)
+DEF cookie$=READCOOKIE("kb_test", "data")
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
@@ -14,17 +18,20 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Create a browser cookie for local storage."
 				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " cookies are created and updated on a page load is complete."
+				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-CREATECOOKIE("kb_test", "{'data':'test'}")
-
 REM Using a variable
 DIM test$=[]
 LET test$["data"]="test"
-
 CREATECOOKIE("kb_test", test$)
+DEF cookie$=READCOOKIE("kb_test", "data")
+PRINT cookie$
 
 REM Without the brackets
 CREATECOOKIE "kb_test", test$
@@ -36,7 +43,7 @@ CREATECOOKIE "kb_test", "test"
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-				CREATECOOKIE("kb_test", "{'data':'test'}")
+				PRINT cookie$
 				END DIV
 				HEADING 4
 					PRINT "See also"

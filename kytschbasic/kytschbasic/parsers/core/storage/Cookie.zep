@@ -1,7 +1,7 @@
 /**
  * Cookie parser
  *
- * @package     KytschBASIC\Parsers\Core\Storage\Cookie
+ * @package    
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
@@ -44,7 +44,7 @@ class Cookie extends Command
 
 	public function processCreate(args)
 	{
-		var data = "KYTSCHBASIC", output = "<?php setcookie(\"";
+		var data = "KYTSCHBASIC", cookie_name, output = "<?php setcookie(";
 
 		if (count(args) == 1) {
 			let args[0] = rtrim(ltrim(args[0], "["), "]");
@@ -56,10 +56,16 @@ class Cookie extends Command
 		}
 	
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let cookie_name = trim(args[0], "\"");
+			if (substr(cookie_name, 0, 1) != "$") {
+				let cookie_name = "\"" . cookie_name . "\"";
+			}
+
 			if (substr(data, 0, 1) != "$") {
 				let data = "\"" . data . "\"";
 			}
-			let output .= trim(args[0], "\"") . "\", (!is_string(" . data . ") ? ";
+
+			let output .= cookie_name . ", (!is_string(" . data . ") ? ";
 			let output .= "json_encode(" . data . ") : " . data . ")";
 		} else {
 			throw new Exception("Invalid CREATECOOKIE, missing cookie name");
@@ -87,14 +93,17 @@ class Cookie extends Command
 		}
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let data = this->readCookie(args[0]);
-						
-			if (var_name && isset(data[var_name])) {
-				let data = data[var_name];
-			}
+			let data = this->readCookie(trim(args[0], "\""));
+			if (data) {	
+				if (var_name && isset(data[var_name])) {
+					let data = data[var_name];
+				}
 
-			if (is_string(data)) {
-				let data = "\"" . data . "\"";
+				if (is_string(data)) {
+					let data = "\"" . data . "\"";
+				}
+			} else {
+				let data = "null";
 			}
 		} else {
 			throw new Exception("Invalid READCOOKIE, missing cookie name");
@@ -110,37 +119,48 @@ class Cookie extends Command
 
 	public function processWrite(args)
 	{
-		var data, var_name = "", output = "<?php ";
+		var data, cookie_name, var_name = "", output = "<?php ";
 
-		/*if (count(args) == 1) {
+		if (count(args) == 1) {
 			let args[0] = rtrim(ltrim(args[0], "["), "]");
 			let args = this->commaSplit(args[0]);
 		}
 
-		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let var_name = trim(args[1], "\"");
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let var_name = trim(args[2], "\"");
+			if (substr(var_name, 0, 1) != "$") {
+				let var_name = "\"" . var_name . "\"";
+			}
 		}
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let data = this->readCookie(args[0], false);
-			let output .= "setcookie(\"";
-
-			if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-				if (var_name && isset(data[var_name])) {
-					let data[var_name] = trim(args[2], "\"");
-				} else {
-					let data = trim(args[2], "\"");
-				}
-
-				if (substr(data, 0, 1) != "$") {
-					let data = "\"" . data . "\"";
-				}
-				let output .= trim(args[0], "\"") . "\", (!is_string(" . data . ") ? ";
-				let output .= "json_encode(" . data . ") : " . data . ")";
+			let cookie_name = trim(args[0], "\"");
+			let output .= "$KBWRITECOOKIETMP = (new KytschBASIC\\Parsers\\Core\\Storage\\Cookie())->readCookie(";
+			if (substr(cookie_name, 0, 1) != "$") {
+				let cookie_name = "\"" . cookie_name . "\"";
 			}
+			let output .= cookie_name . "); ";
+
+			if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+				let args[1] = trim(args[1], "\"");
+			}
+			if (substr(args[1], 0, 1) == "$") {
+				let data = args[1];
+			} else  {
+				let data = "\"" . args[1] . "\"";
+			}
+
+			if (var_name) {
+				let output .= "if(isset($KBWRITECOOKIETMP[" . var_name . "])) {$KBWRITECOOKIETMP[" . var_name . "] = " . data . ";} ";
+			} else {
+				let output .= "$KBWRITECOOKIETMP = " . data . "; ";
+			}
+			
+			let output .= "setcookie(" . cookie_name . ", (!is_string($KBWRITECOOKIETMP) ? ";
+			let output .= "json_encode($KBWRITECOOKIETMP) : $KBWRITECOOKIETMP));";
 		}  else {
 			throw new Exception("Invalid WRITECOOKIE, missing cookie name");
-		}*/
+		}
 
 		return output . " ?>";
 	}
@@ -148,11 +168,9 @@ class Cookie extends Command
 	public function readCookie(string name, bool read = true)
 	{
 		var data;
-
-		let name = trim(name, "\"");
 			
 		if (!isset(_COOKIE[name])) {
-			throw new Exception("Invalid " . (read ? "READCOOKIE" : "WRITECOOKIE") . ", cookie not found");
+			return "";
 		}
 
 		let data = json_decode(_COOKIE[name], true);

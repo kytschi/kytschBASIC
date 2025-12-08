@@ -1,3 +1,8 @@
+DIM test$=[]
+LET test$["data"]="test"
+CREATECOOKIE("kb_test", test$)
+WRITECOOKIE "kb_test", "test2", "data"
+DEF cookie$=READCOOKIE("kb_test", "data")
 LANG "en"
 HEAD
 	LOAD "_ROOT/project/shared/head"
@@ -12,19 +17,27 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "WRITECOOKIE","basic"
 				END HEADING 2
 				SWRITE
-					PRINT "When performing a query you often need to pass data in to said query, this is where the bind command comes into play."
+					PRINT "Write to a created browser cookie."
+				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " cookies are created and updated on a page load is complete."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-
+DIM test$=[]
+LET test$["data"]="test"
+CREATECOOKIE("kb_test", test$)
+WRITECOOKIE "kb_test", "test2", "data"
+PRINT cookie$
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-
+					PRINT cookie$
 				END DIV
 				HEADING 4
 					PRINT "See also"
