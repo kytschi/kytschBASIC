@@ -67,7 +67,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-1");
                 ship_status_trigger.push(["game-progress-1", "red"]);
@@ -150,7 +150,7 @@ WINDOW "game-window", "progress"
                     END BUTTON
                 END DIV
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-2");
                 ship_status_trigger.push(["game-progress-2", "red"]);
@@ -231,7 +231,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-3");
             END JAVASCRIPT
@@ -348,7 +348,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-5");
                 ship_status_trigger.push(["game-progress-5", "red"]);
@@ -471,7 +471,7 @@ WINDOW "game-window", "progress"
                     ship_status_trigger.push(["game-progress-7", "red"]);
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-8"
@@ -542,7 +542,7 @@ WINDOW "game-window", "progress"
                     ship_status_trigger.push(["game-progress-8", "red"]);
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-9"
@@ -601,7 +601,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-9");
                 ship_status_trigger.push(["game-progress-9", "red"]);
@@ -664,7 +664,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-10");
                 ship_status_trigger.push(["game-progress-10", "red"]);
@@ -727,7 +727,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-11");
                 ship_status_trigger.push(["game-progress-11", "red"]);
@@ -790,7 +790,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-12");
                 ship_status_trigger.push(["game-progress-12", "red"]);
@@ -853,7 +853,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-13");
                 ship_status_trigger.push(["game-progress-13", "red"]);
@@ -916,7 +916,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-14");
                 ship_status_trigger.push(["game-progress-14", "red"]);
@@ -979,7 +979,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-15");
                 ship_status_trigger.push(["game-progress-15", "red"]);
@@ -1042,7 +1042,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-16");
                 ship_status_trigger.push(["game-progress-16", "red"]);
@@ -1105,7 +1105,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 30, "online", "offline", "online", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-17");
                 ship_status_trigger.push(["game-progress-17", "red"]);
@@ -1168,7 +1168,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-18");
                 ship_status_trigger.push(["game-progress-18", "red"]);
@@ -1231,7 +1231,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-19");
                 ship_status_trigger.push(["game-progress-19", "red"]);
@@ -1294,7 +1294,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-20");
                 ship_status_trigger.push(["game-progress-20", "red"]);
@@ -1357,7 +1357,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-21");
                 ship_status_trigger.push(["game-progress-21", "red"]);
@@ -1420,7 +1420,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-22");
                 ship_status_trigger.push(["game-progress-22", "red"]);
@@ -1483,7 +1483,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-23");
                 ship_status_trigger.push(["game-progress-23", "red"]);
@@ -1546,7 +1546,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-24");
                 ship_status_trigger.push(["game-progress-24", "red"]);
@@ -1609,7 +1609,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-25");
                 ship_status_trigger.push(["game-progress-25", "red"]);
@@ -1672,7 +1672,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-26");
                 ship_status_trigger.push(["game-progress-26", "red"]);
@@ -1737,7 +1737,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-27");
                 ship_status_trigger.push(["game-progress-27", "red"]);

@@ -67,7 +67,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-1");
             END JAVASCRIPT
@@ -147,7 +147,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-2");
             END JAVASCRIPT
@@ -227,7 +227,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-3");
             END JAVASCRIPT
@@ -318,7 +318,7 @@ WINDOW "game-window", "progress"
                     user_input_enabled.push("game-progress-4");
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-5"
@@ -381,7 +381,7 @@ WINDOW "game-window", "progress"
                     user_input_enabled.push("game-progress-5");
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-6"
@@ -434,7 +434,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-6");
             END JAVASCRIPT
@@ -490,7 +490,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-7");
             END JAVASCRIPT
@@ -546,7 +546,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-8");
             END JAVASCRIPT
@@ -602,7 +602,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-9");
             END JAVASCRIPT
@@ -658,7 +658,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-10");
             END JAVASCRIPT
@@ -738,7 +738,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-11");
             END JAVASCRIPT
@@ -830,7 +830,7 @@ WINDOW "game-window", "progress"
                     user_input_enabled.push("game-progress-12");
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-13"
@@ -906,7 +906,7 @@ WINDOW "game-window", "progress"
                     user_input_enabled.push("game-progress-13");
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-14"
@@ -982,7 +982,7 @@ WINDOW "game-window", "progress"
                     user_input_enabled.push("game-progress-14");
                 END JAVASCRIPT
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-15"
@@ -1041,7 +1041,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-15");
             END JAVASCRIPT
@@ -1103,7 +1103,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-16");
             END JAVASCRIPT
@@ -1165,7 +1165,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-17");
             END JAVASCRIPT
@@ -1227,7 +1227,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-18");
             END JAVASCRIPT
@@ -1289,7 +1289,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-19");
             END JAVASCRIPT
@@ -1351,7 +1351,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-20");
             END JAVASCRIPT
@@ -1413,7 +1413,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-21");
             END JAVASCRIPT
@@ -1475,7 +1475,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-22");
             END JAVASCRIPT
@@ -1537,7 +1537,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-23");
             END JAVASCRIPT
@@ -1599,7 +1599,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-24");
             END JAVASCRIPT
@@ -1661,7 +1661,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-25");
             END JAVASCRIPT
@@ -1723,7 +1723,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-26");
             END JAVASCRIPT
@@ -1785,7 +1785,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-27");
             END JAVASCRIPT
@@ -1847,7 +1847,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-28");
             END JAVASCRIPT
@@ -1909,7 +1909,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-29");
             END JAVASCRIPT
@@ -1971,7 +1971,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "yellow alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-30");
                 ship_status_trigger.push(["game-progress-30", "yellow"]);
@@ -2034,7 +2034,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "yellow alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-31");
                 ship_status_trigger.push(["game-progress-31", "yellow"]);
@@ -2097,7 +2097,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "yellow alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-32");
                 ship_status_trigger.push(["game-progress-32", "yellow"]);
@@ -2162,7 +2162,7 @@ WINDOW "game-window", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation border", "outpost 3366", "yellow alert")
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "yellow alert")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-33");
                 save_on=["game-progress-33", "progress2"];

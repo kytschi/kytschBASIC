@@ -775,31 +775,27 @@ ELSE
     END JAVASCRIPT
 END IF
 
-SCREEN "omega-doom-game"
-    IFE _GET("progress") THEN
-        LOAD "_ROOT/project/arcade/omega_doom/intro"
-    ELSE
-        LOAD "_ROOT/project/arcade/omega_doom/_GET("progress")"
-    END IF
-END SCREEN
 SCREEN "omega-doom-intro"
     WINDOW "intro"
         GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/gameintro.gfx")
     END WINDOW
     DIV ,"intro-controls"
         DIV ,"intro-controls-buttons"
-            BUTTON "btn_continue",,"btn_continue",,,"continueGame()"
-                PRINT "["
-                PRINT "c","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "Continue game", "button-message"
-            END BUTTON
-            BUTTON "btn_start",,"btn_start",,,"startNewGame()"
-                PRINT "["
-                PRINT "n","button_key"
-                PRINT "]", "button_key_end" 
-                PRINT "New game", "button-message"
-            END BUTTON
+            MOUSEACTION "continueGame()"
+                BUTTON "btn_continue",,"btn_continue"
+                    PRINT "["
+                    PRINT "c","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Continue game", "button-message"
+                END BUTTON
+            MOUSEACTION "startNewGame()"
+                BUTTON "btn_start",,"btn_start"
+                    PRINT "["
+                    PRINT "n","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "New game", "button-message"
+                END BUTTON
+            END MOUSEACTION
         END DIV
     END DIV
 END SCREEN
@@ -808,6 +804,13 @@ SCREEN "omega-doom-gameover"
         GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/gameover/gameover.gfx")
         PRINT "Game over","gfx-label","gameover-title"
     END WINDOW
+END SCREEN
+SCREEN "omega-doom-game"
+    IFE _GET("progress") THEN
+        LOAD "_ROOT/project/arcade/omega_doom/intro"
+    ELSE
+        LOAD "_ROOT/project/arcade/omega_doom/_GET("progress")"
+    END IF
 END SCREEN
 END BODY
 END

@@ -93,6 +93,7 @@ class Exception extends \Exception
             let line = this->line_no;
         }
         
+        this->jsOutput();
         echo this;
         if (template && line) {
             if (this->html) {
@@ -145,5 +146,13 @@ class Exception extends \Exception
         }
 
         return gfx;
+    }
+
+    private function jsOutput()
+    {
+        var splits;
+        let splits = explode("Stack trace:", this->getMessage());
+    
+        echo "<script type=\"text/javascript\">console.log('[KB ERROR]', '" . trim(splits[0]) . "');</script>";
     }
 }
