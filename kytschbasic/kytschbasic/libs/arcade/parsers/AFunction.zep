@@ -115,7 +115,7 @@ class AFunction extends Command
 		var output = "";
 
 		if (!in_javascript) {
-			let output = "<script type='text/javascript'>\n";
+			let output = "<script type='text/javascript'>$(document).ready(\n";
 		}
 
 		if (substr(args[0], 0, 1) == "$") {
@@ -131,7 +131,7 @@ class AFunction extends Command
 		}
 
 		if (!in_javascript) {
-			let output .= "</script>";
+			let output .= ");</script>";
 		}
 
 		return output;

@@ -289,6 +289,14 @@
 		"url": "/reference/IMAGE",
 		"template": "project/reference/core/media/IMAGE.kb"
 	},
+	{
+		"url": "/reference/LOADMEDIA",
+		"template": "project/reference/arcade/media/LOADMEDIA.kb"
+	},
+	{
+		"url": "/reference/PLAYMEDIA",
+		"template": "project/reference/arcade/media/PLAYMEDIA.kb"
+	},
 
 	{
 		"url": "/reference/FORM",

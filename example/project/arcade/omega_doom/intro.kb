@@ -67,7 +67,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-1");
             END JAVASCRIPT
@@ -147,7 +147,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-2");
             END JAVASCRIPT
@@ -203,7 +203,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-3");
             END JAVASCRIPT
@@ -259,7 +259,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-4");
             END JAVASCRIPT
@@ -315,7 +315,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-5");
             END JAVASCRIPT
@@ -371,7 +371,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-6");
             END JAVASCRIPT
@@ -427,7 +427,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-7");
             END JAVASCRIPT
@@ -483,7 +483,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-8");
             END JAVASCRIPT
@@ -539,7 +539,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-9");
             END JAVASCRIPT
@@ -595,7 +595,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-10");
             END JAVASCRIPT
@@ -651,7 +651,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-11");
             END JAVASCRIPT
@@ -707,7 +707,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-12");
             END JAVASCRIPT
@@ -763,7 +763,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-13");
             END JAVASCRIPT
@@ -819,7 +819,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-14");
             END JAVASCRIPT
@@ -875,7 +875,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-15");
             END JAVASCRIPT
@@ -931,7 +931,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-16");
             END JAVASCRIPT
@@ -987,7 +987,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-17");
             END JAVASCRIPT
@@ -1067,7 +1067,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-18");
             END JAVASCRIPT
@@ -1129,7 +1129,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-19");
             END JAVASCRIPT
@@ -1191,7 +1191,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-20");
             END JAVASCRIPT
@@ -1253,7 +1253,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-21");
             END JAVASCRIPT
@@ -1315,7 +1315,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-22");
             END JAVASCRIPT
@@ -1377,7 +1377,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-23");
             END JAVASCRIPT
@@ -1444,7 +1444,7 @@ WINDOW "game-intro", "progress"
                     END IF
                 END KEYBOARDEVENT
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_enabled.push("game-progress-24");
             END JAVASCRIPT
@@ -1500,7 +1500,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             KEYBOARDEVENT "7"
                 IFE controls_locked THEN
                     IF in_game && game_data.game_progress="game-progress-25" && !speaking THEN
@@ -1573,7 +1573,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-26");
             END JAVASCRIPT
@@ -1635,7 +1635,7 @@ WINDOW "game-intro", "progress"
                     PRINT "Save & Quit", "button-message"
                 END BUTTON
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_disabled.push("game-progress-27");
             END JAVASCRIPT
@@ -1704,7 +1704,7 @@ WINDOW "game-intro", "progress"
                     END IF
                 END KEYBOARDEVENT
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_enabled.push("game-progress-28");
             END JAVASCRIPT
@@ -1780,7 +1780,7 @@ WINDOW "game-intro", "progress"
                     END IF
                 END KEYBOARDEVENT
             END DIV
-            GOTO drawStats("federation", "earth")
+            GOTO drawStats("SS Liberty", "federation", "earth")
             JAVASCRIPT
                 user_input_enabled.push("game-progress-29");
             END JAVASCRIPT
@@ -1793,10 +1793,12 @@ WINDOW "game-intro", "progress"
                 DIV "render", "warp-effect"
                     GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/warp_effect/0.gfx")
                 END DIV
+                LOADMEDIA "/kytschi/omega_doom/sound/ss_ftl_jump.mp3", "ss-ftl-jump", "hide"
             END DIV
         END WINDOW
         ANIMATION "animationWarp", "false"
             SPIN "warp-effect"
+            PLAYMEDIA "ss-ftl-jump"
             TIMEOUT "3000"
                 GOTO saveAndQuit('progress1')
             END TIMEOUT

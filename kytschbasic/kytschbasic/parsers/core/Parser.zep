@@ -76,6 +76,7 @@ class Parser
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Animation\\Effects",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Bitmap",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Colors\\Color",
+		"KytschBASIC\\Libs\\Arcade\\Parsers\\Media\\Media",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Arc",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Box",
 		"KytschBASIC\\Libs\\Arcade\\Parsers\\Shapes\\Circle",

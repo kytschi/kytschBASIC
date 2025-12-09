@@ -1,0 +1,66 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "LOADMEDIA statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "LOADMEDIA","heading-command basic"
+					LINE BREAK
+					PRINT "SOURCE, ID (optional), CLASS (optional), CONTROLS (default=TRUE), MUTED (default=FALSE), WIDTH (default=640), HEIGHT (default=480)","heading-args"
+					LINE BREAK
+					PRINT "Requires arcade library","heading-required"
+				END SWRITE
+				SWRITE
+					PRINT "This will allow you load a video or sound file into your app."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+INCLUDE arcade
+LOADMEDIA "/kytschi/omega_doom/sound/ss_ftl_jump.mp3", "ss-ftl-jump",,,,,"50"
+ANIMATION "animationWarp", "false"
+    PLAYMEDIA "ss-ftl-jump"
+END ANIMATION
+JAVASCRIPT
+    animationWarp();
+END JAVASCRIPT
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				LOADMEDIA "/kytschi/omega_doom/sound/ss_ftl_jump.mp3", "ss-ftl-jump",,,,,"50"
+				ANIMATION "animationWarp", "false"
+					PLAYMEDIA "ss-ftl-jump"
+				END ANIMATION
+				JAVASCRIPT
+					animationWarp();
+				END JAVASCRIPT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/PLAYMEDIA"
+						PRINT "PLAYMEDIA"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ANIMATION"
+						PRINT "ANIMATION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

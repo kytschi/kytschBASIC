@@ -325,6 +325,9 @@ HEADER
 		LINK "/reference/LOAD#refLOAD","Find out about the LOAD command","nav-link",,"refLOAD"
 			PRINT "LOAD"
 		END LINK
+		LINK "/reference/LOADMEDIA#refLOADMEDIA","Find out about the LOADMEDIA command","nav-link",,"refLOADMEDIA"
+			PRINT "LOADMEDIA"
+		END LINK
 		LINK "/reference/LOG#refLOG","Find out about the LOG command","nav-link",,"refLOG"
 			PRINT "LOG"
 		END LINK
@@ -375,6 +378,9 @@ HEADER
 		END LINK
 		LINK "/reference/PASSWORDINPUT#refPASSWORDINPUT","Find out about the PASSWORDINPUT command","nav-link",,"refPASSWORDINPUT"
 			PRINT "PASSWORDINPUT"
+		END LINK
+		LINK "/reference/PLAYMEDIA#refPLAYMEDIA","Find out about the PLAYMEDIA command","nav-link",,"refPLAYMEDIA"
+			PRINT "PLAYMEDIA"
 		END LINK
 		LINK "/reference/PRINT#refPRINT","Find out about the PRINT command","nav-link",,"refPRINT"
 			PRINT "PRINT"
