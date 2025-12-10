@@ -508,12 +508,14 @@ AFUNCTION "createCookie", "return_data=0"
     data.story_progress = "intro";
     data.game_progress = "game-progress-1";
     data.ship_shields = 100;
+    data.ship_shields_status = 0;
     data.ship_ftl_engines = 1;
     data.ship_impulse_engines = 1;
     data.ship_tactical = "normal";
+    data.ship_weapons = 1;
     data.omega_shields = 100;
-    data.omega_ftl_engines = 1;
-    data.omega_impulse_engines = 1;
+    data.omega_engines = 1;
+    data.omega_weapons = 1;
 
     if (return_data) {
         return data;
@@ -630,18 +632,19 @@ AFUNCTION "nextProgress", "animation=null"
     if (!animation && animation_trigger.length) {
         animation_trigger.forEach((func_call, index) => {
             if (func_call[0] == game_data.game_progress) {
-                animation = func_call[1];
+                $("#omega-doom .progress .game-progress").hide();
+                $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+                window[func_call[1]](event);
+                shipStatus(event);
+                if (typeof(func_call[2]) == "undefined") {
+                    animation = 1;
+                }
                 return;
             }
         });
     }
 
-    if (animation) {
-        $("#omega-doom .progress .game-progress").hide();
-        $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
-        window[animation](event);
-        shipStatus(event);
-    } else {
+    if (!animation) {
         progressSpeech(event, game_data.game_progress, null);
     }
 END AFUNCTION
@@ -666,19 +669,20 @@ AFUNCTION "prevProgress", "animation=null"
     if (!animation && animation_trigger.length) {
         animation_trigger.forEach((func_call, index) => {
             if (func_call[0] == game_data.game_progress) {
-                animation = func_call[1];
+                $("#omega-doom .progress .game-progress").hide();
+                $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+                window[func_call[1]](event);
+                shipStatus(event);
+                if (typeof(func_call[2]) == "undefined") {
+                    animation = 1;
+                }
                 return;
             }
         });
     }
 
-    if (animation) {
-        $("#omega-doom .progress .game-progress").hide();
-        $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
-        window[animation](event);
-        shipStatus(event);
-    } else {
-        progressSpeech(event, null, game_data.game_progress);
+    if (!animation) {
+        progressSpeech(event, game_data.game_progress, null);
     }
 END AFUNCTION
 
