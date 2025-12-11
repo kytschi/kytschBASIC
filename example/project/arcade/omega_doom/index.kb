@@ -417,7 +417,6 @@ FUNCTION "drawStats", ship$, sector$, location$
 END FUNCTION
 
 ADEF current_progress$="intro"
-ADEF loading%=1
 ADEF in_game%=0
 ADEF controls_locked%=1
 ADEF speech_text$=""
@@ -625,9 +624,6 @@ AFUNCTION "saveAndQuit", "progress=null"
                     2000,
                     () => {
                         controls_locked=0;
-                        if (READCOOKIE("kb_OMEGA", "story_progress")) {
-                            $("#btn_continue").show();
-                        }
                         showIntroButtons(event);
                     }
                 );
@@ -778,7 +774,10 @@ AFUNCTION "prevProgress", "animation=null"
 END AFUNCTION
 
 AFUNCTION "showIntroButtons"
-    if (!loading && !controls_locked) {
+    if (READCOOKIE("kb_OMEGA", "story_progress")) {
+        $("#btn_continue").show();
+    }
+    if (!controls_locked) {
         $("#intro-controls-buttons").css("display", "flex");
     }
 END AFUNCTION

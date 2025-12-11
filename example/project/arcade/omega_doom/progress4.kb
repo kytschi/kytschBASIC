@@ -68,12 +68,15 @@ JAVASCRIPT
     if (!game_data.omega_engines) {
         user_skip.push(["game-progress-29", "game-progress-41"]);
     }
+
     updateShip(event, "ship_tactical", "red alert");
-    if (game_data.ship_shields > 70) {
+    if (game_data.ship_shields > 70 || game_data.ship_ftl_engines == 1 || game_data.ship_impulse_engines == 1) {
         updateShip(event, "ship_shields", 70);
         updateShip(event, "ship_ftl_engines", 0);
         updateShip(event, "ship_impulse_engines", 0);
     }
+
+    updateShip(event);
 END JAVASCRIPT
 WINDOW "game-window", "progress"
     DIV "game-progress","game-progress-1"
@@ -177,7 +180,6 @@ WINDOW "game-window", "progress"
             JAVASCRIPT
                 user_input_enabled.push("game-progress-1");
                 ship_status_trigger.push(["game-progress-1", "red"]);
-                updateShip(event);
             END JAVASCRIPT
         END WINDOW
     END DIV
@@ -799,7 +801,7 @@ WINDOW "game-window", "progress"
             IF game_data.ship_shields=0 THEN
                 GOTO gameover("The SS Liberty was completely destroyed!")
             ELSE
-                GOTO updateOmegaShip("ship_shields", 0)
+                GOTO updateShip("ship_shields", 0)
                 GOTO nextProgress()
             END IF
         END ANIMATION
