@@ -86,6 +86,9 @@ WINDOW "game-window", "progress"
                     JAVASCRIPT
                         user_input_enabled.push("game-progress-1");
                         ship_status_trigger.push(["game-progress-1", "red"]);
+                        if (!game_data.omega_engines) {
+                            user_skip.push(["game-progress-28", "game-progress-40"]);
+                        }
                     END JAVASCRIPT
                 END DIV
             END DIV
@@ -113,7 +116,7 @@ WINDOW "game-window", "progress"
                         PRINT "]", "button_key_end" 
                         PRINT "Sensors", "button-message"
                     END BUTTON
-                MOUSEACTION "progressSpeech('game-progress-25')"
+                MOUSEACTION "progressSpeech('game-progress-26')"
                     BUTTON
                         PRINT "["
                         PRINT "w","button_key"
@@ -154,7 +157,7 @@ WINDOW "game-window", "progress"
                 KEYBOARDEVENT "w"
                     IFE controls_locked THEN
                         IF in_game && game_data.game_progress="game-progress-1" && !speaking THEN
-                            GOTO progressSpeech("game-progress-25")
+                            GOTO progressSpeech("game-progress-26")
                         END IF
                     END IF
                 KEYBOARDEVENT "!p && !q"
@@ -781,6 +784,7 @@ WINDOW "game-window", "progress"
             IF game_data.ship_shields=0 THEN
                 GOTO gameover("The SS Liberty was completely destroyed!")
             ELSE
+                DUMP "here"
                 GOTO nextProgress()
             END IF
         END ANIMATION
@@ -1958,7 +1962,7 @@ WINDOW "game-window", "progress"
         END WINDOW
         WINDOW ,"controls"
             DIV "controls-buttons"
-                MOUSEACTION "progressSpeech('game-progress-26')"
+                MOUSEACTION "progressSpeech('game-progress-27')"
                     BUTTON
                         PRINT "["
                         PRINT "1","button_key"
@@ -2044,7 +2048,7 @@ WINDOW "game-window", "progress"
                         PRINT "["
                         PRINT "1","button_key"
                         PRINT "]", "button_key_end" 
-                        PRINT "Target the Engines", "button-message selected"
+                        PRINT "Target the Engines", "button-message"
                     END BUTTON
                 MOUSEACTION "progressSpeech('game-progress-32')"
                     BUTTON
@@ -2135,12 +2139,6 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous btn-previous-progress"
-                        PRINT "["
-                        PRINT "p","button_key"
-                        PRINT "]", "button_key_end_small" 
-                        PRINT "Previous", "button-message"
-                    END BUTTON
                     BUTTON ,"btn-continue btn-next-progress"
                         PRINT "["
                         PRINT "enter","button_key"
@@ -2217,12 +2215,6 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous btn-previous-progress"
-                        PRINT "["
-                        PRINT "p","button_key"
-                        PRINT "]", "button_key_end_small" 
-                        PRINT "Previous", "button-message"
-                    END BUTTON
                     BUTTON ,"btn-continue btn-next-progress"
                         PRINT "["
                         PRINT "enter","button_key"
@@ -2300,12 +2292,6 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous btn-previous-progress"
-                        PRINT "["
-                        PRINT "p","button_key"
-                        PRINT "]", "button_key_end_small" 
-                        PRINT "Previous", "button-message"
-                    END BUTTON
                     BUTTON ,"btn-continue btn-next-progress"
                         PRINT "["
                         PRINT "enter","button_key"
@@ -2383,12 +2369,6 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT ""
                     END SWRITE
-                    BUTTON ,"btn-previous btn-previous-progress"
-                        PRINT "["
-                        PRINT "p","button_key"
-                        PRINT "]", "button_key_end_small" 
-                        PRINT "Previous", "button-message"
-                    END BUTTON
                     BUTTON ,"btn-continue btn-next-progress"
                         PRINT "["
                         PRINT "enter","button_key"
@@ -2444,25 +2424,25 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "1"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-31" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-28")
                         END IF
                     END IF
                 KEYBOARDEVENT "2"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-31" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-32")
                         END IF
                     END IF
                 KEYBOARDEVENT "3"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-31" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-36")
                         END IF
                     END IF
                 KEYBOARDEVENT "4"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-31" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-34")
                         END IF
                     END IF
@@ -2471,7 +2451,7 @@ WINDOW "game-window", "progress"
                     user_input_enabled.push("game-progress-31");
                     ship_status_trigger.push(["game-progress-31", "red"]);
                     animation_trigger.push(["game-progress-31", "updateOmegaEnginesFire", "false"]);
-                    user_continue.push(["game-progress-31", "game-progress-26"]);
+                    user_continue.push(["game-progress-31", "game-progress-27"]);
                 END JAVASCRIPT
             END DIV
             GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
@@ -3110,6 +3090,114 @@ WINDOW "game-window", "progress"
                         PRINT "["
                         PRINT "1","button_key"
                         PRINT "]", "button_key_end" 
+                        PRINT "Target the Engines", "button-message"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-32')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "2","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Target the Shields", "button-message"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-36')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "3","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Target the Sensors", "button-message selected"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-34')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "4","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Target the Weapons", "button-message"
+                    END BUTTON
+                MOUSEACTION "progressSpeech('game-progress-26')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "b","button_key"
+                        PRINT "]", "button_key_end" 
+                        PRINT "Back", "button-message"
+                    END BUTTON
+                END MOUSEACTION
+                BUTTON ,"btn-save-quit" 
+                    PRINT "["
+                    PRINT "q","button_key"
+                    PRINT "]", "button_key_end" 
+                    PRINT "Save & Quit", "button-message"
+                END BUTTON
+                KEYBOARDEVENT "1"
+                    IFE controls_locked THEN
+                        IF game_data.game_progress="game-progress-39" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-28")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "2"
+                    IFE controls_locked THEN
+                        IF game_data.game_progress="game-progress-39" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-32")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "3"
+                    IFE controls_locked THEN
+                        IF game_data.game_progress="game-progress-39" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-36")
+                        END IF
+                    END IF
+                KEYBOARDEVENT "4"
+                    IFE controls_locked THEN
+                        IF game_data.game_progress="game-progress-39" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-34")
+                        END IF
+                    END IF
+                END KEYBOARDEVENT
+                JAVASCRIPT
+                    user_input_enabled.push("game-progress-39");
+                    ship_status_trigger.push(["game-progress-39", "red"]);
+                    user_continue.push(["game-progress-39", "game-progress-26"]);
+                END JAVASCRIPT
+            END DIV
+            GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
+            GOTO drawOmegaStats()
+        END WINDOW
+    END DIV
+    DIV "game-progress","game-progress-40"
+        PRINT "Their engines are already offline.","original hide"
+        WINDOW ,"visuals"
+            DIV "gfx"
+                PRINT "Omega Doom","gfx-label"
+                DIV "render"
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/ships/omega_doom/omega_doom_exteria.gfx")
+                END DIV
+            END DIV
+            DIV "text"
+                DIV "character"
+                    SWRITE
+                        PRINT "Lt. Simons [SS Liberty]"
+                    END SWRITE
+                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                END DIV
+                DIV "speech"
+                    SWRITE
+                        PRINT ""
+                    END SWRITE
+                    BUTTON ,"btn-continue btn-next-progress"
+                        PRINT "["
+                        PRINT "enter","button_key"
+                        PRINT "]", "button_key_end_small" 
+                        PRINT "Continue", "button-message"
+                    END BUTTON
+                END DIV
+            END DIV
+        END WINDOW
+        WINDOW ,"controls"
+            DIV "controls-buttons"
+                MOUSEACTION "progressSpeech('game-progress-40')"
+                    BUTTON
+                        PRINT "["
+                        PRINT "1","button_key"
+                        PRINT "]", "button_key_end" 
                         PRINT "Target the Engines", "button-message selected"
                     END BUTTON
                 MOUSEACTION "progressSpeech('game-progress-32')"
@@ -3149,34 +3237,34 @@ WINDOW "game-window", "progress"
                 END BUTTON
                 KEYBOARDEVENT "1"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
-                            GOTO progressSpeech("game-progress-28")
+                        IF game_data.game_progress="game-progress-40" && in_game && !speaking THEN
+                            GOTO progressSpeech("game-progress-40")
                         END IF
                     END IF
                 KEYBOARDEVENT "2"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-40" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-32")
                         END IF
                     END IF
                 KEYBOARDEVENT "3"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-40" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-36")
                         END IF
                     END IF
                 KEYBOARDEVENT "4"
                     IFE controls_locked THEN
-                        IF game_data.game_progress="game-progress-27" && in_game && !speaking THEN
+                        IF game_data.game_progress="game-progress-40" && in_game && !speaking THEN
                             GOTO progressSpeech("game-progress-34")
                         END IF
                     END IF
                 END KEYBOARDEVENT
                 JAVASCRIPT
-                    user_input_enabled.push("game-progress-39");
-                    ship_status_trigger.push(["game-progress-39", "red"]);
-                    animation_trigger.push(["game-progress-39", "updateOmegaEnginesFire", "false"]);
-                    user_continue.push(["game-progress-39", "game-progress-26"]);
+                    user_input_enabled.push("game-progress-40");
+                    ship_status_trigger.push(["game-progress-40", "red"]);
+                    animation_trigger.push(["game-progress-40", "updateOmegaFireProgress"]);
+                    user_continue.push(["game-progress-40", "game-progress-26"]);
                 END JAVASCRIPT
             END DIV
             GOTO drawStats("SS Liberty", "federation border", "outpost 3366", "red alert", 70, "online", "offline", "offline")
@@ -3197,6 +3285,9 @@ END JAVASCRIPT
 ANIMATION "updateOmegaEnginesFire", "false"
     GOTO updateOmegaShip("omega_shields", 70)
     GOTO updateOmegaShip("omega_engines", 0)
+END ANIMATION
+ANIMATION "updateOmegaFireProgress", "false"
+    GOTO progressSpeech("game-progress-9")
 END ANIMATION
 AFUNCTION "updateOmegaShip", "var_name", "var_value"
     game_data[var_name] = var_value;

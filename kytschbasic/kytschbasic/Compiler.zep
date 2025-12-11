@@ -142,15 +142,19 @@ class Compiler
 
 	private function compile(route)
 	{
-		var err;
+		var err, parser;
 
+		let parser = new Parser();
 		try {
-			var parsed = (new Parser())->parse(constant("_ROOT") . "/" . route->template);
+			var parsed = parser->parse(constant("_ROOT") . "/" . route->template);
 			file_put_contents(constant("_ROOT") . "/compiled.php", "<!DOCTYPE html>\n" . parsed);
 			require_once(constant("_ROOT") . "/compiled.php");
 			return "";
 		} catch Exception, err {
-			err->fatal(constant("_ROOT") . "/" . route->template);
+			err->fatal(
+				constant("_ROOT") . "/" . route->template,
+				err->getLineNo()
+			);
 		} catch \RuntimeException | \Exception | \ParserError, err {
 			(new Exception(
 					err->getMessage(),

@@ -38,7 +38,7 @@ class Parser
 	private line_no = 0;
 	private newline = "\n";
 	private cprint = false;
-	private js = false;
+	public js = false;
 	private process_as_js = false;
 	private create_function = false;
 	private input_event = false;
@@ -224,6 +224,7 @@ class Parser
 				if (!this->cprint) {
 					let this->js = true;
 					let this->create_function = true;
+					let this->process_as_js = true;
 					return (new AFunction())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;
@@ -233,6 +234,7 @@ class Parser
 				if (!this->cprint) {
 					let this->js = false;
 					let this->create_function = false;
+					let this->process_as_js = false;
 					return (new AFunction())->parse(line, command, args, this->js);
 				}  elseif (this->cprint || (this->js && !this->create_function)) {
 					return line . this->newline;

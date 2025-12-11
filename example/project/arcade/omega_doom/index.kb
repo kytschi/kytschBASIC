@@ -373,6 +373,7 @@ ADIM animation_trigger$=()
 ADIM ship_status_trigger$=()
 ADIM user_continue$=()
 ADIM user_prev$=()
+ADIM user_skip$=()
 ADEF game_data$=""
 
 IFE _GET("progress") THEN
@@ -569,6 +570,8 @@ AFUNCTION "saveAndQuit", "progress=null"
 END AFUNCTION
 
 ASYNCFUNCTION "progressSpeech", "next_id", "prev_id", "blank_text=0"
+    var skip = 0;
+
     speaking=1;
     shipStatus(event);
 
@@ -578,30 +581,40 @@ ASYNCFUNCTION "progressSpeech", "next_id", "prev_id", "blank_text=0"
         game_data.game_progress = next_id;
     }
 
-    //console.log("progressSpeech", game_data.game_progress, "blank", blank_text);
+    user_skip.forEach((func_call, index) => {
+        if (func_call[0] == game_data.game_progress) {
+            progressSpeech(event, func_call[1]);
+            skip = 1;
+            return;
+        }
+    });
 
-    if (user_input_enabled.includes(game_data.game_progress)) {
-        user_input = 1;
-    } else if (user_input_disabled.includes(game_data.game_progress)) {
-        user_input = 0;
-    }
+    if (!skip) {
+        //console.log("progressSpeech", game_data.game_progress, "blank", blank_text);
 
-    await sleep(10);
-    $("#omega-doom .btn-continue .button-message").removeClass("selected");
-    $("#omega-doom .btn-previous .button-message").removeClass("selected");
-    
-    $("#omega-doom .progress .game-progress").hide();
-    $("#omega-doom #" + game_data.game_progress + " .speech p span").html("");
-    $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+        if (user_input_enabled.includes(game_data.game_progress)) {
+            user_input = 1;
+        } else if (user_input_disabled.includes(game_data.game_progress)) {
+            user_input = 0;
+        }
 
-    if (!blank_text) {
-        speech_text = $("#omega-doom #" + game_data.game_progress + " .original").html();
-        if (speech_text) {
-            var iLoop=0;
-            while (typeof(speech_text[iLoop]) != "undefined") {
-                $("#omega-doom #" + game_data.game_progress + " .speech p span").append(speech_text[iLoop]);
-                await sleep(10);
-                iLoop++;
+        await sleep(10);
+        $("#omega-doom .btn-continue .button-message").removeClass("selected");
+        $("#omega-doom .btn-previous .button-message").removeClass("selected");
+        
+        $("#omega-doom .progress .game-progress").hide();
+        $("#omega-doom #" + game_data.game_progress + " .speech p span").html("");
+        $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+
+        if (!blank_text) {
+            speech_text = $("#omega-doom #" + game_data.game_progress + " .original").html();
+            if (speech_text) {
+                var iLoop=0;
+                while (typeof(speech_text[iLoop]) != "undefined") {
+                    $("#omega-doom #" + game_data.game_progress + " .speech p span").append(speech_text[iLoop]);
+                    await sleep(10);
+                    iLoop++;
+                }
             }
         }
     }
@@ -617,21 +630,11 @@ AFUNCTION "nextProgress", "animation=null"
     speech_text = "";
     $("#" + game_data.game_progress + " .btn-continue .button-message").addClass("selected");
 
-    if (!userContinue(event)) {
-        var splits = game_data.game_progress.split("-");
-        game_data.game_progress = "";
-        splits.forEach((str) => {
-            if (parseInt(str)) {
-                game_data.game_progress += (parseInt(str)+1)
-            } else {
-                game_data.game_progress += str + "-"
-            }
-        });
-    }
-
+    console.log(game_data.game_progress);
     if (!animation && animation_trigger.length) {
         animation_trigger.forEach((func_call, index) => {
             if (func_call[0] == game_data.game_progress) {
+                console.log(game_data.game_progress, func_call);
                 $("#omega-doom .progress .game-progress").hide();
                 $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
                 window[func_call[1]](event);
@@ -644,6 +647,18 @@ AFUNCTION "nextProgress", "animation=null"
         });
     }
 
+    if (!userContinue(event)) {
+        var splits = game_data.game_progress.split("-");
+        game_data.game_progress = "";
+        splits.forEach((str) => {
+            if (parseInt(str)) {
+                game_data.game_progress += (parseInt(str)+1)
+            } else {
+                game_data.game_progress += str + "-"
+            }
+        });
+    }
+    
     if (!animation) {
         progressSpeech(event, game_data.game_progress, null);
     }
