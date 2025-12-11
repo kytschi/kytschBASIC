@@ -1,3 +1,6 @@
+JAVASCRIPT
+    getGameData(event);
+END JAVASCRIPT
 WINDOW "game-window", "progress"
     DIV "game-progress","game-progress-1"
         PRINT "RED ALERT!","original hide"
@@ -1746,9 +1749,6 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
 END WINDOW
-JAVASCRIPT
-    loading=0;
-END JAVASCRIPT
 KEYBOARDEVENT "b"
     GOTO userInput()
     IFE controls_locked THEN

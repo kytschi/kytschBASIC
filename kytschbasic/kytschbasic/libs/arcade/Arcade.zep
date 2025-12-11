@@ -96,7 +96,12 @@ class Arcade extends Command
 					return null;
 				}
 
-				kb_cookie_get = JSON.parse(kb_cookie_get);
+				try {
+					kb_cookie_get = JSON.parse(kb_cookie_get);
+					
+				} catch (error) {
+				 	kb_cookie_get = {};
+				}
 
 				if (var_to_set == null) {
 					return kb_cookie_get;

@@ -244,8 +244,67 @@ FUNCTION "drawFederationMap", file$, flash$=null, selected$=null
     END MOUSEACTION
 END FUNCTION
 
-FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=100, shields_status$="offline", ftl$="online", impulse$="online", weapons$="online"
-    DIV "controls-stats"
+AFUNCTION "updateShip", "var_name=null", "var_value=null"
+    if (var_name) {
+        game_data[var_name] = var_value;
+        WRITECOOKIE("kb_OMEGA", game_data);
+    }
+
+    if (game_data.ship_shields == 0) {
+        $("#ship-stats #omega-shields").html('<span class="red">' + game_data.ship_shields + '&percnt;&nbsp;[OFFLINE]</span>');
+    } else if (game_data.ship_shields > 0 && game_data.ship_shields <= 39) {
+        $("#omega-stats #omega-shields").html('<span class="red">' + game_data.shields_shields + '&percnt;&nbsp;[ONLINE]</span>');
+    } else if (game_data.ship_shields >= 40 && game_data.shields_shields <= 60) {
+        $("#omega-stats #omega-shields").html('<span class="yellow">' + game_data.ship_shields + '&percnt;&nbsp;[ONLINE]</span>');
+    } else {
+        $("#omega-stats #omega-shields").html('<span class="normal">' + game_data.ship_shields + '&percnt;&nbsp;[ONLINE]</span>');
+    }
+
+    $("#ship-stats #ship-tactical span").removeClass("normal").removeClass("red");
+    $("#ship-stats #ship-tactical span").html(game_data.ship_tactical);
+    if (game_data.ship_tactical == "yellow alert") {
+        $("#ship-stats #ship-tactical span").addClass("yellow");
+    } else if (game_data.ship_tactical == "red alert") {
+        $("#ship-stats #ship-tactical span").addClass("red");
+    } else {
+        $("#ship-stats #ship-tactical span").addClass("normal");
+    }
+    
+    $("#ship-stats #ship-ftl span").removeClass("normal").removeClass("red");
+    if (game_data.ship_ftl_engines == 0) {
+        $("#ship-stats #ship-ftl span").addClass("red");
+        $("#ship-stats #ship-ftl span").html("offline");
+    } else {
+        $("#ship-stats #ship-ftl span").addClass("normal");
+        $("#ship-stats #ship-ftl span").html("online");
+    }
+
+    $("#ship-stats #ship-impulse span").removeClass("normal").removeClass("red");
+    if (game_data.ship_impulse_engines == 0) {
+        $("#ship-stats #ship-impulse span").addClass("red");
+        $("#ship-stats #ship-impulse span").html("offline");
+    } else {
+        $("#ship-stats #ship-impulse span").addClass("normal");
+        $("#ship-stats #ship-impulse span").html("online");
+    }
+    $("#ship-stats #ship-weapons span").removeClass("normal").removeClass("red");
+    if (game_data.ship_weapons == 0) {
+        $("#ship-stats #ship-weapons span").addClass("red");
+        $("#ship-stats #ship-weapons span").html("offline");
+    } else {
+        $("#ship-stats #ship-weapons span").addClass("normal");
+        $("#ship-stats #ship-weapons span").html("online");
+    }
+END AFUNCTION
+
+FUNCTION "drawStats", ship$, sector$, location$
+    DEF tactical$=READCOOKIE("kb_OMEGA", "ship_tactical")
+    DEF shields%=READCOOKIE("kb_OMEGA", "ship_shields")
+    DEF ftl%=READCOOKIE("kb_OMEGA", "ship_ftl_engines")
+    DEF impulse%=READCOOKIE("kb_OMEGA", "ship_impulse_engines")
+    DEF weapons%=READCOOKIE("kb_OMEGA", "ship_weapons")
+
+    DIV "controls-stats", "ship-stats"
         TABLE
             TBODY
                 TROW
@@ -281,7 +340,7 @@ FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=10
                     TCELL ,"controls-stats-label"
                         PRINT "TACTICAL"
                     END TCELL
-                    TCELL
+                    TCELL ,"controls-stats-status", ,"ship-tactical"
                         IF tactical$="yellow alert" THEN
                             PRINT tactical$, "yellow"
                         ELSEIF tactical$="red alert" THEN
@@ -295,7 +354,7 @@ FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=10
                     TCELL ,"controls-stats-label"
                         PRINT "SHIELDS"
                     END TCELL
-                    TCELL ,"controls-stats-status"
+                    TCELL ,"controls-stats-status", ,"ship-shields"
                         IF shields%=0 THEN
                             PRINT shields$, "red"
                             PRINT "&percnt;&nbsp;[OFFLINE]", "red"
@@ -320,11 +379,11 @@ FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=10
                     TCELL ,"controls-stats-label"
                         PRINT "FTL drive"
                     END TCELL
-                    TCELL ,"controls-stats-status"
-                        IF ftl$="offline" THEN
-                            PRINT ftl$, "red"
+                    TCELL ,"controls-stats-status", ,"ship-ftl"
+                        IF ftl%=0 THEN
+                            PRINT "offline", "red"
                         ELSE
-                            PRINT ftl$, "normal"
+                            PRINT "online", "normal"
                         END IF
                     END TCELL
                 END TROW
@@ -332,11 +391,11 @@ FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=10
                     TCELL ,"controls-stats-label"
                         PRINT "Impulse drive"
                     END TCELL
-                    TCELL ,"controls-stats-status"
-                        IF impulse$="offline" THEN
-                            PRINT impulse$, "red"
+                    TCELL ,"controls-stats-status", ,"ship-impulse"
+                        IF impulse%=0 THEN
+                            PRINT "offline", "red"
                         ELSE
-                            PRINT impulse$, "normal"
+                            PRINT "online", "normal"
                         END IF
                     END TCELL
                 END TROW
@@ -344,18 +403,17 @@ FUNCTION "drawStats", ship$, sector$, location$, tactical$="normal", shields%=10
                     TCELL ,"controls-stats-label"
                         PRINT "WEAPONS"
                     END TCELL
-                    TCELL ,"controls-stats-status"
-                        IF weapons$="offline" THEN
-                            PRINT weapons$, "red"
+                    TCELL ,"controls-stats-status", ,"ship-weapons"
+                        IF weapons%=0 THEN
+                            PRINT "offline", "red"
                         ELSE
-                            PRINT weapons$, "normal"
+                            PRINT "online", "normal"
                         END IF
                     END TCELL
                 END TROW
             END TBODY
         END TABLE
     END DIV
-    WRITECOOKIE("kb_OMEGA", tactical$, "ship_tactical")
 END FUNCTION
 
 ADEF current_progress$="intro"
@@ -509,7 +567,6 @@ AFUNCTION "createCookie", "return_data=0"
     data.story_progress = "intro";
     data.game_progress = "game-progress-1";
     data.ship_shields = 100;
-    data.ship_shields_status = 0;
     data.ship_ftl_engines = 1;
     data.ship_impulse_engines = 1;
     data.ship_tactical = "normal";
@@ -534,6 +591,16 @@ AFUNCTION "rebuildGameData"
 
     game_data = data;
     WRITECOOKIE("kb_OMEGA", game_data);
+END AFUNCTION
+
+AFUNCTION "getGameData"
+    game_data = READCOOKIE("kb_OMEGA");
+
+    if (!game_data) {
+        createCookie(event);
+        $("#btn_continue").hide();
+    }
+    //rebuildGameData(event);
 END AFUNCTION
 
 AFUNCTION "saveAndQuit", "progress=null"
@@ -566,6 +633,17 @@ AFUNCTION "saveAndQuit", "progress=null"
                 );
             }
         );
+    }
+END AFUNCTION
+
+AFUNCTION "userInputRemove", "id"
+    if (user_continue.length) {
+        user_continue.forEach((goto, index) => {
+            if (goto[0] == id) {
+                user_continue.slice(index)
+                return;
+            }
+        });
     }
 END AFUNCTION
 
@@ -630,23 +708,6 @@ AFUNCTION "nextProgress", "animation=null"
     speech_text = "";
     $("#" + game_data.game_progress + " .btn-continue .button-message").addClass("selected");
 
-    console.log(game_data.game_progress);
-    if (!animation && animation_trigger.length) {
-        animation_trigger.forEach((func_call, index) => {
-            if (func_call[0] == game_data.game_progress) {
-                console.log(game_data.game_progress, func_call);
-                $("#omega-doom .progress .game-progress").hide();
-                $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
-                window[func_call[1]](event);
-                shipStatus(event);
-                if (typeof(func_call[2]) == "undefined") {
-                    animation = 1;
-                }
-                return;
-            }
-        });
-    }
-
     if (!userContinue(event)) {
         var splits = game_data.game_progress.split("-");
         game_data.game_progress = "";
@@ -655,6 +716,21 @@ AFUNCTION "nextProgress", "animation=null"
                 game_data.game_progress += (parseInt(str)+1)
             } else {
                 game_data.game_progress += str + "-"
+            }
+        });
+    }
+
+    if (!animation && animation_trigger.length) {
+        animation_trigger.forEach((func_call, index) => {
+            if (func_call[0] == game_data.game_progress) {
+                $("#omega-doom .progress .game-progress").hide();
+                $("#omega-doom .progress #" + game_data.game_progress).css("display", "flex");
+                window[func_call[1]](event);
+                shipStatus(event);
+                if (typeof(func_call[2]) == "undefined") {
+                    animation = 1;
+                }
+                return;
             }
         });
     }
@@ -768,15 +844,6 @@ MOUSEEVENT ".btn-previous-progress"
     GOTO prevProgress()
 END MOUSEEVENT
 
-JAVASCRIPT
-    game_data = READCOOKIE("kb_OMEGA");
-
-    if (!game_data) {
-        createCookie(event);
-        $("#btn_continue").hide();
-    }
-    //rebuildGameData(event);
-END JAVASCRIPT
 IFE _GET("progress") THEN
     JAVASCRIPT
         $("#omega-doom-intro").fadeIn(2000, () => {

@@ -1,3 +1,6 @@
+JAVASCRIPT
+    getGameData(event);
+END JAVASCRIPT
 WINDOW "game-intro", "progress"
     DIV "game-progress","game-progress-1"
         PRINT "Captain, incoming hail from Federation Command.","original hide"
@@ -1805,9 +1808,6 @@ WINDOW "game-intro", "progress"
         END ANIMATION
     END DIV
 END WINDOW
-JAVASCRIPT
-    loading=0;
-END JAVASCRIPT
 AFUNCTION "triggerAnimation"
     progressSpeech(event,'game-progress-30');
     animationWarp(event);

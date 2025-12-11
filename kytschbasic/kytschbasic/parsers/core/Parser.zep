@@ -387,13 +387,13 @@ class Parser
 			case "ELSEIF":
 				return this->processIf(line, "elseif", args);
 			case "ELSE":
-				if (!this->process_as_js) {
+				if (!this->js) {
 					return "<?php else : ?>";
 				} else {
 					return "\t} else {\n";
 				}
 			case "END IF":
-				if (!this->process_as_js) {
+				if (!this->js) {
 					return "<?php endif; ?>";
 				} else {
 					return "\t}\n";
@@ -456,7 +456,7 @@ class Parser
 			throw new Exception("Invalid IF statement");
 		}
 		
-		if (!this->process_as_js) {
+		if (!this->js) {
 			let output = "<?php ";
 		} else {
 			let output = "\t";
@@ -477,13 +477,13 @@ class Parser
 		);
 						
 		if (not_empty) {
-			if (!this->process_as_js) {
+			if (!this->js) {
 				let output .= "!empty(" . splits[0] . ")";
 			} else {
 				let output .= splits[0];
 			}
 		} elseif (is_empty) {
-			if (!this->process_as_js) {
+			if (!this->js) {
 				let output .= "empty(" . splits[0] . ")";
 			} else {
 				let output .= "!" . splits[0];
@@ -492,7 +492,7 @@ class Parser
 			let output .= splits[0];
 		}
 
-		if (!this->process_as_js) {
+		if (!this->js) {
 			let output .= ") : ?>";
 		} else {
 			let output .= ") {\n";

@@ -1,3 +1,6 @@
+JAVASCRIPT
+    getGameData(event);
+END JAVASCRIPT
 WINDOW "game-window", "progress"
     DIV "game-progress","game-progress-1"
         PRINT "Ambrose, contact Federation Command, put me through to Admiral Byrd.","original hide"
@@ -1551,6 +1554,3 @@ WINDOW "game-window", "progress"
         END WINDOW
     END DIV
 END WINDOW
-JAVASCRIPT
-    loading=0;
-END JAVASCRIPT
