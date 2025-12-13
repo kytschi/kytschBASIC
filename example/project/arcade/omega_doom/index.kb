@@ -251,13 +251,13 @@ AFUNCTION "updateShip", "var_name=null", "var_value=null"
     }
 
     if (game_data.ship_shields == 0) {
-        $("#ship-stats #omega-shields").html('<span class="red">' + game_data.ship_shields + '&percnt;&nbsp;[OFFLINE]</span>');
+        $("#ship-stats #ship-shields").html('<span class="red">' + game_data.ship_shields + '&percnt;&nbsp;[OFFLINE]</span>');
     } else if (game_data.ship_shields > 0 && game_data.ship_shields <= 39) {
-        $("#omega-stats #omega-shields").html('<span class="red">' + game_data.shields_shields + '&percnt;&nbsp;[ONLINE]</span>');
+        $("#omega-stats #ship-shields").html('<span class="red">' + game_data.shields_shields + '&percnt;&nbsp;[ONLINE]</span>');
     } else if (game_data.ship_shields >= 40 && game_data.shields_shields <= 60) {
-        $("#omega-stats #omega-shields").html('<span class="yellow">' + game_data.ship_shields + '&percnt;&nbsp;[ONLINE]</span>');
+        $("#omega-stats #ship-shields").html('<span class="yellow">' + game_data.ship_shields + '&percnt;&nbsp;[ONLINE]</span>');
     } else {
-        $("#omega-stats #omega-shields").html('<span class="normal">' + game_data.ship_shields + '&percnt;&nbsp;[ONLINE]</span>');
+        $("#omega-stats #ship-shields").html('<span class="normal">' + game_data.ship_shields + '&percnt;&nbsp;[ONLINE]</span>');
     }
 
     $("#ship-stats #ship-tactical span").removeClass("normal").removeClass("red");
@@ -277,6 +277,15 @@ AFUNCTION "updateShip", "var_name=null", "var_value=null"
     } else {
         $("#ship-stats #ship-ftl span").addClass("normal");
         $("#ship-stats #ship-ftl span").html("online");
+    }
+
+    $("#ship-stats #ship-sensors span").removeClass("normal").removeClass("red");
+    if (game_data.ship_sensors == 0) {
+        $("#ship-stats #ship-sensors span").addClass("red");
+        $("#ship-stats #ship-sensors span").html("offline");
+    } else {
+        $("#ship-stats #ship-sensors span").addClass("normal");
+        $("#ship-stats #ship-sensors span").html("online");
     }
 
     $("#ship-stats #ship-impulse span").removeClass("normal").removeClass("red");
@@ -303,6 +312,7 @@ FUNCTION "drawStats", ship$, sector$, location$
     DEF ftl%=READCOOKIE("kb_OMEGA", "ship_ftl_engines")
     DEF impulse%=READCOOKIE("kb_OMEGA", "ship_impulse_engines")
     DEF weapons%=READCOOKIE("kb_OMEGA", "ship_weapons")
+    DEF sensors%=READCOOKIE("kb_OMEGA", "ship_sensors")
 
     DIV "controls-stats", "ship-stats"
         TABLE
@@ -411,6 +421,18 @@ FUNCTION "drawStats", ship$, sector$, location$
                         END IF
                     END TCELL
                 END TROW
+                TROW
+                    TCELL ,"controls-stats-label"
+                        PRINT "SENSORS"
+                    END TCELL
+                    TCELL ,"controls-stats-status", ,"ship-sensors"
+                        IF sensors%=0 THEN
+                            PRINT "offline", "red"
+                        ELSE
+                            PRINT "online", "normal"
+                        END IF
+                    END TCELL
+                END TROW
             END TBODY
         END TABLE
     END DIV
@@ -444,6 +466,7 @@ AFUNCTION "gameover", "title"
     controls_locked=1;
 
     $("#omega-doom-gameover #gameover-title").html(title);
+    createCookie(event, 0);
 
     $("#omega-doom-game").fadeOut(
         2000,
@@ -565,14 +588,18 @@ AFUNCTION "createCookie", "return_data=0"
     var data = {};
     data.story_progress = "intro";
     data.game_progress = "game-progress-1";
+    data.ship_view = "ships/omega_doom/omega_doom_exteria.gfx";
+    data.ship_view_label = "Omega Doom";
     data.ship_shields = 100;
     data.ship_ftl_engines = 1;
     data.ship_impulse_engines = 1;
     data.ship_tactical = "normal";
+    data.ship_sensors = 1;
     data.ship_weapons = 1;
     data.omega_shields = 100;
     data.omega_engines = 1;
     data.omega_weapons = 1;
+    data.omega_senosrs = 1;
 
     if (return_data) {
         return data;
@@ -584,22 +611,21 @@ AFUNCTION "createCookie", "return_data=0"
 END AFUNCTION
 
 AFUNCTION "rebuildGameData"
-    var data = createCookie(event, 1);
-    data.story_progress = "progress4";
-    data.game_progress = "game-progress-1";
+    game_data = createCookie(event, 1);
+    game_data.story_progress = "progress4";
+    game_data.game_progress = "game-progress-1";
 
-    game_data = data;
     WRITECOOKIE("kb_OMEGA", game_data);
 END AFUNCTION
 
 AFUNCTION "getGameData"
+    rebuildGameData(event);
     game_data = READCOOKIE("kb_OMEGA");
 
     if (!game_data) {
         createCookie(event);
         $("#btn_continue").hide();
     }
-    //rebuildGameData(event);
 END AFUNCTION
 
 AFUNCTION "saveAndQuit", "progress=null"

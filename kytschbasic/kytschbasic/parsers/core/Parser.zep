@@ -388,13 +388,13 @@ class Parser
 				return this->processIf(line, "elseif", args);
 			case "ELSE":
 				if (!this->js) {
-					return "<?php else : ?>";
+					return "<?php else : ?>\n";
 				} else {
 					return "\t} else {\n";
 				}
 			case "END IF":
 				if (!this->js) {
-					return "<?php endif; ?>";
+					return "<?php endif; ?>\n";
 				} else {
 					return "\t}\n";
 				}
