@@ -51,8 +51,6 @@ class Head extends Command
 				return this->processLang(args);
 			case "NAME":
 				return this->processName(args);
-			case "PALETTE":
-				return this->processPalette(args);
 			case "SCRIPT":
 				return this->processScript(args);
 			case "VIEWPORT":
@@ -115,31 +113,6 @@ class Head extends Command
 		}
 		
 		return "<?= \"<title>\" . " . args[0] . " . \"</title>\"; ?>";
-	}
-
-	private function processPalette(array args)
-	{
-		var config, output = "<?= \"<link rel=", href;
-		let config = constant("CONFIG");
-
-		if (empty(args[0])) {
-			throw new Exception("Invalid PALETTE");
-		}
-
-		let output .= this->outputArg("stylesheet", true);
-		let output .= " type=" . this->outputArg("text/css", true);
-
-		let href = args[0] . " . '.css'";
-		
-		if (!empty(config["cache"])) {
-			if (empty(config["cache"]->enabled)) {
-				let href .= "?no-cache=" . microtime();
-			}
-		}
-
-		let output .= " href=" . this->outputArg(href);
-
-		return output . ">\"; ?>";
 	}
 
 	private function processScript(array args)

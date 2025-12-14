@@ -32,8 +32,16 @@ class Window extends Command
 	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
+			case "WINDOWBODY":
+				return this->parseWindowBody(args);
+			case "WINDOWFOOTER":
+				return this->parseWindowFooter(args);
 			case "WINDOW":
 				return this->parseWindow(args);
+			case "END WINDOWBODY":
+				return "</div>";
+			case "END WINDOWFOOTER":
+				return "</div>";
 			case "END WINDOW":
 				return "</div>";
 			default:
@@ -43,38 +51,90 @@ class Window extends Command
 
 	public function parseWindow(array args)
 	{
-		var output = "<?= \"<div", cleaned = "";
+		var output = "", id, class_name = "", title="Window Title";
 
-		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[0]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let id = args[1];
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-window"), true);
+			let id = "\"" . this->genID("kb-window") . "\"";
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let class_name = this->outputArg(args[2]);
+		}
+
+		let output = "<style>\n";
+		let output .= "#" . trim(id, "\"") . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);min-height: 100vh;}\n";
+		let output .= "#" . trim(id, "\"") . " .window-title {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(221,17,68,1);color:rgb(255,255,255);border-bottom: 1px solid rgb(91,91,91);}\n";
+		let output .= "#" . trim(id, "\"") . " .window-title span {display: block;}\n";
+		let output .= "</style>\n";
+
+		let output .= "<?php $KB_WINDOW_ID=" . id. "; ?>\n<?= \"<div";
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let title = args[0];
+			let output .= " title=" . this->outputArg(title);
+		}
+
+		let output .= " id=" . this->outputArg(id);
+		if (class_name) {
+			let output .= " class=" . class_name;
+		}
+
+		let output .= "><div class='window-title'><span>" . trim(title, "\"") . "</span></div>\"; ?>";
+		
+		return output;
+	}
+
+	public function parseWindowBody(array args)
+	{
+		var output = "", id = "";
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let id = args[0];
+		} else {
+			let id = "\"" . this->genID("kb-window-body") . "\"";
+		}
+
+		let output = "<style>\n";
+		let output .= "#<?= $KB_WINDOW_ID; ?> #" . trim(id, "\"") . " {flex-grow: 1; overflow: hidden; padding: 10px; background-color: rgba(255,255,255,1);color:rgb(0,0,0);}\n";
+		let output .= "</style>\n";
+		let output .= "<?= \"<div";
+		let output .= " id=" . this->outputArg(id);
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[1]);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
-			if (substr(args[2], 0, 1) == "\"") {
-				let cleaned = trim(args[2], "\"");
-			} else {
-				let cleaned = this->outputArg(args[2], false);
-			}
-
-			let output .= " onclick='javascript:" . cleaned . "(event)'";
-		}
-
-		if (isset(args[3]) && !empty(args[3])) {
-			if (substr(args[3], 0, 1) == "\"") {
-				let cleaned = trim(args[3], "\"");
-			} else {
-				let cleaned = this->outputArg(args[3], false);
-			}
-
-			let output .= " ondblclick='javascript:" . cleaned . "(event)'";
-		}
+		let output .= ">\"; ?>";
 		
-		return output . ">\"; ?>";
+		return output;
+	}
+
+	public function parseWindowFooter(array args)
+	{
+		var output = "", id = "";
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let id = args[0];
+		} else {
+			let id = "\"" . this->genID("kb-window-footer") . "\"";
+		}
+
+		let output = "<style>\n";
+		let output .= "#" . trim(id, "\"") . " {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(229,229,229,1);color:rgb(0,0,0);border-top: 1px solid rgb(91,91,91);}\n";
+		let output .= "#" . trim(id, "\"") . " span {display: block;}\n";
+		let output .= "</style>\n";
+
+		let output .= "<?= \"<div";
+		let output .= " id=" . this->outputArg(id);
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[1]);
+		}
+
+		let output .= ">\"; ?>";
+		
+		return output;
 	}
 }

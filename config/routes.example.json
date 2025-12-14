@@ -803,5 +803,9 @@
 	{
 		"url": "/examples/name-picker",
 		"template": "project/examples/name_picker.kb"
+	},
+	{
+		"url": "/examples/media-vault",
+		"template": "project/examples/media_vault.kb"
 	}
 ]

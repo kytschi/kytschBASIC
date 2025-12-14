@@ -43,15 +43,22 @@ class Screen extends Command
 
 	public function parseScreen(array args)
 	{
-		var output = "<?= \"<div";
+		var output = "", id = "";
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[0]);
+			let id = args[0];
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-screen"), true);
+			let id = "\"" . this->genID("kb-screen") . "\"";
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
+		let output = "<style>\n";
+		let output .= "#" . trim(id, "\"") . " {background-color: rgba(255,255,255,1);color:rgb(0,0,0);min-height: 100vh;}\n";
+		let output .= "</style>\n";
+
+		let output .= "<?= \"<div";
+		let output .= " id=" . this->outputArg(id);
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[1]);
 		}
 		

@@ -15,8 +15,8 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "Here is a list of various example apps, utilities and systems written in kytschBASIC."
 				END SWRITE
+				LINE BREAK
 				HEADING 3
-					LINE BREAK
 					PRINT "Lottery number generator"
 				END HEADING 3
 				LINK "/examples/lottery","Lottery number generator",,"_blank"
@@ -26,14 +26,24 @@ LOAD "_ROOT/project/shared/header"
 				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/examples/lottery.kb","Lottery number generator source code",,"_blank"
 					PRINT "View the source code"
 				END LINK
+				LINE BREAK
 				HEADING 3
-					LINE BREAK
 					PRINT "CMS written in KB"
 				END HEADING 3
 				LINK "https://github.com/kytschi/kytschBASIC-CMS","KB CMS source code",,"_blank"
 					PRINT "View the source code"
 				END LINK
-				
+				LINE BREAK
+				HEADING 3
+					PRINT "Kytschi's Media Vault"
+				END HEADING 3
+				LINK "/examples/media-vault","Media Vault",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/examples/media_vault.kb","KB CMS source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
 			END DIV
 		END DIV
 	LOAD "_ROOT/project/shared/footer"

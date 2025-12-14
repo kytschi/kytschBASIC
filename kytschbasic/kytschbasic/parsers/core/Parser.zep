@@ -66,6 +66,7 @@ class Parser
 		"KytschBASIC\\Parsers\\Core\\Media\\Files",
 		"KytschBASIC\\Parsers\\Core\\Navigation",
 		"KytschBASIC\\Parsers\\Core\\Layout\\Table",
+		"KytschBASIC\\Parsers\\Core\\Palette\\Palette",
 		"KytschBASIC\\Parsers\\Core\\Conditional\\Loops",
 		"KytschBASIC\\Parsers\\Core\\Load",
 		"KytschBASIC\\Parsers\\Core\\Session",

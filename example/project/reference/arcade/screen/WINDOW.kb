@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "WINDOW","heading-command basic"
 					LINE BREAK
-					PRINT "ID, CLASS, ON CLICK FUNC, ON DOUBLE CLICK FUNC","heading-args"
+					PRINT "TITLE, ID, CLASS","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE
@@ -24,44 +24,36 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 INCLUDE arcade
-SCREEN "the-traveller"
-	WINDOW "intro"
-		RGB 0,0,0
-		BITMAP 0,0,800,400
-			RGB 255,0,0
-			BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-			BITMAPTEXT "The Traveller",32,0,120,150
-			BITMAPTEXT "Press any key to start",18,0,135,320
-		END BITMAP
-	END WINDOW
-	WINDOW "input"
-		RGB 0,0,0
-		BITMAP 0,0,800,200
-			RGB 255,0,0
-			LINE 0,0,800,0
-		END BITMAP
-	END WINDOW
+PALETTE ,"screen"
+    BACKGROUND 0,0,0
+    COLOR 0,0,0
+END PALETTE
+SCREEN "screen"
+    WINDOW "Test", "window"
+        WINDOWBODY
+            PRINT "This is a window"
+        END WINDOWBODY
+        WINDOWFOOTER
+            PRINT "Window footer"
+        END WINDOWFOOTER
+    END WINDOW
 END SCREEN
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				SCREEN "the-traveller"
-					WINDOW "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
-							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller",32,0,120,150
-							BITMAPTEXT "Press any key to start",18,0,135,320
-						END BITMAP
-					END WINDOW
-					WINDOW "input"
-						RGB 0,0,0
-						BITMAP 0,0,800,200
-							RGB 255,0,0
-							LINE 0,0,800,0
-						END BITMAP
+				PALETTE ,"screen"
+					BACKGROUND 0,0,0
+					COLOR 0,0,0
+				END PALETTE
+				SCREEN "screen"
+					WINDOW "Test", "window"
+						WINDOWBODY
+							PRINT "This is a window"
+						END WINDOWBODY
+						WINDOWFOOTER
+							PRINT "Window footer"
+						END WINDOWFOOTER
 					END WINDOW
 				END SCREEN
 				HEADING 4

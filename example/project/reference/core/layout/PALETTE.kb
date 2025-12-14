@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "PALETTE","heading-command basic"
 					LINE BREAK
-					PRINT "NAME","heading-args"
+					PRINT "FILE, ID, CLASS","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Load a CSS file."
@@ -21,7 +21,14 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PALETTE "/kytschi/css/palette"
-
+PALETTE ,"screen"
+	BACKGROUND 0,0,0
+	COLOR 0,0,0
+END PALETTE
+PALETTE ,,"window"
+	BACKGROUND 0,0,0
+	COLOR 0,0,0
+END PALETTE
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -29,6 +36,14 @@ PALETTE "/kytschi/css/palette"
 				DIV "kb-code-block"
 					SHOWHTML
 						PALETTE "/kytschi/css/palette"
+						PALETTE ,"screen"
+							BACKGROUND 0,0,0
+							COLOR 0,0,0
+						END PALETTE
+						PALETTE ,,"window"
+							BACKGROUND 0,0,0
+							COLOR 0,0,0
+						END PALETTE
 					END SHOWHTML
 				END DIV
 				HEADING 4

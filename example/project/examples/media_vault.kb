@@ -1,0 +1,26 @@
+LANG "en"
+HEAD
+	INCLUDE arcade
+	LOAD "_ROOT/project/shared/head"
+	NAME "Kytschi's Media Vault | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+    MAIN
+        PALETTE ,"screen"
+            BACKGROUND 0,0,0
+            COLOR 0,0,0
+        END PALETTE
+        SCREEN "screen"
+            WINDOW "Test", "window"
+                WINDOWBODY
+                    PRINT "This is a window"
+                END WINDOWBODY
+                WINDOWFOOTER
+                    PRINT "Window footer"
+                END WINDOWFOOTER
+            END WINDOW
+        END SCREEN
+    END MAIN
+END BODY
+END
