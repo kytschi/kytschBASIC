@@ -54,7 +54,7 @@ class Window extends Command
 		var output = "";
 
 		let output = "<style>\n";
-		let output .= id . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);min-height: 100vh;}\n";
+		let output .= id . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);height: 100vh;}\n";
 		let output .= id . " .window-title {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(221,17,68,1);color:rgb(255,255,255);border-bottom: 1px solid rgb(91,91,91);}\n";
 		let output .= id . " .window-title span {display: block;}\n";
 		let output .= "</style>\n";
@@ -69,11 +69,11 @@ class Window extends Command
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let id = args[1];
 		} else {
-			let id = "\"" . this->genID("kb-window") . "\"";
+			let id = this->genID("kb-window");
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let class_name = this->outputArg(args[2]);
+			let class_name = args[2];
 		}
 
 		if (class_name) {
@@ -82,7 +82,7 @@ class Window extends Command
 			let output = this->genWindowStyle("#" . this->outputArg(id, true, false));
 		}
 		
-		let output .= "<?php $KB_WINDOW_ID=" . id. "; ?>\n<?= \"<div";
+		let output .= "<?php $KB_WINDOW_ID=\"" . this->outputArg(id, false, false). "\"; ?>\n<?= \"<div";
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let title = args[0];
@@ -91,7 +91,7 @@ class Window extends Command
 
 		let output .= " id=" . this->outputArg(id, false);
 		if (class_name) {
-			let output .= " class=" . class_name;
+			let output .= " class=" . this->outputArg(class_name, false);
 		}
 
 		let output .= "><div class='window-title'><span>" . this->outputArg(title, false, false) . "</span></div>\"; ?>";
@@ -106,11 +106,11 @@ class Window extends Command
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let id = args[0];
 		} else {
-			let id = "\"" . this->genID("kb-window-body") . "\"";
+			let id = this->genID("kb-window-body");
 		}
 
 		let output = "<style>\n";
-		let output .= "#<?= $KB_WINDOW_ID; ?> #" . trim(id, "\"") . " {flex-grow: 1; overflow: hidden; padding: 10px; background-color: rgba(255,255,255,1);color:rgb(0,0,0);}\n";
+		let output .= "#<?= $KB_WINDOW_ID; ?> #" . this->outputArg(id, true, false) . " {flex-grow: 1; overflow: hidden; padding: 10px; background-color: rgba(255,255,255,1);color:rgb(0,0,0);}\n";
 		let output .= "</style>\n";
 		let output .= "<?= \"<div";
 		let output .= " id=" . this->outputArg(id, false);
@@ -131,12 +131,12 @@ class Window extends Command
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let id = args[0];
 		} else {
-			let id = "\"" . this->genID("kb-window-footer") . "\"";
+			let id = this->genID("kb-window-footer");
 		}
 
 		let output = "<style>\n";
-		let output .= "#" . trim(id, "\"") . " {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(229,229,229,1);color:rgb(0,0,0);border-top: 1px solid rgb(91,91,91);}\n";
-		let output .= "#" . trim(id, "\"") . " span {display: block;}\n";
+		let output .= "#" . this->outputArg(id, true, false) . " {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(229,229,229,1);color:rgb(0,0,0);border-top: 1px solid rgb(91,91,91);}\n";
+		let output .= "#" . this->outputArg(id, true, false) . " span {display: block;}\n";
 		let output .= "</style>\n";
 
 		let output .= "<?= \"<div";

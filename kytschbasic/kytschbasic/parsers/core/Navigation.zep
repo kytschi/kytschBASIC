@@ -25,6 +25,7 @@
  */
 namespace KytschBASIC\Parsers\Core;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
 class Navigation extends Command
@@ -41,7 +42,9 @@ class Navigation extends Command
 			case "LINK":
 				return this->processLink(args);
 			case "MENU":
-				return this->processNav(args);
+				return this->processMenu(args);
+			case "MENUGROUP":
+				return this->processMenuGroup(args);
 			default:
 				return null;
 		}
@@ -121,7 +124,7 @@ class Navigation extends Command
 		return  output . ">\"; ?>";
 	}
 
-	private function processNav(array args)
+	private function processMenu(array args)
 	{
 		var output = "<?= \"<nav";
 		
@@ -132,9 +135,30 @@ class Navigation extends Command
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " id=" . this->outputArg(args[1], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-span"), false);
+			let output .= " id=" . this->outputArg(this->genID("kb-menu"), false);
 		}
 		
 		return  output . ">\"; ?>";
+	}
+
+	private function processMenuGroup(array args)
+	{
+		var output = "<?= \"<div";
+		
+		if (!isset(args[0]) || empty(args[0]) || args[0] == "\"\"") {
+			throw new Exception("Invalid MENUGROUP");
+		}
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[1], false);
+		}
+
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[2], false);
+		} else {
+			let output .= " id=" . this->outputArg(this->genID("kb-menu-group"), false);
+		}
+		
+		return  output . "><p><span>" . this->outputArg(args[0], false, false) . "</span></p>\"; ?>";
 	}
 }

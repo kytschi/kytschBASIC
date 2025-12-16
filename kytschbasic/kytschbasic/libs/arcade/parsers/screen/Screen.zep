@@ -52,7 +52,7 @@ class Screen extends Command
 		}
 
 		let output = "<style>\n";
-		let output .= "#" . this->outputArg(id, true, false) . " {background-color: rgba(255,255,255,1);color:rgb(0,0,0);min-height: 100vh;}\n";
+		let output .= "#" . this->outputArg(id, true, false) . " {background-color: rgba(255,255,255,1);color:rgb(0,0,0);height: 100vh;}\n";
 		let output .= "</style>\n";
 
 		let output .= "<?= \"<div";

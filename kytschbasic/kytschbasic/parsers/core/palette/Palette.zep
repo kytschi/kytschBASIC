@@ -39,8 +39,16 @@ class Palette extends Command
 				return this->processColor(args);
 			case "END PALETTE":
 				return "}</style>";
+			case "HEIGHT":
+				return this->processSize(args, false, "height");
+			case "HEIGHTPERCENT":
+				return this->processSize(args, true, "height");				
 			case "PALETTE":
 				return this->processPalette(args);
+			case "WIDTH":
+				return this->processSize(args);
+			case "WIDTHPERCENT":
+				return this->processSize(args, true);
 			default:
 				return null;
 		}
@@ -131,11 +139,32 @@ class Palette extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			return "<style>#" . trim(args[1], "\"") . "{";
+			return "<style>#" . this->outputArg(args[1], true, false) . "{";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			return "<style>." . trim(args[2], "\"") . "{";
+			return "<style>." . this->outputArg(args[2], true, false) . "{";
 		}
+	}
+
+	private function processSize(array args, bool percent = false, string type = "width")
+	{
+		var output = "";
+
+		let output = type . ": ";
+
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let output .= "<?= intval(" . this->outputArg(args[0], false, false) . "); ?>";
+			if (percent) {
+				let output .= "%";
+			} else {
+				let output .= "px";
+			}
+			let output .= " !important;";
+		} else {
+			let output .= "100" . (percent ? "%" : "") . " !important;";
+		}
+
+		return output;
 	}
 }

@@ -265,6 +265,12 @@ HEADER
 		LINK "/reference/HEADING#refHEADING","Find out about the HEADING command","nav-link",,"refHEADING"
 			PRINT "HEADING"
 		END LINK
+		LINK "/reference/HEIGHT#refWIDTH","Find out about the HEIGHT command","nav-link",,"refHEIGHT"
+			PRINT "HEIGHT"
+		END LINK
+		LINK "/reference/HEIGHTPERCENT#refHEIGHTPERCENT","Find out about the HEIGHTPERCENT command","nav-link",,"refHEIGHTPERCENT"
+			PRINT "HEIGHTPERCENT"
+		END LINK
 		LINK "/reference/HEX#refHEX","Find out about the HEX command","nav-link",,"refHEX"
 			PRINT "HEX"
 		END LINK
@@ -561,6 +567,12 @@ HEADER
 		END LINK
 		LINK "/reference/WHILE#refWHILE","Find out about the WHILE command","nav-link",,"refWHILE"
 			PRINT "WHILE"
+		END LINK
+		LINK "/reference/WIDTH#refWIDTH","Find out about the WIDTH command","nav-link",,"refWIDTH"
+			PRINT "WIDTH"
+		END LINK
+		LINK "/reference/WIDTHPERCENT#refWIDTHPERCENT","Find out about the WIDTHPERCENT command","nav-link",,"refWIDTHPERCENT"
+			PRINT "WIDTHPERCENT"
 		END LINK
 		LINK "/reference/WINDOW#refWINDOW","Find out about the WINDOW command","nav-link",,"refWINDOW"
 			PRINT "WINDOW"

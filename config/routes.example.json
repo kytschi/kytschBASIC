@@ -563,6 +563,22 @@
 		"url": "/reference/COLOR",
 		"template": "project/reference/core/palette/COLOR.kb"
 	},
+	{
+		"url": "/reference/HEIGHT",
+		"template": "project/reference/core/palette/HEIGHT.kb"
+	},
+	{
+		"url": "/reference/HEIGHTPERCENT",
+		"template": "project/reference/core/palette/HEIGHTPERCENT.kb"
+	},
+	{
+		"url": "/reference/WIDTH",
+		"template": "project/reference/core/palette/WIDTH.kb"
+	},
+	{
+		"url": "/reference/WIDTHPERCENT",
+		"template": "project/reference/core/palette/WIDTHPERCENT.kb"
+	},
 
 	{
 		"url": "/reference/ABS",

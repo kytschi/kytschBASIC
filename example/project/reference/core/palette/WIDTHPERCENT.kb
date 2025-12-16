@@ -1,0 +1,90 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "WIDTHPERCENT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "WIDTHPERCENT","heading-command basic"
+					LINE BREAK
+					PRINT "PERCENTAGE","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Set a width as a percentage."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+PALETTE ,"screen"
+	BACKGROUND 0,0,0
+	COLOR 255,255,255
+	WIDTHPERCENT 50
+	HEIGHTPERCENT 30
+END PALETTE
+SCREEN "screen"
+	PRINT "I'm a screen"
+END SCREEN
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+					SHOWHTML
+						PALETTE ,"screen"
+							BACKGROUND 0,0,0
+							COLOR 255,255,255
+							WIDTHPERCENT 50
+							HEIGHTPERCENT 30
+						END PALETTE
+						SCREEN "screen"
+							PRINT "I'm a screen"
+						END SCREEN
+					END SHOWHTML
+				END DIV
+				HEADING 4
+					PRINT "Example"
+				END HEADING 4
+				PALETTE ,"screen"
+					BACKGROUND 0,0,0
+					COLOR 255,255,255
+					WIDTHPERCENT 50
+					HEIGHTPERCENT 30
+				END PALETTE
+				SCREEN "screen"
+					PRINT "I'm a screen"
+				END SCREEN
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/PALETTE"
+						PRINT "PALETTE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/COLOR"
+						PRINT "COLOR"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEIGHT"
+						PRINT "HEIGHT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WIDTH"
+						PRINT "WIDTH"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WIDTHPERCENT"
+						PRINT "WIDTHPERCENT"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END
