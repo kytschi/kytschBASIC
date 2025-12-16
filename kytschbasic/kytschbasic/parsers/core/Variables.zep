@@ -336,7 +336,7 @@ class Variables
 	{
 		let arg = trim(arg, "\"");
 		if (substr(arg, 0, 1) == "$") {
-			return php_output ? "<?= " . arg . "; ?>" : arg;
+			return php_output ? "<?= " . arg . "; ?>" : "{" . arg . "}";
 		}
 
 		return include_quotes ? "\\\"" . arg . "\\\"" : arg;
