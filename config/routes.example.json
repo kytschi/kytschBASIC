@@ -368,10 +368,6 @@
 		"template": "project/reference/core/layout/HEADER.kb"
 	},
 	{
-		"url": "/reference/PALETTE",
-		"template": "project/reference/core/layout/PALETTE.kb"
-	},
-	{
 		"url": "/reference/TABLE",
 		"template": "project/reference/core/layout/TABLE.kb"
 	},
@@ -507,6 +503,10 @@
 		"template": "project/reference/arcade/shapes/LINE.kb"
 	},
 	{
+		"url": "/reference/MOVETO",
+		"template": "project/reference/core/layout/MOVETO.kb"
+	},
+	{
 		"url": "/reference/MOUSEACTION",
 		"template": "project/reference/arcade/events/MOUSEACTION.kb"
 	},
@@ -541,6 +541,27 @@
 	{
 		"url": "/reference/WINDOW",
 		"template": "project/reference/arcade/screen/WINDOW.kb"
+	},
+	{
+		"url": "/reference/WINDOWBODY",
+		"template": "project/reference/arcade/screen/WINDOWBODY.kb"
+	},
+	{
+		"url": "/reference/WINDOWFOOTER",
+		"template": "project/reference/arcade/screen/WINDOWFOOTER.kb"
+	},
+
+	{
+		"url": "/reference/PALETTE",
+		"template": "project/reference/core/palette/PALETTE.kb"
+	},
+	{
+		"url": "/reference/BACKGROUND",
+		"template": "project/reference/core/palette/BACKGROUND.kb"
+	},
+	{
+		"url": "/reference/COLOR",
+		"template": "project/reference/core/palette/COLOR.kb"
 	},
 
 	{

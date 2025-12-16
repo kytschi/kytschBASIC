@@ -66,12 +66,12 @@ class Form extends Command
 		var output = "<?= \"<form", method = "GET";
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[0]);
+			let output .= " id=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-form"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-form"), false);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			if (in_array(strtoupper(trim(args[1], "\"")), ["GET", "POST"])) {
 				let method = strtoupper(trim(args[1], "\""));
 			}
@@ -80,11 +80,11 @@ class Form extends Command
 		let output .= " method=" . this->outputArg(method, true);
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " action=" . this->outputArg(args[2]);
+			let output .= " action=" . this->outputArg(args[2], false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[3]);
+			let output .= " class=" . this->outputArg(args[3], false);
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
@@ -101,27 +101,27 @@ class Form extends Command
 		let output = "<?= \"<input type=\\\"" . type . "\\\"";
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " value=" . this->outputArg(args[1]);
+			let output .= " value=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[2]);
+			let output .= " class=" . this->outputArg(args[2], false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " placeholder=" . this->outputArg(args[3]);
+			let output .= " placeholder=" . this->outputArg(args[3], false);
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[4]);
+			let output .= " id=" . this->outputArg(args[4], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
@@ -129,7 +129,7 @@ class Form extends Command
 		}
 
 		if (isset(args[6]) && !empty(args[6]) && args[6] != "\"\"") {
-			let output .= trim(this->outputArg(args[6], true), "\\\"");
+			let output .= trim(this->outputArg(args[6], false), "\\\"");
 		}
 		
 		return output . ">\"; ?>";
@@ -142,28 +142,28 @@ class Form extends Command
 		let output = "<?= \"<input type='checkbox'";
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let value = trim(args[1], "\"");
-			let output .= " value=" . this->outputArg(args[1]);
+			let output .= " value=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[2]);
+			let output .= " class=" . this->outputArg(args[2], false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " placeholder=" . this->outputArg(args[3]);
+			let output .= " placeholder=" . this->outputArg(args[3], false);
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[4]);
+			let output .= " id=" . this->outputArg(args[4], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
@@ -182,23 +182,23 @@ class Form extends Command
 		var output = "<?= \"<select";
 				
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1]);
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " placeholder=" . this->outputArg(args[2]);
+			let output .= " placeholder=" . this->outputArg(args[2], false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[3]);
+			let output .= " id=" . this->outputArg(args[3], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
@@ -214,7 +214,7 @@ class Form extends Command
 				
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let value = args[0];
-			let output .= " value=" . this->outputArg(args[0]);
+			let output .= " value=" . this->outputArg(args[0], false);
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
@@ -237,9 +237,9 @@ class Form extends Command
 		var output = "<?= \"<textarea", value = "\"\"";
 				
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " name=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[1]) && !empty(args[1])) {
@@ -247,17 +247,17 @@ class Form extends Command
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {
-			let output .= " class=" . this->outputArg(args[2]);
+			let output .= " class=" . this->outputArg(args[2], false);
 		}
 
 		if (isset(args[3]) && !empty(args[3])) {
-			let output .= " placeholder=" . this->outputArg(args[3]);
+			let output .= " placeholder=" . this->outputArg(args[3], false);
 		}
 
 		if (isset(args[4]) && !empty(args[4])) {
-			let output .= " id=" . this->outputArg(args[4]);
+			let output .= " id=" . this->outputArg(args[4], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-form-input"), false);
 		}
 
 		if (isset(args[5]) && !empty(args[5])) {

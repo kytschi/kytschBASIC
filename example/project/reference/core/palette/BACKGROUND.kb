@@ -1,0 +1,76 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "BACKGROUND statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "BACKGROUND","heading-command basic"
+					LINE BREAK
+					PRINT "RED, GREEN, BLUE","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Set the background colour."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+PALETTE "/kytschi/css/palette"
+PALETTE ,"screen"
+	BACKGROUND 0,0,0
+	COLOR 0,0,0
+END PALETTE
+PALETTE ,,"window"
+	BACKGROUND 0,0,0
+	COLOR 0,0,0
+END PALETTE
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+				DIV "kb-code-block"
+					SHOWHTML
+						PALETTE "/kytschi/css/palette"
+						PALETTE ,"screen"
+							BACKGROUND 0,0,0
+							COLOR 0,0,0
+						END PALETTE
+						PALETTE ,,"window"
+							BACKGROUND 0,0,0
+							COLOR 0,0,0
+						END PALETTE
+					END SHOWHTML
+				END DIV
+				HEADING 4
+					PRINT "Example"
+				END HEADING 4
+				DIV "kb-code-block"
+					PALETTE ,"text"
+						BACKGROUND 255,255,255
+						COLOR 255,0,0
+					END PALETTE
+					PRINT "kytschBASIC",,"text"
+				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/PALETTE"
+						PRINT "PALETTE"
+					END LINK
+					PRINT " | "
+					LINK "/reference/COLOR"
+						PRINT "COLOR"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

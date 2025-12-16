@@ -60,25 +60,28 @@ class Load extends Command
 
 	private function parseLoad(array args)
 	{
-		var ext, err;
 		if(empty(args[0])) {
 			throw new Exception("Invalid INCLUDE");
 		}
 
-		let args[0] = trim(args[0], "\"");
-		let ext = pathinfo(args[0], PATHINFO_EXTENSION);
+		return "
+<?php
+$ext = pathinfo(" . args[0] . ", PATHINFO_EXTENSION);
 
-		switch (ext) {
-			case "js":
-				let args[0] = str_replace(constant("_ROOT"), "", args[0]);
-				return "<script src=" . args[0] . "></script>";
-			default:
-				try {
-					return (new Parser())->parse(rtrim(args[0], ".kb") . ".kb", false);
-				} catch \Exception, err {
-					let err = err;
-					// Do nothing
-				}
-		}
+switch ($ext) {
+    case \"js\":
+        echo \"<script src=\" . str_replace(constant(\"_ROOT\"), \"\", " . args[0] . ") . \"></script>\";
+        break;
+    default:
+        try {
+            $KBLOADFILENAME = '/tmp/" . microtime(true) . "';
+            file_put_contents($KBLOADFILENAME, (new KytschBASIC\\Parsers\\Core\\Parser())->parse(rtrim(" . args[0] . ", \".kb\") . \".kb\", false));
+            require_once($KBLOADFILENAME);
+            unlink($KBLOADFILENAME);
+        } catch (KytschBASIC\\Exceptions\\Exception $KBERR) {
+            // Do nothing
+        }
+}
+?>";
 	}
 }

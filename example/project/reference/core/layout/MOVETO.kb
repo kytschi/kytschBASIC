@@ -1,0 +1,65 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "MOVETO statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "MOVETO","heading-command basic"
+					LINE BREAK
+					PRINT "X, Y, ID, CLASS, ABSOLUTE (default FALSE)","heading-args"
+				END SWRITE
+				SWRITE
+					PRINT "Move an element to a new X and Y position on screen."
+				END SWRITE
+				SWRITE
+					PRINT "Note:","heading-args"
+					PRINT " setting ABSOLUTE to true with cause the element to move using absolute positioning. "
+					PRINT "When set to false which is default, relative positioning is used."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+MOVETO 100, 10, "text"
+PRINT "Move me",,"text"
+				END CPRINT
+				HEADING 4
+					PRINT "Output"
+				END HEADING 4
+					MOVETO 100, 10, "text"
+					PRINT "Move me",,"text"
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/BODY"
+						PRINT "BODY"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DIV"
+						PRINT "DIV"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEAD"
+						PRINT "HEAD"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEADER"
+						PRINT "HEADER"
+					END LINK
+					PRINT " | "
+					LINK "/parameters"
+						PRINT "parameters"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END

@@ -49,6 +49,19 @@ class Window extends Command
 		}
 	}
 
+	private function genWindowStyle(string id = "")
+	{
+		var output = "";
+
+		let output = "<style>\n";
+		let output .= id . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);min-height: 100vh;}\n";
+		let output .= id . " .window-title {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(221,17,68,1);color:rgb(255,255,255);border-bottom: 1px solid rgb(91,91,91);}\n";
+		let output .= id . " .window-title span {display: block;}\n";
+		let output .= "</style>\n";
+
+		return output;
+	}
+
 	public function parseWindow(array args)
 	{
 		var output = "", id, class_name = "", title="Window Title";
@@ -63,25 +76,25 @@ class Window extends Command
 			let class_name = this->outputArg(args[2]);
 		}
 
-		let output = "<style>\n";
-		let output .= "#" . trim(id, "\"") . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);min-height: 100vh;}\n";
-		let output .= "#" . trim(id, "\"") . " .window-title {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(221,17,68,1);color:rgb(255,255,255);border-bottom: 1px solid rgb(91,91,91);}\n";
-		let output .= "#" . trim(id, "\"") . " .window-title span {display: block;}\n";
-		let output .= "</style>\n";
-
+		if (class_name) {
+			let output = this->genWindowStyle("." . this->outputArg(class_name, true, false));
+		} else {
+			let output = this->genWindowStyle("#" . this->outputArg(id, true, false));
+		}
+		
 		let output .= "<?php $KB_WINDOW_ID=" . id. "; ?>\n<?= \"<div";
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let title = args[0];
-			let output .= " title=" . this->outputArg(title);
+			let output .= " title=" . this->outputArg(title, false);
 		}
 
-		let output .= " id=" . this->outputArg(id);
+		let output .= " id=" . this->outputArg(id, false);
 		if (class_name) {
 			let output .= " class=" . class_name;
 		}
 
-		let output .= "><div class='window-title'><span>" . trim(title, "\"") . "</span></div>\"; ?>";
+		let output .= "><div class='window-title'><span>" . this->outputArg(title, false, false) . "</span></div>\"; ?>";
 		
 		return output;
 	}
@@ -100,10 +113,10 @@ class Window extends Command
 		let output .= "#<?= $KB_WINDOW_ID; ?> #" . trim(id, "\"") . " {flex-grow: 1; overflow: hidden; padding: 10px; background-color: rgba(255,255,255,1);color:rgb(0,0,0);}\n";
 		let output .= "</style>\n";
 		let output .= "<?= \"<div";
-		let output .= " id=" . this->outputArg(id);
+		let output .= " id=" . this->outputArg(id, false);
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1]);
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		let output .= ">\"; ?>";
@@ -127,10 +140,10 @@ class Window extends Command
 		let output .= "</style>\n";
 
 		let output .= "<?= \"<div";
-		let output .= " id=" . this->outputArg(id);
+		let output .= " id=" . this->outputArg(id, false);
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1]);
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		let output .= ">\"; ?>";

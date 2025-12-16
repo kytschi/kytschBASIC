@@ -51,11 +51,11 @@ class Files extends Command
 		var output = "<?php copy(\"";
 				
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= this->outputArg(args[0]);
+			let output .= this->outputArg(args[0], false);
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= "\", \"". this->outputArg(args[1]);
+			let output .= "\", \"". this->outputArg(args[1], false);
 		}
 
 		return output . "\"); ?>";
@@ -120,7 +120,7 @@ class Files extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= ", \"". this->outputArg(args[1]) . "\"";
+			let output .= ", \"". this->outputArg(args[1], false) . "\"";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {

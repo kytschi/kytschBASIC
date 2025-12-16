@@ -54,30 +54,30 @@ class Bitmap extends Command
 		var x=0, y=0, width=320, height=240, id;
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let x = "intval(\"" . args[0] . "\")";
+			let x = "intval(" . this->outputArg(args[0], false, false) . ")";
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let y = "intval(\"" . args[1] . "\")";
+			let y = "intval(" . this->outputArg(args[1], false, false) . ")";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let width = "intval(\"" . args[2] . "\")";
+			let width = "intval(" . this->outputArg(args[2], false, false) . ")";
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let height = "intval(\"" . args[3] . "\")";
+			let height = "intval(" .this->outputArg(args[3], false, false) . ")";
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let id = trim(args[4], "\"");
+			let id = this->outputArg(args[4], false, false);
 		} else {
-			let id = "KB_BITMAP_" . rand(10000, getrandmax());
+			let id = "\"KB_BITMAP_" . rand(10000, getrandmax()) . "\"";
 		}
 
 		return "<?php 
 		$KBSHAPES = [];
-		$KBBITMAPID = '" . id . "';
+		$KBBITMAPID = " . id . ";
 		$KBBITMAPWIDTH = " . width . ";
 		$KBBITMAPHEIGHT = " . height . ";
 		$KBBITMAPX = " . x . ";
@@ -92,7 +92,11 @@ class Bitmap extends Command
 
 	private function processBitmapFont(array args)
 	{
-		return "<?php $KBBITMAPFONT=" . args[0] . ";?>";
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			return "<?php $KBBITMAPFONT = \"" . this->outputArg(args[0], false, false) . "\";?>";
+		}
+
+		throw new Exception("Invalid BITMAPFONT");
 	}
 
 	private function processBitmapText(array args)
@@ -102,35 +106,39 @@ class Bitmap extends Command
 		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
 		let output .= "imagefttext($KBBITMAP, ";
 
-		let value = args[0];
-
-		if (isset(args[1])) {
-			let output .= args[1] . ", ";
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let value = this->outputArg(args[0], false, false);
+		} else {
+			throw new Exception("Invalid BITMAPTEXT");
+		}
+		
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= "intval(" . this->outputArg(args[1], false, false) . "), ";
 		} else {
 			let output .= "12, ";
 		}
 
-		if (isset(args[2])) {
-			let output .= args[2] . ", ";
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= "intval(" . this->outputArg(args[2], false, false) . "), ";
 		} else {
 			let output .= "0, ";
 		}
 
-		if (isset(args[3])) {
-			let output .= args[3] . ", ";
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= "intval(" . this->outputArg(args[3], false, false) . "), ";
 		} else {
 			let output .= "0, ";
 		}
 
-		if (isset(args[4])) {
-			let output .= args[4] . ", ";
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= "intval(" . this->outputArg(args[4], false, false) . "), ";
 		} else {
 			let output .= "0, ";
 		}
 
 		let output .= "$KBCOLOUR, $KBBITMAPFONT, ";
 
-		return output . value . "); ?>";
+		return output . "\"" . value . "\"); ?>";
 	}
 
 	private function processEndBitmap(array args)

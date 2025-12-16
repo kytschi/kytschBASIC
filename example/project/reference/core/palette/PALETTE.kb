@@ -50,24 +50,12 @@ END PALETTE
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
-					LINK "/reference/DIV"
-						PRINT "DIV"
+					LINK "/reference/BACKGROUND"
+						PRINT "BACKGROUND"
 					END LINK
 					PRINT " | "
-					LINK "/reference/FOOTER"
-						PRINT "FOOTER"
-					END LINK
-					PRINT " | "
-					LINK "/reference/HEAD"
-						PRINT "HEAD"
-					END LINK
-					PRINT " | "
-					LINK "/reference/HEADER"
-						PRINT "HEADER"
-					END LINK
-					PRINT " | "
-					LINK "/parameters"
-						PRINT "parameters"
+					LINK "/reference/COLOR"
+						PRINT "COLOR"
 					END LINK
 				END DIV
 			END DIV

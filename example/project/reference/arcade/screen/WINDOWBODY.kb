@@ -2,7 +2,7 @@ LANG "en"
 HEAD
 	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
-	NAME "WINDOW statment | kytschBASIC"
+	NAME "WINDOWBODY statment | kytschBASIC"
 END HEAD
 BODY
 LOAD "_ROOT/project/shared/header"
@@ -10,14 +10,14 @@ LOAD "_ROOT/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "WINDOW","heading-command basic"
+					PRINT "WINDOWBODY","heading-command basic"
 					LINE BREAK
-					PRINT "TITLE, ID (optional), CLASS (optional)","heading-args"
+					PRINT "ID (optional), CLASS (optional)","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
-					PRINT "Creates a window on screen."
+					PRINT "Creates a window body on screen."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
@@ -75,17 +75,6 @@ END SCREEN
 					END THEAD
 					TBODY
 						TROW
-							TCELL ,"table-parameter"
-								PRINT "TITLE"
-							END TCELL
-							TCELL
-								PRINT "string"
-							END TCELL
-							TCELL
-								PRINT "Title of the window"
-							END TCELL
-						END TROW
-						TROW
 							THEADCELL ,"table-parameter",3
 								PRINT "Optional"
 							END THEADCELL
@@ -127,8 +116,8 @@ END SCREEN
 						PRINT "SCREEN"
 					END LINK
 					PRINT " | "
-					LINK "/reference/WINDOWBODY"
-						PRINT "WINDOWBODY"
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
 					END LINK
 					PRINT " | "
 					LINK "/reference/WINDOWFOOTER"

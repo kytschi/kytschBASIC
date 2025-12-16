@@ -332,9 +332,14 @@ class Variables
 		return false;
 	}
 
-	public function outputArg(arg, bool is_string = false)
+	public function outputArg(arg, bool php_output = false, bool include_quotes = true)
 	{
-		return (is_string ? "\\\"" : "\\\"\" . ") . arg . (is_string ? "\\\"" : " . \"\\\"");
+		let arg = trim(arg, "\"");
+		if (substr(arg, 0, 1) == "$") {
+			return php_output ? "<?= " . arg . "; ?>" : arg;
+		}
+
+		return include_quotes ? "\\\"" . arg . "\\\"" : arg;
 	}	
 
 	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)

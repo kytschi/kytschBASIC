@@ -51,29 +51,29 @@ class Button extends Command
 			if (submit) {
 				let type = "\"submit\"";
 			}
-			let output .= " name=" . this->outputArg(args[0]);
+			let output .= " name=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " name=" . this->outputArg(this->genID("kb-btn-submit"), true);
+			let output .= " name=" . this->outputArg(this->genID("kb-btn-submit"), false);
 		}
 
 		let output .= " type=" . this->outputArg(type);
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1]);
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[2]);
+			let output .= " id=" . this->outputArg(args[2], false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " value=" . this->outputArg(args[3]);
+			let output .= " value=" . this->outputArg(args[3], false);
 		} else {
 			let output .= " value='button'";
 		}
 
 		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
-			let output .= " onclick=" . this->outputArg(args[5]);
+			let output .= " onclick=" . this->outputArg(args[5], false);
 		} elseif (in_event) {
 			if (isset(in_event[0]) && !empty(in_event[0]) && in_event[0] != "\"\"") {
 				var str, splits = preg_split("/\'[^\']*\'(*SKIP)(*FAIL)|\K\(/", trim(in_event[0], "\""));
@@ -98,7 +98,7 @@ class Button extends Command
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= "><span>\" . " . args[4] . " . \"</span></button>";
+			let output .= "><span>" . this->outputArg(args[4], false, false) . "</span></button>";
 		} else {
 			let output .= ">";
 		}

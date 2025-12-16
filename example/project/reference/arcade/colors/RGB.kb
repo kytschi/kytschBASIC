@@ -12,7 +12,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "RGB","heading-command basic"
 					LINE BREAK
-					PRINT "RED, GREEN, BLUE, TRANSPARENCY","heading-args"
+					PRINT "RED, GREEN, BLUE, TRANSPARENCY (default 100)","heading-args"
 					LINE BREAK
 					PRINT "Requires arcade library","heading-required"
 				END SWRITE

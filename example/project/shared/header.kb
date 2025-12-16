@@ -70,6 +70,9 @@ HEADER
 		LINK "/reference/AUTHOR#refAUTHOR","Find out about the AUTHOR command","nav-link",,"refAUTHOR"
 			PRINT "AUTHOR"
 		END LINK
+		LINK "/reference/BACKGROUND#refBACKGROUND","Find out about the BACKGROUND command","nav-link",,"refBACKGROUND"
+			PRINT "BACKGROUND"
+		END LINK
 		LINK "/reference/BENCHMARK#refBENCHMARK","Find out about the BENCHMARK command","nav-link",,"refBENCHMARK"
 			PRINT "BENCHMARK"
 		END LINK
@@ -123,6 +126,9 @@ HEADER
 		END LINK
 		LINK "/reference/CIRCLEF#refCIRCLEF","Find out about the CIRCLEF command","nav-link",,"refCIRCLEF"
 			PRINT "CIRCLEF"
+		END LINK
+		LINK "/reference/COLOR#refCOLOR","Find out about the COLOR command","nav-link",,"refCOLOR"
+			PRINT "COLOR"
 		END LINK
 		LINK "/reference/CONTAINS#refCONTAINS","Find out about the CONTAINS command","nav-link",,"refCONTAINS"
 			PRINT "CONTAINS"
@@ -358,6 +364,9 @@ HEADER
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK
+		LINK "/reference/MOVETO#refMOVETO","Find out about the MOVETO command","nav-link",,"refMOVETO"
+			PRINT "MOVETO"
+		END LINK
 		LINK "/reference/MOUSEACTION#refMOUSEACTION","Find out about the MOUSEACTION command","nav-link",,"refMOUSEACTION"
 			PRINT "MOUSEACTION"
 		END LINK
@@ -555,6 +564,12 @@ HEADER
 		END LINK
 		LINK "/reference/WINDOW#refWINDOW","Find out about the WINDOW command","nav-link",,"refWINDOW"
 			PRINT "WINDOW"
+		END LINK
+		LINK "/reference/WINDOWBODY#refWINDOWBODY","Find out about the WINDOWBODY command","nav-link",,"refWINDOWBODY"
+			PRINT "WINDOWBODY"
+		END LINK
+		LINK "/reference/WINDOWFOOTER#refWINDOWFOOTER","Find out about the WINDOWFOOTER command","nav-link",,"reWINDOWFOOTER"
+			PRINT "WINDOWFOOTER"
 		END LINK
 		LINK "/reference/WRITECOOKIE#refWRITECOOKIE","Find out about the WRITECOOKIE command","nav-link",,"refWRITECOOKIE"
 			PRINT "WRITECOOKIE"

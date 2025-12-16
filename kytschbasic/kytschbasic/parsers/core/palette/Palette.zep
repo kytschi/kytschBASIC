@@ -114,10 +114,10 @@ class Palette extends Command
 		let config = constant("CONFIG");
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output = "<?= \"<link rel=" . this->outputArg("stylesheet", true);
-			let output .= " type=" . this->outputArg("text/css", true);
+			let output = "<?= \"<link rel=" . this->outputArg("stylesheet", false);
+			let output .= " type=" . this->outputArg("text/css", false);
 
-			let href = args[0] . " . '.css'";
+			let href =  "rtrim(\"" . this->outputArg(args[0], false, false) . "\", \".css\") . \".css\\\"";
 			
 			if (!empty(config["cache"])) {
 				if (empty(config["cache"]->enabled)) {
@@ -125,7 +125,7 @@ class Palette extends Command
 				}
 			}
 
-			let output .= " href=" . this->outputArg(href);
+			let output .= " href=\\\"\" . " . href;
 
 			return output . ">\"; ?>";
 		}

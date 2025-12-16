@@ -43,32 +43,33 @@ class Heading extends Command
 		}
 	}
 
-	private function processHeading(array args, string close = "")
+	private function processHeading(args, string close = "")
 	{
 		var params="", size = 1;
 
 		if (close) {
-			let args[0] = ltrim(close, "END HEADING ");
+			let close = ltrim(close, "END HEADING ");
+			let args = this->args(close);
 		}
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let size = args[0];
+			let size = this->outputArg(args[0], false, false);
 		}
 
 		if (close) {
-			return "<?= \"</h" . size . ">\"; ?>";
+			return "<?= \"</h\" . intval(" . size . ") . \">\"; ?>";
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let params .= " class=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let params .= " class=" . this->outputArg(args[1], false);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
-			let params .= " id=" . this->outputArg(args[2]);
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let params .= " id=" . this->outputArg(args[2], false);
 		} else {
-			let params .= " id=" . this->outputArg(this->genID("kb-heading"), true);
+			let params .= " id=" . this->outputArg(this->genID("kb-heading"), false);
 		}
 
-		return "<?= \"<h" . size . params . ">\"; ?>";
+		return "<?= \"<h\" . intval(" . size . ") . \"" . params . ">\"; ?>";
 	}
 }

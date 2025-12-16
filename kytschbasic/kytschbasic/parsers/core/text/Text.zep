@@ -48,34 +48,27 @@ class Text extends Command
 
 	private function processPrint(array args)
 	{
-		var value="", output = "<?= \"<span", matches;
-		
-		if preg_match_all("/<\?php(.*?)\?>/s", args[0], matches) {
-			let args[0] = str_replace("<?" . matches[0][0], "", args[0]);
-			let output = "<?" . matches[0][0] . output;
-        }
-
-		let value = args[0];
-						
+		var output = "<?= \"<span";
+								
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1]);
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[2]);
+			let output .= " id=" . this->outputArg(args[2], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-span"), false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " title=" . this->outputArg(args[3]);
+			let output .= " title=" . this->outputArg(args[3], false);
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= " style=" . this->outputArg(args[4]);
+			let output .= " style=" . this->outputArg(args[4], false);
 		}
 		
-		return output . ">\" . " . args[0] . " . \"</span>\";?>";
+		return output . ">" . this->outputArg(args[0], false, false) . "</span>\";?>";
 	}
 
 	public function processPadding(string text, int length, string dir = "right")
@@ -102,10 +95,10 @@ class Text extends Command
 			let output .= " class=" . this->outputArg(args[0]);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " id=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[1], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-span"), false);
 		}
 		
 		return output. ">\"; ?>";

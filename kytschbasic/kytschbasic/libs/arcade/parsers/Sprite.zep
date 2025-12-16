@@ -46,13 +46,13 @@ class Sprite extends Command
 		var output = "<?= \"<div", cleaned;
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[0]);
+			let output .= " id=" . this->outputArg(args[0], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-window"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-window"), false);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " class=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2])) {

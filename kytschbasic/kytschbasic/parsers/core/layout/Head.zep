@@ -66,7 +66,7 @@ class Head extends Command
 			throw new Exception("Invalid CHARSET");
 		}
 		
-		return "<?= \"<meta charset=" . this->outputArg(args[0]) . ">\"; ?>";
+		return "<?= \"<meta charset=" . this->outputArg(args[0], false) . ">\"; ?>";
 	}
 
 	private function processFavicon(array args)
@@ -77,12 +77,12 @@ class Head extends Command
 			throw new Exception("Invalid FAVICON");
 		}
 
-		let output .= this->outputArg("icon", true);
+		let output .= this->outputArg("icon", false);
 
-		let output .= " href=" . this->outputArg(args[0]);
+		let output .= " href=" . this->outputArg(args[0], false);
 		
 		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " sizes=" . this->outputArg(args[1]);
+			let output .= " sizes=" . this->outputArg(args[1], false);
 		}
 
 		return output . ">\"; ?>";
@@ -94,7 +94,7 @@ class Head extends Command
 			throw new Exception("Invalid " . command);
 		}
 		
-		return "<?= \"<meta name=" . this->outputArg(type, true) . " content=" . this->outputArg(args[0]) . ">\"; ?>";
+		return "<?= \"<meta name=" . this->outputArg(type, false) . " content=" . this->outputArg(args[0], false) . ">\"; ?>";
 	}
 
 	private function processLang(array args)
@@ -103,7 +103,7 @@ class Head extends Command
 			throw new Exception("Invalid LANG");
 		}
 		
-		return "<?= \"<html lang=" . this->outputArg(args[0]) . ">\"; ?>";
+		return "<?= \"<html lang=" . this->outputArg(args[0], false) . ">\"; ?>";
 	}
 
 	private function processName(array args)
@@ -128,7 +128,7 @@ class Head extends Command
 			let type = args[1];
 		}
 
-		let output .= " type=" . this->outputArg(type, true);
+		let output .= " type=" . this->outputArg(type, false);
 
 		let href = args[0] . " . '.js'";
 		
@@ -138,7 +138,7 @@ class Head extends Command
 			}
 		}
 
-		let output .= " src=" . this->outputArg(href);
+		let output .= " src=" . this->outputArg(href, false);
 
 		return output . "></script>\"; ?>";
 	}

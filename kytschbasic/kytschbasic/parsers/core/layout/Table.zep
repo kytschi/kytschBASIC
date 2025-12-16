@@ -73,21 +73,21 @@ class Table extends Command
 		let output .= tag;
 
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " width=" . this->outputArg(args[0]);
+			let output .= " width=" . this->outputArg(args[0], false);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " class=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
-			let output .= " colspan=" . this->outputArg(args[2]);
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= " colspan=" . this->outputArg(args[2], false);
 		}
 
-		if (isset(args[3]) && !empty(args[3])) {
-			let output .= " id=" . this->outputArg(args[3]);
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[3], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-" . tag), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-" . tag), false);
 		}
 		
 		return output . ">\"; ?>";
@@ -100,13 +100,13 @@ class Table extends Command
 		let output .= tag;
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[0]);
+			let output .= " class=" . this->outputArg(args[0], false);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " id=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[1], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-" . tag), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-" . tag), false);
 		}
 		
 		return output . ">\"; ?>";

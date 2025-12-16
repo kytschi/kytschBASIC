@@ -97,25 +97,25 @@ class Navigation extends Command
 		var output = "<?= \"<a";
 				
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " href=" . this->outputArg(args[0]);
+			let output .= " href=" . this->outputArg(args[0], false);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " title=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " title=" . this->outputArg(args[1], false);
 		}
 
-		if (isset(args[2]) && !empty(args[2])) {
-			let output .= " class=" . this->outputArg(args[2]);
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[2], false);
 		}
 
-		if (isset(args[3]) && !empty(args[3])) {
-			let output .= " target=" . this->outputArg(args[3]);
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " target=" . this->outputArg(args[3], false);
 		}
 
-		if (isset(args[4]) && !empty(args[4])) {
-			let output .= " id=" . this->outputArg(args[4]);
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[4], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-a"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-a"), false);
 		}
 		
 		return  output . ">\"; ?>";
@@ -126,13 +126,13 @@ class Navigation extends Command
 		var output = "<?= \"<nav";
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[0]);
+			let output .= " class=" . this->outputArg(args[0], false);
 		}
 
-		if (isset(args[1]) && !empty(args[1])) {
-			let output .= " id=" . this->outputArg(args[1]);
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[1], false);
 		} else {
-			let output .= " id=" . this->outputArg(this->genID("kb-span"), true);
+			let output .= " id=" . this->outputArg(this->genID("kb-span"), false);
 		}
 		
 		return  output . ">\"; ?>";
