@@ -113,6 +113,13 @@ class Arcade extends Command
 				
 				return kb_cookie_get[var_to_set];
 			}
+
+			$(document).ready(function() {
+				$('.kb-menu-group-title').click(() => {
+					$('.kb-menu-group').addClass('active');
+					$('.kb-menu-group-items').toggle();
+				});
+			});
 		";
 	}
 

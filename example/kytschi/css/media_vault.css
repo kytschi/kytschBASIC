@@ -40,40 +40,49 @@ nav div.active {
     border-bottom: 1px solid rgb(91,91,91);
 }
 
-nav div p {
-    display: inline-block;
-    height: 40px;
+nav .kb-menu-group button {
     margin: 0;
     padding: 0;
+    border:0;
+    background: none;
+    font-family: "Body", Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    text-align: left;
+    cursor: pointer;
 }
 
-nav div p.active {
+nav div .kb-menu-group-title {
+    display: inline-block;
+    height: 40px;
+}
+
+nav div .kb-menu-group.active .kb-menu-group-title {
+    background-color: rgb(249,249,249);
     border-bottom: 1px solid rgb(91,91,91);
 }
 
-nav div p span {
+nav div .kb-menu-group-title span {
     display: inline-block;
     position: relative;
     padding: 9px 10px;
     height: 20px;
     margin-top: 2px;
-    background-color: rgb(249,249,249); 
 }
 
-nav div p span.active {
+nav div .kb-menu-group.active .kb-menu-group-title span {
     border-top: 1px solid rgb(91,91,91);
     border-left: 1px solid rgb(91,91,91);
     border-right: 1px solid rgb(91,91,91);
 }
 
-nav div button {
+nav div .kb-menu-group .kb-menu-group-items {
     display: none;
-    border:0;
     border-left: 1px solid rgb(91,91,91);
     border-right: 1px solid rgb(91,91,91);
+    border-bottom: 1px solid rgb(91,91,91);
     background-color: rgb(249,249,249);
-    font-family: "Body", Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    text-align: left;
+}
+
+nav div .kb-menu-group-items button {
     padding: 10px 10px;
 }
