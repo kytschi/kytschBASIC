@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "ASYNCFUNCTION statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "ASYNCFUNCTION","heading-command basic"
 					LINE BREAK
 					PRINT "NAME, ARGUMENTS (optional)","heading-args"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "This will allow you to create an arcade function which is an async javascript function with jquery support."
@@ -23,7 +20,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 ASYNCFUNCTION "updateText", "text='Arcade support'"
 	await sleep(3000);
 	$("#arcade-text").html(text);

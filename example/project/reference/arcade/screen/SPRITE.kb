@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "SPRITE statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "SPRITE","heading-command basic"
 					LINE BREAK
 					PRINT "ID, CLASS, ON CLICK FUNC, ON DOUBLE CLICK FUNC","heading-args"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "Creates a sprite on screen."
@@ -23,7 +20,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 DIM cards$=("clubs_1.svg", "clubs_2.svg", "clubs_3.svg", "clubs_4.svg")
 SCREEN "cards"
 	WINDOW "hand"

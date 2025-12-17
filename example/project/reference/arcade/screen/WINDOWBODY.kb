@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "WINDOWBODY statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "WINDOWBODY","heading-command basic"
 					LINE BREAK
 					PRINT "ID (optional), CLASS (optional)","heading-args"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "Creates a window body on screen."
@@ -23,7 +20,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 PALETTE ,"screen"
     BACKGROUND 0,0,0
     COLOR 0,0,0

@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "Arcade | kytschBASIC"
 END HEAD
@@ -13,16 +12,11 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Arcade"
 				END HEADING 2
 				SWRITE
-					PRINT "To use the arcade library you need to include it. It is recommended that you include this in the HEAD."
+					PRINT "The arcade library is automatically included in the HTML head when you make use of the HEAD command."
 				END SWRITE
 				SWRITE
 					PRINT "PLEASE NOTE! Arcade uses COOKIES for storing stuff like screen dimensions. It does not store any personal information just stuff to help the graphics building."
 				END SWRITE
-				CPRINT
-HEAD
-INCLUDE arcade
-END HEAD
-				END CPRINT
 				HEADING 3
 					LINE BREAK
 					PRINT "Example of what arcade can do"

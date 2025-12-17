@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "MOUSEEVENT statment | kytschBASIC"
 END HEAD
@@ -27,7 +26,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 AFUNCTION "popup", "message"
 	alert(message);
 END AFUNCTION

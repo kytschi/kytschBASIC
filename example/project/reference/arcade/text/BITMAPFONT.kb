@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "BITMAPFONT statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "BITMAPFONT","heading-command basic"
 					LINE BREAK
 					PRINT "FONT"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to use a font when writing on a bitmap."

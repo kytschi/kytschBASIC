@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "RGB statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "RGB","heading-command basic"
 					LINE BREAK
 					PRINT "RED, GREEN, BLUE, TRANSPARENCY (default 100)","heading-args"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "Set an RGB colour."

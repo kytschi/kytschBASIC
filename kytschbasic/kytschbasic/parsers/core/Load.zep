@@ -26,7 +26,6 @@
 namespace KytschBASIC\Parsers\Core;
 
 use KytschBASIC\Exceptions\Exception;
-use KytschBASIC\Libs\Arcade\Arcade;
 use KytschBASIC\Parsers\Core\Command;
 use KytschBASIC\Parsers\Core\Parser;
 
@@ -51,8 +50,6 @@ class Load extends Command
 		}
 
 		switch (strtolower(args[0])) {
-			case "arcade":
-				return (new Arcade())->build();
 			default:
 				throw new Exception("Invalid library to include");
 		}

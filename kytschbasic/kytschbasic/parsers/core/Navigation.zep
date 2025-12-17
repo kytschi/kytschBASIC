@@ -35,6 +35,8 @@ class Navigation extends Command
 		switch(command) {
 			case "END LINK":
 				return "</a>";
+			case "END MENUGROUP":
+				return "</div>";
 			case "END MENU":
 				return "</nav>";
 			case "GOTO":
@@ -150,7 +152,9 @@ class Navigation extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1], false);
+			let output .= " class=\\\"kb-menu-group " . this->outputArg(args[1], false, false) . "\\\"";
+		} else {
+			let output .= " class=\\\"kb-menu-group\\\"";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
@@ -158,7 +162,9 @@ class Navigation extends Command
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-menu-group"), false);
 		}
-		
-		return  output . "><p><span>" . this->outputArg(args[0], false, false) . "</span></p>\"; ?>";
+
+		let output .= "><button type=\\\"button\\\" class=\\\"kb-menu-group-title\\\"><span>" . this->outputArg(args[0], false, false) . "</span></button>";
+		let output .= "<div class=\\\"kb-menu-group-items\\\">";
+		return  output . "\"; ?>";
 	}
 }

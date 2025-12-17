@@ -295,9 +295,6 @@ HEADER
 		LINK "/reference/IMAGE#refIMAGE","Find out about the IMAGE command","nav-link",,"refIMAGE"
 			PRINT "IMAGE"
 		END LINK
-		LINK "/reference/INCLUDE#refINCLUDE","Find out about the INCLUDE command","nav-link",,"refINCLUDE"
-			PRINT "INCLUDE"
-		END LINK
 		LINK "/reference/INSTR#refINSTR","Find out about the INSTR command","nav-link",,"refINSTR"
 			PRINT "INSTR"
 		END LINK

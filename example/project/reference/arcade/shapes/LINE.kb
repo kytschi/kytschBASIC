@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "LINE statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "LINE","heading-command basic"
 					LINE BREAK
 					PRINT "X1, Y1, X2, Y2","heading-args"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw a line on a bitmap and display it on screen as an image."
@@ -23,7 +20,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 SCREEN
 	RGB 0,0,0
 	BITMAP 0,0,640,480

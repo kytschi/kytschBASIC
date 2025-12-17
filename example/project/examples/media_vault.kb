@@ -1,26 +1,40 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
-	LOAD "_ROOT/project/shared/head"
+	CHARSET "UTF-8"
+    DESCRIPTION "kytschBASIC is a BASIC programming language inspired by the likes of AmigaBASIC and BlitzBASIC for the modern web"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC, Modern BASIC programming,Web-based BASIC interpreter, Learn programming with BASIC, Online BASIC compiler, BASIC in browser, Classic BASIC modern version, Retro programming online, BASIC coding for beginners, Educational programming language"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/media_vault"
 	NAME "Kytschi's Media Vault | kytschBASIC"
 END HEAD
 BODY
-LOAD "_ROOT/project/shared/header"
-    MAIN
-        PALETTE ,"screen"
-            BACKGROUND 0,0,0
-            COLOR 0,0,0
-        END PALETTE
+    PALETTE ,"screen"
+        BACKGROUND 0,0,0
+        COLOR 0,0,0
+    END PALETTE
+    FORM "form_media_vault"
         SCREEN "screen"
-            WINDOW "Test", "window"
+            WINDOW "Test", , "window"
+                PALETTE ,"window-menu"
+                    BACKGROUND 249,249,249
+                    COLOR 0,0,0
+                    WIDTHPERCENT 100
+                END PALETTE
+                MENU ,"window-menu"
+                    MENUGROUP "File"
+                        BUTTONSUBMIT "btn_save",,,,"Save"
+                    END MENUGROUP
+                END MENU
                 WINDOWBODY
-                    PRINT "This is a window"
+                    PRINT "Window body"
                 END WINDOWBODY
                 WINDOWFOOTER
                     PRINT "Window footer"
                 END WINDOWFOOTER
             END WINDOW
         END SCREEN
-    END MAIN
+    END FORM
 END BODY
 END

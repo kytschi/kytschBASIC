@@ -26,6 +26,7 @@
 namespace KytschBASIC\Parsers\Core\Layout;
 
 use KytschBASIC\Exceptions\Exception;
+use KytschBASIC\Libs\Arcade\Arcade;
 use KytschBASIC\Parsers\Core\Command;
 
 class Head extends Command
@@ -44,7 +45,7 @@ class Head extends Command
 			case "FAVICON":
 				return this->processFavicon(args);
 			case "HEAD":
-				return "<head>";
+				return "<head>" . (new Arcade())->build();
 			case "KEYWORDS":
 				return this->processMeta("keywords", command, args);
 			case "LANG":

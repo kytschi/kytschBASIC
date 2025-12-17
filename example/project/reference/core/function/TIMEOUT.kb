@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "TIMEOUT statment | kytschBASIC"
 END HEAD
@@ -21,7 +20,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 PRINT "Timeout running",,"timeout-text"
 AFUNCTION "updateText", "text"
 $("#timeout-text").html(text);

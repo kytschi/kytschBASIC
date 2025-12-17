@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "KEYBOARDEVENT statment | kytschBASIC"
 END HEAD
@@ -31,7 +30,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 AFUNCTION "updateText", "text"
 $("#keytext").html(text);
 END AFUNCTION

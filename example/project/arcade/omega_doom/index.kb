@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	CHARSET "UTF-8"
     DESCRIPTION "A space scifi game written in kytschBASIC"
     KEYWORDS "kytschBASIC, BASIC, web BASIC"

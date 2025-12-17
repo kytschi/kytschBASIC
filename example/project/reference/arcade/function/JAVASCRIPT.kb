@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "JAVASCRIPT statment | kytschBASIC"
 END HEAD
@@ -11,8 +10,6 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
 					PRINT "JAVASCRIPT","heading-command basic"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "This will allow you to write raw javascript with jquery support."
@@ -21,7 +18,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 ASYNCFUNCTION "updateText", "text='Arcade support'"
 	await sleep(3000);
 	$("#arcade-text").html(text);

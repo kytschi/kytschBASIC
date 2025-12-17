@@ -1,6 +1,5 @@
 LANG "en"
 HEAD
-	INCLUDE arcade
 	LOAD "_ROOT/project/shared/head"
 	NAME "PLAYMEDIA statment | kytschBASIC"
 END HEAD
@@ -13,8 +12,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "PLAYMEDIA","heading-command basic"
 					LINE BREAK
 					PRINT "ID","heading-args"
-					LINE BREAK
-					PRINT "Requires arcade library","heading-required"
 				END SWRITE
 				SWRITE
 					PRINT "This will allow you to trigger a play of a loaded media file."
@@ -23,7 +20,6 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-INCLUDE arcade
 LOADMEDIA "/kytschi/omega_doom/sound/ss_ftl_jump.mp3", "ss-ftl-jump",,,,,"50"
 ANIMATION "animationWarp", "false"
     PLAYMEDIA "ss-ftl-jump"

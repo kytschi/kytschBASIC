@@ -22,7 +22,6 @@ NEXT
 
 LANG "en"
 HEAD
-	INCLUDE arcade
 	CHARSET "UTF-8"
     DESCRIPTION "This is a kytschBASIC example"
     KEYWORDS "kytschBASIC, BASIC, web BASIC"
