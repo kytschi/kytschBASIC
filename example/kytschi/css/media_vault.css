@@ -19,6 +19,19 @@ body {
     overflow-y: auto;
 }
 
+button {
+    width: 100%;
+    border-radius: 0;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+    border-radius: 0;
+    font-size: 14pt;
+}
+
 nav {
     display: flex;
     flex-direction: row;
@@ -41,11 +54,59 @@ nav {
 }
 
 #categories {
-    border: 1px solid #000;
+    border-right: 1px solid rgb(91,91,91);
     width: 200px;
+    display: flex;
+    flex-direction: column;
 }
 
 #content {
-    border: 1px solid #000;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#content-search {
+    border-bottom: 1px solid rgb(91,91,91);
+    height: 50px;
+    display: flex;
+}
+
+#content-search input {
+    flex: 1;
+    border: 0;
+}
+#content-search button {
+    width: 100px;
+}
+
+#content-files {
+    flex-grow: 1;
+    display: flex;
+}
+
+#content-files-content {
+    flex-grow: 1;
+}
+
+#content-properties {
+    border-left: 1px solid rgb(91,91,91);
+    width: 250px;
+}
+
+.header-title {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid rgb(91,91,91);
+    margin: 0;
+    padding: 6px 10px;
+    background-color: #F9F9F9;
+}
+
+.header-title span {
+    flex: 1;
+}
+
+.header-title button {
+    width: 25px;
 }

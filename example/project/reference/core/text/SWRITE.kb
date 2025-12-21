@@ -10,6 +10,8 @@ LOAD "_ROOT/project/shared/header"
 			DIV "kb-col kb-col-24","main-content-col"
 				HEADING 2
 					PRINT "SWRITE","basic"
+					LINE BREAK
+					PRINT "CLASS (optional), ID (optional)","heading-args"
 				END HEADING 2
 				SWRITE
 					PRINT "Outputting to the screen as a paragraph."

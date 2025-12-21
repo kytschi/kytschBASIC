@@ -508,6 +508,9 @@ HEADER
 		LINK "/reference/STRIPTRAIL#refSTRIPTRAIL","Find out about the STRIPTRAIL command","nav-link",,"refSTRIPTRAIL"
 			PRINT "STRIPTRAIL"
 		END LINK
+		LINK "/reference/SWRITE#refSWRITE","Find out about the SWRITE command","nav-link",,"refSWRITE"
+			PRINT "SWRITE"
+		END LINK
 		LINK "/reference/TAN#refTAN","Find out about the TAN command","nav-link",,"refTAN"
 			PRINT "TAN"
 		END LINK

@@ -14,45 +14,72 @@ BODY
         BACKGROUND 0,0,0
         COLOR 0,0,0
     END PALETTE
-    FORM "form_media_vault"
-        SCREEN "screen"
-            WINDOW "Kytschi's Media Vault", , "window"
-                PALETTE ,"window-menu"
-                    BACKGROUND 249,249,249
-                    COLOR 0,0,0
-                    WIDTHPERCENT 100
-                END PALETTE
-                MENU ,"window-menu"
-                    MENUGROUP "File"
-                        BUTTON "btn_open",,,,"Open"
-                        BUTTON "btn_save",,,,"Save"
-                    END MENUGROUP
-                    MENUGROUP "Edit"
-                        BUTTON "btn_copy",,,,"Copy"
-                        BUTTON "btn_cut",,,,"Cut"
-                        BUTTON "btn_paste",,,,"Paste"
-                        BUTTON "btn_rename",,,,"Rename"
-                    END MENUGROUP
-                    MENUGROUP "Help"
-                        BUTTON "btn_help",,,,"Help"
-                        BUTTON "btn_about",,,,"About"
-                    END MENUGROUP
-                END MENU
-                WINDOWBODY "window-body"
-                    DIV ,"window-body-content"
-                        DIV ,"categories"
-                            PRINT "categories"
-                        END DIV
-                        DIV ,"content"
-                            PRINT "content"
+    SCREEN "screen"
+        WINDOW "Kytschi's Media Vault", , "window"
+            PALETTE ,"window-menu"
+                BACKGROUND 249,249,249
+                COLOR 0,0,0
+                WIDTHPERCENT 100
+            END PALETTE
+            MENU ,"window-menu"
+                MENUGROUP "File"
+                    BUTTON "btn_open",,,,"Open"
+                    BUTTON "btn_save",,,,"Save"
+                END MENUGROUP
+                MENUGROUP "Edit"
+                    BUTTON "btn_properties",,,,"Properties"
+                    BUTTON "btn_copy",,,,"Copy"
+                    BUTTON "btn_cut",,,,"Cut"
+                    BUTTON "btn_paste",,,,"Paste"
+                    BUTTON "btn_rename",,,,"Rename"
+                END MENUGROUP
+                MENUGROUP "Help"
+                    BUTTON "btn_help",,,,"Help"
+                    BUTTON "btn_about",,,,"About"
+                END MENUGROUP
+            END MENU
+            WINDOWBODY "window-body"
+                DIV ,"window-body-content"
+                    DIV ,"categories"
+                        SWRITE "header-title"
+                            PRINT "Categories"
+                            BUTTON ,,,,"+"
+                        END SWRITE
+                        BUTTON ,,,,"All"
+                        BUTTON ,,,,"Books"
+                        BUTTON ,,,,"Music"
+                        BUTTON ,,,,"Videos"
+                        BUTTON ,,,,"Website"
+                    END DIV
+                    DIV ,"content"
+                        FORM "content-search"
+                            TEXTINPUT "input_search",,"form-input", "Search your media"
+                            BUTTONSUBMIT "btn_search",,,,"search"
+                        END FORM
+                        DIV ,"content-files"
+                            DIV ,"content-files-content"
+                                SWRITE "header-title"
+                                    PRINT "All"
+                                END SWRITE
+                                DIV ,"content-files-files"
+                                    PRINT "files"
+                                END DIV
+                            END DIV
+                            DIV ,"content-properties"
+                                SWRITE "header-title"
+                                    PRINT "Properties"
+                                END SWRITE
+                                PRINT "properties"
+                            END DIV
                         END DIV
                     END DIV
-                END WINDOWBODY
-                WINDOWFOOTER
-                    PRINT DATEFORMAT("NOW", "d/m/y")
-                END WINDOWFOOTER
-            END WINDOW
-        END SCREEN
-    END FORM
+                END DIV
+            END WINDOWBODY
+            WINDOWFOOTER
+                PRINT "Today's date: "
+                PRINT DATEFORMAT("NOW", "d/m/y")
+            END WINDOWFOOTER
+        END WINDOW
+    END SCREEN
 END BODY
 END
