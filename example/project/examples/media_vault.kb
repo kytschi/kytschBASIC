@@ -25,6 +25,7 @@ BODY
                 MENUGROUP "File"
                     BUTTON "btn_open",,,,"Open"
                     BUTTON "btn_save",,,,"Save"
+                    BUTTON "btn_sync",,,,"Sync"
                 END MENUGROUP
                 MENUGROUP "Edit"
                     BUTTON "btn_properties",,,,"Properties"
