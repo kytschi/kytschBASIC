@@ -54,7 +54,7 @@ class Window extends Command
 		var output = "";
 
 		let output = "<style>\n";
-		let output .= id . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);height: 100vh;}\n";
+		let output .= id . " {display: flex; flex-direction: column; background-color: rgba(136,136,136,1);color:rgb(0,0,0);border: 1px solid rgb(91,91,91);height: 100vh;width:100%;}\n";
 		let output .= id . " .window-title {display: flex; overflow: hidden; height: 30px; padding: 10px; background-color: rgba(221,17,68,1);color:rgb(255,255,255);border-bottom: 1px solid rgb(91,91,91);}\n";
 		let output .= id . " .window-title span {display: block;}\n";
 		let output .= "</style>\n";
@@ -110,7 +110,7 @@ class Window extends Command
 		}
 
 		let output = "<style>\n";
-		let output .= "#<?= $KB_WINDOW_ID; ?> #" . this->outputArg(id, true, false) . " {flex-grow: 1; overflow: hidden; padding: 10px; background-color: rgba(255,255,255,1);color:rgb(0,0,0);}\n";
+		let output .= "#<?= $KB_WINDOW_ID; ?> #" . this->outputArg(id, true, false) . " {flex-grow: 1; width: 100%; overflow: hidden; background-color: rgba(255,255,255,1);color:rgb(0,0,0);}\n";
 		let output .= "</style>\n";
 		let output .= "<?= \"<div";
 		let output .= " id=" . this->outputArg(id, false);

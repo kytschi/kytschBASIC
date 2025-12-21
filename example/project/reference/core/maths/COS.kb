@@ -20,8 +20,8 @@ BODY
 				CPRINT
 PRINT COS(3.1415926536)
 LINE BREAK
-DEF val#=3.1415926536
-PRINT COS(val#)
+DEF val#=COS(3.1415926536)
+PRINT val#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -29,8 +29,8 @@ PRINT COS(val#)
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT COS(3.1415926536)
 					LINE BREAK
-					DEF val#=3.1415926536
-					PRINT COS(val#)
+					DEF val#=COS(3.1415926536)
+					PRINT val#
 				END DIV
 				HEADING 4
 					PRINT "See also"

@@ -22,7 +22,8 @@ PRINT SGN(-250)
 LINE BREAK
 PRINT SGN(0)
 LINE BREAK
-PRINT SGN(250)
+DEF var%=SGN(250)
+PRINT var%
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -32,7 +33,8 @@ PRINT SGN(250)
 					LINE BREAK
 					PRINT SGN(0)
 					LINE BREAK
-					PRINT SGN(250)
+					DEF var%=SGN(250)
+					PRINT var%
 				END DIV
 				HEADING 4
 					PRINT "See also"

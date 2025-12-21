@@ -478,6 +478,9 @@ HEADER
 		LINK "/reference/SORT#refSORT","Find out about the SORT command","nav-link",,"refSORT"
 			PRINT "SORT"
 		END LINK
+		LINK "/reference/SPLIT#refSPLIT","Find out about the SPLIT command","nav-link",,"refSPLIT"
+			PRINT "SPLIT"
+		END LINK
 		LINK "/reference/SSORT#refSSORT","Find out about the SSORT command","nav-link",,"refSSORT"
 			PRINT "SSORT"
 		END LINK

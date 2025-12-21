@@ -20,20 +20,516 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DEF date%=DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s")
-PRINT date%
+DEF date$=DATEFORMAT("2025-08-03 08:12:36", "d/m/Y H:i:s")
+PRINT date$
 LINE BREAK
-PRINT DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s"), "basic"
+PRINT DATEFORMAT("NOW", "d/m/Y H:i:s"), "basic"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					DIM strings$=("kytsch", "BASIC")
-					DEF count%=COUNT(strings$)
-					PRINT count%
+					DEF date$=DATEFORMAT("2025-08-03 08:12:36", "d/m/Y H:i:s")
+					PRINT date$
 					LINE BREAK
-					PRINT COUNT(strings$), "basic"
+					PRINT DATEFORMAT("NOW", "d/m/Y H:i:s"), "basic"
+				END DIV
+				HEADING 4
+					PRINT "Date format"
+				END HEADING 4
+				DIV 
+					PRINT "Information thanks to PHP manual on datetime format."
+					TABLE
+						THEAD
+							TROW
+								THEADCELL "140px"
+									PRINT "Character"
+								END THEADCELL
+								THEADCELL
+									PRINT "Description"
+								END THEADCELL
+								THEADCELL
+									PRINT "Example"
+								END THEADCELL
+							END TROW
+						END THEAD
+						TBODY
+							TROW
+								TCELL
+									PRINT "d"
+								END TCELL
+								TCELL
+									PRINT "Day of the month, 2 digits with leading zeros"
+								END TCELL
+								TCELL
+									PRINT "01 to 31"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "D"
+								END TCELL
+								TCELL
+									PRINT "A textual representation of a day, three letters"
+								END TCELL
+								TCELL
+									PRINT "Mon through Sun"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "D"
+								END TCELL
+								TCELL
+									PRINT "A textual representation of a day, three letters"
+								END TCELL
+								TCELL
+									PRINT "Mon through Sun"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "j"
+								END TCELL
+								TCELL
+									PRINT "Day of the month without leading zeros"
+								END TCELL
+								TCELL
+									PRINT "1 to 31"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "l"
+								END TCELL
+								TCELL
+									PRINT "A full textual representation of the day of the week"
+								END TCELL
+								TCELL
+									PRINT "Sunday through Saturday"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "N"
+								END TCELL
+								TCELL
+									PRINT "ISO 8601 numeric representation of the day of the week"
+								END TCELL
+								TCELL
+									PRINT "1 (for Monday) through 7 (for Sunday)"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "S"
+								END TCELL
+								TCELL
+									PRINT "English ordinal suffix for the day of the month, 2 characters"
+								END TCELL
+								TCELL
+									PRINT "st, nd, rd or th. Works well with j"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "w"
+								END TCELL
+								TCELL
+									PRINT "Numeric representation of the day of the week"
+								END TCELL
+								TCELL
+									PRINT "0 (for Sunday) through 6 (for Saturday)"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "z"
+								END TCELL
+								TCELL
+									PRINT "The day of the year (starting from 0)"
+								END TCELL
+								TCELL
+									PRINT "0 through 365"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "W"
+								END TCELL
+								TCELL
+									PRINT "ISO 8601 week number of year, weeks starting on Monday"
+								END TCELL
+								TCELL
+									PRINT "Example: 42 (the 42nd week in the year)"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "F"
+								END TCELL
+								TCELL
+									PRINT "A full textual representation of a month, such as January or March"
+								END TCELL
+								TCELL
+									PRINT "January through December"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "m"
+								END TCELL
+								TCELL
+									PRINT "Numeric representation of a month, with leading zeros"
+								END TCELL
+								TCELL
+									PRINT "01 through 12"
+								END TCELL
+							END TROW
+							END TROW
+							TROW
+								TCELL
+									PRINT "M"
+								END TCELL
+								TCELL
+									PRINT "A short textual representation of a month, three letters"
+								END TCELL
+								TCELL
+									PRINT "Jan through Dec"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "n"
+								END TCELL
+								TCELL
+									PRINT "Numeric representation of a month, without leading zeros"
+								END TCELL
+								TCELL
+									PRINT "1 through 12"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "t"
+								END TCELL
+								TCELL
+									PRINT "Number of days in the given month"
+								END TCELL
+								TCELL
+									PRINT "28 through 31"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "L"
+								END TCELL
+								TCELL
+									PRINT "Whether it's a leap year"
+								END TCELL
+								TCELL
+									PRINT "1 if it is a leap year, 0 otherwise"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "o"
+								END TCELL
+								TCELL
+									PRINT "ISO 8601 week-numbering year. This has the same value as Y, except that if the ISO week number (W) belongs to the previous or next year, that year is used instead"
+								END TCELL
+								TCELL
+									PRINT "Examples: 1999 or 2003"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "X"
+								END TCELL
+								TCELL
+									PRINT "An expanded full numeric representation of a year, at least 4 digits, with - for years BCE, and + for years CE"
+								END TCELL
+								TCELL
+									PRINT "Examples: -0055, +0787, +1999, +10191"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "x"
+								END TCELL
+								TCELL
+									PRINT "An expanded full numeric representation if required, or a standard full numeral representation if possible (like Y). At least four digits. Years BCE are prefixed with a -. Years beyond (and including) 10000 are prefixed by a +"
+								END TCELL
+								TCELL
+									PRINT "Examples: -0055, 0787, 1999, +10191"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "Y"
+								END TCELL
+								TCELL
+									PRINT "A full numeric representation of a year, at least 4 digits, with - for years BCE"
+								END TCELL
+								TCELL
+									PRINT "Examples: -0055, 0787, 1999, 2003, 10191"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "y"
+								END TCELL
+								TCELL
+									PRINT "A two digit representation of a year"
+								END TCELL
+								TCELL
+									PRINT "Examples: 99 or 03"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "a"
+								END TCELL
+								TCELL
+									PRINT "Lowercase Ante meridiem and Post meridiem"
+								END TCELL
+								TCELL
+									PRINT "am or pm"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "A"
+								END TCELL
+								TCELL
+									PRINT "Uppercase Ante meridiem and Post meridiem"
+								END TCELL
+								TCELL
+									PRINT "AM or PM"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "A"
+								END TCELL
+								TCELL
+									PRINT "Uppercase Ante meridiem and Post meridiem"
+								END TCELL
+								TCELL
+									PRINT "AM or PM"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "B"
+								END TCELL
+								TCELL
+									PRINT "Swatch Internet time"
+								END TCELL
+								TCELL
+									PRINT "000 through 999"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "g"
+								END TCELL
+								TCELL
+									PRINT "12-hour format of an hour without leading zeros"
+								END TCELL
+								TCELL
+									PRINT "1 through 12"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "G"
+								END TCELL
+								TCELL
+									PRINT "24-hour format of an hour without leading zeros"
+								END TCELL
+								TCELL
+									PRINT "0 through 23"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "h"
+								END TCELL
+								TCELL
+									PRINT "12-hour format of an hour with leading zeros"
+								END TCELL
+								TCELL
+									PRINT "01 through 12"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "H"
+								END TCELL
+								TCELL
+									PRINT "24-hour format of an hour with leading zeros"
+								END TCELL
+								TCELL
+									PRINT "00 through 23"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "i"
+								END TCELL
+								TCELL
+									PRINT "Minutes with leading zeros"
+								END TCELL
+								TCELL
+									PRINT "00 to 59"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "s"
+								END TCELL
+								TCELL
+									PRINT "Seconds with leading zeros"
+								END TCELL
+								TCELL
+									PRINT "00 through 59"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "u"
+								END TCELL
+								TCELL
+									PRINT "Microseconds. Note that date() will always generate 000000 since it takes an int parameter, whereas DateTimeInterface::format() does support microseconds if an object of type DateTimeInterface was created with microseconds"
+								END TCELL
+								TCELL
+									PRINT "Example: 654321"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "v"
+								END TCELL
+								TCELL
+									PRINT "Milliseconds. Same note applies as for u"
+								END TCELL
+								TCELL
+									PRINT "Example: 654"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "e"
+								END TCELL
+								TCELL
+									PRINT "Timezone identifier"
+								END TCELL
+								TCELL
+									PRINT "Examples: UTC, GMT, Atlantic/Azores"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "I"
+								END TCELL
+								TCELL
+									PRINT "Whether or not the date is in daylight saving time"
+								END TCELL
+								TCELL
+									PRINT "1 if Daylight Saving Time, 0 otherwise"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "O"
+								END TCELL
+								TCELL
+									PRINT "Difference to Greenwich time (GMT) without colon between hours and minutes"
+								END TCELL
+								TCELL
+									PRINT "Example: +0200"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "P"
+								END TCELL
+								TCELL
+									PRINT "Difference to Greenwich time (GMT) with colon between hours and minutes"
+								END TCELL
+								TCELL
+									PRINT "Example: +02:00"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "p"
+								END TCELL
+								TCELL
+									PRINT "The same as P, but returns Z instead of +00:00"
+								END TCELL
+								TCELL
+									PRINT "Examples: Z or +02:00"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "T"
+								END TCELL
+								TCELL
+									PRINT "Timezone abbreviation, if known; otherwise the GMT offset"
+								END TCELL
+								TCELL
+									PRINT "Examples: EST, MDT, +05"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "Z"
+								END TCELL
+								TCELL
+									PRINT "Timezone offset in seconds. The offset for timezones west of UTC is always negative, and for those east of UTC is always positive"
+								END TCELL
+								TCELL
+									PRINT "-43200 through 50400"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "c"
+								END TCELL
+								TCELL
+									PRINT "ISO 8601 date. Only compatible with the non-expanded format (up to year 9999). Later dates will result in an invalid string. For later dates and expanded format, see x and X"
+								END TCELL
+								TCELL
+									PRINT "2004-02-12T15:19:21+00:00"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "r"
+								END TCELL
+								TCELL
+									PRINT "RFC 2822/» RFC 5322 formatted date"
+								END TCELL
+								TCELL
+									PRINT "Example: Thu, 21 Dec 2000 16:01:07 +0200"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									PRINT "U"
+								END TCELL
+								TCELL
+									PRINT "Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)"
+								END TCELL
+								TCELL
+									PRINT "&nbsp;"
+								END TCELL
+							END TROW
+						END TBODY
+					END TABLE
 				END DIV
 				HEADING 4
 					PRINT "See also"
@@ -49,6 +545,10 @@ PRINT DATEFORMAT("2025-08-03 08:12:36", "DD/MM/YYYY H:i:s"), "basic"
 					PRINT " | "
 					LINK "/reference/COUNT#refCOUNT"
 						PRINT "COUNT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SPLIT#refSPLIT"
+						PRINT "SPLIT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/WRITEFILE#refWRITEFILE"

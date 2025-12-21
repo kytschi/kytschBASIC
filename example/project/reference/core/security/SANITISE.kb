@@ -20,6 +20,8 @@ LOAD "_ROOT/project/shared/header"
 				CPRINT
 DEF content$=SANITISE("&lt;script&gt;alert('XSS')&lt;/script&gt;")
 PRINT content$
+LINE BREAK
+PRINT SANITISE("&lt;script&gt;alert('XSS')&lt;/script&gt;")
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -27,6 +29,8 @@ PRINT content$
 				DIV "kb-col kb-col-24 kb-code-block"
 					DEF content$=SANITISE("<script>alert('XSS')</script>")
 					PRINT content$
+					LINE BREAK
+					PRINT SANITISE("&lt;script&gt;alert('XSS')&lt;/script&gt;")
 				END DIV
 				HEADING 4
 					PRINT "See also"

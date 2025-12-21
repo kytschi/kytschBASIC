@@ -19,12 +19,18 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT HTAN(0.5)
+LINE BREAK
+DEF var#=HTAN(0.5)
+PRINT var#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT HTAN(0.5)
+					LINE BREAK
+					DEF var#=HTAN(0.5)
+					PRINT var#
 				END DIV
 				HEADING 4
 					PRINT "See also"

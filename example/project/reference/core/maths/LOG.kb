@@ -22,7 +22,8 @@ LOAD "_ROOT/project/shared/header"
 				CPRINT
 PRINT LOG(10)
 LINE BREAK
-PRINT LOG(10, 2)
+DEF var#=LOG(10, 2)
+PRINT var#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
@@ -30,7 +31,8 @@ PRINT LOG(10, 2)
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT LOG(10)
 					LINE BREAK
-					PRINT LOG(10, 2)
+					DEF var#=LOG(10, 2)
+					PRINT var#
 				END DIV
 				HEADING 4
 					PRINT "See also"

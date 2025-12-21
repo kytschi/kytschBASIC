@@ -42,6 +42,7 @@ class Arcade extends Command
 			"</script>\n";
 
 		let output = output . this->cssAnimation();
+        let output = output . this->kbMenuStyle();
 
 		return output;
 	}
@@ -115,10 +116,31 @@ class Arcade extends Command
 			}
 
 			$(document).ready(function() {
-				$('.kb-menu-group-title').click(() => {
-					$('.kb-menu-group').addClass('active');
-					$('.kb-menu-group-items').toggle();
-				});
+				var menu_open = null;
+				$('.kb-menu-group-title').click((event) => {
+                    $('.kb-menu-group-items').hide();
+                    $('.kb-menu-group').removeClass('active');
+                    
+                    var parent_element = $(event.target).parent();
+                    if (event.target.nodeName == 'SPAN') {
+                        parent_element = $(parent_element).parent();
+                    }
+                    var parent_id = '#' + $(parent_element).attr('id');
+                    
+                    if (menu_open == parent_id) {
+                        menu_open = null;
+                        return;
+                    }
+
+                    if ($(parent_id + ' .kb-menu-group-items').is(':visible')) {
+                        $(parent_id + ' .kb-menu-group-items').hide();
+                    } else {
+                        $(parent_id).addClass('active');
+                        $(parent_id + ' .kb-menu-group-items').show();
+                    }
+
+                    menu_open = parent_id;
+                });
 			});
 		";
 	}
@@ -156,6 +178,25 @@ class Arcade extends Command
 
 		return output;
 	}
+
+    private function kbMenuStyle()
+    {
+        var output = "";
+
+        let output = "<style>\n";
+		let output .= ".kb-menu-group .kb-menu-group-items {display: none;}\n";
+		let output .= ".kb-menu-group.active .kb-menu-group-items {display: flex; flex-direction: column; min-width: 200px;}\n";
+        let output .= ".kb-menu-group-title {display: inline-block;height: 40px;position: relative;z-index: 102; text-align: left; cursor: pointer; border:0; background: none; margin: 0; padding: 0;}";
+        let output .= ".kb-menu-group-title span {display: inline-block;padding: 9px 10px;height: 20px;margin-top: 2px;}";
+        let output .= ".kb-menu-group.active .kb-menu-group-title {border-bottom: 1px solid rgb(249,249,249) !important;}";
+        let output .= ".kb-menu-group.active .kb-menu-group-title span {border-top: 1px solid rgb(91,91,91);border-left: 1px solid rgb(91,91,91);border-right: 1px solid rgb(91,91,91);}";
+        let output .= ".kb-menu-group .kb-menu-group-items {display: none;}";
+        let output .= ".kb-menu-group-items button {text-align: left; border:0; margin: 0; background: none; padding: 10px 10px;}";
+        let output .= ".kb-menu-group.active .kb-menu-group-items {position: absolute;z-index: 101;margin-top: -1px;border: 1px solid rgb(91,91,91);background-color: rgb(249,249,249);}";
+		let output .= "</style>\n";
+
+        return output;
+    }
 
 	/*public function run()
 	{

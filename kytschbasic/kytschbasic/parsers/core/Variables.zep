@@ -334,7 +334,7 @@ class Variables
 
 	public function outputArg(arg, bool php_output = false, bool include_quotes = true)
 	{
-		let arg = trim(arg, "\"");
+		let arg = preg_replace("/^\"|\"$/", "", arg);
 		if (substr(arg, 0, 1) == "$") {
 			return php_output ? "<?= " . arg . "; ?>" : "{" . arg . "}";
 		}
@@ -442,7 +442,7 @@ class Variables
 			return str_replace(splits[1], "count(" . cleaned . ")", arg);
 		}
 
-		return "count(" . this->cleanArg("COUNT", arg) . ")";
+		return "\"\" . count(" . this->cleanArg("COUNT", arg) . ") . \"\"";
 	}
 
 	private function processDateformat(arg)
@@ -453,14 +453,17 @@ class Variables
 		if (count(splits) > 1) {
 			let cleaned = this->cleanArg("DATEFORMAT", splits[1]);
 			let args = this->commaSplit(cleaned);
-			let arg = str_replace(splits[1], "date_format($KBDATE, " . args[1] . ");", arg);
-			return "$KBDATE = " . args[0] . "; if(!empty($KBDATE)) {$KBDATE = date_create($KBDATE);" . arg . "}";
+			return str_replace(splits[1], "(new KytschBASIC\\Parsers\\Core\\Variables())->dateFormat(" . args[0] . ", " . args[1] . ")", arg);
 		} else {
 			let cleaned = this->cleanArg("DATEFORMAT", arg);
 			let args = this->commaSplit(cleaned);
-			let arg = str_replace(splits[0], "$KBDATE", arg);
-			return "<?php $KBDATE = " . args[0] . "; if(!empty($KBDATE)) {$KBDATE = date_create($KBDATE); $KBDATE = date_format($KBDATE, " . args[1] . ");}?>" . arg;
+			return str_replace(splits[0], "\"\" . (new KytschBASIC\\Parsers\\Core\\Variables())->dateFormat(" . args[0] . ", " . args[1] . ") . \"\"", arg);
 		}
+	}
+
+	public function dateFormat(date, format)
+	{
+		return date_format(date_create(date), format);
 	}
 
 	public function processDef(string line, args, bool let_var = false, bool javascript = false, bool in_javascript = false)
@@ -694,6 +697,36 @@ class Variables
 		);
 	}
 
+	public function processSanitise(arg)
+    {
+        var checks = [
+            "\\":"&#92;",
+            "’": "&#39;"
+        ],
+        check, replace, splits, cleaned;
+
+		for check, replace in checks {
+			let arg = str_replace(check, replace, arg);
+		}
+
+		let splits = this->equalsSplit(arg);
+		if (count(splits) > 1) {
+			let cleaned = this->cleanArg("SANITISE", splits[1]);
+			if (empty(cleaned)) {
+				throw new Exception("Invalid SANITISE");
+			}
+
+			return str_replace(splits[1], "filter_var(rawurldecode(" . cleaned . "), FILTER_SANITIZE_FULL_SPECIAL_CHARS)", arg);
+		}
+        
+
+		let cleaned = this->cleanArg("SANITISE", arg);
+		if (empty(cleaned)) {
+			throw new Exception("Invalid SANITISE");
+		}
+		return str_replace(arg, "\"\" . filter_var(rawurldecode(" . cleaned . "), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . \"\"", arg);
+    }
+
 	public function processSessionRead(arg)
 	{
 		var splits, cleaned;
@@ -763,7 +796,7 @@ class Variables
 			return str_replace(splits[1], "number_format(" . cleaned . ", 2, '.', '')", arg);
 		}
 
-		return "number_format(" . this->cleanArg("TWODP", arg) . ", 2, '.', '')";
+		return "\"\" . number_format(" . this->cleanArg("TWODP", arg) . ", 2, '.', '') . \"\"";
 	}
 
 	public function processValidUser(arg)
@@ -816,25 +849,4 @@ class Variables
 				return null;
 		}
 	}
-
-	public function processSanitise(arg)
-    {
-        var checks = [
-            "\\":"&#92;",
-            "’": "&#39;"
-        ],
-        check, replace, splits, cleaned;
-
-		for check, replace in checks {
-			let arg = str_replace(check, replace, arg);
-		}
-
-		let splits = this->equalsSplit(arg);
-		if (count(splits) > 1) {
-			let cleaned = this->cleanArg("SANITISE", splits[1]);
-			return str_replace(splits[1], "filter_var(rawurldecode(" . cleaned . "), FILTER_SANITIZE_FULL_SPECIAL_CHARS)", arg);
-		}
-        
-		return "filter_var(rawurldecode(" . arg . "), FILTER_SANITIZE_FULL_SPECIAL_CHARS);";
-    }
 }

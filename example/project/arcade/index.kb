@@ -30,21 +30,21 @@ LOAD "_ROOT/project/shared/header"
 					DISPHEIGHT
 				END SWRITE
 				SCREEN "the-traveller"
-					WINDOW "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
-							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller",32,0,120,150
-							BITMAPTEXT "Press any key to start",18,0,135,320
-						END BITMAP
-					END WINDOW
-					WINDOW "input"
-						RGB 0,0,0
-						BITMAP 0,0,800,200
-							RGB 255,0,0
-							LINE 0,0,800,0
-						END BITMAP
+					WINDOW "The Traveller"
+						WINDOWBODY
+							RGB 0,0,0
+							BITMAP 0,0,800,400
+								RGB 255,0,0
+								BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
+								BITMAPTEXT "The Traveller",32,0,120,150
+								BITMAPTEXT "Press any key to start",18,0,135,320
+							END BITMAP
+							RGB 0,0,0
+							BITMAP 0,0,800,200
+								RGB 255,0,0
+								LINE 0,0,800,0
+							END BITMAP
+						END WINDOWBODY
 					END WINDOW
 				END SCREEN
 				HEADING 3

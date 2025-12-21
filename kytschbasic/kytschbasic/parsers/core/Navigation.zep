@@ -36,7 +36,7 @@ class Navigation extends Command
 			case "END LINK":
 				return "</a>";
 			case "END MENUGROUP":
-				return "</div>";
+				return "</div></div>";
 			case "END MENU":
 				return "</nav>";
 			case "GOTO":
@@ -145,8 +145,10 @@ class Navigation extends Command
 
 	private function processMenuGroup(array args)
 	{
-		var output = "<?= \"<div";
+		var output = "";
 		
+		let output .= "<?= \"<div";
+
 		if (!isset(args[0]) || empty(args[0]) || args[0] == "\"\"") {
 			throw new Exception("Invalid MENUGROUP");
 		}

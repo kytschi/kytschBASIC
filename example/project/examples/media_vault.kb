@@ -16,7 +16,7 @@ BODY
     END PALETTE
     FORM "form_media_vault"
         SCREEN "screen"
-            WINDOW "Test", , "window"
+            WINDOW "Kytschi's Media Vault", , "window"
                 PALETTE ,"window-menu"
                     BACKGROUND 249,249,249
                     COLOR 0,0,0
@@ -24,14 +24,32 @@ BODY
                 END PALETTE
                 MENU ,"window-menu"
                     MENUGROUP "File"
-                        BUTTONSUBMIT "btn_save",,,,"Save"
+                        BUTTON "btn_open",,,,"Open"
+                        BUTTON "btn_save",,,,"Save"
+                    END MENUGROUP
+                    MENUGROUP "Edit"
+                        BUTTON "btn_copy",,,,"Copy"
+                        BUTTON "btn_cut",,,,"Cut"
+                        BUTTON "btn_paste",,,,"Paste"
+                        BUTTON "btn_rename",,,,"Rename"
+                    END MENUGROUP
+                    MENUGROUP "Help"
+                        BUTTON "btn_help",,,,"Help"
+                        BUTTON "btn_about",,,,"About"
                     END MENUGROUP
                 END MENU
-                WINDOWBODY
-                    PRINT "Window body"
+                WINDOWBODY "window-body"
+                    DIV ,"window-body-content"
+                        DIV ,"categories"
+                            PRINT "categories"
+                        END DIV
+                        DIV ,"content"
+                            PRINT "content"
+                        END DIV
+                    END DIV
                 END WINDOWBODY
                 WINDOWFOOTER
-                    PRINT "Window footer"
+                    PRINT DATEFORMAT("NOW", "d/m/y")
                 END WINDOWFOOTER
             END WINDOW
         END SCREEN

@@ -19,12 +19,18 @@ BODY
 				END HEADING 3
 				CPRINT
 PRINT EXP(5.7)
+LINE BREAK
+DEF var#=EXP(5.7)
+PRINT var#
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					PRINT EXP(5.7)
+					LINE BREAK
+					DEF var#=EXP(5.7)
+					PRINT var#
 				END DIV
 				HEADING 4
 					PRINT "See also"
