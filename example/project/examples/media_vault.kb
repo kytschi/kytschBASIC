@@ -69,7 +69,9 @@ BODY
                                 SWRITE "header-title"
                                     PRINT "Properties"
                                 END SWRITE
-                                PRINT "properties"
+                                DIV ,"content-properties-content"
+                                    PRINT "properties"
+                                END DIV
                             END DIV
                         END DIV
                     END DIV

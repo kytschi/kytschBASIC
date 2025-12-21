@@ -92,6 +92,13 @@ nav {
 #content-properties {
     border-left: 1px solid rgb(91,91,91);
     width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+#content-properties-content {
+    flex: 1;
+    padding: 10px;
 }
 
 .header-title {
