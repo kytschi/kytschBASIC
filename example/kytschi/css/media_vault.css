@@ -55,7 +55,7 @@ nav {
 
 #categories {
     border-right: 1px solid rgb(91,91,91);
-    width: 200px;
+    flex: 0 0 200px;
     display: flex;
     flex-direction: column;
 }
@@ -89,9 +89,30 @@ nav {
     flex-grow: 1;
 }
 
+#content-files-files {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+#content-files-files .file {
+    display: flex;
+    flex-direction: column;
+}
+
+#content-files-files .file img {
+    width: 64px;
+}
+
+#content-files-files .file span {
+    display: block;
+    width: 100%;
+}
+
 #content-properties {
     border-left: 1px solid rgb(91,91,91);
-    width: 250px;
+    flex: 0 0 250px;
     display: flex;
     flex-direction: column;
 }

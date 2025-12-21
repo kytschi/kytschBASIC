@@ -62,15 +62,20 @@ BODY
                                     PRINT "All"
                                 END SWRITE
                                 DIV ,"content-files-files"
-                                    PRINT "files"
+                                    FOR iLoop%=1 TO 50
+                                        DIV "file"
+                                            IMAGE "/kytschi/imgs/media_vault/pdf.png"
+                                            PRINT "file name"
+                                        END DIV
+                                    NEXT
                                 END DIV
                             END DIV
                             DIV ,"content-properties"
                                 SWRITE "header-title"
-                                    PRINT "Properties"
+                                    PRINT "File information"
                                 END SWRITE
                                 DIV ,"content-properties-content"
-                                    PRINT "properties"
+                                    PRINT "file information"
                                 END DIV
                             END DIV
                         END DIV
