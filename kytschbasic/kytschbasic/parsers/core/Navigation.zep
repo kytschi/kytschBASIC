@@ -47,6 +47,8 @@ class Navigation extends Command
 				return this->processMenu(args);
 			case "MENUGROUP":
 				return this->processMenuGroup(args);
+			case "MENUITEM":
+				return this->processMenuItem(args);
 			default:
 				return null;
 		}
@@ -132,6 +134,8 @@ class Navigation extends Command
 		
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[0], false);
+		} else {
+			let output .= " class='menu'";
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
@@ -168,5 +172,39 @@ class Navigation extends Command
 		let output .= "><button type=\\\"button\\\" class=\\\"kb-menu-group-title\\\"><span>" . this->outputArg(args[0], false, false) . "</span></button>";
 		let output .= "<div class=\\\"kb-menu-group-items\\\">";
 		return  output . "\"; ?>";
+	}
+
+	private function processMenuItem(array args)
+	{
+		var output = "<?= \"<button", id = "";
+
+		let id = this->outputArg(this->genID("kb-btn-submit"), false);
+		
+		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+			let id = this->outputArg(args[0], false);
+			let output .= " name=" . str_replace(" ", "_", id);
+		} else {
+			let output .= " name=" . id;
+		}
+
+		let output .= " type='button'";
+
+		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
+			let output .= " class=" . this->outputArg(args[1], false);
+		}
+
+		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
+			let output .= " id=" . this->outputArg(args[2], false);
+		}
+
+		let output .= " value=" . id;
+
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " onclick=" . this->outputArg(args[3], false);
+		}
+
+		let output .= "><span>" . rtrim(ltrim(id, "\\\""), "\\\"") . "</span></button>";
+
+		return output . "\"; ?>";
 	}
 }

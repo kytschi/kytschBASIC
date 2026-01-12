@@ -367,6 +367,12 @@ HEADER
 		LINK "/reference/MENU#refMENU","Find out about the MENU command","nav-link",,"refMENU"
 			PRINT "MENU"
 		END LINK
+		LINK "/reference/MENUGROUP#refMENUGROUP","Find out about the MENUGROUP command","nav-link",,"refMENUGROUP"
+			PRINT "MENUGROUP"
+		END LINK
+		LINK "/reference/MENUITEM#refMENUITEM","Find out about the MENUITEM command","nav-link",,"refMENUITEM"
+			PRINT "MENUITEM"
+		END LINK
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK

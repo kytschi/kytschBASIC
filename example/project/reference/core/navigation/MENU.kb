@@ -24,8 +24,8 @@ MENU
 	LINK "/","Go to the home","nav-link"
 		PRINT "Home"
 	END LINK
-	LINK "/page-one","Go to the page one","nav-link"
-		PRINT "Page one"
+	LINK "/reference/MENU#refMENU","Go to MENU reference","nav-link"
+		PRINT "Menu"
 	END LINK
 END MENU
 				END CPRINT
@@ -37,8 +37,8 @@ END MENU
 						LINK "/","Go to the home","nav-link"
 							PRINT "Home"
 						END LINK
-						LINK "/reference/LINK#refLINK","Go to the LINK page","nav-link"
-							PRINT "LINK"
+						LINK "/reference/MENU#refMENU","Go to MENU reference","nav-link"
+							PRINT "Menu"
 						END LINK
 					END MENU
 				END DIV
@@ -48,6 +48,14 @@ END MENU
 				DIV "kb-col kb-col-24","see-also"
 					LINK "/reference/LINK#refLINK"
 						PRINT "LINK"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MENUGROUP#refMENUGROUP"
+						PRINT "MENUGROUP"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MENUITEM#refMENUITEM"
+						PRINT "MENUITEM"
 					END LINK
 				END DIV
 			END DIV

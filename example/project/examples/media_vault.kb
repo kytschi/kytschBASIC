@@ -23,9 +23,7 @@ BODY
             END PALETTE
             MENU ,"window-menu"
                 MENUGROUP "File"
-                    BUTTON "btn_open",,,,"Open"
-                    BUTTON "btn_save",,,,"Save"
-                    BUTTON "btn_sync",,,,"Sync"
+                    MENUITEM "Save"
                 END MENUGROUP
                 MENUGROUP "Edit"
                     BUTTON "btn_properties",,,,"Properties"

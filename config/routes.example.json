@@ -425,6 +425,14 @@
 		"url": "/reference/MENU",
 		"template": "project/reference/core/navigation/MENU.kb"
 	},
+	{
+		"url": "/reference/MENUGROUP",
+		"template": "project/reference/core/navigation/MENUGROUP.kb"
+	},
+	{
+		"url": "/reference/MENUITEM",
+		"template": "project/reference/core/navigation/MENUITEM.kb"
+	},
 
 	{
 		"url": "/reference/AFUNCTION",
