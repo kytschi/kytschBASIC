@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "BACKGROUND","heading-command basic"
 					LINE BREAK
-					PRINT "RED, GREEN, BLUE","heading-args"
+					PRINT "RED, GREEN, BLUE, TRANSPARENCY (default 100)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Set the background colour."
@@ -20,30 +20,22 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-PALETTE "/kytschi/css/palette"
-PALETTE ,"screen"
-	BACKGROUND 0,0,0
-	COLOR 0,0,0
+PALETTE ,"text"
+	BACKGROUND 255,255,255,50
+	COLOR 255,0,0
 END PALETTE
-PALETTE ,,"window"
-	BACKGROUND 0,0,0
-	COLOR 0,0,0
-END PALETTE
+PRINT "kytschBASIC",,"text"
 				END CPRINT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
 					SHOWHTML
-						PALETTE "/kytschi/css/palette"
-						PALETTE ,"screen"
-							BACKGROUND 0,0,0
-							COLOR 0,0,0
+						PALETTE ,"text"
+							BACKGROUND 255,255,255,50
+							COLOR 255,0,0
 						END PALETTE
-						PALETTE ,,"window"
-							BACKGROUND 0,0,0
-							COLOR 0,0,0
-						END PALETTE
+						PRINT "kytschBASIC",,"text"
 					END SHOWHTML
 				END DIV
 				HEADING 4
@@ -51,7 +43,7 @@ END PALETTE
 				END HEADING 4
 				DIV "kb-code-block"
 					PALETTE ,"text"
-						BACKGROUND 255,255,255
+						BACKGROUND 255,255,255,50
 						COLOR 255,0,0
 					END PALETTE
 					PRINT "kytschBASIC",,"text"
@@ -66,6 +58,22 @@ END PALETTE
 					PRINT " | "
 					LINK "/reference/COLOR"
 						PRINT "COLOR"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEIGHT"
+						PRINT "HEIGHT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEIGHTPERCENT"
+						PRINT "HEIGHTPERCENT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WIDTH"
+						PRINT "WIDTH"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WIDTHPERCENT"
+						PRINT "WIDTHPERCENT"
 					END LINK
 				END DIV
 			END DIV

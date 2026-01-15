@@ -66,16 +66,20 @@ END SCREEN
 						PRINT "PALETTE"
 					END LINK
 					PRINT " | "
+					LINK "/reference/BACKGROUND"
+						PRINT "BACKGROUND"
+					END LINK
+					PRINT " | "
 					LINK "/reference/COLOR"
 						PRINT "COLOR"
 					END LINK
 					PRINT " | "
-					LINK "/reference/HEIGHT"
-						PRINT "HEIGHT"
-					END LINK
-					PRINT " | "
 					LINK "/reference/HEIGHTPERCENT"
 						PRINT "HEIGHTPERCENT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEIGHT"
+						PRINT "HEIGHT"
 					END LINK
 					PRINT " | "
 					LINK "/reference/WIDTHPERCENT"

@@ -26,15 +26,15 @@ BODY
                     MENUITEM "Save"
                 END MENUGROUP
                 MENUGROUP "Edit"
-                    BUTTON "btn_properties",,,,"Properties"
-                    BUTTON "btn_copy",,,,"Copy"
-                    BUTTON "btn_cut",,,,"Cut"
-                    BUTTON "btn_paste",,,,"Paste"
-                    BUTTON "btn_rename",,,,"Rename"
+                    MENUITEM "Properties"
+                    MENUITEM "Copy"
+                    MENUITEM "Cut"
+                    MENUITEM "Paste"
+                    MENUITEM "Rename"
                 END MENUGROUP
                 MENUGROUP "Help"
-                    BUTTON "btn_help",,,,"Help"
-                    BUTTON "btn_about",,,,"About"
+                    MENUITEM "Help"
+                    MENUITEM "About"
                 END MENUGROUP
             END MENU
             WINDOWBODY "window-body"

@@ -20,7 +20,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-FUNCTION printMessage, message$
+FUNCTION "printMessage", message$
 	PRINT message$
 END FUNCTION
 GOTO printMessage("Hello World!")
@@ -34,7 +34,7 @@ GOTO printMessageWithArgs("Hello World!")
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-code-block"
-					FUNCTION printMessage, message$
+					FUNCTION "printMessage", message$
 						PRINT message$
 					END FUNCTION
 					GOTO printMessage("Hello World!")

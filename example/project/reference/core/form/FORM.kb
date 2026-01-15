@@ -11,7 +11,7 @@ LOAD "_ROOT/project/shared/header"
 				SWRITE
 					PRINT "FORM","heading-command basic"
 					LINE BREAK
-					PRINT "ID, METHOD (default is GET), ACTION, CLASS, FILE SUPPORT (set to true)","heading-args"
+					PRINT "ID, METHOD (default GET), ACTION, CLASS, FILE SUPPORT (default true)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Creating an HTML form."

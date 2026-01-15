@@ -66,6 +66,10 @@ END SCREEN
 						PRINT "PALETTE"
 					END LINK
 					PRINT " | "
+					LINK "/reference/BACKGROUND"
+						PRINT "BACKGROUND"
+					END LINK
+					PRINT " | "
 					LINK "/reference/COLOR"
 						PRINT "COLOR"
 					END LINK
