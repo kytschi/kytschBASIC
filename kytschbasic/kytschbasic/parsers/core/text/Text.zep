@@ -170,7 +170,7 @@ class Text extends Command
 			throw new Exception("Invalid ASC");
 		}
 
-		return str_replace(find, "ord(" . cleaned . ")", arg);
+		return str_replace(find, "\"\" . ord(" . cleaned . ") . \"\"", arg);
 	}
 
 	public function processCentre(arg)
@@ -197,7 +197,7 @@ class Text extends Command
 			let length = args[1];
 		}
 
-		return str_replace(find, "substr(" . args[0] . ", intval(strlen(" . args[0] . ") / 2) - 1, intval(" . length . "))", arg);
+		return str_replace(find, "\"\" . substr(" . args[0] . ", intval(strlen(" . args[0] . ") / 2) - 1, intval(" . length . ")) . \"\"", arg);
 	}
 
 	public function processChr(arg)
@@ -216,7 +216,7 @@ class Text extends Command
 			throw new Exception("Invalid CHR");
 		}
 
-		return str_replace(find, "chr(intval(" . cleaned . "))", arg);
+		return str_replace(find, "\"\" . chr(intval(" . cleaned . ")) . \"\"", arg);
 	}
 
 	public function processInstr(arg)
@@ -240,7 +240,7 @@ class Text extends Command
 			throw new Exception("Invalid INSTR");
 		}
 
-		return str_replace(find, "strpos(" . args[0] . ", " . args[1] . ")", arg);
+		return str_replace(find, "\"\" . strpos(" . args[0] . ", " . args[1] . ") . \"\"", arg);
 	}
 
 	public function processInt(arg)
@@ -259,7 +259,7 @@ class Text extends Command
 			throw new Exception("Invalid INT");
 		}
 
-		return str_replace(find, "intval(" . cleaned . ")", arg);
+		return str_replace(find, "\"\" . intval(" . cleaned . ") . \"\"", arg);
 	}
 
 	public function processLCase(arg)
@@ -278,7 +278,7 @@ class Text extends Command
 			throw new Exception("Invalid LCASE");
 		}
 
-		return str_replace(find, "strtolower(" . cleaned . ")", arg);
+		return str_replace(find, "\"\" . strtolower(" . cleaned . ") . \"\"", arg);
 	}
 
 	public function processLeft(arg)
@@ -302,7 +302,7 @@ class Text extends Command
 			throw new Exception("Invalid LEFT");
 		}
 
-		return str_replace(find, "substr(" . args[0] . ", 0,  intval(" . args[1] . "))", arg);
+		return str_replace(find, "\"\" . substr(" . args[0] . ", 0,  intval(" . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processLen(arg)
@@ -321,7 +321,7 @@ class Text extends Command
 			throw new Exception("Invalid LEN");
 		}
 
-		return str_replace(find, "strlen(" . cleaned . ")", arg);
+		return str_replace(find, "\"\" . strlen(" . cleaned . ") . \"\"", arg);
 	}
 
 	public function processLSet(arg)
@@ -345,7 +345,7 @@ class Text extends Command
 			throw new Exception("Invalid LSET");
 		}
 
-		return str_replace(find, "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "), 'left')", arg);
+		return str_replace(find, "\"\" . (new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "), 'left') . \"\"", arg);
 	}
 
 	public function processMid(arg)
@@ -369,7 +369,7 @@ class Text extends Command
 			throw new Exception("Invalid MID");
 		}
 
-		return str_replace(find, "substr(" . args[0] . ", (" . args[1] . " - 1), " . args[2] . ")", arg);
+		return str_replace(find, "\"\" . substr(" . args[0] . ", (" . args[1] . " - 1), " . args[2] . ") . \"\"", arg);
 	}
 
 	public function processReplace(arg)
@@ -393,7 +393,7 @@ class Text extends Command
 			throw new Exception("Invalid REPLACE");
 		}
 		
-		return str_replace(find, "str_replace(" . args[1] . ", " . args[2] . ", " . args[0] . ")", arg);
+		return str_replace(find, "\"\" . str_replace(" . args[1] . ", " . args[2] . ", " . args[0] . ") . \"\"", arg);
 	}
 
 	public function processRight(arg)
@@ -417,7 +417,7 @@ class Text extends Command
 			throw new Exception("Invalid RIGHT");
 		}
 
-		return str_replace(find, "substr(" . args[0] . ", intval(strlen(" . args[0] . ")) - intval(" . args[1] . "),  intval(" . args[1] . "))", arg);
+		return str_replace(find, "\"\" . substr(" . args[0] . ", intval(strlen(" . args[0] . ")) - intval(" . args[1] . "),  intval(" . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processRSet(arg)
@@ -441,7 +441,7 @@ class Text extends Command
 			throw new Exception("Invalid RSET");
 		}
 
-		return str_replace(find, "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . "))", arg);
+		return str_replace(find, "\"\" . (new KytschBASIC\\Parsers\\Core\Text\\Text())->processPadding(" . args[0] . ", intval(" . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processStringSetup(arg)
@@ -464,7 +464,7 @@ class Text extends Command
 			throw new Exception("Invalid STRING");
 		}
 
-		return str_replace(find, "(new KytschBASIC\\Parsers\\Core\Text\\Text())->processString(" . args[0] . ", intval(" . args[1] . "))", arg);
+		return str_replace(find, "\"\" . (new KytschBASIC\\Parsers\\Core\Text\\Text())->processString(" . args[0] . ", intval(" . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processString(converted, length)
@@ -499,7 +499,7 @@ class Text extends Command
 			throw new Exception("Invalid STRIPLEAD");
 		}
 
-		return str_replace(find, "ltrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . "))", arg);
+		return str_replace(find, "\"\" . ltrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processStripTrail(arg)
@@ -522,7 +522,7 @@ class Text extends Command
 			throw new Exception("Invalid STRIPLEAD");
 		}
 
-		return str_replace(find, "rtrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . "))", arg);
+		return str_replace(find, "\"\" . rtrim(" . args[0] . ", (is_numeric(" . args[1] . ") ? chr(intval(" . args[1] . ")) : " . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processToString(arg)
@@ -540,7 +540,7 @@ class Text extends Command
 			throw new Exception("Invalid STR");
 		}
 
-		return str_replace(find, "(string)" . cleaned, arg);
+		return str_replace(find, "\"\" . (string)" . cleaned . " . \"\"", arg);
 	}
 
 	public function processUCase(arg)
@@ -558,7 +558,7 @@ class Text extends Command
 			throw new Exception("Invalid UCASE");
 		}
 
-		return str_replace(find, "strtoupper(" . cleaned . ")", arg);
+		return str_replace(find, "\"\" . strtoupper(" . cleaned . ") . \"\"", arg);
 	}
 
 	public function processUnLeft(arg)
@@ -581,7 +581,7 @@ class Text extends Command
 			throw new Exception("Invalid UNLEFT");
 		}
 
-		return str_replace(find, "substr(" . args[0] . ", intval(" . args[1] . ") - 1,  intval(strlen(" . args[0] . ")))", arg);
+		return str_replace(find, "\"\" . substr(" . args[0] . ", intval(" . args[1] . ") - 1,  intval(strlen(" . args[0] . "))) . \"\"", arg);
 	}
 
 	public function processUnRight(arg)
@@ -604,7 +604,7 @@ class Text extends Command
 			throw new Exception("Invalid UNRIGHT");
 		}
 
-		return str_replace(find, "substr(" . args[0] . ", 0,  intval(strlen(" . args[0] . ")) - intval(" . args[1] . "))", arg);
+		return str_replace(find, "\"\" . substr(" . args[0] . ", 0,  intval(strlen(" . args[0] . ")) - intval(" . args[1] . ")) . \"\"", arg);
 	}
 
 	public function processVal(arg)
@@ -622,6 +622,6 @@ class Text extends Command
 			throw new Exception("Invalid VAL");
 		}
 
-		return str_replace(find, "floatval(" . cleaned . ")", arg);
+		return str_replace(find, "\"\" . floatval(" . cleaned . ") . \"\"", arg);
 	}
 }
