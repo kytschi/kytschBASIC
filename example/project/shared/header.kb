@@ -223,6 +223,9 @@ HEADER
 		LINK "/reference/ERASE#refERASE","Find out about the ERASE command","nav-link",,"refERASE"
 			PRINT "ERASE"
 		END LINK
+		LINK "/reference/EXIT#refEXIT","Find out about the EXIT command","nav-link",,"refEXIT"
+			PRINT "EXIT"
+		END LINK
 		LINK "/reference/EXP#refEXP","Find out about the EXP command","nav-link",,"refEXP"
 			PRINT "EXP"
 		END LINK

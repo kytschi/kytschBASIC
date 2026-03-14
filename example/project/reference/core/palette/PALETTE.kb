@@ -47,6 +47,86 @@ END PALETTE
 					END SHOWHTML
 				END DIV
 				HEADING 4
+					PRINT "Supported commands"
+				END HEADING 4
+				DIV
+					TABLE "table-border"
+						THEAD
+							TROW
+								THEADCELL
+									PRINT "Command"
+								END THEADCELL
+
+								THEADCELL
+									PRINT "Description"
+								END THEADCELL
+							END TROW
+						END THEAD
+						TBODY
+							TROW
+								TCELL
+									LINK "/reference/BACKGROUND"
+										PRINT "BACKGROUND"
+									END LINK
+								END TCELL
+								TCELL
+									PRINT "Sets the background colour"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									LINK "/reference/COLOR"
+										PRINT "COLOR"
+									END LINK
+								END TCELL
+								TCELL
+									PRINT "Sets the text colour"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									LINK "/reference/HEIGHT"
+										PRINT "HEIGHT"
+									END LINK
+								END TCELL
+								TCELL
+									PRINT "Sets the height of the element"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									LINK "/reference/HEIGHTPERCENT"
+										PRINT "HEIGHTPERCENT"
+									END LINK
+								END TCELL
+								TCELL
+									PRINT "Sets the height of the element as a percent"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									LINK "/reference/WIDTH"
+										PRINT "WIDTH"
+									END LINK
+								END TCELL
+								TCELL
+									PRINT "Sets the width of the element"
+								END TCELL
+							END TROW
+							TROW
+								TCELL
+									LINK "/reference/WIDTHPERCENT"
+										PRINT "WIDTHPERCENT"
+									END LINK
+								END TCELL
+								TCELL
+									PRINT "Sets the width of the element as a percent"
+								END TCELL
+							END TROW
+						END TBODY
+					END TABLE
+				END DIV
+				HEADING 4
 					PRINT "See also"
 				END HEADING 4
 				DIV "kb-col kb-col-24","see-also"
@@ -56,6 +136,22 @@ END PALETTE
 					PRINT " | "
 					LINK "/reference/COLOR"
 						PRINT "COLOR"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEIGHTPERCENT"
+						PRINT "HEIGHTPERCENT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/HEIGHT"
+						PRINT "HEIGHT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WIDTH"
+						PRINT "WIDTH"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WIDTHPERCENT"
+						PRINT "WIDTHPERCENT"
 					END LINK
 				END DIV
 			END DIV

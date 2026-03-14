@@ -1,0 +1,60 @@
+LANG "en"
+HEAD
+	LOAD "_ROOT/project/shared/head"
+	NAME "EXIT statment | kytschBASIC"
+END HEAD
+BODY
+LOAD "_ROOT/project/shared/header"
+	MAIN
+		DIV "kb-row","main-content"
+			DIV "kb-col kb-col-24","main-content-col"
+				SWRITE
+					PRINT "EXIT","heading-command basic"
+				END SWRITE
+				SWRITE
+					PRINT "Exit the application."
+					PRINT "Note:","heading-args"
+					PRINT " this only applies to applications built with the offline compiler."
+				END SWRITE
+				HEADING 3
+					PRINT "Example"
+				END HEADING 3
+				CPRINT
+FUNCTION "menuClose"
+	EXIT
+END FUNCTION
+				END CPRINT
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				DIV "kb-col kb-col-24","see-also"
+					LINK "/reference/DEF#refDEF"
+						PRINT "DEF"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DIM#refDIM"
+						PRINT "DIM"
+					END LINK
+					PRINT " | "
+					LINK "/reference/FUNCTION#refFUNCTION"
+						PRINT "FUNCTION"
+					END LINK
+					PRINT " | "
+					LINK "/reference/COUNT#refCOUNT"
+						PRINT "COUNT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/SPLIT#refSPLIT"
+						PRINT "SPLIT"
+					END LINK
+					PRINT " | "
+					LINK "/reference/WRITEFILE#refWRITEFILE"
+						PRINT "WRITEFILE"
+					END LINK
+				END DIV
+			END DIV
+		END DIV
+	LOAD "_ROOT/project/shared/footer"
+	END MAIN
+END BODY
+END
