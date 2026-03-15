@@ -269,7 +269,11 @@ class Variables
 
 		let line = trim(line);
 
-		if (substr(line, 0, 1) == "\"" || preg_match("/^[a-z]/", line)) {
+		if (empty(line)) {
+			return null;
+		}
+
+		if (substr(line, 0, 1) == "\"" || preg_match("/^[a-z]/", line, strings)) {
 			return null;
 		}
 
@@ -302,7 +306,7 @@ class Variables
 		return false;
 	}
 
-	public function isVariable(string arg, bool hash = false)
+	public function isVariable(string arg, bool hash = false) -> bool
 	{
 		if (substr(arg, 0, 1) == "\"" || is_numeric(arg)) {
 			return false;
@@ -321,14 +325,9 @@ class Variables
 			return true;
 		}
 
-		/*if (preg_match("/(?<!\")(?:\$\(|%\(|#\(|&\()/", trim(arg))) {
-			return true;
-		}*/
-
-		if (preg_match("/(?:(|%\(|#\(|&\()/", trim(arg))) {
+		if (preg_match("/([\\$&#])\\(/", trim(arg))) {
 			return true;
 		}
-		
 		return false;
 	}
 

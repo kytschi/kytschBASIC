@@ -71,6 +71,9 @@ class Bitmap extends Command
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
 			let id = this->outputArg(args[4], false, false);
+			if (!this->isVariable(id)) {
+				let id = "\"" . id . "\"";
+			}
 		} else {
 			let id = "\"KB_BITMAP_" . rand(10000, getrandmax()) . "\"";
 		}
