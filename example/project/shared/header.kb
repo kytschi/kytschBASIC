@@ -271,7 +271,7 @@ HEADER
 		LINK "/reference/HEADING#refHEADING","Find out about the HEADING command","nav-link",,"refHEADING"
 			PRINT "HEADING"
 		END LINK
-		LINK "/reference/HEIGHT#refWIDTH","Find out about the HEIGHT command","nav-link",,"refHEIGHT"
+		LINK "/reference/HEIGHT#refHEIGHT","Find out about the HEIGHT command","nav-link",,"refHEIGHT"
 			PRINT "HEIGHT"
 		END LINK
 		LINK "/reference/HEIGHTPERCENT#refHEIGHTPERCENT","Find out about the HEIGHTPERCENT command","nav-link",,"refHEIGHTPERCENT"
@@ -454,7 +454,7 @@ HEADER
 		LINK "/reference/SELECTINPUT#refSELECTINPUT","Find out about the SELECTINPUT command","nav-link",,"refSELECTINPUT"
 			PRINT "SELECTINPUT"
 		END LINK
-		LINK "/reference/SELECTINPUTOPT#refSELECTINPUTOPT","Find out about the SELECTINPUTOPT command","nav-link",,"refSELECTINPUT"
+		LINK "/reference/SELECTINPUTOPT#refSELECTINPUTOPT","Find out about the SELECTINPUTOPT command","nav-link",,"refSELECTINPUTOPT"
 			PRINT "SELECTINPUTOPT"
 		END LINK
 		LINK "/reference/SESSCLEAR#refSESSCLEAR","Find out about the SESSCLEAR command","nav-link",,"refSESSCLEAR"
@@ -595,7 +595,7 @@ HEADER
 		LINK "/reference/WINDOWBODY#refWINDOWBODY","Find out about the WINDOWBODY command","nav-link",,"refWINDOWBODY"
 			PRINT "WINDOWBODY"
 		END LINK
-		LINK "/reference/WINDOWFOOTER#refWINDOWFOOTER","Find out about the WINDOWFOOTER command","nav-link",,"reWINDOWFOOTER"
+		LINK "/reference/WINDOWFOOTER#refWINDOWFOOTER","Find out about the WINDOWFOOTER command","nav-link",,"refWINDOWFOOTER"
 			PRINT "WINDOWFOOTER"
 		END LINK
 		LINK "/reference/WRITECOOKIE#refWRITECOOKIE","Find out about the WRITECOOKIE command","nav-link",,"refWRITECOOKIE"

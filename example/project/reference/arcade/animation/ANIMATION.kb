@@ -47,6 +47,8 @@ ANIMATION
 	SHOW "show_me"
 	SLEEP 1000
 	HIDE "show_me"
+	SLEEP 1000
+	SHOW "show_me"
 END ANIMATION
 				END CPRINT
 				HEADING 4
@@ -79,6 +81,8 @@ END ANIMATION
 					SHOW "show_me"
 					SLEEP 1000
 					HIDE "show_me"
+					SLEEP 1000
+					SHOW "show_me"
 				END ANIMATION
 				HEADING 4
 					PRINT "See also"

@@ -282,3 +282,11 @@ th, td {
 .hide {
     display: none;
 }
+
+.card {
+    height: 120px;
+}
+
+.card img {
+    height: 100%;
+}

@@ -3,11 +3,11 @@
  *
  * @package     KytschBASIC\Parsers\Core\Text\Text
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2025 Mike Welsh
+ * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2025 Mike Welsh
+ * Copyright 2026 Mike Welsh
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -30,6 +30,20 @@ use KytschBASIC\Parsers\Core\Command;
 
 class Text extends Command
 {
+	public function generateRandomString(int length = 8) -> string
+	{
+		var keyspace, iLoop=0, key = 0, output = "";
+		let keyspace = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
+	
+		while (iLoop < length) {
+            let key = rand(0, count(keyspace) - 1);
+            let output .= keyspace[key];
+            let iLoop += 1;
+		}
+
+		return output;
+	}
+	
 	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
@@ -67,8 +81,8 @@ class Text extends Command
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
 			let output .= " style=" . this->outputArg(args[4], false);
 		}
-		
-		return output . ">" . this->outputArg(args[0], false, false) . "</span>\";?>";
+
+		return output . ">\" . " . args[0] . " . \"</span>\";?>";
 	}
 
 	public function processPadding(string text, int length, string dir = "right")
@@ -131,6 +145,8 @@ class Text extends Command
 				return this->processReplace(arg);
 			case "RIGHT":
 				return this->processRight(arg);
+			case "RNDSTRING":
+				return this->processRandomString(arg);
 			case "RSET":
 				return this->processRSet(arg);
 			case "STR":
@@ -418,6 +434,34 @@ class Text extends Command
 		}
 
 		return str_replace(find, "\"\" . substr(" . args[0] . ", intval(strlen(" . args[0] . ")) - intval(" . args[1] . "),  intval(" . args[1] . ")) . \"\"", arg);
+	}
+
+	public function processRandomString(arg)
+	{
+		var args, cleaned, find;
+
+		if (arg == "RNDSTRING") {
+			return str_replace(arg, "\"\" . (new KytschBASIC\\Parsers\\Core\Text\\Text())->generateRandomString(" . cleaned . ") . \"\"", arg);
+		}
+
+		let find = arg;
+		let args = this->equalsSplit(arg);
+		if (count(args) > 1) {
+			let find = args[1];
+		}
+
+		let cleaned = this->cleanArg("RNDSTRING", find);
+		if (!empty(cleaned)) {
+			let cleaned = intval(cleaned);
+		} else {
+			let cleaned = 8;
+		}
+
+		if (cleaned <= 0) {
+			let cleaned = 8;
+		}        
+		
+		return str_replace(find, "\"\" . (new KytschBASIC\\Parsers\\Core\Text\\Text())->generateRandomString(" . cleaned . ") . \"\"", arg);
 	}
 
 	public function processRSet(arg)

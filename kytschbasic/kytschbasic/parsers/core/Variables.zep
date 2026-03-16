@@ -293,7 +293,7 @@ class Variables
 		return null;
 	}
 
-	public function isFormVariable(string arg)
+	public function isFormVariable(string arg) -> bool
 	{
 		var type;
 

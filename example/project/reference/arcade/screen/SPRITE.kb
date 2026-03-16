@@ -26,7 +26,7 @@ SCREEN "cards"
 		FOR card$ IN cards$
 			DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
 			DEF id$=REPLACE(id$, ".svg", "")
-			LET card$="/kytschi/imgs/cards/" . card$
+			LET card$="/kytschi/imgs/cards/" + card$
 			SPRITE id$, "card", "onCardClick"
 				IMAGE card$
 			END SPRITE
@@ -44,7 +44,7 @@ END SCREEN
 							FOR card$ IN cards$
 								DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
 								DEF id$=REPLACE(id$, ".svg", "")
-								LET card$="/kytschi/imgs/cards/" . card$
+								LET card$="/kytschi/imgs/cards/" + card$
 								SPRITE id$, "card", "onCardClick"
 									IMAGE card$
 								END SPRITE

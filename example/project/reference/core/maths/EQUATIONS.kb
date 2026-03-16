@@ -19,24 +19,24 @@ BODY
 				END HEADING 3
 				CPRINT
 DEF add%=(1+1)
-PRINT "add = " . add%
+PRINT "add = " + add%
 LINE BREAK
 
 DEF sub%=(10-add%)
-PRINT "sub = " . sub%
+PRINT "sub = " + sub%
 LINE BREAK
 
 DEF divide%=(sub%/2)
-PRINT "divide = " . divide%
+PRINT "divide = " + divide%
 LINE BREAK
 
 DEF times%=(divide%*2)
-PRINT "times = " . times%
+PRINT "times = " + times%
 LINE BREAK
 
 DIM array_numbers%=(1, 2, 3, 4, 5)
 DEF array_times%=(times%*array_numbers%(3))
-PRINT "array_times = " . array_times%
+PRINT "array_times = " + array_times%
 
 				END CPRINT
 				HEADING 4
@@ -44,24 +44,24 @@ PRINT "array_times = " . array_times%
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
 					DEF add%=(1+1)
-					PRINT "add = " . add%
+					PRINT "add = " + add%
 					LINE BREAK
 
 					DEF sub%=(10-add%)
-					PRINT "sub = " . sub%
+					PRINT "sub = " + sub%
 					LINE BREAK
 
 					DEF divide%=(sub%/2)
-					PRINT "divide = " . divide%
+					PRINT "divide = " + divide%
 					LINE BREAK
 
 					DEF times%=(divide%*2)
-					PRINT "times = " . times%
+					PRINT "times = " + times%
 					LINE BREAK
 
 					DIM array_numbers%=(1, 2, 3, 4, 5)
 					DEF array_times%=(times%*array_numbers%(3))
-					PRINT "array_times = " . array_times%
+					PRINT "array_times = " + array_times%
 				END DIV
 				HEADING 4
 					PRINT "See also"

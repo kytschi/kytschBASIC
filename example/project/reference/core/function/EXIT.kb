@@ -13,6 +13,7 @@ LOAD "_ROOT/project/shared/header"
 				END SWRITE
 				SWRITE
 					PRINT "Exit the application."
+					LINE BREAK
 					PRINT "Note:","heading-args"
 					PRINT " this only applies to applications built with the offline compiler."
 				END SWRITE

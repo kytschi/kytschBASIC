@@ -30,12 +30,14 @@ PRINT TWODP(test#)
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				DEF test#=TWODP(1337.737)
-				PRINT test#
-				LINE BREAK
-				REM or do it on the PRINT
-				LET test#=TWODP(1337.337)
-				PRINT TWODP(test#)
+				DIV "kb-code-block"
+					DEF test#=TWODP(1337.737)
+					PRINT test#
+					LINE BREAK
+					REM or do it on the PRINT
+					LET test#=TWODP(1337.337)
+					PRINT TWODP(test#)
+				END DIV
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4

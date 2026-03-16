@@ -59,6 +59,6 @@ class Image extends Command
 			let output .= " id=" . this->outputArg(args[3], false);
 		}
 
-		return output . "/>\"; ?>";
+		return output . ">\"; ?>";
 	}
 }
