@@ -48,6 +48,9 @@ class Variables
 		let display = new Display();
 		let maths = new Maths();
 
+		// Replace any slash double quotes with &quot;.
+		let line = str_replace("\\\"", "&quot;", line);
+
 		// Clean any + used for string join.
 		let line = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", " . ", line);
 
@@ -128,14 +131,6 @@ class Variables
 			//Check to see if its a maths equation.
 			let subvars = maths->isEquation(arg);
 			if (count(subvars) > 1) {
-				/*
-				// Replace the pluses if its a string join
-				for subvar in subvars {
-					if (is_string(subvar) || substr(subvar, strlen(subvar) - 0, 1) == "$") {
-						let arg = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*\Z)/", " . ", arg);
-						break;
-					}
-				}*/
 				// Replace first unquoted (
 				let arg = preg_replace("/\"[^\"]*\"(*SKIP)(*FAIL)|\K\(/", "|||KBBRACKETSTART|||", arg, 1);
 				
