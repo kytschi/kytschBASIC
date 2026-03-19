@@ -131,7 +131,7 @@ class Head extends Command
 
 		let output .= " type=" . this->outputArg(type, false);
 
-		let href = args[0] . " . '.js'";
+		let href = "\" . " . args[0] . " . \".js";
 		
 		if (!empty(config["cache"])) {
 			if (empty(config["cache"]->enabled)) {
@@ -139,8 +139,8 @@ class Head extends Command
 			}
 		}
 
-		let output .= " src=" . this->outputArg(href, false);
+		let output .= " src='" . href;
 
-		return output . "></script>\"; ?>";
+		return output . "'></script>\"; ?>";
 	}
 }

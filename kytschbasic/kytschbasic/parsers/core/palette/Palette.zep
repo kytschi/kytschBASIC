@@ -125,7 +125,7 @@ class Palette extends Command
 			let output = "<?= \"<link rel=" . this->outputArg("stylesheet", false);
 			let output .= " type=" . this->outputArg("text/css", false);
 
-			let href =  "rtrim(\"" . this->outputArg(args[0], false, false) . "\", \".css\") . \".css\\\"";
+			let href =  "str_replace(\".css\", \"\", \"" . this->outputArg(args[0], false, false) . "\") . \".css\\\"";
 			
 			if (!empty(config["cache"])) {
 				if (empty(config["cache"]->enabled)) {

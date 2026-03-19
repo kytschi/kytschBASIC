@@ -418,6 +418,14 @@ JAVASCRIPT
         window.location.reload();
     });
 
+    $("button[name=btnNewGame]").click(() => {
+        window.location.reload();
+    });
+
+    $("button[name=btnKnock]").click(() => {
+        playerKnocking();
+    });
+
     $("button[name=btnMultiPlayer]").click(() => {
         $("#playerSelect").hide();
         $("#multiplayerSelect").show();
@@ -428,31 +436,31 @@ JAVASCRIPT
     });
 END JAVASCRIPT
 
-SCREEN "sevens"
-    WINDOW "board"
-        WINDOW "deck"
-            WINDOW "diamonds", "deck-placeholder"
+DIV "", "sevens"
+    DIV "", "board"
+        DIV "", "deck"
+            DIV "deck-placeholder", "diamonds"
                 SPRITE "diamonds_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
                 END SPRITE
-            END WINDOW
-            WINDOW "hearts", "deck-placeholder"
+            END DIV
+            DIV "deck-placeholder", "hearts"
                 SPRITE "hearts_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/hearts_placeholder.svg"
                 END SPRITE
-            END WINDOW
-            WINDOW "spades", "deck-placeholder"
+            END DIV
+            DIV "deck-placeholder", "spades"
                 SPRITE "spades_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/spades_placeholder.svg"
                 END SPRITE
             END WINDOW
-            WINDOW "clubs", "deck-placeholder"
+            DIV "deck-placeholder", "clubs"
                 SPRITE "clubs_placeholder","placeholder", "onDeckClick"
                     IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
                 END SPRITE
             END WINDOW
-        END WINDOW
-        WINDOW "game"
+        END DIV
+        DIV "", "game"
             TABLE
                 THEAD
                     TROW
@@ -490,10 +498,10 @@ SCREEN "sevens"
                     NEXT
                 END TBODY
             END TABLE
-        END WINDOW
-    END WINDOW
-    WINDOW "player"
-        WINDOW "hand"
+        END DIV
+    END DIV
+    DIV "", "player"
+        DIV "", "hand"
             FOR card$ IN hands$(0)
                 DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
                 DEF id$=REPLACE(id$, ".svg", "")
@@ -501,8 +509,8 @@ SCREEN "sevens"
                     IMAGE card$
                 END SPRITE
             NEXT
-        END WINDOW
-        WINDOW "controls"
+        END DIV
+        DIV "", "controls"
             BUTTON "btnKnock", "btn-knocking"
                 PRINT "knocking"
             END BUTTON
@@ -513,8 +521,8 @@ SCREEN "sevens"
                 BUTTON "btnSetup", "btn-submit",,"setup","Setup"
             END DIV
             TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
-        END WINDOW
-    END WINDOW
+        END DIV
+    END DIV
     DIV "modal fade", "modalNewGame"
         DIV "modal-dialog"
             DIV "modal-content"
@@ -524,7 +532,7 @@ SCREEN "sevens"
                 DIV "modal-body"
                     DIV "row", "playerSelect"
                         LET no_players%=(no_players%+1)
-                        DEF game_code$=RNDSTRING
+                        DEF game_code$=RNDSTRING(9)
                         DIV "row break"
                             PRINT "No. players"
                             NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
@@ -544,7 +552,7 @@ SCREEN "sevens"
                     END DIV
                     DIV "row hide", "multiplayerSelect"
                         PRINT "Multiplayer"
-                        TEXTINPUT "txtGameID",gameID$,"form-input","Please enter your name","txtPlayerName",true
+                        TEXTINPUT "txtGameID",,"form-input","Please enter your name","txtPlayerName",true
                         TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
                         DIV "row break"
                         END DIV
@@ -557,6 +565,6 @@ SCREEN "sevens"
             END DIV
         END DIV
     END DIV
-END SCREEN
+END DIV
 END BODY
 END

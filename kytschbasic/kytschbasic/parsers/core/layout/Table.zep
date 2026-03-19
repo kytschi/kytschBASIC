@@ -85,7 +85,7 @@ class Table extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[3], false);
+			let output .= " id=\" . " . args[3] . " . \"";
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-" . tag), false);
 		}
@@ -104,7 +104,7 @@ class Table extends Command
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[1], false);
+			let output .= " id=\" . " . args[1] . " . \"";
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-" . tag), false);
 		}
