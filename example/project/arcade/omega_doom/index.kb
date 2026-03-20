@@ -873,6 +873,7 @@ IFE _GET("progress") THEN
         $("#omega-doom-intro").fadeIn(2000, () => {
             controls_locked=0;
             showIntroButtons(event);
+            $("#omega-doom-intro").css("display", "flex");
         });
     END JAVASCRIPT
 ELSE
@@ -881,13 +882,14 @@ ELSE
         $("#omega-doom-intro").fadeIn(2000, () => {
             controls_locked=0;
             continueGame(event);
+            $("#omega-doom-intro").css("display", "flex");
         });
     END JAVASCRIPT
 END IF
 
 SCREEN "omega-doom-intro"
-    WINDOW "intro"
-        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/intro/gameintro.gfx")
+    WINDOW ,"intro"
+        GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/intro/gameintro.gfx")
     END WINDOW
     DIV ,"intro-controls"
         DIV ,"intro-controls-buttons"
@@ -910,16 +912,16 @@ SCREEN "omega-doom-intro"
     END DIV
 END SCREEN
 SCREEN "omega-doom-gameover"
-    WINDOW "gameover"
-        GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/gameover/gameover.gfx")
+    WINDOW ,"gameover"
+        GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/gameover/gameover.gfx")
         PRINT "Game over","gfx-label","gameover-title"
     END WINDOW
 END SCREEN
 SCREEN "omega-doom-game"
     IFE _GET("progress") THEN
-        LOAD "_ROOT/project/arcade/omega_doom/intro"
+        LOAD _ROOT + "/project/arcade/omega_doom/intro"
     ELSE
-        LOAD "_ROOT/project/arcade/omega_doom/_GET("progress")"
+        LOAD _ROOT + "/project/arcade/omega_doom/" + _GET("progress")
     END IF
 END SCREEN
 END BODY

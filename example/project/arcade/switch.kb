@@ -493,11 +493,11 @@ $(document).ready(function() {
 });
 END JAVASCRIPT
 
-SCREEN "switch"
-    WINDOW "board"
-        WINDOW "deck",,"onDeckClick"
-        END WINDOW
-        WINDOW "game"
+DIV "", "switch"
+    DIV "", "board"
+        DIV "", "deck",,"onDeckClick"
+        END DIV
+        DIV "", "game"
             TABLE
                 THEAD
                     TROW
@@ -536,10 +536,10 @@ SCREEN "switch"
                     NEXT
                 END TBODY
             END TABLE
-        END WINDOW
-    END WINDOW
-    WINDOW "player"
-        WINDOW "hand"
+        END DIV
+    END DIV
+    DIV "", "player"
+        DIV "", "hand"
             FOR card$ IN hands$(0)
                 DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
                 DEF id$=REPLACE(id$, ".svg", "")
@@ -547,8 +547,8 @@ SCREEN "switch"
                     IMAGE card$
                 END SPRITE
             NEXT
-        END WINDOW
-        WINDOW "controls"
+        END DIV
+        DIV "", "controls"
             BUTTON "btnKnock", "btn-knocking"
                 PRINT "knocking"
             END BUTTON
@@ -566,16 +566,16 @@ SCREEN "switch"
                 END BUTTON
             END FORM
             TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+        END DIV
+    END DIV
+    DIV "", "change-suit"
+        DIV "", "change-suit-background"
         END WINDOW
-    END WINDOW
-    WINDOW "change-suit"
-        WINDOW "change-suit-background"
-        END WINDOW
-        WINDOW "change-suit-select"
+        DIV "", "change-suit-select"
             HEADING 1
                 PRINT "Change suit"
             END HEADING 1
-            WINDOW "change-suit-select-placeholders"
+            DIV "", "change-suit-select-placeholders"
                 SPRITE "diamonds", "placeholder", "onChangeSuitClick"
                     IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
                 END SPRITE
@@ -588,9 +588,9 @@ SCREEN "switch"
                 SPRITE "clubs", "placeholder", "onChangeSuitClick"
                     IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
                 END SPRITE
-            END WINDOW
-        END WINDOW
-    END WINDOW
-END SCREEN
+            END DIV
+        END DIV
+    END DIV
+END DIV
 END BODY
 END

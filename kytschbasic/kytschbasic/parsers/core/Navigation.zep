@@ -61,14 +61,21 @@ class Navigation extends Command
 		if (strpos("http:", args[0]) !== false || strpos("ftp:", args[0]) !== false) {
 			return "<?php header(\"Location: \" . " . args[0] . ");die(); ?>";
 		} else {
-			if (strpos(args[0], "[") !== false) {
-				let output = substr_replace(
-					substr_replace(args[0], "(", strpos(args[0], "["), 1),
-					")",
-					strlen(args[0]) - 1,
-					1
-				);
+			if (strpos(args[0], "[") !== false || strpos(args[0], "(") !== false) {
+				if (strpos(args[0], "[") !== false) {
+					let output = substr_replace(
+						substr_replace(args[0], "(", strpos(args[0], "["), 1),
+						")",
+						strlen(args[0]) - 1,
+						1
+					);
+				} else {
+					let output = args[0];
+				}
+				
 
+				// Clean any + used for string join.
+				let output = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", " . ", output);
 				let output = rtrim(output, ";");
 
 				if (in_javascript) {
@@ -83,6 +90,9 @@ class Navigation extends Command
 								let output .= str;
 							}
 						}
+					}
+					if (strpos(output, "[](") !== false) {
+						let output = str_replace("[](", "(", output);
 					}
 					return output . ";";
 				} else {

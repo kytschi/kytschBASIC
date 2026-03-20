@@ -1,10 +1,10 @@
 LANG "en"
 HEAD
-	LOAD "_ROOT/project/shared/head"
+	LOAD _ROOT + "/project/shared/head"
 	NAME "SCREEN statment | kytschBASIC"
 END HEAD
 BODY
-LOAD "_ROOT/project/shared/header"
+LOAD _ROOT + "/project/shared/header"
 	MAIN
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
@@ -25,7 +25,7 @@ SCREEN "the-traveller"
 		RGB 0,0,0
 		BITMAP 0,0,800,400
 			RGB 255,0,0
-			BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
+			BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
 			BITMAPTEXT "The Traveller",32,0,120,150
 			BITMAPTEXT "Press any key to start",18,0,135,320
 		END BITMAP
@@ -47,7 +47,7 @@ END SCREEN
 						RGB 0,0,0
 						BITMAP 0,0,800,400
 							RGB 255,0,0
-							BITMAPFONT "_ROOT/kytschi/fonts/Sixtyfour.ttf"
+							BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
 							BITMAPTEXT "The Traveller",32,0,120,150
 							BITMAPTEXT "Press any key to start",18,0,135,320
 						END BITMAP
@@ -160,7 +160,7 @@ END SCREEN
 				END DIV
 			END DIV
 		END DIV
-	LOAD "_ROOT/project/shared/footer"
+	LOAD _ROOT + "/project/shared/footer"
 	END MAIN
 END BODY
 END

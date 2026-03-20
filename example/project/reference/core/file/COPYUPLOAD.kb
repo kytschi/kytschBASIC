@@ -1,10 +1,10 @@
 LANG "en"
 HEAD
-	LOAD "_ROOT/project/shared/head"
+	LOAD _ROOT + "/project/shared/head"
 	NAME "COPYUPLOAD statment | kytschBASIC"
 END HEAD
 BODY
-LOAD "_ROOT/project/shared/header"
+LOAD _ROOT + "/project/shared/header"
 	MAIN
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
@@ -20,7 +20,7 @@ LOAD "_ROOT/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-COPYUPLOAD _FILES("file")("tmp_name"), "_ROOT/dump/"
+COPYUPLOAD _FILES("file")("tmp_name"), _ROOT + "/dump/"
 				END CPRINT
 				HEADING 4
 					PRINT "See also"
@@ -52,7 +52,7 @@ COPYUPLOAD _FILES("file")("tmp_name"), "_ROOT/dump/"
 				END DIV
 			END DIV
 		END DIV
-	LOAD "_ROOT/project/shared/footer"
+	LOAD _ROOT + "/project/shared/footer"
 	END MAIN
 END BODY
 END

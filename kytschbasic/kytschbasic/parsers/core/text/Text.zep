@@ -65,21 +65,21 @@ class Text extends Command
 		var output = "<?= \"<span";
 								
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class=" . this->outputArg(args[1], false);
+			let output .= " class='\" . " . args[1] .  " . \"'";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " id=" . this->outputArg(args[2], false);
+			let output .= " id='\" . " . args[2] .  " . \"'";
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-span"), false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " title=" . this->outputArg(args[3], false);
+			let output .= " title='\" . " . args[3] .  " . \"'";
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= " style=" . this->outputArg(args[4], false);
+			let output .= " style='\" . " . args[4] .  " . \"'";
 		}
 
 		return output . ">\" . " . args[0] . " . \"</span>\";?>";

@@ -16,7 +16,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     background-color: #000;
-    color: #fff;
+    color: #fff !important;
     font-family: 'Body', monospace;
     font-size: 12pt;
 }
@@ -41,7 +41,7 @@ html, body {
 #omega-doom button {
     background: none;
     border: none;
-    color: #fff;
+    color: #fff !important;
     font-size: 14pt;
     line-height: 14pt;
     margin-bottom: 10px;
@@ -49,11 +49,11 @@ html, body {
     letter-spacing: 0pt;
 }
 #omega-doom button .button_key {
-    color:#ff8700;
+    color:#ff8700 !important;
     padding: 0px 4px;
 }
 #omega-doom button .button-message.selected  {
-    color: #009dff;
+    color: #009dff !important;
 }
 #omega-doom button .button_key_end {
     padding-right: 18px;
@@ -69,18 +69,23 @@ html, body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    flex-direction: column;
     display: none;
+    border: none !important;
+    background-color: #000 !important;
 }
 
 #omega-doom-intro pre, #omega-doom-intro #intro-controls, #omega-doom-gameover pre {
     display: flex;
     font-family: 'Body', monospace;
     justify-content: center;
+    background-color: #000 !important;
+    border: none !important;
 }
 
 #omega-doom-gameover .gfx-label {
     text-align: center;
-    color: #00ff3c;
+    color: #00ff3c !important;
 }
 
 #omega-doom-intro #intro-controls-buttons {
@@ -99,6 +104,7 @@ html, body {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
+    border: none !important;
 }
 
 #omega-doom-game {
@@ -159,7 +165,7 @@ html, body {
     padding: 20px;
     width: calc(360px - 40px);
     height: calc(100% - 42px);
-    border: 1px dashed #00ff3c;
+    border: 1px dashed #00ff3c !important;
 }
 #omega-doom-game .controls button {
     text-align: left;
@@ -175,7 +181,7 @@ html, body {
     display: flex;
     width: 100%;
     overflow: hidden;
-    background-color: #000;
+    background-color: #000 !important;
 }
 
 #omega-doom-game .gfx {
@@ -183,7 +189,7 @@ html, body {
 }
 
 #omega-doom-game .text {
-    border-top: 1px dashed #00ff3c;
+    border-top: 1px dashed #00ff3c !important;
     height: 300px;
 }
 
@@ -192,7 +198,7 @@ html, body {
     position: absolute;
     top: 30px;
     left: 30px;
-    color: #00ff3c;
+    color: #00ff3c !important;
 }
 
 #omega-doom-game .gfx .render {
@@ -208,7 +214,7 @@ html, body {
     width: calc(400px - 40px);
     height: calc(100% - 40px);
     padding: 20px 20px;
-    border-right: 1px dashed #00ff3c;
+    border-right: 1px dashed #00ff3c !important;
 }
 
 #omega-doom-game .text .character code {
@@ -224,8 +230,8 @@ html, body {
 #omega-doom-game .text .character p, #omega-doom-game .control-stats-ship p {
     display: block;
     text-align: center;
-    background-color: #fff;
-    color: #000;
+    background-color: #fff !important;
+    color: #000 !important;
     padding: 0 5px;
 }
 
@@ -242,8 +248,8 @@ html, body {
 }
 
 #omega-doom-game .text .speech p span {
-    background-color: #fff;
-    color: #000;
+    background-color: #fff !important;
+    color: #000 !important;
     padding: 0 5px;
 }
 
@@ -261,12 +267,12 @@ html, body {
 }
 
 #omega-doom-game .controls-stats .controls-stats-label {
-    color: #bab8b8;
+    color: #bab8b8 !important;
     width: 120px;
 }
 
 #omega-doom-game .controls-stats .normal {
-    color: #00ff2e;
+    color: #00ff2e !important;
 }
 #omega-doom.alert-normal .text .character,
 #omega-doom.alert-normal .text,
@@ -274,7 +280,7 @@ html, body {
     border-color: #00ff2e !important;
 }
 #omega-doom-game .controls-stats .yellow {
-    color: #ffd900;
+    color: #ffd900 !important;
 }
 #omega-doom.alert-yellow .text .character,
 #omega-doom.alert-yellow .text,
@@ -282,7 +288,7 @@ html, body {
     border-color: #ffd900 !important;
 }
 #omega-doom-game .controls-stats .red {
-    color: #ff0000;
+    color: #ff0000 !important;
 }
 #omega-doom.alert-red .text .character,
 #omega-doom.alert-red .text,
@@ -298,8 +304,8 @@ html, body {
 
 #omega-doom #map .map-text {
     padding: 10px 10px;
-    background-color: #000;
-    color: #fff;
+    background-color: #000 !important;
+    color: #fff !important;
 }
 
 #omega-doom #map #kazaria-syndicate-map {
@@ -394,4 +400,13 @@ html, body {
         position: relative;
         margin-top: -60px;
     }
+}
+
+#omega-doom .window-title {
+    display: none !important;
+}
+
+#omega-doom #intro, #omega-doom #progress {
+    background-color: #000 !important;
+    color: #fff !important;
 }

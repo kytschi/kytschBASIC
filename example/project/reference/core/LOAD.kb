@@ -1,10 +1,10 @@
 LANG "en"
 HEAD
-	LOAD "_ROOT/project/shared/head"
+	LOAD _ROOT + "/project/shared/head"
 	NAME "LOAD statment | kytschBASIC"
 END HEAD
 BODY
-LOAD "_ROOT/project/shared/header"
+LOAD _ROOT + "/project/shared/header"
 	MAIN
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
@@ -19,7 +19,7 @@ LOAD "_ROOT/project/shared/header"
 				END HEADING 3
 				CPRINT
 HEAD
-	LOAD "_ROOT/assets/js/jquery.min.js"
+	LOAD _ROOT + "/assets/js/jquery.min.js"
 END HEAD
 				END CPRINT
 				HEADING 4
@@ -36,7 +36,7 @@ END HEAD
 				END DIV
 			END DIV
 		END DIV
-	LOAD "_ROOT/project/shared/footer"
+	LOAD _ROOT + "/project/shared/footer"
 	END MAIN
 END BODY
 END

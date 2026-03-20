@@ -92,7 +92,7 @@ class Variables
 		for str in vars[0] {
 			let line = substr_replace(
 				line,
-				constant(str[0]),
+				"\"" . constant(str[0]) . "\"",
 				str[1],
 				strlen(str[0])
 			);

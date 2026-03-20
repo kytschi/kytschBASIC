@@ -4,11 +4,11 @@ END JAVASCRIPT
 WINDOW "game-window", "progress"
     DIV "game-progress","game-progress-1"
         PRINT "Captain, thats a Kazaria Syndicate outpost.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -16,7 +16,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Simons [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -31,7 +31,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -78,11 +78,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-2"
         PRINT "What the hell is a Kazarian outpost doing in Federation space on the Rosia border?","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -90,7 +90,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -111,7 +111,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -158,11 +158,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-3"
         PRINT "Ambrose, hail the outpost.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -170,7 +170,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -191,7 +191,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -238,11 +238,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-4"
         PRINT "Aye sir.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -250,7 +250,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -265,7 +265,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 MOUSEACTION "progressSpeech('game-progress-5')"
                     BUTTON
@@ -326,11 +326,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-5"
         PRINT "Opening channel with the outpost.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -338,7 +338,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -353,7 +353,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 MOUSEACTION "progressSpeech('game-progress-6')"
                     BUTTON
@@ -389,11 +389,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-6"
         PRINT "Outpost 3366, this is the SS Liberty.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -401,7 +401,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -422,7 +422,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -445,11 +445,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-7"
         PRINT "Outpost 3366, this is the SS Liberty, please respond.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -457,7 +457,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -478,7 +478,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -501,11 +501,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-8"
         PRINT "Outpost 3366, this is the SS Liberty, please respond.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -513,7 +513,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -534,7 +534,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -557,11 +557,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-9"
         PRINT "Outpost 3366, please respond.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -569,7 +569,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -590,7 +590,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -613,11 +613,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-10"
         PRINT "Captain, there is no response.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -625,7 +625,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Ambrose [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/ambrose.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -646,7 +646,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -669,11 +669,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-11"
         PRINT "Number one, scan the outpost for life signs.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -681,7 +681,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -702,7 +702,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -749,11 +749,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-12"
         PRINT "Yes Captain.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -761,7 +761,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -776,7 +776,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 MOUSEACTION "invalidButton(event,'I need to be selecting sensors.')"
                     BUTTON
@@ -838,11 +838,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-13"
         PRINT "Accessing sensors Captain.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -850,7 +850,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -865,7 +865,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 MOUSEACTION "progressSpeech('game-progress-15')"
                     BUTTON
@@ -914,11 +914,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-14"
         PRINT "Nothing on long range sensors.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -926,7 +926,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -941,7 +941,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 MOUSEACTION "progressSpeech('game-progress-15')"
                     BUTTON
@@ -990,11 +990,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-15"
         PRINT "Scanning the outpost Captain.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1002,7 +1002,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1023,7 +1023,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1052,11 +1052,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-16"
         PRINT "No life signs.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1064,7 +1064,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1085,7 +1085,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1114,11 +1114,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-17"
         PRINT "The outpost's nuclear power core is showing extensive damage...","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1126,7 +1126,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1147,7 +1147,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1176,11 +1176,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-18"
         PRINT "...and will go critical within the hour.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1188,7 +1188,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1209,7 +1209,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1238,11 +1238,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-19"
         PRINT "But I am reading an anomaly on sensors.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1250,7 +1250,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1271,7 +1271,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1300,11 +1300,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-20"
         PRINT "Baring 20 08 74.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1312,7 +1312,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1333,7 +1333,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1362,11 +1362,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-21"
         PRINT "Mr Simons you seeing anything?","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1374,7 +1374,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1395,7 +1395,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1424,11 +1424,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-22"
         PRINT "Negative Captain...wait!","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1436,7 +1436,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Simons [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1457,7 +1457,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1486,11 +1486,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-23"
         PRINT "Report Mr Simons?!","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1498,7 +1498,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1519,7 +1519,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1548,11 +1548,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-24"
         PRINT "I'm not sure Captain.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1560,7 +1560,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Simons [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1581,7 +1581,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1610,11 +1610,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-25"
         PRINT "First there was a sensor reading then there wasn't.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1622,7 +1622,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Simons [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1643,7 +1643,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1672,11 +1672,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-26"
         PRINT "A cloaked ship?","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1684,7 +1684,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1705,7 +1705,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1734,11 +1734,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-27"
         PRINT "Doubtful Captain.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1746,7 +1746,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1767,7 +1767,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1796,11 +1796,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-28"
         PRINT "Sensors are getting a strong reading but only for a fraction of a second.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1808,7 +1808,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1829,7 +1829,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1858,11 +1858,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-29"
         PRINT "Captain! There it is again!","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1870,7 +1870,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Lt. Simons [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/simons.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1891,7 +1891,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1920,11 +1920,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-30"
         PRINT "Yellow alert!","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1932,7 +1932,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -1953,7 +1953,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -1983,11 +1983,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-31"
         PRINT "I'm not taking any chances.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -1995,7 +1995,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -2016,7 +2016,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -2046,11 +2046,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-32"
         PRINT "Mr Thomas, link with the outpost's computer and start downloading whatever you can.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -2058,7 +2058,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Captain. Abrahams [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/abrahams.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -2079,7 +2079,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
@@ -2109,11 +2109,11 @@ WINDOW "game-window", "progress"
     END DIV
     DIV "game-progress","game-progress-33"
         PRINT "Aye Captain. Downloading now.","original hide"
-        WINDOW ,"visuals"
+        WINDOW ,,"visuals"
             DIV "gfx"
                 PRINT "Outpost 3366","gfx-label"
                 DIV "render"
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/universe/federation/outpost3366.gfx")
                 END DIV
             END DIV
             DIV "text"
@@ -2121,7 +2121,7 @@ WINDOW "game-window", "progress"
                     SWRITE
                         PRINT "Cmdr. Thomas [SS Liberty]"
                     END SWRITE
-                    GOTO loadGFX("_ROOT/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
+                    GOTO loadGFX(_ROOT + "/kytschi/omega_doom/gfx/characters/ss_liberty/thomas.gfx")
                 END DIV
                 DIV "speech"
                     SWRITE
@@ -2144,7 +2144,7 @@ WINDOW "game-window", "progress"
                 END DIV
             END DIV
         END WINDOW
-        WINDOW ,"controls"
+        WINDOW ,,"controls"
             DIV "controls-buttons"
                 BUTTON ,"locked"
                     PRINT "["
