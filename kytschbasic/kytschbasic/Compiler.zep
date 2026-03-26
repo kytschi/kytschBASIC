@@ -68,7 +68,7 @@ class Compiler
 			define("_ROOT", getcwd());
 			define("_RURL", _SERVER["REQUEST_SCHEME"] . "://" . _SERVER["HTTP_HOST"]);
 			define("_URL", _SERVER["REQUEST_URI"]);
-			define("_PATH", url["path"]);
+			define("_PATH", isset(url["path"]) ?  url["path"] : "");
 		}
 		
 		// Start the session
@@ -244,9 +244,7 @@ class Compiler
 				if (route->url == path) {
 					let fallback = null;
 
-					/*
-					 * If there is a login and a primary route, kick the user to it.
-					 */
+					// If there is a login and a primary route, kick the user to it.
 					if (
 						!empty(login_route) &&
 						login_route->url == path &&
@@ -257,10 +255,8 @@ class Compiler
 						die();
 					}
 
-					/*
-					 * Check to see if the route is a secure one. If it is, look for a valid session user.
-					 * If there is not then kick the user to the login defined in the routes.json.
-					 */
+					// Check to see if the route is a secure one. If it is, look for a valid session user.
+					// If there is not then kick the user to the login defined in the routes.json.
 					if (isset(route->secure) && !empty(route->secure) && !empty(login_route)) {
 						if (empty(Session::read(user_session_var)) && login_route->url != path) {
 							header("Location: " . login_route->url);
