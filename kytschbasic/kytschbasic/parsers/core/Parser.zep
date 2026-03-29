@@ -107,7 +107,7 @@ class Parser
 		}
 		
 		if (!file_exists(template)) {
-			throw new Exception("Template, " . template . ", not found");
+			throw new Exception("Template not found");
 		}
 		
 		try {
