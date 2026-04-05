@@ -18,8 +18,10 @@ class Arcade extends Command
 	public function build()
 	{
 		var output = "";
+
+		let output = "<?php header(\"Content-Security-Policy: script-src 'self' 'unsafe-inline'\"); ?>";
 		
-		let output = "<script type=\"text/javascript\">" .
+		let output .= "<script type=\"text/javascript\">" .
 			urldecode(
                 this->jsJquery() .
 				this->jsCookie()
@@ -34,7 +36,9 @@ class Arcade extends Command
 
 	private function jsExtra()
 	{
-		return "
+		var output = "";
+
+		let output = "
 			let kb_cookie = Cookies.get(\"kb_HLPR\");
 			if (typeof(kb_cookie) == \"undefined\") {
 				kb_cookie = {display: [0,0]};
@@ -128,6 +132,8 @@ class Arcade extends Command
                 });
 			});
 		";
+
+		return Strings::minify(output);
 	}
 
 	private function jsCookie()
