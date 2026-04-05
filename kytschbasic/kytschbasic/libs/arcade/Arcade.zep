@@ -18,8 +18,6 @@ class Arcade extends Command
 	public function build()
 	{
 		var output = "";
-
-		let output = "<?php header(\"Content-Security-Policy: script-src 'self' 'unsafe-inline'\"); ?>";
 		
 		let output .= "<script type=\"text/javascript\">" .
 			urldecode(
