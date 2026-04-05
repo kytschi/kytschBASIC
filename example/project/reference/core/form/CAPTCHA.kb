@@ -24,9 +24,7 @@ LOAD _ROOT + "/project/shared/header"
 				CPRINT
 IFNTE _GET("input_test") THEN
 	IF VALIDCAPTCHA THEN
-		PRINT "You submitted this,"
-		LINE BREAK
-		PRINT _GET("input_test")
+		PRINT "You submitted something via the form"
 	ELSE
 		PRINT "Invalid CAPTCHA"
 	END IF
@@ -71,9 +69,7 @@ END FORM
 				DIV "kb-col kb-col-24 kb-code-block"
 IFNTE _GET("input_test") THEN
 	IF VALIDCAPTCHA THEN
-		PRINT "You submitted this,"
-		LINE BREAK
-		PRINT _GET("input_test")
+		PPRINT "You submitted something via the form"
 	ELSE
 		PRINT "Invalid CAPTCHA"
 	END IF

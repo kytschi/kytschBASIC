@@ -19,9 +19,7 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 IFNTE _GET("input_test") THEN
-	PRINT "You submitted this,"
-	LINE BREAK
-	PRINT _GET("input_test")
+	PRINT "You submitted something via the form"
 END IF
 				END CPRINT
 				HEADING 4
