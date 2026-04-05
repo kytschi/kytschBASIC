@@ -303,6 +303,22 @@
 	},
 
 	{
+		"url": "/reference/_GET",
+		"template": "project/reference/core/form/_GET.kb"
+	},
+	{
+		"url": "/reference/_POST",
+		"template": "project/reference/core/form/_POST.kb"
+	},
+	{
+		"url": "/reference/_REQUEST",
+		"template": "project/reference/core/form/_REQUEST.kb"
+	},
+	{
+		"url": "/reference/_FILES",
+		"template": "project/reference/core/form/_FILES.kb"
+	},
+	{
 		"url": "/reference/FORM",
 		"template": "project/reference/core/form/FORM.kb"
 	},

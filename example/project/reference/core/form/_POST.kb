@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD _ROOT + "/project/shared/head"
-	NAME "FORM statment | kytschBASIC"
+	NAME "_POST statment | kytschBASIC"
 END HEAD
 BODY
 LOAD _ROOT + "/project/shared/header"
@@ -9,21 +9,19 @@ LOAD _ROOT + "/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "FORM","heading-command basic"
-					LINE BREAK
-					PRINT "ID, METHOD (default GET), ACTION, CLASS, FILE SUPPORT (default false)","heading-args"
+					PRINT "_POST","heading-command basic"
 				END SWRITE
 				SWRITE
-					PRINT "Creating an HTML form."
+					PRINT "Accessing the _POST data array when peforming a form submit"
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-IFNTE _GET("input_test") THEN
+IFNTE _POST("input_test") THEN
 	PRINT "You submitted something via the form"
 END IF
-FORM "form_test"
+FORM "form_test", "POST"
 	SWRITE
 		LINE BREAK
 		TABLE "table-border"
@@ -53,10 +51,10 @@ END FORM
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET("input_test") THEN
+IFNTE _POST("input_test") THEN
 	PRINT "You submitted something via the form"
 END IF
-FORM "form_test"
+FORM "form_test", "POST"
 	SWRITE
 		LINE BREAK
 		TABLE "table-border"
@@ -82,12 +80,6 @@ FORM "form_test"
 	END SWRITE
 END FORM
 				END DIV
-				HEADING 3
-					PRINT "Adding a CAPTCHA to the form"
-				END HEADING 3
-				CPRINT
-CAPTCHA "captcha"
-				END CPRINT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
@@ -132,12 +124,12 @@ CAPTCHA "captcha"
 						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "
-					LINK "/reference/_GET"
-						PRINT "_GET"
+					LINK "/reference/FORM"
+						PRINT "FORM"
 					END LINK
 					PRINT " | "
-					LINK "/reference/_POST"
-						PRINT "_POST"
+					LINK "/reference/_GET"
+						PRINT "_GET"
 					END LINK
 					PRINT " | "
 					LINK "/reference/_REQUEST"

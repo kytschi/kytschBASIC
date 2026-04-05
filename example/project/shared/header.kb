@@ -238,6 +238,9 @@ HEADER
 		LINK "/reference/FILEINPUT#refFILEINPUT","Find out about the FILEINPUT command","nav-link",,"refFILEINPUT"
 			PRINT "FILEINPUT"
 		END LINK
+		LINK "/reference/_FILES#ref_FILES","Find out about the _FILES command","nav-link",,"ref_FILES"
+			PRINT "_FILES"
+		END LINK
 		LINK "/reference/FRAC#refFRAC","Find out about the FRAC command","nav-link",,"refFRAC"
 			PRINT "FRAC"
 		END LINK
@@ -252,6 +255,9 @@ HEADER
 		END LINK
 		LINK "/reference/FUNCTION#refFUNCTION","Find out about the FUNCTION command","nav-link",,"refFUNCTION"
 			PRINT "FUNCTION"
+		END LINK
+		LINK "/reference/_GET#ref_GET","Find out about the _GET command","nav-link",,"ref_GET"
+			PRINT "_GET"
 		END LINK
 		LINK "/reference/GOTO#refGOTO","Find out about the GOTO command","nav-link",,"refGOTO"
 			PRINT "GOTO"
@@ -415,6 +421,9 @@ HEADER
 		LINK "/reference/POP#refPOP","Find out about the POP command","nav-link",,"refPOP"
 			PRINT "POP"
 		END LINK
+		LINK "/reference/_POST#ref_POST","Find out about the _POST command","nav-link",,"ref_POST"
+			PRINT "_POST"
+		END LINK
 		LINK "/reference/READCOOKIE#refREADCOOKIE","Find out about the READCOOKIE command","nav-link",,"refREADCOOKIE"
 			PRINT "READCOOKIE"
 		END LINK
@@ -426,6 +435,9 @@ HEADER
 		END LINK
 		LINK "/reference/REPLACE#refREPLACE","Find out about the REPLACE command","nav-link",,"refREPLACE"
 			PRINT "REPLACE"
+		END LINK
+		LINK "/reference/_REQUEST#ref_REQUEST","Find out about the _REQUEST command","nav-link",,"ref_REQUEST"
+			PRINT "_REQUEST"
 		END LINK
 		LINK "/reference/RGB#refRGB","Find out about the RGB command","nav-link",,"refRGB"
 			PRINT "RGB"

@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD _ROOT + "/project/shared/head"
-	NAME "FORM statment | kytschBASIC"
+	NAME "_FILES statment | kytschBASIC"
 END HEAD
 BODY
 LOAD _ROOT + "/project/shared/header"
@@ -9,28 +9,34 @@ LOAD _ROOT + "/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "FORM","heading-command basic"
-					LINE BREAK
-					PRINT "ID, METHOD (default GET), ACTION, CLASS, FILE SUPPORT (default false)","heading-args"
+					PRINT "_FILES","heading-command basic"
 				END SWRITE
 				SWRITE
-					PRINT "Creating an HTML form."
+					PRINT "Accessing the _FILES data array when peforming a form submit"
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-IFNTE _GET("input_test") THEN
+IFNTE _FILES("file_test") THEN
 	PRINT "You submitted something via the form"
 END IF
-FORM "form_test"
+FORM "form_test","POST",,,"true"
 	SWRITE
 		LINE BREAK
 		TABLE "table-border"
 			TBODY
 				TROW
 					TCELL
-						PRINT "Name"
+						PRINT "File*"
+					END TCELL
+					TCELL
+						FILEINPUT "file_test",, "form-input", "Select a file to upload"
+					END TCELL
+				END TROW
+				TROW
+					TCELL
+						PRINT "Name*"
 					END TCELL
 					TCELL
 						TEXTINPUT "input_test",,"form-input", "Enter your name"
@@ -48,45 +54,6 @@ FORM "form_test"
 		END TABLE
 	END SWRITE
 END FORM
-				END CPRINT
-				HEADING 4
-					PRINT "Output"
-				END HEADING 4
-				DIV "kb-col kb-col-24 kb-code-block"
-IFNTE _GET("input_test") THEN
-	PRINT "You submitted something via the form"
-END IF
-FORM "form_test"
-	SWRITE
-		LINE BREAK
-		TABLE "table-border"
-			TBODY
-				TROW
-					TCELL
-						PRINT "Name"
-					END TCELL
-					TCELL
-						TEXTINPUT "input_test",,"form-input", "Enter your name"
-					END TCELL
-				END TROW
-				TROW
-					TCELL
-						WHITESPACE
-					END TCELL
-					TCELL
-						BUTTONSUBMIT "btn_test",,,,"submit"
-					END TCELL
-				END TROW
-			END TBODY
-		END TABLE
-	END SWRITE
-END FORM
-				END DIV
-				HEADING 3
-					PRINT "Adding a CAPTCHA to the form"
-				END HEADING 3
-				CPRINT
-CAPTCHA "captcha"
 				END CPRINT
 				HEADING 4
 					PRINT "See also"
@@ -132,16 +99,16 @@ CAPTCHA "captcha"
 						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "
+					LINK "/reference/FORM"
+						PRINT "FORM"
+					END LINK
+					PRINT " | "
 					LINK "/reference/_GET"
 						PRINT "_GET"
 					END LINK
 					PRINT " | "
 					LINK "/reference/_POST"
 						PRINT "_POST"
-					END LINK
-					PRINT " | "
-					LINK "/reference/_REQUEST"
-						PRINT "_REQUEST"
 					END LINK
 					PRINT " | "
 					LINK "/reference/_FILES"
