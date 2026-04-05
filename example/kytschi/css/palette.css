@@ -131,11 +131,6 @@ header {
     background-color: #fff;
 }
 
-.kb-col {
-    float: left;
-    box-sizing: border-box;
-}
-
 .kb-col-12 {
     width: 50%;
 }
@@ -143,11 +138,6 @@ header {
 .kb-col-24 {
     width: 100%;
     margin-bottom: 20px;
-}
-
-.kb-row {
-    box-sizing: border-box;
-    position: relative;
 }
 
 .kb-captcha-img {
@@ -289,4 +279,8 @@ th, td {
 
 .card img {
     height: 100%;
+}
+
+#see-also span {
+    margin-right: 5px;
 }

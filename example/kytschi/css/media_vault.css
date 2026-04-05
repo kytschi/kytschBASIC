@@ -138,3 +138,8 @@ nav {
 .header-title button {
     width: 25px;
 }
+
+#window-menu {
+    background-color: rgba(249,249,249);
+    color: #000;
+}

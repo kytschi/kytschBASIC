@@ -360,6 +360,14 @@
 		"template": "project/reference/core/layout/DIV.kb"
 	},
 	{
+		"url": "/reference/ROW",
+		"template": "project/reference/core/layout/ROW.kb"
+	},
+	{
+		"url": "/reference/COL",
+		"template": "project/reference/core/layout/COL.kb"
+	},
+	{
 		"url": "/reference/FOOTER",
 		"template": "project/reference/core/layout/FOOTER.kb"
 	},

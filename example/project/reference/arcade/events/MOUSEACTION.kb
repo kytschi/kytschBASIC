@@ -49,7 +49,7 @@ END MOUSEACTION
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/AFUNCTION"
 						PRINT "AFUNCTION"
 					END LINK
@@ -61,7 +61,7 @@ END MOUSEACTION
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

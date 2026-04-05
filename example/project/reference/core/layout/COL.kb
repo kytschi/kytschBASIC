@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD _ROOT + "/project/shared/head"
-	NAME "TCELL statment | kytschBASIC"
+	NAME "COL statment | kytschBASIC"
 END HEAD
 BODY
 LOAD _ROOT + "/project/shared/header"
@@ -9,59 +9,58 @@ LOAD _ROOT + "/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "TCELL","heading-command basic"
+					PRINT "COL","heading-command basic"
 					LINE BREAK
-					PRINT "WIDTH, CLASS, COLSPAN, ID","heading-args"
+					PRINT "CLASS, ID","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "Creating a table cell."
+					PRINT "Creating a HTML div which is automatically applied the CSS Flex stylings for a column."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-TCELL
-	PRINT "Table cell 1"
-END TCELL
-				END CPRINT
-				HEADING 4
-					PRINT "Output"
-				END HEADING 4
-				CPRINT
-&lt;td&gt;
-	&lt;span&gt;Table cell 1&lt;/span&gt;
-&lt;/td&gt;
+BODY
+	ROW
+		COL
+			SWRITE
+				PRINT "I Love kytschBASIC!"
+			END SWRITE
+		END COL
+	END ROW
+END BODY
+END
 				END CPRINT
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
+					LINK "/reference/BODY"
+						PRINT "BODY"
+					END LINK
+					PRINT " | "
+					LINK "/reference/ROW"
+						PRINT "ROW"
+					END LINK
+					PRINT " | "
+					LINK "/reference/FOOTER"
+						PRINT "FOOTER"
+					END LINK
+					PRINT " | "
+					LINK "/reference/DIV"
+						PRINT "DIV"
+					END LINK
+					PRINT " | "
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					END LINK
 					PRINT " | "
-					LINK "/reference/TABLE"
-						PRINT "TABLE"
+					LINK "/reference/HEADER"
+						PRINT "HEADER"
 					END LINK
 					PRINT " | "
-					LINK "/reference/TBODY"
-						PRINT "TBODY"
-					END LINK
-					PRINT " | "
-					LINK "/reference/TFOOT"
-						PRINT "TFOOT"
-					END LINK
-					PRINT " | "
-					LINK "/reference/THEAD"
-						PRINT "THEAD"
-					END LINK
-					PRINT " | "
-					LINK "/reference/THEADCELL"
-						PRINT "THEADCELL"
-					END LINK
-					PRINT " | "
-					LINK "/reference/TROW"
-						PRINT "TROW"
+					LINK "/parameters"
+						PRINT "parameters"
 					END LINK
 				END ROW
 			END DIV

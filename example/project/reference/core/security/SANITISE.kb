@@ -35,7 +35,7 @@ PRINT SANITISE("&lt;script&gt;alert('XSS')&lt;/script&gt;")
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/HASH#refHASH"
 						PRINT "HASH"
 					END LINK
@@ -47,7 +47,7 @@ PRINT SANITISE("&lt;script&gt;alert('XSS')&lt;/script&gt;")
 					LINK "/reference/UUID#refUUID"
 						PRINT "UUID"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

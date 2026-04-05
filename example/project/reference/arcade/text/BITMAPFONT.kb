@@ -94,7 +94,7 @@ END SCREEN
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK
@@ -146,7 +146,7 @@ END SCREEN
 					LINK "/reference/RGB"
 						PRINT "RGB"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

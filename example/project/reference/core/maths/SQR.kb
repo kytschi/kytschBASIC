@@ -35,7 +35,7 @@ PRINT var#
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/ABS"
 						PRINT "ABS"
 					END LINK
@@ -107,7 +107,7 @@ PRINT var#
 					LINK "/reference/TAN"
 						PRINT "TAN"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

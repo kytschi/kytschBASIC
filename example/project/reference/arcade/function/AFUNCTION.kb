@@ -73,7 +73,7 @@ END SCREEN
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/ASYNCFUNCTION"
 						PRINT "ASYNCFUNCTION"
 					END LINK
@@ -85,7 +85,7 @@ END SCREEN
 					LINK "/reference/KEYBOARDEVENT"
 						PRINT "KEYBOARDEVENT"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

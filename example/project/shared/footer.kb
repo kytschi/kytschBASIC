@@ -1,15 +1,17 @@
 FOOTER
 	DIV "kb-row","footer-content"
 		DIV "kb-col kb-col-12"
-			PRINT "Powered by "
-			PRINT "kytsch","kytsch"
-			PRINT "BASIC","basic"
-			PRINT " "
-			VERSION
-			SWRITE
-				PRINT "Page loaded in approx "
-				BENCHMARK
-			END SWRITE
+			DIV
+				PRINT "Powered by "
+				PRINT "kytsch","kytsch"
+				PRINT "BASIC","basic"
+				PRINT " "
+				VERSION
+				SWRITE
+					PRINT "Page loaded in approx "
+					BENCHMARK
+				END SWRITE
+			END DIV
 		END DIV
 		DIV "kb-col kb-col-12 text-right"
 			SWRITE

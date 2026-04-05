@@ -28,7 +28,7 @@ END HEAD
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/arcade"
 						PRINT "arcade"
 					END LINK
@@ -36,8 +36,7 @@ END HEAD
 					LINK "/reference/LOAD#refLOAD"
 						PRINT "LOAD"
 					END LINK
-				END DIV
-				
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

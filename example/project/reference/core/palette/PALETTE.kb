@@ -129,7 +129,7 @@ END PALETTE
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/BACKGROUND"
 						PRINT "BACKGROUND"
 					END LINK
@@ -153,7 +153,7 @@ END PALETTE
 					LINK "/reference/WIDTHPERCENT"
 						PRINT "WIDTHPERCENT"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

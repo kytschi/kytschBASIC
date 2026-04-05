@@ -33,7 +33,7 @@ FAVICON "/kytschi/imgs/favicon.ico", "64x64"
 				HEADING 4
 					PRINT "See also"
 				END HEADING 4
-				DIV "kb-col kb-col-24","see-also"
+				ROW ,"see-also"
 					LINK "/reference/BODY"
 						PRINT "BODY"
 					END LINK
@@ -65,7 +65,7 @@ FAVICON "/kytschi/imgs/favicon.ico", "64x64"
 					LINK "/reference/VIEWPORT"
 						PRINT "VIEWPORT"
 					END LINK
-				END DIV
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

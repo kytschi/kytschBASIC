@@ -26,6 +26,7 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "View the source code"
 				END LINK
 				LINE BREAK
+
 				HEADING 3
 					PRINT "CMS written in KB"
 				END HEADING 3
@@ -33,6 +34,7 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "View the source code"
 				END LINK
 				LINE BREAK
+
 				HEADING 3
 					PRINT "Kytschi's Media Vault"
 				END HEADING 3
@@ -43,6 +45,44 @@ LOAD _ROOT + "/project/shared/header"
 				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/examples/media_vault.kb","KB CMS source code",,"_blank"
 					PRINT "View the source code"
 				END LINK
+
+				HEADING 3
+					PRINT "Kytschi's Sevens"
+				END HEADING 3
+				LINK "/arcade/sevens","Play the card game sevens",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/sevens.kb","Sevens card game source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				
+				
+				HEADING 3
+					PRINT "Kytschi's Switch"
+				END HEADING 3
+				LINK "/arcade/switch","Play the card game switch",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/switch.kb","Switch card game source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				
+				HEADING 3
+					PRINT "Kytschi's Omega Doom - An ASCII space adventure game"
+				END HEADING 3
+				LINK "/arcade/omega-doom","Play the space adventure Omega Doom",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/omega_doom","Omega Doom source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				PRINT "Note, it's a work in progress", "heading-args"
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

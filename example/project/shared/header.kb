@@ -127,6 +127,9 @@ HEADER
 		LINK "/reference/CIRCLEF#refCIRCLEF","Find out about the CIRCLEF command","nav-link",,"refCIRCLEF"
 			PRINT "CIRCLEF"
 		END LINK
+		LINK "/reference/COL#refCOL","Find out about the COL command","nav-link",,"refCOL"
+			PRINT "COL"
+		END LINK
 		LINK "/reference/COLOR#refCOLOR","Find out about the COLOR command","nav-link",,"refCOLOR"
 			PRINT "COLOR"
 		END LINK
@@ -438,6 +441,9 @@ HEADER
 		END LINK
 		LINK "/reference/RNDSTRING#refRNDSTRING","Find out about the RNDSTRING command","nav-link",,"refRNDSTRING"
 			PRINT "RNDSTRING"
+		END LINK
+		LINK "/reference/ROW#refROW","Find out about the ROW command","nav-link",,"refROW"
+			PRINT "ROW"
 		END LINK
 		LINK "/reference/RSET#refRSET","Find out about the RSET command","nav-link",,"refRSET"
 			PRINT "RSET"
