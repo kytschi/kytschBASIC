@@ -1,12 +1,23 @@
+:root {
+    --black: #000;
+    --blue: #009dff;
+    --gray: #bab8b8;
+    --green: #00ff3c;
+    --orange: #ff8700;
+    --red: #ff0000;
+    --yellow: #ffd900;
+    --white: #fff;
+}
+
 @font-face {
     font-family: 'Body';
     src: url("../fonts/Inconsolata.ttf") format("truetype");
 }
 
 @keyframes flash {
-  0% { color: #ff8700; }
+  0% { color: var(--orange); }
   50% { color: transparent; }
-  100% { color: #ff8700; }
+  100% { color: var(--orange); }
 }
 
 html, body {
@@ -15,8 +26,8 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #000;
-    color: #fff !important;
+    background-color: var(--black);
+    color: var(--white) !important;
     font-family: 'Body', monospace;
     font-size: 12pt;
 }
@@ -41,7 +52,7 @@ html, body {
 #omega-doom button {
     background: none;
     border: none;
-    color: #fff !important;
+    color: var(--white) !important;
     font-size: 14pt;
     line-height: 14pt;
     margin-bottom: 10px;
@@ -49,11 +60,11 @@ html, body {
     letter-spacing: 0pt;
 }
 #omega-doom button .button_key {
-    color:#ff8700 !important;
+    color:var(--orange) !important;
     padding: 0px 4px;
 }
 #omega-doom button .button-message.selected  {
-    color: #009dff !important;
+    color: var(--blue) !important;
 }
 #omega-doom button .button_key_end {
     padding-right: 18px;
@@ -72,20 +83,20 @@ html, body {
     flex-direction: column;
     display: none;
     border: none !important;
-    background-color: #000 !important;
+    background-color: var(--black) !important;
 }
 
 #omega-doom-intro pre, #omega-doom-intro #intro-controls, #omega-doom-gameover pre {
     display: flex;
     font-family: 'Body', monospace;
     justify-content: center;
-    background-color: #000 !important;
+    background-color: var(--black) !important;
     border: none !important;
 }
 
 #omega-doom-gameover .gfx-label {
     text-align: center;
-    color: #00ff3c !important;
+    color: var(--green) !important;
 }
 
 #omega-doom-intro #intro-controls-buttons {
@@ -112,6 +123,7 @@ html, body {
     width: 100%;
     height: 100vh;
     display: none;
+    background-color: var(--black) !important;
 }
 
 #omega-doom-game .progress {
@@ -165,7 +177,8 @@ html, body {
     padding: 20px;
     width: calc(360px - 40px);
     height: calc(100% - 42px);
-    border: 1px dashed #00ff3c !important;
+    border: 1px dashed var(--green) !important;
+    background-color: var(--black) !important;
 }
 #omega-doom-game .controls button {
     text-align: left;
@@ -181,7 +194,7 @@ html, body {
     display: flex;
     width: 100%;
     overflow: hidden;
-    background-color: #000 !important;
+    background-color: var(--black) !important;
 }
 
 #omega-doom-game .gfx {
@@ -189,7 +202,7 @@ html, body {
 }
 
 #omega-doom-game .text {
-    border-top: 1px dashed #00ff3c !important;
+    border-top: 1px dashed var(--green) !important;
     height: 300px;
 }
 
@@ -198,7 +211,7 @@ html, body {
     position: absolute;
     top: 30px;
     left: 30px;
-    color: #00ff3c !important;
+    color: var(--green) !important;
 }
 
 #omega-doom-game .gfx .render {
@@ -214,7 +227,7 @@ html, body {
     width: calc(400px - 40px);
     height: calc(100% - 40px);
     padding: 20px 20px;
-    border-right: 1px dashed #00ff3c !important;
+    border-right: 1px dashed var(--green) !important;
 }
 
 #omega-doom-game .text .character code {
@@ -230,8 +243,8 @@ html, body {
 #omega-doom-game .text .character p, #omega-doom-game .control-stats-ship p {
     display: block;
     text-align: center;
-    background-color: #fff !important;
-    color: #000 !important;
+    background-color: var(--white) !important;
+    color: var(--black) !important;
     padding: 0 5px;
 }
 
@@ -248,8 +261,8 @@ html, body {
 }
 
 #omega-doom-game .text .speech p span {
-    background-color: #fff !important;
-    color: #000 !important;
+    background-color: var(--white) !important;
+    color: var(--black) !important;
     padding: 0 5px;
 }
 
@@ -267,33 +280,33 @@ html, body {
 }
 
 #omega-doom-game .controls-stats .controls-stats-label {
-    color: #bab8b8 !important;
+    color: var(--gray) !important;
     width: 120px;
 }
 
 #omega-doom-game .controls-stats .normal {
-    color: #00ff2e !important;
+    color: var(--green) !important;
 }
 #omega-doom.alert-normal .text .character,
 #omega-doom.alert-normal .text,
 #omega-doom.alert-normal .controls {
-    border-color: #00ff2e !important;
+    border-color: var(--green) !important;
 }
 #omega-doom-game .controls-stats .yellow {
-    color: #ffd900 !important;
+    color: var(--yellow) !important;
 }
 #omega-doom.alert-yellow .text .character,
 #omega-doom.alert-yellow .text,
 #omega-doom.alert-yellow .controls {
-    border-color: #ffd900 !important;
+    border-color: var(--yellow) !important;
 }
 #omega-doom-game .controls-stats .red {
-    color: #ff0000 !important;
+    color: var(--red) !important;
 }
 #omega-doom.alert-red .text .character,
 #omega-doom.alert-red .text,
 #omega-doom.alert-red .controls {
-    border-color: #ff0000 !important;
+    border-color: var(--red) !important;
 }
 
 #omega-doom-game #map code {
@@ -304,8 +317,8 @@ html, body {
 
 #omega-doom #map .map-text {
     padding: 10px 10px;
-    background-color: #000 !important;
-    color: #fff !important;
+    background-color: var(--black) !important;
+    color: var(--white) !important;
 }
 
 #omega-doom #map #kazaria-syndicate-map {
@@ -407,6 +420,6 @@ html, body {
 }
 
 #omega-doom #intro, #omega-doom #progress {
-    background-color: #000 !important;
-    color: #fff !important;
+    background-color: var(--black) !important;
+    color: var(--white) !important;
 }

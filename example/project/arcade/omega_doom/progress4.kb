@@ -98,7 +98,7 @@ JAVASCRIPT
 
     updateShip(event);
 END JAVASCRIPT
-WINDOW "game-window", "progress"
+WINDOW ,, "progress"
     DIV "game-progress","game-progress-1"
         PRINT "Options people.","original hide"
         WINDOW ,,"visuals"

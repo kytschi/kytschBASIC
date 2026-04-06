@@ -1,7 +1,7 @@
 JAVASCRIPT
     getGameData(event);
 END JAVASCRIPT
-WINDOW "game-window", "progress"
+WINDOW ,, "progress"
     DIV "game-progress","game-progress-1"
         PRINT "RED ALERT!","original hide"
         WINDOW ,,"visuals"

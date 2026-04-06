@@ -611,14 +611,13 @@ END AFUNCTION
 
 AFUNCTION "rebuildGameData"
     game_data = createCookie(event, 1);
-    game_data.story_progress = "progress4";
+    game_data.story_progress = "intro";
     game_data.game_progress = "game-progress-1";
 
     WRITECOOKIE("kb_OMEGA", game_data);
 END AFUNCTION
 
 AFUNCTION "getGameData"
-    rebuildGameData(event);
     game_data = READCOOKIE("kb_OMEGA");
 
     if (!game_data) {

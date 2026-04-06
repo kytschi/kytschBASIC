@@ -1,7 +1,7 @@
 JAVASCRIPT
     getGameData(event);
 END JAVASCRIPT
-WINDOW ,"game-intro", "progress"
+WINDOW ,, "progress"
     DIV "game-progress","game-progress-1"
         PRINT "Captain, incoming hail from Federation Command.","original hide"
         WINDOW ,,"visuals"
@@ -1790,7 +1790,7 @@ WINDOW ,"game-intro", "progress"
         END WINDOW
     END DIV
     DIV "game-progress","game-progress-30"
-        WINDOW "warp","visuals full"
+        WINDOW ,"visuals full"
             DIV "gfx"
                 PRINT "Warping to Output 3366","gfx-label"
                 DIV "render", "warp-effect"
