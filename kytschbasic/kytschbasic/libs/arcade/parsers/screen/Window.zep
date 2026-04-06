@@ -36,7 +36,7 @@ class Window extends Command
 
 	public function parseWindow(array args)
 	{
-		var output = "", id, class_name = "kb-window", title="Window Title";
+		var output = "", id, class_name = "kb-window", title="";
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let id = args[1];
@@ -60,9 +60,12 @@ class Window extends Command
 			let output .= " class=" . this->outputArg(class_name, false);
 		}
 
-		let output .= "><div class='kb-window-title'><span>" . this->outputArg(title, false, false) . "</span></div>\"; ?>";
+		let output .= ">";
+		if (title) {
+			let output .= "<div class='kb-window-title'><span>" . this->outputArg(title, false, false) . "</span></div>";
+		}
 		
-		return output;
+		return output . "\"; ?>";
 	}
 
 	public function parseWindowBody(array args)

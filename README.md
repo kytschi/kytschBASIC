@@ -1,6 +1,6 @@
 # kytschBASIC
 
-A PHP module written in [Zephir](https://zephir-lang.com/en) that will allow you to run a version of BASIC language called kytschBASIC for the web.
+A PHP module written in [Zephir](https://zephir-lang.com/en) that will allow you to run a version of BASIC language called kytschBASIC (aka KB) for the web.
 
 ## Requirements
 
@@ -42,6 +42,15 @@ Next setup an index.php on your webserver of choice and tell it to load the kyts
 NOTICE we are loading in the configuration file. See configuration for more information on how to setup the configuration file.
 
 For example website checkout the `example` folder in this repo.
+
+### Security note
+It's worth blocking the `compiled.php` that gets created by KB in the root folder where you've installed KB to run from. Here's an example of how it can be done in Nginx.
+
+```
+location = /compiled.php {
+	return 444;
+}
+```
 
 ## Configuration
 

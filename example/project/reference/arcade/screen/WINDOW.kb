@@ -11,10 +11,10 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "WINDOW","heading-command basic"
 					LINE BREAK
-					PRINT "TITLE, ID (optional), CLASS (optional)","heading-args"
+					PRINT "TITLE (optional), ID (optional), CLASS (optional)","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "Creates a window on screen."
+					PRINT "Creates a window on screen. If no TITLE is supplied then the window title UI will not be rendered."
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
@@ -52,6 +52,18 @@ END SCREEN
 						END WINDOWFOOTER
 					END WINDOW
 				END SCREEN
+				LINE BREAK
+				LINE BREAK
+				SCREEN
+					WINDOW , "window"
+						WINDOWBODY
+							PRINT "This is a window with no title"
+						END WINDOWBODY
+						WINDOWFOOTER
+							PRINT "Window footer"
+						END WINDOWFOOTER
+					END WINDOW
+				END SCREEN
 				HEADING 4
 					PRINT "Parameters"
 				END HEADING 4
@@ -60,6 +72,9 @@ END SCREEN
 						TROW
 							THEADCELL "140px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "200px"
+								PRINT "Required"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -75,6 +90,9 @@ END SCREEN
 								PRINT "TITLE"
 							END TCELL
 							TCELL
+								PRINT "NO"
+							END TCELL
+							TCELL
 								PRINT "string"
 							END TCELL
 							TCELL
@@ -82,13 +100,11 @@ END SCREEN
 							END TCELL
 						END TROW
 						TROW
-							THEADCELL ,"table-parameter",3
-								PRINT "Optional"
-							END THEADCELL
-						END TROW
-						TROW
 							TCELL ,"table-parameter"
 								PRINT "ID"
+							END TCELL
+							TCELL
+								PRINT "NO"
 							END TCELL
 							TCELL
 								PRINT "integer/string"
@@ -98,13 +114,11 @@ END SCREEN
 							END TCELL
 						END TROW
 						TROW
-							THEADCELL ,"table-parameter",3
-								PRINT "Optional"
-							END THEADCELL
-						END TROW
-						TROW
 							TCELL ,"table-parameter"
 								PRINT "CLASS"
+							END TCELL
+							TCELL
+								PRINT "NO"
 							END TCELL
 							TCELL
 								PRINT "integer/string"
