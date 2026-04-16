@@ -14,7 +14,9 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "ID, CLASS (Optional)","heading-args"
 				END SWRITE
 				SWRITE
-					PRINT "Creates a screen."
+					PRINT "Creates a screen which is used to hold a window."
+					LINE BREAK
+					PRINT "Note, it is good practice to only have one window per screen.", "heading-args"
 				END SWRITE
 				HEADING 3
 					PRINT "Example"
@@ -30,13 +32,6 @@ SCREEN "the-traveller"
 			BITMAPTEXT "Press any key to start",18,0,135,320
 		END BITMAP
 	END WINDOW
-	WINDOW "input"
-		RGB 0,0,0
-		BITMAP 0,0,800,200
-			RGB 255,0,0
-			LINE 0,0,800,0
-		END BITMAP
-	END WINDOW
 END SCREEN
 				END CPRINT
 				HEADING 4
@@ -50,13 +45,6 @@ END SCREEN
 							BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
 							BITMAPTEXT "The Traveller",32,0,120,150
 							BITMAPTEXT "Press any key to start",18,0,135,320
-						END BITMAP
-					END WINDOW
-					WINDOW "input"
-						RGB 0,0,0
-						BITMAP 0,0,800,200
-							RGB 255,0,0
-							LINE 0,0,800,0
 						END BITMAP
 					END WINDOW
 				END SCREEN
