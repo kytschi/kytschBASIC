@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "SCREEN","heading-command basic"
 					LINE BREAK
-					PRINT "ID, CLASS (Optional)","heading-args"
+					PRINT "ID, CLASS (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Creates a screen which is used to hold a window."
@@ -23,7 +23,7 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN "the-traveller"
-	WINDOW "intro"
+	WINDOW "The Traveller", "intro"
 		RGB 0,0,0
 		BITMAP 0,0,800,400
 			RGB 255,0,0
@@ -38,7 +38,7 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN "the-traveller"
-					WINDOW "intro"
+					WINDOW "The Traveller", "intro"
 						RGB 0,0,0
 						BITMAP 0,0,800,400
 							RGB 255,0,0
@@ -79,7 +79,7 @@ END SCREEN
 						END TROW
 						TROW
 							THEADCELL ,"table-parameter",3
-								PRINT "Optional"
+								PRINT "optional"
 							END THEADCELL
 						END TROW
 						TROW

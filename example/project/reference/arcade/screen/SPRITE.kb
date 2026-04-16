@@ -83,7 +83,7 @@ END SCREEN
 						END TROW
 						TROW
 							THEADCELL ,"table-parameter",3
-								PRINT "Optional"
+								PRINT "optional"
 							END THEADCELL
 						END TROW
 						TROW

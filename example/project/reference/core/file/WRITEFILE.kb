@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "WRITEFILE","heading-command basic"
 					LINE BREAK
-					PRINT "FILE, CONTENT, APPEND (Optional)","heading-args"
+					PRINT "FILE, CONTENT, APPEND (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "This function will write some content to a file."

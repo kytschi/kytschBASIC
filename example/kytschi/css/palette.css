@@ -226,6 +226,7 @@ pre, .kb-code-block {
 	overflow-x: hidden;
     font-family: "Mono", Arial, Helvetica, sans-serif !important;
     line-height: 1em;
+    width: calc(100% - 150px);
 }
 code {
     font-family: "Mono", Arial, Helvetica, sans-serif !important;
@@ -283,4 +284,20 @@ th, td {
 
 #see-also span {
     margin-right: 5px;
+}
+
+#the-traveller, #screen, .kb-screen {
+    width: calc(100% - 100px);
+    height: 400px;
+}
+
+#intro, .kb-window {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#intro img {
+    width: 100%;
+    height: 100%;
 }

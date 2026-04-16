@@ -17,11 +17,11 @@ BODY
 					PRINT "Requirements","basic"
 				END HEADING 3
 				SWRITE
-					PRINT "PHP 7.4 to 8.3"
+					PRINT "PHP 8.0 to 8.3"
 					LINE BREAK
 					PRINT "PHP-GD"
 					LINE BREAK
-					PRINT "PHP-MySQL (Optional)"
+					PRINT "PHP-MySQL (optional)"
 				END SWRITE
 
 				HEADING 3

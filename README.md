@@ -6,8 +6,8 @@ A PHP module written in [Zephir](https://zephir-lang.com/en) that will allow you
 
 * PHP 8.0 to 8.3
 * PHP-GD
-* PHP-MySQL (Optional)
-* PHP-Swoole (Optional if want to run websockets for games and chat)
+* PHP-MySQL (optional)
+* PHP-Swoole (optional if want to run websockets for games and chat)
 
 ## Installation
 
