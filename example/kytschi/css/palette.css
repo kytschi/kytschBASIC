@@ -289,6 +289,7 @@ th, td {
 #the-traveller, #screen, .kb-screen {
     width: calc(100% - 100px);
     height: 400px;
+    overflow: hidden;
 }
 
 #intro, .kb-window {

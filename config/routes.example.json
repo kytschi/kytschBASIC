@@ -48,6 +48,10 @@
 		"url": "/arcade/omega-doom",
 		"template": "project/arcade/omega_doom/index.kb"
 	},
+	{
+		"url": "/arcade/dead-world",
+		"template": "project/arcade/dead_world/index.kb"
+	},
 
 	{
 		"url": "/news",

@@ -1,0 +1,42 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+#dead-world {
+    background-color: rgba(0, 0, 0, 1);
+}
+#dead-world-body {
+    margin: 0 auto;
+    background-color: rgba(118, 146, 167, 1);
+    width: 1024px;
+    height: 768px;
+    border: 1px solid rgba(69, 74, 80, 1);
+}
+
+.distant-buildings {
+    width: 1024px;
+    height: 558px;
+}
+
+.info-box {
+    position: absolute;
+    margin: 20px;
+    background-color: rgba(37, 44, 52, 1);
+    border: 1px solid rgba(69, 74, 80, 1);
+    color: rgba(144, 141, 136, 1);
+}
+
+.info-box span {
+    display: block;
+    padding: 10px;
+}
+
+.info-box-title {
+    border-bottom: 1px solid rgba(69, 74, 80, 1);
+}
+
+.info-box-body {
+    display: flex;
+    flex-direction: column;
+}

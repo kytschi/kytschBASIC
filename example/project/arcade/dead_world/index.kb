@@ -1,0 +1,31 @@
+LANG "en"
+HEAD
+	CHARSET "UTF-8"
+    DESCRIPTION "A turn based zombie survival game with building and survival mechanics"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC, Modern BASIC programming,Web-based BASIC interpreter, Learn programming with BASIC, Online BASIC compiler, BASIC in browser, Classic BASIC modern version, Retro programming online, BASIC coding for beginners, Educational programming language"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/dead_world"
+	NAME "Dead World | kytschBASIC"
+END HEAD
+BODY
+    SCREEN "app"
+        WINDOW "Dead World 0.0.1 Alpha", "dead-world"
+            WINDOWBODY "dead-world-body"
+                DIV "info-box"
+                    DIV "info-box-title"
+                        PRINT "TURN 7: SURVIVOR"
+                    END DIV
+                    DIV "info-box-body"
+                        PRINT "HP:"
+                        PRINT "STAM:"
+                        PRINT "AMMO:"
+                    END DIV
+                END DIV
+                IMAGE "/kytschi/imgs/dead_world/dead-world-distant-buildings.png", "Distant buildings", "distant-buildings"
+            END WINDOWBODY
+        END WINDOW
+    END SCREEN
+END BODY
+END

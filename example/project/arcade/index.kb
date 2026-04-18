@@ -67,6 +67,11 @@ LOAD _ROOT + "/project/shared/header"
 						PRINT "Omega Doom. An ASCII space adventure game. Note, it's a work in progress"
 					END LINK
 				END SWRITE
+				SWRITE
+					LINK "/arcade/dead-world","Play Dead World",,"_blank"
+						PRINT "Dead World. A turn-based zombie survival game. Note, it's a work in progress"
+					END LINK
+				END SWRITE
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"
