@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "RGB","heading-command basic"
 					LINE BREAK
-					PRINT "RED, GREEN, BLUE, TRANSPARENCY (default 100)","heading-args"
+					PRINT "RED, GREEN, BLUE, TRANSPARENCY (default 0)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Set an RGB colour."
@@ -23,16 +23,16 @@ LOAD _ROOT + "/project/shared/header"
 SCREEN
 	RGB 0,0,0
 	BITMAP 0,0,640,480
-		RGB 255,0,0,99
+		RGB 255,0,0,200
 		CIRCLEF 320,220,220
 
-		RGB 255,0,0,98
+		RGB 255,0,0,150
 		CIRCLEF 320,220,160
 
-		RGB 255,0,0,95
+		RGB 255,0,0,100
 		CIRCLEF 320,220,100
 
-		RGB 255,0,0,90
+		RGB 255,0,0,50
 		CIRCLEF 320,220,40
 	END BITMAP
 END SCREEN
@@ -43,16 +43,16 @@ END SCREEN
 				SCREEN
 					RGB 0,0,0
 					BITMAP 0,0,640,480
-						RGB 255,0,0,99
+						RGB 255,0,0,200
 						CIRCLEF 320,220,220
 
-						RGB 255,0,0,98
+						RGB 255,0,0,150
 						CIRCLEF 320,220,160
 
-						RGB 255,0,0,95
+						RGB 255,0,0,100
 						CIRCLEF 320,220,100
 
-						RGB 255,0,0,90
+						RGB 255,0,0,50
 						CIRCLEF 320,220,40
 					END BITMAP
 				END SCREEN
@@ -120,7 +120,7 @@ END SCREEN
 								PRINT "integer"
 							END TCELL
 							TCELL
-								PRINT "Set how much transparency is to be be applied to the colour. From 0 being none to 100 being 100% transparent."
+								PRINT "Set how much transparency is to be be applied to the colour. From 0 being completely opaque to 255 being completely transparent."
 							END TCELL
 						END TROW
 					END TBODY

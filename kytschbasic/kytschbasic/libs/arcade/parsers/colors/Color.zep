@@ -3,25 +3,10 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Colors\Color
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2022 Mike Welsh
+ * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.1
+ * @version     0.0.2
  *
- * Copyright 2022 Mike Welsh
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301, USA.
  */
 namespace KytschBASIC\Libs\Arcade\Parsers\Colors;
 
@@ -62,9 +47,9 @@ class Color extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[3], false, false) . "),";
+			let output .= "intval(intval(" . this->outputArg(args[3], false, false) . ") / 2),";
 		} else {
-			let output .= "100,";
+			let output .= "0,";
 		}
 
 		return rtrim(output, ",") . "];?>";

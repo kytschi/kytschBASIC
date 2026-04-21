@@ -1,5 +1,5 @@
 #!/bin/bash
-version="8.3"
+version="8.4"
 printf " Building kytschBASIC for PHP $version\n"
 ./vendor/bin/zephir fullclean
 ./vendor/bin/zephir build
