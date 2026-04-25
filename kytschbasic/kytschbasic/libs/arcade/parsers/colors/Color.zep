@@ -52,7 +52,7 @@ class Color extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= "intval(\"" . this->outputArg(args[3], false, false) . "\"),";
+			let output .= "intval((intval(\"" . this->outputArg(args[3], false, false) . "\") - 1) / 2),";
 		} else {
 			let output .= "0,";
 		}
