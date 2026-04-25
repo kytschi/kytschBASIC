@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "ARC","heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, START ANGLE, END ANGLE, RADIUS","heading-args"
+					PRINT "X, Y, START ANGLE, END ANGLE, RADIUS, ID (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw an arc on a bitmap and display it on screen as an image."
@@ -25,10 +25,12 @@ SCREEN
 	BITMAP 0,0,640,480
 		RGB 255,0,0
 
-		ARC 320,160,25,155,150
-		ARC 320,310,-155,-25,150
-		ARC 265,235,-75,75,40
-		ARC 375,235,105,-105,40
+		REM Noticing I'm using a variable here as they are supported by the args.
+		DEF x% = 320
+		ARC x%, 160, 25, 155, 150
+		ARC 320, 310, -155, -25, 150
+		ARC 265, 235, -75, 75, 40
+		ARC 375, 235, 105, -105, 40
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -40,10 +42,12 @@ END SCREEN
 					BITMAP 0,0,640,480
 						RGB 255,0,0
 
-						ARC 320,160,25,155,150
-						ARC 320,310,-155,-25,150
-						ARC 265,235,-75,75,40
-						ARC 375,235,105,-105,40
+						REM Noticing I'm using a variable here as they are supported by the args.
+						DEF x% = 320
+						ARC x%, 160, 25, 155, 150
+						ARC 320, 310, -155, -25, 150
+						ARC 265, 235, -75, 75, 40
+						ARC 375, 235, 105, -105, 40
 					END BITMAP
 				END SCREEN
 				HEADING 4
@@ -52,8 +56,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "120px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -69,7 +76,10 @@ END SCREEN
 								PRINT "X"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "X position"
@@ -80,7 +90,10 @@ END SCREEN
 								PRINT "Y"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Y position"
@@ -88,21 +101,13 @@ END SCREEN
 						END TROW
 						TROW
 							TCELL ,"table-parameter"
-								PRINT "RADIUS"
-							END TCELL
-							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "Radius of the arc"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
 								PRINT "START ANGLE"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Start angle of the arc, can have negative values"
@@ -113,10 +118,41 @@ END SCREEN
 								PRINT "END ANGLE"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "End angle of the arc, can have negative values"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "RADIUS"
+							END TCELL
+							TCELL
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
+							END TCELL
+							TCELL
+								PRINT "Radius of the arc"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "ID"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "ID to help identify or style the ARC"
 							END TCELL
 						END TROW
 					END TBODY

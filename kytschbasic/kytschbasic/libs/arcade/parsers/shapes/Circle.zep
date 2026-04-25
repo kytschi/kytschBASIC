@@ -10,6 +10,7 @@
  */
 namespace KytschBASIC\Libs\Arcade\Parsers\Shapes;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
 class Circle extends Command
@@ -28,15 +29,43 @@ class Circle extends Command
 
 	public function parseCircle(array args, bool filled = false)
 	{
-		return "<?php $KBSHAPES[] = [
+		var output = "";
+
+		if (count(args) < 3) {
+			throw new Exception("Invalid CIRCLE" . (filled ? "F" : ""));
+		}
+
+		let output = "<?php
+		if (!isset($KBBITMAPID)) {
+			throw new KytschBASIC\\Exceptions\\Exception(\"BITMAP is not defined\");
+		}
+		$KBSHAPES[] = [
 			'colour' => $KBRGB,
 			'shape' => '" . (filled ? "imagefilledellipse" : "imagearc") . "',
-			'x' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
-			'y' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
-			'width' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
-			'height' => " . (isset(args[2]) ? intval(args[2]) : 10) . ",
-			's_angle' => 0,
-			'e_angle' => 360,
-		]; ?>";
+			'id' => '',
+			'x' => 0,
+			'y' => 0,
+			'width' => 50,
+			'height' => 50
+		];";
+
+		if (!empty(args[0]) && args[0] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['x'] = intval(\"" . this->outputArg(args[0], false, false) . "\");";
+		}
+
+		if (!empty(args[1]) && args[1] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['y'] = intval(\"" . this->outputArg(args[1], false, false) . "\");";
+		}
+
+		if (!empty(args[2]) && args[2] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['width'] = intval(\"" . this->outputArg(args[2], false, false) . "\");";
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['height'] = intval(\"" . this->outputArg(args[2], false, false) . "\");";
+		}
+
+		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['id'] = \"" . this->outputArg(args[3], false, false) . "\";";
+		}
+
+		return output . "?>";
 	}
 }

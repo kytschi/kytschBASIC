@@ -58,8 +58,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "100px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -71,32 +74,28 @@ END SCREEN
 					END THEAD
 					TBODY
 						TROW
-							THEADCELL ,"table-parameter",3
-								PRINT "optional"
-							END THEADCELL
-						END TROW
-						TROW
 							TCELL ,"table-parameter"
 								PRINT "ID"
 							END TCELL
 							TCELL
-								PRINT "integer/string"
+								PRINT "Yes"
 							END TCELL
 							TCELL
-								PRINT "ID to identify the window"
+								PRINT "string or variable"
 							END TCELL
-						END TROW
-						TROW
-							THEADCELL ,"table-parameter",3
-								PRINT "optional"
-							END THEADCELL
+							TCELL
+								PRINT "ID to identify the window or style it"
+							END TCELL
 						END TROW
 						TROW
 							TCELL ,"table-parameter"
 								PRINT "CLASS"
 							END TCELL
 							TCELL
-								PRINT "integer/string"
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
 							END TCELL
 							TCELL
 								PRINT "CLASS to style the window"

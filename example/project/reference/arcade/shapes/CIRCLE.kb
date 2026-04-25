@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "CIRCLE","heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, RADIUS","heading-args"
+					PRINT "X, Y, RADIUS, ID (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw a circle on a bitmap and display it on screen as an image."
@@ -21,25 +21,27 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN
-	RGB 0,0,0
-	BITMAP 0,0,640,480
-		RGB 255,0,0,0
-		CIRCLE 320,220,220
+	RGB 0, 0, 0
+	BITMAP 0, 0, 640, 480
+		RGB 255, 0, 0, 0
+		REM Noticing I'm using a variable here as they are supported by the args.
+		DEF x% = 320
+		CIRCLE x%, 220, 220
 
-		RGB 255,0,0,50
-		CIRCLE 320,220,200
+		RGB 255, 0, 0, 50
+		CIRCLE 320, 220, 200
 
-		RGB 255,0,0,100
-		CIRCLE 320,220,180
+		RGB 255, 0, 0, 100
+		CIRCLE 320, 220, 180
 
-		RGB 255,0,0,150
-		CIRCLE 320,220,160
+		RGB 255, 0, 0, 150
+		CIRCLE 320, 220, 160
 
-		RGB 255,0,0,200
-		CIRCLE 320,220,140
+		RGB 255, 0, 0, 200
+		CIRCLE 320, 220, 140
 
-		RGB 255,0,0,250
-		CIRCLE 320,220,120
+		RGB 255, 0, 0, 250
+		CIRCLE 320, 220, 120
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -47,25 +49,27 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN
-					RGB 0,0,0
-					BITMAP 0,0,640,480
-						RGB 255,0,0,0
-						CIRCLE 320,220,220
+					RGB 0, 0, 0
+					BITMAP 0, 0, 640, 480
+						RGB 255, 0, 0, 0
+						REM Noticing I'm using a variable here as they are supported by the args.
+						DEF x% = 320
+						CIRCLE x%, 220, 220
 
-						RGB 255,0,0,50
-						CIRCLE 320,220,200
+						RGB 255, 0, 0, 50
+						CIRCLE 320, 220, 200
 
-						RGB 255,0,0,100
-						CIRCLE 320,220,180
+						RGB 255, 0, 0, 100
+						CIRCLE 320, 220, 180
 
-						RGB 255,0,0,150
-						CIRCLE 320,220,160
+						RGB 255, 0, 0, 150
+						CIRCLE 320, 220, 160
 
-						RGB 255,0,0,200
-						CIRCLE 320,220,140
+						RGB 255, 0, 0, 200
+						CIRCLE 320, 220, 140
 
-						RGB 255,0,0,250
-						CIRCLE 320,220,120
+						RGB 255, 0, 0, 250
+						CIRCLE 320, 220, 120
 					END BITMAP
 				END SCREEN
 				HEADING 4
@@ -74,8 +78,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "120px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -91,7 +98,10 @@ END SCREEN
 								PRINT "X"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "X position"
@@ -102,7 +112,10 @@ END SCREEN
 								PRINT "Y"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Y position"
@@ -113,10 +126,27 @@ END SCREEN
 								PRINT "RADIUS"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Radius of the circle"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "ID"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "ID to help identify or style the CIRCLE"
 							END TCELL
 						END TROW
 					END TBODY

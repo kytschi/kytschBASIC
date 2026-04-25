@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "ELLIPSEF","heading-command basic"
 					LINE BREAK
-					PRINT "X, Y, WIDTH, HEIGHT","heading-args"
+					PRINT "X, Y, WIDTH, HEIGHT, ID (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw a filled ellipse on a bitmap and display it on screen as an image."
@@ -21,19 +21,21 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN
-	RGB 0,0,0
-	BITMAP 0,0,640,480
-		RGB 255,0,0
-		ELLIPSEF 320,280,200,160
+	RGB 0, 0, 0
+	BITMAP 0, 0, 640, 480
+		RGB 255, 0, 0, 200
+		REM Noticing I'm using a variable here as they are supported by the args.
+		DEF x% = 320
+		ELLIPSEF x%, 280, 200, 160
 
-		RGB 255,0,0,90
-		ELLIPSEF 360,240,160,120
+		RGB 255, 0, 0, 150
+		ELLIPSEF 360, 240, 160, 120
 
-		RGB 255,0,0,95
-		ELLIPSEF 400,200,120,80
+		RGB 255, 0, 0, 100
+		ELLIPSEF 400, 200, 120, 80
 
-		RGB 255,0,0,98
-		ELLIPSEF 440,160,80,40
+		RGB 255, 0, 0, 50
+		ELLIPSEF 440, 160, 80, 40
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -41,19 +43,21 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN
-					RGB 0,0,0
-					BITMAP 0,0,640,480
-						RGB 255,0,0
-						ELLIPSEF 320,280,200,160
+					RGB 0, 0, 0
+					BITMAP 0, 0, 640, 480
+						RGB 255, 0, 0, 200
+						REM Noticing I'm using a variable here as they are supported by the args.
+						DEF x% = 320
+						ELLIPSEF x%, 280, 200, 160
 
-						RGB 255,0,0,90
-						ELLIPSEF 360,240,160,120
+						RGB 255, 0, 0, 150
+						ELLIPSEF 360, 240, 160, 120
 
-						RGB 255,0,0,95
-						ELLIPSEF 400,200,120,80
+						RGB 255, 0, 0, 100
+						ELLIPSEF 400, 200, 120, 80
 
-						RGB 255,0,0,98
-						ELLIPSEF 440,160,80,40
+						RGB 255, 0, 0, 50
+						ELLIPSEF 440, 160, 80, 40
 					END BITMAP
 				END SCREEN
 				HEADING 4
@@ -62,8 +66,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "120px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -79,7 +86,10 @@ END SCREEN
 								PRINT "X"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "The center X position"
@@ -90,7 +100,10 @@ END SCREEN
 								PRINT "Y"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "The center Y position"
@@ -101,7 +114,10 @@ END SCREEN
 								PRINT "WIDTH"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "The width of the ellipse"
@@ -112,10 +128,27 @@ END SCREEN
 								PRINT "HEIGHT"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "The height of the ellipse"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "ID"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "ID to help identify or style the ELLIPSEF"
 							END TCELL
 						END TROW
 					END TBODY

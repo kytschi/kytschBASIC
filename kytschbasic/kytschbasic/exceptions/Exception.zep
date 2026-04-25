@@ -3,31 +3,16 @@
  *
  * @package     KytschBASIC\Exceptions\Exception
  * @author 		Mike Welsh
- * @copyright   2025 Mike Welsh
+ * @copyright   2026 Mike Welsh
  * @version     0.0.2
  *
- * Copyright 2025 Mike Welsh
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301, USA.
  */
 namespace KytschBASIC\Exceptions;
 
 class Exception extends \Exception
 {
     public code;
-    private version = "0.0.17 alpha";
+    private version = "0.0.19 alpha";
     private html;
     private line_no = 0;
     
@@ -95,13 +80,22 @@ class Exception extends \Exception
         
         this->jsOutput();
         echo this;
-        if (template && line) {
+        if (template || line) {
             if (this->html) {
-                echo "<p>&nbsp;&nbsp;<strong>Trace</strong><br/>&nbsp;&nbsp;Source <strong>" .
-                    str_replace(getcwd(), "", template) . "</strong> at line <strong>" . line . "</strong></p>";
+                echo "
+                <p>
+                    &nbsp;&nbsp;
+                    <strong>Trace</strong>
+                    <br/>
+                    &nbsp;&nbsp;Source
+                    <strong>" . str_replace(getcwd(), "", template) . "</strong>" .
+                    (line ? " at line <strong>" . line . "</strong>" : "") . 
+                "</p>";
             } else {
                 echo "Trace:\n";
-                echo str_replace(getcwd(), "", template) . " at line " . line . "\n";
+                echo str_replace(getcwd(), "", template) .
+                    (line ? " at line " . line : "") . 
+                    "\n";
             }
         }
         die();

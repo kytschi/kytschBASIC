@@ -25,9 +25,12 @@ SCREEN
 	BITMAP 0,0,640,480
 		RGB 255,0,0,200
 		CIRCLEF 320,220,220
-
-		RGB 255,0,0,150
-		CIRCLEF 320,220,160
+		
+		REM using a variables
+		DEF transparency%=150
+		DEF x%=320
+		RGB 255,0,0,transparency%
+		CIRCLEF x%,220,160
 
 		RGB 255,0,0,100
 		CIRCLEF 320,220,100
@@ -46,7 +49,8 @@ END SCREEN
 						RGB 255,0,0,200
 						CIRCLEF 320,220,220
 
-						RGB 255,0,0,150
+						DEF transparency%=150
+						RGB 255,0,0,transparency%
 						CIRCLEF 320,220,160
 
 						RGB 255,0,0,100
@@ -62,8 +66,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "100px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -79,7 +86,10 @@ END SCREEN
 								PRINT "RED"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Red colour from 0 to 255"
@@ -90,7 +100,10 @@ END SCREEN
 								PRINT "GREEN"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Green colour from 0 to 255"
@@ -101,23 +114,24 @@ END SCREEN
 								PRINT "BLUE"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Blue colour from 0 to 255"
 							END TCELL
 						END TROW
 						TROW
-							THEADCELL ,"table-parameter",3
-								PRINT "optional"
-							END THEADCELL
-						END TROW
-						TROW
 							TCELL ,"table-parameter"
 								PRINT "TRANSPARENCY"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Set how much transparency is to be be applied to the colour. From 0 being completely opaque to 255 being completely transparent."

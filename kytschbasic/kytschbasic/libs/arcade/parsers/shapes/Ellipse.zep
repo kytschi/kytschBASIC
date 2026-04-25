@@ -3,28 +3,14 @@
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Shapes\Ellipse
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2025 Mike Welsh
+ * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2
  *
- * Copyright 2025 Mike Welsh
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301, USA.
  */
 namespace KytschBASIC\Libs\Arcade\Parsers\Shapes;
 
+use KytschBASIC\Exceptions\Exception;
 use KytschBASIC\Parsers\Core\Command;
 
 class Ellipse extends Command
@@ -43,13 +29,46 @@ class Ellipse extends Command
 
 	public function parseEllipse(array args, bool filled = false)
 	{
-		return "<?php $KBSHAPES[] = [
+		var output = "";
+
+		if (count(args) < 4) {
+			throw new Exception("Invalid ELLIPSE" . (filled ? "F" : ""));
+		}
+
+		let output = "<?php
+		if (!isset($KBBITMAPID)) {
+			throw new KytschBASIC\\Exceptions\\Exception(\"BITMAP is not defined\");
+		}
+		$KBSHAPES[] = [
 			'colour' => $KBRGB,
 			'shape' => '" . (filled ? "imagefilledellipse" : "imageellipse") . "',
-			'x' => " . (isset(args[0]) ? intval(args[0]) : 0) . ",
-			'y' => " . (isset(args[1]) ? intval(args[1]) : 0) . ",
-			'width' => " . (isset(args[2]) ? intval(args[2]) : 50) . ",
-			'height' => " . (isset(args[3]) ? intval(args[3]) : 50) . ",
-		]; ?>";
+			'id' => '',
+			'x' => 0,
+			'y' => 0,
+			'width' => 50,
+			'height' => 50
+		];";
+
+		if (!empty(args[0]) && args[0] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['x'] = intval(\"" . this->outputArg(args[0], false, false) . "\");";
+		}
+
+		if (!empty(args[1]) && args[1] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['y'] = intval(\"" . this->outputArg(args[1], false, false) . "\");";
+		}
+
+		if (!empty(args[2]) && args[2] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['width'] = intval(\"" . this->outputArg(args[2], false, false) . "\");";
+		}
+
+		if (!empty(args[3]) && args[3] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['height'] = intval(\"" . this->outputArg(args[3], false, false) . "\");";
+		}
+
+		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
+			let output .= " $KBSHAPES[count($KBSHAPES) - 1]['id'] = \"" . this->outputArg(args[4], false, false) . "\";";
+		}
+
+		return output . "?>";
 	}
 }

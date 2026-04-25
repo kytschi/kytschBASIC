@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "LINE","heading-command basic"
 					LINE BREAK
-					PRINT "X1, Y1, X2, Y2","heading-args"
+					PRINT "X1, Y1, X2, Y2, ID (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw a line on a bitmap and display it on screen as an image."
@@ -21,33 +21,35 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN
-	RGB 0,0,0
-	BITMAP 0,0,640,480
-		RGB 255,0,0
-		LINE 200,220,300,320
-		LINE 300,120,200,220
-		LINE 300,120,400,220
-		LINE 400,220,300,320
+	RGB 0, 0, 0
+	BITMAP 0, 0, 640, 480
+		RGB 255, 0, 0
+		REM Noticing I'm using a variable here as they are supported by the args.
+		DEF x% = 200
+		LINE x%, 220, 300, 320
+		LINE 300, 120, 200, 220
+		LINE 300, 120, 400, 220
+		LINE 400, 220, 300, 320
 
-		RGB 255,0,0,40
-		LINE 260,220,330,290
-		LINE 260,220,330,150
+		RGB 255, 0, 0, 40
+		LINE 260, 220, 330, 290
+		LINE 260, 220, 330, 150
 
-		RGB 255,0,0,60
-		LINE 290,220,345,275
-		LINE 290,220,345,165
+		RGB 255, 0, 0, 60
+		LINE 290, 220, 345, 275
+		LINE 290, 220, 345, 165
 
-		RGB 255,0,0,80
-		LINE 320,220,360,260
-		LINE 320,220,360,180
+		RGB 255, 0, 0, 80
+		LINE 320, 220, 360, 260
+		LINE 320, 220, 360, 180
 
-		RGB 255,0,0,90
-		LINE 350,220,375,245
-		LINE 350,220,375,195
+		RGB 255, 0, 0, 90
+		LINE 350, 220, 375, 245
+		LINE 350, 220, 375, 195
 
-		RGB 255,0,0,95
-		LINE 380,220,390,230
-		LINE 380,220,390,210
+		RGB 255, 0, 0, 95
+		LINE 380, 220, 390, 230
+		LINE 380, 220, 390, 210
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -55,33 +57,35 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN
-					RGB 0,0,0
-					BITMAP 0,0,640,480
-						RGB 255,0,0
-						LINE 200,220,300,320
-						LINE 300,120,200,220
-						LINE 300,120,400,220
-						LINE 400,220,300,320
+					RGB 0, 0, 0
+					BITMAP 0, 0, 640, 480
+						RGB 255, 0, 0
+						REM Noticing I'm using a variable here as they are supported by the args.
+						DEF x% = 200
+						LINE x%, 220, 300, 320
+						LINE 300, 120, 200, 220
+						LINE 300, 120, 400, 220
+						LINE 400, 220, 300, 320
 
-						RGB 255,0,0,40
-						LINE 260,220,330,290
-						LINE 260,220,330,150
+						RGB 255, 0, 0, 40
+						LINE 260, 220, 330, 290
+						LINE 260, 220, 330, 150
 
-						RGB 255,0,0,60
-						LINE 290,220,345,275
-						LINE 290,220,345,165
+						RGB 255, 0, 0, 60
+						LINE 290, 220, 345, 275
+						LINE 290, 220, 345, 165
 
-						RGB 255,0,0,80
-						LINE 320,220,360,260
-						LINE 320,220,360,180
+						RGB 255, 0, 0, 80
+						LINE 320, 220, 360, 260
+						LINE 320, 220, 360, 180
 
-						RGB 255,0,0,90
-						LINE 350,220,375,245
-						LINE 350,220,375,195
+						RGB 255, 0, 0, 90
+						LINE 350, 220, 375, 245
+						LINE 350, 220, 375, 195
 
-						RGB 255,0,0,95
-						LINE 380,220,390,230
-						LINE 380,220,390,210
+						RGB 255, 0, 0, 95
+						LINE 380, 220, 390, 230
+						LINE 380, 220, 390, 210
 					END BITMAP
 				END SCREEN
 				HEADING 4
@@ -90,8 +94,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "120px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -107,7 +114,10 @@ END SCREEN
 								PRINT "X1"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "X1 or the start X position"
@@ -118,7 +128,10 @@ END SCREEN
 								PRINT "Y1"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Y1 or the start Y position"
@@ -129,7 +142,10 @@ END SCREEN
 								PRINT "X2"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "X2 or the end X position"
@@ -140,7 +156,10 @@ END SCREEN
 								PRINT "Y2"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Y2 or the end Y position"

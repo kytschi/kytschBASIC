@@ -29,25 +29,41 @@ class Color extends Command
 		var output = "<?php $KBRGB=[";
 						
 		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[0], false, false) . "),";
+			if (this->isVariable(args[0])) {
+				let output .= "intval(" . args[0] . "),";
+			} else {
+				let output .= "intval(" . this->outputArg(args[0], false, false) . "),";
+			}
 		} else {
 			let output .= "0,";
 		}
 
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[1], false, false) . "),";
+			if (this->isVariable(args[1])) {
+				let output .= "intval(" . args[1] . "),";
+			} else {
+				let output .= "intval(" . this->outputArg(args[1], false, false) . "),";
+			}
 		} else {
 			let output .= "0,";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[2], false, false) . "),";
+			if (this->isVariable(args[2])) {
+				let output .= "intval(" . args[2] . "),";
+			} else {
+				let output .= "intval(" . this->outputArg(args[2], false, false) . "),";
+			}
 		} else {
 			let output .= "0,";
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= "intval(intval(" . this->outputArg(args[3], false, false) . ") / 2),";
+			if (this->isVariable(args[3])) {
+				let output .= "0,";
+			} else {
+				let output .= "intval(intval(" . this->outputArg(args[3], false, false) . ") / 2),";
+			}
 		} else {
 			let output .= "0,";
 		}

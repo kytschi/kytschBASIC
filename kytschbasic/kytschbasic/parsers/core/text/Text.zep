@@ -7,21 +7,6 @@
  * @link 		https://kytschbasic.org
  * @version     0.0.2
  *
- * Copyright 2026 Mike Welsh
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA  02110-1301, USA.
  */
 namespace KytschBASIC\Parsers\Core\Text;
 
@@ -33,7 +18,11 @@ class Text extends Command
 	public function generateRandomString(int length = 8) -> string
 	{
 		var keyspace, iLoop=0, key = 0, output = "";
-		let keyspace = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
+		let keyspace = [
+			"A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", 
+			"V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", 
+			"p", "q", "r", "s", "t", "u", "v", "x", "y", "z"
+		];
 	
 		while (iLoop < length) {
             let key = rand(0, count(keyspace) - 1);
@@ -62,24 +51,48 @@ class Text extends Command
 
 	private function processPrint(array args)
 	{
-		var output = "<?= \"<span";
+		var output = "<?= \"<span", style = "display: inline-block;";
 								
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= " class='\" . " . args[1] .  " . \"'";
+			let output .= " class=" . this->outputArg(args[1], false);
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= " id='\" . " . args[2] .  " . \"'";
+			let output .= " id=" . this->outputArg(args[2], false);
 		} else {
 			let output .= " id=" . this->outputArg(this->genID("kb-span"), false);
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " title='\" . " . args[3] .  " . \"'";
+			let output .= " title='" . this->outputArg(args[3], false) . "'";
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= " style='\" . " . args[4] .  " . \"'";
+			if (this->isVariable(args[4])) {
+				let style .= "font-size: " . this->outputArg(args[4], false) . "px;";
+			} else {
+				let style .= "font-size: " . trim(args[4], "\"") . "px;";
+			}
+		}
+
+		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
+			if (this->isVariable(args[5])) {
+				let style .= "margin-left: " . this->outputArg(args[5], false) . "px;";
+			} else {
+				let style .= "margin-left: " . trim(args[5], "\"") . "px;";
+			}
+		}
+
+		if (isset(args[6]) && !empty(args[6]) && args[6] != "\"\"") {
+			if (this->isVariable(args[6])) {
+				let style .= "margin-top: " . this->outputArg(args[6], false) . "px;";
+			} else {
+				let style .= "margin-top: " . trim(args[6], "\"") . "px;";
+			}
+		}
+
+		if (style) {
+			let output .= " style='" . style . "'";
 		}
 
 		return output . ">\" . " . args[0] . " . \"</span>\";?>";

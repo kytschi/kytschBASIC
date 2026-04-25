@@ -238,6 +238,8 @@ code {
 table {
 	border-spacing: 0px;
     min-width: 50%;
+    border: 1px solid #000;
+    border-bottom: 0;
 }
 
 .table-border td {
@@ -247,7 +249,11 @@ table {
 th, td {
     text-align: left;
 	border-bottom: 1px solid #000;
-	padding: 10px;
+	padding: 20px;
+}
+th {
+    background-color:  #000;
+	color: #fff;
 }
 
 .text-right {

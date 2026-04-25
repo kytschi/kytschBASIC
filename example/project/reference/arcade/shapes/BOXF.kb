@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "BOXF","heading-command basic"
 					LINE BREAK
-					PRINT "X1, Y1, X2, Y2","heading-args"
+					PRINT "X1, Y1, X2, Y2, ID (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to draw a filled box on a bitmap and display it on screen as an image."
@@ -21,22 +21,25 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN
-	RGB 0,0,0
-	BITMAP 0,0,640,480
-		RGB 255,0,0
-		BOXF 200,220,340,340
+	RGB 0, 0, 0
+	BITMAP 0, 0, 640, 480
+		RGB 255, 0, 0
 
-		RGB 255,0,0,90
-		BOXF 240,180,380,300
+		REM Noticing I'm using a variable here as they are supported by the args.
+		DEF x% = 200
+		BOXF x%, 220, 340, 340
 
-		RGB 255,0,0,95
-		BOXF 280,140,420,260
+		RGB 255, 0, 0, 90
+		BOXF 240, 180, 380, 300
 
-		RGB 255,0,0,98
-		BOXF 320,100,460,220
+		RGB 255, 0, 0, 95
+		BOXF 280, 140, 420, 260
 
-		RGB 255,0,0,99
-		BOXF 360,60,500,180
+		RGB 255, 0, 0, 98
+		BOXF 320, 100, 460, 220
+
+		RGB 255, 0, 0, 99
+		BOXF 360, 60, 500, 180
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -44,22 +47,25 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN
-					RGB 0,0,0
-					BITMAP 0,0,640,480
-						RGB 255,0,0
-						BOXF 200,220,340,340
+					RGB 0, 0, 0
+					BITMAP 0, 0, 640, 480
+						RGB 255, 0, 0
 
-						RGB 255,0,0,90
-						BOXF 240,180,380,300
+						REM Noticing I'm using a variable here as they are supported by the args.
+						DEF x% = 200
+						BOXF x%, 220, 340, 340
 
-						RGB 255,0,0,95
-						BOXF 280,140,420,260
+						RGB 255, 0, 0, 90
+						BOXF 240, 180, 380, 300
 
-						RGB 255,0,0,98
-						BOXF 320,100,460,220
+						RGB 255, 0, 0, 95
+						BOXF 280, 140, 420, 260
 
-						RGB 255,0,0,99
-						BOXF 360,60,500,180
+						RGB 255, 0, 0, 98
+						BOXF 320, 100, 460, 220
+
+						RGB 255, 0, 0, 99
+						BOXF 360, 60, 500, 180
 					END BITMAP
 				END SCREEN
 				HEADING 4
@@ -68,8 +74,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "120px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -85,7 +94,10 @@ END SCREEN
 								PRINT "X1"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "X1 or the start X position"
@@ -96,7 +108,10 @@ END SCREEN
 								PRINT "Y1"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Y1 or the start Y position"
@@ -107,7 +122,10 @@ END SCREEN
 								PRINT "X2"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "X2 or the end X position"
@@ -118,10 +136,27 @@ END SCREEN
 								PRINT "Y2"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
 							END TCELL
 							TCELL
 								PRINT "Y2 or the end Y position"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "ID"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "ID to help identify or style the ARCF"
 							END TCELL
 						END TROW
 					END TBODY

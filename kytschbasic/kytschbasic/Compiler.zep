@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschi.com>
  * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.18 alpha
+ * @version     0.0.19 alpha
  *
  */
 namespace KytschBASIC;
@@ -26,7 +26,7 @@ class Compiler
 
 	private start_time;
 	
-	private version = "0.0.18 alpha";
+	private version = "0.0.19 alpha";
 
 	private cli;
 
@@ -133,22 +133,44 @@ class Compiler
 		let parser = new Parser();
 		try {
 			var parsed = parser->parse(constant("_ROOT") . "/" . route->template);
-			file_put_contents(constant("_ROOT") . "/compiled.php", "<!DOCTYPE html>\n" . parsed);
+			file_put_contents(
+				constant("_ROOT") . "/compiled.php",
+				"<?php $KBTEMPLATE = \"" . route->template . "\"; try {?>" .
+				"<!DOCTYPE html>\n" . parsed .
+				"<?php } catch (\\Throwable $err) {
+					if (method_exists($err, \"fatal\")) {
+						$err->fatal(
+							$KBTEMPLATE,
+							method_exists($err, \"getLineNo\") ? $err->getLineNo() : 0
+						);
+					} else {
+						(new KytschBASIC\\Exceptions\\Exception(
+								$err->getMessage(),
+								$err->getCode(),
+								true,
+								method_exists($err, \"getLineNo\") ? $err->getLineNo() : 0
+							)
+						)->fatal($KBTEMPLATE);
+					}
+				}"
+			);
 			require_once(constant("_ROOT") . "/compiled.php");
 			return "";
-		} catch Exception, err {
-			err->fatal(
-				constant("_ROOT") . "/" . route->template,
-				err->getLineNo()
-			);
-		} catch \RuntimeException | \Exception | \ParserError, err {
-			(new Exception(
-					err->getMessage(),
-					err->getCode(),
-					true,
-					err->getLineNo()
-				)
-			)->fatal(constant("_ROOT") . "/" . route->template);
+		} catch \Throwable, err {
+			if (method_exists(err, "fatal")) {
+				err->fatal(
+					route->template,
+					method_exists(err, "getLineNo") ? err->getLineNo() : 0
+				);
+			} else {
+				(new Exception(
+						err->getMessage(),
+						err->getCode(),
+						true,
+						method_exists(err, "getLineNo") ? err->getLineNo() : 0
+					)
+				)->fatal(route->template);
+			}	
 		}
 	}
 
