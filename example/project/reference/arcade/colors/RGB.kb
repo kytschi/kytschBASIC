@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "RGB","heading-command basic"
 					LINE BREAK
-					PRINT "RED, GREEN, BLUE, TRANSPARENCY (default 0)","heading-args"
+					PRINT "RED, GREEN, BLUE, TRANSPARENCY (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Set an RGB colour."
@@ -21,22 +21,22 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN
-	RGB 0,0,0
-	BITMAP 0,0,640,480
-		RGB 255,0,0,200
-		CIRCLEF 320,220,220
+	RGB 0, 0, 0
+	BITMAP 0, 0, 640, 480
+		RGB 255 ,0, 0, 200
+		CIRCLEF 320, 220, 220
 		
 		REM using a variables
-		DEF transparency%=150
-		DEF x%=320
-		RGB 255,0,0,transparency%
-		CIRCLEF x%,220,160
+		DEF transparency% = 150
+		DEF x% = 320
+		RGB 255, 0, 0, transparency%
+		CIRCLEF x%, 220, 160
 
-		RGB 255,0,0,100
-		CIRCLEF 320,220,100
+		RGB 255, 0, 0, 00
+		CIRCLEF 320, 220, 100
 
-		RGB 255,0,0,50
-		CIRCLEF 320,220,40
+		RGB 255, 0 ,0, 50
+		CIRCLEF 320, 220, 40
 	END BITMAP
 END SCREEN
 				END CPRINT
@@ -44,20 +44,22 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN
-					RGB 0,0,0
-					BITMAP 0,0,640,480
-						RGB 255,0,0,200
-						CIRCLEF 320,220,220
+					RGB 0, 0, 0
+					BITMAP 0, 0, 640, 480
+						RGB 255 ,0, 0, 200
+						CIRCLEF 320, 220, 220
+						
+						REM using a variables
+						DEF transparency% = 150
+						DEF x% = 320
+						RGB 255, 0, 0, transparency%
+						CIRCLEF x%, 220, 160
 
-						DEF transparency%=150
-						RGB 255,0,0,transparency%
-						CIRCLEF 320,220,160
+						RGB 255, 0, 0, 00
+						CIRCLEF 320, 220, 100
 
-						RGB 255,0,0,100
-						CIRCLEF 320,220,100
-
-						RGB 255,0,0,50
-						CIRCLEF 320,220,40
+						RGB 255, 0 ,0, 50
+						CIRCLEF 320, 220, 40
 					END BITMAP
 				END SCREEN
 				HEADING 4
@@ -134,7 +136,9 @@ END SCREEN
 								PRINT "integer or variable"
 							END TCELL
 							TCELL
-								PRINT "Set how much transparency is to be be applied to the colour. From 0 being completely opaque to 255 being completely transparent."
+								PRINT "Set how much transparency is to be be applied to the colour.&nbsp;"
+								PRINT "0 being completely opaque to 255 being completely transparent.&nbsp;"
+								PRINT "The default value is 0."
 							END TCELL
 						END TROW
 					END TBODY

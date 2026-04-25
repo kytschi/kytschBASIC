@@ -38,20 +38,24 @@ class Bitmap extends Command
 	{
 		var x=0, y=0, width=320, height=240, id;
 
-		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
-			let x = "intval(" . this->outputArg(args[0], false, false) . ")";
+		if (count(args) < 4) {
+			throw new Exception("Invalid BITMAP");
 		}
 
-		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let y = "intval(" . this->outputArg(args[1], false, false) . ")";
+		if (!empty(args[0]) && args[0] != "\"\"") {
+			let x = "intval(\"" . this->outputArg(args[0], false, false) . "\")";
 		}
 
-		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let width = "intval(" . this->outputArg(args[2], false, false) . ")";
+		if (!empty(args[1]) && args[1] != "\"\"") {
+			let y = "intval(\"" . this->outputArg(args[1], false, false) . "\")";
 		}
 
-		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let height = "intval(" .this->outputArg(args[3], false, false) . ")";
+		if (!empty(args[2]) && args[2] != "\"\"") {
+			let width = "intval(\"" . this->outputArg(args[2], false, false) . "\")";
+		}
+
+		if (!empty(args[3]) && args[3] != "\"\"") {
+			let height = "intval(\"" .this->outputArg(args[3], false, false) . "\")";
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
@@ -94,35 +98,44 @@ class Bitmap extends Command
 	{
 		var output = "<?php ", value;
 
+		if (count(args) < 1) {
+			throw new Exception("Invalid BITMAPTEXT");
+		}
+
+		let output .= "if (!isset($KBBITMAPID)) {
+			throw new KytschBASIC\\Exceptions\\Exception(\"BITMAP is not defined\");
+		}
+		if (empty($KBRGB)) {
+			throw new KytschBASIC\\Exceptions\\Exception(\"RGB is not defined\");
+		}";
+
 		let output .= "$KBCOLOUR = imagecolorallocatealpha($KBBITMAP, $KBRGB[0], $KBRGB[1], $KBRGB[2], $KBRGB[3]);";
 		let output .= "imagefttext($KBBITMAP, ";
 
-		if (isset(args[0]) && !empty(args[0]) && args[0] != "\"\"") {
+		if (!empty(args[0]) && args[0] != "\"\"") {
 			let value = this->outputArg(args[0], false, false);
-		} else {
-			throw new Exception("Invalid BITMAPTEXT");
 		}
 		
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[1], false, false) . "), ";
+			let output .= "intval(\"" . this->outputArg(args[1], false, false) . "\"), ";
 		} else {
 			let output .= "12, ";
 		}
 
 		if (isset(args[2]) && !empty(args[2]) && args[2] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[2], false, false) . "), ";
+			let output .= "intval(\"" . this->outputArg(args[2], false, false) . "\"), ";
 		} else {
 			let output .= "0, ";
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[3], false, false) . "), ";
+			let output .= "intval(\"" . this->outputArg(args[3], false, false) . "\"), ";
 		} else {
 			let output .= "0, ";
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
-			let output .= "intval(" . this->outputArg(args[4], false, false) . "), ";
+			let output .= "intval(\"" . this->outputArg(args[4], false, false) . "\"), ";
 		} else {
 			let output .= "0, ";
 		}

@@ -22,13 +22,14 @@ LOAD _ROOT + "/project/shared/header"
 				CPRINT
 SCREEN "the-traveller"
 	WINDOW "intro"
-		RGB 0,0,0
-		BITMAP 0,0,800,400
-			RGB 255,0,0
-			BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
-			BITMAPTEXT "The Traveller",32,0,120,150
-			BITMAPTEXT "Press any key to start",18,0,135,320
-		END BITMAP
+		WINDOWBODY
+			RGB 0, 0, 0
+			BITMAP 0, 0, 800, 400
+				RGB 255, 0, 0
+				BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
+				BITMAPTEXT "The Traveller", 32, 0, 120, 150
+			END BITMAP
+		END WINDOWBODY
 	END WINDOW
 END SCREEN
 				END CPRINT
@@ -37,13 +38,14 @@ END SCREEN
 				END HEADING 4
 				SCREEN "the-traveller"
 					WINDOW "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
-							BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller",32,0,120,150
-							BITMAPTEXT "Press any key to start",18,0,135,320
-						END BITMAP
+						WINDOWBODY
+							RGB 0, 0, 0
+							BITMAP 0, 0, 800, 400
+								RGB 255, 0, 0
+								BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
+								BITMAPTEXT "The Traveller", 32, 0, 120, 150
+							END BITMAP
+						END WINDOWBODY
 					END WINDOW
 				END SCREEN
 				HEADING 4

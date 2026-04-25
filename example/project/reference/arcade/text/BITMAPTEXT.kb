@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "BITMAPTEXT","heading-command basic"
 					LINE BREAK
-					PRINT "TEXT, SIZE, ANGLE, X, Y","heading-args"
+					PRINT "TEXT, SIZE (optional), ANGLE (optional), X (optional), Y (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "The ability to write text on a bitmap."
@@ -21,14 +21,15 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 SCREEN "the-traveller"
-	WINDOW "The Traveller", "intro"
-		RGB 0,0,0
-		BITMAP 0,0,800,400
-			RGB 255,0,0
-			BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
-			BITMAPTEXT "The Traveller",32,0,120,150
-			BITMAPTEXT "Press any key to start",18,0,135,320
-		END BITMAP
+	WINDOW "intro"
+		WINDOWBODY
+			RGB 0, 0, 0
+			BITMAP 0, 0, 800, 400
+				RGB 255, 0, 0
+				BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
+				BITMAPTEXT "The Traveller", 32, 0, 120, 150
+			END BITMAP
+		END WINDOWBODY
 	END WINDOW
 END SCREEN
 				END CPRINT
@@ -36,14 +37,15 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SCREEN "the-traveller"
-					WINDOW "The Traveller", "intro"
-						RGB 0,0,0
-						BITMAP 0,0,800,400
-							RGB 255,0,0
-							BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
-							BITMAPTEXT "The Traveller",32,0,120,150
-							BITMAPTEXT "Press any key to start",18,0,135,320
-						END BITMAP
+					WINDOW "intro"
+						WINDOWBODY
+							RGB 0, 0, 0
+							BITMAP 0, 0, 800, 400
+								RGB 255, 0, 0
+								BITMAPFONT _ROOT + "/kytschi/fonts/Sixtyfour.ttf"
+								BITMAPTEXT "The Traveller", 32, 0, 120, 150
+							END BITMAP
+						END WINDOWBODY
 					END WINDOW
 				END SCREEN
 				HEADING 4
@@ -52,8 +54,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "100px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -69,10 +74,69 @@ END SCREEN
 								PRINT "TEXT"
 							END TCELL
 							TCELL
-								PRINT "string"
+								PRINT "No"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
 							END TCELL
 							TCELL
 								PRINT "Text to be written on the bitmap"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "SIZE"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
+							END TCELL
+							TCELL
+								PRINT "Text size. It is in pixels and the default size is 15."
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "ANGLE"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
+							END TCELL
+							TCELL
+								PRINT "Angle or rotation of the text. The default is 0."
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "X"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
+							END TCELL
+							TCELL
+								PRINT "The horizontal position of the text. The default is 0."
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "Y"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "integer or variable"
+							END TCELL
+							TCELL
+								PRINT "The vertical position of the text. The default is 0."
 							END TCELL
 						END TROW
 					END TBODY

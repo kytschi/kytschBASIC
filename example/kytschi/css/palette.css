@@ -304,6 +304,14 @@ th {
     overflow: hidden;
 }
 
+#intro, .kb-window-body {
+    background-color: #000;
+}
+
+#intro, .kb-window-body img {
+    margin: auto auto;
+}
+
 #intro img {
     width: 100%;
     height: 100%;

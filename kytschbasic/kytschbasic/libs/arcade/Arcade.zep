@@ -174,11 +174,12 @@ class Arcade extends Command
 				background-color: rgba(136,136,136,1);
 				color:rgb(0,0,0);
 				border: 1px solid rgb(91,91,91);
-				height: 100vh;width:100%;
+				height: 100vh;
+				width:100%;
+				overflow: hidden;
 			}
 			.kb-window .kb-window-title {
 				display: flex;
-				overflow: hidden;
 				height: 30px;
 				padding: 10px;
 				background-color: rgba(221,17,68,1);

@@ -41,7 +41,7 @@ class Circle extends Command
 		}
 		$KBSHAPES[] = [
 			'colour' => $KBRGB,
-			'shape' => '" . (filled ? "imagefilledellipse" : "imagearc") . "',
+			'shape' => '" . (filled ? "imagefilledellipse" : "imageellipse") . "',
 			'id' => '',
 			'x' => 0,
 			'y' => 0,
