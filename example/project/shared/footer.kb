@@ -2,10 +2,10 @@ FOOTER
 	DIV "kb-row","footer-content"
 		DIV "kb-col kb-col-12"
 			DIV
-				PRINT "Powered by "
+				PRINT "Powered by&nbsp;"
 				PRINT "kytsch","kytsch"
 				PRINT "BASIC","basic"
-				PRINT " "
+				PRINT "&nbsp;"
 				VERSION
 			END DIV
 		END DIV
