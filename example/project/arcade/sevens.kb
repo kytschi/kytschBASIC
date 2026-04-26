@@ -369,6 +369,7 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
+    $(".last-card").attr("style", "");
     var played = false;
 
     if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
@@ -489,7 +490,7 @@ DIV "", "sevens"
                                 PRINT names$(iLoop%)
                             END TCELL
                             TCELL ,"last-card",,"last-card-" + iLoop%
-                                PRINT "LC",,,"Last card"
+                                PRINT "LC","last-card",,"Last card"
                             END TCELL
                             TCELL ,"text-center",,"player-" + iLoop% + "-score"
                                 PRINT "0"

@@ -313,6 +313,16 @@ class Variables
 
 	public function outputArg(arg, bool php_output = false, bool include_quotes = true)
 	{
+		var matches, pos, clean;
+
+		preg_match_all("/\"[^\"]*\"(*SKIP)(*F)|.\s\\$/", arg, matches, PREG_OFFSET_CAPTURE);
+		if (!empty(matches[0])) {
+			let clean = preg_replace("/\\$([a-zA-Z_][a-zA-Z0-9_]*)/", "{\$\\1}", arg);
+			let clean = preg_replace("/\s*\.\s*\"/", "", clean);
+			let clean = preg_replace("/\"\s*\.\s*/", "", clean);
+			let arg = trim(clean, "\"");
+		}
+			
 		let arg = preg_replace("/^\"|\"$/", "", arg);
 		if (substr(arg, 0, 1) == "$") {
 			return php_output ? "<?= " . arg . "; ?>" : "{" . arg . "}";

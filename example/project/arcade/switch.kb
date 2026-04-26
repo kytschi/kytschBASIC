@@ -464,7 +464,8 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
-$(document).ready(function() {
+    $(".last-card").attr("style", "");
+
     var played = false;
     start = 1;
 
@@ -490,7 +491,6 @@ $(document).ready(function() {
     $("button[name=btnNewGame]").click(() => {
         window.location.reload();
     });
-});
 END JAVASCRIPT
 
 DIV "", "switch"

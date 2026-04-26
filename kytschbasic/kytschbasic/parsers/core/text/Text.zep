@@ -52,6 +52,10 @@ class Text extends Command
 	private function processPrint(array args)
 	{
 		var output = "<?= \"<span", style = "display: inline-block;";
+
+		if (count(args) < 1) {
+			throw new Exception("Invalid PRINT");
+		}
 								
 		if (isset(args[1]) && !empty(args[1]) && args[1] != "\"\"") {
 			let output .= " class=" . this->outputArg(args[1], false);
@@ -64,7 +68,7 @@ class Text extends Command
 		}
 
 		if (isset(args[3]) && !empty(args[3]) && args[3] != "\"\"") {
-			let output .= " title='" . this->outputArg(args[3], false) . "'";
+			let output .= " title=" . this->outputArg(args[3], false);
 		}
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
