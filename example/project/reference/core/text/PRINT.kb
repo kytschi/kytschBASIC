@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "PRINT","heading-command basic"
 					LINE BREAK
-					PRINT "TEXT, CLASS (optional), ID (optional), TITLE (optional), SIZE (optional), X (optional), Y (optional)","heading-args"
+					PRINT "TEXT, CLASS (optional), ID (optional), TITLE (optional), STYLE (optional), SIZE (optional), X (optional), Y (optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Outputting text to the screen."
@@ -115,6 +115,20 @@ PRINT string$
 							END TCELL
 							TCELL
 								PRINT "When the user hovers over the PRINT they'll see a title popup to help explain what it might be"
+							END TCELL
+						END TROW
+						TROW
+							TCELL ,"table-parameter"
+								PRINT "STYLE"
+							END TCELL
+							TCELL
+								PRINT "Yes"
+							END TCELL
+							TCELL
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "Set the inline style of the text"
 							END TCELL
 						END TROW
 						TROW

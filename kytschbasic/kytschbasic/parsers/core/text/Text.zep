@@ -51,7 +51,7 @@ class Text extends Command
 
 	private function processPrint(array args)
 	{
-		var output = "<?= \"<span", style = "display: inline-block;";
+		var output = "<?= \"<span", style = "";
 
 		if (count(args) < 1) {
 			throw new Exception("Invalid PRINT");
@@ -73,25 +73,33 @@ class Text extends Command
 
 		if (isset(args[4]) && !empty(args[4]) && args[4] != "\"\"") {
 			if (this->isVariable(args[4])) {
-				let style .= "font-size: " . this->outputArg(args[4], false) . "px;";
+				let style = this->outputArg(args[4], false) . ";";
 			} else {
-				let style .= "font-size: " . trim(args[4], "\"") . "px;";
+				let style = trim(args[4], "\"") . ";";
 			}
 		}
 
 		if (isset(args[5]) && !empty(args[5]) && args[5] != "\"\"") {
 			if (this->isVariable(args[5])) {
-				let style .= "margin-left: " . this->outputArg(args[5], false) . "px;";
+				let style .= "font-size: " . this->outputArg(args[5], false) . "px;";
 			} else {
-				let style .= "margin-left: " . trim(args[5], "\"") . "px;";
+				let style .= "font-size: " . trim(args[4], "\"") . "px;";
 			}
 		}
 
 		if (isset(args[6]) && !empty(args[6]) && args[6] != "\"\"") {
 			if (this->isVariable(args[6])) {
-				let style .= "margin-top: " . this->outputArg(args[6], false) . "px;";
+				let style .= "margin-left: " . this->outputArg(args[6], false) . "px;";
 			} else {
-				let style .= "margin-top: " . trim(args[6], "\"") . "px;";
+				let style .= "margin-left: " . trim(args[6], "\"") . "px;";
+			}
+		}
+
+		if (isset(args[7]) && !empty(args[7]) && args[7] != "\"\"") {
+			if (this->isVariable(args[7])) {
+				let style .= "display: inline-block; margin-top: " . this->outputArg(args[7], false) . "px;";
+			} else {
+				let style .= "display: inline-block; margin-top: " . trim(args[7], "\"") . "px;";
 			}
 		}
 

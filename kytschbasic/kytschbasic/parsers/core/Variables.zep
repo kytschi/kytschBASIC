@@ -313,7 +313,7 @@ class Variables
 
 	public function outputArg(arg, bool php_output = false, bool include_quotes = true)
 	{
-		var matches, pos, clean;
+		var matches, clean;
 
 		preg_match_all("/\"[^\"]*\"(*SKIP)(*F)|.\s\\$/", arg, matches, PREG_OFFSET_CAPTURE);
 		if (!empty(matches[0])) {
