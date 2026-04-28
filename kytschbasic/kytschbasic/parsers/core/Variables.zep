@@ -315,6 +315,7 @@ class Variables
 	{
 		var matches, clean;
 
+		// Processing the string joins i.e. "test" . $string
 		preg_match_all("/\"[^\"]*\"(*SKIP)(*F)|.\s\\$/", arg, matches, PREG_OFFSET_CAPTURE);
 		if (!empty(matches[0])) {
 			let clean = preg_replace("/\\$([a-zA-Z_][a-zA-Z0-9_]*)/", "{\$\\1}", arg);
@@ -322,7 +323,7 @@ class Variables
 			let clean = preg_replace("/\"\s*\.\s*/", "", clean);
 			let arg = trim(clean, "\"");
 		}
-			
+		
 		let arg = preg_replace("/^\"|\"$/", "", arg);
 		if (substr(arg, 0, 1) == "$") {
 			return php_output ? "<?= " . arg . "; ?>" : "{" . arg . "}";

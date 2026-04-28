@@ -57,6 +57,11 @@ LOAD _ROOT + "/project/shared/header"
 					END LINK
 				END SWRITE
 				SWRITE
+					LINK "/arcade/triple-triad","Play the card game Triple Triad",,"_blank"
+						PRINT "Triple Triad card game. Note, it's a work in progress"
+					END LINK
+				END SWRITE
+				SWRITE
 					LINK "/arcade/omega-doom","Play the space adventure Omega Doom",,"_blank"
 						PRINT "Omega Doom. An ASCII space adventure game. Note, it's a work in progress"
 					END LINK

@@ -1,0 +1,170 @@
+LANG "en"
+HEAD
+	CHARSET "UTF-8"
+    DESCRIPTION "This is a kytschBASIC example of the Final Fantasy card game Triple Triad"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC, triple triad"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/triple_triad"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - Triple Triad | kytschBASIC"
+END HEAD
+BODY ,"triple-triad"
+    DIV ,"game"
+        DIV ,"board"
+            DIV "row"
+                DIV "column", "column-left"
+                    DIV "computer-hand",
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/leezard.jpg", "Leezard"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/funtuar.jpg", "Funtuar"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/biting-bug.jpg", "Biting Bug"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/red-wing-bat.jpg", "Red Wing Bat"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/blobrawah.jpg", "Blobrawah"
+                        END DIV
+                    END DIV
+                END DIV
+                DIV "column", "column-middle"
+                    DIV "play-area",
+                        DIV "row spacer"
+                            DIV "card"
+                                
+                            END DIV
+                        END DIV
+                        DIV "row"
+                            DIV "card"
+                                
+                            END DIV
+                            DIV "card"
+                                
+                            END DIV
+                            DIV "card"
+                                
+                            END DIV
+                        END DIV
+                        DIV "row"
+                            DIV "card"
+                                
+                            END DIV
+                            DIV "card"
+                                
+                            END DIV
+                            DIV "card"
+                                
+                            END DIV
+                        END DIV
+                        DIV "row"
+                            DIV "card"
+                                
+                            END DIV
+                            DIV "card"
+                                
+                            END DIV
+                            DIV "card"
+                                
+                            END DIV
+                        END DIV
+                        DIV "row spacer"
+                            DIV "card"
+                                
+                            END DIV
+                        END DIV
+                    END DIV
+                END DIV
+                DIV "column", "column-right"
+                    DIV "player-hand",
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/gavla.jpg", "Gavla"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/jespa.jpg", "Jespa"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/slowitokalo-s.jpg", "Slowitokalo-S"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/blood-sucker.jpg", "Blood Sucker"
+                        END DIV
+                        DIV "card"
+                            IMAGE "/kytschi/imgs/triple_triad/cards/killerpillar.jpg", "Killerpillar"
+                        END DIV
+                    END DIV
+                END DIV
+            END DIV
+        END DIV
+    END DIV
+    DIV "level"
+        DIV "row"
+            SWRITE
+                PRINT "Level 1", "label"
+            END SWRITE
+        END DIV
+        DIV "row"
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/leezard.jpg", "Leezard"
+                PRINT "Leezard"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/funtuar.jpg", "Funtuar"
+                PRINT "Funtuar"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/biting-bug.jpg", "Biting Bug"
+                PRINT "Biting Bug"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/red-wing-bat.jpg", "Red Wing Bat"
+                PRINT "Red Wing Bat"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/blobrawah.jpg", "Blobrawah"
+                PRINT "Blobrawah"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/gavla.jpg", "Gavla"
+                PRINT "Gavla"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/jespa.jpg", "Jespa"
+                PRINT "Jespa"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/slowitokalo-s.jpg", "Slowitokalo-S"
+                PRINT "Slowitokalo-S"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/blood-sucker.jpg", "Blood Sucker"
+                PRINT "Blood Sucker"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/killerpillar.jpg", "Killerpillar"
+                PRINT "Killerpillar"
+            END DIV
+            DIV "card"
+                IMAGE "/kytschi/imgs/triple_triad/cards/cockamenacer.jpg", "Cockamenacer"
+                PRINT "Cockamenacer"
+            END DIV
+        END DIV
+    END DIV
+    DIV ,"disclaimer"
+        SWRITE
+            PRINT "Disclaimer"
+            LINE BREAK
+            PRINT "This a fan made game to help me build and test KB, plus a thanks to my little cousin.&nbsp;"
+            PRINT "I do not own the rights to the game, its concept nor am I making any money from this.&nbsp;"
+            PRINT "All assets have been generated using AI and nothing is ripped from any games or copyrighted material.&nbsp;"
+            PRINT "All the copyrights of the game and its concept belong to Square Enix and the Final Fantasy team."
+        END SWRITE
+    END DIV
+END BODY
+END

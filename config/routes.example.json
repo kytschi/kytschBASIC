@@ -52,6 +52,10 @@
 		"url": "/arcade/dead-world",
 		"template": "project/arcade/dead_world/index.kb"
 	},
+	{
+		"url": "/arcade/triple-triad",
+		"template": "project/arcade/triple_triad.kb"
+	},
 
 	{
 		"url": "/news",
