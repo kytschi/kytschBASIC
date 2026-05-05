@@ -123,3 +123,7 @@ For more information and a to view the available command set please visit [https
 ## Thanks
 
 The Arcade library makes use of [JS-Cookie](https://github.com/js-cookie/js-cookie) and [jQuery](https://jquery.com/).
+
+## Issues
+
+There is an issue with camel case variable names, e.g. camelCase so for now stick to lowercase till I do the fix.
