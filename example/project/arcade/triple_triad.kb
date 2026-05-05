@@ -12,147 +12,210 @@ HEAD
 	NAME "Arcade - Triple Triad | kytschBASIC"
 END HEAD
 BODY ,"triple-triad"
+
+DIM deck$=("biting-bug-1531","blobrawah-2531","blood-sucker-2116","cathelma-3345","cockamenacer-2612","cuel-6322","funtuar-5311","gavla-2414","jespa-1154","kesherise-5343", "killerpillar-4324","leezard-1541","red-wing-bat-6211","slowitokalo-s-3152","vrat-7113","worm-eye-6314")
+DIM computer$=()
+DIM player$=()
+
+SHUFFLE(deck$)
+FOR index%=0 TO 4
+    LET computer$()=deck$(index%)
+    SHIFT(deck$)
+NEXT
+
+FOR index%=0 TO 4
+    LET player$()=deck$(index%)
+    SHIFT(deck$)
+NEXT
+
+ADEF selected$=""
+ADEF selected_rank$=""
+ADEF move$="player"
+ADIM computer$=computer$
+
+AFUNCTION "cardSelected", "type"
+    if (move != "computer" && type == "computer") {
+        gameInfo(event, "Wait your turn", true);
+        return;
+    } else if (move != "player" && type == "player") {
+        gameInfo(event, "Wait your turn", true);
+        return;
+    }
+
+    selected = $(event.currentTarget).attr("id");
+    $("#" + selected).addClass("highlight");
+    move = type;
+
+    var card = $("#" + selected + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
+    selected_rank = card[card.length-1].split("");
+END AFUNCTION
+
+AFUNCTION "checkBoard"
+    console.log("-----checking the board------");
+    $("#play-area .card").each((index, card) => {
+        if ($("#play-area-" + index).html()) {
+            var card = $("#play-area-" + index + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
+            var rank = card[card.length-1].split("");
+
+            if (index == 1) {
+                
+            }
+            
+            console.log(index, rank);
+        }
+    });
+END AFUNCTION
+
+AFUNCTION "dropCard"
+    if (!selected) {
+        gameInfo(event, "Please select a card to play", true);
+        return;
+    }
+
+    checkBoard(event);
+
+    var id = $(event.currentTarget).attr("id");
+    
+    if ($("#" + id).html()) {
+        gameInfo(event, "Pick an empty square", true);
+        return;
+    }
+
+    var type = "player"
+    if (move == "computer") {
+        type = "computer";
+    }
+
+    $("#" + selected).removeClass("highlight");
+    $("#" + id).addClass(type);
+    $("#" + id).html($("#" + selected).html());
+
+    $("#" + move + "-hand #" + selected).remove();
+
+    $(".label.computer, .label.player").removeClass("highlight");
+    if (move == "player") {
+        move = "computer";
+        $(".label.computer").addClass("highlight");
+    } else {
+        move = "player";
+        $(".label.player").addClass("highlight");
+    }
+END AFUNCTION
+
+ADEF computer_index%=1
+AFUNCTION "computerTurn"
+    var free_index = 0;
+    $("#play-area .card").each((index, card) => {
+        if (!$("#play-area-" + index).html()) {
+            free_index = index;
+            return;
+        }
+    });
+    $("#play-area-" + free_index).html($("#computer-card-" + computer_index).html());
+    $("#play-area-" + free_index).addClass("computer");
+    $("#computer-hand #computer-card-" + computer_index).remove();
+    computer_index++;
+END AFUNCTION
+
+AFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: (error ? "INVALID" : names[turn]),
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
+    });
+END AFUNCTION
+
+MOUSEEVENT "#player-hand .card"
+    GOTO cardSelected("player")
+MOUSEEVENT "#computer-hand .card"
+    GOTO cardSelected("computer")
+MOUSEEVENT "#play-area .card"
+    GOTO dropCard()
+END MOUSEEVENT
+
     DIV ,"game"
         DIV ,"board"
             DIV "row"
                 DIV "column", "column-left"
-                    DIV "computer-hand",
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/leezard.jpg", "Leezard"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/funtuar.jpg", "Funtuar"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/biting-bug.jpg", "Biting Bug"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/red-wing-bat.jpg", "Red Wing Bat"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/blobrawah.jpg", "Blobrawah"
-                        END DIV
+                    DIV ,"computer-hand"
+                        DEF iLoop%=1
+                        FOR card$ IN computer$
+                            DIV "card computer", "computer-card-"+iLoop%
+                                IMAGE "/kytschi/imgs/triple_triad/cards/"+card$+".png"
+                            END DIV
+                            LET iLoop%=(iLoop%+1)
+                        NEXT
                     END DIV
                 END DIV
                 DIV "column", "column-middle"
-                    DIV "play-area",
-                        DIV "row spacer"
-                            DIV "card"
+                    DIV "row spacer"
+                        DIV "label computer"
+                            PRINT "Opponent"
+                        END DIV
+                        DIV "card"
+                            
+                        END DIV
+                        DIV "label player align-right"
+                            PRINT "You"
+                        END DIV
+                    END DIV
+                    DIV ,"play-area"
+                        DIV "row"
+                            DIV "card", "play-area-1"
+                                
+                            END DIV
+                            DIV "card", "play-area-2"
+                                
+                            END DIV
+                            DIV "card", "play-area-3"
                                 
                             END DIV
                         END DIV
                         DIV "row"
-                            DIV "card"
+                            DIV "card", "play-area-4"
                                 
                             END DIV
-                            DIV "card"
+                            DIV "card", "play-area-5"
                                 
                             END DIV
-                            DIV "card"
-                                
-                            END DIV
-                        END DIV
-                        DIV "row"
-                            DIV "card"
-                                
-                            END DIV
-                            DIV "card"
-                                
-                            END DIV
-                            DIV "card"
+                            DIV "card", "play-area-6"
                                 
                             END DIV
                         END DIV
                         DIV "row"
-                            DIV "card"
+                            DIV "card", "play-area-7"
                                 
                             END DIV
-                            DIV "card"
+                            DIV "card", "play-area-8"
                                 
                             END DIV
-                            DIV "card"
+                            DIV "card", "play-area-9"
                                 
                             END DIV
                         END DIV
-                        DIV "row spacer"
-                            DIV "card"
-                                
-                            END DIV
+                    END DIV
+                    DIV "row spacer"
+                        DIV "card"
+                            
                         END DIV
                     END DIV
                 END DIV
                 DIV "column", "column-right"
-                    DIV "player-hand",
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/gavla.jpg", "Gavla"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/jespa.jpg", "Jespa"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/slowitokalo-s.jpg", "Slowitokalo-S"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/blood-sucker.jpg", "Blood Sucker"
-                        END DIV
-                        DIV "card"
-                            IMAGE "/kytschi/imgs/triple_triad/cards/killerpillar.jpg", "Killerpillar"
-                        END DIV
+                    DIV ,"player-hand"
+                        LET iLoop%=1
+                        FOR card$ IN player$
+                            DIV "card player", "player-card-"+iLoop%
+                                IMAGE "/kytschi/imgs/triple_triad/cards/"+card$+".png"
+                            END DIV
+                            LET iLoop%=(iLoop%+1)
+                        NEXT
                     END DIV
                 END DIV
-            END DIV
-        END DIV
-    END DIV
-    DIV "level"
-        DIV "row"
-            SWRITE
-                PRINT "Level 1", "label"
-            END SWRITE
-        END DIV
-        DIV "row"
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/leezard.jpg", "Leezard"
-                PRINT "Leezard"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/funtuar.jpg", "Funtuar"
-                PRINT "Funtuar"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/biting-bug.jpg", "Biting Bug"
-                PRINT "Biting Bug"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/red-wing-bat.jpg", "Red Wing Bat"
-                PRINT "Red Wing Bat"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/blobrawah.jpg", "Blobrawah"
-                PRINT "Blobrawah"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/gavla.jpg", "Gavla"
-                PRINT "Gavla"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/jespa.jpg", "Jespa"
-                PRINT "Jespa"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/slowitokalo-s.jpg", "Slowitokalo-S"
-                PRINT "Slowitokalo-S"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/blood-sucker.jpg", "Blood Sucker"
-                PRINT "Blood Sucker"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/killerpillar.jpg", "Killerpillar"
-                PRINT "Killerpillar"
-            END DIV
-            DIV "card"
-                IMAGE "/kytschi/imgs/triple_triad/cards/cockamenacer.jpg", "Cockamenacer"
-                PRINT "Cockamenacer"
             END DIV
         END DIV
     END DIV

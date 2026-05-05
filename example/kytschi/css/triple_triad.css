@@ -18,7 +18,6 @@ body {
     margin-top: 40px;
 }
 
-
 #board {
     margin: 0 auto;
     display: flex;
@@ -40,30 +39,18 @@ body {
 .row {
     display: flex;
     flex-flow: row wrap;
-    gap: 40px;
     align-items: flex-start; 
 }
 
-.level {
-    margin: 40px 0;
-    padding: 0 20px;
+.label {
+    display: flex;
+    width: 128px;
 }
-.level .row {
-    gap: 20px;
-}
-
-.level .label {
+.label span {
+    display: block;
     border: 3px solid #000;
     background-color: #fff;
     padding: 10px;
-}
-
-.level .card span {
-    display: block;
-    background-color: #fff;
-    border: 3px solid #000;
-    padding: 10px 0;
-    text-align: center;
 }
 
 .column {
@@ -80,7 +67,7 @@ body {
     flex-direction: column;
 }
 
-.computer-hand, .player-hand {
+#computer-hand, #player-hand {
     display: flex;
     flex-direction: column;
 }
@@ -91,7 +78,11 @@ body {
     background-repeat: no-repeat;
     width: 128px;
     height: 165px;
-    
+    cursor: pointer;
+}
+
+.card.highlight, .label.highlight span {
+    border: 3px solid #1df769;
 }
 
 .card img {
@@ -104,4 +95,19 @@ body {
 
 .level .card {
     height: 215px;
+}
+
+.card.computer, .computer span {
+    background: none;
+    background-color:#3654B6 !important;
+    color: #fff;
+}
+.card.player, .player span {
+    background: none;
+    background-color:#e82929 !important;
+    color: #fff;
+}
+
+.align-right {
+    justify-content: end;
 }

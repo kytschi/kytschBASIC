@@ -18,6 +18,10 @@ CPRINT
 PRINT "This is how you \"escape\" characters"
 END CPRINT
 				END SWRITE
+				LINE BREAK
+				SWRITE
+					PRINT "There is an issue with camel case variable names, e.g. camelCase so for now stick to lowercase till I do the fix."
+				END SWRITE
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"
