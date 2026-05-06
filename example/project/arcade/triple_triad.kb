@@ -13,7 +13,7 @@ HEAD
 END HEAD
 BODY ,"triple-triad"
 
-DIM deck$=("biting-bug-1531","blobrawah-2531","blood-sucker-2116","cathelma-3345","cockamenacer-2612","cuel-6322","funtuar-5311","gavla-2414","jespa-1154","kesherise-5343", "killerpillar-4324","leezard-1541","red-wing-bat-6211","slowitokalo-s-3152","vrat-7113","worm-eye-6314")
+DIM deck$=("biting-bug-1315","blobrawah-2315","blood-sucker-2161","cathelma-3453","cockamenacer-2126","cuel-6223","funtuar-5113","gavla-2144","jespa-1541","kesherise-5433", "killerpillar-4243","leezard-1415","red-wing-bat-6112","slowitokalo-s-3521","vrat-7131","worm-eye-6143")
 DIM computer$=()
 DIM player$=()
 
@@ -32,7 +32,7 @@ ADEF selected$=""
 ADEF selected_rank$=""
 ADEF move$="player"
 ADIM computer$=computer$
-ADIM board%=((0,0,0,0),(0,0,0,0),(0,0,0,0))
+ADIM board%=(null,null,null,null,null,null,null,null,null)
 
 AFUNCTION "cardSelected", "type"
     if (move != "computer" && type == "computer") {
@@ -52,173 +52,55 @@ AFUNCTION "cardSelected", "type"
     selected_rank = card[card.length-1].split("");
 END AFUNCTION
 
-AFUNCTION "findTouching", "id"
-    var num = parseInt(id, 10);
-    var index = num - 1;
-    var col = index % 3;
-    var row = Math.floor(index / 3);
-    
-    var touching = [];
+AFUNCTION "getNeighbors", "index"
+    index = parseInt(index, 10);
 
-    if (row > 0) touching.push(num - 3);
-    if (row < 3 - 1) touching.push(num + 3);
-    if (col > 0) touching.push(num - 1);
-    if (col < 3 - 1) touching.push(num + 1);
+    const neighbors = [];
+    // Define bounds: [index change, side of current card, side of neighbor card]
+    const checks = [
+        { adj: index - 3, currSide: 0, neighborSide: 2 }, // Top
+        { adj: index + 3, currSide: 2, neighborSide: 0 }, // Bottom
+        { adj: index - 1, currSide: 3, neighborSide: 1, skip: index % 3 === 0 }, // Left
+        { adj: index + 1, currSide: 1, neighborSide: 3, skip: (index + 1) % 3 === 0 } // Right
+    ];
 
-    return touching.sort((a, b) => a - b);
+    checks.forEach(check => {
+        if (!check.skip && check.adj >= 0 && check.adj < 9) {
+            neighbors.push(check);
+        }
+    });
+    return neighbors;
 END AFUNCTION
 
-AFUNCTION "checkBoard", "dropID"
-    console.log("-----checking the board------");
-    
-    var index = dropID - 1;
-    var col = (index % 3) + 1;
-    var row = Math.floor(index / 3) + 1;
+AFUNCTION "resolveCombat", "placedIndex", "card"
+    const neighbors = getNeighbors(event, placedIndex);
+    console.log("neighbors", neighbors);
 
-    var found = false;
-    var ownership = move;
+    neighbors.forEach(check => {
+        const neighborCard = board[check.adj];
+        if (neighborCard) {
+            console.log(check.adj, neighborCard.owner, "!==", card.owner);
+        }
 
-    $("#play-area .card").each((index, playCard) => {
-        if ($(playCard).html()) {
-            var touching = findTouching(event, $(playCard).attr("id").replace("play-area-", ""));
-            
-            //console.log(touching);
+        // Only check if there's an opponent's card there
+        if (neighborCard && neighborCard.owner !== card.owner) {
+            const attackValue = card.values[check.currSide];
+            const defenseValue = neighborCard.values[check.neighborSide];
 
-            touching.forEach((id, index) => {
-                if ($("#play-area-" + id).html()) {
-                    var card = $("#play-area-" + id + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
-                    var rank = card[card.length-1].split("");
-
-                    switch (dropID) {
-                        case 1:
-                            if (selected_rank[3] > rank[0] && id == 4) {
-                                $("#play-area-4").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[2] > rank[1] && id == 2) {
-                                $("#play-area-2").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 2:
-                            if (selected_rank[3] > rank[0] && id == 5) {
-                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[1] > rank[2] && id == 1) {
-                                $("#play-area-1").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[2] > rank[1] && id == 3) {
-                                $("#play-area-3").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 3:
-                            if (selected_rank[1] > rank[2] && id == 2) {
-                                $("#play-area-2").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[3] > rank[0] && id == 6) {
-                                $("#play-area-6").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 4:
-                            if (selected_rank[0] > rank[3] && id == 1) {
-                                $("#play-area-1").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[2] > rank[1] && id == 5) {
-                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[3] > rank[0] && id == 7) {
-                                $("#play-area-7").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 5:
-                            if (selected_rank[0] > rank[3] && id == 2) {
-                                $("#play-area-2").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[1] > rank[2] && id == 4) {
-                                $("#play-area-4").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[2] > rank[1] && id == 7) {
-                                $("#play-area-7").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[3] > rank[0] && id == 8) {
-                                $("#play-area-8").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 6:
-                            if (selected_rank[0] > rank[3] && id == 3) {
-                                $("#play-area-3").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[1] > rank[2] && id == 5) {
-                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[3] > rank[0] && id == 9) {
-                                $("#play-area-9").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 7:
-                            if (selected_rank[0] > rank[3] && id == 4) {
-                                $("#play-area-4").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[2] > rank[1] && id == 8) {
-                                $("#play-area-8").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 8:
-                            if (selected_rank[0] > rank[3] && id == 5) {
-                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[1] > rank[2] && id == 7) {
-                                $("#play-area-7").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[2] > rank[1] && id == 9) {
-                                $("#play-area-9").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                        case 9:
-                            if (selected_rank[0] > rank[3] && id == 6) {
-                                $("#play-area-6").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            if (selected_rank[1] > rank[2] && id == 8) {
-                                $("#play-area-8").removeClass("computer").removeClass("player").addClass(move);
-                                found = true;
-                            }
-                            break;
-                    }
-
-                    if (found) {
-                        return;
-                    }
-
-                    //console.log(dropID, selected_rank, id, rank);
-                }
-            });
-
-            if (found) {
-                return;
+            console.log(attackValue, ">", defenseValue);
+            if (attackValue > defenseValue) {
+                flipCard(event, check.adj);
             }
         }
     });
+END AFUNCTION
+
+AFUNCTION "flipCard", "index"
+    const card = board[index];
+    card.owner = (card.owner === 'player') ? 'computer' : 'player';
+    
+    $("#play-area-" + index).removeClass("computer").removeClass("player").addClass(card.owner);
+    console.log(`Card at ${index} flipped to ${card.owner}`);
 END AFUNCTION
 
 AFUNCTION "dropCard"
@@ -234,27 +116,77 @@ AFUNCTION "dropCard"
         return;
     }
 
-    var type = "player"
-    if (move == "computer") {
-        type = "computer";
-    }
-
     $("#" + selected).removeClass("highlight");
-    $("#" + id).addClass(type);
+    $("#" + id).addClass(move);
     $("#" + id).html($("#" + selected).html());
 
-    checkBoard(event, parseInt(id.replace("play-area-", "")));
+    var card = $("#" + id + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
+    var rank = card[card.length-1].split("");
+    var index = parseInt(id.replace("play-area-", ""));
 
-    $("#" + move + "-hand #" + selected).remove();
+    if (board[index] === null) {
+        board[index] = {
+            values: rank,
+            owner: move
+        };
+        
+        resolveCombat(event, index, board[index]);
+        
+        checkWinCondition(event);
 
-    $(".label.computer, .label.player").removeClass("highlight");
-    if (move == "player") {
-        move = "computer";
-        $(".label.computer").addClass("highlight");
-    } else {
-        move = "player";
-        $(".label.player").addClass("highlight");
+        $("#" + move + "-hand #" + selected).remove();
+        $(".label.computer, .label.player").removeClass("highlight");
+        if (move == "player") {
+            move = "computer";
+            $(".label.computer").addClass("highlight");
+        } else {
+            move = "player";
+            $(".label.player").addClass("highlight");
+        }
     }
+END AFUNCTION
+
+AFUNCTION "checkWinCondition"
+    // 1. Check if the board is full
+    const isFull = board.every(slot => slot !== null);
+
+    if (isFull) {
+        let p1Count = 0;
+        let p2Count = 0;
+
+        // 2. Count cards on the board
+        board.forEach(card => {
+            if (card.owner === 'player') p1Count++;
+            else p2Count++;
+        });
+
+        // 3. Add the "hand" card (Standard Triple Triad rule)
+        // Usually, Player 1 started with 5, Player 2 started with 5.
+        // After 9 turns, one card remains in a hand. That card counts for its owner.
+        // For simplicity, we can track remaining hand counts:
+        p1Count += countRemainingInHand(event, 'player');
+        p2Count += countRemainingInHand(event, 'computer');
+
+        declareWinner(event, p1Count, p2Count);
+    }
+END AFUNCTION
+
+AFUNCTION "countRemainingInHand", "player"
+    return $(`.${player}-hand .card`).length;
+END AFUNCTION
+
+AFUNCTION "declareWinner", "p1Score", "p2Score"
+    let message = "";
+    
+    if (p1Score > p2Score) {
+        message = `Player 1 Wins! (${p1Score} - ${p2Score})`;
+    } else if (p2Score > p1Score) {
+        message = `Player 2 Wins! (${p2Score} - ${p1Score})`;
+    } else {
+        message = "it's a DRAW!";
+    }
+
+    gameInfo(event, message);
 END AFUNCTION
 
 ADEF computer_index%=1
@@ -274,7 +206,7 @@ END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
     $.toast({
-        heading: (error ? "INVALID" : names[turn]),
+        heading: (error ? "INVALID" : "INFO"),
         text: text,
         icon: 'info',
         loader: true,
@@ -298,7 +230,7 @@ END MOUSEEVENT
             DIV "row"
                 DIV "column", "column-left"
                     DIV ,"computer-hand"
-                        DEF iLoop%=1
+                        DEF iLoop%=0
                         FOR card$ IN computer$
                             DIV "card computer", "computer-card-"+iLoop%
                                 IMAGE "/kytschi/imgs/triple_triad/cards/"+card$+".png"
@@ -321,35 +253,35 @@ END MOUSEEVENT
                     END DIV
                     DIV ,"play-area"
                         DIV "row"
+                            DIV "card", "play-area-0"
+                                
+                            END DIV
                             DIV "card", "play-area-1"
                                 
                             END DIV
                             DIV "card", "play-area-2"
                                 
                             END DIV
+                        END DIV
+                        DIV "row"
                             DIV "card", "play-area-3"
                                 
                             END DIV
-                        END DIV
-                        DIV "row"
                             DIV "card", "play-area-4"
                                 
                             END DIV
                             DIV "card", "play-area-5"
                                 
                             END DIV
+                        END DIV
+                        DIV "row"
                             DIV "card", "play-area-6"
                                 
                             END DIV
-                        END DIV
-                        DIV "row"
                             DIV "card", "play-area-7"
                                 
                             END DIV
                             DIV "card", "play-area-8"
-                                
-                            END DIV
-                            DIV "card", "play-area-9"
                                 
                             END DIV
                         END DIV
@@ -362,7 +294,7 @@ END MOUSEEVENT
                 END DIV
                 DIV "column", "column-right"
                     DIV ,"player-hand"
-                        LET iLoop%=1
+                        LET iLoop%=0
                         FOR card$ IN player$
                             DIV "card player", "player-card-"+iLoop%
                                 IMAGE "/kytschi/imgs/triple_triad/cards/"+card$+".png"
