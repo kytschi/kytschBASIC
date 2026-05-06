@@ -310,7 +310,7 @@ END MOUSEEVENT
         SWRITE
             PRINT "Disclaimer", "strong"
             LINE BREAK
-            PRINT "This a fan made game to help me build and test KB, plus a thanks to my little cousin.&nbsp;"
+            PRINT "This a fan made game that isn't exactly the same as the original but its to help me build on and test KB, plus a thanks to my little cousin.&nbsp;"
             PRINT "I do not own the rights to the game, its concept nor am I making any money from this.&nbsp;"
             PRINT "All assets have been generated using AI and nothing is ripped from any games or copyrighted material.&nbsp;"
             PRINT "All the copyrights of the game and its concept belong to Square Enix and the Final Fantasy team."
