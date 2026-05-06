@@ -145,7 +145,15 @@ class Text extends Command
 
 	public function processValue(arg)
 	{
-		switch (this->getCommand(arg)) {
+		var args, find;
+
+        let find = arg;
+        let args = this->equalsSplit(arg);
+        if (count(args) > 1) {
+            let find = args[1];
+		}
+		
+		switch (this->getCommand(find)) {
 			case "ASC":
 				return this->processAsc(arg);
 			case "CENTRE":

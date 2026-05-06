@@ -32,6 +32,7 @@ ADEF selected$=""
 ADEF selected_rank$=""
 ADEF move$="player"
 ADIM computer$=computer$
+ADIM board%=((0,0,0,0),(0,0,0,0),(0,0,0,0))
 
 AFUNCTION "cardSelected", "type"
     if (move != "computer" && type == "computer") {
@@ -42,6 +43,7 @@ AFUNCTION "cardSelected", "type"
         return;
     }
 
+    $("#computer-hand .card, #player-hand .card").removeClass("highlight");
     selected = $(event.currentTarget).attr("id");
     $("#" + selected).addClass("highlight");
     move = type;
@@ -50,18 +52,171 @@ AFUNCTION "cardSelected", "type"
     selected_rank = card[card.length-1].split("");
 END AFUNCTION
 
-AFUNCTION "checkBoard"
-    console.log("-----checking the board------");
-    $("#play-area .card").each((index, card) => {
-        if ($("#play-area-" + index).html()) {
-            var card = $("#play-area-" + index + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
-            var rank = card[card.length-1].split("");
+AFUNCTION "findTouching", "id"
+    var num = parseInt(id, 10);
+    var index = num - 1;
+    var col = index % 3;
+    var row = Math.floor(index / 3);
+    
+    var touching = [];
 
-            if (index == 1) {
-                
-            }
+    if (row > 0) touching.push(num - 3);
+    if (row < 3 - 1) touching.push(num + 3);
+    if (col > 0) touching.push(num - 1);
+    if (col < 3 - 1) touching.push(num + 1);
+
+    return touching.sort((a, b) => a - b);
+END AFUNCTION
+
+AFUNCTION "checkBoard", "dropID"
+    console.log("-----checking the board------");
+    
+    var index = dropID - 1;
+    var col = (index % 3) + 1;
+    var row = Math.floor(index / 3) + 1;
+
+    var found = false;
+    var ownership = move;
+
+    $("#play-area .card").each((index, playCard) => {
+        if ($(playCard).html()) {
+            var touching = findTouching(event, $(playCard).attr("id").replace("play-area-", ""));
             
-            console.log(index, rank);
+            //console.log(touching);
+
+            touching.forEach((id, index) => {
+                if ($("#play-area-" + id).html()) {
+                    var card = $("#play-area-" + id + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
+                    var rank = card[card.length-1].split("");
+
+                    switch (dropID) {
+                        case 1:
+                            if (selected_rank[3] > rank[0] && id == 4) {
+                                $("#play-area-4").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[2] > rank[1] && id == 2) {
+                                $("#play-area-2").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 2:
+                            if (selected_rank[3] > rank[0] && id == 5) {
+                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[1] > rank[2] && id == 1) {
+                                $("#play-area-1").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[2] > rank[1] && id == 3) {
+                                $("#play-area-3").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 3:
+                            if (selected_rank[1] > rank[2] && id == 2) {
+                                $("#play-area-2").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[3] > rank[0] && id == 6) {
+                                $("#play-area-6").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 4:
+                            if (selected_rank[0] > rank[3] && id == 1) {
+                                $("#play-area-1").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[2] > rank[1] && id == 5) {
+                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[3] > rank[0] && id == 7) {
+                                $("#play-area-7").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 5:
+                            if (selected_rank[0] > rank[3] && id == 2) {
+                                $("#play-area-2").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[1] > rank[2] && id == 4) {
+                                $("#play-area-4").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[2] > rank[1] && id == 7) {
+                                $("#play-area-7").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[3] > rank[0] && id == 8) {
+                                $("#play-area-8").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 6:
+                            if (selected_rank[0] > rank[3] && id == 3) {
+                                $("#play-area-3").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[1] > rank[2] && id == 5) {
+                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[3] > rank[0] && id == 9) {
+                                $("#play-area-9").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 7:
+                            if (selected_rank[0] > rank[3] && id == 4) {
+                                $("#play-area-4").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[2] > rank[1] && id == 8) {
+                                $("#play-area-8").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 8:
+                            if (selected_rank[0] > rank[3] && id == 5) {
+                                $("#play-area-5").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[1] > rank[2] && id == 7) {
+                                $("#play-area-7").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[2] > rank[1] && id == 9) {
+                                $("#play-area-9").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                        case 9:
+                            if (selected_rank[0] > rank[3] && id == 6) {
+                                $("#play-area-6").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            if (selected_rank[1] > rank[2] && id == 8) {
+                                $("#play-area-8").removeClass("computer").removeClass("player").addClass(move);
+                                found = true;
+                            }
+                            break;
+                    }
+
+                    if (found) {
+                        return;
+                    }
+
+                    //console.log(dropID, selected_rank, id, rank);
+                }
+            });
+
+            if (found) {
+                return;
+            }
         }
     });
 END AFUNCTION
@@ -71,8 +226,6 @@ AFUNCTION "dropCard"
         gameInfo(event, "Please select a card to play", true);
         return;
     }
-
-    checkBoard(event);
 
     var id = $(event.currentTarget).attr("id");
     
@@ -89,6 +242,8 @@ AFUNCTION "dropCard"
     $("#" + selected).removeClass("highlight");
     $("#" + id).addClass(type);
     $("#" + id).html($("#" + selected).html());
+
+    checkBoard(event, parseInt(id.replace("play-area-", "")));
 
     $("#" + move + "-hand #" + selected).remove();
 
@@ -160,7 +315,7 @@ END MOUSEEVENT
                         DIV "card"
                             
                         END DIV
-                        DIV "label player align-right"
+                        DIV "label player align-right highlight"
                             PRINT "You"
                         END DIV
                     END DIV
@@ -221,7 +376,7 @@ END MOUSEEVENT
     END DIV
     DIV ,"disclaimer"
         SWRITE
-            PRINT "Disclaimer"
+            PRINT "Disclaimer", "strong"
             LINE BREAK
             PRINT "This a fan made game to help me build and test KB, plus a thanks to my little cousin.&nbsp;"
             PRINT "I do not own the rights to the game, its concept nor am I making any money from this.&nbsp;"

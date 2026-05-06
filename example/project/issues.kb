@@ -12,15 +12,17 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Issues"
 				END HEADING 2
 				SWRITE
+					PRINT "If you spot something let me know via "
+					LINK "https://github.com/kytschi/kytschBASIC/issues",,,"_blank"
+						PRINT "github."
+					END LINK
+				END SWRITE
+				SWRITE
 					PRINT "When using commands like PRINT and you are wanting to output a string with double quotes inside you'll "
 					PRINT "face errors. To avoid this use character ecaping as shown in the example below."
 CPRINT
 PRINT "This is how you \"escape\" characters"
 END CPRINT
-				END SWRITE
-				LINE BREAK
-				SWRITE
-					PRINT "There is an issue with camel case variable names, e.g. camelCase so for now stick to lowercase till I do the fix."
 				END SWRITE
 			END DIV
 		END DIV

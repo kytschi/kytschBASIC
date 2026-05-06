@@ -3,7 +3,7 @@
  *
  * @package     KytschBASIC\Parsers\Core\Variables
  * @author 		Mike Welsh <hello@kytschi.com>
- * @copyright   2025 Mike Welsh
+ * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2
  *
@@ -225,6 +225,11 @@ class Variables
 		return preg_split("/,\s*(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^()]*\([^()]*\))*[^()]*$)/", line);
 	}
 
+	public function dateFormat(date, format)
+	{
+		return date_format(date_create(date), format);
+	}
+
 	public function dump(output, bool html = false, bool in_javascript = false)
 	{
 		if (in_javascript) {
@@ -243,7 +248,7 @@ class Variables
 		return preg_split("/=(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", line, 2, PREG_SPLIT_NO_EMPTY);
 	}
 
-	public function getCommand(string line)
+	public function getCommand(line)
 	{
 		var strings;
 
@@ -252,6 +257,12 @@ class Variables
 		if (empty(line)) {
 			return null;
 		}
+
+		/*let strings = this->equalsSplit(line);
+		if (count(strings) > 1) {
+			let line = strings[1];
+		}
+		var_dump(line);*/
 
 		if (substr(line, 0, 1) == "\"" || preg_match("/^[a-z]/", line, strings)) {
 			return null;
@@ -449,11 +460,6 @@ class Variables
 			let args = this->commaSplit(cleaned);
 			return str_replace(splits[0], "\"\" . (new KytschBASIC\\Parsers\\Core\\Variables())->dateFormat(" . args[0] . ", " . args[1] . ") . \"\"", arg);
 		}
-	}
-
-	public function dateFormat(date, format)
-	{
-		return date_format(date_create(date), format);
 	}
 
 	public function processDef(string line, args, bool let_var = false, bool javascript = false, bool in_javascript = false)
@@ -804,7 +810,15 @@ class Variables
 
 	public function processValue(arg)
 	{
-		switch (this->getCommand(arg)) {
+		var args, find;
+
+        let find = arg;
+        let args = this->equalsSplit(arg);
+        if (count(args) > 1) {
+            let find = args[1];
+		}
+		
+		switch (this->getCommand(find)) {
 			case "CONTAINS":
 				return this->processContains(arg);
 			case "COUNT":

@@ -126,4 +126,4 @@ The Arcade library makes use of [JS-Cookie](https://github.com/js-cookie/js-cook
 
 ## Issues
 
-There is an issue with camel case variable names, e.g. camelCase so for now stick to lowercase till I do the fix.
+Let me know via [github](https://github.com/kytschi/kytschBASIC/issues).
