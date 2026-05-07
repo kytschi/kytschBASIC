@@ -280,7 +280,7 @@ AFUNCTION "playCard"
 
     gameInfo(event, "Played " + value + " of " + card_suit);
 
-    pick_up_done=1;
+    pick_up_done = 1;
     if (value == 7) {
         switch_dir = switch_dir ? 0 : 1;
         gameInfo(event, "Switch");
