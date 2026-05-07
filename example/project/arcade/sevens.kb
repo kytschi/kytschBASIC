@@ -23,6 +23,7 @@ DEF no_players%=3
 
 IFNTE _GET("np") THEN
     LET no_players%=_GET("np")
+    LET no_players%=INT(no_players%)
 END IF
 
 IF no_players%<3 THEN
@@ -538,34 +539,38 @@ DIV "", "sevens"
                     PRINT "Select game setup"
                 END DIV
                 DIV "modal-body"
-                    DIV "row", "playerSelect"
-                        LET no_players%=(no_players%+1)
-                        DEF game_code$=RNDSTRING(9)
-                        DIV "row break"
-                            PRINT "No. players"
-                            NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
-                        END DIV
-                        DIV "row"
-                            PRINT "Game code"
-                            TEXTINPUT "game_code", game_code$, "form-input"
-                        END DIV
-                        DIV "row break"
-                        END DIV
-                        DIV "row"
-                            DIV "col-full"
-                                BUTTON "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single", "Single player"
-                                BUTTON "btnMultiPlayer", "btn-last-card", "btnMultiPlayer", "multi", "Multiplayer"
+                    FORM "form_setup", "GET", "/arcade/sevens"
+                        DIV "row", "playerSelect"
+                            LET no_players%=(no_players%+1)
+                            DEF game_code$=RNDSTRING(9)
+                            DIV "row break"
+                                PRINT "No. players"
+                                NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
+                            END DIV
+                            REM DIV "row"
+                                REM PRINT "Game code"
+                                REM TEXTINPUT "game_code", game_code$, "form-input"
+                            REM END DIV
+                            DIV "row break"
+                            END DIV
+                            DIV "row"
+                                DIV "col-full"
+                                    BUTTONSUBMIT "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single"
+                                        IMAGE "/kytschi/imgs/cards/button-setup.png"
+                                    END BUTTON
+                                    REM BUTTONSUBMIT "btnMultiPlayer", "btn-last-card", "btnMultiPlayer", "multi", "Multiplayer"
+                                END DIV
                             END DIV
                         END DIV
-                    END DIV
-                    DIV "row hide", "multiplayerSelect"
-                        PRINT "Multiplayer"
-                        TEXTINPUT "txtGameID",,"form-input","Please enter your name","txtPlayerName",true
-                        TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
-                        DIV "row break"
-                        END DIV
-                        BUTTON "btnMultiPlayerStart", "btn-new-game", "btnMultiPlayerStart", "multi", "Start"
-                    END DIV
+                        REM DIV "row hide", "multiplayerSelect"
+                            REM PRINT "Multiplayer"
+                            REM TEXTINPUT "txtGameID",,"form-input","Please enter your name","txtPlayerName",true
+                            REM TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
+                            REM DIV "row break"
+                            REM END DIV
+                            REM BUTTONSUBMIT "btnMultiPlayerStart", "btn-new-game", "btnMultiPlayerStart", "multi", "Start"
+                        REM END DIV
+                    END FORM
                 END DIV
                 DIV "modal-footer"
                     BUTTON "btnCloseModal", "btn-knocking", "btnCloseModal", "close", "Close"
