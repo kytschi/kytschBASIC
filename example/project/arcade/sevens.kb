@@ -34,7 +34,7 @@ LET no_players%=no_players%-1
 
 FOR suit$ IN suits$
     FOR face$ IN faces$
-        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".svg"
+        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".png"
     NEXT
 NEXT
 
@@ -91,7 +91,7 @@ AFUNCTION "computerPlay"
 
         hands[turn].forEach((card, index) => {
             if (!played) {
-                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
                 let card_details = selected_card.split("_");
                 deck_suit = card_details[0];
                 value = card_details[1];
@@ -243,7 +243,7 @@ AFUNCTION "playCard", "value"
     if (turn == 0) {
         $("#" + deck_suit).append($("#" + selected_card).prop("outerHTML"));
     } else {
-        $("#" + deck_suit).append('<div id="' + selected_card + '" class="card" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
+        $("#" + deck_suit).append('<div id="' + selected_card + '" class="card" onclick="javascript:onCardClick(event)"><img src="/kytschi/imgs/cards/' + selected_card + '.png"></div>');
     }
 
     $("#" + deck_suit + " #" + selected_card).attr("onclick", $("#" + deck_suit + "_placeholder").attr("onclick"));
@@ -269,7 +269,7 @@ AFUNCTION "playCard", "value"
     if (turn == 0) {
         $("#hand #" + selected_card).remove();
         hands[turn].forEach((card, index) => {
-            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
             if (check == selected_card) {
                 hands[turn].splice(index, 1);
             }
@@ -325,8 +325,8 @@ AFUNCTION "gameInfo", "text", "error = false"
         textColor: 'white'
     });
 
-    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
-    $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
+    //$("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
+    //$("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
 
 AFUNCTION "gameOver"
@@ -348,7 +348,7 @@ AFUNCTION "gameOver"
         score = parseInt($("#player-" + iLoop + "-score span").html());
 
         hands[iLoop].forEach((card, index) => {
-            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
+            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
             value = parseInt(card_details[1]);
             if (value == 1) {
                 score += 11;
@@ -382,7 +382,7 @@ JAVASCRIPT
         turn = iLoop;
         hands[turn].forEach((card, index) => {
             if (!played) {
-                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                selected_card = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
                 let card_details = selected_card.split("_");
                 deck_suit = card_details[0];
                 value = card_details[1];   
@@ -440,51 +440,79 @@ END JAVASCRIPT
 DIV "", "sevens"
     DIV "", "board"
         DIV "", "deck"
-            DIV "deck-placeholder", "diamonds"
-                SPRITE "diamonds_placeholder","placeholder", "onDeckClick"
-                    IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
-                END SPRITE
+            DIV ,"cards"
+                DIV "deck-placeholder", "diamonds"
+                    SPRITE "diamonds_placeholder","placeholder", "onDeckClick"
+                        IMAGE "/kytschi/imgs/cards/diamonds_placeholder.png"
+                    END SPRITE
+                END DIV
+                DIV "deck-placeholder", "hearts"
+                    SPRITE "hearts_placeholder","placeholder", "onDeckClick"
+                        IMAGE "/kytschi/imgs/cards/hearts_placeholder.png"
+                    END SPRITE
+                END DIV
+                DIV "deck-placeholder", "spades"
+                    SPRITE "spades_placeholder","placeholder", "onDeckClick"
+                        IMAGE "/kytschi/imgs/cards/spades_placeholder.png"
+                    END SPRITE
+                END DIV
+                DIV "deck-placeholder", "clubs"
+                    SPRITE "clubs_placeholder","placeholder", "onDeckClick"
+                        IMAGE "/kytschi/imgs/cards/clubs_placeholder.png"
+                    END SPRITE
+                END DIV
             END DIV
-            DIV "deck-placeholder", "hearts"
-                SPRITE "hearts_placeholder","placeholder", "onDeckClick"
-                    IMAGE "/kytschi/imgs/cards/hearts_placeholder.svg"
-                END SPRITE
+            DIV , "controls"
+                BUTTON "btnKnock", "btn-knocking"
+                    PRINT "&nbsp;"
+                END BUTTON
+                BUTTON "btnNewGame", "btn-new-game"
+                    PRINT "&nbsp;"
+                END BUTTON
+                DIV "form_test"
+                    BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
+                END DIV
             END DIV
-            DIV "deck-placeholder", "spades"
-                SPRITE "spades_placeholder","placeholder", "onDeckClick"
-                    IMAGE "/kytschi/imgs/cards/spades_placeholder.svg"
-                END SPRITE
-            END WINDOW
-            DIV "deck-placeholder", "clubs"
-                SPRITE "clubs_placeholder","placeholder", "onDeckClick"
-                    IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
-                END SPRITE
-            END WINDOW
         END DIV
-        DIV "", "game"
+    END DIV
+    DIV "", "player"
+        DIV "", "hand"
+            FOR card$ IN hands$(0)
+                DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+                DEF id$=REPLACE(id$, ".png", "")
+                SPRITE id$, "card", "onCardClick", "onCardDblClick"
+                    IMAGE card$
+                END SPRITE
+            NEXT
+        END DIV
+    END DIV
+    DIV "", "scoreboard"
+        DIV "", "scoreboard-scores"
             TABLE
-                THEAD
-                    TROW
-                        THEADCELL
-                            PRINT "&nbsp;"
-                        END THEADCELL
-                        THEADCELL ,"text-left"
-                            PRINT "Player"
-                        END THEADCELL
-                        THEADCELL ,"text-left"
-                            PRINT "&nbsp;"
-                        END THEADCELL
-                        THEADCELL
-                            PRINT "Score"
-                        END THEADCELL
-                    END TROW
-                END THEAD
                 TBODY
+                    TROW
+                        TCELL
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL
+                            PRINT "Player"
+                        END TCELL
+                        TCELL ,"last-card"
+                            PRINT "LC","last-card",,"Last card"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "Total"
+                        END TCELL
+                    END TROW
                     FOR iLoop%=0 TO no_players%
                         DEF id$="score-"+iLoop%
                         TROW ,id$
-                            TCELL ,,,"player-" + iLoop%
-                                PRINT "&nbsp;"
+                            TCELL ,"player-img",,"player-" + iLoop%
+                                IF iLoop%=0
+                                    IMAGE "/kytschi/imgs/cards/human.png"
+                                ELSE
+                                    IMAGE "/kytschi/imgs/cards/bot.png"
+                                END IF
                             END TCELL
                             TCELL
                                 PRINT names$(iLoop%)
@@ -500,28 +528,7 @@ DIV "", "sevens"
                 END TBODY
             END TABLE
         END DIV
-    END DIV
-    DIV "", "player"
-        DIV "", "hand"
-            FOR card$ IN hands$(0)
-                DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
-                DEF id$=REPLACE(id$, ".svg", "")
-                SPRITE id$, "card", "onCardClick", "onCardDblClick"
-                    IMAGE card$
-                END SPRITE
-            NEXT
-        END DIV
-        DIV "", "controls"
-            BUTTON "btnKnock", "btn-knocking"
-                PRINT "knocking"
-            END BUTTON
-            BUTTON "btnNewGame", "btn-new-game"
-                PRINT "new game"
-            END BUTTON
-            DIV "form_test"
-                BUTTON "btnSetup", "btn-submit",,"setup","Setup"
-            END DIV
-            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+        DIV ,"scoreboard-footer"
         END DIV
     END DIV
     DIV "modal fade", "modalNewGame"

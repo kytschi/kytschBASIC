@@ -31,7 +31,7 @@ NEXT
 ADEF selected$=""
 ADEF selected_rank$=""
 ADEF move$="player"
-ADIM computer$=computer$
+ADEF computer_index%=1
 ADIM board%=(null,null,null,null,null,null,null,null,null)
 
 AFUNCTION "cardSelected", "type"
@@ -47,16 +47,12 @@ AFUNCTION "cardSelected", "type"
     selected = $(event.currentTarget).attr("id");
     $("#" + selected).addClass("highlight");
     move = type;
-
-    var card = $("#" + selected + " img").attr("src").replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
-    selected_rank = card[card.length-1].split("");
 END AFUNCTION
 
 AFUNCTION "getNeighbors", "index"
     index = parseInt(index, 10);
 
     const neighbors = [];
-    // Define bounds: [index change, side of current card, side of neighbor card]
     const checks = [
         { adj: index - 3, currSide: 0, neighborSide: 2 }, // Top
         { adj: index + 3, currSide: 2, neighborSide: 0 }, // Bottom
@@ -74,20 +70,15 @@ END AFUNCTION
 
 AFUNCTION "resolveCombat", "placedIndex", "card"
     const neighbors = getNeighbors(event, placedIndex);
-    console.log("neighbors", neighbors);
 
     neighbors.forEach(check => {
         const neighborCard = board[check.adj];
-        if (neighborCard) {
-            console.log(check.adj, neighborCard.owner, "!==", card.owner);
-        }
 
         // Only check if there's an opponent's card there
         if (neighborCard && neighborCard.owner !== card.owner) {
             const attackValue = card.values[check.currSide];
             const defenseValue = neighborCard.values[check.neighborSide];
 
-            console.log(attackValue, ">", defenseValue);
             if (attackValue > defenseValue) {
                 flipCard(event, check.adj);
             }
@@ -147,20 +138,18 @@ AFUNCTION "dropCard"
 END AFUNCTION
 
 AFUNCTION "checkWinCondition"
-    // 1. Check if the board is full
     const isFull = board.every(slot => slot !== null);
 
     if (isFull) {
         let p1Count = 0;
         let p2Count = 0;
 
-        // 2. Count cards on the board
         board.forEach(card => {
             if (card.owner === 'player') p1Count++;
             else p2Count++;
         });
 
-        // 3. Add the "hand" card (Standard Triple Triad rule)
+        // Add the "hand" card (Standard Triple Triad rule)
         // Usually, Player 1 started with 5, Player 2 started with 5.
         // After 9 turns, one card remains in a hand. That card counts for its owner.
         // For simplicity, we can track remaining hand counts:
@@ -179,17 +168,16 @@ AFUNCTION "declareWinner", "p1Score", "p2Score"
     let message = "";
     
     if (p1Score > p2Score) {
-        message = `Player 1 Wins! (${p1Score} - ${p2Score})`;
+        message = `You Win! (${p1Score} - ${p2Score})`;
     } else if (p2Score > p1Score) {
-        message = `Player 2 Wins! (${p2Score} - ${p1Score})`;
+        message = `Opponent Wins! (${p2Score} - ${p1Score})`;
     } else {
-        message = "it's a DRAW!";
+        message = "It's a DRAW!";
     }
 
     gameInfo(event, message);
 END AFUNCTION
 
-ADEF computer_index%=1
 AFUNCTION "computerTurn"
     var free_index = 0;
     $("#play-area .card").each((index, card) => {
@@ -287,6 +275,14 @@ END MOUSEEVENT
                         END DIV
                     END DIV
                     DIV "row spacer"
+                        DIV "card"
+                            
+                        END DIV
+                        DIV "card"
+                            LINK "/arcade/triple-triad", "Start a new game", "button align-middle"
+                                PRINT "New Game"
+                            END LINK
+                        END DIV
                         DIV "card"
                             
                         END DIV

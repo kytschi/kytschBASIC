@@ -13,6 +13,16 @@ body {
     background-repeat: repeat-x;
 }
 
+.button {
+    display: block;
+    background-color: #89518E;
+    border: 3px solid #3E135A;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #FFE6E1;
+    text-align: center;
+}
+
 #game {
     display: flex;
     flex-direction: column;
@@ -58,6 +68,8 @@ body {
     border: 3px solid #3E135A;
     background-color: #fff;
     padding: 10px;
+    width: 100%;
+    text-align: center;
 }
 
 .column {
@@ -81,6 +93,7 @@ body {
 }
 
 .card {
+    display: block;
     background-image: url("../imgs/triple_triad/cards/placeholder.jpg");
     background-size: 128px 165px;
     background-repeat: no-repeat;
@@ -116,6 +129,9 @@ body {
     color: #fff;
 }
 
+.align-middle {
+    margin-top: calc(100% / 2);
+}
 .align-right {
     justify-content: end;
 }

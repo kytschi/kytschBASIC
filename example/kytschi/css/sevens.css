@@ -1,78 +1,173 @@
+:root {
+    --card-width: 100px;
+}
 html, body {
     padding: 0;
     margin: 0;
     width: 100%;
-    height: 100%;
     overflow-x: hidden;
-    background-color: #09a314;
+    background-color: #165041;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("../imgs/cards/bk.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 #sevens {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
-    height: 100vh;
-    padding: 5px;
 }
 
 #sevens #board, #sevens #player {
     display: flex;
     width: 100%;
-}
-
-#sevens #board {
-    display: flex;
-    height: 300px;
-    position: absolute;
+    align-items: center;
+    justify-content: center;
 }
 
 #sevens #deck {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    padding-top: 50px;
+    height: 523px;
+    background-image: url("../imgs/cards/table.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 1099px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+#sevens #deck #cards {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 320px;
+}
+#sevens #deck #controls {
     gap: 10px;
-    flex: 1 1 auto;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 70px;
 }
 
-#sevens #game {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 200px;
-    height: 100%;
-    border-left: 2px solid #000;
-    padding: 10px;
+#sevens #deck #controls .btn-new-game {
+    display: block;
+    background-image: url("../imgs/cards/button-new.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#sevens #deck #controls .btn-knocking {
+    display: block;
+    background-image: url("../imgs/cards/button-knock.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#sevens #deck #controls .btn-submit{
+    display: block;
+    background-image: url("../imgs/cards/button-setup.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+
+#sevens #scoreboard {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: block;
+    width: 327px;
     z-index: 5;
+    background-image: url("../imgs/cards/scoreboard.png");
+    background-repeat: no-repeat;
+    color: #fff;
+    padding-top: 49px;
+}
+#sevens #scoreboard-scores {
+    width: 100%;
+    background-color: #292444;
+    background-image: url("../imgs/cards/scoreboard-border.png");
+    background-repeat: repeat-y;
+}
+#sevens #scoreboard-footer {
+    position: relative;
+    margin-top: -5px;
+    height: 19px;
+    width: 100%;
+    background-image: url("../imgs/cards/scoreboard-bottom.png");
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+#sevens #scoreboard table {
+    margin-left: 11px;
+    border-collapse: collapse;
+    border: none;
+    width: calc(100% - 24px);
+}
+
+#sevens #scoreboard table tbody {
+    width: 100%;
+}
+
+#sevens #scoreboard th, #sevens #scoreboard td {
+    padding: 0 0 0 5px;
+    margin: 0;
+    border: none;
+}
+#sevens #scoreboard .player-img {
+    text-align: center;
+    width: 41px;
+    padding: 0;
+}
+#sevens #scoreboard .player-img img {
+    margin: 0;
+}
+
+#sevens #scoreboard table tbody tr:nth-child(odd) {
+    background-color: #292444;
+    padding: 0;
+}
+#sevens #scoreboard table tbody tr:nth-child(even) {
+    background-color: #313654;
+    padding: 0;
 }
 
 #sevens #player {
-    margin-top: 300px;
-    border-top: 2px solid #000;
-    z-index: 10;
-    background-color: #09a314;
+    flex-direction: column;
+    z-index: 10;    
 }
 
 #sevens #player #hand {
     flex: 1 1 auto;
     display: flex;
-    column-gap: 10px;
-    row-gap: 20px;
-    align-content: flex-start;
+    column-gap: 0px;
+    row-gap: 0px;
+    align-content: center;
+    justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
     padding-top: 10px;
 }
 
-#sevens #player #controls {
-    gap: 10px;
-    flex: 0 0 200px;
-    display: flex;
-    /*display: none;*/
-    flex-direction: column;
-    border-left: 2px solid #000;
-    padding: 10px;
+#sevens #player #hand .card {
+    position: relative;
+    margin-left: calc(((var(--card-width) / 2) + 20px) * -1);
 }
 
 #sevens #deck .deck-placeholder {
@@ -88,7 +183,7 @@ html, body {
     display: inline-flex;
     background: none;
     border: none;
-    width: 120px;
+    width: var(--card-width);
     cursor: pointer;
     padding: 0;
     margin: 0;
@@ -99,7 +194,7 @@ html, body {
 
 #sevens #deck .card {
     position: absolute;
-    margin-left: -120px;
+    margin-left: calc(var(--card-width) * -1);
 }
 
 #sevens .row {
@@ -137,21 +232,21 @@ html, body {
     }
 
     #sevens .card, #sevens .placeholder {
-        width: 100px;
+        width: calc(var(--card-width) - 20px);
     }
 
     #sevens #deck .card {
-        margin-left: -100px;
+        margin-left: calc((var(--card-width) - 20px) * -1);
     }
 }
 
 @media only screen and (max-height: 315px) {
     #sevens .card, #sevens .placeholder {
-        width: 80px;
+        width: calc(var(--card-width) - 40px);
     }
 
     #sevens #deck .card {
-        margin-left: -80px;
+        margin-left: calc((var(--card-width) - 40px) * -1);
     }
 }
 
@@ -164,14 +259,14 @@ html, body {
 }
 
 #sevens .card-highlight {
-    border: 4px solid #4ee5fc;
+    border: 4px solid #2B8ACA;
 }
 
 #sevens .card-warn {
-    border: 4px solid #f43c09;
+    border: 4px solid #D23136;
 }
 
-#sevens img {
+#sevens #deck img, #sevens #hand img {
     width: 100%;
     margin: 0;
 }
@@ -185,7 +280,7 @@ html, body {
 }
 
 #sevens .player-turn {
-    background-color: #4ee5fc;
+    background-color: #2B8ACA;
 }
 
 #sevens .last-card span {
@@ -214,35 +309,15 @@ html, body {
 }
 
 #sevens button {
-    height: 50px;
     border: 0;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
-    width: 100%;
+    background: none;
 }
 
 #sevens .btn-last-card {
     background-color: #ffd400;
-}
-
-#sevens .btn-knocking {
-    background-color: #f43c09;
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    width: calc(100% - 10px);
-}
-
-#sevens .btn-submit {
-    background-color: #ffd400;
-    width: calc(100% - 10px);
-}
-
-#sevens .btn-new-game {
-    background-color: #2794e8;
-    color: #fff;
-    width: calc(100% - 10px);
 }
 
 #sevens .no-players {
