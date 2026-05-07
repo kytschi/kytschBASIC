@@ -283,12 +283,12 @@ body {
     background-color: #2B8ACA;
 }
 
-#sevens td.last-card {
+#sevens td.last-card-col {
     width: 50px;
     text-align: center;
 }
 
-#sevens .last-card img, #sevens .winner img {
+#sevens .last-card, #sevens .winner, #sevens .knocking {
     display: none;
     cursor: pointer;
 }

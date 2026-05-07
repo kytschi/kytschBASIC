@@ -102,7 +102,7 @@ AFUNCTION "computerPlay"
                     hands[turn].splice(index, 1);
                     if (hands[turn].length == 1) {
                         gameInfo(event, "LAST CARD");
-                        $("#last-card-" + turn + " .last-card").show();
+                        $("#player-" + turn + " .last-card").show();
                     } else if (hands[turn].length == 0) {
                         gameOver(event);
                     }
@@ -113,6 +113,9 @@ AFUNCTION "computerPlay"
 
         if (!played) {
             gameInfo(event, "KNOCKING");
+            $("#player-" + turn + " .knocking").show();
+        } else {
+            $("#player-" + turn + " .knocking").hide();
         }
 
         updateTurn();
@@ -124,17 +127,19 @@ AFUNCTION "updateTurn"
         return;
     }
 
-    $("#player-" + turn).removeClass("player-turn");
+    $("#player-" + turn + " .player-img").removeClass("player-turn");
 
     turn += 1;
     if (turn == hands.length) {
         turn = 0;
     }
     
-    $("#player-" + turn).addClass("player-turn");
+    $("#player-" + turn + " .player-img").addClass("player-turn");
 
     if (turn != 0) {
         computerPlay();
+    } else {
+        $("#player-" + turn + " .knocking").hide();
     }
 END AFUNCTION
 
@@ -227,6 +232,8 @@ AFUNCTION "playerKnocking"
         }
     });
 
+    $("#player-" + turn + " .knocking").show();
+
     if (valid == true) {
         gameInfo(event, "KNOCKING");
     } else {
@@ -306,7 +313,7 @@ AFUNCTION "onDeckClick", "suit=null"
             gameOver(event);
         } else if ($("#hand").children().length == 1) {
             gameInfo(event, "LAST CARD");
-            $("#last-card-" + turn + " .last-card").show();
+            $("#player-" + turn + " .last-card").show();
         }
         updateTurn();
     } else {
@@ -344,11 +351,11 @@ AFUNCTION "gameOver"
 
     game_over = 1;
     gameInfo(event, "I WIN!!!");
-    $("#last-card-" + turn + " .last-card").hide();
-    $("#last-card-" + turn + " .winner").show();
+    $("#player-" + turn + " .last-card").hide();
+    $("#player-" + turn + " .winner").show();
 
     for (var iLoop = 0; iLoop < hands.length; iLoop++) {
-        score = parseInt($("#player-" + iLoop + "-score span").html());
+        score = parseInt($("#player-" + iLoop + " .score span").html());
 
         hands[iLoop].forEach((card, index) => {
             card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
@@ -362,7 +369,7 @@ AFUNCTION "gameOver"
             }
         });
 
-        $("#player-" + iLoop + "-score span").html(score);
+        $("#player-" + iLoop + " .score span").html(score);
         kb_cookie.kb_sevens_scores[iLoop].score = score;
     }
 
@@ -376,7 +383,7 @@ JAVASCRIPT
 
     if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_sevens_scores)) {
-            $("#player-" + player + "-score span").html(value.score);
+            $("#player-" + player + " .score span").html(value.score);
         }
     }
 
@@ -499,7 +506,10 @@ DIV "", "sevens"
                         TCELL
                             PRINT "Player"
                         END TCELL
-                        TCELL ,"last-card"
+                        TCELL ,"last-card-col"
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL ,"last-card-col"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"text-center"
@@ -507,9 +517,8 @@ DIV "", "sevens"
                         END TCELL
                     END TROW
                     FOR iLoop%=0 TO no_players%
-                        DEF id$="score-"+iLoop%
-                        TROW ,id$
-                            TCELL ,"player-img",,"player-" + iLoop%
+                        TROW ,"player-"+iLoop%
+                            TCELL ,"player-img"
                                 IF iLoop%=0
                                     IMAGE "/kytschi/imgs/cards/human.png"
                                 ELSE
@@ -519,11 +528,14 @@ DIV "", "sevens"
                             TCELL
                                 PRINT names$(iLoop%)
                             END TCELL
-                            TCELL ,"last-card",,"last-card-" + iLoop%
+                            TCELL ,"last-card-col"
                                 IMAGE "/kytschi/imgs/cards/last-card.png","last","last-card"
                                 IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                             END TCELL
-                            TCELL ,"text-center",,"player-" + iLoop% + "-score"
+                            TCELL ,"last-card-col"
+                                IMAGE "/kytschi/imgs/cards/knocking.png","knocking","knocking"
+                            END TCELL
+                            TCELL ,"text-center score"
                                 PRINT "0"
                             END TCELL
                         END TROW
