@@ -167,7 +167,7 @@ body {
 
 #sevens #player #hand .card {
     position: relative;
-    margin-left: calc(((var(--card-width) / 2) + 20px) * -1);
+    margin-left: calc(((var(--card-width) / 2) + 10px) * -1);
 }
 
 #sevens #deck .deck-placeholder {
@@ -283,13 +283,14 @@ body {
     background-color: #2B8ACA;
 }
 
-#sevens .last-card span {
+#sevens td.last-card {
+    width: 50px;
+    text-align: center;
+}
+
+#sevens .last-card img, #sevens .winner img {
     display: none;
     cursor: pointer;
-    background-color: #FFD400;
-    color: #000;
-    font-size: 12px;
-    padding: 0 2px;
 }
 
 #sevens #game-info {
@@ -314,10 +315,6 @@ body {
     font-weight: bold;
     cursor: pointer;
     background: none;
-}
-
-#sevens .btn-last-card {
-    background-color: #ffd400;
 }
 
 #sevens .no-players {

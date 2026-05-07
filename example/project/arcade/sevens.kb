@@ -102,7 +102,7 @@ AFUNCTION "computerPlay"
                     hands[turn].splice(index, 1);
                     if (hands[turn].length == 1) {
                         gameInfo(event, "LAST CARD");
-                        $("#last-card-" + turn + " span").show();
+                        $("#last-card-" + turn + " .last-card").show();
                     } else if (hands[turn].length == 0) {
                         gameOver(event);
                     }
@@ -306,7 +306,7 @@ AFUNCTION "onDeckClick", "suit=null"
             gameOver(event);
         } else if ($("#hand").children().length == 1) {
             gameInfo(event, "LAST CARD");
-            $("#last-card-" + turn + " span").show();
+            $("#last-card-" + turn + " .last-card").show();
         }
         updateTurn();
     } else {
@@ -344,6 +344,8 @@ AFUNCTION "gameOver"
 
     game_over = 1;
     gameInfo(event, "I WIN!!!");
+    $("#last-card-" + turn + " .last-card").hide();
+    $("#last-card-" + turn + " .winner").show();
 
     for (var iLoop = 0; iLoop < hands.length; iLoop++) {
         score = parseInt($("#player-" + iLoop + "-score span").html());
@@ -370,7 +372,6 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
-    $(".last-card").attr("style", "");
     var played = false;
 
     if (typeof(kb_cookie.kb_sevens_scores) != "undefined") {
@@ -499,7 +500,7 @@ DIV "", "sevens"
                             PRINT "Player"
                         END TCELL
                         TCELL ,"last-card"
-                            PRINT "LC","last-card",,"Last card"
+                            PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"text-center"
                             PRINT "Total"
@@ -519,7 +520,8 @@ DIV "", "sevens"
                                 PRINT names$(iLoop%)
                             END TCELL
                             TCELL ,"last-card",,"last-card-" + iLoop%
-                                PRINT "LC","last-card",,"Last card"
+                                IMAGE "/kytschi/imgs/cards/last-card.png","last","last-card"
+                                IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                             END TCELL
                             TCELL ,"text-center",,"player-" + iLoop% + "-score"
                                 PRINT "0"
