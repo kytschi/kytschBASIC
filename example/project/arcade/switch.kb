@@ -114,6 +114,10 @@ AFUNCTION "updateTurn"
         return;
     }
 
+    if (pick_up != 0) {
+        $("button[name=btnPickup]").addClass("btn-pickup-on");
+    }
+
     $("#player-" + turn + " .player-img").removeClass("player-turn");
     $("#player-" + turn + " .knocking").hide();
 
@@ -245,7 +249,8 @@ END AFUNCTION
 
 AFUNCTION "pickup"
     if (pick_up && pick_up_done) {
-        gameInfo(event, "You have to pick up " + pick_up);
+        $("button[name=btnPickup]").removeClass("btn-pickup-on");
+        gameInfo(event, "You had to pick up " + pick_up);
         for (iLoop = 0; iLoop < pick_up; iLoop++) {
             hands[turn].push(pool[0]);
             pool.splice(0, 1);
@@ -340,6 +345,7 @@ END AFUNCTION
 
 AFUNCTION "onDeckClick"
     if (game_over || turn) {
+        gameInfo(event, "Wait your turn", true);
         return;
     }
 
@@ -511,14 +517,22 @@ JAVASCRIPT
     });
 
     $("button[name=btnKnock]").click(() => {
-        playerKnocking();
+        if (turn == 0) {
+            playerKnocking();
+        } else {
+            gameInfo(event, "Wait your turn", true);
+        }
     });
     $("button[name=btnPickup]").click(() => {
-        pick_up_done = 1;
-        if (pick_up && pick_up_done) {
-            pickup();
+        if (turn == 0) {
+            if (pick_up) {
+                pick_up_done = 1;
+                pickup();
+            } else {
+                gameInfo(event, "Nothing to pick up", true);
+            }
         } else {
-            gameInfo(event, "Nothing to pick up", true);
+            gameInfo(event, "Wait your turn", true);
         }
     });
 
