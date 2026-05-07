@@ -1,94 +1,193 @@
+:root {
+    --card-width: 100px;
+}
 html, body {
     padding: 0;
     margin: 0;
     width: 100%;
-    height: 100%;
     overflow-x: hidden;
-    background-color: #09a314;
+    background-color: #165041;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("../imgs/cards/bk.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 #switch {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
-    height: 100vh;
-    padding: 5px;
 }
 
 #switch #board, #switch #player {
     display: flex;
     width: 100%;
-}
-
-#switch #board {
-    display: flex;
-    height: 300px;
-    position: absolute;
+    align-items: center;
+    justify-content: center;
 }
 
 #switch #deck {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    padding-top: 50px;
+    height: 523px;
+    background-image: url("../imgs/cards/table.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 1099px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+#switch #deck #cards {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: var(--card-width);
+    height: 300px;
+    background-image: url("../imgs/cards/start_placeholder.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#switch #deck #controls {
     gap: 10px;
-    flex: 1 1 auto;
-    overflow: hidden;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 70px;
 }
 
-#switch #game {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 200px;
-    height: 100%;
-    border-left: 2px solid #000;
-    padding: 10px;
+#switch #deck #controls .btn-new-game {
+    display: block;
+    background-image: url("../imgs/cards/button-new.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#switch #deck #controls .btn-knocking {
+    display: block;
+    background-image: url("../imgs/cards/button-knock.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#switch #deck #controls .btn-pickup {
+    display: block;
+    background-image: url("../imgs/cards/button-pickup.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#switch #deck #controls .btn-submit{
+    display: block;
+    background-image: url("../imgs/cards/button-setup.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+
+#switch #scoreboard {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: block;
+    width: 327px;
     z-index: 5;
+    background-image: url("../imgs/cards/scoreboard.png");
+    background-repeat: no-repeat;
+    color: #fff;
+    padding-top: 49px;
+}
+#switch #scoreboard-scores {
+    width: 100%;
+    background-color: #292444;
+    background-image: url("../imgs/cards/scoreboard-border.png");
+    background-repeat: repeat-y;
+}
+#switch #scoreboard-footer {
+    position: relative;
+    margin-top: -5px;
+    height: 19px;
+    width: 100%;
+    background-image: url("../imgs/cards/scoreboard-bottom.png");
+    background-position: top;
+    background-repeat: no-repeat;
+}
+#switch #scoreboard table {
+    margin-left: 11px;
+    border-collapse: collapse;
+    border: none;
+    width: calc(100% - 24px);
+}
+#switch #scoreboard table tbody {
+    width: 100%;
+}
+#switch #scoreboard th, #switch #scoreboard td {
+    padding: 0 0 0 5px;
+    margin: 0;
+    border: none;
+}
+#switch #scoreboard .player-img {
+    text-align: center;
+    width: 41px;
+    padding: 0;
+}
+#switch #scoreboard .player-img img {
+    margin: 0;
+}
+#switch #scoreboard table tbody tr:nth-child(odd) {
+    background-color: #292444;
+    padding: 0;
+}
+#switch #scoreboard table tbody tr:nth-child(even) {
+    background-color: #313654;
+    padding: 0;
 }
 
 #switch #player {
-    margin-top: 300px;
-    border-top: 2px solid #000;
-    z-index: 10;
-    background-color: #09a314;
+    flex-direction: column;
+    z-index: 10;    
 }
 
 #switch #player #hand {
     flex: 1 1 auto;
     display: flex;
-    column-gap: 10px;
-    row-gap: 20px;
-    align-content: flex-start;
+    column-gap: 0px;
+    row-gap: 0px;
+    align-content: center;
+    justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
     padding-top: 10px;
 }
 
-#switch #player #controls {
-    gap: 10px;
-    flex: 0 0 200px;
-    display: flex;
-    flex-direction: column;
-    border-left: 2px solid #000;
-    padding: 10px;
+#switch #player #hand .card {
+    position: relative;
+    margin-left: calc(((var(--card-width) / 2) + 10px) * -1);
 }
 
 #switch #deck .deck-placeholder {
     display: block;
-}
-
-#switch #game table {
-    width: 100%;
-    color: #fff;
+    cursor: pointer;
 }
 
 #switch .card, #switch .placeholder {
     display: inline-flex;
     background: none;
     border: none;
-    width: 120px;
+    width: var(--card-width);
     cursor: pointer;
     padding: 0;
     margin: 0;
@@ -99,7 +198,31 @@ html, body {
 
 #switch #deck .card {
     position: absolute;
-    margin-left: -120px;
+}
+
+#switch .row {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    flex-direction: column;
+}
+
+#switch .row.hide {
+    display: none;
+}
+
+#switch .col-full {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+@media (min-width: 576px) {
+  #switch .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
 }
 
 @media only screen and (max-width: 810px) {
@@ -112,41 +235,25 @@ html, body {
     }
 
     #switch .card, #switch .placeholder {
-        width: 100px;
-    }
-
-    #switch #deck .card {
-        margin-left: -100px;
+        width: calc(var(--card-width) - 20px);
     }
 }
 
 @media only screen and (max-height: 315px) {
     #switch .card, #switch .placeholder {
-        width: 80px;
+        width: calc(var(--card-width) - 40px);
     }
-
-    #switch #deck .card {
-        margin-left: -80px;
-    }
-}
-
-#switch #deck .card-lower {
-    margin-top: -40px;
-}
-
-#switch #deck .card-higher {
-    margin-top: 40px;
 }
 
 #switch .card-highlight {
-    border: 4px solid #4ee5fc;
+    border: 4px solid #2B8ACA;
 }
 
 #switch .card-warn {
-    border: 4px solid #f43c09;
+    border: 4px solid #D23136;
 }
 
-#switch img {
+#switch #deck img, #switch #hand img, #switch .placeholder img {
     width: 100%;
     margin: 0;
 }
@@ -160,21 +267,21 @@ html, body {
 }
 
 #switch .player-turn {
-    background-color: #4ee5fc;
+    background-color: #2B8ACA;
 }
 
-#switch .last-card {
+#switch td.last-card-col {
+    width: 50px;
+    text-align: center;
+}
+
+#switch .last-card, #switch .winner, #switch .knocking {
     display: none;
     cursor: pointer;
-    background-color: #FFD400;
-    color: #000;
-    font-size: 12px;
-    padding: 0 2px;
-    margin-left: 4px;
 }
 
 #switch #game-info {
-    /*display: none;*/
+    display: none;
     background-color: #fff;
     border: 0;
     border-top: 2px solid #000;
@@ -189,78 +296,12 @@ html, body {
     padding: 0;
 }
 
-#switch #change-suit {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
-
-#switch #change-suit-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1001;
-}
-
-#switch #change-suit-select {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 1002;
-}
-
-#switch #change-suit-select-placeholders {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 10px;
-    row-gap: 20px;
-}
-
-#switch #change-suit-select h1 {
-    background-color: #fff;
-    padding: 5px 10px;
-}
-
 #switch button {
-    height: 50px;
     border: 0;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
-    width: 100%;
-}
-
-#switch .btn-knocking {
-    background-color: #f43c09;
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    width: calc(100% - 10px);
-}
-
-#switch .btn-submit {
-    background-color: #ffd400;
-    width: calc(100% - 10px);
-}
-
-#switch .btn-new-game {
-    background-color: #2794e8;
-    color: #fff;
-    width: calc(100% - 10px);
+    background: none;
 }
 
 #switch .no-players {
@@ -287,4 +328,104 @@ html, body {
     background-color: #fff;
     border: 2px solid #000;
     height: 35px;
+}
+
+#switch .modal .form-input, #switch .modal .btn-new-game {
+    width: 100%;
+}
+
+#switch .modal .row.break {
+    margin-bottom: 20px;
+}
+
+#switch .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: #000;
+}
+
+#switch .modal.fade {
+  transition: opacity .15s linear;
+}
+
+#switch .modal.show .modal-dialog {
+  transform: none;
+}
+#switch .modal.fade .modal-dialog {
+  transition: transform .3s ease-out;
+  transform: translate(0,-50px);
+}
+
+#switch .modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 3.75rem auto;
+  pointer-events: none;
+}
+
+#switch .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+  outline: 0;
+}
+
+#switch .modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+}
+
+#switch .modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+#switch .modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding: .75rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: calc(.3rem - 1px);
+  border-bottom-left-radius: calc(.3rem - 1px);
+}
+
+#switch #change-suit {
+    background: none;
+}
+#switch #change-suit .modal-content, #switch #change-suit .modal-header {
+    background-color: #106529;
+    border: 0;
+    color: #fff;
+}
+#switch #change-suit .modal-content {
+    border:3px solid #fff;
+}
+#switch #change-suit-select-placeholders {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

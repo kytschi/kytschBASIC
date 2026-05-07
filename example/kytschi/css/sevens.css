@@ -113,18 +113,15 @@ body {
     background-position: top;
     background-repeat: no-repeat;
 }
-
 #sevens #scoreboard table {
     margin-left: 11px;
     border-collapse: collapse;
     border: none;
     width: calc(100% - 24px);
 }
-
 #sevens #scoreboard table tbody {
     width: 100%;
 }
-
 #sevens #scoreboard th, #sevens #scoreboard td {
     padding: 0 0 0 5px;
     margin: 0;
@@ -138,7 +135,6 @@ body {
 #sevens #scoreboard .player-img img {
     margin: 0;
 }
-
 #sevens #scoreboard table tbody tr:nth-child(odd) {
     background-color: #292444;
     padding: 0;

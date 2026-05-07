@@ -28,6 +28,8 @@ END IF
 
 IF no_players%<3 THEN
 	LET no_players%=3
+ELSEIF no_players%>6 THEN
+	LET no_players%=6
 END IF
 
 DEF end%=(52/no_players%)-1
@@ -440,10 +442,6 @@ JAVASCRIPT
         $("#playerSelect").hide();
         $("#multiplayerSelect").show();
     });
-    
-    $("button[name=btnMultiPlayerStart]").click(() => {
-        
-    });
 END JAVASCRIPT
 
 DIV "", "sevens"
@@ -472,15 +470,9 @@ DIV "", "sevens"
                 END DIV
             END DIV
             DIV , "controls"
-                BUTTON "btnKnock", "btn-knocking"
-                    PRINT "&nbsp;"
-                END BUTTON
-                BUTTON "btnNewGame", "btn-new-game"
-                    PRINT "&nbsp;"
-                END BUTTON
-                DIV "form_test"
-                    BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
-                END DIV
+                BUTTON "btnKnock", "btn-knocking",,"knocking","&nbsp;"
+                BUTTON "btnNewGame", "btn-new-game",,"new","&nbsp;"
+                BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
             END DIV
         END DIV
     END DIV

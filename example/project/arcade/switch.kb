@@ -23,10 +23,13 @@ DEF no_players%=3
 
 IFNTE _GET("np") THEN
     LET no_players%=_GET("np")
+    LET no_players%=INT(no_players%)
 END IF
 
 IF no_players%<3 THEN
 	LET no_players%=3
+ELSEIF no_players%>6 THEN
+	LET no_players%=6
 END IF
 
 DEF end%=6
@@ -34,7 +37,7 @@ LET no_players%=no_players%-1
 
 FOR suit$ IN suits$
     FOR face$ IN faces$
-        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".svg"
+        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".png"
     NEXT
 NEXT
 
@@ -73,14 +76,15 @@ AFUNCTION "computerPlay"
     var value = "";
     var played = false;
 
-    $("#player-last-card-" + turn).hide();
+    $("#player-" + turn + " .last-card").hide();
 
     sleep(500).then(() => {
         if (turn != 0) {
+            $("#player-" + turn + " .knocking").hide();
             hands[turn].sort(() => Math.random() - .5);
             for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
                 if (!played) {
-                    let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                    let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".png", "");
                     if (canPlay(event, card)) {
                         selected_card = card;
                         playCard(event);
@@ -110,17 +114,19 @@ AFUNCTION "updateTurn"
         return;
     }
 
-    $("#player-" + turn).removeClass("player-turn");
+    $("#player-" + turn + " .player-img").removeClass("player-turn");
+    $("#player-" + turn + " .knocking").hide();
 
-    $("#player-last-card-" + turn).hide();
+    $("#player-" + turn + " .last-card").hide();
+    $("#player-" + turn + " .last-card-col span").show();
     if (hands[turn].length == 1) {
         gameInfo(event, "LAST CARD");
-        $("#player-last-card-" + turn).show();
-        
+        $("#player-" + turn + " .last-card-col span").hide();
+        $("#player-" + turn + " .last-card").show();
     } else if (hands[turn].length == 0) {
         gameOver(event);
     }
-    $("#player-cards-" + turn).html(hands[turn].length);
+    $("#player-" + turn + " .last-card-col span").html(hands[turn].length);
 
     if (parseInt(switch_dir) == 0) {
         turn += 1;
@@ -152,7 +158,7 @@ AFUNCTION "updateTurn"
         }          
     }
     
-    $("#player-" + turn).addClass("player-turn");
+    $("#player-" + turn + " .player-img").addClass("player-turn");
 
     if (turn != 0) {
         computerPlay();
@@ -165,7 +171,7 @@ AFUNCTION "rebuildHand"
     $("#hand").html("");
     hands[0].sort();
     hands[0].forEach((card) => {
-        let id = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+        let id = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
         $("#hand").append('<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>');
     });
 END AFUNCTION
@@ -192,7 +198,7 @@ AFUNCTION "canPlay", "check=null"
         return false;
     }
         
-    let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
+    let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
     if (
         check_details[0] == card_details[0] ||
         check_details[1] == card_details[1] ||
@@ -226,6 +232,7 @@ AFUNCTION "playerKnocking"
     pickup(event);
 
     gameInfo(event, "KNOCKING");
+    $("#player-" + turn + " .knocking").show();
     hands[turn].push(pool[0]);
     pool.splice(0, 1);
 
@@ -291,7 +298,7 @@ AFUNCTION "playCard"
         } else {
             let best_suit = [0,0,0,0];
             for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
-                let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+                let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".png", "");
                 let card_details = card.split("_");
                 if (card_details[0] == "diamonds") {
                     best_suit[0] += 1;
@@ -354,13 +361,13 @@ AFUNCTION "onDeckClick"
 END AFUNCTION
 
 AFUNCTION updateDeck
-    $("#deck").append('<div id="' + selected_card + '" class="card"><img src="/kytschi/imgs/cards/' + selected_card + '.svg"></div>');
-    deck.push('/kytschi/imgs/cards/' + selected_card + '.svg');
+    $("#cards").append('<div id="' + selected_card + '" class="card"><img src="/kytschi/imgs/cards/' + selected_card + '.png"></div>');
+    deck.push('/kytschi/imgs/cards/' + selected_card + '.png');
 
     if (turn == 0) {
         $("#hand #" + selected_card).remove();
         hands[turn].forEach((card, index) => {
-            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+            let check = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
             if (check == selected_card) {
                 hands[turn].splice(index, 1);
             }
@@ -376,7 +383,7 @@ AFUNCTION updateDeck
 
     selected_card = "";
 
-    $("#deck .card").removeClass("card-highlight");
+    $("#cards .card").removeClass("card-highlight");
 END AFUNCTION
 
 AFUNCTION "onChangeSuitClick", "id=null"
@@ -393,7 +400,7 @@ AFUNCTION "onChangeSuitClick", "id=null"
     let card_details = selected_card.split("_");
 
     for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
-        let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".svg", "");
+        let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".png", "");
         if (selected_card == card) {            
             hands[turn].splice(iLoop, 1);            
             break;
@@ -403,6 +410,7 @@ AFUNCTION "onChangeSuitClick", "id=null"
     selected_card = suit + "_" + card_details[1];
 
     updateDeck(event);
+    rebuildHand(event);
     change_suit = 0;
     updateTurn(event);
 END AFUNCTION
@@ -418,9 +426,6 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-
-    $("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
-    $("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
 
 AFUNCTION "gameOver"
@@ -438,12 +443,15 @@ AFUNCTION "gameOver"
 
     game_over = 1;
     gameInfo(event, "I WIN!!!");
+    $("#player-" + turn + " .last-card").hide();
+    $("#player-" + turn + " .last-card-col span").hide();
+    $("#player-" + turn + " .winner").show();
 
     for (var iLoop = 0; iLoop < hands.length; iLoop++) {
-        score = parseInt($("#player-" + iLoop + "-score span").html());
+        score = parseInt($("#player-" + iLoop + " .score span").html());
 
         hands[iLoop].forEach((card, index) => {
-            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".svg", "").split("_");
+            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
             value = parseInt(card_details[1]);
             if (value == 1) {
                 score += 11;
@@ -454,7 +462,7 @@ AFUNCTION "gameOver"
             }
         });
 
-        $("#player-" + iLoop + "-score span").html(score);
+        $("#player-" + iLoop + " .score span").html(score);
         kb_cookie.kb_switch_scores[iLoop].score = score;
     }
 
@@ -464,14 +472,12 @@ AFUNCTION "gameOver"
 END AFUNCTION
 
 JAVASCRIPT
-    $(".last-card").attr("style", "");
-
     var played = false;
     start = 1;
 
     if (typeof(kb_cookie.kb_switch_scores) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_switch_scores)) {
-            $("#player-" + player + "-score span").html(value.score);
+            $("#player-" + player + " .score span").html(value.score);
             if (turn == -1) {
                 turn = value.turn;
             }
@@ -480,56 +486,114 @@ JAVASCRIPT
         turn = 0;
     }
 
+    $("#player-" + turn + " .player-img").addClass("player-turn");
+
     if (turn) {
         computerPlay();
     }
 
-    $("button[name=btnKnock]").click(() => {
-        playerKnocking();
+    $("button[name=btnSetup]").click(() => {
+        $("#playerSelect").show();
+        $("#multiplayerSelect").hide();
+        $("#modalNewGame").show();
+    });
+
+    $("button[name=btnCloseModal]").click(() => {
+        $("#modalNewGame").hide();
+    });
+
+    $("button[name=btnSinglePlayer]").click(() => {
+        window.location.reload();
     });
 
     $("button[name=btnNewGame]").click(() => {
         window.location.reload();
     });
+
+    $("button[name=btnKnock]").click(() => {
+        playerKnocking();
+    });
+    $("button[name=btnPickup]").click(() => {
+        pick_up_done = 1;
+        if (pick_up && pick_up_done) {
+            pickup();
+        } else {
+            gameInfo(event, "Nothing to pick up", true);
+        }
+    });
+
+    $("button[name=btnMultiPlayer]").click(() => {
+        $("#playerSelect").hide();
+        $("#multiplayerSelect").show();
+    });
 END JAVASCRIPT
 
 DIV "", "switch"
     DIV "", "board"
-        DIV "", "deck",,"onDeckClick"
+        DIV "", "deck"
+            DIV ,"cards",,"onDeckClick"
+            END DIV
+            DIV , "controls"
+                BUTTON "btnKnock", "btn-knocking",,"knocking","&nbsp;"
+                BUTTON "btnPickup", "btn-pickup",,"pick","&nbsp;"
+                BUTTON "btnNewGame", "btn-new-game",,"new","&nbsp;"
+                BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
+            END DIV
         END DIV
-        DIV "", "game"
+    END DIV
+    DIV "", "player"
+        DIV "", "hand"
+            FOR card$ IN hands$(0)
+                DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+                DEF id$=REPLACE(id$, ".png", "")
+                SPRITE id$, "card", "onCardClick", "onCardDblClick"
+                    IMAGE card$
+                END SPRITE
+            NEXT
+        END DIV
+    END DIV
+    DIV "", "scoreboard"
+        DIV "", "scoreboard-scores"
             TABLE
-                THEAD
-                    TROW
-                        THEADCELL
-                            PRINT "&nbsp;"
-                        END THEADCELL
-                        THEADCELL ,"text-left"
-                            PRINT "Player"
-                        END THEADCELL
-                        THEADCELL ,"text-left"
-                            PRINT "Cards"
-                        END THEADCELL
-                        THEADCELL
-                            PRINT "Score"
-                        END THEADCELL
-                    END TROW
-                END THEAD
                 TBODY
+                    TROW
+                        TCELL
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL
+                            PRINT "Player"
+                        END TCELL
+                        TCELL ,"last-card-col"
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL ,"last-card-col"
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "Total"
+                        END TCELL
+                    END TROW
                     FOR iLoop%=0 TO no_players%
-                        DEF id$="score-"+iLoop%
-                        TROW ,id$
-                            TCELL ,,,"player-" + iLoop%
-                                PRINT "&nbsp;"
+                        TROW ,"player-"+iLoop%
+                            TCELL ,"player-img"
+                                IF iLoop%=0
+                                    IMAGE "/kytschi/imgs/cards/human.png"
+                                ELSE
+                                    IMAGE "/kytschi/imgs/cards/bot.png"
+                                END IF
                             END TCELL
                             TCELL
                                 PRINT names$(iLoop%)
                             END TCELL
-                            TCELL
-                                PRINT COUNT(hands$[iLoop%]),,"player-cards-" + iLoop%
-                                PRINT "LC","last-card","player-last-card-" + iLoop%,"Last card"
+                            TCELL ,"last-card-col"
+                                PRINT COUNT(hands$[iLoop%])
+                                IMAGE "/kytschi/imgs/cards/last-card.png","last","last-card"
+                                IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                             END TCELL
-                            TCELL ,"text-center",,"player-" + iLoop% + "-score"
+                            TCELL ,"last-card-col"
+                                IMAGE "/kytschi/imgs/cards/knocking.png","knocking","knocking"
+                            END TCELL
+                            TCELL ,"text-center score"
                                 PRINT "0"
                             END TCELL
                         END TROW
@@ -537,57 +601,79 @@ DIV "", "switch"
                 END TBODY
             END TABLE
         END DIV
-    END DIV
-    DIV "", "player"
-        DIV "", "hand"
-            FOR card$ IN hands$(0)
-                DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
-                DEF id$=REPLACE(id$, ".svg", "")
-                SPRITE id$, "card", "onCardClick", "onCardDblClick"
-                    IMAGE card$
-                END SPRITE
-            NEXT
+        DIV ,"scoreboard-footer"
         END DIV
-        DIV "", "controls"
-            BUTTON "btnKnock", "btn-knocking"
-                PRINT "knocking"
-            END BUTTON
-            BUTTON "btnNewGame", "btn-new-game"
-                PRINT "new game"
-            END BUTTON
-            FORM "form_test"
-                LET no_players%=(no_players%+1)
-                DIV "no-players"
-                    PRINT "No. players"
-                    NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
+    END DIV
+    DIV "modal fade", "change-suit"
+        DIV "modal-dialog"
+            DIV "modal-content"
+                DIV "modal-header"
+                    PRINT "Change suit"
                 END DIV
-                BUTTONSUBMIT "btnSubmit",  "btn-submit"
-                    PRINT "setup"
-                END BUTTON
-            END FORM
-            TEXTAREA "game-info", "",,, "game-info",,"autocomplete='off'"
+                DIV "modal-body"
+                    DIV "", "change-suit-select"
+                        DIV "", "change-suit-select-placeholders"
+                            SPRITE "diamonds", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/diamonds_placeholder.png"
+                            END SPRITE
+                            SPRITE "hearts", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/hearts_placeholder.png"
+                            END SPRITE
+                            SPRITE "spades", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/spades_placeholder.png"
+                            END SPRITE
+                            SPRITE "clubs", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/clubs_placeholder.png"
+                            END SPRITE
+                        END DIV
+                    END DIV
+                END DIV
+            END DIV
         END DIV
     END DIV
-    DIV "", "change-suit"
-        DIV "", "change-suit-background"
-        END WINDOW
-        DIV "", "change-suit-select"
-            HEADING 1
-                PRINT "Change suit"
-            END HEADING 1
-            DIV "", "change-suit-select-placeholders"
-                SPRITE "diamonds", "placeholder", "onChangeSuitClick"
-                    IMAGE "/kytschi/imgs/cards/diamonds_placeholder.svg"
-                END SPRITE
-                SPRITE "hearts", "placeholder", "onChangeSuitClick"
-                    IMAGE "/kytschi/imgs/cards/hearts_placeholder.svg"
-                END SPRITE
-                SPRITE "spades", "placeholder", "onChangeSuitClick"
-                    IMAGE "/kytschi/imgs/cards/spades_placeholder.svg"
-                END SPRITE
-                SPRITE "clubs", "placeholder", "onChangeSuitClick"
-                    IMAGE "/kytschi/imgs/cards/clubs_placeholder.svg"
-                END SPRITE
+    DIV "modal fade", "modalNewGame"
+        DIV "modal-dialog"
+            DIV "modal-content"
+                DIV "modal-header"
+                    PRINT "Select game setup"
+                END DIV
+                DIV "modal-body"
+                    FORM "form_setup", "GET", "/arcade/switch"
+                        DIV "row", "playerSelect"
+                            LET no_players%=(no_players%+1)
+                            DEF game_code$=RNDSTRING(9)
+                            DIV "row break"
+                                PRINT "No. players"
+                                NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
+                            END DIV
+                            REM DIV "row"
+                                REM PRINT "Game code"
+                                REM TEXTINPUT "game_code", game_code$, "form-input"
+                            REM END DIV
+                            DIV "row break"
+                            END DIV
+                            DIV "row"
+                                DIV "col-full"
+                                    BUTTONSUBMIT "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single"
+                                        IMAGE "/kytschi/imgs/cards/button-setup.png"
+                                    END BUTTON
+                                    REM BUTTONSUBMIT "btnMultiPlayer", "btn-last-card", "btnMultiPlayer", "multi", "Multiplayer"
+                                END DIV
+                            END DIV
+                        END DIV
+                        REM DIV "row hide", "multiplayerSelect"
+                            REM PRINT "Multiplayer"
+                            REM TEXTINPUT "txtGameID",,"form-input","Please enter your name","txtPlayerName",true
+                            REM TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
+                            REM DIV "row break"
+                            REM END DIV
+                            REM BUTTONSUBMIT "btnMultiPlayerStart", "btn-new-game", "btnMultiPlayerStart", "multi", "Start"
+                        REM END DIV
+                    END FORM
+                END DIV
+                DIV "modal-footer"
+                    BUTTON "btnCloseModal", "btn-knocking", "btnCloseModal", "close", "Close"
+                END DIV
             END DIV
         END DIV
     END DIV
