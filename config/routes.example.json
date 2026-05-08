@@ -56,6 +56,10 @@
 		"url": "/arcade/triple-triad",
 		"template": "project/arcade/triple_triad.kb"
 	},
+	{
+		"url": "/arcade/solitaire",
+		"template": "project/arcade/solitaire.kb"
+	},
 
 	{
 		"url": "/news",

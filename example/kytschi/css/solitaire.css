@@ -1,6 +1,5 @@
 :root {
-    --card-width: 64px;
-    --card-width-rotate: 128px;
+    --card-width: 100px;
 }
 html, body {
     padding: 0;
@@ -12,56 +11,77 @@ html, body {
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     background-image: url("../imgs/cards/bk.jpg");
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-#fiveandthrees {
+#solitaire {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
 }
 
-#fiveandthrees #board, #fiveandthrees #player {
+#solitaire #board {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
-#fiveandthrees #deck {
-    padding-top: 50px;
+#solitaire #deck {
+    width: 1099px;
     height: 523px;
+    display: flex;
+    flex-direction: column;
     background-image: url("../imgs/cards/table.png");
     background-position: center center;
     background-repeat: no-repeat;
+}
+#solitaire #player {
+    display: flex;
+    flex: 1;
+    margin-top: 195px;
+    padding-left: 90px;
+    gap: 30px;
+}
+#solitaire #player .stack {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    flex: 0 0 1099px;
-    align-items: center;
-    justify-content: center;
 }
-#fiveandthrees #deck #cards {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 320px;
+#solitaire #player .stack .card {
+    position: relative;
+    margin-top: -110px;
 }
-#fiveandthrees #deck #controls {
-    gap: 10px;
+#solitaire #deck-playarea {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 70px;
+    flex: 1;
+    margin-top: 95px;
+    padding-left: 90px;
+}
+#solitaire #deck #cards {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    padding-right: 90px;
+}
+#solitaire #deck .deck-placeholder {
+    display: block;
+}
+#solitaire #deck #pile {
+    flex: 0 0 300px;
 }
 
-#fiveandthrees #deck #controls .btn-new-game {
+#solitaire #controls {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#solitaire #controls .btn-new-game {
     display: block;
     background-image: url("../imgs/cards/button-new.png");
     background-position: top;
@@ -69,15 +89,7 @@ body {
     width: 222px;
     height: 78px;
 }
-#fiveandthrees #deck #controls .btn-knocking {
-    display: block;
-    background-image: url("../imgs/cards/button-knock.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
-}
-#fiveandthrees #deck #controls .btn-submit{
+#solitaire #controls .btn-submit{
     display: block;
     background-image: url("../imgs/cards/button-setup.png");
     background-position: top;
@@ -86,7 +98,7 @@ body {
     height: 78px;
 }
 
-#fiveandthrees #scoreboard {
+#solitaire #scoreboard {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -98,13 +110,13 @@ body {
     color: #fff;
     padding-top: 49px;
 }
-#fiveandthrees #scoreboard-scores {
+#solitaire #scoreboard-scores {
     width: 100%;
     background-color: #292444;
     background-image: url("../imgs/cards/scoreboard-border.png");
     background-repeat: repeat-y;
 }
-#fiveandthrees #scoreboard-footer {
+#solitaire #scoreboard-footer {
     position: relative;
     margin-top: -5px;
     height: 19px;
@@ -113,68 +125,43 @@ body {
     background-position: top;
     background-repeat: no-repeat;
 }
-#fiveandthrees #scoreboard table {
+#solitaire #scoreboard table {
     margin-left: 11px;
     border-collapse: collapse;
     border: none;
     width: calc(100% - 24px);
 }
-#fiveandthrees #scoreboard table tbody {
+#solitaire #scoreboard table tbody {
     width: 100%;
 }
-#fiveandthrees #scoreboard th, #fiveandthrees #scoreboard td {
+#solitaire #scoreboard th, #solitaire #scoreboard td {
     padding: 0 0 0 5px;
     margin: 0;
     border: none;
 }
-#fiveandthrees #scoreboard .player-img {
+#solitaire #scoreboard .player-img {
     text-align: center;
     width: 41px;
     padding: 0;
 }
-#fiveandthrees #scoreboard .player-img img {
+#solitaire #scoreboard .player-img img {
     margin: 0;
 }
-#fiveandthrees #scoreboard table tbody tr:nth-child(odd) {
+#solitaire #scoreboard table tbody tr:nth-child(odd) {
     background-color: #292444;
     padding: 0;
 }
-#fiveandthrees #scoreboard table tbody tr:nth-child(even) {
+#solitaire #scoreboard table tbody tr:nth-child(even) {
     background-color: #313654;
     padding: 0;
 }
 
-#fiveandthrees #player {
-    flex-direction: column;
-    z-index: 10;    
-}
-
-#fiveandthrees #player #hand {
-    flex: 1 1 auto;
-    display: flex;
-    column-gap: 0px;
-    row-gap: 0px;
-    align-content: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    padding-top: 10px;
-}
-
-#fiveandthrees #player #hand .card {
-    position: relative;
-}
-
-#fiveandthrees #deck .deck-placeholder {
-    display: block;
-}
-
-#fiveandthrees #game table {
+#solitaire #game table {
     width: 100%;
     color: #fff;
 }
 
-#fiveandthrees .card, #fiveandthrees .placeholder {
+#solitaire .card, #solitaire .placeholder {
     display: inline-flex;
     background: none;
     border: none;
@@ -187,18 +174,18 @@ body {
     overflow: hidden;
 }
 
-#fiveandthrees .row {
+#solitaire .row {
     display: flex;
     width: 100%;
     flex: 1;
     flex-direction: column;
 }
 
-#fiveandthrees .row.hide {
+#solitaire .row.hide {
     display: none;
 }
 
-#fiveandthrees .col-full {
+#solitaire .col-full {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -206,101 +193,77 @@ body {
 }
 
 @media (min-width: 576px) {
-  #fiveandthrees .modal-dialog {
+  #solitaire .modal-dialog {
     max-width: 500px;
     margin: 1.75rem auto;
   }
 }
 
 @media only screen and (max-width: 810px) {
-    #fiveandthrees #board {
+    #solitaire #board {
         height: 260px;
     }
 
-    #fiveandthrees #player {
+    #solitaire #player {
         margin-top: 260px;
     }
 
-    #fiveandthrees .card, #fiveandthrees .placeholder {
+    #solitaire .card, #solitaire .placeholder {
         width: calc(var(--card-width) - 20px);
     }
 
-    #fiveandthrees #deck .card {
+    #solitaire #deck .card {
         margin-left: calc((var(--card-width) - 20px) * -1);
     }
 }
 
 @media only screen and (max-height: 315px) {
-    #fiveandthrees .card, #fiveandthrees .placeholder {
+    #solitaire .card, #solitaire .placeholder {
         width: calc(var(--card-width) - 40px);
     }
 
-    #fiveandthrees #deck .card {
+    #solitaire #deck .card {
         margin-left: calc((var(--card-width) - 40px) * -1);
     }
 }
 
-#fiveandthrees #deck .card-lower {
-    margin-top: -40px;
-}
-
-#fiveandthrees #deck .card-higher {
-    margin-top: 40px;
-}
-
-#fiveandthrees .card-highlight {
+#solitaire .card-highlight {
     border: 4px solid #F8B133;
     background-color: #F8B133;
 }
 
-#fiveandthrees .card-warn {
+#solitaire .card-warn {
     border: 4px solid #D23136;
 }
 
-#fiveandthrees #deck img, #fiveandthrees #hand img {
-    width: var(--card-width);
+#solitaire #deck img, #solitaire #hand img {
+    width: 100%;
     margin: 0;
 }
 
-#fiveandthrees .text-center {
+#solitaire .text-center {
     text-align: center;
 }
 
-#fiveandthrees .text-left {
+#solitaire .text-left {
     text-align: left;
 }
 
-#fiveandthrees .player-turn {
+#solitaire .player-turn {
     background-color: #2B8ACA;
 }
 
-#fiveandthrees td.last-card-col {
+#solitaire td.last-card-col {
     width: 50px;
     text-align: center;
 }
 
-#fiveandthrees .last-card, #fiveandthrees .winner, #fiveandthrees .knocking {
+#solitaire .last-card, #solitaire .winner, #solitaire .knocking {
     display: none;
     cursor: pointer;
 }
 
-#fiveandthrees #game-info {
-    display: none;
-    background-color: #fff;
-    border: 0;
-    border-top: 2px solid #000;
-    margin-top: 10px;
-    width: calc(100% - 10px);
-    height: 300px;
-    overflow-y: scroll;
-}
-
-#fiveandthrees #game-info p {
-    margin: 0;
-    padding: 0;
-}
-
-#fiveandthrees button {
+#solitaire button {
     border: 0;
     text-transform: uppercase;
     font-weight: bold;
@@ -308,24 +271,13 @@ body {
     background: none;
 }
 
-#fiveandthrees .no-players {
-    display: flex;
-    width: calc(100% - 10px);
-}
-
-#fiveandthrees .no-players span {
-    color: #fff;
-    padding-top: 15px;
-    flex: auto;
-}
-
-#fiveandthrees form {
+#solitaire form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#fiveandthrees .form-input {
+#solitaire .form-input {
     display: inline-block;
     width: 60px;
     margin-top: 10px;
@@ -334,15 +286,15 @@ body {
     height: 35px;
 }
 
-#fiveandthrees .modal .form-input, #fiveandthrees .modal .btn-new-game {
+#solitaire .modal .form-input, #solitaire .modal .btn-new-game {
     width: 100%;
 }
 
-#fiveandthrees .modal .row.break {
+#solitaire .modal .row.break {
     margin-bottom: 20px;
 }
 
-#fiveandthrees .modal {
+#solitaire .modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -356,26 +308,26 @@ body {
   background-color: #000;
 }
 
-#fiveandthrees .modal.fade {
+#solitaire .modal.fade {
   transition: opacity .15s linear;
 }
 
-#fiveandthrees .modal.show .modal-dialog {
+#solitaire .modal.show .modal-dialog {
   transform: none;
 }
-#fiveandthrees .modal.fade .modal-dialog {
+#solitaire .modal.fade .modal-dialog {
   transition: transform .3s ease-out;
   transform: translate(0,-50px);
 }
 
-#fiveandthrees .modal-dialog {
+#solitaire .modal-dialog {
   position: relative;
   width: auto;
   margin: 3.75rem auto;
   pointer-events: none;
 }
 
-#fiveandthrees .modal-content {
+#solitaire .modal-content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -388,7 +340,7 @@ body {
   outline: 0;
 }
 
-#fiveandthrees .modal-header {
+#solitaire .modal-header {
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -399,13 +351,13 @@ body {
   border-top-right-radius: calc(.3rem - 1px);
 }
 
-#fiveandthrees .modal-body {
+#solitaire .modal-body {
   position: relative;
   flex: 1 1 auto;
   padding: 1rem;
 }
 
-#fiveandthrees .modal-footer {
+#solitaire .modal-footer {
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
@@ -415,36 +367,4 @@ body {
   border-top: 1px solid #dee2e6;
   border-bottom-right-radius: calc(.3rem - 1px);
   border-bottom-left-radius: calc(.3rem - 1px);
-}
-
-#fiveandthrees #dominoes-left,
-#fiveandthrees #dominoes-left .dominoes,
-#fiveandthrees #dominoes-right,
-#fiveandthrees #dominoes-right .dominoes {
-    display: flex;
-}
-#fiveandthrees #dominoes-left .dominoes {
-    flex-direction: row-reverse;
-}
-
-#fiveandthrees .dominoes .rotate-left {
-    width: var(--card-width-rotate);
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-#fiveandthrees .dominoes .rotate-left img {
-    margin-left: calc(var(--card-width) / 2) !important;
-}
-
-#fiveandthrees .dominoes .rotate-right {
-    width: var(--card-width-rotate);
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-}
-#fiveandthrees .dominoes .rotate-right img {
-    margin-left: calc(var(--card-width) / 2) !important;
 }

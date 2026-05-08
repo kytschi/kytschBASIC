@@ -46,31 +46,81 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Some example games built in kytsch"
 					PRINT "BASIC", "basic"
 				END HEADING 3
-				SWRITE
-					LINK "/arcade/sevens","Play the card game sevens",,"_blank"
-						PRINT "Sevens card game"
-					END LINK
-				END SWRITE
-				SWRITE
-					LINK "/arcade/switch","Play the card game switch",,"_blank"
-						PRINT "Switch card game"
-					END LINK
-				END SWRITE
-				SWRITE
-					LINK "/arcade/triple-triad","Play the card game Triple Triad",,"_blank"
-						PRINT "Triple Triad card game. Note, it's a work in progress"
-					END LINK
-				END SWRITE
-				SWRITE
-					LINK "/arcade/omega-doom","Play the space adventure Omega Doom",,"_blank"
-						PRINT "Omega Doom. An ASCII space adventure game. Note, it's a work in progress"
-					END LINK
-				END SWRITE
-				SWRITE
-					LINK "/arcade/dead-world","Play Dead World",,"_blank"
-						PRINT "Dead World. A turn-based zombie survival game. Note, it's a work in progress"
-					END LINK
-				END SWRITE
+				HEADING 3
+					PRINT "Kytschi's Sevens"
+				END HEADING 3
+				LINK "/arcade/sevens","Play the card game sevens",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/sevens.kb","Sevens card game source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				
+				HEADING 3
+					PRINT "Kytschi's Switch"
+				END HEADING 3
+				LINK "/arcade/switch","Play the card game switch",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/switch.kb","Switch card game source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+
+				HEADING 3
+					PRINT "Kytschi's Solitaire"
+				END HEADING 3
+				LINK "/arcade/solitaire","Play the Solitaire card game",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/solitaire.kb","Solitaire card game source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				PRINT "Note, it's a work in progress", "heading-args"
+
+				HEADING 3
+					PRINT "Kytschi's 5 and 3s - A domino game"
+				END HEADING 3
+				LINK "/arcade/5and3s","Play the domino game",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/5and3s.kb","5 and 3s source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				PRINT "Note, it's a work in progress", "heading-args"
+
+				HEADING 3
+					PRINT "Kytschi's Triple Triad - A fantasy card game"
+				END HEADING 3
+				LINK "/arcade/triple-triad","Play the fantasy card game",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/triple_triad.kb","Triple Triad source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				PRINT "Note, it's a work in progress", "heading-args"
+				
+				HEADING 3
+					PRINT "Kytschi's Omega Doom - An ASCII space adventure game"
+				END HEADING 3
+				LINK "/arcade/omega-doom","Play the space adventure Omega Doom",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/omega_doom","Omega Doom source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				PRINT "Note, it's a work in progress", "heading-args"
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"
