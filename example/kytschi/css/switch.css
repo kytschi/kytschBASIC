@@ -35,7 +35,7 @@ body {
 
 #switch #deck {
     padding-top: 50px;
-    height: 523px;
+    height: 503px;
     background-image: url("../imgs/cards/table.png");
     background-position: center center;
     background-repeat: no-repeat;
@@ -62,7 +62,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 70px;
+    padding-top: 40px;
 }
 
 #switch #deck #controls .btn-new-game {
@@ -173,7 +173,6 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
-    padding-top: 10px;
 }
 
 #switch #player #hand .card {

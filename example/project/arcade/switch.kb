@@ -345,7 +345,7 @@ END AFUNCTION
 
 AFUNCTION "onDeckClick"
     if (game_over || turn) {
-        gameInfo(event, "Wait your turn", true);
+        //gameInfo(event, "Wait your turn", true);
         return;
     }
 
