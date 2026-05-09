@@ -124,7 +124,7 @@ AFUNCTION "updateTurn"
     $("#player-" + turn + " .last-card").hide();
     $("#player-" + turn + " .last-card-col span").show();
     if (hands[turn].length == 1) {
-        gameInfo(event, "LAST CARD");
+        //gameInfo(event, "LAST CARD");
         $("#player-" + turn + " .last-card-col span").hide();
         $("#player-" + turn + " .last-card").show();
     } else if (hands[turn].length == 0) {
@@ -235,7 +235,7 @@ AFUNCTION "playerKnocking"
 
     pickup(event);
 
-    gameInfo(event, "KNOCKING");
+    //gameInfo(event, "KNOCKING");
     $("#player-" + turn + " .knocking").show();
     hands[turn].push(pool[0]);
     pool.splice(0, 1);
@@ -250,7 +250,7 @@ END AFUNCTION
 AFUNCTION "pickup"
     if (pick_up && pick_up_done) {
         $("button[name=btnPickup]").removeClass("btn-pickup-on");
-        gameInfo(event, "You had to pick up " + pick_up);
+        //gameInfo(event, "You had to pick up " + pick_up);
         for (iLoop = 0; iLoop < pick_up; iLoop++) {
             hands[turn].push(pool[0]);
             pool.splice(0, 1);
@@ -283,7 +283,7 @@ AFUNCTION "playCard"
         value = "ace";
     }
 
-    gameInfo(event, "Played " + value + " of " + card_suit);
+    //gameInfo(event, "Played " + value + " of " + card_suit);
 
     pick_up_done = 1;
     if (value == 7) {
@@ -400,7 +400,7 @@ AFUNCTION "onChangeSuitClick", "id=null"
         suit = event.target.parentElement.id;
     }
     
-    gameInfo(event, "Change to " + suit);
+    //gameInfo(event, "Change to " + suit);
     $("#switch #change-suit").hide();
 
     let card_details = selected_card.split("_");
@@ -448,7 +448,7 @@ AFUNCTION "gameOver"
     }
 
     game_over = 1;
-    gameInfo(event, "I WIN!!!");
+    //gameInfo(event, "I WIN!!!");
     $("#player-" + turn + " .last-card").hide();
     $("#player-" + turn + " .last-card-col span").hide();
     $("#player-" + turn + " .winner").show();

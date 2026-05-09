@@ -103,7 +103,7 @@ AFUNCTION "computerPlay"
                     playCard(event, value);
                     hands[turn].splice(index, 1);
                     if (hands[turn].length == 1) {
-                        gameInfo(event, "LAST CARD");
+                        //gameInfo(event, "LAST CARD");
                         $("#player-" + turn + " .last-card").show();
                     } else if (hands[turn].length == 0) {
                         gameOver(event);
@@ -114,7 +114,7 @@ AFUNCTION "computerPlay"
         });
 
         if (!played) {
-            gameInfo(event, "KNOCKING");
+            //gameInfo(event, "KNOCKING");
             $("#player-" + turn + " .knocking").show();
         } else {
             $("#player-" + turn + " .knocking").hide();
@@ -237,7 +237,7 @@ AFUNCTION "playerKnocking"
     $("#player-" + turn + " .knocking").show();
 
     if (valid == true) {
-        gameInfo(event, "KNOCKING");
+        //gameInfo(event, "KNOCKING");
     } else {
         gameInfo(event, "INVALID KNOCKING!" + (!no_update ? " Miss a turn" : ""), true);
     }
@@ -274,7 +274,7 @@ AFUNCTION "playCard", "value"
         value = "ace";
     }
 
-    gameInfo(event, "Played " + value + " of " + deck_suit);
+    //gameInfo(event, "Played " + value + " of " + deck_suit);
 
     if (turn == 0) {
         $("#hand #" + selected_card).remove();
@@ -314,7 +314,7 @@ AFUNCTION "onDeckClick", "suit=null"
         if ($("#hand").children().length == 0) {
             gameOver(event);
         } else if ($("#hand").children().length == 1) {
-            gameInfo(event, "LAST CARD");
+            //gameInfo(event, "LAST CARD");
             $("#player-" + turn + " .last-card").show();
         }
         updateTurn();
@@ -334,9 +334,6 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-
-    //$("#game-info").val($("#game-info").val() + (error ? "ERROR" : names[turn]) + ": " + text + "\n");
-    //$("#game-info").scrollTop($("#game-info")[0].scrollHeight);
 END AFUNCTION
 
 AFUNCTION "gameOver"
@@ -352,7 +349,7 @@ AFUNCTION "gameOver"
     }
 
     game_over = 1;
-    gameInfo(event, "I WIN!!!");
+    //gameInfo(event, "I WIN!!!");
     $("#player-" + turn + " .last-card").hide();
     $("#player-" + turn + " .winner").show();
 
