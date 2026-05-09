@@ -33,16 +33,29 @@ ADEF start%=1
 ADEF selected_card$=""
 
 AFUNCTION "onCardClick"
+    var prev_card = selected_card;
     selected_card = event.target.parentElement.id;
-    $("#pick .card").removeClass(["card-highlight", "card-warn"]);
-    $("#" + selected_card).addClass("card-highlight");
+
+    if ($("#" + selected_card + " img").attr("src") == "/kytschi/imgs/cards/back.png") {
+        return;
+    }
+
+    if ($("#" + selected_card).hasClass("card-highlight")) {
+        $(".card").removeClass(["card-highlight", "card-warn"]);
+        selected_card = "";
+    } else {
+        $("#" + selected_card).addClass("card-highlight");
+        dropCard(event, event.target.parentElement.parentElement.id, prev_card);
+    }
 END AFUNCTION
 
-AFUNCTION "onCardDblClick"
-    selected_card = event.target.parentElement.id;
-    $("#pick .card").removeClass(["card-highlight", "card-warn"]);
-    $("#" + selected_card).addClass("card-highlight");
-    onDeckClick(event);
+AFUNCTION "dropCard", "target", "toDrop"
+    if (!toDrop || !target) {
+        return;
+    }
+    $("#" + target).append($("#" + toDrop));
+    $(".card").removeClass(["card-highlight", "card-warn"]);
+    selected_card = "";
 END AFUNCTION
 
 AFUNCTION "pickCards"
@@ -57,9 +70,9 @@ AFUNCTION "pickCards"
         var card = hand[iLoop-1];
         var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
         $("#pick").append(
-            '<div id="' + id + '" class="card"' + 
-            (iLoop == end  - 1 ? ' onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"' : '') + 
-            '><img src="' + card + '"></div>'
+            '<div id="' + id + '" class="card' + 
+            (iLoop == end  - 1 ? ' clickable' : '') + 
+            '"><img src="' + card + '"></div>'
         );
     }
 
@@ -67,13 +80,22 @@ AFUNCTION "pickCards"
 END AFUNCTION
 
 AFUNCTION "dealCards"
+END AFUNCTION
+
+AFUNCTION "setupStack"
     var stack = 1;
     var iLoop = 1;
     var end = 1;
+
     for (var card of hand) {
         var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
+
+        if (iLoop != end) {
+            card = "/kytschi/imgs/cards/back.png";
+        }
+
         $("#stack" + stack).append(
-            '<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>'
+            '<div id="' + id + '" class="card clickable"><img src="' + card + '"></div>'
         );
 
         if (iLoop != end) {
@@ -126,7 +148,7 @@ AFUNCTION "playCard"
             iLoop++;
         }
 
-        $("#pick .card:last-child").attr('onclick', 'javascript:onCardClick(event)').attr('ondblclick', 'javascript:onCardDblClick(event)');
+        $("#pick .card:last-child").attr('onclick', 'javascript:onCardClick(event)');
         selected_card = "";
     }
 END AFUNCTION
@@ -227,9 +249,13 @@ JAVASCRIPT
         onDeckClick(event);
     });
 
-    dealCards(event);
+    setupStack(event);
     //pickCards(event);
 END JAVASCRIPT
+
+MOUSEEVENT ".stack .clickable"
+    GOTO onCardClick()
+END MOUSEEVENT
 
 DIV "", "solitaire"
     DIV "", "board"
@@ -240,7 +266,7 @@ DIV "", "solitaire"
         DIV "", "deck"
             DIV "", "deck-playarea"
                 DIV , "pile"
-                    SPRITE , "card", "dealCards"
+                    SPRITE , "card", "pickCards"
                         IMAGE "/kytschi/imgs/cards/back.png"
                     END SPRITE
                 END DIV
