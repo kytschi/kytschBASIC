@@ -120,7 +120,7 @@ END FORM
 						PRINT "BUTTON"
 					END LINK
 					PRINT " | "
-					LINK "/reference/BUTTON-SUBMIT"
+					LINK "/reference/BUTTONSUBMIT"
 						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "

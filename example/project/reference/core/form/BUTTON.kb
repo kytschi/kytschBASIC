@@ -118,7 +118,7 @@ END SWRITE
 						PRINT "PASSWORDINPUT"
 					END LINK
 					PRINT " | "
-					LINK "/reference/BUTTON-SUBMIT"
+					LINK "/reference/BUTTONSUBMIT"
 						PRINT "BUTTONSUBMIT"
 					END LINK
 					PRINT " | "
