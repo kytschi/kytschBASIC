@@ -14,7 +14,7 @@ END HEAD
 BODY
 DIM suits$=("diamonds", "clubs","hearts","spades")
 DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
-DIM names$=("You", "Mike", "Laura", "Lenny", "Brian", "Helen", "Angie")
+DIM names$=("you", "mike", "laura", "lenny", "brian", "helen", "angie")
 
 DIM cards$=()
 DIM hands$=()
@@ -589,14 +589,15 @@ DIV "", "switch"
                     END TROW
                     FOR iLoop%=0 TO no_players%
                         TROW ,"player-"+iLoop%
+                            DEF name$=names$(iLoop%)
                             TCELL ,"player-img"
                                 IF iLoop%=0
-                                    IMAGE "/kytschi/imgs/cards/human.png"
+                                    IMAGE "/kytschi/imgs/people/nick.png"
                                 ELSE
-                                    IMAGE "/kytschi/imgs/cards/bot.png"
+                                    IMAGE "/kytschi/imgs/people/" + name$ + ".png"
                                 END IF
                             END TCELL
-                            TCELL
+                            TCELL ,"player-name"
                                 PRINT names$(iLoop%)
                             END TCELL
                             TCELL ,"last-card-col"

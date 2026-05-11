@@ -149,6 +149,10 @@ body {
 }
 #switch #scoreboard .player-img img {
     margin: 0;
+    width: 100%;
+}
+#switch #scoreboard .player-name::first-letter {
+    text-transform: uppercase;
 }
 #switch #scoreboard table tbody tr:nth-child(odd) {
     background-color: #292444;

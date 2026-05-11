@@ -134,7 +134,12 @@ body {
 }
 #sevens #scoreboard .player-img img {
     margin: 0;
+    width: 100%;
 }
+#sevens #scoreboard .player-name::first-letter {
+    text-transform: uppercase;
+}
+
 #sevens #scoreboard table tbody tr:nth-child(odd) {
     background-color: #292444;
     padding: 0;

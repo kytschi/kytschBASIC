@@ -16,6 +16,10 @@ BODY ,"triple-triad"
 DIM deck$=("biting-bug-1315","blobrawah-2315","blood-sucker-2161","cathelma-3453","cockamenacer-2126","cuel-6223","funtuar-5113","gavla-2144","jespa-1541","kesherise-5433", "killerpillar-4243","leezard-1415","red-wing-bat-6112","slowitokalo-s-3521","vrat-7131","worm-eye-6143")
 DIM computer$=()
 DIM player$=()
+DIM names$=("amy", "angie", "ashleigh", "brian", "chris", "claire", "emma", "george", "helen", "ian", "jane", "jemma", "joe", "josh", "kyle", "laura", "lenny", "matt", "mike", "nick", "sarah", "zack")
+DEF end%=COUNT(names$)
+DEF indx%=RND(0, end%)
+DEF name$=names$(indx%)
 
 SHUFFLE(deck$)
 FOR index%=0 TO 4
@@ -126,13 +130,13 @@ AFUNCTION "dropCard"
         checkWinCondition(event);
 
         $("#" + move + "-hand #" + selected).remove();
-        $(".label.computer, .label.player").removeClass("highlight");
+        $(".player-ui.computer, .player-ui.player").removeClass("highlight");
         if (move == "player") {
             move = "computer";
-            $(".label.computer").addClass("highlight");
+            $(".player-ui.computer").addClass("highlight");
         } else {
             move = "player";
-            $(".label.player").addClass("highlight");
+            $(".player-ui.player").addClass("highlight");
         }
     }
 END AFUNCTION
@@ -229,13 +233,15 @@ END MOUSEEVENT
                 END DIV
                 DIV "column", "column-middle"
                     DIV "row spacer"
-                        DIV "label computer"
-                            PRINT "Opponent"
+                        DIV "player-ui computer"
+                            IMAGE "/kytschi/imgs/people/" + name$ + ".png"
+                            PRINT name$
                         END DIV
                         DIV "card"
                             
                         END DIV
-                        DIV "label player align-right highlight"
+                        DIV "player-ui player align-right highlight"
+                            IMAGE "/kytschi/imgs/people/jason.png"
                             PRINT "You"
                         END DIV
                     END DIV

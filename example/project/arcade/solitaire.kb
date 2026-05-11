@@ -53,7 +53,46 @@ AFUNCTION "dropCard", "target", "toDrop"
     if (!toDrop || !target) {
         return;
     }
+
+    var target_card = $("#" + target).children().last().attr("id").split("_");
+    var source_card = toDrop.split("_");
+
+    console.log("Source:", source_card, "Target:", target_card);
+
+    if (source_card[0] == target_card[0]) {
+        $(".card").removeClass(["card-highlight", "card-warn"]);
+        selected_card = "";
+        gameInfo(event, "Invalid move", true);
+        return;
+    }
+
+    var valid = false;
+
+    if (target_card[0] == "hearts" || target_card[0] == "diamonds") {
+        if (source_card[0] == "clubs" || source_card[0] == "spades") {
+            if (source_card[1] == target_card[1] - 1) {
+                valid = true;
+            }
+        }
+    } else if (target_card[0] == "clubs" || target_card[0] == "spades") {
+        if (source_card[0] == "hearts" || source_card[0] == "diamonds") {
+            if (source_card[1] == target_card[1] - 1) {
+                valid = true;
+            }
+        }
+    }
+
+    if (!valid) {
+        $(".card").removeClass(["card-highlight", "card-warn"]);
+        selected_card = "";
+        gameInfo(event, "Invalid move", true);
+        return;
+    }
+
+    var parent = $("#" + toDrop).parent();
+    
     $("#" + target).append($("#" + toDrop));
+    $(parent).children().last().find("img").attr("src", "/kytschi/imgs/cards/" + $(parent).children().last().attr("id") + ".png");
     $(".card").removeClass(["card-highlight", "card-warn"]);
     selected_card = "";
 END AFUNCTION
