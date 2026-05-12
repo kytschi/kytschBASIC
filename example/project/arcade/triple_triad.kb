@@ -13,11 +13,12 @@ HEAD
 END HEAD
 BODY ,"triple-triad"
 
-DIM deck$=("biting-bug-1315","blobrawah-2315","blood-sucker-2161","cathelma-3453","cockamenacer-2126","cuel-6223","funtuar-5113","gavla-2144","jespa-1541","kesherise-5433", "killerpillar-4243","leezard-1415","red-wing-bat-6112","slowitokalo-s-3521","vrat-7131","worm-eye-6143")
+DIM deck$=("biting-bug-1315","blobrawah-2315","blood-sucker-2161","cathelma-3453","cockamenacer-2126","cuel-6223","funtuar-5113","gavla-2144","jespa-1541","kesherise-5433", "killerpillar-4243","leezard-1415","red-wing-bat-6112","slowitokalo-s-3521","vrat-7131","worm-eye-6143","grande-mantis-5253","grandal-4452","jellI-3217","shadow-creeps-5252","anacondray-5135","thrustmusta-5325")
 DIM computer$=()
 DIM player$=()
 DIM names$=("amy", "angie", "ashleigh", "brian", "chris", "claire", "emma", "george", "helen", "ian", "jane", "jemma", "joe", "josh", "kyle", "laura", "lenny", "matt", "mike", "nick", "sarah", "zack")
 DEF end%=COUNT(names$)
+LET end%=(end%-1)
 DEF indx%=RND(0, end%)
 DEF name$=names$(indx%)
 
@@ -53,62 +54,75 @@ AFUNCTION "cardSelected", "type"
     move = type;
 END AFUNCTION
 
-AFUNCTION "getNeighbors", "index"
+AFUNCTION "getNeighbours", "index"
     index = parseInt(index, 10);
 
-    const neighbors = [];
-    const checks = [
-        { adj: index - 3, currSide: 0, neighborSide: 2 }, // Top
-        { adj: index + 3, currSide: 2, neighborSide: 0 }, // Bottom
-        { adj: index - 1, currSide: 3, neighborSide: 1, skip: index % 3 === 0 }, // Left
-        { adj: index + 1, currSide: 1, neighborSide: 3, skip: (index + 1) % 3 === 0 } // Right
+    var neighbours = [];
+    var checks = [
+        { adj: index - 3, currentSide: 0, neighbourSide: 2 }, // Top
+        { adj: index + 3, currentSide: 2, neighbourSide: 0 }, // Bottom
+        { adj: index - 1, currentSide: 3, neighbourSide: 1, skip: index % 3 === 0 }, // Left
+        { adj: index + 1, currentSide: 1, neighbourSide: 3, skip: (index + 1) % 3 === 0 } // Right
     ];
 
     checks.forEach(check => {
         if (!check.skip && check.adj >= 0 && check.adj < 9) {
-            neighbors.push(check);
+            neighbours.push(check);
         }
     });
-    return neighbors;
+    return neighbours;
 END AFUNCTION
 
-AFUNCTION "resolveCombat", "placedIndex", "card"
-    const neighbors = getNeighbors(event, placedIndex);
+AFUNCTION "resolveCombat", "placed_index", "card"
+    var neighbours = getNeighbours(event, placed_index);
+    var won = null;
 
-    neighbors.forEach(check => {
-        const neighborCard = board[check.adj];
+    for (var check of neighbours) {
+        var neighborCard = board[check.adj];
 
         // Only check if there's an opponent's card there
         if (neighborCard && neighborCard.owner !== card.owner) {
-            const attackValue = card.values[check.currSide];
-            const defenseValue = neighborCard.values[check.neighborSide];
+            var attackValue = card.values[check.currentSide];
+            var defenseValue = neighborCard.values[check.neighbourSide];
 
             if (attackValue > defenseValue) {
-                flipCard(event, check.adj);
+                won = check.adj;
+                break;
             }
         }
-    });
+    }
+
+    return won;
 END AFUNCTION
 
 AFUNCTION "flipCard", "index"
-    const card = board[index];
+    var card = board[index];
     card.owner = (card.owner === 'player') ? 'computer' : 'player';
     
     $("#play-area-" + index).removeClass("computer").removeClass("player").addClass(card.owner);
-    console.log(`Card at ${index} flipped to ${card.owner}`);
+    //console.log(`Card at ${index} flipped to ${card.owner}`);
 END AFUNCTION
 
-AFUNCTION "dropCard"
+AFUNCTION "dropCard", "drop_to=null"
     if (!selected) {
-        gameInfo(event, "Please select a card to play", true);
-        return;
+        if (drop_to === null) {
+            gameInfo(event, "Please select a card to play", true);
+        }
+        return null;
     }
 
-    var id = $(event.currentTarget).attr("id");
+    var id = 0;
+    if (drop_to) {
+        id = "play-area-" + drop_to;
+    } else {
+        id = $(event.currentTarget).attr("id");
+    }
     
     if ($("#" + id).html()) {
-        gameInfo(event, "Pick an empty square", true);
-        return;
+        if (drop_to === null) {
+            gameInfo(event, "Pick an empty square", true);
+        }
+        return null;
     }
 
     $("#" + selected).removeClass("highlight");
@@ -119,30 +133,38 @@ AFUNCTION "dropCard"
     var rank = card[card.length-1].split("");
     var index = parseInt(id.replace("play-area-", ""));
 
-    if (board[index] === null) {
-        board[index] = {
-            values: rank,
-            owner: move
-        };
-        
-        resolveCombat(event, index, board[index]);
-        
-        checkWinCondition(event);
-
+    board[index] = {
+        values: rank,
+        owner: move
+    };
+    
+    var win = resolveCombat(event, index, board[index]);
+    if (win !== null) {
+        flipCard(event, win);
+    } else if (drop_to) {
+        board[index] = null;
+        $("#" + id).html("");
+        $("#" + id).removeClass(move);
+    }
+    
+    if (!drop_to) {
         $("#" + move + "-hand #" + selected).remove();
         $(".player-ui.computer, .player-ui.player").removeClass("highlight");
         if (move == "player") {
             move = "computer";
             $(".player-ui.computer").addClass("highlight");
+            computerTurn(event);
         } else {
             move = "player";
             $(".player-ui.player").addClass("highlight");
         }
     }
+    checkWinCondition(event);
+    return win;
 END AFUNCTION
 
 AFUNCTION "checkWinCondition"
-    const isFull = board.every(slot => slot !== null);
+    var isFull = board.every(slot => slot !== null);
 
     if (isFull) {
         let p1Count = 0;
@@ -168,13 +190,13 @@ AFUNCTION "countRemainingInHand", "player"
     return $(`.${player}-hand .card`).length;
 END AFUNCTION
 
-AFUNCTION "declareWinner", "p1Score", "p2Score"
+AFUNCTION "declareWinner", "player1_score", "player2_score"
     let message = "";
     
-    if (p1Score > p2Score) {
-        message = `You Win! (${p1Score} - ${p2Score})`;
-    } else if (p2Score > p1Score) {
-        message = `Opponent Wins! (${p2Score} - ${p1Score})`;
+    if (player1_score > player2_score) {
+        message = `You Win! (${player1_score} - ${player2_score})`;
+    } else if (player2_score > player1_score) {
+        message = `Opponent Wins! (${player2_score} - ${player1_score})`;
     } else {
         message = "It's a DRAW!";
     }
@@ -183,17 +205,68 @@ AFUNCTION "declareWinner", "p1Score", "p2Score"
 END AFUNCTION
 
 AFUNCTION "computerTurn"
-    var free_index = 0;
-    $("#play-area .card").each((index, card) => {
-        if (!$("#play-area-" + index).html()) {
-            free_index = index;
-            return;
+    var won = null;
+
+    for (var play_card of $("#play-area .card.player img")) {
+        var parent_card = $(play_card).parent();
+        var placed_index = $(parent_card).attr("id").replace("play-area-", "");
+
+        var neighbours = getNeighbours(event, placed_index);
+
+        for (var check of neighbours) {
+            if (board[check.adj] !== null) {
+                continue;
+            }
+
+            for (var card of $("#computer-hand .card")) {
+                $("#computer-hand .card").removeClass("highlight");
+                selected = card.id;
+                $("#" + selected).addClass("highlight");
+                won = dropCard(event, check.adj);
+                if (won !== null) {
+                    $("#" + selected).remove();
+                    break;
+                }
+            }
+
+            if (won !== null) {
+                break;
+            }
         }
-    });
-    $("#play-area-" + free_index).html($("#computer-card-" + computer_index).html());
-    $("#play-area-" + free_index).addClass("computer");
-    $("#computer-hand #computer-card-" + computer_index).remove();
-    computer_index++;
+
+        if (won !== null) {
+            break;
+        }
+    }
+
+    $("#computer-hand .card").removeClass("highlight");
+
+    if (won === null) {
+        var id = board.findIndex(item => item === null);
+        var card = $("#computer-hand").children(":not(:empty)").first().attr("id");
+
+        if (id >= 0 && card) {
+            console.log(id, board[id]);
+            $("#play-area #play-area-" + id).html($("#" + card).html());
+            $("#play-area #play-area-" + id).addClass("computer");
+            var src = $("#play-area #play-area-" + id + " img").attr("src");
+
+            if (src) {
+                $("#computer-hand #" + card).remove();
+                var to_play = src.replace("/kytschi/imgs/triple_triad/cards/", "").replace(".png", "").split("-");
+                var rank = to_play[to_play.length-1].split("");
+
+                board[id] = {
+                    values: rank,
+                    owner: move
+                };
+            }
+        }
+    }
+
+    move = "player";
+    $(".player-ui.computer, .player-ui.player").removeClass("highlight");
+    $(".player-ui.player").addClass("highlight");
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
@@ -212,7 +285,7 @@ END AFUNCTION
 MOUSEEVENT "#player-hand .card"
     GOTO cardSelected("player")
 MOUSEEVENT "#computer-hand .card"
-    GOTO cardSelected("computer")
+    REM GOTO cardSelected("computer")
 MOUSEEVENT "#play-area .card"
     GOTO dropCard()
 END MOUSEEVENT

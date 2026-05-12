@@ -111,8 +111,8 @@ body {
     cursor: pointer;
 }
 
-.card.highlight, .label.highlight span {
-    border: 3px solid #FFE6E1;
+.card.highlight, .player-ui.highlight span {
+    border: 3px solid #F8B133;
 }
 
 .card img {
