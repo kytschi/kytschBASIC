@@ -33,6 +33,7 @@ FOR index%=0 TO 4
     SHIFT(deck$)
 NEXT
 
+ADEF game_over%=0
 ADEF selected$=""
 ADEF selected_rank$=""
 ADEF move$="player"
@@ -104,7 +105,7 @@ AFUNCTION "flipCard", "index"
 END AFUNCTION
 
 AFUNCTION "dropCard", "drop_to=null"
-    if (!selected) {
+    if (!selected || game_over) {
         if (drop_to === null) {
             gameInfo(event, "Please select a card to play", true);
         }
@@ -201,10 +202,15 @@ AFUNCTION "declareWinner", "player1_score", "player2_score"
         message = "It's a DRAW!";
     }
 
+    game_over = 1;
     gameInfo(event, message);
 END AFUNCTION
 
 AFUNCTION "computerTurn"
+    if (game_over) {
+        return;
+    }
+    
     var won = null;
 
     for (var play_card of $("#play-area .card.player img")) {
@@ -281,6 +287,18 @@ AFUNCTION "gameInfo", "text", "error = false"
         textColor: 'white'
     });
 END AFUNCTION
+
+JAVASCRIPT
+    var players = ["computer", "player"];
+    move = players[Math.floor(Math.random() * players.length)];
+
+    $(".player-ui.computer, .player-ui.player").removeClass("highlight");
+    $(".player-ui." + move).addClass("highlight");
+
+    if (move == "computer") {
+        computerTurn(event);
+    }
+END JAVASCRIPT
 
 MOUSEEVENT "#player-hand .card"
     GOTO cardSelected("player")
