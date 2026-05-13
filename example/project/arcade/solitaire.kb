@@ -106,7 +106,8 @@ AFUNCTION "onStackCardClick"
         selected_card = "";
     } else {
         $("#" + selected_card).addClass("card-highlight");
-        $("#" + selected_card).parent().children(".flipped").slice($("#" + selected_card).index()).addClass("card-highlight");
+        $("#" + selected_card).parent().children(".card").slice($("#" + selected_card).index()).addClass("card-highlight");
+        //console.log($("#" + selected_card).parent().children(".card").slice($("#" + selected_card).index()));
         if (prev_card) {
             $("#" + prev_card).parent().children(".card-highlight").each((index, card) => {
                 dropCard(event, stack, $(card).attr("id"));
@@ -114,7 +115,9 @@ AFUNCTION "onStackCardClick"
         }
     }
 
+    $(".placeholder").removeClass("card-highlight");
     updatePickClick(event);
+    updatePile(event);
 END AFUNCTION
 
 AFUNCTION "dropCard", "target", "to_drop"
@@ -216,6 +219,7 @@ AFUNCTION "playCard", "parent_id"
 
     $(".card").removeClass(["card-highlight", "card-warn"]);
     selected_card = "";
+    updatePile(event);
 END AFUNCTION
 
 AFUNCTION "flipCard", "parent_element"
@@ -265,6 +269,10 @@ AFUNCTION "pickCards"
     }
 
     updatePickClick(event);
+    updatePile(event);
+END AFUNCTION
+
+AFUNCTION "updatePile"
     if (hand.length - 1 == 0) {
         $("#pile .card").hide();
     }
