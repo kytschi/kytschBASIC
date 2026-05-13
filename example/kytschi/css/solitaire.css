@@ -11,6 +11,7 @@ html, body {
 
 body {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background-image: url("../imgs/cards/bk.jpg");
     background-position: center center;
@@ -40,21 +41,34 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 }
-#solitaire #player {
+#solitaire #stack {
     display: flex;
     flex: 1;
-    margin-top: 195px;
+    margin-top: 135px;
+    margin-bottom: 100px;
     padding-left: 90px;
     gap: 30px;
 }
-#solitaire #player .stack {
+#solitaire #stack .stack {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 0 0 var(--card-width);
+    cursor: pointer;
+    margin-top: -110px;
+    padding-top: 110px;
 }
-#solitaire #player .stack .card {
+#solitaire #stack .stack .card {
     position: relative;
     margin-top: -110px;
 }
+#solitaire #stack .stack .placeholder {
+    position: absolute;
+    margin-top: -110px;
+    /*display: none;*/
+}
+
 #solitaire #deck-playarea {
     display: flex;
     flex: 1;
@@ -71,9 +85,16 @@ body {
     display: block;
 }
 #solitaire #deck #pile {
-    flex: 0 0 300px;
+    flex: 0 0 var(--card-width);
+    margin-right: 20px;
 }
-
+#solitaire #deck #pick {
+    flex: 0 0 calc(var(--card-width)*3);
+    padding-left: calc(calc((var(--card-width)/2)) + 20px);
+}
+#solitaire #deck #pick .card {
+    margin-left: calc(calc((var(--card-width)/2) * -1) - 20px);
+}
 #solitaire #controls {
     gap: 10px;
     display: flex;
@@ -204,7 +225,7 @@ body {
         height: 260px;
     }
 
-    #solitaire #player {
+    #solitaire #stack {
         margin-top: 260px;
     }
 
@@ -367,4 +388,21 @@ body {
   border-top: 1px solid #dee2e6;
   border-bottom-right-radius: calc(.3rem - 1px);
   border-bottom-left-radius: calc(.3rem - 1px);
+}
+
+#disclaimer {
+    display: flex;
+    gap: 20px;
+    background-color: #fff;
+    border: 3px solid #3E135A;
+    margin: 240px 20px 40px 20px;
+    width: calc(100% - 40px);
+}
+
+#disclaimer p {
+    padding: 10px 20px;
+}
+
+#disclaimer .strong {
+    font-weight: bold;
 }

@@ -16,7 +16,7 @@ DIM suits$=("diamonds", "clubs","hearts","spades")
 DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
 
 DIM cards$=()
-DEF amount_deal%=3
+DEF amount_deal%=1
 
 FOR suit$ IN suits$
     FOR face$ IN faces$
@@ -24,62 +24,130 @@ FOR suit$ IN suits$
     NEXT
 NEXT
 
-SHUFFLE(cards$)
+REM SHUFFLE(cards$)
 
 ADIM hand$=cards$
 ADEF amount_deal%=amount_deal%
 ADEF game_over%=0
 ADEF start%=1
 ADEF selected_card$=""
+ADEF prev_card$=""
+ADEF prev_stack$=""
 
-AFUNCTION "onCardClick"
-    var prev_card = selected_card;
-    selected_card = event.target.parentElement.id;
-
-    if ($("#" + selected_card + " img").attr("src") == "/kytschi/imgs/cards/back.png") {
+AFUNCTION "onDeckClick"
+    if (game_over) {
+        gameInfo(event, "Game is over", true);
         return;
     }
+
+    playCard(event, event.target.parentElement.id);
+END AFUNCTION
+
+AFUNCTION "onPickCardClick"
+    var prev_card = selected_card;
+    selected_card = event.target.parentElement.id;
 
     if ($("#" + selected_card).hasClass("card-highlight")) {
         $(".card").removeClass(["card-highlight", "card-warn"]);
         selected_card = "";
     } else {
         $("#" + selected_card).addClass("card-highlight");
-        dropCard(event, event.target.parentElement.parentElement.id, prev_card);
     }
 END AFUNCTION
 
-AFUNCTION "dropCard", "target", "toDrop"
-    if (!toDrop || !target) {
+AFUNCTION "onStackCardClick"
+    prev_card = selected_card;
+    if (prev_card) {
+        prev_stack = $("#" + prev_card).parent().attr("id");
+    }
+
+    selected_card = event.target.parentElement.id;
+    var stack = event.target.parentElement.parentElement.id
+
+    if (!prev_stack) {
+        prev_stack = stack;
+    }
+
+    var just_stack = false;
+
+    //console.log("Stack:", stack, "Prev:", prev_card, "Selected:", selected_card);
+
+    // Empty stack drop.
+    if (selected_card == "stack") {
+        selected_card = prev_card;
+        stack = event.target.id
+        just_stack = true;
+        //console.log("Stack clicked");
+
+        $("#" + prev_card).parent().children(".card-highlight").each((index, card) => {
+            dropCard(event, stack, $(card).attr("id"));
+        });
+
+        $(".card").removeClass(["card-highlight", "card-warn"]);
+        selected_card = "";
         return;
     }
 
-    var target_card = $("#" + target).children().last().attr("id").split("_");
-    var source_card = toDrop.split("_");
+    if ($("#" + selected_card + " img").attr("src") == "/kytschi/imgs/cards/back.png") {
+        return;
+    }
 
-    console.log("Source:", source_card, "Target:", target_card);
-
-    if (source_card[0] == target_card[0]) {
+    if ($("#" + selected_card).hasClass("card-highlight") && !just_stack) {
         $(".card").removeClass(["card-highlight", "card-warn"]);
         selected_card = "";
-        gameInfo(event, "Invalid move", true);
+    } else {
+        $("#" + stack).children(".flipped").addClass("card-highlight");
+        if (prev_card) {
+            $("#" + prev_card).parent().children(".card-highlight").each((index, card) => {
+                dropCard(event, stack, $(card).attr("id"));
+            });
+        }
+    }
+
+    updatePickClick(event);
+END AFUNCTION
+
+AFUNCTION "dropCard", "target", "to_drop"
+    if (!to_drop || !target) {
         return;
     }
 
     var valid = false;
 
-    if (target_card[0] == "hearts" || target_card[0] == "diamonds") {
-        if (source_card[0] == "clubs" || source_card[0] == "spades") {
-            if (source_card[1] == target_card[1] - 1) {
-                valid = true;
+    var target_card = $("#" + target).children().last().attr("id");
+
+    //console.log("Source:", source_card, "Target:", target_card);
+
+    if (target_card) {
+        target_card = target_card.split("_");
+        var source_card = to_drop.split("_");
+
+        if (target_card[1] == "placeholder") {
+            valid = true;
+        } else {
+            if (source_card[0] == target_card[0]) {
+                $(".card").removeClass(["card-highlight", "card-warn"]);
+                selected_card = "";
+                gameInfo(event, "Invalid move, suits match", true);
+                return;
+            }
+
+            if (target_card[0] == "hearts" || target_card[0] == "diamonds") {
+                if (source_card[0] == "clubs" || source_card[0] == "spades") {
+                    if (source_card[1] == target_card[1] - 1) {
+                        valid = true;
+                    }
+                }
+            } else if (target_card[0] == "clubs" || target_card[0] == "spades") {
+                if (source_card[0] == "hearts" || source_card[0] == "diamonds") {
+                    if (source_card[1] == target_card[1] - 1) {
+                        valid = true;
+                    }
+                }
             }
         }
-    } else if (target_card[0] == "clubs" || target_card[0] == "spades") {
-        if (source_card[0] == "hearts" || source_card[0] == "diamonds") {
-            if (source_card[1] == target_card[1] - 1) {
-                valid = true;
-            }
-        }
+    } else {
+        valid = true;
     }
 
     if (!valid) {
@@ -89,69 +157,19 @@ AFUNCTION "dropCard", "target", "toDrop"
         return;
     }
 
-    var parent = $("#" + toDrop).parent();
-    
-    $("#" + target).append($("#" + toDrop));
-    $(parent).children().last().find("img").attr("src", "/kytschi/imgs/cards/" + $(parent).children().last().attr("id") + ".png");
+    var parent_element = $("#" + to_drop).parent().attr("id");
+    $("#" + target).append($("#" + to_drop));
+    flipCard(event, parent_element);
+    updateStackClick(event);
+    removeFromHand(event, to_drop);
+
+    //console.log("Parent: ", parent_element, flip_id);
+
     $(".card").removeClass(["card-highlight", "card-warn"]);
     selected_card = "";
 END AFUNCTION
 
-AFUNCTION "pickCards"
-    $("#pick").html("");
-
-    var end = start + amount_deal;
-    if (end > hand.length) {
-        end = hand.length;
-    }
-
-    for (var iLoop = start; iLoop < end; iLoop++) {
-        var card = hand[iLoop-1];
-        var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
-        $("#pick").append(
-            '<div id="' + id + '" class="card' + 
-            (iLoop == end  - 1 ? ' clickable' : '') + 
-            '"><img src="' + card + '"></div>'
-        );
-    }
-
-    start += amount_deal;
-END AFUNCTION
-
-AFUNCTION "dealCards"
-END AFUNCTION
-
-AFUNCTION "setupStack"
-    var stack = 1;
-    var iLoop = 1;
-    var end = 1;
-
-    for (var card of hand) {
-        var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
-
-        if (iLoop != end) {
-            card = "/kytschi/imgs/cards/back.png";
-        }
-
-        $("#stack" + stack).append(
-            '<div id="' + id + '" class="card clickable"><img src="' + card + '"></div>'
-        );
-
-        if (iLoop != end) {
-            iLoop++;
-        } else {
-            iLoop = 1;
-            stack++;
-            end += 1;
-        }
-
-        if (stack == 8) {
-            break;
-        }
-    }
-END AFUNCTION
-
-AFUNCTION "playCard"
+AFUNCTION "playCard", "parent_id"
     if (!selected_card) {
         return;
     }
@@ -162,43 +180,131 @@ AFUNCTION "playCard"
     let card_suit = card_details[0];
     let value = card_details[1];
 
-    let check_details = $("#" + event.target.parentElement.id + " img").attr("src").replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
+    let check_details = $("#" + parent_id + " img").attr("src").replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
     let check_suit = check_details[0];
     let check_value = check_details[1];
 
-    if (check_value == "placeholder") {
+    if (card_suit == check_suit && check_value == "placeholder") {
+        if (value == "1") {
+            valid = true;
+        }
+    } else if (card_suit == check_suit && parseInt(check_value)+1 == value) {
         valid = true;
     }
 
-    console.log(value, check_value);
-
     if (valid) {
-        $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
+        var parent_id = $("#" + selected_card).parent().attr("id");
         $("#" + card_suit + "_placeholder").html($("#" + selected_card).html());
-        $("#pick #" + selected_card).remove();
+        $("#pick #" + selected_card + ", #stack #" + selected_card).remove();
+        flipCard(event, parent_id);
+        removeFromHand(event, selected_card);
+        updatePickClick(event);
+        updateStackClick(event);
+    } else {
+        gameInfo(event, "Invalid play", true);
+    }
 
-        var iLoop = 0;
-        for (var card of hand) {
-            var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
-            if (selected_card == id) {
-                hand.splice(iLoop, 1);
-                break;
-            }
-            iLoop++;
-        }
+    $(".card").removeClass(["card-highlight", "card-warn"]);
+    selected_card = "";
+END AFUNCTION
 
-        $("#pick .card:last-child").attr('onclick', 'javascript:onCardClick(event)');
-        selected_card = "";
+AFUNCTION "flipCard", "parent_element"
+    //console.log("Flip", parent_element);
+    var flip_id = $("#" + parent_element).children(".card").last().attr("id");
+    if (flip_id) {
+        $("#" + parent_element).children(".card").last().find("img").attr("src", "/kytschi/imgs/cards/" + flip_id + ".png").parent().addClass("flipped");
     }
 END AFUNCTION
 
-AFUNCTION "onDeckClick"
-    if (game_over) {
-        gameInfo(event, "Game is over", true);
-        return;
+AFUNCTION "updatePickClick"
+    $("#pick .clickable").off("click");
+    $("#pick").children().last().addClass("clickable");
+    $("#pick .clickable").click((event) => {
+        onPickCardClick(event);
+    });
+END AFUNCTION
+
+AFUNCTION "updateStackClick"
+    $("#stack .flipped").off("click");
+    $("#stack .flipped").on("click", (event) => {
+        onStackCardClick(event);
+    });
+END AFUNCTION
+
+AFUNCTION "pickCards"
+    $("#pick").html("");
+
+    var end = start + amount_deal;
+    if (end > hand.length) {
+        end = hand.length + 1;
     }
 
-    playCard(event);
+    for (var iLoop = start; iLoop < end; iLoop++) {
+        var card = hand[iLoop-1];
+        var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
+        $("#pick").append(
+            '<div id="' + id + '" class="card' + 
+            (iLoop == end  - 1 ? ' clickable flipped' : '') + 
+            '"><img src="' + card + '"></div>'
+        );
+    }
+
+    start += amount_deal;
+    if (start >= hand.length) {
+        start = 1;
+    }
+
+    updatePickClick(event);
+    if (!hand.length) {
+        $("#pile .card").hide();
+    }
+END AFUNCTION
+
+AFUNCTION "setupStack"
+    var stack = 1;
+    var iLoop = 1;
+    var end = 1;
+    var flipped = " flipped";
+
+    while (stack != 8) {
+        var card = hand[0];
+        var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
+
+        if (iLoop != end) {
+            card = "/kytschi/imgs/cards/back.png";
+            flipped = "";
+        } else {
+            flipped = " flipped"
+        }
+
+        $("#stack" + stack).append(
+            '<div id="' + id + '" class="card clickable' + flipped + '"><img src="' + card + '"></div>'
+        );
+
+        hand.splice(0, 1);
+
+        if (iLoop != end) {
+            iLoop++;
+        } else {
+            iLoop = 1;
+            stack++;
+            end += 1;
+        }
+    }
+    updateStackClick(event);
+END AFUNCTION
+
+AFUNCTION "removeFromHand", "selected"
+    //console.log("Removing", selected);
+    var iLoop = 0;
+    for (var card of hand) {
+        var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
+        if (selected == id) {
+            hand.splice(iLoop, 1);
+            break;
+        }
+        iLoop++;
+    }
 END AFUNCTION
 
 AFUNCTION "gameInfo", "text", "error = false"
@@ -214,53 +320,7 @@ AFUNCTION "gameInfo", "text", "error = false"
     });
 END AFUNCTION
 
-AFUNCTION "gameOver"
-    var score = 0, card_details, value = 0;
-
-    if (typeof(kb_cookie.kb_solitaire_scores) == "undefined") {
-        kb_cookie.kb_solitaire_scores = {};
-        names.forEach((player, index) => {
-            kb_cookie.kb_solitaire_scores[index] = {
-                "score": 0,
-                "turn": turn
-            }
-        });
-    }
-
-    game_over = 1;
-    gameInfo(event, "I WIN!!!");
-    $("#player-0 .winner").show();
-
-    
-    score = parseInt($("#player-0 .score span").html());
-
-    hand.forEach((card, index) => {
-        card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
-        value = parseInt(card_details[1]);
-        if (value == 1) {
-            score += 11;
-        } else if (([11, 12, 13]).includes(value)) {
-            score += 10;
-        } else {
-            score += value;
-        }
-    });
-
-    $("#player-0 .score span").html(score);
-    kb_cookie.kb_solitaire_score = score;
-
-    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
-
-    $(".btn-new-game").addClass("card-highlight");
-END AFUNCTION
-
 JAVASCRIPT
-    if (typeof(kb_cookie.kb_solitaire_score) != "undefined") {
-        $("#player-0 .score span").html(kb_cookie.kb_solitaire_score);
-    }
-
-    $("#player-0 .player-img").addClass("player-turn");
-
     $("button[name=btnSetup]").click(() => {
         $("#playerSelect").show();
         $("#multiplayerSelect").hide();
@@ -284,16 +344,13 @@ JAVASCRIPT
         $("#multiplayerSelect").show();
     });
 
-    $(".deck-placeholder").click((event) => {
-        onDeckClick(event);
-    });
-
     setupStack(event);
-    //pickCards(event);
 END JAVASCRIPT
 
-MOUSEEVENT ".stack .clickable"
-    GOTO onCardClick()
+MOUSEEVENT ".stack-placeholder"
+    GOTO onStackCardClick()
+MOUSEEVENT ".deck-placeholder"
+    GOTO onDeckClick()
 END MOUSEEVENT
 
 DIV "", "solitaire"
@@ -334,60 +391,43 @@ DIV "", "solitaire"
                     END DIV
                 END DIV
             END DIV
-            DIV "", "player"
+            DIV "", "stack"
                 DIV "stack", "stack1"
+                    SPRITE "stack1_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
                 DIV "stack", "stack2"
+                    SPRITE "stack2_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
                 DIV "stack", "stack3"
+                    SPRITE "stack3_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
                 DIV "stack", "stack4"
+                    SPRITE "stack4_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
                 DIV "stack", "stack5"
+                    SPRITE "stack5_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
                 DIV "stack", "stack6"
+                    SPRITE "stack6_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
                 DIV "stack", "stack7"
+                    SPRITE "stack7_placeholder", "stack-placeholder placeholder"
+                        IMAGE "/kytschi/imgs/cards/drop_placeholder.png"
+                    END SPRITE
                 END DIV
             END DIV
-        END DIV
-    END DIV
-    DIV "", "scoreboard"
-        DIV "", "scoreboard-scores"
-            TABLE
-                TBODY
-                    TROW
-                        TCELL
-                            PRINT "&nbsp;"
-                        END TCELL
-                        TCELL
-                            PRINT "Player"
-                        END TCELL
-                        TCELL ,"last-card-col"
-                            PRINT "&nbsp;"
-                        END TCELL
-                        TCELL ,"text-center"
-                            PRINT "Total"
-                        END TCELL
-                    END TROW
-                    TROW ,"player-0"
-                        TCELL ,"player-img"
-                            IMAGE "/kytschi/imgs/cards/human.png"
-                        END TCELL
-                        TCELL
-                            PRINT "You"
-                        END TCELL
-                        TCELL ,"last-card-col"
-                            IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
-                        END TCELL
-                        TCELL ,"text-center score"
-                            PRINT "0"
-                        END TCELL
-                    END TROW
-                END TBODY
-            END TABLE
-        END DIV
-        DIV ,"scoreboard-footer"
         END DIV
     END DIV
     DIV "modal fade", "modalNewGame"
@@ -421,6 +461,15 @@ DIV "", "solitaire"
             END DIV
         END DIV
     END DIV
+END DIV
+DIV ,"disclaimer"
+    SWRITE
+        PRINT "Note", "strong"
+        LINE BREAK
+        PRINT "You don't drag and drop the card. You click the ones you want and then click where you'd like them to be placed."
+        LINE BREAK
+        PRINT "When you what to move multiple cards around, select the top most number and it will automatically select the ones below to take with it."
+    END SWRITE
 END DIV
 END BODY
 END
