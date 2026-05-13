@@ -24,7 +24,7 @@ FOR suit$ IN suits$
     NEXT
 NEXT
 
-SHUFFLE(cards$)
+REM SHUFFLE(cards$)
 
 ADIM hand$=cards$
 ADEF amount_deal%=amount_deal%
@@ -96,7 +96,8 @@ AFUNCTION "onStackCardClick"
         $(".card").removeClass(["card-highlight", "card-warn"]);
         selected_card = "";
     } else {
-        $("#" + stack).children(".flipped").addClass("card-highlight");
+        $("#" + selected_card).addClass("card-highlight");
+        $("#" + selected_card).parent().children().slice($("#" + selected_card).index()).addClass("card-highlight");
         if (prev_card) {
             $("#" + prev_card).parent().children(".card-highlight").each((index, card) => {
                 dropCard(event, stack, $(card).attr("id"));
