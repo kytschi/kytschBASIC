@@ -18,6 +18,15 @@ DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
 DIM cards$=()
 DEF amount_deal%=1
 
+IFNTE _GET("pd") THEN
+    LET amount_deal%=_GET("pd")
+    LET amount_deal%=INT(amount_deal%)
+END IF
+
+IF amount_deal%>3 THEN
+	LET amount_deal%=1
+END IF
+
 FOR suit$ IN suits$
     FOR face$ IN faces$
         LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".png"
@@ -93,11 +102,11 @@ AFUNCTION "onStackCardClick"
     }
 
     if ($("#" + selected_card).hasClass("card-highlight") && !just_stack) {
-        $(".card").removeClass(["card-highlight", "card-warn"]);
+        $(".card, .placeholder").removeClass(["card-highlight", "card-warn"]);
         selected_card = "";
     } else {
         $("#" + selected_card).addClass("card-highlight");
-        $("#" + selected_card).parent().children().slice($("#" + selected_card).index()).addClass("card-highlight");
+        $("#" + selected_card).parent().children(".flipped").slice($("#" + selected_card).index()).addClass("card-highlight");
         if (prev_card) {
             $("#" + prev_card).parent().children(".card-highlight").each((index, card) => {
                 dropCard(event, stack, $(card).attr("id"));
@@ -441,8 +450,12 @@ DIV "", "solitaire"
                     FORM "form_setup", "GET", "/arcade/solitaire"
                         DIV "row", "playerSelect"
                             DIV "row break"
-                                PRINT "No. players"
-                                
+                                PRINT "Per Deal"
+                                SELECTINPUT "pd",, "form-input", "Please select an option"
+                                    SELECTINPUTOPT 1,"1 per deal"
+                                    SELECTINPUTOPT 2,"2 per deal"
+                                    SELECTINPUTOPT 3,"3 per deal"
+                                END SELECTINPUT
                             END DIV
                             DIV "row break"
                             END DIV
