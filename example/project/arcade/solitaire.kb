@@ -24,7 +24,7 @@ FOR suit$ IN suits$
     NEXT
 NEXT
 
-REM SHUFFLE(cards$)
+SHUFFLE(cards$)
 
 ADIM hand$=cards$
 ADEF amount_deal%=amount_deal%
