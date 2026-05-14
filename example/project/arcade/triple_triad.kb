@@ -195,8 +195,10 @@ AFUNCTION "declareWinner", "player1_score", "player2_score"
     let message = "";
     
     if (player1_score > player2_score) {
+        $(".player .winner").show();
         message = `You Win! (${player1_score} - ${player2_score})`;
     } else if (player2_score > player1_score) {
+        $(".computer .winner").show();
         message = `Opponent Wins! (${player2_score} - ${player1_score})`;
     } else {
         message = "It's a DRAW!";
@@ -327,13 +329,12 @@ END MOUSEEVENT
                         DIV "player-ui computer"
                             IMAGE "/kytschi/imgs/people/" + name$ + ".png"
                             PRINT name$
+                            IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                         END DIV
-                        DIV "card"
-                            
-                        END DIV
-                        DIV "player-ui player align-right highlight"
+                        DIV "player-ui player"
                             IMAGE "/kytschi/imgs/people/jason.png"
                             PRINT "You"
+                            IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                         END DIV
                     END DIV
                     DIV ,"play-area"
@@ -371,18 +372,12 @@ END MOUSEEVENT
                             END DIV
                         END DIV
                     END DIV
-                    DIV "row spacer"
-                        DIV "card"
-                            
-                        END DIV
-                        DIV "card"
-                            LINK "/arcade/triple-triad", "Start a new game", "button align-middle"
+                    DIV "row spacer center"
+                        SWRITE
+                            LINK "/arcade/triple-triad", "Start a new game", "button"
                                 PRINT "New Game"
                             END LINK
-                        END DIV
-                        DIV "card"
-                            
-                        END DIV
+                        END SWRITE
                     END DIV
                 END DIV
                 DIV "column", "column-right"

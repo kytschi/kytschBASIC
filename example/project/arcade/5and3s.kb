@@ -20,9 +20,9 @@ FOR face$ IN faces$
     LET dominoes$()="/kytschi/imgs/dominoes/" + face$ + ".png"
 NEXT
 
-DIM names$=("You", "Mike", "Laura", "Lenny")
+DIM names$=("you", "mike", "lenny", "brian")
 
-DEF no_players%=4
+DEF no_players%=2
 
 IFNTE _GET("np") THEN
     LET no_players%=_GET("np")
@@ -77,51 +77,38 @@ AFUNCTION "computerPlay"
     var status = false;
     
     sleep(500).then(() => {
-        //hands[turn].sort(() => Math.random() - .5);
-        console.log("Computer", names[turn]);
+        hands[turn].sort(() => Math.random() - .5);
+        var directions = ["left", "right"];
+        directions.sort(() => Math.random() - .5);
 
-        hands[turn].forEach((card, index) => {
-            if (!played) {
-                var rotate = "";
-                var direction = "left";
+        for (var direction of directions) {
+            for (var iLoop = 0; iLoop < hands[turn].length; iLoop++) {
+                var domino = hands[turn][iLoop];
+                selected_domino = (domino).replace("/kytschi/imgs/dominoes/", "").replace(".png", "");
+                var rotate = calMove(event, direction);
 
-                selected_domino = (card).replace("/kytschi/imgs/dominoes/", "").replace(".png", "");
-                var selected = selected_domino.split("");
-
-                var check_left = played_left.split("");
-                rotate = calRotate(event, direction, check_left);
-                
-                if (rotate == "") {
-                    var check_right = played_right.split("");
-                    direction = "right";
-                    rotate = calRotate(event, direction, check_right);
-                }
-
-                if (rotate) {
-                    if (selected[0] == selected[1]) {
-                        rotate = "";
-                    }
-                    console.log(direction, rotate);
-                    hands[turn].splice(index, 1);
+                if (rotate != null) {
+                    hands[turn].splice(iLoop, 1);
                     played = true;
-                    played_left = selected_domino;
-                    if (direction == "right") {
-                        played_right = selected_domino;
-                    }
                     $("#dominoes-" + direction + " .dominoes")
                         .append("<div id=\"" + selected_domino + "\" class=\"card" + (rotate ? " " + rotate : "") + "\"><img src=\"/kytschi/imgs/dominoes/" + selected_domino + ".png\"/></div>");
+                    break;
                 }
             }
-        });
+            if (played) {
+                break;
+            }
+        }
 
         if (!played) {
             gameInfo(event, "KNOCKING");
             $("#player-" + turn + " .knocking").show();
         } else {
+            selected_domino = "";
             $("#player-" + turn + " .knocking").hide();
         }
 
-        updateTurn();
+        updateTurn(event);
     });
 END AFUNCTION
 
@@ -147,50 +134,79 @@ AFUNCTION "updateTurn"
     }
 END AFUNCTION
 
-AFUNCTION "calRotate", "direction", "played"
-    var selected = selected_domino.split("");   
-
-    if (direction == "right") {
-        if (selected[0] == played[0]) {
-            return "rotate-right";
-        } else if (selected[1] == played[1]) {
-            return "rotate-left";
+AFUNCTION "calMove", "direction"
+    var selected = selected_domino.split("");
+    var iLoop;
+    
+    if (played_left == "" && played_right == "") {
+        if (selected[0] == selected[1]) {
+            played_left = played_right = selected[0];
+            return "";
         }
-    } else {
-        if (selected[0] == played[0]) {
-            return "rotate-left";
-        } else if (selected[1] == played[1]) {
-            return "rotate-right";
+
+        played_left = selected[0];
+        played_right = selected[1];
+        return "rotate-right";
+    } else if (direction == "left") {
+        for (iLoop = 0; iLoop < selected.length; iLoop++) {
+            //console.log("Check", selected[iLoop],  "==", played_left);
+            if (selected[iLoop] == played_left) {
+                if (iLoop) {
+                    played_left = selected[0];
+                    if (selected[0] == selected[1]) {
+                        return "";
+                    }
+                    return "rotate-right";
+                } else {
+                    played_left = selected[1];
+                    if (selected[0] == selected[1]) {
+                        return "";
+                    }
+                    return "rotate-left";
+                }
+            }
+        }
+    } else if (direction == "right") {
+        for (iLoop = 0; iLoop < selected.length; iLoop++) {
+            //console.log("Check", selected[iLoop],  "==", played_right);
+            if (selected[iLoop] == played_right) {
+                if (iLoop) {
+                    played_right = selected[0];
+                    if (selected[0] == selected[1]) {
+                        return "";
+                    }
+                    return "rotate-left";
+                } else {
+                    played_right = selected[1];
+                    if (selected[0] == selected[1]) {
+                        return "";
+                    }
+                    return "rotate-right";
+                }
+            }
         }
     }
 
-    return "";
+    return null;
 END AFUNCTION
 
-
 AFUNCTION "onDropZoneClick"
-    var direction = $(event.target).attr("class");
-    var rotate = "";
-
-    if (played_left == "" && played_right == "") {
-        played_left = played_right = selected_domino;
-        var selected = selected_domino.split("");
-        if (selected[0] != selected[1]) {
-            rotate = "rotate-" + direction;
-        }
-    } else {
-        var played = [];
-        if (direction == "left") {
-            played = played_left.split("");
-            played_left = selected_domino;
-        } else {
-            played = played_right.split("");
-            played_right = selected_domino;
-        }
-
-        rotate = calRotate(event, direction, played);
+    if (!selected_domino) {
+        return;
     }
 
+    var direction = $(event.target).attr("class");
+    var selected = selected_domino.split("");
+    var rotate = calMove(event, direction);
+
+    //console.log("Player", selected, "Direction", direction, "Played left", played_left, "Played right", played_right);
+    
+    if (rotate == null) {
+        console.log("Player", selected, "Direction", direction, "Played left", played_left, "Played right", played_right);
+        gameInfo(event, "Invalid play", true);
+        return;
+    }
+    
     $("#dominoes-" + direction + " .dominoes")
         .append("<div id=\"" + selected_domino + "\" class=\"card" + (rotate ? " " + rotate : "") + "\">" + $("#" + selected_domino).html() + "</div>");
     $("#hand #" + selected_domino).remove();
@@ -201,6 +217,8 @@ AFUNCTION "onDropZoneClick"
             return;
         }
     });
+
+    selected_domino = "";
 
     updateTurn(event);
 END AFUNCTION
@@ -251,7 +269,6 @@ JAVASCRIPT
 
     $("button[name=btnSetup]").click(() => {
         $("#playerSelect").show();
-        $("#multiplayerSelect").hide();
         $("#modalNewGame").show();
     });
 
@@ -274,17 +291,12 @@ JAVASCRIPT
             gameInfo(event, "Wait your turn", true);
         }
     });
-
-    $("button[name=btnMultiPlayer]").click(() => {
-        $("#playerSelect").hide();
-        $("#multiplayerSelect").show();
-    });
 END JAVASCRIPT
 
 DIV "", "fiveandthrees"
     DIV "", "board"
         DIV "", "deck"
-            DIV ,"cards"
+            DIV ,"dominoes"
                 DIV ,"dominoes-left"
                     SPRITE "drop-zone-left", "placeholder", "onDropZoneClick"
                         IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
@@ -330,7 +342,7 @@ DIV "", "fiveandthrees"
                             PRINT "Player"
                         END TCELL
                         TCELL ,"last-card-col"
-                            PRINT "&nbsp;"
+                            PRINT "Hand"
                         END TCELL
                         TCELL ,"last-card-col"
                             PRINT "&nbsp;"
@@ -341,19 +353,19 @@ DIV "", "fiveandthrees"
                     END TROW
                     FOR iLoop%=0 TO no_players%
                         TROW ,"player-"+iLoop%
+                            DEF name$=names$(iLoop%)
                             TCELL ,"player-img"
                                 IF iLoop%=0
-                                    IMAGE "/kytschi/imgs/cards/human.png"
+                                    IMAGE "/kytschi/imgs/people/nick.png"
                                 ELSE
-                                    IMAGE "/kytschi/imgs/cards/bot.png"
+                                    IMAGE "/kytschi/imgs/people/" + name$ + ".png"
                                 END IF
                             END TCELL
-                            TCELL
-                                PRINT names$(iLoop%)
+                            TCELL ,"player-name"
+                                PRINT name$
                             END TCELL
                             TCELL ,"last-card-col"
                                 PRINT COUNT(hands$[iLoop%])
-                                IMAGE "/kytschi/imgs/cards/last-card.png","last","last-card"
                                 IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                             END TCELL
                             TCELL ,"last-card-col"
@@ -383,12 +395,11 @@ DIV "", "fiveandthrees"
                             DEF game_code$=RNDSTRING(9)
                             DIV "row break"
                                 PRINT "No. players"
-                                NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
+                                SELECTINPUT "np",, "form-input", "Please select the players"
+                                    SELECTINPUTOPT 2,"2 players"
+                                    SELECTINPUTOPT 4,"4 players"
+                                END SELECTINPUT
                             END DIV
-                            REM DIV "row"
-                                REM PRINT "Game code"
-                                REM TEXTINPUT "game_code", game_code$, "form-input"
-                            REM END DIV
                             DIV "row break"
                             END DIV
                             DIV "row"
@@ -400,14 +411,6 @@ DIV "", "fiveandthrees"
                                 END DIV
                             END DIV
                         END DIV
-                        REM DIV "row hide", "multiplayerSelect"
-                            REM PRINT "Multiplayer"
-                            REM TEXTINPUT "txtGameID",,"form-input","Please enter your name","txtPlayerName",true
-                            REM TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
-                            REM DIV "row break"
-                            REM END DIV
-                            REM BUTTONSUBMIT "btnMultiPlayerStart", "btn-new-game", "btnMultiPlayerStart", "multi", "Start"
-                        REM END DIV
                     END FORM
                 END DIV
                 DIV "modal-footer"

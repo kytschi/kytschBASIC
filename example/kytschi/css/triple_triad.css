@@ -1,3 +1,7 @@
+:root {
+    --card-width: 108px;
+    --card-height: 139px;
+}
 html, body {
     padding: 0px;
     margin: 0;
@@ -28,7 +32,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 #board {
@@ -58,23 +62,35 @@ body {
     flex-flow: row wrap;
     align-items: flex-start; 
 }
+.row.spacer {
+    align-items: baseline;
+}
+.row.center {
+    justify-content: center;
+}
 
 .player-ui {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 128px;
 }
 .player-ui img {
     width: 100px;
+}
+.player-ui .winner {
+    position: absolute;
+    margin-top: 75px;
+    margin-left: 100px;
+    width: 54px;
+    display: none;
 }
 .player-ui span {
     display: block;
     border: 3px solid #3E135A;
     background-color: #fff;
     padding: 10px;
-    width: 100%;
+    width: calc(100% - 30px);
     text-align: center;
 }
 .player-ui span::first-letter {
@@ -98,16 +114,16 @@ body {
 #computer-hand, #player-hand {
     display: flex;
     flex-direction: column;
-    width: 128px;
+    width: var(--card-width);
 }
 
 .card {
     display: block;
     background-image: url("../imgs/triple_triad/cards/placeholder.jpg");
-    background-size: 128px 165px;
+    background-size: 100%;
     background-repeat: no-repeat;
-    width: 128px;
-    height: 165px;
+    width: var(--card-width);
+    height: var(--card-height);
     cursor: pointer;
 }
 
@@ -116,17 +132,12 @@ body {
 }
 
 .card img {
-    width: 128px;
+    width: 100%;
 }
 
 .row.spacer .card {
     background: none;
 }
-
-.level .card {
-    height: 215px;
-}
-
 .card.computer, .computer span {
     background: none;
     background-color:#3654B6 !important;

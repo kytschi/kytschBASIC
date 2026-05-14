@@ -1,6 +1,6 @@
 :root {
-    --card-width: 64px;
-    --card-width-rotate: 128px;
+    --card-width: 58px;
+    --card-width-rotate: 116px;
 }
 html, body {
     padding: 0;
@@ -12,8 +12,6 @@ html, body {
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     background-image: url("../imgs/cards/bk.jpg");
     background-position: center center;
@@ -23,8 +21,8 @@ body {
 #fiveandthrees {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
+    padding-top: 50px;
 }
 
 #fiveandthrees #board, #fiveandthrees #player {
@@ -35,22 +33,21 @@ body {
 }
 
 #fiveandthrees #deck {
-    padding-top: 50px;
-    height: 523px;
+    width: 1099px;
+    min-height: 523px;
     background-image: url("../imgs/cards/table.png");
     background-position: center center;
     background-repeat: no-repeat;
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    flex: 0 0 1099px;
-    align-items: center;
-    justify-content: center;
 }
-#fiveandthrees #deck #cards {
+#fiveandthrees #deck #dominoes {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 900px;
     height: 320px;
 }
 #fiveandthrees #deck #controls {
@@ -88,7 +85,7 @@ body {
 
 #fiveandthrees #scoreboard {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     left: 10px;
     display: block;
     width: 327px;
@@ -134,7 +131,12 @@ body {
 }
 #fiveandthrees #scoreboard .player-img img {
     margin: 0;
+    width: 100%;
 }
+#fiveandthrees #scoreboard .player-name::first-letter {
+    text-transform: uppercase;
+}
+
 #fiveandthrees #scoreboard table tbody tr:nth-child(odd) {
     background-color: #292444;
     padding: 0;
@@ -422,6 +424,7 @@ body {
 #fiveandthrees #dominoes-right,
 #fiveandthrees #dominoes-right .dominoes {
     display: flex;
+    flex-wrap: wrap;
 }
 #fiveandthrees #dominoes-left .dominoes {
     flex-direction: row-reverse;
