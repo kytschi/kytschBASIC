@@ -25,6 +25,9 @@ BODY
 						PRINT "Link to repo"
 					END LINK
 				END SWRITE
+				SWRITE
+					PRINT "You can drop me a message at hello@kytschbasic.org."
+				END SWRITE
 			END DIV
 		END DIV
 		LOAD _ROOT + "/project/shared/footer"
