@@ -29,7 +29,7 @@ LOAD _ROOT + "/project/shared/header"
 				CPRINT
 MAIL
 	REM who the email is from.
-	MAILFROM "hello@kytschi.com"
+	MAILFROM "hello@kytschbasic.org"
 
 	REM who to send the email to.
 	MAILTO "mike@kytschi.com"

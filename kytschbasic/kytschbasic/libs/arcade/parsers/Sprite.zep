@@ -2,7 +2,7 @@
  * SPRITE parser
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Sprite
- * @author 		Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschbasic.org>
  * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2

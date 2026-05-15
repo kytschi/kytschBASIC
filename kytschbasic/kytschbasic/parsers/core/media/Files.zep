@@ -2,7 +2,7 @@
  * Files parser
  *
  * @package     KytschBASIC\Parsers\Core\Media\Files
- * @author 		Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschbasic.org>
  * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1

@@ -2,7 +2,7 @@
  * BITMAP parser
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\Bitmap
- * @author 		Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschbasic.org>
  * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.1

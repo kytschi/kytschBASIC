@@ -2,7 +2,7 @@
  * Database exception
  *
  * @package     KytschBASIC\Exceptions\DatabaseException
- * @author 		Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschbasic.org>
  * @copyright   2025 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.2

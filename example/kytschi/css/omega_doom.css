@@ -14,12 +14,6 @@
     src: url("../fonts/Inconsolata.ttf") format("truetype");
 }
 
-@keyframes flash {
-  0% { color: var(--orange); }
-  50% { color: transparent; }
-  100% { color: var(--orange); }
-}
-
 html, body {
     padding: 0;
     margin: 0;
@@ -32,66 +26,40 @@ html, body {
     font-size: 12pt;
 }
 
-#omega-doom .hide {
-    display: none;
+#omega-doom-game {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black) !important;
 }
 
-#omega-doom pre, #omega-doom code {
+#omega-doom img {
     padding: 0;
     margin: 0;
-    display: block;
-    font-size: 8pt;
-    font-family: 'Body', monospace;
-    text-align: left;
-    width: 100%;
-    height: 100%;
-    line-height: 6pt;
-    letter-spacing: 1pt;
-}
-
-#omega-doom button {
-    background: none;
-    border: none;
-    color: var(--white) !important;
-    font-size: 14pt;
-    line-height: 14pt;
-    margin-bottom: 10px;
-    cursor: pointer;
-    letter-spacing: 0pt;
-}
-#omega-doom button .button_key {
-    color:var(--orange) !important;
-    padding: 0px 4px;
-}
-#omega-doom button .button-message.selected  {
-    color: var(--blue) !important;
-}
-#omega-doom button .button_key_end {
-    padding-right: 18px;
-}
-#omega-doom button .button_key_end_small {
-    padding-right: 12px;
-}
-#omega-doom button.locked {
-    opacity: 0.5 !important;
 }
 
 #omega-doom-intro, #omega-doom-gameover {
+    padding-top: 50px;
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    flex-direction: column;
     display: none;
     border: none !important;
     background-color: var(--black) !important;
+    align-items: center;
 }
-
-#omega-doom-intro pre, #omega-doom-intro #intro-controls, #omega-doom-gameover pre {
+#omega-doom .screen-content {
     display: flex;
-    font-family: 'Body', monospace;
-    justify-content: center;
-    background-color: var(--black) !important;
-    border: none !important;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+#omega-doom-intro #intro, #omega-doom-gameover #gameover {
+    max-width: 1099px;
+    flex-direction: column;
+}
+#omega-doom-intro #intro img, #omega-doom-gameover #gameover img {
+    width: 100%;
 }
 
 #omega-doom-gameover .gfx-label {
@@ -99,327 +67,163 @@ html, body {
     color: var(--green) !important;
 }
 
-#omega-doom-intro #intro-controls-buttons {
-    display: none;
-    flex-direction: column;
-}
-
-#omega-doom-intro pre code, #omega-doom-gameover pre code {
-    margin-top: 50px;
-    width: 800px !important;
-    text-align: center;
-}
-
-#omega-doom-intro #intro, #omega-doom-gameover #gameover {
-    width: 100%;
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    border: none !important;
-}
-
-#omega-doom-game {
-    display: block;
-    width: 100%;
-    height: 100vh;
-    display: none;
-    background-color: var(--black) !important;
-}
-
 #omega-doom-game .progress {
-    display: block;
+    display: flex;
     width: 100%;
     height: 100vh;
 }
-
 #omega-doom-game .game-progress {
     display: none;
     width: 100%;
     height: 100%;
 }
+#omega-doom-game .overlay {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+#omega-doom-game .overlay .location {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+#omega-doom-game .overlay .location img {
+    min-width: 100%;
+    min-height: 100%;
+}
+#omega-doom-game .view-screen img {
+    width: 100%;
+}
+#omega-doom-game .view-screen {
+    position: fixed;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black);
+}
+#omega-doom-game .game-data {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 101;
+}
+#omega-doom-game .ss-liberty .view-screen {
+    width: 700px;
+    height: 500px;
+    top: 140px;
+}
 
-#omega-doom-game .visuals {
+#omega-doom-game .character {
+    display: flex;
+    justify-content: flex-start;
+    margin: 30px 0 0 30px;
+}
+#omega-doom-game .character .original {
+    display: none;
+}
+#omega-doom-game .character-data {
+    display: flex;
+    background-color: var(--black);
+    border: 3px solid var(--green);
+    color: var(--green);
+    width: 800px;
+}
+#omega-doom-game .character-image {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 360px);
-    height: 100%;
-}
-
-#omega-doom-game .visuals.full {
-    width: 100%;
-    height: 100vh;
-}
-
-#omega-doom-game .visuals.full pre, #omega-doom-game .visuals.full code {
+    width: 170px;
     text-align: center;
-    font-size: 12pt;
-    padding-top: 0px;
+    align-items: center;
+    padding-top: 10px;
+    border-right: 3px solid var(--green);
+}
+#omega-doom-game .character-image img {
+    display: inline-block;
+    width: 120px;
+}
+#omega-doom-game .character-speech {
+    display: none;
+}
+#omega-doom-game .character-speech-output {
+    display: flex;
+    flex: 1;
+}
+#omega-doom-game .character-speech-output p {
+    display: inline-block;
+    padding: 10px;
+    margin: 0;
     width: 100%;
-    height: 100vh;
 }
 
-#omega-doom-game #warp .render {
-    text-align: center;
-    font-size: 12pt;
-    padding-top: 30px;
-    width: 100%;
-    height: 100vh;
+#omega-doom-game .screen-right {
+    justify-content: flex-end;
+    margin: 30px 30px 0 0;
 }
-
-#omega-doom-game #warp .gfx {
-    width: 100%;
-    height: 100vh;
+#omega-doom-game .screen-right .character-image {
+    border-right: none;
+    border-left: 3px solid var(--green);
+}
+#omega-doom-game .screen-right .character-image img {
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 #omega-doom-game .controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 200px;
+    background-color: var(--black);
+    border-top: 3px solid var(--green);
+}
+
+#omega-doom-game .controls .buttons {
+    height: 100%;
+    display: flex;
     padding: 20px;
-    width: calc(360px - 40px);
-    height: calc(100% - 42px);
-    border: 1px dashed var(--green) !important;
-    background-color: var(--black) !important;
+    align-items: flex-start;
+    gap: 20px;
 }
-#omega-doom-game .controls button {
-    text-align: left;
-    width: 100%;
-}
-    
-#omega-doom-game .button-message.flash {
-    -webkit-animation: flash linear 2s infinite;
-    animation: flash linear 2s infinite;
-}
-
-#omega-doom-game .gfx, #omega-doom-game .text {
+#omega-doom-game .controls .sub-select {
+    flex: 1;
+    height: 100%;
     display: flex;
-    width: 100%;
-    overflow: hidden;
-    background-color: var(--black) !important;
+    border-left: 3px solid var(--green);
+    padding: 20px;
+    align-items: flex-start;
+    gap: 20px;
 }
-
-#omega-doom-game .gfx {
-    height: calc(100vh - 300px);
-}
-
-#omega-doom-game .text {
-    border-top: 1px dashed var(--green) !important;
-    height: 300px;
-}
-
-#omega-doom-game .gfx .gfx-label {
-    display: block;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    color: var(--green) !important;
-}
-
-#omega-doom-game .gfx .render {
-    display: block;
-    overflow: hidden;
-    width: 100%;
+#omega-doom-game .controls .info {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
     height: 100%;
 }
-
-#omega-doom-game .text .character {
-    display: block;
-    overflow: hidden;
-    width: calc(400px - 40px);
-    height: calc(100% - 40px);
-    padding: 20px 20px;
-    border-right: 1px dashed var(--green) !important;
-}
-
-#omega-doom-game .text .character code {
-    height: 300px !important;
-    text-align: center;
-    font-size: 12pt;
-}
-
-#omega-doom p {
+#omega-doom-game .controls .info .character {
     margin: 0;
+    border-left: 3px solid var(--green);
+    height: 100%;
+}
+#omega-doom-game .controls .info .character-data {
+    border: none;
 }
 
-#omega-doom-game .text .character p, #omega-doom-game .control-stats-ship p {
-    display: block;
-    text-align: center;
-    background-color: var(--white) !important;
-    color: var(--black) !important;
-    padding: 0 5px;
-}
-
-#omega-doom-game .text .speech {
-    display: block;
-    overflow: hidden;
-    width: calc(100% - 440px);
-    height: calc(100% - 20px);
-    padding: 20px 20px;
-}
-
-#omega-doom-game .text .speech p {
-    margin-bottom: 10px;
-}
-
-#omega-doom-game .text .speech p span {
-    background-color: var(--white) !important;
-    color: var(--black) !important;
-    padding: 0 5px;
-}
-
-#omega-doom-game .controls-buttons {
-    flex-grow: 1;
-}
-
-#omega-doom-game .controls-stats {
-    text-transform: uppercase;
-    width: 100%;
-}
-
-#omega-doom-game .controls-stats table {
-    width: 100%;
-}
-
-#omega-doom-game .controls-stats .controls-stats-label {
-    color: var(--gray) !important;
-    width: 120px;
-}
-
-#omega-doom-game .controls-stats .normal {
-    color: var(--green) !important;
-}
-#omega-doom.alert-normal .text .character,
-#omega-doom.alert-normal .text,
-#omega-doom.alert-normal .controls {
-    border-color: var(--green) !important;
-}
-#omega-doom-game .controls-stats .yellow {
-    color: var(--yellow) !important;
-}
-#omega-doom.alert-yellow .text .character,
-#omega-doom.alert-yellow .text,
-#omega-doom.alert-yellow .controls {
-    border-color: var(--yellow) !important;
-}
-#omega-doom-game .controls-stats .red {
-    color: var(--red) !important;
-}
-#omega-doom.alert-red .text .character,
-#omega-doom.alert-red .text,
-#omega-doom.alert-red .controls {
-    border-color: var(--red) !important;
-}
-
-#omega-doom-game #map code {
-    text-align: center;
-    font-size: 12pt;
-    padding-top: 30px;
-}
-
-#omega-doom #map .map-text {
-    padding: 10px 10px;
-    background-color: var(--black) !important;
-    color: var(--white) !important;
-}
-
-#omega-doom #map #kazaria-syndicate-map {
-    position: absolute;
-    top: 90px;
-    left: calc(50% - 280px);
-}
-#omega-doom #map #federation-map {
-    position: absolute;
-    top: 230px;
-    left: calc(50% - 360px);
-}
-#omega-doom #map #rosia-empire-map {
-    position: absolute;
-    top: 260px;
-    left: calc(50% + 70px);
-}
-#omega-doom #map #aris-republic-map {
-    position: absolute;
-    top: 340px;
-    left: calc(50% - 560px);
-}
-#omega-doom #map #garis-republic-map {
-    position: absolute;
-    top: 400px;
-    left: calc(50% - 180px);
-}
-#omega-doom #map #stovacor-map {
-    position: absolute;
-    top: 440px;
-    left: calc(50% - 440px);
-}
-#omega-doom #map #house-of-moong-map {
-    position: absolute;
-    top: 480px;
-    left: calc(50% - 200px);
-}
-#omega-doom #map #the-void-map {
-    position: absolute;
-    top: 310px;
-    left: calc(50% - 210px);
-}
-
-#omega-doom #map #earth-map {
-    position: absolute;
-    top: 60px;
-    left: calc(50% - 620px);
-}
-#omega-doom #map #yidow-prime-map {
-    position: absolute;
-    top: 120px;
-    left: calc(50% - 380px);
-}
-#omega-doom #map #fasbon-prime-map {
-    position: absolute;
-    top: 120px;
-    left: calc(50% + 60px);
-}
-#omega-doom #map #cratol-moon-map {
-    position: absolute;
-    top: 170px;
-    left: calc(50% - 590px);
-}
-#omega-doom #map #furia-prime-map {
-    position: absolute;
-    top: 390px;
-    left: calc(50% - 600px);
-}
-#omega-doom #map #opalus-prime-map {
-    position: absolute;
-    top: 310px;
-    left: calc(50% - 180px);
-}
-#omega-doom #map #outpost-3366-map {
-    position: absolute;
-    top: 380px;
-    left: calc(50% + 90px);
-}
-
-@media only screen and (max-height: 720px) {
-    #omega-doom-game .gfx {
-        height: calc(100vh - 200px);
-    }
-
-    #omega-doom-game .text {
-        height: 200px;
-    }
-
-    #omega-doom-game .text .character code {
-        height: 200px !important;
-        font-size: 6pt;
-        position: relative;
-        margin-top: -60px;
-    }
-}
-
-#omega-doom .window-title {
-    display: none !important;
-}
-
-#omega-doom #intro, #omega-doom #progress {
-    background-color: var(--black) !important;
-    color: var(--white) !important;
+#omega-doom button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 15px;
+    background-color: var(--orange);
+    color: var(--black);
 }

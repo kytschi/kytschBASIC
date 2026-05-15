@@ -2,7 +2,7 @@
  * Layout parser
  *
  * @package     KytschBASIC\Parsers\Core\Layout\Layout
- * @author 		Mike Welsh <hello@kytschi.com>
+ * @author 		Mike Welsh <hello@kytschbasic.org>
  * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
  * @version     0.0.3
