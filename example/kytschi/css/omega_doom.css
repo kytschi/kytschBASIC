@@ -27,6 +27,7 @@ html, body {
 }
 
 #omega-doom-game {
+    overflow: hidden;
     display: block;
     width: 100%;
     height: 100vh;
@@ -94,19 +95,41 @@ html, body {
     min-width: 100%;
     min-height: 100%;
 }
-#omega-doom-game .view-screen img {
-    width: 100%;
-}
-#omega-doom-game .view-screen {
-    position: fixed;
+#omega-doom-game .navigation {
     display: flex;
+    margin: 50px auto 0 auto;
+    width: 1024px;
+    height: 600px;
     overflow: hidden;
     align-items: center;
     justify-content: center;
+}
+#omega-doom-game .navigation .console {
+    position: absolute;
+    border: 3px solid var(--green);
+}
+#omega-doom-game .navigation .map {
+    width: 100%;
+    height: 100%;
+}
+#omega-doom-game .navigation .map img {
+    width: 100%;
+}
+
+#omega-doom-game .view-screen {
+    position: fixed;
+    overflow: hidden;
+    text-align: center;
     background-color: var(--black);
 }
+#omega-doom-game .view-screen img {
+    /*width: 100%;*/
+}
+
 #omega-doom-game .game-data {
+    display: inline-block;
     position: absolute;
+    overflow: hidden;
     top: 0;
     left: 0;
     width: 100%;
@@ -114,9 +137,9 @@ html, body {
     z-index: 101;
 }
 #omega-doom-game .ss-liberty .view-screen {
-    width: 700px;
-    height: 500px;
-    top: 140px;
+    width: 800px;
+    height: 700px;
+    top: 220px;
 }
 
 #omega-doom-game .character {
@@ -130,9 +153,13 @@ html, body {
 #omega-doom-game .character-data {
     display: flex;
     background-color: var(--black);
-    border: 3px solid var(--green);
-    color: var(--green);
+    border: 3px solid var(--gray);
+    color: var(--gray);
     width: 800px;
+}
+#omega-doom-game .character.active .character-data {
+    border-color: var(--green);
+    color: var(--green);
 }
 #omega-doom-game .character-image {
     display: flex;
@@ -140,12 +167,12 @@ html, body {
     width: 170px;
     text-align: center;
     align-items: center;
-    padding-top: 10px;
-    border-right: 3px solid var(--green);
+    /*border-right: 3px solid var(--green);*/
 }
 #omega-doom-game .character-image img {
     display: inline-block;
     width: 120px;
+    margin-top: 10px;
 }
 #omega-doom-game .character-speech {
     display: none;
@@ -167,7 +194,7 @@ html, body {
 }
 #omega-doom-game .screen-right .character-image {
     border-right: none;
-    border-left: 3px solid var(--green);
+    /*border-left: 3px solid var(--green);*/
 }
 #omega-doom-game .screen-right .character-image img {
     -webkit-transform: scaleX(-1);
@@ -178,10 +205,10 @@ html, body {
 
 #omega-doom-game .controls {
     position: fixed;
+    overflow: hidden;
     bottom: 0;
     left: 0;
     display: flex;
-    align-items: flex-start;
     width: 100%;
     height: 200px;
     background-color: var(--black);
@@ -194,25 +221,18 @@ html, body {
     padding: 20px;
     align-items: flex-start;
     gap: 20px;
-}
-#omega-doom-game .controls .sub-select {
     flex: 1;
-    height: 100%;
-    display: flex;
-    border-left: 3px solid var(--green);
-    padding: 20px;
-    align-items: flex-start;
-    gap: 20px;
 }
 #omega-doom-game .controls .info {
-    flex: 1;
     display: flex;
     justify-content: flex-end;
+    width: 700px;
     height: 100%;
 }
 #omega-doom-game .controls .info .character {
     margin: 0;
-    border-left: 3px solid var(--green);
+    border-right: 3px solid var(--green);
+    width: 100%;
     height: 100%;
 }
 #omega-doom-game .controls .info .character-data {

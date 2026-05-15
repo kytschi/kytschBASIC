@@ -542,10 +542,14 @@ JAVASCRIPT
     });
 END JAVASCRIPT
 
+MOUSEEVENT "#cards"
+    GOTO onDeckClick()
+END MOUSEEVENT
+
 DIV "", "switch"
     DIV "", "board"
         DIV "", "deck"
-            DIV ,"cards",,"onDeckClick"
+            DIV ,"cards"
             END DIV
             DIV , "controls"
                 BUTTON "btnKnock", "btn-knocking",,"knocking","&nbsp;"

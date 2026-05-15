@@ -16,6 +16,7 @@ BODY "alert-normal","omega-doom"
 ADEF game_data$=""
 ADEF to_speak%=0
 ADEF current_speech%=0
+ADEF current_chat$=""
 
 AFUNCTION "characterSpeechPause"
     current_speech--;
@@ -35,6 +36,11 @@ AFUNCTION "characterSpeech"
         var parent_id = $("." + game_data.game_progress + "-speech-" + current_speech).parent().parent().attr("id");
         var message = $("." + game_data.game_progress + "-speech-" + current_speech).html();
 
+        if (current_chat != parent_id) {
+            $("#" + current_chat).removeClass("active");
+            $("#" + parent_id).addClass("active");
+        }
+
         if (iLoop < message.length) {
             $("#" + parent_id + " .character-speech-output p span").append(message.charAt(iLoop));
             iLoop++;
@@ -43,6 +49,8 @@ AFUNCTION "characterSpeech"
                 current_speech++;
                 if (current_speech < to_speak) {
                     $("#" + parent_id + " .character-speech-output p span").append("<br/><br/>");
+                    current_chat = parent_id;
+
                     if ($("." + game_data.game_progress + "-speech-" + current_speech).hasClass("speech-clear")) {
                         setTimeout(() => {
                             var character_id = $("." + game_data.game_progress + "-speech-" + current_speech).parent().parent().attr("id");
@@ -51,7 +59,7 @@ AFUNCTION "characterSpeech"
                             typeNext();
                         }, 2000);
                     } else {
-                        setTimeout(typeNext, game_data.speech_speed);
+                        setTimeout(typeNext, 2000);
                     }
                 } else {
                     setTimeout(characterSpeechPause, 2000);
@@ -64,6 +72,7 @@ AFUNCTION "characterSpeech"
 
     to_speak = $("#" + game_data.game_progress + " .character-speech").children("span").length;
     if (to_speak) {
+        current_chat = $("." + game_data.game_progress + "-speech-" + current_speech).parent().parent().attr("id");
         typeNext();
     }
 END AFUNCTION
@@ -71,7 +80,7 @@ END AFUNCTION
 AFUNCTION "createCookie", "return_data=0"
     var data = {};
     data.story_progress = "story-intro";
-    data.game_progress = "game-progress-4";
+    data.game_progress = "game-progress-2";
     data.speech_speed = 30;
 
     if (return_data) {

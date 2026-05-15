@@ -9,7 +9,7 @@ DIV "progress", "story-intro"
             END DIV
         END DIV
         DIV "game-data"
-            DIV "character"
+            DIV "character active"
                 DIV "character-speech"
                     PRINT "Captain, incoming hail from Federation Command.", "game-progress-1-speech-0"
                     PRINT "Priority one message from Admiral Byrd sir.", "game-progress-1-speech-1"
@@ -59,7 +59,7 @@ DIV "progress", "story-intro"
             END DIV
         END DIV
         DIV "game-data"
-            DIV "character"
+            DIV "character active"
                 DIV "character-speech"
                     PRINT "Admiral, I hope this isn't bad news?", "game-progress-2-speech-0"
                     PRINT "My crew is in dire need of some R an...", "game-progress-2-speech-1"
@@ -119,10 +119,10 @@ DIV "progress", "story-intro"
             END DIV
         END DIV
         DIV "game-data"
-            DIV "character"
+            DIV "character active"
                 DIV "character-speech"
                     PRINT "Helm...", "game-progress-3-speech-0"
-                    PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.", "game-progress-3-speech-2", "continue-game-progress-4"
+                    PRINT "Set a course for 663993 691216 in Federation space on Rosia border. Maximum warp.", "game-progress-3-speech-1", "continue-game-progress-4"
                 END DIV
                 DIV "character-data"
                     DIV "character-image"
@@ -150,40 +150,40 @@ DIV "progress", "story-intro"
             END DIV
         END DIV
         DIV "game-data"
+            DIV "navigation"
+                DIV "console"
+                    IMAGE "/kytschi/omega_doom/gfx/ships/ss-liberty/navigation.png", "Navigation"
+                END DIV
+                DIV "map"
+                    IMAGE "/kytschi/omega_doom/gfx/universe/quadrant/alpha.jpg", "Alpha Quadrant"
+                END DIV
+            END DIV
             DIV "controls"
-                DIV "buttons"
-                    BUTTON
-                        PRINT "Navigation"
-                    END BUTTON
-                    BUTTON
-                        PRINT "Communications"
-                    END BUTTON
-                END DIV
-                DIV "sub-select"
-                    BUTTON
-                        PRINT "Map"
-                    END BUTTON
-                END DIV
                 DIV "info"
-                    DIV "character screen-right"
+                    DIV "character active"
                         DIV "character-speech"
                             PRINT "Aye sir.", "game-progress-4-speech-0"
-                            PRINT "Setting course for 663993 691216 in Federation space on Rosia border.", "game-progress-4-speech-0"
+                            PRINT "Setting course for 663993 691216 in Federation space on Rosia border.", "game-progress-4-speech-1"
                         END DIV
                         DIV "character-data"
-                            DIV "character-speech-output"
-                                SWRITE
-                                    PRINT ""
-                                END SWRITE
-                            END DIV
                             DIV "character-image"
                                 IMAGE "/kytschi/omega_doom/gfx/characters/ss_liberty/ensign-simons.jpg", "Ensign Simons"
                                 SWRITE
                                     PRINT "Ensign Simons"
                                 END SWRITE
                             END DIV
+                            DIV "character-speech-output"
+                                SWRITE
+                                    PRINT ""
+                                END SWRITE
+                            END DIV
                         END DIV
                     END DIV
+                END DIV
+                DIV "buttons"
+                    BUTTON
+                        PRINT "Navigation"
+                    END BUTTON
                 END DIV
             END DIV
         END DIV
