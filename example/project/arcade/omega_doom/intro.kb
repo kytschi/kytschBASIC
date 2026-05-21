@@ -1,6 +1,6 @@
 DIV "progress", "story-intro"
     DIV "game-progress ss-liberty","game-progress-1"
-        DIV "overlay"
+        DIV "background"
             DIV "view-screen"
                 IMAGE "/kytschi/omega_doom/gfx/universe/federation/sol-earth.jpg", "Earth"
             END DIV
@@ -50,7 +50,7 @@ DIV "progress", "story-intro"
         END DIV
     END DIV
     DIV "game-progress ss-liberty","game-progress-2"
-        DIV "overlay"
+        DIV "background"
             DIV "view-screen"
                 IMAGE "/kytschi/omega_doom/gfx/characters/federation_command/adm-byrd-full.jpg", "Adm. Byrd"
             END DIV
@@ -110,7 +110,7 @@ DIV "progress", "story-intro"
         END DIV
     END DIV
     DIV "game-progress ss-liberty","game-progress-3"
-        DIV "overlay"
+        DIV "background"
             DIV "view-screen"
                 IMAGE "/kytschi/omega_doom/gfx/universe/federation/sol-earth.jpg", "Earth"
             END DIV
@@ -141,7 +141,7 @@ DIV "progress", "story-intro"
         END DIV
     END DIV
     DIV "game-progress ss-liberty","game-progress-4"
-        DIV "overlay"
+        DIV "background"
             DIV "view-screen"
                 IMAGE "/kytschi/omega_doom/gfx/universe/federation/sol-earth.jpg", "Earth"
             END DIV
@@ -150,12 +150,26 @@ DIV "progress", "story-intro"
             END DIV
         END DIV
         DIV "game-data"
-            DIV "navigation"
-                DIV "console"
-                    IMAGE "/kytschi/omega_doom/gfx/ships/ss-liberty/navigation.png", "Navigation"
+            DIV "console"
+                DIV "data"
+                    IMAGE "/kytschi/omega_doom/gfx/universe/federation/sol-earth.jpg", "Earth"
                 END DIV
-                DIV "map"
-                    IMAGE "/kytschi/omega_doom/gfx/universe/quadrant/alpha.jpg", "Alpha Quadrant"
+                DIV "buttons"
+                    BUTTON "navigation-impulse", "purple"
+                        PRINT "Impulse"
+                    END BUTTON
+                    BUTTON "navigation-hold", "blue"
+                        PRINT "Hold Position"
+                    END BUTTON
+                    BUTTON "navigation-warp", "yellow"
+                        PRINT "Warp Drive"
+                    END BUTTON
+                    BUTTON "navigation-engage"
+                        PRINT "Engage"
+                    END BUTTON
+                END DIV
+                DIV "overlay"
+                    IMAGE "/kytschi/omega_doom/gfx/ships/ss-liberty/navigation.png", "Navigation"
                 END DIV
             END DIV
             DIV "controls"

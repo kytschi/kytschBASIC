@@ -43,14 +43,21 @@ NEXT
 
 SHUFFLE(cards$)
 
+DEF start%=(no_players%+1)
+DEF hand_length%=(start%*end%)
+DEF player%=0
+WHILE (hand_length%)
+    LET hands$(player%)()=cards$(0)
+	SHIFT(cards$)
+    LET player%=(player%+1)
+    IF player%>no_players%
+        LET player%=0
+    END IF
+    LET hand_length%=(hand_length%-1)
+WEND
+
 FOR player%=0 TO no_players%
-    DIM hand$=()
-    FOR iLoop%=0 TO end%
-        LET hand$()=cards$(0)
-        SHIFT(cards$)
-    NEXT
-    NATSORT(hand$)
-    LET hands$(player%)=hand$
+	NATSORT(hands$(player%))
 NEXT
 
 ADIM hands$=hands$

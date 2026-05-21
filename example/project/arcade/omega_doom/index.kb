@@ -80,7 +80,7 @@ END AFUNCTION
 AFUNCTION "createCookie", "return_data=0"
     var data = {};
     data.story_progress = "story-intro";
-    data.game_progress = "game-progress-2";
+    data.game_progress = "game-progress-4";
     data.speech_speed = 30;
 
     if (return_data) {

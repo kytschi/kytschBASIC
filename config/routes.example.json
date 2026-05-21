@@ -60,6 +60,10 @@
 		"url": "/arcade/solitaire",
 		"template": "project/arcade/solitaire.kb"
 	},
+	{
+		"url": "/arcade/blackjack",
+		"template": "project/arcade/blackjack.kb"
+	},
 
 	{
 		"url": "/news",
@@ -154,6 +158,10 @@
 	{
 		"url": "/reference/NATSORT",
 		"template": "project/reference/core/variables/NATSORT.kb"
+	},
+	{
+		"url": "/reference/MERGE",
+		"template": "project/reference/core/variables/MERGE.kb"
 	},
 
 	{

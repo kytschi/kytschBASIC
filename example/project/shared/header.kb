@@ -385,6 +385,9 @@ HEADER
 		LINK "/reference/MENUITEM#refMENUITEM","Find out about the MENUITEM command","nav-link",,"refMENUITEM"
 			PRINT "MENUITEM"
 		END LINK
+		LINK "/reference/MERGE#refMERGE","Find out about the MERGE command","nav-link",,"refMERGE"
+			PRINT "MERGE"
+		END LINK
 		LINK "/reference/MID#refMID","Find out about the MID command","nav-link",,"refMID"
 			PRINT "MID"
 		END LINK

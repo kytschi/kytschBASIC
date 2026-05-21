@@ -627,7 +627,7 @@ class Variables
 	public function processNatSort(args)
 	{
 		let args[0] = this->cleanArg("NATSORT", args[0]);
-		return "<?php natsort(" . args[0] . "); " . args[0] . " = array_values(" . args[0] . "); ?>";
+		return "<?php natsort(" . args[0] . "); ?>";
 	}
 
 	public function processNSort(args)

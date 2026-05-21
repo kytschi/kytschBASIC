@@ -180,6 +180,58 @@ NEXT
 						END SWRITE
 					NEXT
 				END DIV
+				HEADING 4
+					PRINT "See also"
+				END HEADING 4
+				ROW ,"see-also"
+					LINK "/reference/DIM#refDIM"
+						PRINT "DIM"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/DUMP#refDUMP"
+						PRINT "DUMP"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/ERASE#refERASE"
+						PRINT "ERASE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/LET#refLET"
+						PRINT "LET"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MERGE#refMERGE"
+						PRINT "MERGE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/NATSORT#refNASTSORT"
+						PRINT "NATSORT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/NSORT#refNSORT"
+						PRINT "NSORT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/POP#refPOP"
+						PRINT "POP"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SHIFT#refSHIFT"
+						PRINT "SHIFT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SHUFFLE#refSHUFFLE"
+						PRINT "SHUFFLE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SORT#refSORT"
+						PRINT "SORT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SSORT#refSSORT"
+						PRINT "SSORT"
+					END LINK
+				END ROW
 			END DIV
 		END DIV
 	LOAD _ROOT + "/project/shared/footer"

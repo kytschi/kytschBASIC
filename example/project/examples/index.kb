@@ -84,6 +84,19 @@ LOAD _ROOT + "/project/shared/header"
 				PRINT "Note, it's a work in progress", "heading-args"
 
 				HEADING 3
+					PRINT "Kytschi's Blackjack"
+				END HEADING 3
+				LINK "/arcade/blackjack","Play the blackjack card game",,"_blank"
+					PRINT "View it live here"
+				END LINK
+				LINE BREAK
+				LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/blackjack.kb","Blackjack card game source code",,"_blank"
+					PRINT "View the source code"
+				END LINK
+				LINE BREAK
+				PRINT "Note, it's a work in progress", "heading-args"
+
+				HEADING 3
 					PRINT "Kytschi's 5 and 3s - A domino game"
 				END HEADING 3
 				LINK "/arcade/5and3s","Play the domino game",,"_blank"

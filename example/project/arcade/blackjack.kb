@@ -1,0 +1,441 @@
+LANG "en"
+HEAD
+	CHARSET "UTF-8"
+    DESCRIPTION "This is a kytschBASIC example"
+    KEYWORDS "kytschBASIC, BASIC, web BASIC, blackjack"
+    AUTHOR "Mike Welsh"
+    VIEWPORT "width=device-width, initial-scale=1.0"
+    FAVICON "/kytschi/imgs/favicon.ico","64x64"
+    PALETTE "/kytschi/css/blackjack"
+    PALETTE "/kytschi/css/jquery.toast.min"
+    SCRIPT "/kytschi/js/jquery.toast.min"
+	NAME "Arcade - Blackjack | kytschBASIC"
+END HEAD
+BODY
+DIM suits$=("diamonds", "clubs","hearts","spades")
+DIM faces$=("1","2","3","4","5","6","7","8","9","10","11","12","13")
+DIM names$=("dealer", "john", "player", "bob")
+
+DIM cards$=()
+DIM hands$=()
+
+DEF no_players%=3
+DEF player_id%=3
+
+IFNTE _GET("np") THEN
+    LET no_players%=_GET("np")
+    LET no_players%=INT(no_players%)
+END IF
+
+IF no_players%<1 THEN
+	LET no_players%=1
+ELSEIF no_players%>3 THEN
+	LET no_players%=3
+END IF
+
+IF no_players%=1 THEN
+    LEFT player_id%=1
+    LET names$=("dealer", "player")
+ELSEIF no_players%=2 THEN
+    LET names$=("dealer", "john", "player")
+    LEFT player_id%=2
+END IF
+
+DEF end%=1
+LET no_players%=no_players%
+
+FOR suit$ IN suits$
+    FOR face$ IN faces$
+        LET cards$()="/kytschi/imgs/cards/" + suit$ + "_" + face$ + ".png"
+    NEXT
+NEXT
+
+DIM deck$=()
+FOR player%=0 TO 3
+    MERGE deck$, cards$
+NEXT
+
+SHUFFLE(deck$)
+
+FOR player%=0 TO no_players%
+    DIM hand$=()
+    FOR iLoop%=0 TO end%
+        LET hand$()=deck$(0)
+        SHIFT(deck$)
+    NEXT
+    NATSORT(hand$)
+    LET hands$(player%)=hand$
+NEXT
+
+ADIM hands$=hands$
+ADIM names$=names$
+
+ADIM deck$=deck$
+ADEF turn%=0
+ADEF game_over%=0
+ADEF computer_flipped%=0
+
+AFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: "Dealer",
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
+    });
+END AFUNCTION
+
+AFUNCTION "gameOver"
+    var score = 0, card_details, value = 0;
+
+    if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
+        kb_cookie.kb_switch_scores = {};
+        names.forEach((player, index) => {
+            kb_cookie.kb_switch_scores[index] = {
+                "score": 0,
+                "turn": turn
+            }
+        });
+    }
+
+    game_over = 1;
+    //gameInfo(event, "I WIN!!!");
+    $("#player-" + turn + " .last-card").hide();
+    $("#player-" + turn + " .last-card-col span").hide();
+    $("#player-" + turn + " .winner").show();
+
+    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
+        score = parseInt($("#player-" + iLoop + " .score span").html());
+
+        hands[iLoop].forEach((card, index) => {
+            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
+            value = parseInt(card_details[1]);
+            if (value == 1) {
+                score += 11;
+            } else if (([11, 12, 13]).includes(value)) {
+                score += 10;
+            } else {
+                score += value;
+            }
+        });
+
+        $("#player-" + iLoop + " .score span").html(score);
+        kb_cookie.kb_switch_scores[iLoop].score = score;
+    }
+
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+
+    $(".btn-new-game").addClass("card-highlight");
+END AFUNCTION
+
+AFUNCTION "checkHand"
+    var total = 0;
+    $("#player-cards-" + turn).children(".card").each((index, card) => {
+        var number = $(card).attr("id").split("_");
+        number = parseInt(number[1]);
+        if ([11, 12, 13].includes(number)) {
+            number = 10;
+        } else if (number == 1) {
+            if (total + number < 21) {
+                number = 11;
+            }
+        }
+        total += number;
+    });
+
+    return total;
+END AFUNCTION
+
+AFUNCTION "computerOver", "computer_total"
+    if (computer_total > 21) {
+        gameInfo(event, names[turn] + " bust", true);
+        $(".player .winner").show();
+    } else if (computer_total == 21) {
+        gameInfo(event, names[turn] + " blackjack");
+    } else {
+        for (var iLoop = 1; iLoop < hands.length; iLoop++) {
+            var total = 0;
+            $("#player-cards-" + iLoop).children(".card").each((index, card) => {
+                var number = $(card).attr("id").split("_");
+                number = parseInt(number[1]);
+                if ([11, 12, 13].includes(number)) {
+                    number = 10;
+                } else if (number == 1) {
+                    if (total + number < 21) {
+                        number = 11;
+                    }
+                }
+                total += number;
+            });
+
+            if (total >= computer_total) {
+                $("#player-" + iLoop + " .winner").show();
+                gameInfo(event, names[iLoop] + " wins");
+            } else {
+                $("#player-0 .winner").show();
+                gameInfo(event, names[0] + " wins");
+            }
+        }
+    }
+END AFUNCTION
+
+AFUNCTION "computerPlay"
+    var total = 0;
+    if (!computer_flipped) {
+        $("#player-cards-" + turn).children(".card").each((index, card) => {
+            if ($(card).children("img").attr("src") == "/kytschi/imgs/cards/back.png") {
+                $(card).children("img").attr("src", "/kytschi/imgs/cards/" + $(card).attr("id") + ".png");
+                computer_flipped = 1;
+                total = checkHand();
+            }
+        });
+    }
+
+    if (total <= 17) {
+        setTimeout(() => {
+            total = dealCard();
+            if (total <= 17) {
+                computerPlay();
+            } else {
+                computerOver(event, total);
+            }
+        }, 1000);
+    } else {
+        computerOver(event, total);
+    }
+END AFUNCTION
+
+AFUNCTION "dealCard"
+    var card = deck.pop();
+    var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
+    $("#player-cards-" + turn).append("<div id=\"" + id + "\" class=\"card\"><img src=\"" + card + "\"></div>");
+
+    var total = checkHand();
+    if (total > 21) {
+        $("#player-" + turn + " .bust").show();
+        gameInfo(event, names[turn] + " bust", true);
+        updateTurn();
+    } else if (total == 21) {
+        $("#player-" + turn + " .winner").show();
+        gameInfo(event, names[turn] + " blackjack");
+        updateTurn();
+    }
+    return total;
+END AFUNCTION
+
+AFUNCTION "updateTurn"
+    if (game_over) {
+        return;
+    }
+
+    $("#player-" + turn + " .player-img").removeClass("player-turn");
+
+    turn += 1;
+    if (turn >= hands.length) {
+        turn = 0;
+    }
+
+    $("#player-" + turn + " .player-img").addClass("player-turn");
+
+    if (turn == 0) {
+        computerPlay();
+    }
+END AFUNCTION
+
+AFUNCTION "newGame"
+    window.location.reload();
+END AFUNCTION
+
+JAVASCRIPT
+    var played = false;
+
+    if (typeof(kb_cookie.kb_blackjack) != "undefined") {
+        for (const [player, value] of Object.entries(kb_cookie.kb_blackjack)) {
+            $("#player-" + player + " .score span").html(value.score);
+        }
+    } else {
+        $("#player-1 .score span").html("100");
+        turn = 1;
+    }
+
+    $("#player-" + turn + " .player-img").addClass("player-turn");
+
+    $("button[name=btnSetup]").click(() => {
+        $("#modalNewGame").show();
+    });
+
+    $("button[name=btnCloseModal]").click(() => {
+        $("#modalNewGame").hide();
+    });
+END JAVASCRIPT
+
+MOUSEEVENT "#btn-hit"
+    GOTO dealCard()
+MOUSEEVENT "#btn-stay"
+    GOTO updateTurn()
+MOUSEEVENT "#btn-new-game"
+    GOTO newGame()
+END MOUSEEVENT
+
+DIV "", "blackjack"
+    DIV "", "board"
+        DIV "no-players-"+no_players%, "table"
+            DIV "", "cards"
+                DEF iLoop%=0
+                FOR hand$ IN hands$
+                    IF iLoop%=0 THEN
+                        DIV "row"
+                    END IF
+                    DEF iLoop2%=0
+                    DIV "player-cards", "player-cards-"+iLoop%
+                        FOR card$ IN hand$
+                            DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+                            DEF id$=REPLACE(id$, ".png", "")
+                            SPRITE id$, "card"
+                                IF iLoop%=0 && iLoop2% THEN
+                                    IMAGE "/kytschi/imgs/cards/back.png"
+                                ELSE
+                                    IMAGE card$
+                                END IF
+                            END SPRITE
+                            LET iLoop2%=1
+                        NEXT
+                    END DIV
+                    IF iLoop%=0 THEN
+                        END DIV
+                        DIV "row players", "players-"+no_players%    
+                    END IF
+                    LET iLoop%=(iLoop%+1)
+                NEXT
+                END DIV
+            END DIV
+        END DIV
+        DIV , "controls"
+            BUTTON "btnHit", "btn-hit", "btn-hit", "hit", "&nbsp;"
+            BUTTON "btnSplit", "btn-split", "btn-split", "split", "&nbsp;"
+            BUTTON "btnStay", "btn-stay", "btn-stay", "stay", "&nbsp;"
+            BUTTON "btnNewGame", "btn-new-game", "btn-new-game", "new", "&nbsp;"
+            BUTTON "btnSetup", "btn-submit", "btn-submit", "setup", "&nbsp;"
+        END DIV
+    END DIV
+    DIV "", "scoreboard"
+        DIV "", "scoreboard-scores"
+            TABLE
+                TBODY
+                    TROW
+                        TCELL
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL
+                            PRINT "Player"
+                        END TCELL
+                        TCELL ,"winner-col"
+                            PRINT "&nbsp;"
+                        END TCELL
+                        TCELL ,"text-center"
+                            PRINT "Cash"
+                        END TCELL
+                    END TROW
+                    LET iLoop%=0
+                    FOR name$ IN names$
+                        DEF player_class$=" player"
+                        IF iLoop%=0 THEN
+                            LET player_class$=" computer"
+                        END IF
+                        TROW ,"player-"+iLoop%
+                            TCELL ,"player-img"
+                                IF iLoop%=(player_id%-1) THEN
+                                    IMAGE "/kytschi/imgs/people/jane.png"
+                                ELSE
+                                    IMAGE "/kytschi/imgs/people/" + name$ + ".png"
+                                END IF
+                            END TCELL
+                            TCELL ,"player-name"
+                                PRINT name$
+                            END TCELL
+                            TCELL ,"winner-col"+player_class$
+                                IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
+                                IMAGE "/kytschi/imgs/cards/knocking.png","bust","bust"
+                            END TCELL
+                            TCELL ,"text-center score"
+                                PRINT "0"
+                            END TCELL
+                        END TROW
+                        LET iLoop%=(iLoop%+1)
+                    NEXT
+                END TBODY
+            END TABLE
+        END DIV
+        DIV ,"scoreboard-footer"
+        END DIV
+    END DIV
+    DIV "modal fade", "change-suit"
+        DIV "modal-dialog"
+            DIV "modal-content"
+                DIV "modal-header"
+                    PRINT "Change suit"
+                END DIV
+                DIV "modal-body"
+                    DIV "", "change-suit-select"
+                        DIV "", "change-suit-select-placeholders"
+                            SPRITE "diamonds", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/diamonds_placeholder.png"
+                            END SPRITE
+                            SPRITE "hearts", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/hearts_placeholder.png"
+                            END SPRITE
+                            SPRITE "spades", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/spades_placeholder.png"
+                            END SPRITE
+                            SPRITE "clubs", "placeholder", "onChangeSuitClick"
+                                IMAGE "/kytschi/imgs/cards/clubs_placeholder.png"
+                            END SPRITE
+                        END DIV
+                    END DIV
+                END DIV
+            END DIV
+        END DIV
+    END DIV
+    DIV "modal fade", "modalNewGame"
+        DIV "modal-dialog"
+            DIV "modal-content"
+                DIV "modal-header"
+                    PRINT "Select game setup"
+                END DIV
+                DIV "modal-body"
+                    FORM "form_setup", "GET", "/arcade/blackjack"
+                        DIV "row", "playerSelect"
+                            LET no_players%=(no_players%+1)
+                            DEF game_code$=RNDSTRING(9)
+                            DIV "row break"
+                                PRINT "No. players"
+                                SELECTINPUT "np",, "form-input", "Please select an option"
+                                    SELECTINPUTOPT 1,"You vs dealer"
+                                    SELECTINPUTOPT 2,"You and another computer player vs dealer"
+                                    SELECTINPUTOPT 3,"You and two other computer players vs dealer"
+                                END SELECTINPUT
+                            END DIV
+                            DIV "row break"
+                            END DIV
+                            DIV "row"
+                                DIV "col-full"
+                                    BUTTONSUBMIT "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single"
+                                        IMAGE "/kytschi/imgs/cards/button-setup-plain.png"
+                                    END BUTTON
+                                END DIV
+                            END DIV
+                        END DIV
+                    END FORM
+                END DIV
+                DIV "modal-footer"
+                    BUTTON "btnCloseModal", "btn-knocking", "btnCloseModal", "close", "Close"
+                END DIV
+            END DIV
+        END DIV
+    END DIV
+END DIV
+END BODY
+END

@@ -1,9 +1,10 @@
 :root {
-    --black: #000;
-    --blue: #009dff;
+    --black: #00020f;
+    --blue: #6198f5;
     --gray: #bab8b8;
     --green: #00ff3c;
-    --orange: #ff8700;
+    --orange: #FB8B49;
+    --purple: #a080e5;
     --red: #ff0000;
     --yellow: #ffd900;
     --white: #fff;
@@ -78,41 +79,56 @@ html, body {
     width: 100%;
     height: 100%;
 }
-#omega-doom-game .overlay {
+#omega-doom-game .background, #omega-doom-game .console {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: center;
+    overflow: hidden;
 }
-#omega-doom-game .overlay .location {
+#omega-doom-game .background .location {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
 }
-#omega-doom-game .overlay .location img {
+#omega-doom-game .background .location img {
     min-width: 100%;
     min-height: 100%;
 }
-#omega-doom-game .navigation {
-    display: flex;
-    margin: 50px auto 0 auto;
-    width: 1024px;
-    height: 600px;
-    overflow: hidden;
+
+#omega-doom-game .console {
     align-items: center;
     justify-content: center;
+    width: 1106px;
+    height: 711px;
+    margin: 20px auto 0 auto;
+    z-index: 200;
 }
-#omega-doom-game .navigation .console {
+#omega-doom-game .console .overlay {
     position: absolute;
-    border: 3px solid var(--green);
 }
-#omega-doom-game .navigation .map {
+#omega-doom-game .console .data {
+    flex: 1;
+    margin-left: 30px;
+}
+#omega-doom-game .console .data img {
     width: 100%;
-    height: 100%;
 }
-#omega-doom-game .navigation .map img {
+#omega-doom-game .console .buttons {
+    display: flex;
+    width: 220px;
+    padding-bottom: 150px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 20px;
+    z-index: 201;
+    margin-left: 40px;
+    margin-right: 50px;
+}
+#omega-doom-game .console .buttons button {
     width: 100%;
 }
 
@@ -214,7 +230,6 @@ html, body {
     background-color: var(--black);
     border-top: 3px solid var(--green);
 }
-
 #omega-doom-game .controls .buttons {
     height: 100%;
     display: flex;
@@ -225,7 +240,7 @@ html, body {
 }
 #omega-doom-game .controls .info {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     width: 700px;
     height: 100%;
 }
@@ -240,10 +255,46 @@ html, body {
 }
 
 #omega-doom button {
+    background: var(--orange);
     border: none;
-    background: none;
-    cursor: pointer;
-    padding: 15px;
-    background-color: var(--orange);
     color: var(--black);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 28px;
+    text-transform: uppercase;
+    
+    clip-path: polygon(
+        0px 6px, 6px 6px, 6px 0px,
+        calc(100% - 6px) 0px, calc(100% - 6px) 6px,
+        100% 6px, 100% calc(100% - 6px),
+        calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%,
+        6px calc(100% - 6px), 0px calc(100% - 6px)
+    );
+    
+    box-shadow: 6px 6px 0 var(--orange);
+    cursor: pointer;
+    transition: all 0.05s linear;
+}
+#omega-doom button.blue {
+    background: var(--blue);
+    box-shadow: 6px 6px 0 var(--blue);
+}
+#omega-doom button.purple {
+    background: var(--purple);
+    box-shadow: 6px 6px 0 var(--purple);
+}
+#omega-doom button.yellow {
+    background: var(--yellow);
+    box-shadow: 6px 6px 0 var(--yellow);
+}
+
+@media only screen and (max-height: 720px) {
+    #omega-doom-game .console {
+        margin-top: 0;
+    }
+    #omega-doom-game .console .buttons {
+        padding-bottom: 260px;
+    }
 }

@@ -1,0 +1,398 @@
+:root {
+    --card-width: 75px;
+    --card-height: 75px;
+    --black: #00030e;
+}
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #165041;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--black);
+}
+
+#blackjack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#blackjack .row {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+}
+
+#blackjack #board, #blackjack #player {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+#blackjack #board {
+    flex-direction: column;
+}
+
+#blackjack #table {
+    width: 1408px;
+    height: 865px;
+    background-image: url("../imgs/cards/blackjack-table-1.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+#blackjack #table.no-players-2 {
+    background-image: url("../imgs/cards/blackjack-table-2.jpg");
+}
+#blackjack #table.no-players-3 {
+    background-image: url("../imgs/cards/blackjack-table-3.jpg");
+}
+#blackjack #cards {
+    margin-top: 270px;
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+#blackjack .player-cards {
+    display: flex;
+}
+#blackjack .player-cards .card {
+    position: relative;
+    display: inline-flex;
+    background: none;
+    border: none;
+    /*width: var(--card-width);*/
+    height: var(--card-height);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    overflow: hidden;
+}
+#blackjack #player-cards-0 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 35px;
+}
+#blackjack .players {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+}
+#blackjack #players-3 #player-cards-1 {
+    flex: 1;
+    padding-left: 0px;
+    transform: rotate(45deg);
+}
+#blackjack #players-3 #player-cards-2 {
+    flex: 1;
+    justify-content: center;
+    padding-top: 50px;
+}
+#blackjack #players-3 #player-cards-3 {
+    flex: 1;
+    justify-content: flex-end;
+    transform: rotate(-45deg);
+}
+
+#blackjack button {
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+}
+#blackjack #controls {
+    margin-top: -80px;
+    position: relative;
+    gap: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#blackjack #controls .btn-new-game {
+    display: block;
+    background-image: url("../imgs/cards/button-new-plain.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#blackjack #controls .btn-hit {
+    display: block;
+    background-image: url("../imgs/cards/button-hit.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#blackjack #controls .btn-split {
+    display: block;
+    background-image: url("../imgs/cards/button-split.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#blackjack #controls .btn-stay {
+    display: block;
+    background-image: url("../imgs/cards/button-stay.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+#blackjack #controls .btn-submit {
+    display: block;
+    background-image: url("../imgs/cards/button-setup-plain.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+}
+
+#blackjack #scoreboard {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: block;
+    width: 327px;
+    z-index: 5;
+    background-image: url("../imgs/cards/scoreboard.png");
+    background-repeat: no-repeat;
+    color: #fff;
+    padding-top: 49px;
+}
+#blackjack #scoreboard-scores {
+    width: 100%;
+    background-color: #292444;
+    background-image: url("../imgs/cards/scoreboard-border.png");
+    background-repeat: repeat-y;
+}
+#blackjack #scoreboard-footer {
+    position: relative;
+    margin-top: -5px;
+    height: 19px;
+    width: 100%;
+    background-image: url("../imgs/cards/scoreboard-bottom.png");
+    background-position: top;
+    background-repeat: no-repeat;
+}
+#blackjack #scoreboard table {
+    margin-left: 11px;
+    border-collapse: collapse;
+    border: none;
+    width: calc(100% - 24px);
+}
+#blackjack #scoreboard table tbody {
+    width: 100%;
+}
+#blackjack #scoreboard th, #blackjack #scoreboard td {
+    padding: 0 0 0 5px;
+    margin: 0;
+    border: none;
+}
+#blackjack #scoreboard .player-img {
+    text-align: center;
+    width: 41px;
+    padding: 0;
+}
+#blackjack #scoreboard .player-img img {
+    margin: 0;
+    width: 100%;
+}
+#blackjack #scoreboard .player-name::first-letter {
+    text-transform: uppercase;
+}
+#blackjack #scoreboard table tbody tr:nth-child(odd) {
+    background-color: #292444;
+    padding: 0;
+}
+#blackjack #scoreboard table tbody tr:nth-child(even) {
+    background-color: #313654;
+    padding: 0;
+}
+
+@media (min-width: 576px) {
+  #blackjack .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+
+@media only screen and (max-height: 820px) {
+    #blackjack #controls {
+        margin-top: -130px;
+    }
+}
+
+#blackjack .card-highlight {
+    border: 4px solid #F8B133;
+    background-color: #F8B133;
+}
+
+#blackjack .card-warn {
+    border: 4px solid #D23136;
+}
+
+#blackjack #table img, #blackjack #hand img, #blackjack .placeholder img {
+    width: 100%;
+    margin: 0;
+}
+
+#blackjack .text-center {
+    text-align: center;
+}
+
+#blackjack .text-left {
+    text-align: left;
+}
+
+#blackjack .player-turn {
+    background-color: #2B8ACA;
+}
+
+#blackjack td.winner-col {
+    width: 50px;
+    text-align: center;
+}
+#blackjack .winner, #blackjack .bust {
+    display: none;
+    cursor: pointer;
+}
+
+#blackjack #game-info {
+    display: none;
+    background-color: #fff;
+    border: 0;
+    border-top: 2px solid #000;
+    margin-top: 10px;
+    width: calc(100% - 10px);
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#blackjack #game-info p {
+    margin: 0;
+    padding: 0;
+}
+
+#blackjack .no-players {
+    display: flex;
+    width: calc(100% - 10px);
+}
+
+#blackjack form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#blackjack .form-input {
+    display: inline-block;
+    width: 60px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 35px;
+}
+
+#blackjack .modal .form-input, #blackjack .modal .btn-new-game {
+    width: 100%;
+}
+
+#blackjack .modal .row.break {
+    margin-bottom: 20px;
+}
+
+#blackjack .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: #000;
+}
+
+#blackjack .modal.fade {
+  transition: opacity .15s linear;
+}
+
+#blackjack .modal.show .modal-dialog {
+  transform: none;
+}
+#blackjack .modal.fade .modal-dialog {
+  transition: transform .3s ease-out;
+  transform: translate(0,-50px);
+}
+
+#blackjack .modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 3.75rem auto;
+  pointer-events: none;
+}
+
+#blackjack .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+  outline: 0;
+}
+
+#blackjack .modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+}
+
+#blackjack .modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+#blackjack .modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding: .75rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: calc(.3rem - 1px);
+  border-bottom-left-radius: calc(.3rem - 1px);
+}
