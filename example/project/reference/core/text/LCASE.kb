@@ -41,19 +41,19 @@ PRINT string$
 					LINK "/reference/CPRINT"
 						PRINT "CPRINT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/RND"
 						PRINT "RND"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/RNDSTRING"
 						PRINT "RNDSTRING"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/UCASE"
 						PRINT "UCASE"
 					END LINK

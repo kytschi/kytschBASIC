@@ -87,55 +87,55 @@ END FORM
 					LINK "/reference/TEXTINPUT"
 						PRINT "TEXTINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/PASSWORDINPUT"
 						PRINT "PASSWORDINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/FILEINPUT"
 						PRINT "FILEINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CAPTCHA"
 						PRINT "CAPTCHA"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TEXTAREA"
 						PRINT "TEXTAREA"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MOUSEACTION"
 						PRINT "MOUSEACTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MOUSEEVENT"
 						PRINT "MOUSEEVENT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/NUMBERINPUT"
 						PRINT "NUMBERINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BUTTON"
 						PRINT "BUTTON"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BUTTONSUBMIT"
 						PRINT "BUTTONSUBMIT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/FORM"
 						PRINT "FORM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_POST"
 						PRINT "_POST"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_REQUEST"
 						PRINT "_REQUEST"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_FILES"
 						PRINT "_FILES"
 					END LINK

@@ -46,39 +46,39 @@ PRINT cookie$
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DATA"
 						PRINT "DATA"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DOPEN"
 						PRINT "DOPEN"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DSELECT"
 						PRINT "DSELECT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DSORT"
 						PRINT "DSORT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DSET"
 						PRINT "DSET"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DINSERT"
 						PRINT "DINSERT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DWHERE"
 						PRINT "DWHERE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/READCOOKIE"
 						PRINT "READCOOKIE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CREATECOOKIE"
 						PRINT "CREATECOOKIE"
 					END LINK

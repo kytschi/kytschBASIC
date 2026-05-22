@@ -33,23 +33,23 @@ WRITEFILE _ROOT + "/robots.txt", "User-agent: *\n Disallow:"
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIM#refDIM"
 						PRINT "DIM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COPYFILE#refCOPYFILE"
 						PRINT "COPYFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COPYUPLOAD#refCOPYUPLOAD"
 						PRINT "COPYUPLOAD"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/OUTPUTFILE#refOUTPUTFILE"
 						PRINT "OUTPUTFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/READFILE#refREADFILE"
 						PRINT "READFILE"
 					END LINK

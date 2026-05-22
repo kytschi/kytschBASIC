@@ -34,15 +34,15 @@ OUTPUTFILE _ROOT + "/kytschi/omega_doom/gfx/intro/game-title1.gfx"
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIM#refDIM"
 						PRINT "DIM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WRITEFILE#refWRITEFILE"
 						PRINT "WRITEFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/READFILE#refREADFILE"
 						PRINT "READFILE"
 					END LINK

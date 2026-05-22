@@ -99,59 +99,59 @@ END FORM
 					LINK "/reference/FORM#refFORM"
 						PRINT "FORM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CAPTCHA#refCAPTCHA"
 						PRINT "CAPTCHA"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TEXTAREA#refTEXTAREA"
 						PRINT "TEXTAREA"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/NUMBERINPUT#refNUMBERINPUT"
 						PRINT "NUMBERINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TEXTINPUT#refTEXTINPUT"
 						PRINT "TEXTINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BUTTON#refBUTTON"
 						PRINT "BUTTON"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BUTTONSUBMIT#refBUTTONSUBMIT"
 						PRINT "BUTTONSUBMIT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MOUSEACTION"
 						PRINT "MOUSEACTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MOUSEEVENT"
 						PRINT "MOUSEEVENT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/PASSWORDINPUT#refPASSWORDINPUT"
 						PRINT "PASSWORDINPUT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SELECTINPUTOPT#refSELECTINPUTOPT"
 						PRINT "SELECTINPUTOPT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_GET#ref_GET"
 						PRINT "_GET"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_POST#ref_POST"
 						PRINT "_POST"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_REQUEST#ref_REQUEST"
 						PRINT "_REQUEST"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/_FILES#ref_FILES"
 						PRINT "_FILES"
 					END LINK

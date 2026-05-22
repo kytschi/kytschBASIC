@@ -171,64 +171,112 @@ END SCREEN
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
+					LINK "/reference/ANIMATION"
+						PRINT "ANIMATION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAP"
 						PRINT "BITMAP"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAPFONT"
 						PRINT "BITMAPFONT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAPTEXT"
 						PRINT "BITMAPTEXT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BOX"
 						PRINT "BOX"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BOXF"
 						PRINT "BOXF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CIRCLE"
 						PRINT "CIRCLE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CIRCLEF"
 						PRINT "CIRCLEF"
 					END LINK
-					PRINT " | "
-					LINK "/globals"
-						PRINT "Globals"
-					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ELLIPSE"
 						PRINT "ELLIPSE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ELLIPSEF"
 						PRINT "ELLIPSEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/globals"
+						PRINT "Globals"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/HIDE"
+						PRINT "HIDE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/JFUNCTION"
+						PRINT "JFUNCTION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/JSYNCFUNCTION"
+						PRINT "JSYNCFUNCTION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/KEYBOARDEVENT"
+						PRINT "KEYBOARDEVENT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/LINE"
+						PRINT "LINE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MOUSEVENT"
+						PRINT "MOUSEVENT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/RGB"
 						PRINT "RGB"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SCREEN"
 						PRINT "SCREEN"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SHOW"
+						PRINT "SHOW"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SPIN"
+						PRINT "SPIN"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WINDOW"
 						PRINT "WINDOW"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/WINDOWBODY"
+						PRINT "WINDOWBODY"
 					END LINK
 				END ROW
 			END DIV

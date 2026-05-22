@@ -37,31 +37,31 @@ FAVICON "/kytschi/imgs/favicon.ico", "64x64"
 					LINK "/reference/BODY"
 						PRINT "BODY"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/FOOTER"
 						PRINT "FOOTER"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/HEADER"
 						PRINT "HEADER"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/AUTHOR"
 						PRINT "AUTHOR"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CHARSET"
 						PRINT "CHARSET"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DESCRIPTION"
 						PRINT "DESCRIPTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/KEYWORDS"
 						PRINT "KEYWORDS"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/VIEWPORT"
 						PRINT "VIEWPORT"
 					END LINK

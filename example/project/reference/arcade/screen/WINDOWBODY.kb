@@ -110,11 +110,11 @@ END SCREEN
 					LINK "/reference/SCREEN"
 						PRINT "SCREEN"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WINDOW"
 						PRINT "WINDOW"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WINDOWFOOTER"
 						PRINT "WINDOWFOOTER"
 					END LINK

@@ -10,9 +10,9 @@ HEAD
 	NAME "Dead World | kytschBASIC"
 END HEAD
 BODY
-    SCREEN "app"
-        WINDOW "Dead World 0.0.1 Alpha", "dead-world"
-            WINDOWBODY "dead-world-body"
+    SCREEN "dead-world"
+        WINDOW "", "dead-world-location-1", "dead-world-location"
+            WINDOWBODY "", "dead-world-body"
                 DIV "info-box"
                     DIV "info-box-title"
                         PRINT "TURN 7: SURVIVOR"
@@ -23,9 +23,24 @@ BODY
                         PRINT "AMMO:"
                     END DIV
                 END DIV
-                IMAGE "/kytschi/imgs/dead_world/dead-world-distant-buildings.png", "Distant buildings", "distant-buildings"
             END WINDOWBODY
         END WINDOW
+        WINDOW "", "dead-world-location-2", "dead-world-location"
+            WINDOWBODY "", "dead-world-body"
+                DIV "info-box"
+                    DIV "info-box-title"
+                        PRINT "TURN 7: SURVIVOR"
+                    END DIV
+                    DIV "info-box-body"
+                        PRINT "HP:"
+                        PRINT "STAM:"
+                        PRINT "AMMO:"
+                    END DIV
+                END DIV
+            END WINDOWBODY
+        END WINDOW
+        SPRITE "player"
+        END SPRITE
     END SCREEN
 END BODY
 END

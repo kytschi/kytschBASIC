@@ -41,15 +41,15 @@ END IF
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIM#refDIM"
 						PRINT "DIM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DATEFORMAT#refDATEFORMAT"
 						PRINT "DATEFORMAT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WRITEFILE#refWRITEFILE"
 						PRINT "WRITEFILE"
 					END LINK

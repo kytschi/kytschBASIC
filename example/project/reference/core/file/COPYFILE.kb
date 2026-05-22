@@ -29,15 +29,15 @@ COPYFILE _ROOT + "/dump/my_file.jpg", _ROOT + "/dump/my_copy.jpg"
 					LINK "/reference/COPYUPLOAD#refCOPYUPLOAD"
 						PRINT "COPYUPLOAD"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WRITEFILE#refWRITEFILE"
 						PRINT "WRITEFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/OUTPUTFILE#refOUTPUTFILE"
 						PRINT "OUTPUTFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/READFILE#refREADFILE"
 						PRINT "READFILE"
 					END LINK

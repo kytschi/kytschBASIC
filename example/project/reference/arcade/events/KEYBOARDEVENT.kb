@@ -67,19 +67,19 @@ END KEYBOARDEVENT
 					LINK "/reference/JFUNCTION"
 						PRINT "JFUNCTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/JSYNCFUNCTION"
 						PRINT "JSYNCFUNCTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MOUSEACTION"
 						PRINT "MOUSEACTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MOUSEEVENT"
 						PRINT "MOUSEEVENT"
 					END LINK

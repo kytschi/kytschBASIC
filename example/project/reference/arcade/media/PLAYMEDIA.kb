@@ -45,11 +45,11 @@ END JAVASCRIPT
 					LINK "/reference/LOADMEDIA"
 						PRINT "LOADMEDIA"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ANIMATION"
 						PRINT "ANIMATION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK

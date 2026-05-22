@@ -38,27 +38,27 @@ END
 					LINK "/reference/BODY"
 						PRINT "BODY"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COL"
 						PRINT "COL"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/FOOTER"
 						PRINT "FOOTER"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIV"
 						PRINT "DIV"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/HEADER"
 						PRINT "HEADER"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/parameters"
 						PRINT "parameters"
 					END LINK

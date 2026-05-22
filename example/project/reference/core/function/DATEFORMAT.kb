@@ -538,19 +538,19 @@ PRINT DATEFORMAT("NOW", "d/m/Y H:i:s"), "basic"
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIM#refDIM"
 						PRINT "DIM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COUNT#refCOUNT"
 						PRINT "COUNT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SPLIT#refSPLIT"
 						PRINT "SPLIT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WRITEFILE#refWRITEFILE"
 						PRINT "WRITEFILE"
 					END LINK

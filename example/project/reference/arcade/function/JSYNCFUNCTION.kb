@@ -72,11 +72,11 @@ END SCREEN
 					LINK "/reference/JFUNCTION"
 						PRINT "JFUNCTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/KEYBOARDEVENT"
 						PRINT "KEYBOARDEVENT"
 					END LINK

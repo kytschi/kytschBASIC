@@ -53,11 +53,11 @@ NEXT
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/FOR"
 						PRINT "FOR"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WHILE"
 						PRINT "WHILE"
 					END LINK

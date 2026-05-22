@@ -33,19 +33,19 @@ DEF contents$=READFILE(_ROOT + "/kytschi/omega_doom/gfx/intro/game-title1.gfx")
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COPYFILE#refCOPYFILE"
 						PRINT "COPYFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COPYUPLOAD#refCOPYUPLOAD"
 						PRINT "COPYUPLOAD"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WRITEFILE#refWRITEFILE"
 						PRINT "WRITEFILE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/OUTPUTFILE#refOUTPUTFILE"
 						PRINT "OUTPUTFILE"
 					END LINK

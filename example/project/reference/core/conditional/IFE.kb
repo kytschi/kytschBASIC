@@ -30,19 +30,19 @@ END IF
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/IF"
 						PRINT "IF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/IFNTE"
 						PRINT "IFNTE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CONTINUE"
 						PRINT "CONTINUE"
 					END LINK

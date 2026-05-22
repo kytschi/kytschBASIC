@@ -148,51 +148,51 @@ END SCREEN
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAP"
 						PRINT "BITMAP"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAPFONT"
 						PRINT "BITMAPFONT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BOX"
 						PRINT "BOX"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BOXF"
 						PRINT "BOXF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CIRCLE"
 						PRINT "CIRCLE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CIRCLEF"
 						PRINT "CIRCLEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ELLIPSE"
 						PRINT "ELLIPSE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ELLIPSEF"
 						PRINT "ELLIPSEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/globals"
 						PRINT "Globals"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/LINE"
 						PRINT "LINE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/RGB"
 						PRINT "RGB"
 					END LINK

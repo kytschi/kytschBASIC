@@ -48,7 +48,7 @@ END ANIMATION
 					LINK "/reference/ANIMATION#refANIMATION"
 						PRINT "ANIMATION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SLEEP#refSLEEP"
 						PRINT "SLEEP"
 					END LINK

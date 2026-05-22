@@ -77,11 +77,11 @@ END SCREEN
 					LINK "/reference/JSYNCFUNCTION"
 						PRINT "JSYNCFUNCTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/JAVASCRIPT"
 						PRINT "JAVASCRIPT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/KEYBOARDEVENT"
 						PRINT "KEYBOARDEVENT"
 					END LINK

@@ -51,27 +51,27 @@ END THEAD
 					LINK "/reference/HEAD"
 						PRINT "HEAD"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TABLE"
 						PRINT "TABLE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TBODY"
 						PRINT "TBODY"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TCELL"
 						PRINT "TCELL"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TFOOT"
 						PRINT "TFOOT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/THEADCELL"
 						PRINT "THEADCELL"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/TROW"
 						PRINT "TROW"
 					END LINK

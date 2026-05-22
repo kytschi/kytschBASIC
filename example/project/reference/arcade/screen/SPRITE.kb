@@ -11,7 +11,7 @@ LOAD _ROOT + "/project/shared/header"
 				SWRITE
 					PRINT "SPRITE","heading-command basic"
 					LINE BREAK
-					PRINT "ID, CLASS, ON CLICK FUNC, ON DOUBLE CLICK FUNC","heading-args"
+					PRINT "ID, CLASS (Optional), ON CLICK FUNC (Optional), ON DOUBLE CLICK FUNC (Optional)","heading-args"
 				END SWRITE
 				SWRITE
 					PRINT "Creates a sprite on screen."
@@ -20,17 +20,19 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-DIM cards$=("clubs_1.svg", "clubs_2.svg", "clubs_3.svg", "clubs_4.svg")
+DIM cards$=("clubs_1.png", "clubs_2.png", "clubs_3.png", "clubs_4.png")
 SCREEN "cards"
-	WINDOW "hand"
-		FOR card$ IN cards$
-			DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
-			DEF id$=REPLACE(id$, ".svg", "")
-			LET card$="/kytschi/imgs/cards/" + card$
-			SPRITE id$, "card", "onCardClick"
-				IMAGE card$
-			END SPRITE
-		NEXT
+	WINDOW
+		WINDOWBODY
+			FOR card$ IN cards$
+				DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+				DEF id$=REPLACE(id$, ".png", "")
+				LET card$="/kytschi/imgs/cards/" + card$
+				SPRITE id$, "card", "onCardClick"
+					IMAGE card$
+				END SPRITE
+			NEXT
+		END WINDOWBODY
 	END WINDOW
 END SCREEN
 				END CPRINT
@@ -38,17 +40,19 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				DIV "kb-col kb-col-24 kb-code-block"
-					DIM cards$=("clubs_1.svg", "clubs_2.svg", "clubs_3.svg", "clubs_4.svg")
+					DIM cards$=("clubs_1.png", "clubs_2.png", "clubs_3.png", "clubs_4.png")
 					SCREEN "cards"
-						WINDOW "hand"
-							FOR card$ IN cards$
-								DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
-								DEF id$=REPLACE(id$, ".svg", "")
-								LET card$="/kytschi/imgs/cards/" + card$
-								SPRITE id$, "card", "onCardClick"
-									IMAGE card$
-								END SPRITE
-							NEXT
+						WINDOW
+							WINDOWBODY
+								FOR card$ IN cards$
+									DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
+									DEF id$=REPLACE(id$, ".png", "")
+									LET card$="/kytschi/imgs/cards/" + card$
+									SPRITE id$, "card", "onCardClick"
+										IMAGE card$
+									END SPRITE
+								NEXT
+							END WINDOWBODY
 						END WINDOW
 					END SCREEN
 				END DIV
@@ -58,8 +62,11 @@ END SCREEN
 				TABLE
 					THEAD
 						TROW
-							THEADCELL "140px"
+							THEADCELL "120px"
 								PRINT "Parameter"
+							END THEADCELL
+							THEADCELL "80px"
+								PRINT "Optional"
 							END THEADCELL
 							THEADCELL "200px"
 								PRINT "Type"
@@ -75,92 +82,55 @@ END SCREEN
 								PRINT "ID"
 							END TCELL
 							TCELL
-								PRINT "integer/string"
+								PRINT "No"
 							END TCELL
 							TCELL
-								PRINT "ID to identify the window"
-							END TCELL
-						END TROW
-						TROW
-							THEADCELL ,"table-parameter",3
-								PRINT "optional"
-							END THEADCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "TITLE"
+								PRINT "string or variable"
 							END TCELL
 							TCELL
-								PRINT "string"
-							END TCELL
-							TCELL
-								PRINT "Title of the window"
+								PRINT "ID of the sprite"
 							END TCELL
 						END TROW
 						TROW
 							TCELL ,"table-parameter"
-								PRINT "X1"
+								PRINT "CLASS"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "Yes"
 							END TCELL
 							TCELL
-								PRINT "X1 position"
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "To help style the SPRITE"
 							END TCELL
 						END TROW
 						TROW
 							TCELL ,"table-parameter"
-								PRINT "Y1"
+								PRINT "ON CLICK FUNC"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "Yes"
 							END TCELL
 							TCELL
-								PRINT "Y1 position"
+								PRINT "string or variable"
+							END TCELL
+							TCELL
+								PRINT "Trigger a function when the user single clicks the SPRITE"
 							END TCELL
 						END TROW
 						TROW
 							TCELL ,"table-parameter"
-								PRINT "X2"
+								PRINT "ON DOUBLE CLICK FUNC"
 							END TCELL
 							TCELL
-								PRINT "integer"
+								PRINT "Yes"
 							END TCELL
 							TCELL
-								PRINT "X2 position"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "Y2"
+								PRINT "string or variable"
 							END TCELL
 							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "Y2 position"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "TYPE"
-							END TCELL
-							TCELL
-								PRINT "integer"
-							END TCELL
-							TCELL
-								PRINT "Type of the window"
-							END TCELL
-						END TROW
-						TROW
-							TCELL ,"table-parameter"
-								PRINT "SCREEN ID"
-							END TCELL
-							TCELL
-								PRINT "integer/string"
-							END TCELL
-							TCELL
-								PRINT "ID of the screen the window is to be attached to"
+								PRINT "Trigger a function when the user double clicks the SPRITE"
 							END TCELL
 						END TROW
 					END TBODY
@@ -169,40 +139,107 @@ END SCREEN
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
+					LINK "/reference/ANIMATION"
+						PRINT "ANIMATION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ARC"
 						PRINT "ARC"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/ARCF"
 						PRINT "ARCF"
 					END LINK
-					PRINT " | "
-					LINK "/reference/CIRCLE"
-						PRINT "CIRCLE"
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/BITMAP"
+						PRINT "BITMAP"
 					END LINK
-					PRINT " | "
-					LINK "/reference/CIRCLEF"
-						PRINT "CIRCLEF"
-					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAPFONT"
 						PRINT "BITMAPFONT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/BITMAPTEXT"
 						PRINT "BITMAPTEXT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/BOX"
+						PRINT "BOX"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/BOXF"
+						PRINT "BOXF"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/CIRCLE"
+						PRINT "CIRCLE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/ELLIPSE"
+						PRINT "ELLIPSE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/ELLIPSEF"
+						PRINT "ELLIPSEF"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/globals"
 						PRINT "Globals"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/HIDE"
+						PRINT "HIDE"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/JAVASCRIPT"
+						PRINT "JAVASCRIPT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/JFUNCTION"
+						PRINT "JFUNCTION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/JSYNCFUNCTION"
+						PRINT "JSYNCFUNCTION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/KEYBOARDEVENT"
+						PRINT "KEYBOARDEVENT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/LINE"
 						PRINT "LINE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MOUSEACTION"
+						PRINT "MOUSEACTION"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/MOUSEVENT"
+						PRINT "MOUSEVENT"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/RGB"
+						PRINT "RGB"
+					END LINK
 					LINK "/reference/SCREEN"
 						PRINT "SCREEN"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SHOW"
+						PRINT "SHOW"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/SPIN"
+						PRINT "SPIN"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/WINDOW"
+						PRINT "WINDOW"
+					END LINK
+					PRINT "&nbsp;|&nbsp;"
+					LINK "/reference/WINDOWBODY"
+						PRINT "WINDOWBODY"
 					END LINK
 				END ROW
 			END DIV

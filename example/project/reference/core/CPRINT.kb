@@ -47,11 +47,11 @@ PRINT "I want to see the statement without executing it"
 					LINK "/reference/REM"
 						PRINT "REM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SPRINT"
 						PRINT "SPRINT"
 					END LINK

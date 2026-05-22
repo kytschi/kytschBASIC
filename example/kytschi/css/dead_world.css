@@ -1,22 +1,44 @@
 html, body {
+    width: 100%;
+    height: 100vh;
     padding: 0;
     margin: 0;
     overflow: hidden;
+    background-color: #000 !important;
 }
 #dead-world {
-    background-color: rgba(0, 0, 0, 1);
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #000 !important;
 }
-#dead-world-body {
+.dead-world-body {
     margin: 0 auto;
-    background-color: rgba(118, 146, 167, 1);
-    width: 1024px;
+    width: 1408px;
     height: 768px;
     border: 1px solid rgba(69, 74, 80, 1);
 }
 
-.distant-buildings {
-    width: 1024px;
-    height: 558px;
+/* LOCATIONS */
+.dead-world-location {
+    display: none;
+    background-color: #000 !important;
+    border: 0;
+}
+#dead-world-location-1 {
+    display: flex !important;
+}
+#dead-world-location-1  .dead-world-body {
+    background-color: rgba(118, 146, 167, 1);
+    background-image: url("/kytschi/dead_world/locations/location1.png");
+    background-repeat: no-repeat;
+}
+#dead-world-location-2  .dead-world-body {
+    background-color: rgba(118, 146, 167, 1);
+    background-image: url("/kytschi/dead_world/locations/location2.png");
+    background-repeat: no-repeat;
 }
 
 .info-box {

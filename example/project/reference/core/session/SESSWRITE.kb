@@ -40,11 +40,11 @@ PRINT test$
 					LINK "/reference/SESSCLEAR"
 						PRINT "SESSCLEAR"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SESSDESTORY"
 						PRINT "SESSDESTORY"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SESSREAD"
 						PRINT "SESSREAD"
 					END LINK

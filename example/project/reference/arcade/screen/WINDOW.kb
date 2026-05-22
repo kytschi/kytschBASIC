@@ -136,11 +136,11 @@ END SCREEN
 					LINK "/reference/SCREEN"
 						PRINT "SCREEN"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WINDOWBODY"
 						PRINT "WINDOWBODY"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/WINDOWFOOTER"
 						PRINT "WINDOWFOOTER"
 					END LINK

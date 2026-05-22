@@ -36,15 +36,15 @@ PRINT "OK ready!"
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIM#refDIM"
 						PRINT "DIM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/COUNT#refCOUNT"
 						PRINT "COUNT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DATEFORMAT#refDATEFORMAT"
 						PRINT "DATEFORMAT"
 					END LINK

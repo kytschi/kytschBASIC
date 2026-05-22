@@ -21,13 +21,13 @@ LOAD _ROOT + "/project/shared/header"
 FOR iLoop%=1 TO 10
 	IF iLoop%=2 THEN
 		PRINT iLoop%
-		PRINT " | "
+		PRINT "&nbsp;|&nbsp;"
 	ELSEIF iLoop%=4 THEN
         PRINT iLoop%
-		PRINT " | "
+		PRINT "&nbsp;|&nbsp;"
 	ELSEIF iLoop%=6 THEN
         PRINT iLoop%
-		PRINT " | "
+		PRINT "&nbsp;|&nbsp;"
 	END IF
 NEXT
 LINE BREAK
@@ -45,13 +45,13 @@ NEXT
 					FOR iLoop%=1 TO 10
 						IF iLoop%=2 THEN
 							PRINT iLoop%
-							PRINT " | "
+							PRINT "&nbsp;|&nbsp;"
 						ELSEIF iLoop%=4 THEN
 							PRINT iLoop%
-							PRINT " | "
+							PRINT "&nbsp;|&nbsp;"
 						ELSEIF iLoop%=6 THEN
 							PRINT iLoop%
-							PRINT " | "
+							PRINT "&nbsp;|&nbsp;"
 						END IF
 					NEXT
 					LINE BREAK
@@ -69,11 +69,11 @@ NEXT
 					LINK "/installation#configuration"
 						PRINT "configuration"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SELECT"
 						PRINT "SELECT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/CONTINUE"
 						PRINT "CONTINUE"
 					END LINK

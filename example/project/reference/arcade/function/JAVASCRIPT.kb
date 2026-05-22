@@ -70,11 +70,11 @@ END SCREEN
 					LINK "/reference/JFUNCTION"
 						PRINT "JFUNCTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/JSYNCFUNCTION"
 						PRINT "JSYNCFUNCTION"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/KEYBOARDEVENT"
 						PRINT "KEYBOARDEVENT"
 					END LINK

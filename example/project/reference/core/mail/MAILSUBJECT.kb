@@ -52,15 +52,15 @@ END MAIL
 					LINK "/reference/MAIL"
 						PRINT "MAIL"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MAILFROM"
 						PRINT "MAILFROM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MAILTO"
 						PRINT "MAILTO"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/MAILBODY"
 						PRINT "MAILBODY"
 					END LINK

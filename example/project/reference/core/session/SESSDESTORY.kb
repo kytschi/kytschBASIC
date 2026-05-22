@@ -33,11 +33,11 @@ SESSDESTORY
 					LINK "/reference/SESSCLEAR"
 						PRINT "SESSWRITE"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SESSCLEAR"
 						PRINT "SESSCLEAR"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SESSREAD"
 						PRINT "SESSREAD"
 					END LINK

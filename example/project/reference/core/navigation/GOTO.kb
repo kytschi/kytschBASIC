@@ -32,7 +32,7 @@ GOTO printMessage("Hello World!")
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SWRITE"
 						PRINT "SWRITE"
 					END LINK

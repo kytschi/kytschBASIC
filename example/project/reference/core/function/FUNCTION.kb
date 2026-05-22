@@ -51,11 +51,11 @@ GOTO printMessageWithArgs("Hello World!")
 					LINK "/reference/DEF#refDEF"
 						PRINT "DEF"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/DIM#refDIM"
 						PRINT "DIM"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/GOTO#refGOTO"
 						PRINT "GOTO"
 					END LINK

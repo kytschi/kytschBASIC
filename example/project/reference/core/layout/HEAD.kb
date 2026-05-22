@@ -41,11 +41,11 @@ END HEAD
 					LINK "/reference/BODY"
 						PRINT "BODY"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/FOOTER"
 						PRINT "FOOTER"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/HEADER"
 						PRINT "HEADER"
 					END LINK

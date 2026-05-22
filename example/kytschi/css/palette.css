@@ -280,6 +280,12 @@ th {
     display: none;
 }
 
+#cards {
+    height: 180px;
+}
+#cards .kb-window {
+    border: none;
+}
 .card {
     height: 120px;
 }
@@ -288,7 +294,12 @@ th {
     height: 100%;
 }
 
+#see-also {
+    display: flex;
+    flex-wrap: wrap;
+}
 #see-also span {
+    display: inline-block;
     margin-right: 5px;
 }
 

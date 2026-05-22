@@ -38,7 +38,7 @@ PRINT "And this to be my second line"
 					LINK "/reference/PRINT"
 						PRINT "PRINT"
 					END LINK
-					PRINT " | "
+					PRINT "&nbsp;|&nbsp;"
 					LINK "/reference/SWRITE"
 						PRINT "SWRITE"
 					END LINK
