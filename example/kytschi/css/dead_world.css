@@ -1,3 +1,6 @@
+:root {
+    --move-size: 38px;
+}
 html, body {
     width: 100%;
     height: 100vh;
@@ -15,10 +18,89 @@ html, body {
     background-color: #000 !important;
 }
 .dead-world-body {
+    display: inline-block;
     margin: 0 auto;
-    width: 1408px;
-    height: 768px;
+    width: 1200px;
+    height: 684px;
     border: 1px solid rgba(69, 74, 80, 1);
+}
+.dead-world-body .move-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 0;
+    row-gap: 0;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+}
+.dead-world-body .move, .dead-world-body .action, .dead-world-body .blocked {
+    display: block;
+    width: var(--move-size);
+    height: var(--move-size);
+    overflow: hidden;
+}
+.dead-world-body .move span, .dead-world-body .action span  {
+    font-weight: bold;
+    background-color: #fff;
+}
+.dead-world-body .move {
+    background-color: rgba(71, 255, 74, 0.5);
+    border: 1px solid rgba(71, 255, 74, 1);
+}
+.dead-world-body .action {
+    background-color: rgba(0, 229, 255, 0.5);
+    border: 1px solid rgba(0, 229, 255, 1);
+}
+.dead-world-body .blocked {
+    background: none;
+    border: none;
+    width: calc(var(--move-size) + 2px);
+    height: calc(var(--move-size) + 2px);
+}
+.dead-world-body .search-barrel,
+.dead-world-body .search-bin,
+.dead-world-body .search-box,
+.dead-world-body .search-bus,
+.dead-world-body .search-car,
+.dead-world-body .search-crate,
+.dead-world-body .search-fuel,
+.dead-world-body .search-lorry,
+.dead-world-body .search-rubbish,
+.dead-world-body .search-truck,
+.dead-world-body .search-vending-machine,
+.dead-world-body .collect-water {
+    background-color: rgba(249, 129, 37, 0.5);
+    border: 1px solid rgba(249, 129, 37, 1);
+}
+.dead-world-body .climb-bus,
+.dead-world-body .climb-car,
+.dead-world-body .climb-lorry,
+.dead-world-body .climb-structure,
+.dead-world-body .climb-truck,
+.dead-world-body .climb-wall,
+.dead-world-body .sit-bench {
+    background-color: rgba(247, 247, 37, 0.5);
+    border: 1px solid rgba(247, 247, 37, 1);
+}
+.dead-world-body .hide-bin,
+.dead-world-body .hide-bus,
+.dead-world-body .hide-car,
+.dead-world-body .hide-lorry,
+.dead-world-body .hide-truck {
+    background-color: rgba(171, 36, 244, 0.5);
+    border: 1px solid rgba(171, 36, 244, 1);
+}
+.dead-world-body .enter-window,
+.dead-world-body .enter-door {
+    background-color: rgba(214, 36, 242, 0.5);
+    border: 1px solid rgba(214, 36, 242, 1);
+}
+.dead-world-body .enter-door.barricaded,
+.dead-world-body .enter-window.barricaded {
+    background-color: rgba(252, 47, 47, 0.5);
+    border: 1px solid rgba(252, 47, 47, 1);
 }
 
 /* LOCATIONS */
@@ -39,6 +121,21 @@ html, body {
     background-color: rgba(118, 146, 167, 1);
     background-image: url("/kytschi/dead_world/locations/location2.png");
     background-repeat: no-repeat;
+}
+
+#player {
+    display: none;
+    position: absolute;
+    flex-wrap: wrap;
+}
+#player-sprite {
+    cursor: pointer;
+    width: var(--move-size);
+    height: var(--move-size);
+    background-color: blue;
+}
+#player-sprite.selected {
+    background-color: rgb(71, 255, 74);
 }
 
 .info-box {
