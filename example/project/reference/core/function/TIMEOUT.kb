@@ -21,9 +21,9 @@ LOAD _ROOT + "/project/shared/header"
 				END HEADING 3
 				CPRINT
 PRINT "Timeout running",,"timeout-text"
-AFUNCTION "updateText", "text"
+JFUNCTION "updateText", "text"
 $("#timeout-text").html(text);
-END AFUNCTION
+END JFUNCTION
 ANIMATION "timeoutExample"
     TIMEOUT "3000"
         GOTO updateText('Timeout complete')
@@ -32,9 +32,9 @@ END ANIMATION
 				END CPRINT
 				DIV "kb-code-block"
 					PRINT "Timeout running",,"timeout-text"
-					AFUNCTION "updateText", "text"
+					JFUNCTION "updateText", "text"
 						$("#timeout-text").html(text);
-					END AFUNCTION
+					END JFUNCTION
 					ANIMATION "timeoutExample"
 						TIMEOUT "3000"
 							GOTO updateText('Timeout complete')

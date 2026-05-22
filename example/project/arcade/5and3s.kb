@@ -61,13 +61,13 @@ ADIM names$=names$
 ADEF played_left$=""
 ADEF played_right$=""
 
-AFUNCTION "onDominoClick"
+JFUNCTION "onDominoClick"
     selected_domino = event.target.parentElement.id;
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_domino).addClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "computerPlay"
+JFUNCTION "computerPlay"
     if (game_over) {
         return;
     }
@@ -110,9 +110,9 @@ AFUNCTION "computerPlay"
 
         updateTurn(event);
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "updateTurn"
+JFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
@@ -132,9 +132,9 @@ AFUNCTION "updateTurn"
     } else {
         $("#player-" + turn + " .knocking").hide();
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "calMove", "direction"
+JFUNCTION "calMove", "direction"
     var selected = selected_domino.split("");
     var iLoop;
     
@@ -188,9 +188,9 @@ AFUNCTION "calMove", "direction"
     }
 
     return null;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onDropZoneClick"
+JFUNCTION "onDropZoneClick"
     if (!selected_domino) {
         return;
     }
@@ -221,9 +221,9 @@ AFUNCTION "onDropZoneClick"
     selected_domino = "";
 
     updateTurn(event);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameInfo", "text", "error = false"
+JFUNCTION "gameInfo", "text", "error = false"
     $.toast({
         heading: (error ? "ERROR" : names[turn]),
         text: text,
@@ -234,9 +234,9 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "playerKnocking"
+JFUNCTION "playerKnocking"
     if (game_over) {
         return;
     }
@@ -254,7 +254,7 @@ AFUNCTION "playerKnocking"
     if (!no_update) {
         updateTurn();
     }
-END AFUNCTION
+END JFUNCTION
 
 JAVASCRIPT    
     if (typeof(kb_cookie.kb_5and3s_scores) != "undefined") {

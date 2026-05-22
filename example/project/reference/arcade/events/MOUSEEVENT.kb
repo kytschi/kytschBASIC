@@ -26,9 +26,9 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-AFUNCTION "popup", "message"
+JFUNCTION "popup", "message"
 	alert(message);
-END AFUNCTION
+END JFUNCTION
 MOUSEEVENT "#btn-mouse-event"
     GOTO popup("Click by ID")
 MOUSEEVENT ".btn-mouse-event"
@@ -49,9 +49,9 @@ END BUTTON
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				AFUNCTION "popup", "message"
+				JFUNCTION "popup", "message"
 					alert(message);
-				END AFUNCTION
+				END JFUNCTION
 				MOUSEEVENT "#btn-mouse-event"
 					GOTO popup("Click by ID")
 				MOUSEEVENT ".btn-mouse-event"
@@ -115,12 +115,12 @@ END BUTTON
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
-					LINK "/reference/AFUNCTION"
-						PRINT "AFUNCTION"
+					LINK "/reference/JFUNCTION"
+						PRINT "JFUNCTION"
 					END LINK
 					PRINT " | "
-					LINK "/reference/ASYNCFUNCTION"
-						PRINT "ASYNCFUNCTION"
+					LINK "/reference/JSYNCFUNCTION"
+						PRINT "JSYNCFUNCTION"
 					END LINK
 					PRINT " | "
 					LINK "/reference/JAVASCRIPT"

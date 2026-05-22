@@ -18,7 +18,7 @@ ADEF to_speak%=0
 ADEF current_speech%=0
 ADEF current_chat$=""
 
-AFUNCTION "characterSpeechPause"
+JFUNCTION "characterSpeechPause"
     current_speech--;
     var continue_id = $("." + game_data.game_progress + "-speech-" + current_speech).attr("id");
     current_speech = 0;
@@ -29,8 +29,8 @@ AFUNCTION "characterSpeechPause"
         $("#" + game_data.story_progress + " #" + game_data.game_progress).show();
         characterSpeech(event);
     }
-END AFUNCTION
-AFUNCTION "characterSpeech"
+END JFUNCTION
+JFUNCTION "characterSpeech"
     var iLoop = 0;
     function typeNext() {
         var parent_id = $("." + game_data.game_progress + "-speech-" + current_speech).parent().parent().attr("id");
@@ -75,9 +75,9 @@ AFUNCTION "characterSpeech"
         current_chat = $("." + game_data.game_progress + "-speech-" + current_speech).parent().parent().attr("id");
         typeNext();
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "createCookie", "return_data=0"
+JFUNCTION "createCookie", "return_data=0"
     var data = {};
     data.story_progress = "story-intro";
     data.game_progress = "game-progress-4";
@@ -92,7 +92,7 @@ AFUNCTION "createCookie", "return_data=0"
     $("#" + data.story_progress + " #" + data.game_progress).show();
 
     game_data = data;
-END AFUNCTION
+END JFUNCTION
 
 IFE _GET("progress") THEN
     JAVASCRIPT

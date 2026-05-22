@@ -1,7 +1,7 @@
 LANG "en"
 HEAD
 	LOAD _ROOT + "/project/shared/head"
-	NAME "AFUNCTION statment | kytschBASIC"
+	NAME "JFUNCTION statment | kytschBASIC"
 END HEAD
 BODY
 LOAD _ROOT + "/project/shared/header"
@@ -9,7 +9,7 @@ LOAD _ROOT + "/project/shared/header"
 		DIV "kb-row","main-content"
 			DIV "kb-col kb-col-24","main-content-col"
 				SWRITE
-					PRINT "AFUNCTION","heading-command basic"
+					PRINT "JFUNCTION","heading-command basic"
 					LINE BREAK
 					PRINT "NAME, ARGUMENTS (optional)","heading-args"
 				END SWRITE
@@ -28,9 +28,9 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-AFUNCTION "updateText", "text='Arcade support'"
+JFUNCTION "updateText", "text='Arcade support'"
 	$("#arcade-text").html(text);
-END AFUNCTION
+END JFUNCTION
 LINE BREAK
 JAVASCRIPT
 	updateText(event, "Arcade support enabled");
@@ -44,9 +44,9 @@ END SCREEN
 					PRINT "Output"
 				END HEADING 4
 				SHOWHTML
-					AFUNCTION "updateText", "text='Arcade support'"
+					JFUNCTION "updateText", "text='Arcade support'"
 						$("#arcade-text").html(text);
-					END AFUNCTION
+					END JFUNCTION
 					LINE BREAK
 					JAVASCRIPT
 						updateText(event, "Arcade support enabled");
@@ -59,9 +59,9 @@ END SCREEN
 				HEADING 4
 					PRINT "Demo"
 				END HEADING 4
-				AFUNCTION "updateText", "text='Arcade support'"
+				JFUNCTION "updateText", "text='Arcade support'"
 					$("#arcade-text").html(text);
-				END AFUNCTION
+				END JFUNCTION
 				LINE BREAK
 				JAVASCRIPT
 					updateText(event, "Arcade support enabled");
@@ -74,8 +74,8 @@ END SCREEN
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
-					LINK "/reference/ASYNCFUNCTION"
-						PRINT "ASYNCFUNCTION"
+					LINK "/reference/JSYNCFUNCTION"
+						PRINT "JSYNCFUNCTION"
 					END LINK
 					PRINT " | "
 					LINK "/reference/JAVASCRIPT"

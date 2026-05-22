@@ -75,7 +75,7 @@ ADEF turn%=0
 ADEF game_over%=0
 ADEF computer_flipped%=0
 
-AFUNCTION "gameInfo", "text", "error = false"
+JFUNCTION "gameInfo", "text", "error = false"
     $.toast({
         heading: "Dealer",
         text: text,
@@ -86,9 +86,9 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameOver"
+JFUNCTION "gameOver"
     var score = 0, card_details, value = 0;
 
     if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
@@ -129,9 +129,9 @@ AFUNCTION "gameOver"
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
 
     $(".btn-new-game").addClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "checkHand"
+JFUNCTION "checkHand"
     var total = 0;
     $("#player-cards-" + turn).children(".card").each((index, card) => {
         var number = $(card).attr("id").split("_");
@@ -147,9 +147,9 @@ AFUNCTION "checkHand"
     });
 
     return total;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "computerOver", "computer_total"
+JFUNCTION "computerOver", "computer_total"
     if (computer_total > 21) {
         gameInfo(event, names[turn] + " bust", true);
         $(".player .winner").show();
@@ -180,9 +180,9 @@ AFUNCTION "computerOver", "computer_total"
             }
         }
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "computerPlay"
+JFUNCTION "computerPlay"
     var total = 0;
     if (!computer_flipped) {
         $("#player-cards-" + turn).children(".card").each((index, card) => {
@@ -206,9 +206,9 @@ AFUNCTION "computerPlay"
     } else {
         computerOver(event, total);
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "dealCard"
+JFUNCTION "dealCard"
     var card = deck.pop();
     var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
     $("#player-cards-" + turn).append("<div id=\"" + id + "\" class=\"card\"><img src=\"" + card + "\"></div>");
@@ -224,9 +224,9 @@ AFUNCTION "dealCard"
         updateTurn();
     }
     return total;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "updateTurn"
+JFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
@@ -243,11 +243,11 @@ AFUNCTION "updateTurn"
     if (turn == 0) {
         computerPlay();
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "newGame"
+JFUNCTION "newGame"
     window.location.reload();
-END AFUNCTION
+END JFUNCTION
 
 JAVASCRIPT
     var played = false;

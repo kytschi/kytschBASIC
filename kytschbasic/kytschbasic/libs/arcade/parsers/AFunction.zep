@@ -1,5 +1,5 @@
 /**
- * AFUNCTION parser
+ * JFUNCTION parser
  *
  * @package     KytschBASIC\Libs\Arcade\Parsers\AFunction
  * @author 		Mike Welsh <hello@kytschbasic.org>
@@ -18,17 +18,17 @@ class AFunction extends Command
 	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch(command) {
-			case "AFUNCTION":
+			case "JFUNCTION":
 				return this->parseFunction(line, args);
 			case "ANIMATION":
 				return this->parseFunction(line, args, true);
-			case "ASYNCFUNCTION":
+			case "JSYNCFUNCTION":
 				return this->parseFunction(line, args, false, true);
-			case "END AFUNCTION":
+			case "END JFUNCTION":
 				return "}</script>";
 			case "END ANIMATION":
 				return "}</script>";
-			case "END ASYNCFUNCTION":
+			case "END JSYNCFUNCTION":
 				return "}</script>";
 			case "SHOW":
 				return this->parseShow(line, args, in_javascript);
@@ -47,7 +47,7 @@ class AFunction extends Command
 
 		if (empty(args) || args[0] == "\"\"") {
 			if (!animation) {
-				throw new Exception("Invalid " . (async ? "ASYNCFUNCTION" : "AFUNCTION"));
+				throw new Exception("Invalid " . (async ? "JSYNCFUNCTION" : "JFUNCTION"));
 			} else {
 				let args[0] = "KB_ANIMATION_" . rand(10000, getrandmax());
 			}

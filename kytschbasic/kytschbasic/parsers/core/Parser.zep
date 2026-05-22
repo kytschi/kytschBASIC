@@ -158,7 +158,7 @@ class Parser
 					return line . this->newline;
 				}
 				break;
-			case "AFUNCTION":
+			case "JFUNCTION":
 				if (!this->cprint) {
 					let this->js = true;
 					return (new AFunction())->parse(line, command, args, this->js);
@@ -166,7 +166,7 @@ class Parser
 					return line . this->newline;
 				}
 				break;
-			case "END AFUNCTION":
+			case "END JFUNCTION":
 				if (!this->cprint) {
 					let this->js = false;
 					return (new AFunction())->parse(line, command, args, this->js);
@@ -174,7 +174,7 @@ class Parser
 					return line . this->newline;
 				}
 				break;
-			case "ASYNCFUNCTION":
+			case "JSYNCFUNCTION":
 				if (!this->cprint) {
 					let this->js = true;
 					return (new AFunction())->parse(line, command, args, this->js);
@@ -182,7 +182,7 @@ class Parser
 					return line . this->newline;
 				}
 				break;
-			case "END ASYNCFUNCTION":
+			case "END JSYNCFUNCTION":
 				if (!this->cprint) {
 					let this->js = false;
 					return (new AFunction())->parse(line, command, args, this->js);

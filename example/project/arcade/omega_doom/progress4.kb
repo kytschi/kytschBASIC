@@ -3530,7 +3530,7 @@ ANIMATION "updateOmegaShieldsFire", "false"
     GOTO updateOmegaShip("omega_shields", 60)
     GOTO progressSpeech('game-progress-27')
 END ANIMATION
-AFUNCTION "updateOmegaFire"
+JFUNCTION "updateOmegaFire"
     userInputRemove("game-progress-41");
     if (!game_data.omega_engines) {
         user_continue.push(["game-progress-41", "game-progress-9"]);
@@ -3548,8 +3548,8 @@ AFUNCTION "updateOmegaFire"
     } else {
         user_continue.push(["game-progress-41", "game-progress-27"]);
     }
-END AFUNCTION
-AFUNCTION "updateOmegaShip", "var_name", "var_value"    
+END JFUNCTION
+JFUNCTION "updateOmegaShip", "var_name", "var_value"    
     game_data[var_name] = var_value;
     WRITECOOKIE("kb_OMEGA", game_data);
 
@@ -3584,4 +3584,4 @@ AFUNCTION "updateOmegaShip", "var_name", "var_value"
     }
 
     updateOmegaFire(event);
-END AFUNCTION
+END JFUNCTION

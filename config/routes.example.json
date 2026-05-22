@@ -483,8 +483,8 @@
 	},
 
 	{
-		"url": "/reference/AFUNCTION",
-		"template": "project/reference/arcade/function/AFUNCTION.kb"
+		"url": "/reference/JFUNCTION",
+		"template": "project/reference/arcade/function/JFUNCTION.kb"
 	},
 	{
 		"url": "/reference/ANIMATION",
@@ -499,8 +499,8 @@
 		"template": "project/reference/arcade/shapes/ARCF.kb"
 	},
 	{
-		"url": "/reference/ASYNCFUNCTION",
-		"template": "project/reference/arcade/function/ASYNCFUNCTION.kb"
+		"url": "/reference/JSYNCFUNCTION",
+		"template": "project/reference/arcade/function/JSYNCFUNCTION.kb"
 	},
 	{
 		"url": "/reference/BITMAP",

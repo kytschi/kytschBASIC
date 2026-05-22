@@ -43,9 +43,6 @@ HEADER
 		LINK "/reference/ACOS#refACOS","Find out about the ACOS command","nav-link",,"refACOS"
 			PRINT "ACOS"
 		END LINK
-		LINK "/reference/AFUNCTION#refAFUNCTION","Find out about the AFUNCTION command","nav-link",,"refAFUNCTION"
-			PRINT "AFUNCTION"
-		END LINK
 		LINK "/reference/ANIMATION#refANIMATION","Find out about the ANIMATION command","nav-link",,"refANIMATION"
 			PRINT "ANIMATION"
 		END LINK
@@ -60,9 +57,6 @@ HEADER
 		END LINK
 		LINK "/reference/ASIN#refASIN","Find out about the ASIN command","nav-link",,"refASIN"
 			PRINT "ASIN"
-		END LINK
-		LINK "/reference/ASYNCFUNCTION#refASYNCFUNCTION","Find out about the ASYNCFUNCTION command","nav-link",,"refASYNCFUNCTION"
-			PRINT "ASYNCFUNCTION"
 		END LINK
 		LINK "/reference/ATAN#refATAN","Find out about the ATAN command","nav-link",,"refATAN"
 			PRINT "ATAN"
@@ -316,14 +310,20 @@ HEADER
 		LINK "/reference/INT#refINT","Find out about the INT command","nav-link",,"refINT"
 			PRINT "INT"
 		END LINK
+		LINK "/reference/JAVASCRIPT#refJAVASCRIPT","Find out about the JAVASCRIPT command","nav-link",,"refJAVASCRIPT"
+			PRINT "JAVASCRIPT"
+		END LINK
+		LINK "/reference/JFUNCTION#refJFUNCTION","Find out about the JFUNCTION command","nav-link",,"refJFUNCTION"
+			PRINT "JFUNCTION"
+		END LINK
+		LINK "/reference/JSYNCFUNCTION#refJSYNCFUNCTION","Find out about the JSYNCFUNCTION command","nav-link",,"refJSYNCFUNCTION"
+			PRINT "JSYNCFUNCTION"
+		END LINK
 		LINK "/reference/KEYBOARDEVENT#refKEYBOARDEVENT","Find out about the KEYBOARDEVENT command","nav-link",,"refKEYBOARDEVENT"
 			PRINT "KEYBOARDEVENT"
 		END LINK
 		LINK "/reference/KEYWORDS#refKEYWORDS","Find out about the KEYWORDS command","nav-link",,"refKEYWORDS"
 			PRINT "KEYWORDS"
-		END LINK
-		LINK "/reference/JAVASCRIPT#refJAVASCRIPT","Find out about the JAVASCRIPT command","nav-link",,"refJAVASCRIPT"
-			PRINT "JAVASCRIPT"
 		END LINK
 		LINK "/reference/LCASE#refLCASE","Find out about the LCASE command","nav-link",,"refLCASE"
 			PRINT "LCASE"

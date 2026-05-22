@@ -26,9 +26,9 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-AFUNCTION "popup"
+JFUNCTION "popup"
 	alert("Hi there!");
-END AFUNCTION
+END JFUNCTION
 MOUSEACTION "popup()"
     BUTTON
         PRINT "Click to see popup"
@@ -38,9 +38,9 @@ END MOUSEACTION
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				AFUNCTION "popup"
+				JFUNCTION "popup"
 					alert("Hi there!");
-				END AFUNCTION
+				END JFUNCTION
 				MOUSEACTION "popup()"
 					BUTTON
 						PRINT "Click to see popup"
@@ -50,12 +50,12 @@ END MOUSEACTION
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
-					LINK "/reference/AFUNCTION"
-						PRINT "AFUNCTION"
+					LINK "/reference/JFUNCTION"
+						PRINT "JFUNCTION"
 					END LINK
 					PRINT " | "
-					LINK "/reference/ASYNCFUNCTION"
-						PRINT "ASYNCFUNCTION"
+					LINK "/reference/JSYNCFUNCTION"
+						PRINT "JSYNCFUNCTION"
 					END LINK
 					PRINT " | "
 					LINK "/reference/JAVASCRIPT"

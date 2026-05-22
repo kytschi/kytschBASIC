@@ -73,7 +73,7 @@ ADEF turn%=0
 ADEF game_over%=0
 ADEF start%=1
 
-AFUNCTION "computerPlay"
+JFUNCTION "computerPlay"
     if (game_over) {
         return;
     }
@@ -115,9 +115,9 @@ AFUNCTION "computerPlay"
 
         updateTurn();
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "updateTurn"
+JFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
@@ -136,9 +136,9 @@ AFUNCTION "updateTurn"
     } else {
         $("#player-" + turn + " .knocking").hide();
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "updateDeck", "cards", "value", "check=false"
+JFUNCTION "updateDeck", "cards", "value", "check=false"
     let status = false;
     
     if (window["deck_" + cards].length == 1) {
@@ -170,9 +170,9 @@ AFUNCTION "updateDeck", "cards", "value", "check=false"
     }
 
     return status;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "canPlay", "value", "check = false"
+JFUNCTION "canPlay", "value", "check = false"
     if (game_over) {
         return;
     }
@@ -189,24 +189,24 @@ AFUNCTION "canPlay", "value", "check = false"
         default:
             return false;
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onCardClick"
+JFUNCTION "onCardClick"
     selected_card = event.target.parentElement.id;
     card_suit = (selected_card).split("_")[0];
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onCardDblClick"
+JFUNCTION "onCardDblClick"
     selected_card = event.target.parentElement.id;
     card_suit = (selected_card).split("_")[0];
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
     onDeckClick(event, card_suit);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "playerKnocking"
+JFUNCTION "playerKnocking"
     if (game_over) {
         return;
     }
@@ -238,9 +238,9 @@ AFUNCTION "playerKnocking"
     if (!no_update) {
         updateTurn();
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "playCard", "value"
+JFUNCTION "playCard", "value"
     $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
 
     if (turn == 0) {
@@ -282,9 +282,9 @@ AFUNCTION "playCard", "value"
     $("#player-" + turn + "-cards span").html(parseInt($("#player-" + turn + "-cards span").html()) - 1);
 
     selected_card = "";
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onDeckClick", "suit=null"
+JFUNCTION "onDeckClick", "suit=null"
     if (game_over || turn) {
         return;
     }
@@ -314,9 +314,9 @@ AFUNCTION "onDeckClick", "suit=null"
     } else {
         gameInfo(event, "INVALID PLAY", true);
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameInfo", "text", "error = false"
+JFUNCTION "gameInfo", "text", "error = false"
     $.toast({
         heading: (error ? "ERROR" : names[turn]),
         text: text,
@@ -327,9 +327,9 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameOver"
+JFUNCTION "gameOver"
     var score = 0, card_details, value = 0;
 
     if (typeof(kb_cookie.kb_sevens_scores) == "undefined") {
@@ -368,7 +368,7 @@ AFUNCTION "gameOver"
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
 
     $(".btn-new-game").addClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
 JAVASCRIPT
     var played = false;

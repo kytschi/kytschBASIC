@@ -40,7 +40,7 @@ ADEF move$="player"
 ADEF computer_index%=1
 ADIM board%=(null,null,null,null,null,null,null,null,null)
 
-AFUNCTION "cardSelected", "type"
+JFUNCTION "cardSelected", "type"
     if (move != "computer" && type == "computer") {
         gameInfo(event, "Wait your turn", true);
         return;
@@ -53,9 +53,9 @@ AFUNCTION "cardSelected", "type"
     selected = $(event.currentTarget).attr("id");
     $("#" + selected).addClass("highlight");
     move = type;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "getNeighbours", "index"
+JFUNCTION "getNeighbours", "index"
     index = parseInt(index, 10);
 
     var neighbours = [];
@@ -72,9 +72,9 @@ AFUNCTION "getNeighbours", "index"
         }
     });
     return neighbours;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "resolveCombat", "placed_index", "card"
+JFUNCTION "resolveCombat", "placed_index", "card"
     var neighbours = getNeighbours(event, placed_index);
     var won = null;
 
@@ -94,17 +94,17 @@ AFUNCTION "resolveCombat", "placed_index", "card"
     }
 
     return won;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "flipCard", "index"
+JFUNCTION "flipCard", "index"
     var card = board[index];
     card.owner = (card.owner === 'player') ? 'computer' : 'player';
     
     $("#play-area-" + index).removeClass("computer").removeClass("player").addClass(card.owner);
     //console.log(`Card at ${index} flipped to ${card.owner}`);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "dropCard", "drop_to=null"
+JFUNCTION "dropCard", "drop_to=null"
     if (!selected || game_over) {
         if (drop_to === null) {
             gameInfo(event, "Please select a card to play", true);
@@ -162,9 +162,9 @@ AFUNCTION "dropCard", "drop_to=null"
     }
     checkWinCondition(event);
     return win;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "checkWinCondition"
+JFUNCTION "checkWinCondition"
     var isFull = board.every(slot => slot !== null);
 
     if (isFull) {
@@ -185,13 +185,13 @@ AFUNCTION "checkWinCondition"
 
         declareWinner(event, p1Count, p2Count);
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "countRemainingInHand", "player"
+JFUNCTION "countRemainingInHand", "player"
     return $(`.${player}-hand .card`).length;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "declareWinner", "player1_score", "player2_score"
+JFUNCTION "declareWinner", "player1_score", "player2_score"
     let message = "";
     
     if (player1_score > player2_score) {
@@ -206,9 +206,9 @@ AFUNCTION "declareWinner", "player1_score", "player2_score"
 
     game_over = 1;
     gameInfo(event, message);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "computerTurn"
+JFUNCTION "computerTurn"
     if (game_over) {
         return;
     }
@@ -275,9 +275,9 @@ AFUNCTION "computerTurn"
     move = "player";
     $(".player-ui.computer, .player-ui.player").removeClass("highlight");
     $(".player-ui.player").addClass("highlight");
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameInfo", "text", "error = false"
+JFUNCTION "gameInfo", "text", "error = false"
     $.toast({
         heading: (error ? "INVALID" : "INFO"),
         text: text,
@@ -288,7 +288,7 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-END AFUNCTION
+END JFUNCTION
 
 JAVASCRIPT
     var players = ["computer", "player"];

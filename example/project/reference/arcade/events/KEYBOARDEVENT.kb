@@ -30,9 +30,9 @@ LOAD _ROOT + "/project/shared/header"
 					PRINT "Example"
 				END HEADING 3
 				CPRINT
-AFUNCTION "updateText", "text"
+JFUNCTION "updateText", "text"
 $("#keytext").html(text);
-END AFUNCTION
+END JFUNCTION
 PRINT "Press either q or w",,"keytext"
 KEYBOARDEVENT "q || Q"
 	GOTO updateText("q was pressed")
@@ -47,9 +47,9 @@ END KEYBOARDEVENT
 				HEADING 4
 					PRINT "Output"
 				END HEADING 4
-				AFUNCTION "updateText", "text"
+				JFUNCTION "updateText", "text"
 				$("#keytext").html(text);
-				END AFUNCTION
+				END JFUNCTION
 				PRINT "Press either q or w",,"keytext"
 				KEYBOARDEVENT "q || Q"
 					GOTO updateText("q was pressed")
@@ -64,12 +64,12 @@ END KEYBOARDEVENT
 					PRINT "See also"
 				END HEADING 4
 				ROW ,"see-also"
-					LINK "/reference/AFUNCTION"
-						PRINT "AFUNCTION"
+					LINK "/reference/JFUNCTION"
+						PRINT "JFUNCTION"
 					END LINK
 					PRINT " | "
-					LINK "/reference/ASYNCFUNCTION"
-						PRINT "ASYNCFUNCTION"
+					LINK "/reference/JSYNCFUNCTION"
+						PRINT "JSYNCFUNCTION"
 					END LINK
 					PRINT " | "
 					LINK "/reference/JAVASCRIPT"

@@ -75,7 +75,7 @@ ADEF pick_up%=0
 ADEF pick_up_done%=0
 ADEF change_suit%=0
 
-AFUNCTION "computerPlay"
+JFUNCTION "computerPlay"
     if (game_over || turn == 0) {
         return;
     }
@@ -114,9 +114,9 @@ AFUNCTION "computerPlay"
             }
         }
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "updateTurn"
+JFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
@@ -176,18 +176,18 @@ AFUNCTION "updateTurn"
     } else {
         pickup(event);
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "rebuildHand"
+JFUNCTION "rebuildHand"
     $("#hand").html("");
     hands[0].sort();
     hands[0].forEach((card) => {
         let id = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
         $("#hand").append('<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>');
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "canPlay", "check=null"
+JFUNCTION "canPlay", "check=null"
     if (game_over) {
         return;
     }
@@ -220,22 +220,22 @@ AFUNCTION "canPlay", "check=null"
     }    
 
     return false;
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onCardClick"
+JFUNCTION "onCardClick"
     selected_card = event.target.parentElement.id;
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onCardDblClick"
+JFUNCTION "onCardDblClick"
     selected_card = event.target.parentElement.id;
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
     onDeckClick(event);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "playerKnocking"
+JFUNCTION "playerKnocking"
     if (game_over) {
         return;
     }
@@ -252,9 +252,9 @@ AFUNCTION "playerKnocking"
     }
 
     updateTurn();
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "pickup"
+JFUNCTION "pickup"
     if (pick_up && pick_up_done) {
         $("button[name=btnPickup]").removeClass("btn-pickup-on");
         //gameInfo(event, "You had to pick up " + pick_up);
@@ -271,9 +271,9 @@ AFUNCTION "pickup"
         }
         updateTurn(event);
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "playCard"
+JFUNCTION "playCard"
     $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
 
     let card_details = selected_card.split("_");
@@ -348,9 +348,9 @@ AFUNCTION "playCard"
     }
 
     pickup(event);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onDeckClick"
+JFUNCTION "onDeckClick"
     if (game_over || turn) {
         //gameInfo(event, "Wait your turn", true);
         return;
@@ -371,9 +371,9 @@ AFUNCTION "onDeckClick"
     if (change_suit == 0) {
         updateTurn(event);
     }
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION updateDeck
+JFUNCTION updateDeck
     $("#cards").append('<div id="' + selected_card + '" class="card"><img src="/kytschi/imgs/cards/' + selected_card + '.png"></div>');
     deck.push('/kytschi/imgs/cards/' + selected_card + '.png');
 
@@ -397,9 +397,9 @@ AFUNCTION updateDeck
     selected_card = "";
 
     $("#cards .card").removeClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "onChangeSuitClick", "id=null"
+JFUNCTION "onChangeSuitClick", "id=null"
     let suit = "";
     if (id) {
         suit = id;
@@ -426,9 +426,9 @@ AFUNCTION "onChangeSuitClick", "id=null"
     rebuildHand(event);
     change_suit = 0;
     updateTurn(event);
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameInfo", "text", "error = false"
+JFUNCTION "gameInfo", "text", "error = false"
     $.toast({
         heading: (error ? "ERROR" : names[turn]),
         text: text,
@@ -439,9 +439,9 @@ AFUNCTION "gameInfo", "text", "error = false"
         bgColor: (error ? '#f24f32' : '#33a1ea'),
         textColor: 'white'
     });
-END AFUNCTION
+END JFUNCTION
 
-AFUNCTION "gameOver"
+JFUNCTION "gameOver"
     var score = 0, card_details, value = 0;
 
     if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
@@ -482,7 +482,7 @@ AFUNCTION "gameOver"
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
 
     $(".btn-new-game").addClass("card-highlight");
-END AFUNCTION
+END JFUNCTION
 
 JAVASCRIPT
     var played = false;
