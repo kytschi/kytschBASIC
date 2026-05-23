@@ -23,6 +23,8 @@ html, body {
     width: 1200px;
     height: 684px;
     border: 1px solid rgba(69, 74, 80, 1);
+    background-color: rgba(118, 146, 167, 1);
+    background-repeat: no-repeat;
 }
 .dead-world-body .move-grid {
     display: flex;
@@ -112,21 +114,33 @@ html, body {
 #dead-world-location-1 {
     display: flex !important;
 }
-#dead-world-location-1  .dead-world-body {
-    background-color: rgba(118, 146, 167, 1);
+#dead-world-location-1 .dead-world-body {
     background-image: url("/kytschi/dead_world/locations/location1.png");
-    background-repeat: no-repeat;
 }
-#dead-world-location-2  .dead-world-body {
-    background-color: rgba(118, 146, 167, 1);
+#dead-world-location-2 {
+    /*display: flex !important;*/
+}
+#dead-world-location-2 .dead-world-body {
     background-image: url("/kytschi/dead_world/locations/location2.png");
-    background-repeat: no-repeat;
+}
+#dead-world-location-3 {
+    /*display: flex !important;*/
+}
+#dead-world-location-3 .dead-world-body {
+    background-image: url("/kytschi/dead_world/locations/location3.png");
+}
+#dead-world-location-4 {
+    /*display: flex !important;*/
+}
+#dead-world-location-4 .dead-world-body {
+    background-image: url("/kytschi/dead_world/locations/location4.png");
 }
 
 #player {
-    display: none;
+    display: block;
     position: absolute;
     flex-wrap: wrap;
+    left: 0;
 }
 #player-sprite {
     cursor: pointer;
@@ -134,7 +148,7 @@ html, body {
     height: var(--move-size);
     background-color: blue;
 }
-#player-sprite.selected {
+#player.selected #player-sprite {
     background-color: rgb(71, 255, 74);
 }
 

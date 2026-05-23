@@ -13,10 +13,10 @@ HEAD
 END HEAD
 BODY "alert-normal","omega-doom"
 
-ADEF game_data$=""
-ADEF to_speak%=0
-ADEF current_speech%=0
-ADEF current_chat$=""
+JDEF game_data$=""
+JDEF to_speak%=0
+JDEF current_speech%=0
+JDEF current_chat$=""
 
 JFUNCTION "characterSpeechPause"
     current_speech--;

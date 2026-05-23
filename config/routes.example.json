@@ -483,6 +483,14 @@
 	},
 
 	{
+		"url": "/reference/JDEF",
+		"template": "project/reference/core/variables/JDEF.kb"
+	},
+	{
+		"url": "/reference/JDIM",
+		"template": "project/reference/core/variables/JDIM.kb"
+	},
+	{
 		"url": "/reference/JFUNCTION",
 		"template": "project/reference/arcade/function/JFUNCTION.kb"
 	},

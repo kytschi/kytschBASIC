@@ -60,20 +60,20 @@ FOR player%=0 TO no_players%
 	NATSORT(hands$(player%))
 NEXT
 
-ADIM hands$=hands$
-ADIM names$=names$
+JDIM hands$=hands$
+JDIM names$=names$
 
-ADIM deck%=()
-ADIM pool$=cards$
-ADEF selected_card$=""
-ADEF turn%=-1
-ADEF switch_dir%=0
-ADEF game_over%=0
-ADEF start%=1
-ADEF miss_a_turn%=0
-ADEF pick_up%=0
-ADEF pick_up_done%=0
-ADEF change_suit%=0
+JDIM deck%=()
+JDIM pool$=cards$
+JDEF selected_card$=""
+JDEF turn%=-1
+JDEF switch_dir%=0
+JDEF game_over%=0
+JDEF start%=1
+JDEF miss_a_turn%=0
+JDEF pick_up%=0
+JDEF pick_up_done%=0
+JDEF change_suit%=0
 
 JFUNCTION "computerPlay"
     if (game_over || turn == 0) {

@@ -35,13 +35,13 @@ NEXT
 
 SHUFFLE(cards$)
 
-ADIM hand$=cards$
-ADEF amount_deal%=amount_deal%
-ADEF game_over%=0
-ADEF start%=1
-ADEF selected_card$=""
-ADEF prev_card$=""
-ADEF prev_stack$=""
+JDIM hand$=cards$
+JDEF amount_deal%=amount_deal%
+JDEF game_over%=0
+JDEF start%=1
+JDEF selected_card$=""
+JDEF prev_card$=""
+JDEF prev_stack$=""
 
 JFUNCTION "onDeckClick"
     if (game_over) {

@@ -346,9 +346,9 @@ class Variables
 	public function parse(string line, string command, array args, bool in_javascript = false, in_event = false)
 	{
 		switch (command) {
-			case "ADEF":
+			case "JDEF":
 				return this->processDef(line, args, false, true);
-			case "ADIM":
+			case "JDIM":
 				return this->processDim(line, args, true);
 			case "BENCHMARK":
 				return this->processBenchmark();
@@ -627,7 +627,7 @@ class Variables
 	public function processNatSort(args)
 	{
 		let args[0] = this->cleanArg("NATSORT", args[0]);
-		return "<?php natsort(" . args[0] . "); ?>";
+		return "<?php natsort(" . args[0] . "); " . args[0] . " = array_values(" . args[0] . "); ?>";
 	}
 
 	public function processNSort(args)

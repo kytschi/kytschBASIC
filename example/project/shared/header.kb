@@ -313,6 +313,12 @@ HEADER
 		LINK "/reference/JAVASCRIPT#refJAVASCRIPT","Find out about the JAVASCRIPT command","nav-link",,"refJAVASCRIPT"
 			PRINT "JAVASCRIPT"
 		END LINK
+		LINK "/reference/JDEF#refJDEF","Find out about the JDEF command","nav-link",,"refJDEF"
+			PRINT "JDEF"
+		END LINK
+		LINK "/reference/JDIM#refJDIM","Find out about the JDIM command","nav-link",,"refJDIM"
+			PRINT "JDIM"
+		END LINK
 		LINK "/reference/JFUNCTION#refJFUNCTION","Find out about the JFUNCTION command","nav-link",,"refJFUNCTION"
 			PRINT "JFUNCTION"
 		END LINK

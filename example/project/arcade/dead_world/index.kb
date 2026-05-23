@@ -15,6 +15,7 @@ BODY
 JFUNCTION "playerSelected"
     $("#player").addClass("selected");
 END JFUNCTION
+
     SCREEN "dead-world"
         WINDOW "", "dead-world-location-1", "dead-world-location"
             WINDOWBODY "", "dead-world-body"
@@ -1675,28 +1676,32 @@ END JFUNCTION
                     END DIV
                 END DIV
             END WINDOWBODY
+            JAVASCRIPT
+                $("#player")
+            END JAVASCRIPT
         END WINDOW
         WINDOW "", "dead-world-location-2", "dead-world-location"
             WINDOWBODY "", "dead-world-body"
             END WINDOWBODY
         END WINDOW
+        WINDOW "", "dead-world-location-3", "dead-world-location"
+            WINDOWBODY "", "dead-world-body"
+            END WINDOWBODY
+        END WINDOW
+        WINDOW "", "dead-world-location-4", "dead-world-location"
+            WINDOWBODY "", "dead-world-body"
+            END WINDOWBODY
+        END WINDOW
         DIV "", "player"
-            DIV "move"
-            END DIV
-            DIV "move"
-            END DIV
-            DIV "move"
-            END DIV
             SPRITE "player-sprite", "", "playerSelected"
                 
             END SPRITE
-            DIV "move"
-            END DIV
-            DIV "move"
-            END DIV
-            DIV "move"
-            END DIV
         END DIV
     END SCREEN
+
+JAVASCRIPT
+    $("#player")
+END JAVASCRIPT
+
 END BODY
 END

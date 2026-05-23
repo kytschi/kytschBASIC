@@ -59,19 +59,19 @@ FOR player%=0 TO no_players%
 	NATSORT(hands$(player%))
 NEXT
 
-ADIM hands$=hands$
-ADIM names$=names$
+JDIM hands$=hands$
+JDIM names$=names$
 
-ADIM deck_diamonds%=(7)
-ADIM deck_clubs%=(7)
-ADIM deck_spades%=(7)
-ADIM deck_hearts%=(7)
-ADEF selected_card$=""
-ADEF deck_suit$=""
-ADEF card_suit$=""
-ADEF turn%=0
-ADEF game_over%=0
-ADEF start%=1
+JDIM deck_diamonds%=(7)
+JDIM deck_clubs%=(7)
+JDIM deck_spades%=(7)
+JDIM deck_hearts%=(7)
+JDEF selected_card$=""
+JDEF deck_suit$=""
+JDEF card_suit$=""
+JDEF turn%=0
+JDEF game_over%=0
+JDEF start%=1
 
 JFUNCTION "computerPlay"
     if (game_over) {
@@ -379,7 +379,7 @@ JAVASCRIPT
         }
     }
 
-    for (iLoop = 0; iLoop <= hands.length - 1; iLoop++) {
+    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
         turn = iLoop;
         hands[turn].forEach((card, index) => {
             if (!played) {

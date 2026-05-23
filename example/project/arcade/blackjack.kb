@@ -67,13 +67,13 @@ FOR player%=0 TO no_players%
     LET hands$(player%)=hand$
 NEXT
 
-ADIM hands$=hands$
-ADIM names$=names$
+JDIM hands$=hands$
+JDIM names$=names$
 
-ADIM deck$=deck$
-ADEF turn%=0
-ADEF game_over%=0
-ADEF computer_flipped%=0
+JDIM deck$=deck$
+JDEF turn%=0
+JDEF game_over%=0
+JDEF computer_flipped%=0
 
 JFUNCTION "gameInfo", "text", "error = false"
     $.toast({

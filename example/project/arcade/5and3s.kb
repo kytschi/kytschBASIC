@@ -53,13 +53,13 @@ FOR player%=0 TO no_players%
     LET hands$(player%)=hand$
 NEXT
 
-ADEF selected_domino$=""
-ADEF turn%=0
-ADEF game_over%=0
-ADIM hands$=hands$
-ADIM names$=names$
-ADEF played_left$=""
-ADEF played_right$=""
+JDEF selected_domino$=""
+JDEF turn%=0
+JDEF game_over%=0
+JDIM hands$=hands$
+JDIM names$=names$
+JDEF played_left$=""
+JDEF played_right$=""
 
 JFUNCTION "onDominoClick"
     selected_domino = event.target.parentElement.id;

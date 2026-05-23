@@ -33,12 +33,12 @@ FOR index%=0 TO 4
     SHIFT(deck$)
 NEXT
 
-ADEF game_over%=0
-ADEF selected$=""
-ADEF selected_rank$=""
-ADEF move$="player"
-ADEF computer_index%=1
-ADIM board%=(null,null,null,null,null,null,null,null,null)
+JDEF game_over%=0
+JDEF selected$=""
+JDEF selected_rank$=""
+JDEF move$="player"
+JDEF computer_index%=1
+JDIM board%=(null,null,null,null,null,null,null,null,null)
 
 JFUNCTION "cardSelected", "type"
     if (move != "computer" && type == "computer") {
