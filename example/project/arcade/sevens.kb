@@ -33,7 +33,7 @@ ELSEIF no_players%>6 THEN
 END IF
 
 DEF end%=(52/no_players%)-1
-LET no_players%=no_players%-1
+LET no_players%=(no_players%-1)
 
 FOR suit$ IN suits$
     FOR face$ IN faces$

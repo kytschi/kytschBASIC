@@ -39,7 +39,7 @@ IF no_players%>2 THEN
     LET deal%=4
 END IF
 
-LET no_players%=no_players%-1
+LET no_players%=(no_players%-1)
 
 SHUFFLE(dominoes$)
 
