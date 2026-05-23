@@ -11,6 +11,8 @@ HEAD
 END HEAD
 BODY
 
+JDEF start_move%=0
+JDIM player$={position:{left:0, top:0}}
 
 JFUNCTION "playerSelected"
     $("#player").addClass("selected");
@@ -1677,7 +1679,7 @@ END JFUNCTION
                 END DIV
             END WINDOWBODY
             JAVASCRIPT
-                $("#player")
+                
             END JAVASCRIPT
         END WINDOW
         WINDOW "", "dead-world-location-2", "dead-world-location"
@@ -1700,7 +1702,7 @@ END JFUNCTION
     END SCREEN
 
 JAVASCRIPT
-    $("#player")
+    console.log(player);
 END JAVASCRIPT
 
 END BODY

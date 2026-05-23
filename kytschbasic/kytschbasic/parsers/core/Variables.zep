@@ -537,17 +537,24 @@ class Variables
 		var arg, output = "<?php ", splits, is_array = false, cleaned;
 
 		if (!count(args)) {
-			throw new Exception("Invalid DIM");
+			throw new Exception("Invalid " . (javascript ? "DIM" : "JDIM"));
 		}
 
 		preg_match_all("/(?<!\")(?:\$=|%=|#=|&=)/", trim(line), splits);
-
 		if (empty(splits[0][0])) {
-			throw new Exception("Invalid DIM");
+			throw new Exception("Invalid " . (javascript ? "DIM" : "JDIM"));
 		}
 
 		if (javascript) {
 			let output = "<?= '<script type=\"text/javascript\">";
+			preg_match_all("/(?<!\")(?:\$={|%={|#={|&={)/", trim(line), splits);
+			if (!empty(splits[0][0])) {
+				let line = this->cleanArg("JDIM", line);
+				let args = this->equalsSplit(line);
+				let output .= "var " . str_replace(this->types, "", args[0]) . " = " . args[1] . ";";
+			}
+			let output .= "</script>';";
+			return output . " ?>";
 		}
 
 		let args = this->equalsSplit(args[0]);

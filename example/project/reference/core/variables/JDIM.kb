@@ -79,6 +79,24 @@ JAVASCRIPT
 	console.log(test);
 END JAVASCRIPT
 				END CPRINT
+
+				SWRITE "basic h3"
+					PRINT "Objects"
+				END SWRITE
+				SWRITE
+					PRINT "Defining an object."
+					LINE BREAK
+					PRINT "Note: The type does not matter when defining an object.","heading-args"
+				END SWRITE
+				SWRITE "basic"
+					PRINT "Example"
+				END SWRITE
+				CPRINT
+JDIM test$={position:{left:0, top:0}}
+JAVASCRIPT
+	console.log(test);
+END JAVASCRIPT
+				END CPRINT
 				
 				HEADING 4
 					PRINT "See also"
