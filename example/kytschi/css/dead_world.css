@@ -8,8 +8,10 @@ html, body {
     margin: 0;
     overflow: hidden;
     background-color: #000 !important;
+    position: relative;
 }
 #dead-world {
+    position: relative;
     display: flex;
     width: 100%;
     height: 100vh;
@@ -18,6 +20,7 @@ html, body {
     background-color: #000 !important;
 }
 .dead-world-body {
+    position: relative;
     display: inline-block;
     margin: 0 auto;
     width: 1200px;
@@ -27,6 +30,7 @@ html, body {
     background-repeat: no-repeat;
 }
 .dead-world-body .move-grid {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -38,6 +42,7 @@ html, body {
     height: 100%;
 }
 .dead-world-body .move, .dead-world-body .action, .dead-world-body .blocked {
+    
     display: block;
     width: var(--move-size);
     height: var(--move-size);
@@ -136,20 +141,22 @@ html, body {
     background-image: url("/kytschi/dead_world/locations/location4.png");
 }
 
-#player {
+.player {
     display: block;
     position: absolute;
     flex-wrap: wrap;
     left: 0;
 }
-#player-sprite {
+.player-sprite {
     cursor: pointer;
     width: var(--move-size);
     height: var(--move-size);
-    background-color: blue;
+    background-color: rgba(142, 142, 142, 0.7);
+    border: 1px solid rgba(142, 142, 142, 1);
 }
-#player.selected #player-sprite {
-    background-color: rgb(71, 255, 74);
+.player.selected .player-sprite, .move.selected {
+    background-color: rgba(52, 115, 239, 0.5) !important;
+    border: 1px solid rgba(52, 115, 239, 1) !important;
 }
 
 .info-box {

@@ -243,9 +243,8 @@ body {
     }
 }
 
-#blackjack .card-highlight {
-    border: 4px solid #F8B133;
-    background-color: #F8B133;
+#blackjack .card-highlight .card, #blackjack .button-highlight {
+    border: 3px solid #2B8ACA;
 }
 
 #blackjack .card-warn {

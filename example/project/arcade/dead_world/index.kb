@@ -12,10 +12,23 @@ END HEAD
 BODY
 
 JDEF start_move%=0
-JDIM player$={position:{left:0, top:0}}
+JDIM player$={position:{left:0, top:0}, moves: 4}
 
 JFUNCTION "playerSelected"
-    $("#player").addClass("selected");
+    $("#dead-world-location-1 .player").addClass("selected");
+END JFUNCTION
+JFUNCTION "playerStart"
+    var move = $("#dead-world-location-1 .move-grid").children(".move").eq(start_move);
+    $(move).addClass("selected");
+    var parent_pos = $("#dead-world-location-1 .move-grid").offset();
+    pos = $(move).offset();
+    player.left = parseInt(pos.left - parent_pos.left);
+    player.top = parseInt(pos.top - parent_pos.top);
+    playerUpdate();
+END JFUNCTION
+JFUNCTION "playerUpdate"
+    //console.log("Player", player);
+    $("#dead-world-location-1 .player").css({left: player.left, top: player.top});
 END JFUNCTION
 
     SCREEN "dead-world"
@@ -1677,9 +1690,14 @@ END JFUNCTION
                     DIV "blocked"
                     END DIV
                 END DIV
+                DIV "player"
+                    SPRITE , "player-sprite", "playerSelected"
+                        
+                    END SPRITE
+                END DIV
             END WINDOWBODY
             JAVASCRIPT
-                
+                start_move=136;
             END JAVASCRIPT
         END WINDOW
         WINDOW "", "dead-world-location-2", "dead-world-location"
@@ -1694,15 +1712,11 @@ END JFUNCTION
             WINDOWBODY "", "dead-world-body"
             END WINDOWBODY
         END WINDOW
-        DIV "", "player"
-            SPRITE "player-sprite", "", "playerSelected"
-                
-            END SPRITE
-        END DIV
+        
     END SCREEN
 
 JAVASCRIPT
-    console.log(player);
+    playerStart();
 END JAVASCRIPT
 
 END BODY

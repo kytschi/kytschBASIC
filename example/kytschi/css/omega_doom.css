@@ -105,16 +105,21 @@ html, body {
     height: 711px;
     margin: 20px auto 0 auto;
     z-index: 200;
+    overflow: hidden;
 }
 #omega-doom-game .console .overlay {
     position: absolute;
 }
 #omega-doom-game .console .data {
     flex: 1;
-    margin-left: 30px;
+    margin-left: 50px;
+    background-color: var(--black);
+    width: 570px;
+    overflow: hidden;
 }
 #omega-doom-game .console .data img {
-    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
 }
 #omega-doom-game .console .buttons {
     display: flex;
@@ -130,6 +135,10 @@ html, body {
 }
 #omega-doom-game .console .buttons button {
     width: 100%;
+}
+#omega-doom-game .buttons-group {
+    display: flex;
+    gap: 20px;
 }
 
 #omega-doom-game .view-screen {

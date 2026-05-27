@@ -69,67 +69,13 @@ NEXT
 
 JDIM hands$=hands$
 JDIM names$=names$
+JDIM bets%=(0,10,10,10)
 
 JDIM deck$=deck$
 JDEF turn%=0
 JDEF game_over%=0
 JDEF computer_flipped%=0
-
-JFUNCTION "gameInfo", "text", "error = false"
-    $.toast({
-        heading: "Dealer",
-        text: text,
-        icon: 'info',
-        loader: true,
-        position: 'bottom-right',
-        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
-        bgColor: (error ? '#f24f32' : '#33a1ea'),
-        textColor: 'white'
-    });
-END JFUNCTION
-
-JFUNCTION "gameOver"
-    var score = 0, card_details, value = 0;
-
-    if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
-        kb_cookie.kb_switch_scores = {};
-        names.forEach((player, index) => {
-            kb_cookie.kb_switch_scores[index] = {
-                "score": 0,
-                "turn": turn
-            }
-        });
-    }
-
-    game_over = 1;
-    //gameInfo(event, "I WIN!!!");
-    $("#player-" + turn + " .last-card").hide();
-    $("#player-" + turn + " .last-card-col span").hide();
-    $("#player-" + turn + " .winner").show();
-
-    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
-        score = parseInt($("#player-" + iLoop + " .score span").html());
-
-        hands[iLoop].forEach((card, index) => {
-            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
-            value = parseInt(card_details[1]);
-            if (value == 1) {
-                score += 11;
-            } else if (([11, 12, 13]).includes(value)) {
-                score += 10;
-            } else {
-                score += value;
-            }
-        });
-
-        $("#player-" + iLoop + " .score span").html(score);
-        kb_cookie.kb_switch_scores[iLoop].score = score;
-    }
-
-    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
-
-    $(".btn-new-game").addClass("card-highlight");
-END JFUNCTION
+JDEF player_id%=(player_id%-1)
 
 JFUNCTION "checkHand"
     var total = 0;
@@ -139,7 +85,7 @@ JFUNCTION "checkHand"
         if ([11, 12, 13].includes(number)) {
             number = 10;
         } else if (number == 1) {
-            if (total + number < 21) {
+            if ((total + 11) <= 21) {
                 number = 11;
             }
         }
@@ -150,13 +96,20 @@ JFUNCTION "checkHand"
 END JFUNCTION
 
 JFUNCTION "computerOver", "computer_total"
+    var iLoop;
+
     if (computer_total > 21) {
-        gameInfo(event, names[turn] + " bust", true);
-        $(".player .winner").show();
+        gameInfo(event, names[0] + " bust", true);
+        for (iLoop = 1; iLoop < hands.length; iLoop++) {
+            if (!$("#player-" + iLoop + " .bust").is(':visible') && !$("#player-" + iLoop + " .winner").is(':visible')) {
+                $("#player-" + iLoop + " .winner").show();
+                $("#player-" + iLoop + " .score span").html(parseInt($("#player-" + iLoop + " .score span").html()) + parseInt(bets[iLoop]));
+            }
+        }
     } else if (computer_total == 21) {
-        gameInfo(event, names[turn] + " blackjack");
+        gameInfo(event, names[0] + " blackjack");
     } else {
-        for (var iLoop = 1; iLoop < hands.length; iLoop++) {
+        for (iLoop = 1; iLoop < hands.length; iLoop++) {
             var total = 0;
             $("#player-cards-" + iLoop).children(".card").each((index, card) => {
                 var number = $(card).attr("id").split("_");
@@ -164,7 +117,7 @@ JFUNCTION "computerOver", "computer_total"
                 if ([11, 12, 13].includes(number)) {
                     number = 10;
                 } else if (number == 1) {
-                    if (total + number < 21) {
+                    if ((total + 11) <= 21) {
                         number = 11;
                     }
                 }
@@ -172,14 +125,19 @@ JFUNCTION "computerOver", "computer_total"
             });
 
             if (total >= computer_total) {
-                $("#player-" + iLoop + " .winner").show();
-                gameInfo(event, names[iLoop] + " wins");
+                if (!$("#player-" + iLoop + " .bust").is(':visible') && !$("#player-" + iLoop + " .winner").is(':visible')) {
+                    $("#player-" + iLoop + " .winner").show();
+                    $("#player-" + iLoop + " .score span").html(parseInt($("#player-" + iLoop + " .score span").html()) + parseInt(bets[iLoop]));
+                    gameInfo(event, names[iLoop] + " wins");
+                }
             } else {
                 $("#player-0 .winner").show();
                 gameInfo(event, names[0] + " wins");
             }
         }
     }
+
+    gameOver();
 END JFUNCTION
 
 JFUNCTION "computerPlay"
@@ -216,14 +174,40 @@ JFUNCTION "dealCard"
     var total = checkHand();
     if (total > 21) {
         $("#player-" + turn + " .bust").show();
-        gameInfo(event, names[turn] + " bust", true);
         updateTurn();
     } else if (total == 21) {
         $("#player-" + turn + " .winner").show();
+        $("#player-" + turn + " .score span").html(parseInt($("#player-" + turn + " .score span").html()) + parseInt(bets[turn]));
         gameInfo(event, names[turn] + " blackjack");
         updateTurn();
     }
     return total;
+END JFUNCTION
+
+JFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: "Dealer",
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
+    });
+END JFUNCTION
+
+JFUNCTION "gameOver"
+    var card_details, value = 0;
+    game_over = 1;
+
+    for (var iLoop = 1; iLoop < hands.length; iLoop++) {
+        kb_cookie.kb_blackjack[iLoop] = parseInt($("#player-" + iLoop + " .score span").html());
+    }
+
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+
+    $("#btn-new-game").addClass("button-highlight");
 END JFUNCTION
 
 JFUNCTION "updateTurn"
@@ -232,6 +216,7 @@ JFUNCTION "updateTurn"
     }
 
     $("#player-" + turn + " .player-img").removeClass("player-turn");
+    $("#cards .player-cards").removeClass("card-highlight");
 
     turn += 1;
     if (turn >= hands.length) {
@@ -239,6 +224,7 @@ JFUNCTION "updateTurn"
     }
 
     $("#player-" + turn + " .player-img").addClass("player-turn");
+    $("#player-cards-" + turn).addClass("card-highlight");
 
     if (turn == 0) {
         computerPlay();
@@ -254,14 +240,28 @@ JAVASCRIPT
 
     if (typeof(kb_cookie.kb_blackjack) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_blackjack)) {
-            $("#player-" + player + " .score span").html(value.score);
+            if (parseInt(player)) {
+                $("#player-" + player + " .score span").html(value);
+                turn = player;
+                checkHand();
+            }
         }
     } else {
-        $("#player-1 .score span").html("100");
-        turn = 1;
+        kb_cookie.kb_blackjack = [];
+        $("#player-" + player_id + " .score span").html("100");
+        hands.forEach((hand, player) => {
+            if (parseInt(player)) {
+                $("#player-" + player + " .score span").html("100");
+                turn = player;
+                checkHand();
+            }
+        });
     }
 
+    turn = 1;
+
     $("#player-" + turn + " .player-img").addClass("player-turn");
+    $("#player-cards-" + turn).addClass("card-highlight");
 
     $("button[name=btnSetup]").click(() => {
         $("#modalNewGame").show();
@@ -358,7 +358,7 @@ DIV "", "blackjack"
                             END TCELL
                             TCELL ,"winner-col"+player_class$
                                 IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
-                                IMAGE "/kytschi/imgs/cards/knocking.png","bust","bust"
+                                IMAGE "/kytschi/imgs/cards/bust.png","bust","bust"
                             END TCELL
                             TCELL ,"text-center score"
                                 PRINT "0"
@@ -408,14 +408,12 @@ DIV "", "blackjack"
                 DIV "modal-body"
                     FORM "form_setup", "GET", "/arcade/blackjack"
                         DIV "row", "playerSelect"
-                            LET no_players%=(no_players%+1)
-                            DEF game_code$=RNDSTRING(9)
                             DIV "row break"
                                 PRINT "No. players"
                                 SELECTINPUT "np",, "form-input", "Please select an option"
-                                    SELECTINPUTOPT 1,"You vs dealer"
-                                    SELECTINPUTOPT 2,"You and another computer player vs dealer"
-                                    SELECTINPUTOPT 3,"You and two other computer players vs dealer"
+                                    SELECTINPUTOPT 1, "You vs dealer", no_players%
+                                    SELECTINPUTOPT 2, "You and another computer player vs dealer", no_players%
+                                    SELECTINPUTOPT 3, "You and two other computer players vs dealer", no_players%
                                 END SELECTINPUT
                             END DIV
                             DIV "row break"

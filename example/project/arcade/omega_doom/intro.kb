@@ -152,9 +152,28 @@ DIV "progress", "story-intro"
         DIV "game-data"
             DIV "console"
                 DIV "data"
-                    IMAGE "/kytschi/omega_doom/gfx/universe/federation/sol-earth.jpg", "Earth"
+                    IMAGE "/kytschi/omega_doom/gfx/universe/quadrant/alpha.jpg", "Alpha"
                 END DIV
                 DIV "buttons"
+                    DIV "buttons-group"
+                        BUTTON "navigation-left", "yellow"
+                            PRINT "Nav Left"
+                        END BUTTON
+                        BUTTON "navigation-right", "yellow"
+                            PRINT "Nav Right"
+                        END BUTTON
+                    END DIV
+                    DIV "buttons-group"
+                        BUTTON "navigation-zoom-in"
+                            PRINT "Zoom In"
+                        END BUTTON
+                        BUTTON "navigation-zoom-out"
+                            PRINT "Zoom Out"
+                        END BUTTON
+                    END DIV
+                    DIV
+                        PRINT "&nbsp;"
+                    END DIV
                     BUTTON "navigation-impulse", "purple"
                         PRINT "Impulse"
                     END BUTTON
