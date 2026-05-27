@@ -2,7 +2,10 @@
     --card-width: 75px;
     --card-height: 75px;
     --black: #00030e;
+    --blue: #2B8ACA;
+    --red: #D23136;
 }
+
 html, body {
     padding: 0;
     margin: 0;
@@ -60,7 +63,7 @@ body {
 }
 #blackjack #cards {
     margin-top: 270px;
-    width: 700px;
+    width: 900px;
     height: 500px;
     display: flex;
     flex-direction: column;
@@ -68,6 +71,8 @@ body {
 
 #blackjack .player-cards {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #blackjack .player-cards .card {
     position: relative;
@@ -77,7 +82,7 @@ body {
     /*width: var(--card-width);*/
     height: var(--card-height);
     cursor: pointer;
-    padding: 0;
+    padding: 3px;
     margin: 0;
     font-size: 0;
     overflow: hidden;
@@ -86,28 +91,28 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
-    padding-top: 35px;
+    padding-top: 30px;
 }
 #blackjack .players {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 35px;
 }
 #blackjack #players-3 #player-cards-1 {
     flex: 1;
     padding-left: 0px;
     transform: rotate(45deg);
+    padding-bottom: 70px;
 }
 #blackjack #players-3 #player-cards-2 {
     flex: 1;
     justify-content: center;
-    padding-top: 50px;
+    padding-top: 80px;
 }
 #blackjack #players-3 #player-cards-3 {
     flex: 1;
-    justify-content: flex-end;
     transform: rotate(-45deg);
+    padding-bottom: 70px;
 }
 
 #blackjack button {
@@ -116,6 +121,10 @@ body {
     font-weight: bold;
     cursor: pointer;
     background: none;
+}
+#blackjack button img {
+    margin: 0;
+    padding: 0;
 }
 #blackjack #controls {
     margin-top: -80px;
@@ -244,11 +253,25 @@ body {
 }
 
 #blackjack .card-highlight .card, #blackjack .button-highlight {
-    border: 3px solid #2B8ACA;
+    border: 4px solid var(--blue);
+    clip-path: polygon(
+        0px 3px, 3px 3px, 3px 0px,
+        calc(100% - 3px) 0px, calc(100% - 3px) 3px,
+        100% 3px, 100% calc(100% - 3px),
+        calc(100% - 3px) calc(100% - 3px),
+        calc(100% - 3px) 100%, 3px 100%,
+        3px calc(100% - 3px), 0px calc(100% - 3px)
+    );
+    
+    box-shadow: 3px 3px 0 var(--blue);
+    transition: all 0.05s linear;
+}
+#blackjack .button-highlight {
+    background-color: var(--blue);
 }
 
 #blackjack .card-warn {
-    border: 4px solid #D23136;
+    border: 4px solid var(--red);
 }
 
 #blackjack #table img, #blackjack #hand img, #blackjack .placeholder img {
@@ -265,7 +288,7 @@ body {
 }
 
 #blackjack .player-turn {
-    background-color: #2B8ACA;
+    background-color: var(--blue);
 }
 
 #blackjack td.winner-col {

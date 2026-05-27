@@ -77,80 +77,97 @@ JDEF game_over%=0
 JDEF computer_flipped%=0
 JDEF player_id%=(player_id%-1)
 
-JFUNCTION "checkHand"
-    var total = 0;
-    $("#player-cards-" + turn).children(".card").each((index, card) => {
-        var number = $(card).attr("id").split("_");
+JFUNCTION "checkHand", "player", "do_turn=true"
+    var total = 0, number, numbers = [], has_ace = false;
+
+    if (typeof(player) == "undefined") {
+        player = turn;
+    }
+
+    $("#player-cards-" + player).children(".card").each((index, card) => {
+        number = $(card).attr("id").split("_");
         number = parseInt(number[1]);
         if ([11, 12, 13].includes(number)) {
             number = 10;
-        } else if (number == 1) {
-            if ((total + 11) <= 21) {
-                number = 11;
-            }
         }
-        total += number;
+        numbers.push(number);
     });
 
+    numbers.forEach((number) => {
+        total += number;
+        if (number == 1 && (total + 10) <= 21) {
+            has_ace = true;
+            total += 10;
+        } else if (has_ace && total > 21) {
+            total -= 10;
+        }
+    });
+
+    if (player) {
+        //console.log("Player", player, total);
+        if (total > 21) {
+            $("#player-" + player + " .bust").show();
+            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) - parseInt(bets[player]));
+            if (do_turn) {
+                updateTurn();
+            }
+        } else if (total == 21) {
+            $("#player-" + player + " .winner").show();
+            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) + parseInt(bets[player]));
+            gameInfo(event, names[player] + " blackjack");
+            if (do_turn) {
+                updateTurn();
+            }
+        }
+    }
+
     return total;
+END JFUNCTION
+
+JFUNCTION "updateWinnings", "computer_total"
+    for (var player = 1; player < hands.length; player++) {
+        var total = checkHand(event, player);
+        //console.log("Player", player, total);
+        if (total >= computer_total) {
+            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) + parseInt(bets[player]));
+            $("#player-" + player + " .winner").show();
+        } else {
+            if (!$("#player-0 .bust").is(':visible')) {
+                $("#player-0 .winner").show();
+            }
+            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) - parseInt(bets[player]));
+        }
+    }
+    gameOver();
 END JFUNCTION
 
 JFUNCTION "computerOver", "computer_total"
     var iLoop;
 
     if (computer_total > 21) {
+        $("#player-0 .bust").show();
         gameInfo(event, names[0] + " bust", true);
-        for (iLoop = 1; iLoop < hands.length; iLoop++) {
-            if (!$("#player-" + iLoop + " .bust").is(':visible') && !$("#player-" + iLoop + " .winner").is(':visible')) {
-                $("#player-" + iLoop + " .winner").show();
-                $("#player-" + iLoop + " .score span").html(parseInt($("#player-" + iLoop + " .score span").html()) + parseInt(bets[iLoop]));
-            }
-        }
     } else if (computer_total == 21) {
+        $("#player-0 .winner").show();
         gameInfo(event, names[0] + " blackjack");
-    } else {
-        for (iLoop = 1; iLoop < hands.length; iLoop++) {
-            var total = 0;
-            $("#player-cards-" + iLoop).children(".card").each((index, card) => {
-                var number = $(card).attr("id").split("_");
-                number = parseInt(number[1]);
-                if ([11, 12, 13].includes(number)) {
-                    number = 10;
-                } else if (number == 1) {
-                    if ((total + 11) <= 21) {
-                        number = 11;
-                    }
-                }
-                total += number;
-            });
-
-            if (total >= computer_total) {
-                if (!$("#player-" + iLoop + " .bust").is(':visible') && !$("#player-" + iLoop + " .winner").is(':visible')) {
-                    $("#player-" + iLoop + " .winner").show();
-                    $("#player-" + iLoop + " .score span").html(parseInt($("#player-" + iLoop + " .score span").html()) + parseInt(bets[iLoop]));
-                    gameInfo(event, names[iLoop] + " wins");
-                }
-            } else {
-                $("#player-0 .winner").show();
-                gameInfo(event, names[0] + " wins");
-            }
-        }
     }
 
-    gameOver();
+    updateWinnings(event, computer_total);
 END JFUNCTION
 
 JFUNCTION "computerPlay"
     var total = 0;
+
     if (!computer_flipped) {
         $("#player-cards-" + turn).children(".card").each((index, card) => {
             if ($(card).children("img").attr("src") == "/kytschi/imgs/cards/back.png") {
                 $(card).children("img").attr("src", "/kytschi/imgs/cards/" + $(card).attr("id") + ".png");
                 computer_flipped = 1;
-                total = checkHand();
             }
         });
     }
+
+    total = checkHand();
 
     if (total <= 17) {
         setTimeout(() => {
@@ -167,21 +184,16 @@ JFUNCTION "computerPlay"
 END JFUNCTION
 
 JFUNCTION "dealCard"
+    if ($("#player-" + turn + " .winner").is(':visible')) {
+        updateTurn();
+        return;
+    }
+
     var card = deck.pop();
     var id = card.replace("/kytschi/imgs/cards/", "").replace(".png", "");
     $("#player-cards-" + turn).append("<div id=\"" + id + "\" class=\"card\"><img src=\"" + card + "\"></div>");
 
-    var total = checkHand();
-    if (total > 21) {
-        $("#player-" + turn + " .bust").show();
-        updateTurn();
-    } else if (total == 21) {
-        $("#player-" + turn + " .winner").show();
-        $("#player-" + turn + " .score span").html(parseInt($("#player-" + turn + " .score span").html()) + parseInt(bets[turn]));
-        gameInfo(event, names[turn] + " blackjack");
-        updateTurn();
-    }
-    return total;
+    return checkHand();
 END JFUNCTION
 
 JFUNCTION "gameInfo", "text", "error = false"
@@ -210,7 +222,7 @@ JFUNCTION "gameOver"
     $("#btn-new-game").addClass("button-highlight");
 END JFUNCTION
 
-JFUNCTION "updateTurn"
+JFUNCTION "updateTurn", "start=false"
     if (game_over) {
         return;
     }
@@ -223,11 +235,17 @@ JFUNCTION "updateTurn"
         turn = 0;
     }
 
+    if (!turn && start) {
+        turn = 1;
+    }
+
     $("#player-" + turn + " .player-img").addClass("player-turn");
     $("#player-cards-" + turn).addClass("card-highlight");
 
     if (turn == 0) {
         computerPlay();
+    } else {
+        checkHand();
     }
 END JFUNCTION
 
@@ -236,29 +254,32 @@ JFUNCTION "newGame"
 END JFUNCTION
 
 JAVASCRIPT
-    var played = false;
+    var played = false, total;
+    turn = 1;
 
     if (typeof(kb_cookie.kb_blackjack) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_blackjack)) {
             if (parseInt(player)) {
                 $("#player-" + player + " .score span").html(value);
-                turn = player;
-                checkHand();
+                total = checkHand(event, player, false);
+                if (total == 21) {
+                    turn = player + 1;
+                }
             }
         }
     } else {
         kb_cookie.kb_blackjack = [];
-        $("#player-" + player_id + " .score span").html("100");
+        $("#player-" + player_id + " .score span").html("10000");
         hands.forEach((hand, player) => {
             if (parseInt(player)) {
-                $("#player-" + player + " .score span").html("100");
-                turn = player;
-                checkHand();
+                $("#player-" + player + " .score span").html("10000");
+                total = checkHand(event, player, false);
+                if (total == 21) {
+                    turn = player + 1;
+                }
             }
         });
     }
-
-    turn = 1;
 
     $("#player-" + turn + " .player-img").addClass("player-turn");
     $("#player-cards-" + turn).addClass("card-highlight");
@@ -270,6 +291,10 @@ JAVASCRIPT
     $("button[name=btnCloseModal]").click(() => {
         $("#modalNewGame").hide();
     });
+
+    if (turn != 1) {
+        updateTurn(event, true);
+    }
 END JAVASCRIPT
 
 MOUSEEVENT "#btn-hit"
