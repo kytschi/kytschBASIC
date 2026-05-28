@@ -22,7 +22,6 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-top: 50px;
 }
 
 #fiveandthrees #board, #fiveandthrees #player {
@@ -33,9 +32,9 @@ body {
 }
 
 #fiveandthrees #deck {
-    width: 1099px;
-    min-height: 523px;
-    background-image: url("../imgs/cards/table.png");
+    width: 1180px;
+    min-height: 862px;
+    background-image: url("../imgs/dominoes/table.png");
     background-position: center center;
     background-repeat: no-repeat;
     align-items: center;
@@ -47,40 +46,32 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 900px;
-    height: 320px;
+    width: 980px;
 }
+
 #fiveandthrees #deck #controls {
     gap: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 70px;
+    margin-top: 7px;
+    margin-bottom: 10px;
 }
-
-#fiveandthrees #deck #controls .btn-new-game {
+#fiveandthrees #deck #controls button {
     display: block;
-    background-image: url("../imgs/cards/button-new.png");
     background-position: top;
     background-repeat: no-repeat;
     width: 222px;
     height: 78px;
+}
+#fiveandthrees #deck #controls .btn-new-game {
+    background-image: url("../imgs/cards/button-new.png");
 }
 #fiveandthrees #deck #controls .btn-knocking {
-    display: block;
     background-image: url("../imgs/cards/button-knock.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
 }
 #fiveandthrees #deck #controls .btn-submit{
-    display: block;
     background-image: url("../imgs/cards/button-setup.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
 }
 
 #fiveandthrees #scoreboard {
@@ -148,7 +139,9 @@ body {
 
 #fiveandthrees #player {
     flex-direction: column;
-    z-index: 10;    
+    z-index: 10;
+    position: relative;
+    margin-top: -90px;
 }
 
 #fiveandthrees #player #hand {
@@ -208,10 +201,10 @@ body {
 }
 
 @media (min-width: 576px) {
-  #fiveandthrees .modal-dialog {
-    max-width: 500px;
-    margin: 1.75rem auto;
-  }
+    #fiveandthrees .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto;
+    }
 }
 
 @media only screen and (max-width: 810px) {
@@ -224,11 +217,11 @@ body {
     }
 
     #fiveandthrees .card, #fiveandthrees .placeholder {
-        width: calc(var(--card-width) - 20px);
+        width: calc(var(--card-width) - 50px);
     }
 
     #fiveandthrees #deck .card {
-        margin-left: calc((var(--card-width) - 20px) * -1);
+        margin-left: calc((var(--card-width) - 50px) * -1);
     }
 }
 

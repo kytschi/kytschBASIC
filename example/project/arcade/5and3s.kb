@@ -296,6 +296,11 @@ END JAVASCRIPT
 DIV "", "fiveandthrees"
     DIV "", "board"
         DIV "", "deck"
+            DIV , "controls"
+                BUTTON "btnKnock", "btn-knocking",,"knocking","&nbsp;"
+                BUTTON "btnNewGame", "btn-new-game",,"new","&nbsp;"
+                BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
+            END DIV
             DIV ,"dominoes"
                 DIV ,"dominoes-left"
                     SPRITE "drop-zone-left", "placeholder", "onDropZoneClick"
@@ -312,11 +317,7 @@ DIV "", "fiveandthrees"
                     END SPRITE
                 END DIV
             END DIV
-            DIV , "controls"
-                BUTTON "btnKnock", "btn-knocking",,"knocking","&nbsp;"
-                BUTTON "btnNewGame", "btn-new-game",,"new","&nbsp;"
-                BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
-            END DIV
+            
         END DIV
     END DIV
     DIV "", "player"
