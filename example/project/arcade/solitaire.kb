@@ -273,8 +273,9 @@ JFUNCTION "pickCards"
 END JFUNCTION
 
 JFUNCTION "updatePile"
-    if (hand.length - 1 == 0) {
-        $("#pile .card").hide();
+    console.log("hand", hand.length);
+    if (hand.length == 1) {
+        $("#pile .back").hide();
     }
 END JFUNCTION
 
@@ -380,7 +381,7 @@ DIV "", "solitaire"
         DIV "", "deck"
             DIV "", "deck-playarea"
                 DIV , "pile"
-                    SPRITE , "card", "pickCards"
+                    SPRITE , "card back", "pickCards"
                         IMAGE "/kytschi/imgs/cards/back.png"
                     END SPRITE
                 END DIV
