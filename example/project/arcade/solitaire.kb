@@ -273,7 +273,6 @@ JFUNCTION "pickCards"
 END JFUNCTION
 
 JFUNCTION "updatePile"
-    console.log("hand", hand.length);
     if (hand.length == 1) {
         $("#pile .back").hide();
     }
