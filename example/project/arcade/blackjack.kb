@@ -74,10 +74,10 @@ JDIM bets%=(0,10,10,10)
 JDIM deck$=deck$
 JDEF turn%=0
 JDEF game_over%=0
-JDEF computer_flipped%=0
+JDEF dealer_flipped%=0
 JDEF player_id%=(player_id%-1)
 
-JFUNCTION "checkHand", "player", "do_turn=true"
+JFUNCTION "checkHand", "player"
     var total = 0, number, numbers = [], has_ace = false;
 
     if (typeof(player) == "undefined") {
@@ -106,68 +106,53 @@ JFUNCTION "checkHand", "player", "do_turn=true"
     if (player) {
         //console.log("Player", player, total);
         if (total > 21) {
-            $("#player-" + player + " .bust").show();
-            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) - parseInt(bets[player]));
-            if (do_turn) {
-                updateTurn();
+            if (!$("#player-" + player + " .winner").is(':visible')) {
+                $("#player-" + player + " .bust").show();
             }
         } else if (total == 21) {
-            $("#player-" + player + " .winner").show();
-            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) + parseInt(bets[player]));
-            gameInfo(event, names[player] + " blackjack");
-            if (do_turn) {
-                updateTurn();
+            if (!$("#player-" + player + " .bust").is(':visible')) {
+                $("#player-" + player + " .winner").show();
+                gameInfo(event, names[player] + " blackjack");
             }
         }
     }
-
+    
     return total;
 END JFUNCTION
 
-JFUNCTION "updateWinnings", "computer_total"
-    for (var player = 1; player < hands.length; player++) {
-        var total = checkHand(event, player);
-        //console.log("Player", player, total);
-        if (total >= computer_total) {
-            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) + parseInt(bets[player]));
-            $("#player-" + player + " .winner").show();
-        } else {
-            if (!$("#player-0 .bust").is(':visible')) {
-                $("#player-0 .winner").show();
-            }
-            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) - parseInt(bets[player]));
-        }
-    }
-    gameOver();
-END JFUNCTION
-
 JFUNCTION "computerOver", "computer_total"
-    var iLoop;
-
+    //console.log("Computer", turn, computer_total);
     if (computer_total > 21) {
-        $("#player-0 .bust").show();
-        gameInfo(event, names[0] + " bust", true);
+        $("#player-" + turn + " .bust").show();
+        gameInfo(event, names[turn] + " bust", true);
     } else if (computer_total == 21) {
-        $("#player-0 .winner").show();
-        gameInfo(event, names[0] + " blackjack");
+        $("#player-" + turn + " .winner").show();
+        gameInfo(event, names[turn] + " blackjack");
     }
 
-    updateWinnings(event, computer_total);
+    if (turn == 0) {
+        game_over = 1;
+        updateWinnings(event, computer_total);
+    } else {
+        updateTurn();
+    }
 END JFUNCTION
 
 JFUNCTION "computerPlay"
     var total = 0;
 
-    if (!computer_flipped) {
+    if (!dealer_flipped && turn == 0) {
         $("#player-cards-" + turn).children(".card").each((index, card) => {
             if ($(card).children("img").attr("src") == "/kytschi/imgs/cards/back.png") {
                 $(card).children("img").attr("src", "/kytschi/imgs/cards/" + $(card).attr("id") + ".png");
-                computer_flipped = 1;
+                dealer_flipped = 1;
             }
         });
     }
 
-    total = checkHand();
+    total = checkHand(event, turn, false);
+
+    //console.log("Turn", turn, total);
 
     if (total <= 17) {
         setTimeout(() => {
@@ -184,9 +169,15 @@ JFUNCTION "computerPlay"
 END JFUNCTION
 
 JFUNCTION "dealCard"
-    if ($("#player-" + turn + " .winner").is(':visible')) {
-        updateTurn();
+    if (game_over) {
         return;
+    }
+
+    //console.log("Deal", turn);
+
+    if ($("#player-" + turn + " .winner").is(':visible')) {
+        //updateTurn();
+        return checkHand(event, turn, false);
     }
 
     var card = deck.pop();
@@ -222,7 +213,7 @@ JFUNCTION "gameOver"
     $("#btn-new-game").addClass("button-highlight");
 END JFUNCTION
 
-JFUNCTION "updateTurn", "start=false"
+JFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
@@ -235,22 +226,29 @@ JFUNCTION "updateTurn", "start=false"
         turn = 0;
     }
 
-    if (!turn && start) {
-        turn = 1;
-    }
-
     $("#player-" + turn + " .player-img").addClass("player-turn");
     $("#player-cards-" + turn).addClass("card-highlight");
 
-    if (turn == 0) {
+    if (turn != player_id) {
         computerPlay();
     } else {
         checkHand();
     }
 END JFUNCTION
 
-JFUNCTION "newGame"
-    window.location.reload();
+JFUNCTION "updateWinnings"
+    var dealer_total = checkHand(event, 0, false);
+    for (var player = 1; player < hands.length; player++) {
+        var total = checkHand(event, player, false);
+        //console.log("Player", player, total);
+        if ((total >= dealer_total || dealer_total > 21) && !$("#player-" + player + " .bust").is(':visible')) {
+            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) + parseInt(bets[player]));
+            $("#player-" + player + " .winner").show();
+        } else {
+            $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) - parseInt(bets[player]));
+        }
+    }
+    gameOver();
 END JFUNCTION
 
 JAVASCRIPT
@@ -281,6 +279,10 @@ JAVASCRIPT
         });
     }
 
+    if (turn >= hands.length) {
+        turn = 1;
+    }
+
     $("#player-" + turn + " .player-img").addClass("player-turn");
     $("#player-cards-" + turn).addClass("card-highlight");
 
@@ -292,18 +294,26 @@ JAVASCRIPT
         $("#modalNewGame").hide();
     });
 
-    if (turn != 1) {
-        updateTurn(event, true);
+    $("button[name=btnHit]").click(() => {
+        if (turn == player_id) {
+            dealCard();
+        }
+    });
+
+    $("button[name=btnStay]").click(() => {
+        if (turn == player_id) {
+            updateTurn();
+        }
+    });
+
+    $("button[name=btnNewGame]").click(() => {
+        window.location.reload();
+    });
+
+    if (turn != player_id) {
+        computerPlay();
     }
 END JAVASCRIPT
-
-MOUSEEVENT "#btn-hit"
-    GOTO dealCard()
-MOUSEEVENT "#btn-stay"
-    GOTO updateTurn()
-MOUSEEVENT "#btn-new-game"
-    GOTO newGame()
-END MOUSEEVENT
 
 DIV "", "blackjack"
     DIV "", "board"
@@ -395,33 +405,6 @@ DIV "", "blackjack"
             END TABLE
         END DIV
         DIV ,"scoreboard-footer"
-        END DIV
-    END DIV
-    DIV "modal fade", "change-suit"
-        DIV "modal-dialog"
-            DIV "modal-content"
-                DIV "modal-header"
-                    PRINT "Change suit"
-                END DIV
-                DIV "modal-body"
-                    DIV "", "change-suit-select"
-                        DIV "", "change-suit-select-placeholders"
-                            SPRITE "diamonds", "placeholder", "onChangeSuitClick"
-                                IMAGE "/kytschi/imgs/cards/diamonds_placeholder.png"
-                            END SPRITE
-                            SPRITE "hearts", "placeholder", "onChangeSuitClick"
-                                IMAGE "/kytschi/imgs/cards/hearts_placeholder.png"
-                            END SPRITE
-                            SPRITE "spades", "placeholder", "onChangeSuitClick"
-                                IMAGE "/kytschi/imgs/cards/spades_placeholder.png"
-                            END SPRITE
-                            SPRITE "clubs", "placeholder", "onChangeSuitClick"
-                                IMAGE "/kytschi/imgs/cards/clubs_placeholder.png"
-                            END SPRITE
-                        END DIV
-                    END DIV
-                END DIV
-            END DIV
         END DIV
     END DIV
     DIV "modal fade", "modalNewGame"
