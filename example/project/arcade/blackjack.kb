@@ -108,11 +108,17 @@ JFUNCTION "checkHand", "player"
         if (total > 21) {
             if (!$("#player-" + player + " .winner").is(':visible')) {
                 $("#player-" + player + " .bust").show();
+                if (player == player_id) {
+                    updateTurn();
+                }
             }
         } else if (total == 21) {
             if (!$("#player-" + player + " .bust").is(':visible')) {
                 $("#player-" + player + " .winner").show();
                 gameInfo(event, names[player] + " blackjack");
+                if (player == player_id) {
+                    updateTurn();
+                }
             }
         }
     }
