@@ -290,8 +290,13 @@ JAVASCRIPT
         $("#modalNewGame").show();
     });
 
-    $("button[name=btnCloseModal]").click(() => {
+    $("button[name=btnBet]").click(() => {
+        $("#modalBet").show();
+    });
+
+    $("button[name=btnCloseModal], button[name=btnCloseBetModal]").click(() => {
         $("#modalNewGame").hide();
+        $("#modalBet").hide();
     });
 
     $("button[name=btnHit]").click(() => {
@@ -308,6 +313,12 @@ JAVASCRIPT
 
     $("button[name=btnNewGame]").click(() => {
         window.location.reload();
+    });
+
+    $("button[class=btn-bet-chip]").click(() => {
+        bets[player_id] = parseInt($(event.target).val());
+        $("#player-" + player_id + " .player-bet span").html(bets[player_id]);
+        $("#modalBet").hide();
     });
 
     if (turn != player_id) {
@@ -352,8 +363,7 @@ DIV "", "blackjack"
             BUTTON "btnHit", "btn-hit", "btn-hit", "hit", "&nbsp;"
             BUTTON "btnSplit", "btn-split", "btn-split", "split", "&nbsp;"
             BUTTON "btnStay", "btn-stay", "btn-stay", "stay", "&nbsp;"
-            BUTTON "btnNewGame", "btn-new-game", "btn-new-game", "new", "&nbsp;"
-            BUTTON "btnSetup", "btn-submit", "btn-submit", "setup", "&nbsp;"
+            BUTTON "btnBet", "btn-bet", "btn-bet", "bet", "&nbsp;"
         END DIV
     END DIV
     DIV "", "scoreboard"
@@ -366,6 +376,9 @@ DIV "", "blackjack"
                         END TCELL
                         TCELL
                             PRINT "Player"
+                        END TCELL
+                        TCELL ,"bet-col"
+                            PRINT "Bet"
                         END TCELL
                         TCELL ,"winner-col"
                             PRINT "&nbsp;"
@@ -391,6 +404,13 @@ DIV "", "blackjack"
                             TCELL ,"player-name"
                                 PRINT name$
                             END TCELL
+                            TCELL ,"player-bet"
+                                IF iLoop%=0 THEN
+                                    PRINT "&nbsp;"
+                                ELSE
+                                    PRINT "10"
+                                END IF
+                            END TCELL
                             TCELL ,"winner-col"+player_class$
                                 IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                                 IMAGE "/kytschi/imgs/cards/bust.png","bust","bust"
@@ -405,6 +425,30 @@ DIV "", "blackjack"
             END TABLE
         END DIV
         DIV ,"scoreboard-footer"
+        END DIV
+    END DIV
+    DIV "", "game-controls"
+        BUTTON "btnNewGame", "btn-new-game", "btn-new-game", "new", "&nbsp;"
+        BUTTON "btnSetup", "btn-submit", "btn-submit", "setup", "&nbsp;"
+    END DIV
+    DIV "modal fade", "modalBet"
+        DIV "modal-dialog"
+            DIV "modal-content"
+                DIV "modal-body"
+                    DIV "col"
+                        BUTTON "btnBetChip1", "btn-bet-chip", "btn-bet-chip-1", "1", "&nbsp;"
+                        BUTTON "btnBetChip5", "btn-bet-chip", "btn-bet-chip-5", "5", "&nbsp;"
+                        BUTTON "btnBetChip10", "btn-bet-chip", "btn-bet-chip-10", "10", "&nbsp;"
+                        BUTTON "btnBetChip20", "btn-bet-chip", "btn-bet-chip-20", "20", "&nbsp;"
+                        BUTTON "btnBetChip50", "btn-bet-chip", "btn-bet-chip-50", "50", "&nbsp;"
+                        BUTTON "btnBetChip100", "btn-bet-chip", "btn-bet-chip-100", "100", "&nbsp;"
+                    END DIV
+                END DIV
+                DIV "modal-footer"
+                    BUTTON "btnCloseBetModal", "btn-close", "btnCloseBetModal", "close", "Close"
+                    BUTTON "btnModalBet", "btn-bet", "btn-modal-bet", "bet", "&nbsp;"
+                END DIV
+            END DIV
         END DIV
     END DIV
     DIV "modal fade", "modalNewGame"
@@ -424,20 +468,14 @@ DIV "", "blackjack"
                                     SELECTINPUTOPT 3, "You and two other computer players vs dealer", no_players%
                                 END SELECTINPUT
                             END DIV
-                            DIV "row break"
-                            END DIV
-                            DIV "row"
-                                DIV "col-full"
-                                    BUTTONSUBMIT "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single"
-                                        IMAGE "/kytschi/imgs/cards/button-setup-plain.png"
-                                    END BUTTON
-                                END DIV
-                            END DIV
                         END DIV
                     END FORM
                 END DIV
                 DIV "modal-footer"
-                    BUTTON "btnCloseModal", "btn-knocking", "btnCloseModal", "close", "Close"
+                    BUTTON "btnCloseModal", "btn-close", "btnCloseModal", "close", "Close"
+                    BUTTONSUBMIT "btnSinglePlayer", "btn-submit", "btnSinglePlayer", "single"
+                        IMAGE "/kytschi/imgs/cards/button-setup-plain.png"
+                    END BUTTON
                 END DIV
             END DIV
         END DIV

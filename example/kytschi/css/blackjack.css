@@ -31,6 +31,11 @@ body {
     height: auto;
     flex-direction: column;
 }
+#blackjack .col {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
 
 #blackjack #board, #blackjack #player {
     display: flex;
@@ -121,13 +126,18 @@ body {
     font-weight: bold;
     cursor: pointer;
     background: none;
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 222px;
+    height: 78px;
+    display: block;
 }
 #blackjack button img {
     margin: 0;
     padding: 0;
 }
 #blackjack #controls {
-    margin-top: -80px;
+    margin-top: -100px;
     position: relative;
     gap: 10px;
     width: 100%;
@@ -136,45 +146,24 @@ body {
     justify-content: center;
     flex-wrap: wrap;
 }
-#blackjack #controls .btn-new-game {
-    display: block;
+
+#blackjack .btn-new-game {
     background-image: url("../imgs/cards/button-new-plain.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
 }
-#blackjack #controls .btn-hit {
-    display: block;
+#blackjack .btn-hit {
     background-image: url("../imgs/cards/button-hit.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
 }
-#blackjack #controls .btn-split {
-    display: block;
+#blackjack .btn-split {
     background-image: url("../imgs/cards/button-split.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
 }
-#blackjack #controls .btn-stay {
-    display: block;
+#blackjack .btn-stay {
     background-image: url("../imgs/cards/button-stay.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
 }
-#blackjack #controls .btn-submit {
-    display: block;
+#blackjack .btn-submit {
     background-image: url("../imgs/cards/button-setup-plain.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
+}
+#blackjack .btn-bet {
+    background-image: url("../imgs/cards/button-bet.png");
 }
 
 #blackjack #scoreboard {
@@ -183,7 +172,7 @@ body {
     left: 10px;
     display: block;
     width: 327px;
-    z-index: 5;
+    z-index: 50;
     background-image: url("../imgs/cards/scoreboard.png");
     background-repeat: no-repeat;
     color: #fff;
@@ -238,17 +227,27 @@ body {
     background-color: #313654;
     padding: 0;
 }
+#blackjack #game-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 222px;
+    z-index: 60;
+    gap: 10px;
+}
 
 @media (min-width: 576px) {
-  #blackjack .modal-dialog {
-    max-width: 500px;
-    margin: 1.75rem auto;
-  }
+    #blackjack #modalNewGame .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto;
+    }
 }
 
 @media only screen and (max-height: 820px) {
     #blackjack #controls {
-        margin-top: -130px;
+        margin-top: -150px;
     }
 }
 
@@ -352,6 +351,7 @@ body {
   display: none;
   width: 100%;
   height: 100%;
+  padding-top: 30px;
   overflow-x: hidden;
   overflow-y: auto;
   outline: 0;
@@ -417,4 +417,45 @@ body {
   border-top: 1px solid #dee2e6;
   border-bottom-right-radius: calc(.3rem - 1px);
   border-bottom-left-radius: calc(.3rem - 1px);
+}
+
+#blackjack #modalBet .modal-dialog {
+    max-width: calc(100% - 80px);
+}
+#blackjack #modalBet .modal-content {
+    background-color: #000;
+}
+#blackjack #modalBet .modal-footer {
+    background-color: #fff;
+}
+#blackjack .btn-bet-chip {
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 212px;
+    height: 211px;
+    display: block;
+}
+#blackjack #btn-bet-chip-1 {
+    background-image: url("../imgs/cards/1-chip.png");
+}
+#blackjack #btn-bet-chip-5 {
+    background-image: url("../imgs/cards/5-chip.png");
+}
+#blackjack #btn-bet-chip-10 {
+    background-image: url("../imgs/cards/10-chip.png");
+}
+#blackjack #btn-bet-chip-20 {
+    background-image: url("../imgs/cards/20-chip.png");
+}
+#blackjack #btn-bet-chip-50 {
+    background-image: url("../imgs/cards/50-chip.png");
+}
+#blackjack #btn-bet-chip-100 {
+    background-image: url("../imgs/cards/100-chip.png");
 }
