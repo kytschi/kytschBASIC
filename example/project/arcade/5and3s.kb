@@ -189,6 +189,17 @@ JFUNCTION "gameInfo", "text", "error = false"
     });
 END JFUNCTION
 
+JFUNCTION "gameOver"
+    game_over = 1;
+
+    for (var iLoop = 1; iLoop < hands.length; iLoop++) {
+        kb_cookie.kb_blackjack[iLoop] = parseInt($("#player-" + iLoop + " .score span").html());
+    }
+
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+    $("#btn-new-game").addClass("button-highlight");
+END JFUNCTION
+
 JFUNCTION "onDominoClick"
     selected_domino = event.target.parentElement.id;
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
@@ -293,10 +304,39 @@ JFUNCTION "updateDrops", "drop_id", "direction"
     }
 END JFUNCTION
 
+JFUNCTION "updateScore"
+    var score = 0, total = 0, remain;
+
+    score = parseInt($("#player-" + turn + " .score span").html());
+
+    if (played_left[played_left.length-1] == played_right[played_right.length-1]) {
+        total = parseInt(played_left[played_left.length-1]);
+    } else {
+        total = parseInt(played_left[played_left.length-1]) + parseInt(played_right[played_right.length-1]);
+    }
+
+    remain = total % 3;
+    if (remain) {
+        remain = total % 5;
+        if (!remain) {
+            score += total / 5;
+        }
+    } else {
+        score += total / 3;
+    }
+    
+    $("#player-" + turn + " .score span").html(score);
+    kb_cookie.kb_5and3s[turn] = score;
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
+    //console.log("Total", total, "Remain", remain, "Score", score);
+END JFUNCTION
+
 JFUNCTION "updateTurn"
     if (game_over) {
         return;
     }
+
+    updateScore();
 
     $("#player-" + turn + " .player-img").removeClass("player-turn");
     $("#player-" + turn + " .last-card-col span").html(hands[turn].length);
@@ -315,11 +355,13 @@ JFUNCTION "updateTurn"
     }
 END JFUNCTION
 
-JAVASCRIPT    
-    if (typeof(kb_cookie.kb_5and3s_scores) != "undefined") {
-        for (const [player, value] of Object.entries(kb_cookie.kb_5and3s_scores)) {
-            $("#player-" + player + " .score span").html(value.score);
+JAVASCRIPT
+    if (typeof(kb_cookie.kb_5and3s) != "undefined") {
+        for (const [player, value] of Object.entries(kb_cookie.kb_5and3s)) {
+            $("#player-" + player + " .score span").html(value);
         }
+    } else {
+        kb_cookie.kb_5and3s = [];
     }
 
     turn = 0;
