@@ -64,6 +64,7 @@ JDEF drop_left%=0
 JDEF drop_right%=0
 JDEF max_length_left%=5
 JDEF max_length_right%=5
+JDEF knocking%=0
 
 JFUNCTION "calMove", "direction"
     var selected = selected_domino.split("");
@@ -165,9 +166,11 @@ JFUNCTION "computerPlay"
         }
 
         if (!played) {
+            knocking++;
             gameInfo(event, "KNOCKING");
             $("#player-" + turn + " .knocking").show();
         } else {
+            knocking=0;
             selected_domino = "";
             $("#player-" + turn + " .knocking").hide();
         }
@@ -192,12 +195,14 @@ END JFUNCTION
 JFUNCTION "gameOver"
     game_over = 1;
 
-    for (var iLoop = 1; iLoop < hands.length; iLoop++) {
-        kb_cookie.kb_blackjack[iLoop] = parseInt($("#player-" + iLoop + " .score span").html());
+    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
+        kb_cookie.kb_5and3s[iLoop] = parseInt($("#player-" + iLoop + " .score span").html());
     }
 
     Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
-    $("#btn-new-game").addClass("button-highlight");
+
+    gameInfo(event, "Game over");
+    $("button[name=btnNewGame]").addClass("button-highlight");
 END JFUNCTION
 
 JFUNCTION "onDominoClick"
@@ -251,19 +256,11 @@ JFUNCTION "playerKnocking"
         return;
     }
 
-    var valid = true, no_update = false;
-
     $("#player-" + turn + " .knocking").show();
 
-    if (valid == true) {
-        gameInfo(event, "KNOCKING");
-    } else {
-        gameInfo(event, "INVALID KNOCKING!" + (!no_update ? " Miss a turn" : ""), true);
-    }
-
-    if (!no_update) {
-        updateTurn();
-    }
+    knocking++;
+    gameInfo(event, "KNOCKING");
+    updateTurn();
 END JFUNCTION
 
 JFUNCTION "updateDrops", "drop_id", "direction"
@@ -350,10 +347,14 @@ JFUNCTION "updateTurn"
     
     $("#player-" + turn + " .player-img").addClass("player-turn");
 
-    if (turn != 0) {
-        computerPlay();
+    if (!hands[turn].length || knocking > hands.length) {
+        gameOver();
     } else {
-        $("#player-" + turn + " .knocking").hide();
+        if (turn != 0) {
+            computerPlay();
+        } else {
+            $("#player-" + turn + " .knocking").hide();
+        }
     }
 END JFUNCTION
 

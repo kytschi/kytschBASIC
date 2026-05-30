@@ -3,13 +3,17 @@
     --card-width: 58px;
     --card-width-rotate: 116px;
     --card-height-rotate: 58px;
+    --black: #00030e;
+    --blue: #2B8ACA;
+    --orange: #F8B133;
+    --red: #D23136;
 }
 html, body {
     padding: 0;
     margin: 0;
     width: 100%;
     overflow-x: hidden;
-    background-color: #165041;
+    background-color: var(--black);
 }
 body {
     display: flex;
@@ -51,12 +55,19 @@ body {
     margin-top: 7px;
     margin-bottom: 10px;
 }
+#fiveandthrees button {
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+}
 #fiveandthrees #deck #controls button {
     display: block;
-    background-position: top;
+    background-position: top 3px center;
     background-repeat: no-repeat;
-    width: 222px;
-    height: 78px;
+    width: 228px;
+    height: 84px;
 }
 #fiveandthrees #deck #controls .btn-new-game {
     background-image: url("../imgs/cards/button-new.png");
@@ -150,6 +161,7 @@ body {
 }
 #fiveandthrees #player #hand .card {
     position: relative;
+    padding: 3px;
 }
 
 #fiveandthrees #game table {
@@ -187,21 +199,24 @@ body {
     flex: 1;
 }
 
-#fiveandthrees #deck .deck-placeholder {
-    display: block;
-}
-#fiveandthrees #deck .card-lower {
-    margin-top: -40px;
-}
-#fiveandthrees #deck .card-higher {
-    margin-top: 40px;
-}
-#fiveandthrees .card-highlight {
-    border: 4px solid #F8B133;
-    background-color: #F8B133;
+#fiveandthrees .card-highlight, #fiveandthrees .card-warn, #fiveandthrees .button-highlight {
+    background-color: var(--orange);
+
+    clip-path: polygon(
+        0px 3px, 3px 3px, 3px 0px,
+        calc(100% - 3px) 0px, calc(100% - 3px) 3px,
+        100% 3px, 100% calc(100% - 3px),
+        calc(100% - 3px) calc(100% - 3px),
+        calc(100% - 3px) 100%, 3px 100%,
+        3px calc(100% - 3px), 0px calc(100% - 3px)
+    );
+    transition: all 0.05s linear;
 }
 #fiveandthrees .card-warn {
-    border: 4px solid #D23136;
+    background-color: var(--red);
+}
+#fiveandthrees .button-highlight {
+    background-color: var(--blue);
 }
 
 #fiveandthrees #deck img, #fiveandthrees #hand img {
@@ -243,14 +258,6 @@ body {
 #fiveandthrees #game-info p {
     margin: 0;
     padding: 0;
-}
-
-#fiveandthrees button {
-    border: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: pointer;
-    background: none;
 }
 
 #fiveandthrees .no-players {
