@@ -261,15 +261,22 @@ JFUNCTION "updateDrops", "drop_id", "direction"
         if ($(drop_id).children().length >= max_length_right) {
             drop_right++;
         }
-    } else if ($(drop_id).children().length >= max_length_left) {
-        drop_left++;
+        max_length_left--;
+    } else {
+        if ($(drop_id).children().length >= max_length_left) {
+            drop_left++;
+        }
+        max_length_right--;
     }
+
+    $("#dominoes-1").width($("#dominoes-0").width());
+    $("#dominoes-2").width($("#dominoes-0").width());
 
     //console.log(drop_id, "Right", drop_right, "Left", drop_left);
     if (drop_right == 1) {
         $("#dominoes-0 .drop-zone-right").hide();
         $("#dominoes-1 .dominoes-right .placeholder").css("display", "inline-block");
-        max_length_right = 1;
+        max_length_right = 2;
     } else if (drop_right == 2) {
         $("#dominoes-1 .drop-zone-right").hide();
         $("#dominoes-2 .dominoes-right .placeholder").css("display", "inline-block");
@@ -278,7 +285,7 @@ JFUNCTION "updateDrops", "drop_id", "direction"
     if (drop_left == 1) {
         $("#dominoes-0 .drop-zone-left").hide();
         $("#dominoes-1 .dominoes-left .placeholder").css("display", "inline-block");
-        max_length_left = 1;
+        max_length_left = 2;
     } else if (drop_left == 2) {
         $("#dominoes-1 .drop-zone-left").hide();
         $("#dominoes-2 .dominoes-left .placeholder").css("display", "inline-block");
