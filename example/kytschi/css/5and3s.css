@@ -1,6 +1,8 @@
 :root {
+    --card-height: 118px;
     --card-width: 58px;
     --card-width-rotate: 116px;
+    --card-height-rotate: 58px;
 }
 html, body {
     padding: 0;
@@ -9,7 +11,6 @@ html, body {
     overflow-x: hidden;
     background-color: #165041;
 }
-
 body {
     display: flex;
     min-height: 100vh;
@@ -33,7 +34,7 @@ body {
 
 #fiveandthrees #deck {
     width: 1180px;
-    min-height: 862px;
+    min-height: 859px;
     background-image: url("../imgs/dominoes/table.png");
     background-position: center center;
     background-repeat: no-repeat;
@@ -41,12 +42,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-#fiveandthrees #deck #dominoes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 980px;
 }
 
 #fiveandthrees #deck #controls {
@@ -143,7 +138,6 @@ body {
     position: relative;
     margin-top: -90px;
 }
-
 #fiveandthrees #player #hand {
     flex: 1 1 auto;
     display: flex;
@@ -155,13 +149,8 @@ body {
     flex-direction: row;
     padding-top: 10px;
 }
-
 #fiveandthrees #player #hand .card {
     position: relative;
-}
-
-#fiveandthrees #deck .deck-placeholder {
-    display: block;
 }
 
 #fiveandthrees #game table {
@@ -174,6 +163,7 @@ body {
     background: none;
     border: none;
     width: var(--card-width);
+    height: var(--card-height);
     cursor: pointer;
     padding: 0;
     margin: 0;
@@ -188,16 +178,298 @@ body {
     flex: 1;
     flex-direction: column;
 }
-
-#fiveandthrees .row.hide {
+#fiveandthrees .hide {
     display: none;
 }
-
 #fiveandthrees .col-full {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex: 1;
+}
+
+#fiveandthrees #deck .deck-placeholder {
+    display: block;
+}
+#fiveandthrees #deck .card-lower {
+    margin-top: -40px;
+}
+#fiveandthrees #deck .card-higher {
+    margin-top: 40px;
+}
+#fiveandthrees .card-highlight {
+    border: 4px solid #F8B133;
+    background-color: #F8B133;
+}
+#fiveandthrees .card-warn {
+    border: 4px solid #D23136;
+}
+
+#fiveandthrees #deck img, #fiveandthrees #hand img {
+    width: var(--card-width);
+    margin: 0;
+}
+
+#fiveandthrees .text-center {
+    text-align: center;
+}
+#fiveandthrees .text-left {
+    text-align: left;
+}
+
+#fiveandthrees .player-turn {
+    background-color: #2B8ACA;
+}
+
+#fiveandthrees td.last-card-col {
+    width: 50px;
+    text-align: center;
+}
+
+#fiveandthrees .last-card, #fiveandthrees .winner, #fiveandthrees .knocking {
+    display: none;
+    cursor: pointer;
+}
+
+#fiveandthrees #game-info {
+    display: none;
+    background-color: #fff;
+    border: 0;
+    border-top: 2px solid #000;
+    margin-top: 10px;
+    width: calc(100% - 10px);
+    height: 300px;
+    overflow-y: scroll;
+}
+#fiveandthrees #game-info p {
+    margin: 0;
+    padding: 0;
+}
+
+#fiveandthrees button {
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+}
+
+#fiveandthrees .no-players {
+    display: flex;
+    width: calc(100% - 10px);
+}
+#fiveandthrees .no-players span {
+    color: #fff;
+    padding-top: 15px;
+    flex: auto;
+}
+
+#fiveandthrees .dominoes-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1100px;
+}
+#fiveandthrees .dominoes-left,
+#fiveandthrees .dominoes-left .dominoes,
+#fiveandthrees .dominoes-right,
+#fiveandthrees .dominoes-right .dominoes {
+    display: flex;
+    flex-wrap: wrap;
+}
+#fiveandthrees .dominoes-left .dominoes {
+    flex-direction: row-reverse;
+}
+#fiveandthrees .dominoes .rotate-left {
+    width: var(--card-width-rotate);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+#fiveandthrees .dominoes .rotate-left img {
+    margin-left: calc(var(--card-width) / 2) !important;
+}
+#fiveandthrees .dominoes .rotate-right {
+    width: var(--card-width-rotate);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+#fiveandthrees .dominoes .rotate-right img {
+    margin-left: calc(var(--card-width) / 2) !important;
+}
+
+#fiveandthrees #dominoes-1.dominoes-row {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+#fiveandthrees #dominoes-1 .dominoes {
+    flex-direction: column;
+}
+#fiveandthrees #dominoes-1 .dominoes-left,
+#fiveandthrees #dominoes-1 .dominoes-right {
+    flex: 1;
+    flex-direction: column;
+}
+#fiveandthrees #dominoes-1 .dominoes-right {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+#fiveandthrees #dominoes-1 .dominoes-right .dominoes {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+#fiveandthrees #dominoes-1 .dominoes .card {
+    width: var(--card-width);
+}
+#fiveandthrees #dominoes-1 .dominoes-left .rotate-left {
+    -webkit-transform: rotate(0deg) !important;
+    -moz-transform: rotate(0deg) !important;
+    -ms-transform: rotate(0deg) !important;
+    transform: rotate(0deg) !important;
+}
+#fiveandthrees #dominoes-1 .dominoes-right .rotate-left {
+    -webkit-transform: rotate(180deg) !important;
+    -moz-transform: rotate(180deg) !important;
+    -ms-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+}
+#fiveandthrees #dominoes-1 .dominoes-left .rotate-right {
+    -webkit-transform: rotate(180deg) !important;
+    -moz-transform: rotate(180deg) !important;
+    -ms-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+}
+#fiveandthrees #dominoes-1 .dominoes-right .rotate-right {
+    -webkit-transform: rotate(0deg) !important;
+    -moz-transform: rotate(0deg) !important;
+    -ms-transform: rotate(0deg) !important;
+    transform: rotate(0deg) !important;
+}
+#fiveandthrees #dominoes-1 .dominoes img {
+    margin-left: 0 !important;
+}
+
+#fiveandthrees #dominoes-2.dominoes-row {
+    justify-content: flex-start !important;
+}
+#fiveandthrees #dominoes-2.dominoes-row .dominoes {
+    justify-content: flex-end !important;
+    flex-direction: row !important;
+}
+#fiveandthrees #dominoes-2 .dominoes-left {
+    flex: 1;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+#fiveandthrees #dominoes-2 .dominoes-right {
+    flex: 1;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+}
+#fiveandthrees #dominoes-2 .rotate-left {
+    width: var(--card-width-rotate);
+    -webkit-transform: rotate(270deg) !important;
+    -moz-transform: rotate(270deg) !important;
+    -ms-transform: rotate(270deg) !important;
+    transform: rotate(270deg) !important;
+}
+#fiveandthrees #dominoes-2 .rotate-right {
+    width: var(--card-width-rotate);
+    -webkit-transform: rotate(90deg) !important;
+    -moz-transform: rotate(90deg) !important;
+    -ms-transform: rotate(90deg) !important;
+    transform: rotate(90deg) !important;
+}
+
+#fiveandthrees form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#fiveandthrees .form-input {
+    display: inline-block;
+    width: 60px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 35px;
+}
+
+#fiveandthrees .modal .form-input, #fiveandthrees .modal .btn-new-game {
+    width: 100%;
+}
+#fiveandthrees .modal .row.break {
+    margin-bottom: 20px;
+}
+#fiveandthrees .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    background-color: #000;
+}
+#fiveandthrees .modal.fade {
+    transition: opacity .15s linear;
+}
+#fiveandthrees .modal.show .modal-dialog {
+    transform: none;
+}
+#fiveandthrees .modal.fade .modal-dialog {
+    transition: transform .3s ease-out;
+    transform: translate(0,-50px);
+}
+#fiveandthrees .modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 3.75rem auto;
+    pointer-events: none;
+}
+#fiveandthrees .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+#fiveandthrees .modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+}
+#fiveandthrees .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+#fiveandthrees .modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    padding: .75rem;
+    border-top: 1px solid #dee2e6;
+    border-bottom-right-radius: calc(.3rem - 1px);
+    border-bottom-left-radius: calc(.3rem - 1px);
 }
 
 @media (min-width: 576px) {
@@ -233,214 +505,4 @@ body {
     #fiveandthrees #deck .card {
         margin-left: calc((var(--card-width) - 40px) * -1);
     }
-}
-
-#fiveandthrees #deck .card-lower {
-    margin-top: -40px;
-}
-
-#fiveandthrees #deck .card-higher {
-    margin-top: 40px;
-}
-
-#fiveandthrees .card-highlight {
-    border: 4px solid #F8B133;
-    background-color: #F8B133;
-}
-
-#fiveandthrees .card-warn {
-    border: 4px solid #D23136;
-}
-
-#fiveandthrees #deck img, #fiveandthrees #hand img {
-    width: var(--card-width);
-    margin: 0;
-}
-
-#fiveandthrees .text-center {
-    text-align: center;
-}
-
-#fiveandthrees .text-left {
-    text-align: left;
-}
-
-#fiveandthrees .player-turn {
-    background-color: #2B8ACA;
-}
-
-#fiveandthrees td.last-card-col {
-    width: 50px;
-    text-align: center;
-}
-
-#fiveandthrees .last-card, #fiveandthrees .winner, #fiveandthrees .knocking {
-    display: none;
-    cursor: pointer;
-}
-
-#fiveandthrees #game-info {
-    display: none;
-    background-color: #fff;
-    border: 0;
-    border-top: 2px solid #000;
-    margin-top: 10px;
-    width: calc(100% - 10px);
-    height: 300px;
-    overflow-y: scroll;
-}
-
-#fiveandthrees #game-info p {
-    margin: 0;
-    padding: 0;
-}
-
-#fiveandthrees button {
-    border: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: pointer;
-    background: none;
-}
-
-#fiveandthrees .no-players {
-    display: flex;
-    width: calc(100% - 10px);
-}
-
-#fiveandthrees .no-players span {
-    color: #fff;
-    padding-top: 15px;
-    flex: auto;
-}
-
-#fiveandthrees form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#fiveandthrees .form-input {
-    display: inline-block;
-    width: 60px;
-    margin-top: 10px;
-    background-color: #fff;
-    border: 2px solid #000;
-    height: 35px;
-}
-
-#fiveandthrees .modal .form-input, #fiveandthrees .modal .btn-new-game {
-    width: 100%;
-}
-
-#fiveandthrees .modal .row.break {
-    margin-bottom: 20px;
-}
-
-#fiveandthrees .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1060;
-  display: none;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: 0;
-  background-color: #000;
-}
-
-#fiveandthrees .modal.fade {
-  transition: opacity .15s linear;
-}
-
-#fiveandthrees .modal.show .modal-dialog {
-  transform: none;
-}
-#fiveandthrees .modal.fade .modal-dialog {
-  transition: transform .3s ease-out;
-  transform: translate(0,-50px);
-}
-
-#fiveandthrees .modal-dialog {
-  position: relative;
-  width: auto;
-  margin: 3.75rem auto;
-  pointer-events: none;
-}
-
-#fiveandthrees .modal-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: .3rem;
-  outline: 0;
-}
-
-#fiveandthrees .modal-header {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1rem;
-  border-bottom: 1px solid #dee2e6;
-  border-top-left-radius: calc(.3rem - 1px);
-  border-top-right-radius: calc(.3rem - 1px);
-}
-
-#fiveandthrees .modal-body {
-  position: relative;
-  flex: 1 1 auto;
-  padding: 1rem;
-}
-
-#fiveandthrees .modal-footer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: flex-end;
-  padding: .75rem;
-  border-top: 1px solid #dee2e6;
-  border-bottom-right-radius: calc(.3rem - 1px);
-  border-bottom-left-radius: calc(.3rem - 1px);
-}
-
-#fiveandthrees #dominoes-left,
-#fiveandthrees #dominoes-left .dominoes,
-#fiveandthrees #dominoes-right,
-#fiveandthrees #dominoes-right .dominoes {
-    display: flex;
-    flex-wrap: wrap;
-}
-#fiveandthrees #dominoes-left .dominoes {
-    flex-direction: row-reverse;
-}
-
-#fiveandthrees .dominoes .rotate-left {
-    width: var(--card-width-rotate);
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-#fiveandthrees .dominoes .rotate-left img {
-    margin-left: calc(var(--card-width) / 2) !important;
-}
-
-#fiveandthrees .dominoes .rotate-right {
-    width: var(--card-width-rotate);
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-}
-#fiveandthrees .dominoes .rotate-right img {
-    margin-left: calc(var(--card-width) / 2) !important;
 }
