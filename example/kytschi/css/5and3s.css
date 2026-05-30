@@ -134,8 +134,8 @@ body {
 #fiveandthrees #player {
     flex-direction: column;
     z-index: 10;
-    position: relative;
-    margin-top: -90px;
+    position: fixed;
+    bottom: 10px;
 }
 #fiveandthrees #player #hand {
     flex: 1 1 auto;
@@ -263,11 +263,15 @@ body {
     flex: auto;
 }
 
+#fiveandthrees #playarea {
+    display: inline-block;
+    width: auto;
+}
 #fiveandthrees .dominoes-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 100%;
 }
 #fiveandthrees .dominoes-left,
 #fiveandthrees .dominoes-left .dominoes,
@@ -362,7 +366,7 @@ body {
     flex-direction: row-reverse !important;
 }
 #fiveandthrees #dominoes-2 .dominoes-left {
-    flex: 1;
+    /*flex: 1;*/
     align-items: flex-start !important;
     justify-content: flex-start !important;
 }
@@ -431,8 +435,8 @@ body {
 }
 #fiveandthrees .modal-dialog {
     position: relative;
-    width: auto;
-    margin: 3.75rem auto;
+    max-width: 500px;
+    margin: 1.75rem auto;
     pointer-events: none;
 }
 #fiveandthrees .modal-content {
@@ -472,39 +476,4 @@ body {
     border-top: 1px solid #dee2e6;
     border-bottom-right-radius: calc(.3rem - 1px);
     border-bottom-left-radius: calc(.3rem - 1px);
-}
-
-@media (min-width: 576px) {
-    #fiveandthrees .modal-dialog {
-        max-width: 500px;
-        margin: 1.75rem auto;
-    }
-}
-
-@media only screen and (max-width: 810px) {
-    #fiveandthrees #board {
-        height: 260px;
-    }
-
-    #fiveandthrees #player {
-        margin-top: 260px;
-    }
-
-    #fiveandthrees .card, #fiveandthrees .placeholder {
-        width: calc(var(--card-width) - 50px);
-    }
-
-    #fiveandthrees #deck .card {
-        margin-left: calc((var(--card-width) - 50px) * -1);
-    }
-}
-
-@media only screen and (max-height: 315px) {
-    #fiveandthrees .card, #fiveandthrees .placeholder {
-        width: calc(var(--card-width) - 40px);
-    }
-
-    #fiveandthrees #deck .card {
-        margin-left: calc((var(--card-width) - 40px) * -1);
-    }
 }

@@ -280,8 +280,8 @@ JFUNCTION "updateDrops", "drop_id", "direction"
         max_length_right--;
     }
 
-    $("#dominoes-1").width($("#dominoes-0").width());
-    $("#dominoes-2").width($("#dominoes-0").width());
+    //
+    //$("#dominoes-2").width($("#dominoes-0").width());
 
     //console.log(drop_id, "Right", drop_right, "Left", drop_left);
     if (drop_right == 1) {
@@ -289,6 +289,7 @@ JFUNCTION "updateDrops", "drop_id", "direction"
         $("#dominoes-1 .dominoes-right .placeholder").css("display", "inline-block");
         max_length_right = 2;
     } else if (drop_right == 2) {
+        $("#dominoes-1").width($("#dominoes-0").width());
         $("#dominoes-1 .drop-zone-right").hide();
         $("#dominoes-2 .dominoes-right .placeholder").css("display", "inline-block");
         max_length_right = 5;
@@ -298,6 +299,7 @@ JFUNCTION "updateDrops", "drop_id", "direction"
         $("#dominoes-1 .dominoes-left .placeholder").css("display", "inline-block");
         max_length_left = 2;
     } else if (drop_left == 2) {
+        $("#dominoes-1").width($("#dominoes-0").width());
         $("#dominoes-1 .drop-zone-left").hide();
         $("#dominoes-2 .dominoes-left .placeholder").css("display", "inline-block");
         max_length_left = 5;
@@ -402,51 +404,53 @@ DIV "", "fiveandthrees"
                 BUTTON "btnNewGame", "btn-new-game",,"new","&nbsp;"
                 BUTTON "btnSetup", "btn-submit",,"setup","&nbsp;"
             END DIV
-            DIV "dominoes-row", "dominoes-0"
-                DIV "dominoes-left"
-                    SPRITE "", "drop-zone-left placeholder", "onDropZoneClick"
-                        IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
-                    END SPRITE
-                    DIV "dominoes"
+            DIV "", "playarea"
+                DIV "dominoes-row", "dominoes-0"
+                    DIV "dominoes-left"
+                        SPRITE "", "drop-zone-left placeholder", "onDropZoneClick"
+                            IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
+                        END SPRITE
+                        DIV "dominoes"
+                        END DIV
+                    END DIV
+                    DIV "dominoes-right"
+                        DIV "dominoes"
+                        END DIV
+                        SPRITE "", "drop-zone-right placeholder", "onDropZoneClick"
+                            IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "right"
+                        END SPRITE
                     END DIV
                 END DIV
-                DIV "dominoes-right"
-                    DIV "dominoes"
+                DIV "dominoes-row", "dominoes-1"
+                    DIV "dominoes-left"
+                        DIV "dominoes"
+                        END DIV
+                        SPRITE "", "drop-zone-left placeholder hide", "onDropZoneClick"
+                            IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
+                        END SPRITE
                     END DIV
-                    SPRITE "", "drop-zone-right placeholder", "onDropZoneClick"
-                        IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "right"
-                    END SPRITE
-                END DIV
-            END DIV
-            DIV "dominoes-row", "dominoes-1"
-                DIV "dominoes-left"
-                    DIV "dominoes"
+                    DIV "dominoes-right"
+                        DIV "dominoes"
+                        END DIV
+                        SPRITE "", "drop-zone-right placeholder hide", "onDropZoneClick"
+                            IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "right"
+                        END SPRITE
                     END DIV
-                    SPRITE "", "drop-zone-left placeholder hide", "onDropZoneClick"
-                        IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
-                    END SPRITE
                 END DIV
-                DIV "dominoes-right"
-                    DIV "dominoes"
+                DIV "dominoes-row", "dominoes-2"
+                    DIV "dominoes-left"
+                        DIV "dominoes"
+                        END DIV
+                        SPRITE "", "drop-zone-left placeholder hide", "onDropZoneClick"
+                            IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
+                        END SPRITE
                     END DIV
-                    SPRITE "", "drop-zone-right placeholder hide", "onDropZoneClick"
-                        IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "right"
-                    END SPRITE
-                END DIV
-            END DIV
-            DIV "dominoes-row", "dominoes-2"
-                DIV "dominoes-left"
-                    DIV "dominoes"
-                    END DIV
-                    SPRITE "", "drop-zone-left placeholder hide", "onDropZoneClick"
-                        IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "left"
-                    END SPRITE
-                END DIV
-                DIV "dominoes-right"
-                    SPRITE "", "drop-zone-right placeholder hide", "onDropZoneClick"
-                        IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "right"
-                    END SPRITE
-                    DIV "dominoes"
+                    DIV "dominoes-right"
+                        SPRITE "", "drop-zone-right placeholder hide", "onDropZoneClick"
+                            IMAGE "/kytschi/imgs/dominoes/drop.png", "drop", "right"
+                        END SPRITE
+                        DIV "dominoes"
+                        END DIV
                     END DIV
                 END DIV
             END DIV
