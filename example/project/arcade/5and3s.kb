@@ -127,7 +127,7 @@ JFUNCTION "computerPlay"
         return;
     }
 
-    var value = "";
+    var value = "", drop_id = "", rotate = null;
     var played = false;
     var status = false;
     
@@ -140,23 +140,17 @@ JFUNCTION "computerPlay"
             for (var iLoop = 0; iLoop < hands[turn].length; iLoop++) {
                 var domino = hands[turn][iLoop];
                 selected_domino = (domino).replace("/kytschi/imgs/dominoes/", "").replace(".png", "");
-                var rotate = calMove(event, direction);
+                rotate = calMove(event, direction);
                 
                 if (rotate != null) {
                     hands[turn].splice(iLoop, 1);
-                    played = true;
 
-                    var drop_id = "#dominoes-" + drop_left + " .dominoes-" + direction + " .dominoes";
+                    drop_id = "#dominoes-" + drop_left + " .dominoes-" + direction + " .dominoes";
                     if (direction == "right") {
                         drop_id = "#dominoes-" + drop_right + " .dominoes-" + direction + " .dominoes";
                     }
 
-                    $(drop_id)
-                        .append(
-                            "<div id=\"" + selected_domino + "\" class=\"card" + 
-                            (rotate ? " " + rotate : "") + "\"><img src=\"/kytschi/imgs/dominoes/" + selected_domino + ".png\"/></div>"
-                        );
-                    updateDrops(event, drop_id, direction);
+                    played = true;
                     break;
                 }
             }
@@ -170,8 +164,18 @@ JFUNCTION "computerPlay"
             gameInfo(event, "KNOCKING");
             $("#player-" + turn + " .knocking").show();
         } else {
+            $(drop_id)
+                .append(
+                    "<div id=\"" + selected_domino + "\" class=\"card" + 
+                    (rotate ? " " + rotate : "") + 
+                    "\"><img src=\"/kytschi/imgs/dominoes/" + selected_domino + ".png\"/></div>"
+                );
+
+            updateDrops(event, drop_id, direction);
+
             knocking=0;
             selected_domino = "";
+
             $("#player-" + turn + " .knocking").hide();
         }
 
@@ -212,7 +216,7 @@ JFUNCTION "onDominoClick"
 END JFUNCTION
 
 JFUNCTION "onDropZoneClick"
-    if (!selected_domino) {
+    if (!selected_domino || game_over) {
         return;
     }
 
@@ -238,6 +242,7 @@ JFUNCTION "onDropZoneClick"
     updateDrops(event, drop_id, direction);
 
     $("#hand #" + selected_domino).remove();
+
     hands[turn].forEach((card, index) => {
         card = (card).replace("/kytschi/imgs/dominoes/", "").replace(".png", "");
         if (card == selected_domino) {
@@ -340,16 +345,16 @@ JFUNCTION "updateTurn"
     $("#player-" + turn + " .player-img").removeClass("player-turn");
     $("#player-" + turn + " .last-card-col span").html(hands[turn].length);
 
-    turn += 1;
-    if (turn == hands.length) {
-        turn = 0;
-    }
-    
-    $("#player-" + turn + " .player-img").addClass("player-turn");
-
     if (!hands[turn].length || knocking > hands.length) {
         gameOver();
     } else {
+        turn += 1;
+        if (turn == hands.length) {
+            turn = 0;
+        }
+        
+        $("#player-" + turn + " .player-img").addClass("player-turn");
+
         if (turn != 0) {
             computerPlay();
         } else {
