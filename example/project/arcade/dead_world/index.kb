@@ -15,6 +15,7 @@ JDEF start_move%=0
 JDEF move_padding%=2
 JDEF game_location$="dead-world-location-1"
 JDIM player$={id: "player", position:{left:0, top:0}, moves: 4}
+JDEF player_move%=0
 
 JFUNCTION "calMoves", "sprite"
     function getMove(start_left, start_top, end_left, end_top)
@@ -64,20 +65,43 @@ JFUNCTION "calMoves", "sprite"
     var width = player_div.width() + move_padding;
     var height = player_div.height() + move_padding;
 
-    //console.log(width, height);
-    //console.log($(player_div).attr("id"), player_div.offset().top , player_div.offset().left);
-
     var divs = getMove(
         left - (width * player.moves),
         top - (width * player.moves),
         left + (width * player.moves),
         top + (height * player.moves)
     );
+
+    if (divs.length) {
+        player_move = 1;
+        updateMoveClicks();
+    }
 END JFUNCTION
 
 JFUNCTION "playerSelected"
     //$("#dead-world-location-1 .player-position .player").addClass("selected");
-    calMoves();
+    if (player_move) {
+        player_move = 0;
+    } else {
+        calMoves();
+    }
+END JFUNCTION
+
+JFUNCTION "updateMoveClicks"
+    $("#" + game_location + " .move-grid .selected").unbind("click");
+    $("#" + game_location + " .move-grid .selected").bind("click", (event) => {
+        //event.stopPropagation();
+        if ($(event.target).hasClass("player") || $(event.target).hasClass("player-position")) {
+            return;
+        }
+
+        $(event.target).append($("#" + game_location + " .move-grid .player-position .player"));
+        $("#" + game_location + " .move-grid .player-position .player").remove();
+        $("#" + game_location + " .move-grid .player-position").removeClass(["selected", "player-position"]);
+        $(event.target).addClass("player-position");
+        $("#" + game_location + " .move-grid .move").removeClass("selected");
+        player_move = 0;
+    });
 END JFUNCTION
 
 JAVASCRIPT
