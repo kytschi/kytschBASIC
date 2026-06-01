@@ -57,8 +57,8 @@ html, body {
     /*display: none;*/
 }
 .dead-world-body .move {
-    background-color: rgba(111, 209, 104, 0.5);
-    border-color: rgba(111, 209, 104, 1);
+    background-color: rgba(52, 115, 239, 0.7);
+    border-color: rgba(52, 115, 239, 1);
 }
 .dead-world-body .action {
     background-color: rgba(0, 229, 255, 0.5);
@@ -159,7 +159,8 @@ html, body {
     background-color: rgba(142, 142, 142, 0.7) !important;
 }
 .player.selected, .move.selected {
-    background-color: rgba(52, 115, 239, 0.7) !important;
+    background-color: rgba(111, 209, 104, 0.5) !important;
+    border-color: rgba(111, 209, 104, 1) !important;
 }
 
 .info-box {
