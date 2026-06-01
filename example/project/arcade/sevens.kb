@@ -193,6 +193,10 @@ END JFUNCTION
 
 JFUNCTION "onCardClick"
     selected_card = event.target.parentElement.id;
+    if (selected_card == "hand") {
+        selected_card = "";
+        return;
+    }
     card_suit = (selected_card).split("_")[0];
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");
@@ -200,6 +204,10 @@ END JFUNCTION
 
 JFUNCTION "onCardDblClick"
     selected_card = event.target.parentElement.id;
+    if (selected_card == "hand") {
+        selected_card = "";
+        return;
+    }
     card_suit = (selected_card).split("_")[0];
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
     $("#" + selected_card).addClass("card-highlight");

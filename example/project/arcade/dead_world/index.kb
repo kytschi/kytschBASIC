@@ -12,96 +12,154 @@ END HEAD
 BODY
 
 JDEF start_move%=0
-JDIM player$={position:{left:0, top:0}, moves: 4}
+JDEF move_padding%=2
+JDEF game_location$="dead-world-location-1"
+JDIM player$={id: "player", position:{left:0, top:0}, moves: 4}
+
+JFUNCTION "calMoves", "sprite"
+    function getMove(start_left, start_top, end_left, end_top)
+    {
+        var divs = [];
+        //console.log("Player, top:", player_top, ", left:", player_left);
+        $("#" + game_location + " .move-grid .move").filter(function() {
+            var left = parseInt($(this).offset().left);
+            var top = parseInt($(this).offset().top);
+
+            if (
+                (start_left >= left && left <= end_left) && 
+                (start_top >= top && top <= end_top)
+            ) {
+                $(this).addClass("selected");
+                console.log(
+                    "Check #" + $(this).attr("id") + 
+                    ", left:", left,
+                    ", check left:", parseInt($(this).offset().left),
+                    ", top:", top,
+                    ", check top:", parseInt($(this).offset().top)
+                );
+                divs.push(this);
+                return this;
+            }
+        });
+
+        return divs;
+    }
+
+    var grid = [];
+    var player_div = $("#" + game_location + " .move-grid .player-position");
+
+    var left = parseInt(player_div.offset().left);
+    var top = parseInt(player_div.offset().top);
+    var width = player_div.width() + move_padding;
+    var height = player_div.height() + move_padding;
+
+    //console.log(width, height);
+    //console.log($(player_div).attr("id"), player_div.offset().top , player_div.offset().left);
+
+    var divs = getMove(
+        left - (width * player.moves),
+        top - (height * player.moves),
+        left + (width * player.moves),
+        top + (height * player.moves)
+    );
+END JFUNCTION
 
 JFUNCTION "playerSelected"
-    $("#dead-world-location-1 .player").addClass("selected");
+    //$("#dead-world-location-1 .player-position .player").addClass("selected");
+    calMoves();
 END JFUNCTION
-JFUNCTION "playerStart"
-    var move = $("#dead-world-location-1 .move-grid").children(".move").eq(start_move);
-    $(move).addClass("selected");
-    var parent_pos = $("#dead-world-location-1 .move-grid").offset();
-    pos = $(move).offset();
-    player.left = parseInt(pos.left - parent_pos.left);
-    player.top = parseInt(pos.top - parent_pos.top);
-    playerUpdate();
-END JFUNCTION
-JFUNCTION "playerUpdate"
-    //console.log("Player", player);
-    $("#dead-world-location-1 .player").css({left: player.left, top: player.top});
-END JFUNCTION
+
+JAVASCRIPT
+    $("#" + game_location + " .move-grid .cell").click(() => {
+        console.log(
+            "#" + $(event.target).attr("id") +
+            ", top: ", parseInt($(event.target).offset().top),
+            ", left: ", parseInt($(event.target).offset().left)
+        );
+    });
+
+    $("button[name=btnGrid]").click(() => {
+        if ($(".move-grid").css("display") == "flex") {
+            $(".move-grid").css("display", "none");
+        } else {
+            $(".move-grid").css("display", "flex");
+        }
+    });
+END JAVASCRIPT
 
     SCREEN "dead-world"
         WINDOW "", "dead-world-location-1", "dead-world-location"
             WINDOWBODY "", "dead-world-body"
                 DIV "move-grid"
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-barrel search-lorry climb-lorry hide-lorry"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-barrel search-lorry climb-lorry hide-lorry"
                         DIV "barrel"
                             PRINT "ba1"
                         END DIV
@@ -109,12 +167,12 @@ END JFUNCTION
                             PRINT "l1"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-1", "lorry-1"
                             PRINT "l1"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry search-bin hide-lorry hide-bin"
+                    DIV "cell move action search-lorry search-bin hide-lorry hide-bin"
                         DIV "lorry-1"
                             PRINT "l1"
                         END DIV
@@ -122,20 +180,22 @@ END JFUNCTION
                             PRINT "b1"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-1"
                             PRINT "c1"
                         END DIV
                     END DIV
-                    DIV "move action search-car search-truck climb-car climb-truck hide-car hide-truck"
+                    DIV "cell move action search-car search-truck climb-car climb-truck hide-car hide-truck"
                         DIV "truck-1", "truck-1"
                             PRINT "t1"
                         END DIV
@@ -143,60 +203,60 @@ END JFUNCTION
                             PRINT "c1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action climb-structure"
+                    DIV "cell move action climb-structure"
                         DIV "structure-1"
                             PRINT "s1"
                         END DIV
                     END DIV
-                    DIV "move action search-bin"
+                    DIV "cell move action search-bin"
                          DIV "bin-2", "bin-2"
                             PRINT "b2"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-2", "car-2"
                             PRINT "c2"
                         END DIV
                     END DIV
-                    DIV "move action search-car search-truck climb-car climb-truck hide-car hide-truck"
+                    DIV "cell move action search-car search-truck climb-car climb-truck hide-car hide-truck"
                         DIV "car-2"
                             PRINT "c2"
                         END DIV
@@ -204,31 +264,33 @@ END JFUNCTION
                             PRINT "l1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-1 building-1", "window-1"
                             PRINT "w1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action enter-door"
                         DIV "door-1 build-1", "door-1"
                             PRINT "d1"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-2 building-1", "window-2"
                             PRINT "w2"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-1", "car-1"
                             PRINT "c1"
                         END DIV
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-truck climb-truck hide-truck search-lorry climb-lorry hide-lorry"
                         DIV "lorry-2", "lorry-2"
                             PRINT "l2"
                         END DIV
@@ -236,87 +298,87 @@ END JFUNCTION
                             PRINT "t1"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-2"
                             PRINT "l2"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-3"
                             PRINT "c3"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-3", "car-3"
                             PRINT "c3"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-4"
                             PRINT "c4"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-4"
                             PRINT "c4"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action climb-structure hide-structure"
+                    DIV "cell move action climb-structure hide-structure"
                         DIV "structure-1"
                             PRINT "s1"
                         END DIV
                     END DIV
-                    DIV "move action climb-structure hide-structure"
+                    DIV "cell move action climb-structure hide-structure"
                         DIV "structure-1", "structure-1"
                             PRINT "s1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-2"
                             PRINT "c2"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-2"
                             PRINT "c2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-fuel"
+                    DIV "cell move action search-fuel"
                         DIV "fuel-1"
                             PRINT "fu1"
                         END DIV
                     END DIV
-                    DIV "move action search-fuel"
+                    DIV "cell move action search-fuel"
                         DIV "fuel-1", "fuel-1"
                             PRINT "fu1"
                         END DIV
@@ -324,70 +386,75 @@ END JFUNCTION
                             PRINT "fu2"
                         END DIV
                     END DIV
-                    DIV "move action search-fuel"
+                    DIV "cell move action search-fuel"
                         DIV "fuel-2"
                             PRINT "fu2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-2"
                             PRINT "l2"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
+                        DIV "lorry-2", "lorry-2"
+                            PRINT "l2"
+                        END DIV
                     END DIV
-                    DIV "blocked action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-2"
                             PRINT "l2"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-3"
                             PRINT "c3"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-3"
                             PRINT "c3"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-4"
                             PRINT "c4"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-4"
                             PRINT "c4"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-3", "window-3"
                             PRINT "w3"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-2", "door-2"
                             PRINT "d2"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-4", "window-4"
                             PRINT "w4"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-3", "door-3"
                             PRINT "d3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-door enter-window"
+                    DIV "cell move action enter-door enter-window"
                         DIV "door-4", "door-4"
                             PRINT "d4"
                         END DIV
@@ -395,59 +462,61 @@ END JFUNCTION
                             PRINT "w5"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-6", "window-6"
                             PRINT "w6"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-5", "door-5"
                             PRINT "d5"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-7", "window-7"
                             PRINT "w7"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-barrel"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-barrel"
                         DIV "barrel-2", "barrel-2"
                             PRINT "ba2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-5"
                             PRINT "c5"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-5", "car-5"
                             PRINT "c5"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-5"
                             PRINT "c5"
                         END DIV
@@ -455,12 +524,12 @@ END JFUNCTION
                             PRINT "c6"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-6", "car-6"
                             PRINT "c6"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-6"
                             PRINT "c6"
                         END DIV
@@ -468,16 +537,21 @@ END JFUNCTION
                             PRINT "c7"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-7", "car-7"
                             PRINT "c7"
                         END DIV
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump action search-car climb-car hide-car"
+                        DIV "car-7"
+                            PRINT "c7"
+                        END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car search-rubbish climb-car hide-car"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-car search-rubbish climb-car hide-car"
                         DIV "car-8"
                             PRINT "c8"
                         END DIV
@@ -485,217 +559,221 @@ END JFUNCTION
                             PRINT "r1"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-8", "car-8"
                             PRINT "c8"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-8"
                             PRINT "c8"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-rubbish"
+                    DIV "cell move action search-rubbish"
                         DIV "rubbish-2", "rubbish-2"
                             PRINT "r2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-2"
                             PRINT "t2"
                         END DIV
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-2", "truck-2"
                             PRINT "t2"
                         END DIV
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-2"
                             PRINT "t2"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-9"
                             PRINT "c9"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-9", "car-9"
                             PRINT "c9"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-bin"
+                    DIV "cell move action search-bin"
                         DIV "bin-3"
                             PRINT "b3"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-crate"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-crate"
                         DIV "crate-1"
                             PRINT "cr1"
                         END DIV
                     END DIV
-                    DIV "move action search-barrel"
+                    DIV "cell move action search-barrel"
                         DIV "barrel-3", "barrel-3"
                             PRINT "ba3"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
-                    END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-9"
                             PRINT "c9"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-9"
                             PRINT "c9"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-10", "car-10"
                             PRINT "c10"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-10"
                             PRINT "c10"
                         END DIV
                     END DIV
-                    DIV "move action enter-window enter-door"
+                    DIV "cell move action enter-window enter-door"
                         DIV "window-8", "window-8"
                             PRINT "w8"
                         END DIV
@@ -703,7 +781,7 @@ END JFUNCTION
                             PRINT "d6"
                         END DIV
                     END DIV
-                    DIV "move action enter-window enter-door"
+                    DIV "cell move action enter-window enter-door"
                         DIV "window-9", "window-9"
                             PRINT "w9"
                         END DIV
@@ -711,22 +789,22 @@ END JFUNCTION
                             PRINT "d6"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-9"
                             PRINT "w9"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-7 locked", "door-7"
                             PRINT "d7"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-10", "window-10"
                             PRINT "w10"
                         END DIV
                     END DIV
-                    DIV "move action enter-window enter-door"
+                    DIV "cell move action enter-window enter-door"
                         DIV "window-10"
                             PRINT "w10"
                         END DIV
@@ -734,90 +812,100 @@ END JFUNCTION
                             PRINT "d8"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-10"
                             PRINT "w10"
                         END DIV
                     END DIV
-                    DIV "move action search-bin"
+                    DIV "cell move action search-bin"
                         DIV "bin-4"
                             PRINT "b4"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
+                        DIV "lorry-3"
+                            PRINT "l3"
+                        END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move action search-barrel"
+                        DIV "barrel-3"
+                            PRINT "ba3"
+                        END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-crate"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-crate"
                         DIV "crate-2"
                             PRINT "cr2"
                         END DIV
                     END DIV
-                    DIV "move action search-box"
+                    DIV "cell move action search-box"
                         DIV "box-1"
                             PRINT "bx1"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move player-position"
+                        SPRITE , "player", "playerSelected"
+                        END SPRITE
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
-                    END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-10"
                             PRINT "c10"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-6"
                             PRINT "d6"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-barrel"
+                    DIV "cell move action search-barrel"
                         DIV "barrel-4", "barrel-4"
                             PRINT "ba4"
                         END DIV
@@ -825,47 +913,61 @@ END JFUNCTION
                             PRINT "ba5"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-7", "door-7"
                             PRINT "d7"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-bin"
+                    DIV "cell move action search-bin"
                         DIV "bin-4", "bin-4"
                             PRINT "b4"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-3"
                             PRINT "l3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
+                        DIV "lorry-3"
+                            PRINT "l3"
+                        END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell action enter-door"
+                        DIV "window-17 smash"
+                            PRINT "w17"
+                        END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell action enter-door"
+                        DIV "window-17 smash", "window-17"
+                            PRINT "w17"
+                        END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell action enter-door"
+                        DIV "window-17 smash"
+                            PRINT "w17"
+                        END DIV
+                    END DIV
+                    DIV "cell move action enter-door"
                         DIV "door-9 locked", "door-9"
                             PRINT "d9"
                         END DIV
                     END DIV
-                    DIV "move action search-vending-machine"
+                    DIV "cell move action search-vending-machine"
                         DIV "vm-1", "vm-1"
                             PRINT "v1"
                         END DIV
                     END DIV
-                    DIV "move action search-vending-machine"
+                    DIV "cell move action search-vending-machine"
                         DIV "vm-2", "vm-2"
                             PRINT "v2"
                         END DIV
@@ -873,14 +975,14 @@ END JFUNCTION
                             PRINT "v3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-box"
+                    DIV "cell move action search-box"
                         DIV "box-1", "box-1"
                             PRINT "bx1"
                         END DIV
                     END DIV
-                    DIV "move enter-door search-lorry climb-lorry hide-lorry"
+                    DIV "cell move enter-door search-lorry climb-lorry hide-lorry"
                         DIV "door-10", "door-10"
                             PRINT "d10"
                         END DIV
@@ -888,7 +990,7 @@ END JFUNCTION
                             PRINT "l4"
                         END DIV
                     END DIV
-                    DIV "move enter-door search-lorry climb-lorry hide-lorry"
+                    DIV "cell move enter-door search-lorry climb-lorry hide-lorry"
                         DIV "door-10"
                             PRINT "d10"
                         END DIV
@@ -896,38 +998,44 @@ END JFUNCTION
                             PRINT "l4"
                         END DIV
                     END DIV
-                    DIV "move enter-door"
+                    DIV "cell move enter-door"
+                        DIV "door-10"
+                            PRINT "d10"
+                        END DIV
+                    END DIV
+                    DIV "cell move enter-door"
                         DIV "door-11 locked", "door-11"
                             PRINT "d11"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
-                    END DIV
-                    DIV "move action search-barrel"
+                    DIV "cell move action search-barrel"
                         DIV "barrel-6", "barrel-6"
                             PRINT "ba6"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-11"
                             PRINT "c11"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move action search-car climb-car hide-car"
+                        DIV "car-11"
+                            PRINT "c11"
+                        END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action sit-bench collect-water drink-water"
+                    DIV "cell move action sit-bench collect-water drink-water"
                         DIV "bench-1", "bench-1"
                             PRINT "bn1"
                         END DIV
@@ -935,7 +1043,7 @@ END JFUNCTION
                             PRINT "wa1"
                         END DIV
                     END DIV
-                    DIV "move action sit-bench collect-water drink-water"
+                    DIV "cell move action sit-bench collect-water drink-water"
                         DIV "bench-1"
                             PRINT "bn1"
                         END DIV
@@ -946,7 +1054,7 @@ END JFUNCTION
                             PRINT "wa1"
                         END DIV
                     END DIV
-                    DIV "move action sit-bench collect-water drink-water"
+                    DIV "cell move action sit-bench collect-water drink-water"
                         DIV "bench-2", "bench-2"
                             PRINT "bn2"
                         END DIV
@@ -954,73 +1062,66 @@ END JFUNCTION
                             PRINT "wa1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-door"
-                        DIV "door-9"
-                            PRINT "d9"
-                        END DIV
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-12"
                             PRINT "c12"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-12", "car-12"
                             PRINT "c12"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-12"
                             PRINT "c12"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-14"
                             PRINT "l4"
                         END DIV
                     END DIV
-                    DIV "move action search-lorry climb-lorry hide-lorry"
+                    DIV "cell move action search-lorry climb-lorry hide-lorry"
                         DIV "lorry-14"
                             PRINT "l4"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
-                        DIV "car-16"
-                            PRINT "c16"
-                        END DIV
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
-                        DIV "car-16"
-                            PRINT "c16"
-                        END DIV
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
-                    END DIV
-                    DIV "move action barricaded enter-door search-car climb-car hide-car"
+                    DIV "cell move action barricaded enter-door search-car climb-car hide-car"
                         DIV "car-13"
                             PRINT "c13"
                         END DIV
@@ -1028,120 +1129,124 @@ END JFUNCTION
                             PRINT "d12"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-13"
                             PRINT "c13"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-11", "car-11"
                             PRINT "c11"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move action search-car climb-car hide-car"
+                        DIV "car-11"
+                            PRINT "c11"
+                        END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action collect-water drink-water"
+                    DIV "cell move action collect-water drink-water"
                         DIV "water-1"
                             PRINT "wa1"
                         END DIV
                     END DIV
-                    DIV "move action collect-water drink-water"
+                    DIV "cell move action collect-water drink-water"
                         DIV "water-1", "water-1"
                             PRINT "wa1"
                         END DIV
                     END DIV
-                    DIV "move action collect-water drink-water"
+                    DIV "cell move action collect-water drink-water"
                         DIV "water-1"
                             PRINT "wa1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
-                        DIV "car-14"
-                            PRINT "c14"
-                        END DIV
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-14", "car-14"
                             PRINT "c14"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-14"
                             PRINT "c14"
                         END DIV
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-15", "car-15"
                             PRINT "c15"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-15"
                             PRINT "c15"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-16"
                             PRINT "c16"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-16", "car-16"
                             PRINT "c16"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-16"
                             PRINT "c16"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-13"
                             PRINT "c13"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-13"
                             PRINT "c13"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action sit-bench search-truck climb-truck hide-truck"
+                    DIV "cell move action sit-bench search-truck climb-truck hide-truck"
                         DIV "bench-3"
                             PRINT "bn3"
                         END DIV
@@ -1149,132 +1254,134 @@ END JFUNCTION
                             PRINT "t3"
                         END DIV
                     END DIV
-                    DIV "move action sit-bench"
+                    DIV "cell move action sit-bench"
                         DIV "bench-3", "bench-3"
                             PRINT "bn3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action sit-bench"
+                    DIV "cell move action sit-bench"
                         DIV "bench-4", "bench-4"
                             PRINT "bn4"
                         END DIV
                     END DIV
-                    DIV "move action sit-bench"
+                    DIV "cell move action sit-bench"
                         DIV "bench-4"
                             PRINT "bn4"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-17"
                             PRINT "c17"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-17"
                             PRINT "c17"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-3"
                             PRINT "t3"
                         END DIV
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-3"
                             PRINT "t3"
                         END DIV
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-3", "truck-3"
                             PRINT "t3"
                         END DIV
                     END DIV
-                    DIV "move action search-truck climb-truck hide-truck"
+                    DIV "cell move action search-truck climb-truck hide-truck"
                         DIV "truck-3"
                             PRINT "t3"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-18"
                             PRINT "c18"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-18", "car-18"
                             PRINT "c18"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-18"
                             PRINT "c18"
                         END DIV
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-19"
                             PRINT "c19"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-19", "car-19"
                             PRINT "c19"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-20"
                             PRINT "c20"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car search box"
+                    DIV "cell move action search-car climb-car hide-car search box"
                         DIV "car-20", "car-20"
                             PRINT "c20"
                         END DIV
@@ -1282,247 +1389,244 @@ END JFUNCTION
                             PRINT "bx2"
                         END DIV
                     END DIV
-                    DIV "move action search box"
+                    DIV "cell move action search box"
                         DIV "box-2", "box-2"
                             PRINT "bx2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-bus climb-bus hide-bus"
+                    DIV "cell move action search-bus climb-bus hide-bus"
                         DIV "bus-1"
                             PRINT "bs1"
                         END DIV
                     END DIV
-                    DIV "move action search-bus climb-bus hide-bus"
+                    DIV "cell move action search-bus climb-bus hide-bus"
                         DIV "bus-1", "bus-1"
                             PRINT "bs1"
                         END DIV
                     END DIV
-                    DIV "move action search-bus climb-bus hide-bus"
+                    DIV "cell move action search-bus climb-bus hide-bus"
                         DIV "bus-1"
                             PRINT "bs1"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-21"
                             PRINT "c21"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-21", "car-21"
                             PRINT "c21"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
-                        DIV "car-21"
-                            PRINT "c21"
-                        END DIV
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
-                        DIV "car-17"
-                            PRINT "c17"
-                        END DIV
-                    END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-17", "car-17"
                             PRINT "c17"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-22", "car-22"
                             PRINT "c22"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
-                        DIV "car-22", "car-22"
-                            PRINT "c22"
-                        END DIV
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-23", "car-23"
                             PRINT "c23"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-23"
                             PRINT "c23"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action climb-structure hide-structure"
+                    DIV "cell move action climb-structure hide-structure"
                         DIV "structure-2"
                             PRINT "s2"
                         END DIV
                     END DIV
-                    DIV "move action climb-structure hide-structure"
+                    DIV "cell move action climb-structure hide-structure"
                         DIV "structure-2"
                             PRINT "s2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-box"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-box"
                         DIV "box-3"
                             PRINT "bx3"
                         END DIV
                     END DIV
-                    DIV "move action search-box"
+                    DIV "cell move action search-box"
                         DIV "box-3", "box-3"
                             PRINT "bx3"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-24"
                             PRINT "c24"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-24"
                             PRINT "c24"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-25"
                             PRINT "c25"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-25"
                             PRINT "c25"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                         DIV "fence-2"
                             PRINT "fe2"
                         END DIV
                     END DIV
-                    DIV "move jump"
+                    DIV "cell move jump"
                         DIV "fence-3"
                             PRINT "fe3"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action climb-structure hide-structure"
+                    DIV "cell move action climb-structure hide-structure"
                         DIV "structure-2"
                             PRINT "s2"
                         END DIV
                     END DIV
-                    DIV "move action climb-structure hide-structure"
+                    DIV "cell move action climb-structure hide-structure"
                         DIV "structure-2", "structure-2"
                             PRINT "s2"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-barrel"
+                    DIV "cell blocked"
+                    END DIV
+                    DIV "cell move action search-barrel"
                         DIV "barrel-7", "barrel-7"
                             PRINT "ba7"
                         END DIV
                     END DIV
-                    DIV "move action search-box"
+                    DIV "cell move action search-box"
                         DIV "box-4", "box-4"
                             PRINT "bx4"
                         END DIV
@@ -1530,105 +1634,113 @@ END JFUNCTION
                             PRINT "bx5"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-24"
                             PRINT "c24"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-24", "car-24"
                             PRINT "c24"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-25"
                             PRINT "c25"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-25", "car-25"
                             PRINT "c25"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action enter-window"
                         DIV "window-11"
                             PRINT "w11"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
                         DIV "door-14 locked"
                             PRINT "d14"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
-                    END DIV
-                    DIV "move action enter-door enter-window"
-                        DIV "door-15 locked"
+                    DIV "cell move action enter-door enter-window"
+                        DIV "door-15 locked", "door-15"
                             PRINT "d15"
                         END DIV
                         DIV "window-12 barricaded", "window-12"
                             PRINT "w12"
                         END DIV
                     END DIV
-                    DIV "move action enter-door"
+                    DIV "cell move action enter-door"
+                        DIV "door-15"
+                            PRINT "d15"
+                        END DIV
+                    END DIV
+                    DIV "cell move action enter-door"
+                        DIV "door-16", "door-16"
+                            PRINT "d16"
+                        END DIV
+                    END DIV
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move"
+                    END DIV
+                    DIV "cell move action enter-door enter-window"
                         DIV "door-16"
-                            PRINT "d16"
-                        END DIV
-                    END DIV
-                    DIV "move action enter-door"
-                        DIV "door-16", "door-16"
-                            PRINT "d16"
-                        END DIV
-                    END DIV
-                    DIV "move"
-                    END DIV
-                    DIV "move"
-                    END DIV
-                    DIV "move action enter-door enter-window"
-                        DIV "door-16", "door-16"
                             PRINT "d16"
                         END DIV
                         DIV "window-13 smash", "window-13"
                             PRINT "w13"
                         END DIV
                     END DIV
-                    DIV "move action enter-door enter-window"
+                    DIV "cell move action enter-door enter-window"
+                        DIV "door-16", "door-16"
+                            PRINT "d16"
+                        END DIV
+                        DIV "window-14 smash"
+                            PRINT "w14"
+                        END DIV
+                    END DIV
+                    DIV "cell move action enter-door enter-window"
                         DIV "door-16"
                             PRINT "d16"
                         END DIV
@@ -1636,20 +1748,20 @@ END JFUNCTION
                             PRINT "w14"
                         END DIV
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-15", "window-15"
                             PRINT "w15"
                         END DIV
                     END DIV
-                    DIV "move action enter-door enter-window"
+                    DIV "cell move action enter-door enter-window"
                         DIV "door-17"
                             PRINT "d17"
                         END DIV
@@ -1660,40 +1772,35 @@ END JFUNCTION
                             PRINT "w16"
                         END DIV
                     END DIV
-                    DIV "move action enter-window"
+                    DIV "cell move action enter-window"
                         DIV "window-16", "window-16"
                             PRINT "w16"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-26", "car-26"
                             PRINT "c26"
                         END DIV
                     END DIV
-                    DIV "move action search-car climb-car hide-car"
+                    DIV "cell move action search-car climb-car hide-car"
                         DIV "car-26"
                             PRINT "c26"
                         END DIV
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "move"
+                    DIV "cell move"
                     END DIV
-                    DIV "blocked"
+                    DIV "cell blocked"
                     END DIV
-                END DIV
-                DIV "player"
-                    SPRITE , "player-sprite", "playerSelected"
-                        
-                    END SPRITE
                 END DIV
             END WINDOWBODY
             JAVASCRIPT
@@ -1712,12 +1819,9 @@ END JFUNCTION
             WINDOWBODY "", "dead-world-body"
             END WINDOWBODY
         END WINDOW
-        
+        DIV "", "controls"
+            BUTTON "btnGrid", "btn-grid", "btn-grid", "1", "GRID"
+        END DIV
     END SCREEN
-
-JAVASCRIPT
-    playerStart();
-END JAVASCRIPT
-
 END BODY
 END
