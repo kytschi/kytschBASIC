@@ -76,6 +76,7 @@ JDEF turn%=0
 JDEF game_over%=0
 JDEF dealer_flipped%=0
 JDEF player_id%=(player_id%-1)
+JDEF computer_playing%=false
 
 JFUNCTION "checkHand", "player"
     var total = 0, number, numbers = [], has_ace = false;
@@ -95,9 +96,11 @@ JFUNCTION "checkHand", "player"
 
     numbers.forEach((number) => {
         total += number;
-        if (number == 1 && (total + 10) <= 21) {
+        if (number == 1) {
             has_ace = true;
-            total += 10;
+            if ((total + 10) <= 21) {
+                total += 10;
+            }
         } else if (has_ace && total > 21) {
             total -= 10;
         }
@@ -140,7 +143,7 @@ JFUNCTION "computerOver", "computer_total"
         game_over = 1;
         updateWinnings(event, computer_total);
     } else {
-        updateTurn();
+        
     }
 END JFUNCTION
 
@@ -161,16 +164,22 @@ JFUNCTION "computerPlay"
     //console.log("Turn", turn, total);
 
     if (total <= 17) {
-        setTimeout(() => {
-            total = dealCard();
-            if (total <= 17) {
-                computerPlay();
-            } else {
-                computerOver(event, total);
-            }
-        }, 1000);
+        if (!computer_playing) {
+            computer_playing = true;
+            setTimeout(() => {
+                computer_playing = false;
+                total = dealCard();
+                if (total <= 17) {
+                    computerPlay();
+                } else {
+                    computerOver(event, total);
+                    updateTurn();
+                }
+            }, 1000);
+        }
     } else {
         computerOver(event, total);
+        updateTurn();
     }
 END JFUNCTION
 
@@ -226,12 +235,21 @@ JFUNCTION "startGame"
             if ($(card).children("img").attr("src") == "/kytschi/imgs/cards/back.png") {
                 $(card).children("img").attr("src", "/kytschi/imgs/cards/" + $(card).attr("id") + ".png");
             }
+            total = checkHand(event, iLoop, false);
+            if (total == 21) {
+                turn = iLoop + 1;
+            }
         });
+    }
+    if (turn >= hands.length) {
+        turn = 1;
     }
     $("#controls-start").hide();
     $("#controls").css("display", "flex");
     if (turn != player_id) {
         computerPlay();
+    } else {
+        updateTurn();
     }
 END JFUNCTION
 
@@ -282,28 +300,11 @@ JAVASCRIPT
         for (const [player, value] of Object.entries(kb_cookie.kb_blackjack)) {
             if (parseInt(player)) {
                 $("#player-" + player + " .score span").html(value);
-                total = checkHand(event, player, false);
-                if (total == 21) {
-                    turn = player + 1;
-                }
             }
         }
     } else {
         kb_cookie.kb_blackjack = [];
         $("#player-" + player_id + " .score span").html("10000");
-        hands.forEach((hand, player) => {
-            if (parseInt(player)) {
-                $("#player-" + player + " .score span").html("10000");
-                total = checkHand(event, player, false);
-                if (total == 21) {
-                    turn = player + 1;
-                }
-            }
-        });
-    }
-
-    if (turn >= hands.length) {
-        turn = 1;
     }
 
     $("#player-" + turn + " .player-img").addClass("player-turn");
