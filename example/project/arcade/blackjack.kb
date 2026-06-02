@@ -103,7 +103,7 @@ JFUNCTION "checkHand", "player"
         }
     });
 
-    if (player) {
+    //if (player) {
         //console.log("Player", player, total);
         if (total > 21) {
             if (!$("#player-" + player + " .winner").is(':visible')) {
@@ -121,7 +121,7 @@ JFUNCTION "checkHand", "player"
                 }
             }
         }
-    }
+    //}
     
     return total;
 END JFUNCTION
@@ -176,6 +176,7 @@ END JFUNCTION
 
 JFUNCTION "dealCard"
     if (game_over) {
+        gameInfo(event, "The game is over", true);
         return;
     }
 
@@ -219,8 +220,24 @@ JFUNCTION "gameOver"
     $("#btn-new-game").addClass("button-highlight");
 END JFUNCTION
 
+JFUNCTION "startGame"
+    for (var iLoop = 1; iLoop < hands.length; iLoop++) {
+        $("#player-cards-" + iLoop).children(".card").each((index, card) => {
+            if ($(card).children("img").attr("src") == "/kytschi/imgs/cards/back.png") {
+                $(card).children("img").attr("src", "/kytschi/imgs/cards/" + $(card).attr("id") + ".png");
+            }
+        });
+    }
+    $("#controls-start").hide();
+    $("#controls").css("display", "flex");
+    if (turn != player_id) {
+        computerPlay();
+    }
+END JFUNCTION
+
 JFUNCTION "updateTurn"
     if (game_over) {
+        gameInfo(event, "The game is over", true);
         return;
     }
 
@@ -297,7 +314,9 @@ JAVASCRIPT
     });
 
     $("button[name=btnBet]").click(() => {
-        $("#modalBet").show();
+        if (!game_over) {
+            $("#modalBet").show();
+        }
     });
 
     $("button[name=btnCloseModal], button[name=btnCloseBetModal]").click(() => {
@@ -306,14 +325,24 @@ JAVASCRIPT
     });
 
     $("button[name=btnHit]").click(() => {
-        if (turn == player_id) {
+        if (turn == player_id && !game_over) {
             dealCard();
+        } else if (game_over) {
+            gameInfo(event, "The game is over", true);
         }
     });
 
     $("button[name=btnStay]").click(() => {
-        if (turn == player_id) {
+        if (turn == player_id && !game_over) {
             updateTurn();
+        } else if (game_over) {
+            gameInfo(event, "The game is over", true);
+        }
+    });
+
+    $("button[name=btnStart]").click(() => {
+        if (!game_over) {
+            startGame();
         }
     });
 
@@ -326,10 +355,6 @@ JAVASCRIPT
         $("#player-" + player_id + " .player-bet span").html(bets[player_id]);
         $("#modalBet").hide();
     });
-
-    if (turn != player_id) {
-        computerPlay();
-    }
 END JAVASCRIPT
 
 DIV "", "blackjack"
@@ -347,11 +372,11 @@ DIV "", "blackjack"
                             DEF id$=REPLACE(card$, "/kytschi/imgs/cards/", "")
                             DEF id$=REPLACE(id$, ".png", "")
                             SPRITE id$, "card"
-                                IF iLoop%=0 && iLoop2% THEN
+                                REM IF iLoop%=0 && iLoop2% THEN
                                     IMAGE "/kytschi/imgs/cards/back.png"
-                                ELSE
-                                    IMAGE card$
-                                END IF
+                                REM ELSE
+                                    REM IMAGE card$
+                                REM END IF
                             END SPRITE
                             LET iLoop2%=1
                         NEXT
@@ -368,6 +393,9 @@ DIV "", "blackjack"
         DIV , "controls"
             BUTTON "btnHit", "btn-hit", "btn-hit", "hit", "&nbsp;"
             BUTTON "btnStay", "btn-stay", "btn-stay", "stay", "&nbsp;"
+        END DIV
+        DIV , "controls-start"
+            BUTTON "btnStart", "btn-start", "btn-start", "start", "&nbsp;"
             BUTTON "btnBet", "btn-bet", "btn-bet", "bet", "&nbsp;"
         END DIV
     END DIV

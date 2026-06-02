@@ -137,7 +137,7 @@ body {
     margin: 0;
     padding: 0;
 }
-#blackjack #controls {
+#blackjack #controls, #blackjack #controls-start {
     margin-top: -100px;
     position: relative;
     gap: 10px;
@@ -147,6 +147,9 @@ body {
     justify-content: center;
     flex-wrap: wrap;
 }
+#blackjack #controls {
+    display: none;
+}
 
 #blackjack .btn-new-game {
     background-image: url("../imgs/cards/button-new-plain.png");
@@ -154,11 +157,11 @@ body {
 #blackjack .btn-hit {
     background-image: url("../imgs/cards/button-hit.png");
 }
-#blackjack .btn-split {
-    background-image: url("../imgs/cards/button-split.png");
-}
 #blackjack .btn-stay {
     background-image: url("../imgs/cards/button-stay.png");
+}
+#blackjack .btn-start {
+    background-image: url("../imgs/cards/button-start.png");
 }
 #blackjack .btn-submit {
     background-image: url("../imgs/cards/button-setup-plain.png");
@@ -247,7 +250,7 @@ body {
 }
 
 @media only screen and (max-height: 820px) {
-    #blackjack #controls {
+    #blackjack #controls, #blackjack #controls-start {
         margin-top: -150px;
     }
 }
