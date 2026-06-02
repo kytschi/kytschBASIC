@@ -16,7 +16,6 @@ html, body {
 body {
     display: flex;
     justify-content: flex-start;
-    
     background-image: url("../imgs/cards/bk.jpg");
     background-position: top center;
     background-repeat: no-repeat;

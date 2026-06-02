@@ -367,7 +367,6 @@ DIV "", "blackjack"
         END DIV
         DIV , "controls"
             BUTTON "btnHit", "btn-hit", "btn-hit", "hit", "&nbsp;"
-            BUTTON "btnSplit", "btn-split", "btn-split", "split", "&nbsp;"
             BUTTON "btnStay", "btn-stay", "btn-stay", "stay", "&nbsp;"
             BUTTON "btnBet", "btn-bet", "btn-bet", "bet", "&nbsp;"
         END DIV
