@@ -1,3 +1,6 @@
+.jq-toast-single h2 {
+    text-transform: capitalize;
+}
 html, body {
     padding: 0;
     margin: 0;

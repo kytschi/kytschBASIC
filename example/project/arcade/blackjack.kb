@@ -76,7 +76,6 @@ JDEF turn%=0
 JDEF game_over%=0
 JDEF dealer_flipped%=0
 JDEF player_id%=(player_id%-1)
-JDEF computer_playing%=false
 
 JFUNCTION "checkHand", "player"
     var total = 0, number, numbers = [], has_ace = false;
@@ -142,8 +141,6 @@ JFUNCTION "computerOver", "computer_total"
     if (turn == 0) {
         game_over = 1;
         updateWinnings(event, computer_total);
-    } else {
-        
     }
 END JFUNCTION
 
@@ -164,19 +161,8 @@ JFUNCTION "computerPlay"
     //console.log("Turn", turn, total);
 
     if (total <= 17) {
-        if (!computer_playing) {
-            computer_playing = true;
-            setTimeout(() => {
-                computer_playing = false;
-                total = dealCard();
-                if (total <= 17) {
-                    computerPlay();
-                } else {
-                    computerOver(event, total);
-                    updateTurn();
-                }
-            }, 1000);
-        }
+        total = dealCard();
+        computerPlay();
     } else {
         computerOver(event, total);
         updateTurn();
@@ -278,6 +264,7 @@ JFUNCTION "updateTurn"
 END JFUNCTION
 
 JFUNCTION "updateWinnings"
+    var dealer_winner = 1;
     var dealer_total = checkHand(event, 0, false);
     for (var player = 1; player < hands.length; player++) {
         var total = checkHand(event, player, false);
@@ -285,9 +272,13 @@ JFUNCTION "updateWinnings"
         if ((total >= dealer_total || dealer_total > 21) && !$("#player-" + player + " .bust").is(':visible')) {
             $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) + parseInt(bets[player]));
             $("#player-" + player + " .winner").show();
+            dealer_winner = 0;
         } else {
             $("#player-" + player + " .score span").html(parseInt($("#player-" + player + " .score span").html()) - parseInt(bets[player]));
         }
+    }
+    if (dealer_winner) {
+        $("#player-0 .winner").show();
     }
     gameOver();
 END JFUNCTION
@@ -299,12 +290,19 @@ JAVASCRIPT
     if (typeof(kb_cookie.kb_blackjack) != "undefined") {
         for (const [player, value] of Object.entries(kb_cookie.kb_blackjack)) {
             if (parseInt(player)) {
+                if (value <= 0) {
+                    value = 10000;
+                }
                 $("#player-" + player + " .score span").html(value);
             }
         }
     } else {
         kb_cookie.kb_blackjack = [];
-        $("#player-" + player_id + " .score span").html("10000");
+        hands.forEach((cards, index) => {
+            if (index) {
+                $("#player-" + index + " .score span").html("10000");
+            }
+        });
     }
 
     $("#player-" + turn + " .player-img").addClass("player-turn");
@@ -405,17 +403,14 @@ DIV "", "blackjack"
             TABLE
                 TBODY
                     TROW
-                        TCELL
+                        TCELL ,"winner-col"
                             PRINT "&nbsp;"
                         END TCELL
-                        TCELL
-                            PRINT "Player"
+                        TCELL ,, "2"
+                            PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"bet-col"
                             PRINT "Bet"
-                        END TCELL
-                        TCELL ,"winner-col"
-                            PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"text-center"
                             PRINT "Cash"
@@ -428,6 +423,10 @@ DIV "", "blackjack"
                             LET player_class$=" computer"
                         END IF
                         TROW ,"player-"+iLoop%
+                            TCELL ,"winner-col"+player_class$
+                                IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
+                                IMAGE "/kytschi/imgs/cards/bust.png","bust","bust"
+                            END TCELL
                             TCELL ,"player-img"
                                 IF iLoop%=(player_id%-1) THEN
                                     IMAGE "/kytschi/imgs/people/jane.png"
@@ -444,10 +443,6 @@ DIV "", "blackjack"
                                 ELSE
                                     PRINT "10"
                                 END IF
-                            END TCELL
-                            TCELL ,"winner-col"+player_class$
-                                IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
-                                IMAGE "/kytschi/imgs/cards/bust.png","bust","bust"
                             END TCELL
                             TCELL ,"text-center score"
                                 PRINT "0"

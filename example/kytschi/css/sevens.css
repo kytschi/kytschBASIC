@@ -4,6 +4,9 @@
     --orange: #F8B133;
     --red: #D23136;
 }
+.jq-toast-single h2 {
+    text-transform: capitalize;
+}
 html, body {
     padding: 0;
     margin: 0;
@@ -12,7 +15,6 @@ html, body {
     overflow: hidden;
     background-color: #165041;
 }
-
 body {
     display: flex;
     justify-content: flex-start;
@@ -224,22 +226,6 @@ body {
 #sevens .last-card, #sevens .winner, #sevens .knocking {
     display: none;
     cursor: pointer;
-}
-
-#sevens #game-info {
-    display: none;
-    background-color: #fff;
-    border: 0;
-    border-top: 2px solid #000;
-    margin-top: 10px;
-    width: calc(100% - 10px);
-    height: 300px;
-    overflow-y: scroll;
-}
-
-#sevens #game-info p {
-    margin: 0;
-    padding: 0;
 }
 
 #sevens button {

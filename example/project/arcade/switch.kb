@@ -75,10 +75,47 @@ JDEF pick_up%=0
 JDEF pick_up_done%=0
 JDEF change_suit%=0
 
+JFUNCTION "canPlay", "check=null"
+    if (game_over) {
+        return;
+    }
+
+    if (start == 1) {
+        start = 0;
+        return true;
+    }
+
+    let check_details = selected_card.split("_");
+    if (check) {
+        check_details = check.split("_");
+    }
+
+    if (pick_up && !pick_up_done) {
+        if (check_details[1] == 2) {
+            return true;
+        }
+        return false;
+    }
+        
+    let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
+    if (
+        check_details[0] == card_details[0] ||
+        check_details[1] == card_details[1] ||
+        check_details[1] == 1 ||
+        check_details[1] == 11
+    ) {
+        return true;
+    }    
+
+    return false;
+END JFUNCTION
+
 JFUNCTION "computerPlay"
     if (game_over || turn == 0) {
         return;
     }
+
+    //console.log("Computer", turn);
 
     var value = "";
     var played = false;
@@ -116,148 +153,136 @@ JFUNCTION "computerPlay"
     });
 END JFUNCTION
 
-JFUNCTION "updateTurn"
-    if (game_over) {
-        return;
-    }
-
-    if (pick_up != 0) {
-        $("button[name=btnPickup]").addClass("btn-pickup-on");
-    }
-
-    $("#player-" + turn + " .player-img").removeClass("player-turn");
-    $("#player-" + turn + " .knocking").hide();
-
-    $("#player-" + turn + " .last-card").hide();
-    $("#player-" + turn + " .last-card-col span").show();
-    if (hands[turn].length == 1) {
-        //gameInfo(event, "LAST CARD");
-        $("#player-" + turn + " .last-card-col span").hide();
-        $("#player-" + turn + " .last-card").show();
-    } else if (hands[turn].length == 0) {
-        gameOver(event);
-    }
-    $("#player-" + turn + " .last-card-col span").html(hands[turn].length);
-
-    if (parseInt(switch_dir) == 0) {
-        turn += 1;
-        if (turn >= hands.length) {
-            turn = 0;
-        }
-        
-        if (miss_a_turn == 1) {
-            gameInfo(event, "Miss a turn");
-            miss_a_turn = 0;
-            turn += 1;
-            if (turn >= hands.length) {
-                turn = 0;
-            }
-        }
-    } else {
-        turn -= 1;
-        if (turn < 0) {
-            turn = hands.length - 1;
-        }
-
-        if (miss_a_turn == 1) {
-            gameInfo(event, "Miss a turn");
-            miss_a_turn = 0;
-            turn -= 1;
-            if (turn < 0) {
-                turn = hands.length - 1;
-            }
-        }          
-    }
-    
-    $("#player-" + turn + " .player-img").addClass("player-turn");
-
-    if (turn != 0) {
-        computerPlay();
-    } else {
-        pickup(event);
-    }
-END JFUNCTION
-
-JFUNCTION "rebuildHand"
-    $("#hand").html("");
-    hands[0].sort();
-    hands[0].forEach((card) => {
-        let id = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
-        $("#hand").append('<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>');
+JFUNCTION "gameInfo", "text", "error = false"
+    $.toast({
+        heading: (error ? "ERROR" : names[turn]),
+        text: text,
+        icon: 'info',
+        loader: true,
+        position: 'bottom-right',
+        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
+        bgColor: (error ? '#f24f32' : '#33a1ea'),
+        textColor: 'white'
     });
 END JFUNCTION
 
-JFUNCTION "canPlay", "check=null"
-    if (game_over) {
-        return;
+JFUNCTION "gameOver"
+    var score = 0, card_details, value = 0;
+
+    if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
+        kb_cookie.kb_switch_scores = {};
+        names.forEach((player, index) => {
+            kb_cookie.kb_switch_scores[index] = {
+                "score": 0,
+                "turn": turn
+            }
+        });
     }
 
-    if (start == 1) {
-        start = 0;
-        return true;
+    game_over = 1;
+    //gameInfo(event, "I WIN!!!");
+    $("#player-" + turn + " .last-card").hide();
+    $("#player-" + turn + " .last-card-col span").hide();
+    $("#player-" + turn + " .winner").show();
+
+    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
+        score = parseInt($("#player-" + iLoop + " .score span").html());
+
+        hands[iLoop].forEach((card, index) => {
+            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
+            value = parseInt(card_details[1]);
+            if (value == 1) {
+                score += 11;
+            } else if (([11, 12, 13]).includes(value)) {
+                score += 10;
+            } else {
+                score += value;
+            }
+        });
+
+        $("#player-" + iLoop + " .score span").html(score);
+        kb_cookie.kb_switch_scores[iLoop].score = score;
     }
 
-    let check_details = selected_card.split("_");
-    if (check) {
-        check_details = check.split("_");
-    }
+    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
 
-    if (pick_up && !pick_up_done) {
-        if (check_details[1] == 2) {
-            return true;
-        }
-        return false;
-    }
-        
-    let card_details = deck[deck.length-1].replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
-    if (
-        check_details[0] == card_details[0] ||
-        check_details[1] == card_details[1] ||
-        check_details[1] == 1 ||
-        check_details[1] == 11
-    ) {
-        return true;
-    }    
-
-    return false;
+    $(".btn-new-game").addClass("card-highlight");
 END JFUNCTION
 
 JFUNCTION "onCardClick"
     selected_card = event.target.parentElement.id;
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
+    if (selected_card == "hand") {
+        return;
+    }
     $("#" + selected_card).addClass("card-highlight");
 END JFUNCTION
 
 JFUNCTION "onCardDblClick"
     selected_card = event.target.parentElement.id;
     $("#hand .card").removeClass(["card-highlight", "card-warn"]);
+    if (selected_card == "hand") {
+        return;
+    }
     $("#" + selected_card).addClass("card-highlight");
     onDeckClick(event);
 END JFUNCTION
 
-JFUNCTION "playerKnocking"
-    if (game_over) {
+JFUNCTION "onChangeSuitClick", "id=null"
+    let suit = "";
+    if (id) {
+        suit = id;
+    } else {
+        suit = event.target.parentElement.id;
+    }
+    
+    //gameInfo(event, "Change to " + suit);
+    $("#switch #change-suit").hide();
+
+    //console.log("Remove suit", turn, selected_card, suit);
+    for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
+        let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".png", "");
+        if (selected_card == card) {
+            //console.log("Remove from hand", turn, selected_card, card);
+            hands[turn].splice(iLoop, 1);
+            break;
+        }
+    }
+
+    selected_card = suit + "_1";
+    $("#cards").append('<div id="' + selected_card + '" class="card"><img src="/kytschi/imgs/cards/' + selected_card + '.png"></div>');
+    deck.push('/kytschi/imgs/cards/' + selected_card + '.png');
+    //console.log("Change suit", turn, selected_card, suit);
+
+    //updateDeck(event, false);
+    rebuildHand(event);
+    change_suit = 0;
+    updateTurn(event);
+END JFUNCTION
+
+JFUNCTION "onDeckClick"
+    if (game_over || turn) {
+        //gameInfo(event, "Wait your turn", true);
         return;
     }
 
-    pickup(event);
-
-    //gameInfo(event, "KNOCKING");
-    $("#player-" + turn + " .knocking").show();
-    hands[turn].push(pool[0]);
-    pool.splice(0, 1);
-
-    if (turn == 0) {
-        rebuildHand(event);
+    if (!canPlay(event)) {
+        gameInfo(event, "INVALID PLAY", true);
+        return;
     }
 
-    updateTurn();
+    playCard(event);
+    if (change_suit == 0) {
+        updateTurn(event);
+    }
 END JFUNCTION
 
 JFUNCTION "pickup"
+    //console.log("Pickup event", pick_up, pick_up_done);
     if (pick_up && pick_up_done) {
         $("button[name=btnPickup]").removeClass("btn-pickup-on");
-        //gameInfo(event, "You had to pick up " + pick_up);
+        //console.log(turn, "You had to pick up " + pick_up);
+        gameInfo(event, "You had to pick up " + pick_up);
         for (iLoop = 0; iLoop < pick_up; iLoop++) {
             hands[turn].push(pool[0]);
             pool.splice(0, 1);
@@ -270,11 +295,14 @@ JFUNCTION "pickup"
             rebuildHand(event);
         }
         updateTurn(event);
+        return true;
     }
+    return false;
 END JFUNCTION
 
 JFUNCTION "playCard"
     $("#" + selected_card).removeClass(["card-highlight", "card-warn"]);
+    $("#player-" + turn + " .knocking").hide();
 
     let card_details = selected_card.split("_");
     let card_suit = card_details[0];
@@ -350,34 +378,40 @@ JFUNCTION "playCard"
     pickup(event);
 END JFUNCTION
 
-JFUNCTION "onDeckClick"
-    if (game_over || turn) {
-        //gameInfo(event, "Wait your turn", true);
+JFUNCTION "playerKnocking"
+    if (game_over || (pick_up && !pick_up_done)) {
         return;
     }
 
-    if (pick_up && !pick_up_done) {
-        pick_up_done = 1;
-        pickup(event);
-        return;
+    gameInfo(event, "KNOCKING");
+    //console.log(turn, "knocking");
+    $("#player-" + turn + " .knocking").show();
+    hands[turn].push(pool[0]);
+    pool.splice(0, 1);
+
+    if (turn == 0) {
+        rebuildHand(event);
     }
 
-    if (!canPlay(event)) {
-        gameInfo(event, "INVALID PLAY", true);
-        return;
-    }
-
-    playCard(event);
-    if (change_suit == 0) {
-        updateTurn(event);
-    }
+    updateTurn();
 END JFUNCTION
 
-JFUNCTION updateDeck
+JFUNCTION "rebuildHand"
+    $("#hand").html("");
+    hands[0].sort();
+    hands[0].forEach((card) => {
+        let id = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
+        $("#hand").append('<div id="' + id + '" class="card" onclick="javascript:onCardClick(event)" ondblclick="javascript:onCardDblClick(event)"><img src="' + card + '"></div>');
+    });
+    $("#player-0 .last-card-col span").html(hands[0].length);
+    
+END JFUNCTION
+
+JFUNCTION "updateDeck", "slice=true"
     $("#cards").append('<div id="' + selected_card + '" class="card"><img src="/kytschi/imgs/cards/' + selected_card + '.png"></div>');
     deck.push('/kytschi/imgs/cards/' + selected_card + '.png');
 
-    if (turn == 0) {
+    if (turn == 0 && slice) {
         $("#hand #" + selected_card).remove();
         hands[turn].forEach((card, index) => {
             let check = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "");
@@ -397,91 +431,81 @@ JFUNCTION updateDeck
     selected_card = "";
 
     $("#cards .card").removeClass("card-highlight");
+    $("#player-0 .last-card-col span").html(hands[0].length);
 END JFUNCTION
 
-JFUNCTION "onChangeSuitClick", "id=null"
-    let suit = "";
-    if (id) {
-        suit = id;
+JFUNCTION "updateDirection"
+    $("#scoreboard-scores .arrow-down, #scoreboard-scores .arrow-up").hide();
+    if (switch_dir) {
+        $("#scoreboard-scores .arrow-up").show();
     } else {
-        suit = event.target.parentElement.id;
+        $("#scoreboard-scores .arrow-down").show();
+    }
+END JFUNCTION
+
+JFUNCTION "updateTurn"
+    if (game_over) {
+        return;
+    }
+
+    if (pick_up != 0) {
+        $("button[name=btnPickup]").addClass("btn-pickup-on");
+    }
+
+    $("#player-" + turn + " .player-img").removeClass("player-turn");
+
+    $("#player-" + turn + " .last-card").hide();
+    $("#player-" + turn + " .last-card-col span").show();
+
+    if (hands[turn].length == 1) {
+        //gameInfo(event, "LAST CARD");
+        $("#player-" + turn + " .last-card-col span").hide();
+        $("#player-" + turn + " .last-card").show();
+    } else if (hands[turn].length == 0) {
+        gameOver(event);
+        return;
+    }
+
+    $("#player-" + turn + " .last-card-col span").html(hands[turn].length);
+
+    if (parseInt(switch_dir) == 0) {
+        turn += 1;
+        if (turn >= hands.length) {
+            turn = 0;
+        }
+        
+        if (miss_a_turn == 1) {
+            gameInfo(event, "Miss a turn");
+            miss_a_turn = 0;
+            turn += 1;
+            if (turn >= hands.length) {
+                turn = 0;
+            }
+        }
+    } else {
+        turn -= 1;
+        if (turn < 0) {
+            turn = hands.length - 1;
+        }
+
+        if (miss_a_turn == 1) {
+            gameInfo(event, "Miss a turn");
+            miss_a_turn = 0;
+            turn -= 1;
+            if (turn < 0) {
+                turn = hands.length - 1;
+            }
+        }          
     }
     
-    //gameInfo(event, "Change to " + suit);
-    $("#switch #change-suit").hide();
+    $("#player-" + turn + " .player-img").addClass("player-turn");
+    updateDirection();
 
-    let card_details = selected_card.split("_");
-
-    for (let iLoop = 0; iLoop < hands[turn].length; iLoop++) {
-        let card = hands[turn][iLoop].replace("/kytschi/imgs/cards/", "").replace(".png", "");
-        if (selected_card == card) {            
-            hands[turn].splice(iLoop, 1);            
-            break;
-        }
+    if (turn != 0) {
+        computerPlay();
+    } else {
+        pickup(event);
     }
-
-    selected_card = suit + "_" + card_details[1];
-
-    updateDeck(event);
-    rebuildHand(event);
-    change_suit = 0;
-    updateTurn(event);
-END JFUNCTION
-
-JFUNCTION "gameInfo", "text", "error = false"
-    $.toast({
-        heading: (error ? "ERROR" : names[turn]),
-        text: text,
-        icon: 'info',
-        loader: true,
-        position: 'bottom-right',
-        loaderBg: (error ? '#ed2d2d' : '#1783ef'),
-        bgColor: (error ? '#f24f32' : '#33a1ea'),
-        textColor: 'white'
-    });
-END JFUNCTION
-
-JFUNCTION "gameOver"
-    var score = 0, card_details, value = 0;
-
-    if (typeof(kb_cookie.kb_switch_scores) == "undefined") {
-        kb_cookie.kb_switch_scores = {};
-        names.forEach((player, index) => {
-            kb_cookie.kb_switch_scores[index] = {
-                "score": 0,
-                "turn": turn
-            }
-        });
-    }
-
-    game_over = 1;
-    //gameInfo(event, "I WIN!!!");
-    $("#player-" + turn + " .last-card").hide();
-    $("#player-" + turn + " .last-card-col span").hide();
-    $("#player-" + turn + " .winner").show();
-
-    for (var iLoop = 0; iLoop < hands.length; iLoop++) {
-        score = parseInt($("#player-" + iLoop + " .score span").html());
-
-        hands[iLoop].forEach((card, index) => {
-            card_details = (card).replace("/kytschi/imgs/cards/", "").replace(".png", "").split("_");
-            value = parseInt(card_details[1]);
-            if (value == 1) {
-                score += 11;
-            } else if (([11, 12, 13]).includes(value)) {
-                score += 10;
-            } else {
-                score += value;
-            }
-        });
-
-        $("#player-" + iLoop + " .score span").html(score);
-        kb_cookie.kb_switch_scores[iLoop].score = score;
-    }
-
-    Cookies.set("kb_HLPR", JSON.stringify(kb_cookie));
-
-    $(".btn-new-game").addClass("card-highlight");
 END JFUNCTION
 
 JAVASCRIPT
@@ -500,10 +524,7 @@ JAVASCRIPT
     }
 
     $("#player-" + turn + " .player-img").addClass("player-turn");
-
-    if (turn) {
-        computerPlay();
-    }
+    $("#scoreboard-scores .arrow-down").show();
 
     $("button[name=btnSetup]").click(() => {
         $("#playerSelect").show();
@@ -511,8 +532,9 @@ JAVASCRIPT
         $("#modalNewGame").show();
     });
 
-    $("button[name=btnCloseModal]").click(() => {
+    $("button[name=btnCloseModal], button[name=btnCancelModal]").click(() => {
         $("#modalNewGame").hide();
+        $("#change-suit").hide();
     });
 
     $("button[name=btnSinglePlayer]").click(() => {
@@ -530,6 +552,7 @@ JAVASCRIPT
             gameInfo(event, "Wait your turn", true);
         }
     });
+
     $("button[name=btnPickup]").click(() => {
         if (turn == 0) {
             if (pick_up) {
@@ -543,10 +566,9 @@ JAVASCRIPT
         }
     });
 
-    $("button[name=btnMultiPlayer]").click(() => {
-        $("#playerSelect").hide();
-        $("#multiplayerSelect").show();
-    });
+    if (turn) {
+        computerPlay();
+    }
 END JAVASCRIPT
 
 MOUSEEVENT "#cards"
@@ -585,8 +607,8 @@ DIV "", "switch"
                         TCELL
                             PRINT "&nbsp;"
                         END TCELL
-                        TCELL
-                            PRINT "Player"
+                        TCELL ,, "2"
+                            PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"last-card-col"
                             PRINT "&nbsp;"
@@ -595,12 +617,16 @@ DIV "", "switch"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"text-center"
-                            PRINT "Total"
+                            PRINT "Score"
                         END TCELL
                     END TROW
                     FOR iLoop%=0 TO no_players%
-                        TROW ,"player-"+iLoop%
+                        TROW , "player-" + iLoop%
                             DEF name$=names$(iLoop%)
+                            TCELL ,"game-direction"
+                                IMAGE "/kytschi/imgs/cards/arrow-up.png", , "arrow-up"
+                                IMAGE "/kytschi/imgs/cards/arrow-down.png", , "arrow-down"
+                            END TCELL
                             TCELL ,"player-img"
                                 IF iLoop%=0
                                     IMAGE "/kytschi/imgs/people/nick.png"
@@ -613,11 +639,11 @@ DIV "", "switch"
                             END TCELL
                             TCELL ,"last-card-col"
                                 PRINT COUNT(hands$[iLoop%])
-                                IMAGE "/kytschi/imgs/cards/last-card.png","last","last-card"
-                                IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
+                                IMAGE "/kytschi/imgs/cards/last-card.png", "last", "last-card"
+                                IMAGE "/kytschi/imgs/cards/winner.png", "winner", "winner"
                             END TCELL
                             TCELL ,"last-card-col"
-                                IMAGE "/kytschi/imgs/cards/knocking.png","knocking","knocking"
+                                IMAGE "/kytschi/imgs/cards/knocking.png", "knocking", "knocking"
                             END TCELL
                             TCELL ,"text-center score"
                                 PRINT "0"
@@ -654,6 +680,9 @@ DIV "", "switch"
                         END DIV
                     END DIV
                 END DIV
+                DIV "modal-footer"
+                    BUTTON "btnCancelModal", "btn-close", "btnCancelModal", "cancel", "Cancel"
+                END DIV
             END DIV
         END DIV
     END DIV
@@ -672,10 +701,6 @@ DIV "", "switch"
                                 PRINT "No. players"
                                 NUMBERINPUT "np",no_players%, "form-input", "Enter the number of players",,,"max='6' min='3'"
                             END DIV
-                            REM DIV "row"
-                                REM PRINT "Game code"
-                                REM TEXTINPUT "game_code", game_code$, "form-input"
-                            REM END DIV
                             DIV "row break"
                             END DIV
                             DIV "row"
@@ -683,22 +708,13 @@ DIV "", "switch"
                                     BUTTONSUBMIT "btnSinglePlayer", "btn-new-game", "btnSinglePlayer", "single"
                                         IMAGE "/kytschi/imgs/cards/button-setup.png"
                                     END BUTTON
-                                    REM BUTTONSUBMIT "btnMultiPlayer", "btn-last-card", "btnMultiPlayer", "multi", "Multiplayer"
                                 END DIV
                             END DIV
                         END DIV
-                        REM DIV "row hide", "multiplayerSelect"
-                            REM PRINT "Multiplayer"
-                            REM TEXTINPUT "txtGameID",,"form-input","Please enter your name","txtPlayerName",true
-                            REM TEXTINPUT "txtPlayerName",,"form-input","Please enter your name","txtPlayerName",true
-                            REM DIV "row break"
-                            REM END DIV
-                            REM BUTTONSUBMIT "btnMultiPlayerStart", "btn-new-game", "btnMultiPlayerStart", "multi", "Start"
-                        REM END DIV
                     END FORM
                 END DIV
                 DIV "modal-footer"
-                    BUTTON "btnCloseModal", "btn-knocking", "btnCloseModal", "close", "Close"
+                    BUTTON "btnCloseModal", "btn-close", "btnCloseModal", "close", "Close"
                 END DIV
             END DIV
         END DIV

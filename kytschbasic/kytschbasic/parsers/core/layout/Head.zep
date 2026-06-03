@@ -67,7 +67,7 @@ class Head extends Command
 
 		let output .= " href=" . this->outputArg(args[0], false);
 		
-		if (isset(args[1]) && !empty(args[1])) {
+		if (isset(args[1]) && !empty(args[1])  && args[1] != "\"\"") {
 			let output .= " sizes=" . this->outputArg(args[1], false);
 		}
 

@@ -5,7 +5,7 @@
  * @author 		Mike Welsh <hello@kytschbasic.org>
  * @copyright   2026 Mike Welsh
  * @link 		https://kytschbasic.org
- * @version     0.0.19 alpha
+ * @version     0.0.20 alpha
  *
  */
 namespace KytschBASIC;
@@ -26,7 +26,7 @@ class Compiler
 
 	private start_time;
 	
-	private version = "0.0.19 alpha";
+	private version = "0.0.20 alpha";
 
 	private cli;
 

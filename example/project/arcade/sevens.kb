@@ -494,7 +494,7 @@ DIV "", "sevens"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL
-                            PRINT "Player"
+                            PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"last-card-col"
                             PRINT "&nbsp;"
@@ -503,7 +503,7 @@ DIV "", "sevens"
                             PRINT "&nbsp;"
                         END TCELL
                         TCELL ,"text-center"
-                            PRINT "Total"
+                            PRINT "Score"
                         END TCELL
                     END TROW
                     FOR iLoop%=0 TO no_players%

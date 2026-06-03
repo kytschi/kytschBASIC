@@ -14,7 +14,9 @@
     font-family: 'Body';
     src: url("../fonts/Inconsolata.ttf") format("truetype");
 }
-
+.jq-toast-single h2 {
+    text-transform: capitalize;
+}
 html, body {
     padding: 0;
     margin: 0;

@@ -2,6 +2,9 @@
     --card-width: 108px;
     --card-height: 139px;
 }
+.jq-toast-single h2 {
+    text-transform: capitalize;
+}
 html, body {
     padding: 0px;
     margin: 0;

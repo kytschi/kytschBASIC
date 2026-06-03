@@ -12,7 +12,7 @@ namespace KytschBASIC\Exceptions;
 class Exception extends \Exception
 {
     public code;
-    private version = "0.0.19 alpha";
+    private version = "0.0.20 alpha";
     private html;
     private line_no = 0;
     

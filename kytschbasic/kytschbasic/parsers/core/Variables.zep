@@ -54,9 +54,12 @@ class Variables
 		preg_match_all("/(?<!\\$)(_GET|_POST|_REQUEST|_FILES)\\(([^)]+)\\)/", line, vars, PREG_OFFSET_CAPTURE);
 		// Add some padding to handle the extra char.
 		let arg = 0;
-		if (vars) {
+		if (!empty(vars[0])) {
 			for str in vars[0] {
 				let arg = "$" . str_replace(")", "]", str_replace("(", "[", str[0]));
+				let line = str_replace(str[0], arg, line);
+				/*
+				CANT REMEMBER WHAT IM DOING HERE?!!!!!!
 				ob_start();
 				eval("if (isset(" . arg . ")) {echo " . arg . ";}");
 				let find = ob_get_clean();
@@ -68,7 +71,7 @@ class Variables
 					}
 				} else {
 					let line = str_replace(str[0], arg, line);
-				}
+				}*/
 			}
 		}
 
@@ -324,20 +327,28 @@ class Variables
 
 	public function outputArg(arg, bool php_output = false, bool include_quotes = true)
 	{
-		var matches, clean;
+		var matches, item, cleaned = "";
 
 		// Processing the string joins i.e. "test" . $string
-		preg_match_all("/\"[^\"]*\"(*SKIP)(*F)|.\s\\$/", arg, matches, PREG_OFFSET_CAPTURE);
-		if (!empty(matches[0])) {
-			let clean = preg_replace("/\\$([a-zA-Z_][a-zA-Z0-9_]*)/", "{\$\\1}", arg);
-			let clean = preg_replace("/\s*\.\s*\"/", "", clean);
-			let clean = preg_replace("/\"\s*\.\s*/", "", clean);
-			let arg = trim(clean, "\"");
+		let matches = preg_split("/\.(?=([^\"]*\"[^\"]*\")*[^\"]*$)/", arg);
+		if (count(matches) > 1) {
+			var can_trim = true, is_var, iLoop;
+			let cleaned = "\" . ";
+			for (iLoop, item in matches) {
+				let cleaned .= item . " . ";
+				if (preg_match("/\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"(*SKIP)(*FAIL)|\\$/", item, is_var) !== false && iLoop == (count(matches) - 1)) {
+					let can_trim = false;
+				}
+			}
+			let cleaned = rtrim(cleaned, " . ");
+			return can_trim ? rtrim(cleaned, "\"") : cleaned . " . \"";
 		}
 		
 		let arg = preg_replace("/^\"|\"$/", "", arg);
 		if (substr(arg, 0, 1) == "$") {
-			return php_output ? "<?= " . arg . "; ?>" : "{" . arg . "}";
+			return php_output ?
+				"<?= " . arg . "; ?>" :
+				"'\" . " . arg . " . \"'";
 		}
 
 		return include_quotes ? "\\\"" . arg . "\\\"" : arg;
@@ -534,7 +545,7 @@ class Variables
 
 	private function processDim(string line, args, bool javascript = false)
 	{
-		var arg, output = "<?php ", splits, is_array = false, cleaned;
+		var arg, output = "<?php ", splits, me_array = false, cleaned = "";
 
 		if (!count(args)) {
 			throw new Exception("Invalid " . (javascript ? "DIM" : "JDIM"));
@@ -562,23 +573,35 @@ class Variables
 		let output .= (javascript ? "var " . ltrim(args[0], "$") : args[0]) . " = ";
 		array_shift(args);
 
-		for arg in args {
-			if (substr(arg, 0, 1) == "(" || arg == "[]") {
-				let is_array = true;
-				let output .= "[";
+		let arg = implode(",", args);
+		let output .= javascript ?
+			"' . json_encode(" . arg . ")  . '</script>'" :
+			preg_replace("/:(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", " => ", arg);
+		
+		/*for arg in args {
+			if (
+				arg == "[]" ||
+				substr(arg, 0, 1) == "(" || substr(arg, strlen(arg) - 1, 1) == ")" ||
+				substr(arg, 0, 1) == "[" || substr(arg, strlen(arg) - 1, 1) == "]"
+			) {
+				let me_array = true;
+				if (substr(arg, 0, 1) != "$") {
+					let output .= "[";
+				}
+				let arg = ltrim(rtrim(arg, "]"), "[");
+				let arg = ltrim(rtrim(arg, ")"), "(");
 			}
 
-			let arg = ltrim(rtrim(arg, ")"), "(");
-			if (arg == "[]") {
+			if (empty(arg)) {
 				continue;
 			}
 
 			switch (splits[0][0]) {
 				case "%=":
-					let cleaned = "intval(" . arg . ")";
+					let cleaned = me_array ? arg : "intval(" . arg . ")";
 					break;
 				case "#=":
-					let cleaned = "(double)" . arg . "";
+					let cleaned = me_array ? arg : "(double)" . arg . "";
 					break;
 				default:
 					let cleaned = arg;
@@ -594,18 +617,19 @@ class Variables
 				javascript ? "' . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ") . ', " :
 				arg . ", "
 			);
-		}
+		}*/
 
-		let output = rtrim(output, ", ");
-		if (is_array) {
+		//let output = rtrim(output, ", ");
+		if (me_array) {
+			//let output = rtrim(output, "]") . "];";
 			let output .= "];";
+			if (!javascript) {
+				// Replace any : with => as its an associative array.
+				let output = preg_replace("/:(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", " => ", output);
+			}
 		}
 
-		if (javascript) {
-			let output .= "</script>';";
-		}
-
-		return output . " ?>";
+		return output . "; ?>";
 	}
 
 	public function setDoubleEquals(arg)

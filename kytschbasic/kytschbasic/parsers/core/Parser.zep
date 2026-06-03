@@ -372,6 +372,10 @@ class Parser
 				return this->processIf(line, "if", args, false, true);
 			case "ELSEIF":
 				return this->processIf(line, "elseif", args);
+			case "ELSEIFE":
+				return this->processIf(line, "elseif", args, false, true);
+			case "ELSEIFNTE":
+				return this->processIf(line, "elseif", args, true);
 			case "ELSE":
 				if (!this->js) {
 					return "<?php else : ?>\n";

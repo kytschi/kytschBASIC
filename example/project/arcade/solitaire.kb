@@ -243,6 +243,10 @@ JFUNCTION "updateStackClick"
     $("#stack .flipped").on("click", (event) => {
         onStackCardClick(event);
     });
+    if ($("#pile").children().length == 1) {
+        flipCard();
+        updatePile(event);
+    }
 END JFUNCTION
 
 JFUNCTION "pickCards"

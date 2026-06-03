@@ -58,7 +58,8 @@ class Navigation extends Command
 	{
 		var output = "", splits, str;
 
-		if (strpos("http:", args[0]) !== false || strpos("ftp:", args[0]) !== false) {
+		let str = trim(args[0], "\"");
+		if (substr(str, 0 , 4) == "http" || substr(str, 0 , 3) == "ftp" || substr(str, 0 , 1) == "/") {
 			return "<?php header(\"Location: \" . " . args[0] . ");die(); ?>";
 		} else {
 			if (strpos(args[0], "[") !== false || strpos(args[0], "(") !== false) {
@@ -72,7 +73,6 @@ class Navigation extends Command
 				} else {
 					let output = args[0];
 				}
-				
 
 				// Clean any + used for string join.
 				let output = preg_replace("/\+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", " . ", output);

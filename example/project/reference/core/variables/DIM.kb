@@ -112,7 +112,7 @@ FOR iLoop%=0 TO 10
 	LET test$(iLoop%)="array element" + iLoop%
 NEXT
 FOR val$ IN test$
-	PRINT val#
+	PRINT val$
 	LINE BREAK
 NEXT
 				END CPRINT
@@ -128,6 +128,27 @@ NEXT
 						PRINT val#
 						LINE BREAK
 					NEXT
+				END DIV
+
+				SWRITE "basic h3"
+					PRINT "Associative arrays"
+				END SWRITE
+				SWRITE
+					PRINT "Defining an associative array."
+				END SWRITE
+				SWRITE "basic"
+					PRINT "Example"
+				END SWRITE
+				CPRINT
+DIM test$=("index1":"test1", "index2": "test2")
+PRINT test$("index1")
+				END CPRINT
+				SWRITE "basic"
+					PRINT "Output"
+				END SWRITE
+				DIV "kb-code-block"
+					DIM test$=("index1":"test1", "index2": "test2")
+					PRINT test$("index1")
 				END DIV
 				HEADING 4
 					PRINT "See also"

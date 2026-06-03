@@ -20,6 +20,8 @@ LOAD _ROOT + "/project/shared/header"
 				CPRINT
 IFNTE _GET("input_test") THEN
 	PRINT "You submitted something via the form"
+ELSEIFNTE _GET("input_test2") THEN
+	PRINT "You submitted something via the form"
 END IF
 				END CPRINT
 				HEADING 4

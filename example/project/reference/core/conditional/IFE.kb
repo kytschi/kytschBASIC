@@ -22,6 +22,13 @@ DEF test%=0
 IFE test% THEN
 	PRINT "Test is empty"
 END IF
+
+DEF missing_fields%=0
+IFE _POST("username") THEN
+	LET missing_fields%=1
+ELSEIFE _POST("password") THEN
+	LET missing_fields%=1
+END IF
 				END CPRINT
 				HEADING 4
 					PRINT "See also"

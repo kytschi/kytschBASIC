@@ -6,7 +6,9 @@
     --orange: #F8B133;
     --red: #D23136;
 }
-
+.jq-toast-single {
+    text-transform: capitalize;
+}
 html, body {
     padding: 0;
     margin: 0;

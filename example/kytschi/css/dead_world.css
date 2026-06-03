@@ -1,6 +1,9 @@
 :root {
     --move-size: 36px;
 }
+.jq-toast-single h2 {
+    text-transform: capitalize;
+}
 html, body {
     width: 100%;
     height: 100vh;
