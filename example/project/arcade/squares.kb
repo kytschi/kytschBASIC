@@ -20,6 +20,7 @@ DEF name$=names$(indx%)
 DEF size%=9
 
 JDEF turn%=0
+JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","swordsman6","swordsman7","swordsman8","swordsman9")
 
 JFUNCTION "setTakeOver"
     var parent_offset = $("#battleground").offset();
@@ -93,8 +94,11 @@ JFUNCTION "setTakeOver"
 
     if (computer_sides == 3 || player_sides == 3) {
         $("#squares #grid #" + cell_take)
-            .css("border-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("background", $("#squares #player-" + turn + " span").css("background-color"));
+            .css("border-color", $("#squares #player-" + turn + " span").css("background-color"));
+
+        $("#squares #grid #" + cell_take).html('<img src="/kytschi/imgs/squares/army/' + army[Math.floor(Math.random() * army.length)] + '.png"/>');
+    } else if (computer_sides == 2 && player_sides == 2) {
+        $("#squares #grid #" + cell_take).addClass("dead");
     }
     updateTurn();
 END JFUNCTION

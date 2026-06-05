@@ -165,4 +165,12 @@ img {
     background-image: url(../imgs/squares/battle-square.jpg);
     background-repeat: no-repeat;
     border: 4px solid var(--brown);
+    align-items: center;
+    justify-content: center;
+}
+#squares #battleground #grid .col.dead {
+    background-image: url(../imgs/squares/battle-square-dead.jpg);
+}
+#squares #battleground #grid .col img {
+    width: 100%;
 }
