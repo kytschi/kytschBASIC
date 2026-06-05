@@ -153,16 +153,16 @@ img {
 }
 #squares #battleground #grid .row {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 2px;
 }
 #squares #battleground #grid .col {
     display: flex;
-    width: calc(var(--col-size) - 4px);
-    height: calc(var(--col-size) - 4px);
+    width: calc(var(--col-size) - 8px);
+    height: calc(var(--col-size) - 8px);
     cursor: pointer;
     background-image: url(../imgs/squares/battle-square.jpg);
     background-repeat: no-repeat;
-    border: 2px solid var(--brown);
+    border: 4px solid var(--brown);
 }
