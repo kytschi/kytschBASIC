@@ -20,7 +20,7 @@ DEF name$=names$(indx%)
 DEF size%=9
 
 JDEF turn%=0
-JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","swordsman6","swordsman7","swordsman8","swordsman9")
+JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","swordsman6","swordsman7","swordsman8","swordsman9","archer1","archer2","archer3","archer4","archer5","archer6","archer7","archer8","archer9","catapult1","catapult2","catapult3","catapult4","catapult5")
 
 JFUNCTION "setTakeOver"
     var parent_offset = $("#battleground").offset();
@@ -92,12 +92,11 @@ JFUNCTION "setTakeOver"
         }
     });
 
-    if (computer_sides == 3 || player_sides == 3) {
+    if (computer_sides == 4 || player_sides == 4) {
         $("#squares #grid #" + cell_take)
             .css("border-color", $("#squares #player-" + turn + " span").css("background-color"));
-
         $("#squares #grid #" + cell_take).html('<img src="/kytschi/imgs/squares/army/' + army[Math.floor(Math.random() * army.length)] + '.png"/>');
-    } else if (computer_sides == 2 && player_sides == 2) {
+    } else if (computer_sides + player_sides >= 4) {
         $("#squares #grid #" + cell_take).addClass("dead");
     }
     updateTurn();
