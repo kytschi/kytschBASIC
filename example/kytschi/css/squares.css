@@ -80,7 +80,7 @@ img {
 #squares #players .player-ui span {
     display: block;
     margin-top: -5px;
-    background-color: var(--green);
+    background-color: var(--blue);
     color: var(--white);
     padding: 10px;
     width: calc(100% - 30px);
@@ -150,23 +150,19 @@ img {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*border-top: 5px solid var(--brown);*/
 }
 #squares #battleground #grid .row {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*border-bottom: 5px solid var(--brown);
-    border-right: 5px solid var(--brown);*/
+    gap: 2px;
 }
 #squares #battleground #grid .col {
     display: flex;
-    width: var(--col-size);
-    height: var(--col-size);
-    
+    width: calc(var(--col-size) - 4px);
+    height: calc(var(--col-size) - 4px);
     cursor: pointer;
     background-image: url(../imgs/squares/battle-square.jpg);
     background-repeat: no-repeat;
-    border: 1px solid var(--brown);
-    /*border-left: 5px solid var(--brown);*/
+    border: 2px solid var(--brown);
 }

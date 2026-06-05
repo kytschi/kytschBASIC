@@ -26,48 +26,76 @@ JFUNCTION "setTakeOver"
     var target_offset = $(event.target).offset();
     var cell_take = event.target.id;
     var size = $(event.target).height();
+    var border_width = "4px";
 
-    console.log(
+    /*console.log(
         "Mouse",
         event.pageY,
         event.pageX
     );
-    /*console.log(
-        "Grid",
-        parent_offset.top,
-        parent_offset.left
-    );*/
     console.log(
         cell_take,
         target_offset.top,
         target_offset.left
-    );
-
-    if ($("#squares #grid #" + cell_take).attr("data-owner-left")) {
-        return;
-    }
-
-    $("#squares #grid #" + cell_take).css("border-bottom-color", $("#squares #player-" + turn + " span").css("background-color"));
+    );*/
 
     // Top line
-    if (event.pageY >= target_offset.top && event.pageY <= target_offset.top + 5) {
-        console.log("Top");
-        $("#squares #grid #" + cell_take).css("border-top-width", "5px");
-        $("#squares #grid #" + cell_take).attr("data-owner-top", turn);
-    } else if (event.pageY <= (target_offset.top + size - 5) && event.pageY >= target_offset.top + 5) {
-        console.log("Bottom");
-        $("#squares #grid #" + cell_take).css("border-bottom-width", "5px");
-        $("#squares #grid #" + cell_take).attr("data-owner-bottom", turn);
-    } else if (event.pageX <= (target_offset.top + size - 5) && event.pageX >= target_offset.top + 5) {
-        console.log("Right");
-        $("#squares #grid #" + cell_take).css("border-right-width", "5px");
-        $("#squares #grid #" + cell_take).attr("data-owner-right", turn);
-    } else {
-        console.log("Left");
-        $("#squares #grid #" + cell_take).css("border-left-width", "5px");
-        $("#squares #grid #" + cell_take).attr("data-owner-left", turn);
+    if (event.pageY >= target_offset.top && event.pageY <= target_offset.top + (size / 4)) {
+        //console.log("Top");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-top")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-top-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-top-width", border_width);
+        $("#squares #grid #" + cell_take).data("data-owner-top", turn);
+    } else if (event.pageX <= target_offset.left + size && event.pageX >= target_offset.left + size - (size / 4)) {
+        //console.log("Right");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-right")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-right-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-right-width", border_width);
+        $("#squares #grid #" + cell_take).data("data-owner-right", turn);
+    } else if (event.pageX >= target_offset.left && event.pageX <= target_offset.left + (size / 4)) {
+        //console.log("Left");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-left")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-left-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-left-width", border_width);
+        $("#squares #grid #" + cell_take).data("data-owner-left", turn);
+    } else if (event.pageY <= target_offset.top + size && event.pageY >= target_offset.top - (size / 4)) {
+        //console.log("Bottom");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-bottom")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-bottom-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-bottom-width", border_width);
+        $("#squares #grid #" + cell_take).data("data-owner-bottom", turn);
     }
 
+    var computer_sides = 0;
+    var player_sides = 0;
+    ["data-owner-bottom", "data-owner-top", "data-owner-left", "data-owner-right"].forEach((name) => {
+        if (typeof($("#squares #grid #" + cell_take).data(name)) == "undefined") {
+            return;
+        }
+        if ($("#squares #grid #" + cell_take).data(name)) {
+            player_sides++;
+        } else {
+            computer_sides++;
+        }
+    });
+
+    if (computer_sides == 3 || player_sides == 3) {
+        $("#squares #grid #" + cell_take)
+            .css("border-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("background", $("#squares #player-" + turn + " span").css("background-color"));
+    }
     updateTurn();
 END JFUNCTION
 
