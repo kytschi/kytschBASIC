@@ -154,6 +154,9 @@ HEADER
 		LINK "/reference/CREATECOOKIE#refCREATECOOKIE","Find out about the CREATECOOKIE command","nav-link",,"refCREATECOOKIE"
 			PRINT "CREATECOOKIE"
 		END LINK
+		LINK "/reference/DATA#refDATA","Find out about the DATA command","nav-link",,"refDATA"
+			PRINT "DATA"
+		END LINK
 		LINK "/reference/DATEFORMAT#refDATEFORMAT","Find out about the DATEFORMAT command","nav-link",,"refDATEFORMAT"
 			PRINT "DATEFORMAT"
 		END LINK

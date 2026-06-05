@@ -64,6 +64,10 @@
 		"url": "/arcade/blackjack",
 		"template": "project/arcade/blackjack.kb"
 	},
+	{
+		"url": "/arcade/squares",
+		"template": "project/arcade/squares.kb"
+	},
 
 	{
 		"url": "/news",
@@ -243,6 +247,10 @@
 		"template": "project/reference/core/loops/CONTINUE.kb"
 	},
 
+	{
+		"url": "/reference/DATA",
+		"template": "project/reference/core/storage/database/DATA.kb"
+	},
 	{
 		"url": "/reference/DBIND",
 		"template": "project/reference/core/storage/database/DBIND.kb"

@@ -192,7 +192,6 @@ body {
 
 #sevens .card-highlight {
     background-color: var(--orange);
-
     clip-path: polygon(
         0px 3px, 3px 3px, 3px 0px,
         calc(100% - 3px) 0px, calc(100% - 3px) 3px,

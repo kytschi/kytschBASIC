@@ -545,7 +545,7 @@ class Variables
 
 	private function processDim(string line, args, bool javascript = false)
 	{
-		var arg, output = "<?php ", splits, me_array = false, cleaned = "";
+		var arg, output = "<?php ", splits, cleaned = "";
 
 		if (!count(args)) {
 			throw new Exception("Invalid " . (javascript ? "DIM" : "JDIM"));
@@ -577,57 +577,6 @@ class Variables
 		let output .= javascript ?
 			"' . json_encode(" . arg . ")  . '</script>'" :
 			preg_replace("/:(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", " => ", arg);
-		
-		/*for arg in args {
-			if (
-				arg == "[]" ||
-				substr(arg, 0, 1) == "(" || substr(arg, strlen(arg) - 1, 1) == ")" ||
-				substr(arg, 0, 1) == "[" || substr(arg, strlen(arg) - 1, 1) == "]"
-			) {
-				let me_array = true;
-				if (substr(arg, 0, 1) != "$") {
-					let output .= "[";
-				}
-				let arg = ltrim(rtrim(arg, "]"), "[");
-				let arg = ltrim(rtrim(arg, ")"), "(");
-			}
-
-			if (empty(arg)) {
-				continue;
-			}
-
-			switch (splits[0][0]) {
-				case "%=":
-					let cleaned = me_array ? arg : "intval(" . arg . ")";
-					break;
-				case "#=":
-					let cleaned = me_array ? arg : "(double)" . arg . "";
-					break;
-				default:
-					let cleaned = arg;
-					break;
-			}
-
-			if (javascript && cleaned == "") {
-				let cleaned = "json_encode([])";
-				let arg = [];
-			}
-
-			let output .= (
-				javascript ? "' . (is_array(" . arg . ") ? json_encode(" . arg. ") : " . cleaned . ") . ', " :
-				arg . ", "
-			);
-		}*/
-
-		//let output = rtrim(output, ", ");
-		if (me_array) {
-			//let output = rtrim(output, "]") . "];";
-			let output .= "];";
-			if (!javascript) {
-				// Replace any : with => as its an associative array.
-				let output = preg_replace("/:(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/", " => ", output);
-			}
-		}
 
 		return output . "; ?>";
 	}

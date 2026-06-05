@@ -23,6 +23,19 @@ END LINK
 LINE BREAK
 
 HEADING 3
+    PRINT "Kytschi's Squares"
+END HEADING 3
+LINK "/arcade/squares","Play the squares conquest game",,"_blank"
+    PRINT "View it live here"
+END LINK
+LINE BREAK
+LINK "https://github.com/kytschi/kytschBASIC/blob/master/example/project/arcade/squares.kb","Squares card game source code",,"_blank"
+    PRINT "View the source code"
+END LINK
+LINE BREAK
+PRINT "Note, it's a work in progress", "heading-args"
+
+HEADING 3
     PRINT "Kytschi's Solitaire"
 END HEADING 3
 LINK "/arcade/solitaire","Play the Solitaire card game",,"_blank"

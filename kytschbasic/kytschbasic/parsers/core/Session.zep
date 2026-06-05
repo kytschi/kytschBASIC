@@ -61,7 +61,7 @@ class Session extends Command
 		}
 
 		if (array_key_exists(trim(name, "\""), _SESSION)) {
-			return "<?php unset($_SESSION[" . name . "]); ?>";
+			return "<?php isset($_SESSION[" . name . "]) ? unset($_SESSION[" . name . "]) : ''; ?>";
 		}
 	}
 
