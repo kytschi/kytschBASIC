@@ -13,6 +13,7 @@ HEAD
 END HEAD
 
 DEF size%=5
+DEF tiles%=11
 
 JDEF border_width$="4px"
 JDEF turn%=0
@@ -357,8 +358,10 @@ BODY
                     DEF id%=1;
                     FOR iLoop%=1 TO size% 
                         DIV "row"
-                            FOR iLoop2%=1 TO size% 
-                                DIV "col", "cell-" + id%
+                            FOR iLoop2%=1 TO size%
+                                DEF tile%=RND(1, tiles%)
+                                DEF col$="col tile" + tile%
+                                DIV col$, "cell-" + id%
                                 END DIV
                                 LET id%=(id%+1)
                             NEXT

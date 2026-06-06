@@ -181,22 +181,54 @@ img {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 2px;
 }
 #squares #battleground #grid .col {
     display: flex;
     width: calc(var(--col-size) - 8px);
     height: calc(var(--col-size) - 8px);
     cursor: pointer;
-    background-image: url(../imgs/squares/battle-square.jpg);
+    background-color: var(--brown);
     background-size: 100%;
     background-repeat: no-repeat;
     border: 4px solid var(--brown);
     align-items: center;
     justify-content: center;
 }
+#squares #battleground #grid .tile1 {
+    background-image: url(../imgs/squares/tile1.png);
+}
+#squares #battleground #grid .tile2 {
+    background-image: url(../imgs/squares/tile2.png);
+}
+#squares #battleground #grid .tile3 {
+    background-image: url(../imgs/squares/tile3.png);
+}
+#squares #battleground #grid .tile4 {
+    background-image: url(../imgs/squares/tile4.png);
+}
+#squares #battleground #grid .tile5 {
+    background-image: url(../imgs/squares/tile5.png);
+}
+#squares #battleground #grid .tile6 {
+    background-image: url(../imgs/squares/tile6.png);
+}
+#squares #battleground #grid .tile7 {
+    background-image: url(../imgs/squares/tile7.png);
+}
+#squares #battleground #grid .tile8 {
+    background-image: url(../imgs/squares/tile8.png);
+}
+#squares #battleground #grid .tile9 {
+    background-image: url(../imgs/squares/tile9.png);
+}
+#squares #battleground #grid .tile10 {
+    background-image: url(../imgs/squares/tile10.png);
+}
+#squares #battleground #grid .tile11 {
+    background-image: url(../imgs/squares/tile11.png);
+}
 #squares #battleground #grid .col.dead {
-    background-image: url(../imgs/squares/battle-square-dead.jpg);
+    background-image: url(../imgs/squares/tile-dead.png) !important;
 }
 #squares #battleground #grid .col img {
     width: 100%;
