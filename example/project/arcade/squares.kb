@@ -27,49 +27,99 @@ JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","sw
 JDIM computer_squares$=()
 JDIM player_squares$=()
 
+JFUNCTION "computerPlay"
+    sleep(500).then(() => {
+        if (computer_squares.length >= 4) {
+            fight();
+            return;
+        }
+
+        var location = "", cols = $("#squares #grid .col");
+        for (var iLoop=0; iLoop < cols.length; iLoop++) {
+            var col = cols[iLoop];
+            if (typeof($(col).data("data-owner-top")) == "undefined") {
+                location = "top";
+            }
+            if (typeof($(col).data("data-owner-left")) == "undefined") {
+                location = "left";
+            }
+            if (typeof($(col).data("data-owner-right")) == "undefined") {
+                location = "right";
+            }
+            if (typeof($(col).data("data-owner-bottom")) == "undefined") {
+                location = "bottom";
+            }
+
+            if (location) {
+                setTakeOver(event, $(col).attr("id"), location, true);
+                break;
+            }
+        }
+    });
+END JFUNCTION
+
 JFUNCTION "fight"
     if (computer_squares < 1 || player_squares < 1) {
         return;
     }
 
-    var computer_strength = 0;
-    var player_strength = 0;
-
-    computer_squares.forEach((solder) => {
-        computer_strength += fightStength(event, solder);
-    });
-
-    player_squares.forEach((solder) => {
-        player_strength += fightStength(event, solder);
-    });
-
-    if (computer_strength > player_strength) {
-        player_squares.forEach((solder) => {
-            $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 0 + " span").css("background-color"));
-            $("#squares #" + solder.id)
-                .removeData("data-owner-top")
-                .removeData("data-owner-left")
-                .removeData("data-owner-right")
-                .removeData("data-owner-bottom");
-            $("#squares #" + solder.id).html("");
-        });
-        player_squares = [];
-        resetBorders();
-        resetButtons();
-    } else if (player_strength > computer_strength) {
-        computer_squares.forEach((solder) => {
-            $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 1 + " span").css("background-color"));
-            $("#squares #" + solder.id)
-                .removeData("data-owner-top")
-                .removeData("data-owner-left")
-                .removeData("data-owner-right")
-                .removeData("data-owner-bottom");
-            $("#squares #" + solder.id).html("");
-        });
-        computer_squares = [];
-        resetBorders();
-        resetButtons();
+    $("#squares #fight img").hide();
+    $("#squares #battleground #fight").css("display", "flex");
+    if (turn) {
+        $("#squares #fight .player-fight").show();
+    } else {
+        $("#squares #fight .computer-fight").show();
     }
+
+    sleep(1000).then(() => {
+        var computer_strength = 0;
+        var player_strength = 0;
+
+        computer_squares.forEach((solder) => {
+            computer_strength += fightStength(event, solder);
+        });
+
+        player_squares.forEach((solder) => {
+            player_strength += fightStength(event, solder);
+        });
+
+        $("#squares #fight img").hide();
+        if (computer_strength > player_strength) {
+            player_squares.forEach((solder) => {
+                $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 0 + " span").css("background-color"));
+                $("#squares #" + solder.id)
+                    .removeData("data-owner-top")
+                    .removeData("data-owner-left")
+                    .removeData("data-owner-right")
+                    .removeData("data-owner-bottom");
+                $("#squares #" + solder.id).html("");
+            });
+            player_squares = [];
+            resetBorders();
+            resetButtons();
+            $("#squares #fight .computer-won").show();
+        } else if (player_strength > computer_strength) {
+            computer_squares.forEach((solder) => {
+                $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 1 + " span").css("background-color"));
+                $("#squares #" + solder.id)
+                    .removeData("data-owner-top")
+                    .removeData("data-owner-left")
+                    .removeData("data-owner-right")
+                    .removeData("data-owner-bottom");
+                $("#squares #" + solder.id).html("");
+            });
+            computer_squares = [];
+            resetBorders();
+            resetButtons();
+            $("#squares #fight .player-won").show();
+        }
+
+        sleep(1000).then(() => {
+            $("#squares #fight img").hide();
+            $("#squares #battleground #fight").css("display", "none");
+            updateTurn();
+        });
+    });
 END JFUNCTION
 JFUNCTION "fightStength", "solder"
     switch(solder.type) {
@@ -150,33 +200,29 @@ JFUNCTION "setBorder", "target_offset", "cell_take", "set=false"
     }
 
     if (location) {
-        $("#squares #grid #" + cell_take)
-            .css("border-" + location + "-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-" + location + "-width", border_width);
-        if (set) {
-            $("#squares #grid #" + cell_take).data("data-owner-" + location, turn);
-        }
+        setLocation(event, cell_take, location, set);
     }
 
     return true;
 END JFUNCTION
 
-JFUNCTION "setTakeOver"
-    var target_offset = $(event.target).offset();
-    var cell_take = event.target.id;
-    
-    /*console.log(
-        "Mouse",
-        event.pageY,
-        event.pageX
-    );
-    console.log(
-        cell_take,
-        target_offset.top,
-        target_offset.left
-    );*/
+JFUNCTION "setLocation", "cell_take", "location", "set=false"
+    $("#squares #grid #" + cell_take)
+        .css("border-" + location + "-color", $("#squares #player-" + turn + " span").css("background-color"))
+        .css("border-" + location + "-width", border_width);
 
-    if (!setBorder(event, target_offset, cell_take, true)) {
+    if (set) {
+        $("#squares #grid #" + cell_take).data("data-owner-" + location, turn);
+    }
+END JFUNCTION
+
+JFUNCTION "setTakeOver", "id=null", "location=''", "set=false"
+    var target_offset = event ? $(event.target).offset() : null;
+    var cell_take = id ? id : event.target.id;
+    
+    if (id) {
+        setLocation(event, cell_take, location, set);
+    } else if (!setBorder(event, target_offset, cell_take, true)) {
         return;
     }
 
@@ -214,7 +260,9 @@ JFUNCTION "setTakeOver"
     } else if (computer_sides + player_sides >= 4) {
         $("#squares #grid #" + cell_take).addClass("dead");
     }
-    updateTurn();
+    if (computer_sides >= 1 || player_sides >= 1) {
+        updateTurn();
+    }
 END JFUNCTION
 
 JFUNCTION "setTakeOverHighlight"
@@ -236,17 +284,27 @@ JFUNCTION "updateTurn"
         turn = 0;
     }
     $("#squares #player-" + turn).addClass("highlight");
+
+    if (!turn) {
+        computerPlay();
+    }
 END JFUNCTION
 
 JAVASCRIPT
     $("#squares #grid .col").click(() => {
-        setTakeOver(event);
+        if (turn) {
+            setTakeOver(event);
+        }
     }).mousemove(() => {
-        setTakeOverHighlight(event);
+        if (turn) {
+            setTakeOverHighlight(event);
+        }
     });
 
     $("#squares #grid").mouseleave(() => {
-        resetBorders(event);
+        if (turn) {
+            resetBorders(event);
+        }
     });
 
     $("button[name=btnNewGame]").click(() => {
@@ -267,6 +325,13 @@ JAVASCRIPT
     // Randomly select who goes first.
     turn = Math.floor(Math.random() * 2);
     $("#squares #player-" + turn).addClass("highlight");
+
+    $("#squares #battleground #fight").css("width", $("#squares #battleground #grass").width());
+    $("#squares #battleground #fight").css("height", $("#squares #battleground #grass").height());
+
+    if (!turn) {
+        computerPlay();
+    }
 END JAVASCRIPT
 
 BODY
@@ -304,6 +369,12 @@ BODY
                             NEXT
                         END DIV
                     NEXT
+                END DIV
+                DIV "", "fight"
+                    IMAGE "/kytschi/imgs/squares/banner-computer-fight.png", "computer fight", "computer-fight"
+                    IMAGE "/kytschi/imgs/squares/banner-computer-won.png", "computer won", "computer-won"
+                    IMAGE "/kytschi/imgs/squares/banner-player-fight.png", "player fight", "player-fight"
+                    IMAGE "/kytschi/imgs/squares/banner-player-won.png", "player won", "player-won"
                 END DIV
             END DIV
         END DIV
