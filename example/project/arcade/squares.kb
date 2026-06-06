@@ -121,55 +121,44 @@ END JFUNCTION
 
 JFUNCTION "setBorder", "target_offset", "cell_take", "set=false"
     var div = 3;
-    // Top line
+    var location = "";
+    
     if (event.pageY >= target_offset.top && event.pageY <= target_offset.top + (cell_size / div)) {
         //console.log("Top");
         if (typeof($("#squares #grid #" + cell_take).data("data-owner-top")) != "undefined") {
-            return;
+            return false;
         }
-        $("#squares #grid #" + cell_take)
-            .css("border-top-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-top-width", border_width);
-        if (set) {
-            $("#squares #grid #" + cell_take).data("data-owner-top", turn);
-        }
+        location = "top";
     } else if (event.pageX <= target_offset.left + cell_size && event.pageX >= target_offset.left + cell_size - (cell_size / div)) {
         //console.log("Right");
         if (typeof($("#squares #grid #" + cell_take).data("data-owner-right")) != "undefined") {
-            return;
+            return false;
         }
-        $("#squares #grid #" + cell_take)
-            .css("border-right-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-right-width", border_width);
-        
-        if (set) {
-            $("#squares #grid #" + cell_take).data("data-owner-right", turn);
-        }
+        location = "right";
     } else if (event.pageX >= target_offset.left && event.pageX <= target_offset.left + (cell_size / div)) {
         //console.log("Left");
         if (typeof($("#squares #grid #" + cell_take).data("data-owner-left")) != "undefined") {
-            return;
+            return false;
         }
-        $("#squares #grid #" + cell_take)
-            .css("border-left-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-left-width", border_width);
-        
-        if (set) {
-            $("#squares #grid #" + cell_take).data("data-owner-left", turn);
-        }
+        location = "left";
     } else if (event.pageY <= target_offset.top + cell_size && event.pageY >= target_offset.top - (cell_size / div)) {
         //console.log("Bottom");
         if (typeof($("#squares #grid #" + cell_take).data("data-owner-bottom")) != "undefined") {
-            return;
+            return false;
         }
+        location = "bottom";
+    }
+
+    if (location) {
         $("#squares #grid #" + cell_take)
-            .css("border-bottom-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-bottom-width", border_width);
-        
+            .css("border-" + location + "-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-" + location + "-width", border_width);
         if (set) {
-            $("#squares #grid #" + cell_take).data("data-owner-bottom", turn);
+            $("#squares #grid #" + cell_take).data("data-owner-" + location, turn);
         }
     }
+
+    return true;
 END JFUNCTION
 
 JFUNCTION "setTakeOver"
@@ -187,7 +176,9 @@ JFUNCTION "setTakeOver"
         target_offset.left
     );*/
 
-    setBorder(event, target_offset, cell_take, true);
+    if (!setBorder(event, target_offset, cell_take, true)) {
+        return;
+    }
 
     var computer_sides = 0;
     var player_sides = 0;
