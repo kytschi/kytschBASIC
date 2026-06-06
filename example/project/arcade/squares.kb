@@ -254,6 +254,10 @@ JAVASCRIPT
         setTakeOverHighlight(event);
     });
 
+    $("#squares #grid").mouseleave(() => {
+        resetBorders(event);
+    });
+
     $("button[name=btnNewGame]").click(() => {
         window.location.reload();
     });
