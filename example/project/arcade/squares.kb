@@ -12,11 +12,6 @@ HEAD
 	NAME "Arcade - Squares | kytschBASIC"
 END HEAD
 
-DIM names$=("amy", "angie", "ashleigh", "brian", "chris", "claire", "emma", "george", "helen", "ian", "jane", "jemma", "joe", "josh", "kyle", "laura", "lenny", "matt", "mike", "nick", "sarah", "zack")
-DEF end%=COUNT(names$)
-LET end%=(end%-1)
-DEF indx%=RND(0, end%)
-DEF name$=names$(indx%)
 DEF size%=5
 
 JDEF border_width$="4px"
@@ -340,8 +335,8 @@ BODY
             DIV "", "players"
                 DIV "", "players-content"
                     DIV "player-ui computer", "player-0"
-                        IMAGE "/kytschi/imgs/people/" + name$ + ".png"
-                        PRINT name$
+                        IMAGE "/kytschi/imgs/people/bot.png"
+                        PRINT "Bot"
                         IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                         PRINT "&nbsp;", "show-highlight"
                     END DIV
