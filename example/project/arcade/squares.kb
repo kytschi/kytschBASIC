@@ -17,18 +17,165 @@ DEF end%=COUNT(names$)
 LET end%=(end%-1)
 DEF indx%=RND(0, end%)
 DEF name$=names$(indx%)
-DEF size%=9
+DEF size%=5
 
+JDEF border_width$="4px"
 JDEF turn%=0
-JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","swordsman6","swordsman7","swordsman8","swordsman9","archer1","archer2","archer3","archer4","archer5","archer6","archer7","archer8","archer9","catapult1","catapult2","catapult3","catapult4","catapult5")
+JDEF cell_size%=128
+JDEF parent_offset#=null
+JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","swordsman6","swordsman7","swordsman8","swordsman9","archer1","archer2","archer3","archer4","archer5","archer6","archer7","archer8","archer9","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4","maseman5","maseman6","axeman1","axeman2","axeman3","axeman4","axeman5","axeman6","axeman7","pikeman1","pikeman2","pikeman3","pikeman4","pikeman5","pikeman6","knight1","knight2","knight3","knight4","knight5","knight6","knight7","knight8","horseman1","horseman2","horseman3","horseman4","horseman5","peasant1","peasant2","peasant3","peasant4","peasant5","peasant6","peasant7")
+JDIM computer_squares$=()
+JDIM player_squares$=()
+
+JFUNCTION "fight"
+    if (computer_squares < 1 || player_squares < 1) {
+        return;
+    }
+
+    var computer_strength = 0;
+    var player_strength = 0;
+
+    computer_squares.forEach((solder) => {
+        computer_strength += fightStength(event, solder);
+    });
+
+    player_squares.forEach((solder) => {
+        player_strength += fightStength(event, solder);
+    });
+
+    if (computer_strength > player_strength) {
+        player_squares.forEach((solder) => {
+            $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 0 + " span").css("background-color"));
+            $("#squares #" + solder.id)
+                .removeData("data-owner-top")
+                .removeData("data-owner-left")
+                .removeData("data-owner-right")
+                .removeData("data-owner-bottom");
+            $("#squares #" + solder.id).html("");
+        });
+        player_squares = [];
+        resetBorders();
+        resetButtons();
+    } else if (player_strength > computer_strength) {
+        computer_squares.forEach((solder) => {
+            $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 1 + " span").css("background-color"));
+            $("#squares #" + solder.id)
+                .removeData("data-owner-top")
+                .removeData("data-owner-left")
+                .removeData("data-owner-right")
+                .removeData("data-owner-bottom");
+            $("#squares #" + solder.id).html("");
+        });
+        computer_squares = [];
+        resetBorders();
+        resetButtons();
+    }
+END JFUNCTION
+JFUNCTION "fightStength", "solder"
+    switch(solder.type) {
+        case "archer":
+            return 3;
+        case "axeman":
+            return 3;
+        case "catapult":
+            return 6;
+        case "horseman":
+            return 5;
+        case "knight":
+            return 5;
+        case "maseman":
+            return 2;
+        case "pikeman":
+            return 4;
+        case "swordsman":
+            return 2;
+        default:
+            return 1;
+    }
+END JFUNCTION
+
+JFUNCTION "resetBorders"
+    $("#squares #grid .col").each((index, col) => {
+        if (typeof($(col).data("data-owner-top")) == "undefined") {
+            $(col).css("border-top-color", "var(--brown)");
+        }
+        if (typeof($(col).data("data-owner-left")) == "undefined") {
+            $(col).css("border-left-color", "var(--brown)");
+        }
+        if (typeof($(col).data("data-owner-right")) == "undefined") {
+            $(col).css("border-right-color", "var(--brown)");
+        }
+        if (typeof($(col).data("data-owner-bottom")) == "undefined") {
+            $(col).css("border-bottom-color", "var(--brown)");
+        }
+    });
+END JFUNCTION
+
+JFUNCTION "resetButtons"
+    if (computer_squares.length >= 1 && player_squares.length >= 1) {
+        $("#squares .btn-fight").removeClass("off");
+    } else {
+        $("#squares .btn-fight").addClass("off");
+    }
+END JFUNCTION
+
+JFUNCTION "setBorder", "target_offset", "cell_take", "set=false"
+    var div = 3;
+    // Top line
+    if (event.pageY >= target_offset.top && event.pageY <= target_offset.top + (cell_size / div)) {
+        //console.log("Top");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-top")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-top-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-top-width", border_width);
+        if (set) {
+            $("#squares #grid #" + cell_take).data("data-owner-top", turn);
+        }
+    } else if (event.pageX <= target_offset.left + cell_size && event.pageX >= target_offset.left + cell_size - (cell_size / div)) {
+        //console.log("Right");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-right")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-right-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-right-width", border_width);
+        
+        if (set) {
+            $("#squares #grid #" + cell_take).data("data-owner-right", turn);
+        }
+    } else if (event.pageX >= target_offset.left && event.pageX <= target_offset.left + (cell_size / div)) {
+        //console.log("Left");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-left")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-left-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-left-width", border_width);
+        
+        if (set) {
+            $("#squares #grid #" + cell_take).data("data-owner-left", turn);
+        }
+    } else if (event.pageY <= target_offset.top + cell_size && event.pageY >= target_offset.top - (cell_size / div)) {
+        //console.log("Bottom");
+        if (typeof($("#squares #grid #" + cell_take).data("data-owner-bottom")) != "undefined") {
+            return;
+        }
+        $("#squares #grid #" + cell_take)
+            .css("border-bottom-color", $("#squares #player-" + turn + " span").css("background-color"))
+            .css("border-bottom-width", border_width);
+        
+        if (set) {
+            $("#squares #grid #" + cell_take).data("data-owner-bottom", turn);
+        }
+    }
+END JFUNCTION
 
 JFUNCTION "setTakeOver"
-    var parent_offset = $("#battleground").offset();
     var target_offset = $(event.target).offset();
     var cell_take = event.target.id;
-    var size = $(event.target).height();
-    var border_width = "4px";
-
+    
     /*console.log(
         "Mouse",
         event.pageY,
@@ -40,44 +187,7 @@ JFUNCTION "setTakeOver"
         target_offset.left
     );*/
 
-    // Top line
-    if (event.pageY >= target_offset.top && event.pageY <= target_offset.top + (size / 4)) {
-        //console.log("Top");
-        if (typeof($("#squares #grid #" + cell_take).data("data-owner-top")) != "undefined") {
-            return;
-        }
-        $("#squares #grid #" + cell_take)
-            .css("border-top-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-top-width", border_width);
-        $("#squares #grid #" + cell_take).data("data-owner-top", turn);
-    } else if (event.pageX <= target_offset.left + size && event.pageX >= target_offset.left + size - (size / 4)) {
-        //console.log("Right");
-        if (typeof($("#squares #grid #" + cell_take).data("data-owner-right")) != "undefined") {
-            return;
-        }
-        $("#squares #grid #" + cell_take)
-            .css("border-right-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-right-width", border_width);
-        $("#squares #grid #" + cell_take).data("data-owner-right", turn);
-    } else if (event.pageX >= target_offset.left && event.pageX <= target_offset.left + (size / 4)) {
-        //console.log("Left");
-        if (typeof($("#squares #grid #" + cell_take).data("data-owner-left")) != "undefined") {
-            return;
-        }
-        $("#squares #grid #" + cell_take)
-            .css("border-left-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-left-width", border_width);
-        $("#squares #grid #" + cell_take).data("data-owner-left", turn);
-    } else if (event.pageY <= target_offset.top + size && event.pageY >= target_offset.top - (size / 4)) {
-        //console.log("Bottom");
-        if (typeof($("#squares #grid #" + cell_take).data("data-owner-bottom")) != "undefined") {
-            return;
-        }
-        $("#squares #grid #" + cell_take)
-            .css("border-bottom-color", $("#squares #player-" + turn + " span").css("background-color"))
-            .css("border-bottom-width", border_width);
-        $("#squares #grid #" + cell_take).data("data-owner-bottom", turn);
-    }
+    setBorder(event, target_offset, cell_take, true);
 
     var computer_sides = 0;
     var player_sides = 0;
@@ -93,13 +203,39 @@ JFUNCTION "setTakeOver"
     });
 
     if (computer_sides == 4 || player_sides == 4) {
+        var index = Math.floor(Math.random() * army.length);
+        var solder = army[index];
+        army.splice(index, 1);
+
         $("#squares #grid #" + cell_take)
-            .css("border-color", $("#squares #player-" + turn + " span").css("background-color"));
-        $("#squares #grid #" + cell_take).html('<img src="/kytschi/imgs/squares/army/' + army[Math.floor(Math.random() * army.length)] + '.png"/>');
+            .css("border-color", $("#squares #player-" + turn + " span")
+            .css("background-color"));
+
+        $("#squares #grid #" + cell_take).html('<img src="/kytschi/imgs/squares/army/' + solder + '.png"/>');
+
+        if (computer_sides == 4) {
+            computer_squares.push({id: cell_take, type: solder.replace(/[^a-zA-Z]/g, '')});
+        } else {
+            player_squares.push({id: cell_take, type: solder.replace(/[^a-zA-Z]/g, '')});
+        }
+
+        resetButtons();
     } else if (computer_sides + player_sides >= 4) {
         $("#squares #grid #" + cell_take).addClass("dead");
     }
     updateTurn();
+END JFUNCTION
+
+JFUNCTION "setTakeOverHighlight"
+    var target_offset = $(event.target).offset();
+    var cell_take = event.target.id;
+
+    if (!cell_take) {
+        return;
+    }
+
+    resetBorders();
+    setBorder(event, target_offset, cell_take);
 END JFUNCTION
 
 JFUNCTION "updateTurn"
@@ -112,29 +248,53 @@ JFUNCTION "updateTurn"
 END JFUNCTION
 
 JAVASCRIPT
-    $("#squares .col").click(() => {
-       setTakeOver(event);
+    $("#squares #grid .col").click(() => {
+        setTakeOver(event);
+    }).mousemove(() => {
+        setTakeOverHighlight(event);
     });
+
+    $("button[name=btnNewGame]").click(() => {
+        window.location.reload();
+    });
+
+    $("button[name=btnNewGame]").click(() => {
+        window.location.reload();
+    });
+
+    $("button[name=btnFight]").click(() => {
+        fight();
+    });
+
+    cell_size = $("#squares #grid .col").height();
+    parent_offset = $("#battleground").offset();
+
+    // Randomly select who goes first.
+    turn = Math.floor(Math.random() * 2);
     $("#squares #player-" + turn).addClass("highlight");
 END JAVASCRIPT
 
 BODY
     DIV "", "squares"
-        DIV "", "players"
-            DIV "", "players-content"
-                DIV "player-ui computer", "player-0"
-                    IMAGE "/kytschi/imgs/people/" + name$ + ".png"
-                    PRINT name$
-                    IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
-                    PRINT "&nbsp;", "show-highlight"
-                END DIV
-                DIV "player-ui player", "player-1"
-                    IMAGE "/kytschi/imgs/people/jason.png"
-                    PRINT "You"
-                    IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
-                    PRINT "&nbsp;", "show-highlight"
+        DIV "", "controls"
+            DIV "", "players"
+                DIV "", "players-content"
+                    DIV "player-ui computer", "player-0"
+                        IMAGE "/kytschi/imgs/people/" + name$ + ".png"
+                        PRINT name$
+                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
+                        PRINT "&nbsp;", "show-highlight"
+                    END DIV
+                    DIV "player-ui player", "player-1"
+                        IMAGE "/kytschi/imgs/people/jason.png"
+                        PRINT "You"
+                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
+                        PRINT "&nbsp;", "show-highlight"
+                    END DIV
                 END DIV
             END DIV
+            BUTTON "btnNewGame", "btn-new-game",, "new", "&nbsp;"
+            BUTTON "btnFight", "btn-fight off",, "fight", "&nbsp;"
         END DIV
         DIV "", "battleground"
             DIV "", "grass"
