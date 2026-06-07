@@ -19,15 +19,17 @@ JDEF border_width$="4px"
 JDEF turn%=0
 JDEF cell_size%=128
 JDEF parent_offset#=null
-JDIM army$=("swordsman1","swordsman2","swordsman3","swordsman4","swordsman5","swordsman6","swordsman7","swordsman8","swordsman9","archer1","archer2","archer3","archer4","archer5","archer6","archer7","archer8","archer9","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4","maseman5","maseman6","axeman1","axeman2","axeman3","axeman4","axeman5","axeman6","axeman7","pikeman1","pikeman2","pikeman3","pikeman4","pikeman5","pikeman6","knight1","knight2","knight3","knight4","knight5","knight6","knight7","knight8","horseman1","horseman2","horseman3","horseman4","horseman5","peasant1","peasant2","peasant3","peasant4","peasant5","peasant6","peasant7")
+JDIM computer_army$=("swordsman1","swordsman2","swordsman3","swordsman4","archer1","archer2","archer3","archer4","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4")
+JDIM player_army$=("swordsman1","swordsman2","swordsman3","swordsman4","archer1","archer2","archer3","archer4","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4")
 JDIM computer_squares$=()
 JDIM player_squares$=()
 
 JFUNCTION "computerPlay"
     sleep(500).then(() => {
-        if (computer_squares.length >= 4) {
-            fight();
-            return;
+        if (computer_squares.length >= 4 && Math.floor(Math.random() * 2) == 1) {
+            if (!fight(event, 0)) {
+                return;
+            }
         }
 
         var location = "", cols = $("#squares #grid .col");
@@ -54,60 +56,92 @@ JFUNCTION "computerPlay"
     });
 END JFUNCTION
 
-JFUNCTION "fight"
+JFUNCTION "fight", "player=1"
     if (computer_squares < 1 || player_squares < 1) {
-        return;
+        return false;
     }
 
     $("#squares #fight img").hide();
     $("#squares #battleground #fight").css("display", "flex");
-    if (turn) {
+
+    var attacker_won = 0;
+    var defender_won = 0;
+    var attacker = player_squares;
+    var defender = computer_squares;
+    var attacker_show = ".player-won";
+    var defender_show = ".computer-won";
+
+    if (player) {
         $("#squares #fight .player-fight").show();
     } else {
         $("#squares #fight .computer-fight").show();
+        attacker = computer_squares;
+        defender = player_squares;
+        attacker_show = ".computer-won";
+        defender_show = ".player-won";
     }
 
     sleep(1000).then(() => {
-        var computer_strength = 0;
-        var player_strength = 0;
-
-        computer_squares.forEach((solder) => {
-            computer_strength += fightStength(event, solder);
-        });
-
-        player_squares.forEach((solder) => {
-            player_strength += fightStength(event, solder);
-        });
-
         $("#squares #fight img").hide();
-        if (computer_strength > player_strength) {
-            player_squares.forEach((solder) => {
-                $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 0 + " span").css("background-color"));
-                $("#squares #" + solder.id)
-                    .removeData("data-owner-top")
-                    .removeData("data-owner-left")
-                    .removeData("data-owner-right")
-                    .removeData("data-owner-bottom");
-                $("#squares #" + solder.id).html("");
-            });
-            player_squares = [];
-            resetBorders();
-            resetButtons();
-            $("#squares #fight .computer-won").show();
-        } else if (player_strength > computer_strength) {
-            computer_squares.forEach((solder) => {
-                $("#squares #" + solder.id).css("border-color", $("#squares #player-" + 1 + " span").css("background-color"));
-                $("#squares #" + solder.id)
-                    .removeData("data-owner-top")
-                    .removeData("data-owner-left")
-                    .removeData("data-owner-right")
-                    .removeData("data-owner-bottom");
-                $("#squares #" + solder.id).html("");
-            });
-            computer_squares = [];
-            resetBorders();
-            resetButtons();
-            $("#squares #fight .player-won").show();
+        
+        attacker.forEach((solder, index) => {
+            //console.log(solder);
+            if (typeof(defender[index]) != "undefined") {
+                var attacker_id = solder.id;
+                var defender_id = defender[index].id;
+                var attacker_strength = fightStength(event, solder);
+                var defender_strength = fightStength(event, defender[index]);
+                var draw = false;
+                //console.log(attacker_strength, defender_strength);
+
+                if (attacker_strength > defender_strength) {
+                    id = defender[index].id;
+                    defender.splice(index, 1);
+                    attacker_won++;
+
+                    $("#squares #" + defender_id).css("border-color", $("#squares #player-" + player + " span").css("background-color"));
+                    $("#squares #" + defender_id)
+                        .data("data-owner-top", player)
+                        .data("data-owner-left", player)
+                        .data("data-owner-right", player)
+                        .data("data-owner-bottom", player);
+                    $("#squares #" + defender_id).html("");
+                } else if (defender_strength > attacker_strength) {
+                    attacker.splice(index, 1);
+                    defender_won++;
+                    $("#squares #" + attacker_id).css("border-color", $("#squares #player-" + (player ? 0 : 1) + " span").css("background-color"));
+                    $("#squares #" + attacker_id)
+                        .data("data-owner-top", player ? 0 : 1)
+                        .data("data-owner-left", player ? 0 : 1)
+                        .data("data-owner-right", player ? 0 : 1)
+                        .data("data-owner-bottom", player ? 0 : 1);
+                    $("#squares #" + attacker_id).html("");
+                } else {
+                    defender.splice(index, 1);
+                    defender_won++;
+                    attacker.splice(index, 1);
+                    attacker_won++;
+                }
+            }
+        });
+
+        if (!player) {
+            computer_squares = attacker;
+            player_squares = defender;
+        } else {
+            player_squares = attacker;
+            computer_squares = defender;
+        }
+
+        resetBorders();
+        resetButtons();
+
+        if (attacker_won > defender_won) {
+            $("#squares #fight " + attacker_show).show();
+        } else if (defender_won > attacker_won) {
+            $("#squares #fight " + defender_show).show();
+        } else {
+            $("#squares #fight .draw").show();
         }
 
         sleep(1000).then(() => {
@@ -116,6 +150,7 @@ JFUNCTION "fight"
             updateTurn();
         });
     });
+    return true;
 END JFUNCTION
 JFUNCTION "fightStength", "solder"
     switch(solder.type) {
@@ -236,20 +271,22 @@ JFUNCTION "setTakeOver", "id=null", "location=''", "set=false"
     });
 
     if (computer_sides == 4 || player_sides == 4) {
+        var army = (turn ? player_army : computer_army);
         var index = Math.floor(Math.random() * army.length);
         var solder = army[index];
-        army.splice(index, 1);
-
+        
         $("#squares #grid #" + cell_take)
             .css("border-color", $("#squares #player-" + turn + " span")
             .css("background-color"));
 
-        $("#squares #grid #" + cell_take).html('<img src="/kytschi/imgs/squares/army/' + solder + '.png"/>');
+        $("#squares #grid #" + cell_take).html('<img src="/kytschi/imgs/squares/army/' + (turn ? 'player/' : 'bot/') + solder + '.png"/>');
 
         if (computer_sides == 4) {
             computer_squares.push({id: cell_take, type: solder.replace(/[^a-zA-Z]/g, '')});
+            computer_army.splice(index, 1);
         } else {
             player_squares.push({id: cell_take, type: solder.replace(/[^a-zA-Z]/g, '')});
+            player_army.splice(index, 1);
         }
 
         resetButtons();
@@ -338,14 +375,14 @@ BODY
                     DIV "player-ui computer", "player-0"
                         IMAGE "/kytschi/imgs/people/bot.png"
                         PRINT "Bot"
-                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                         PRINT "&nbsp;", "show-highlight"
+                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                     END DIV
                     DIV "player-ui player", "player-1"
                         IMAGE "/kytschi/imgs/people/jason.png"
                         PRINT "You"
-                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                         PRINT "&nbsp;", "show-highlight"
+                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                     END DIV
                 END DIV
             END DIV
@@ -373,6 +410,7 @@ BODY
                     IMAGE "/kytschi/imgs/squares/banner-computer-won.png", "computer won", "computer-won"
                     IMAGE "/kytschi/imgs/squares/banner-player-fight.png", "player fight", "player-fight"
                     IMAGE "/kytschi/imgs/squares/banner-player-won.png", "player won", "player-won"
+                    IMAGE "/kytschi/imgs/squares/banner-draw.png", "draw", "draw"
                 END DIV
             END DIV
         END DIV

@@ -1,6 +1,6 @@
 :root {
     --black: #000400;
-    --blue: #63C1D2;
+    --blue: #4A6797;
     --brown: #946539;
     --dark-blue: #327EDD;
     --green: #77af05;
@@ -107,6 +107,8 @@ img {
 #squares #players .player-ui span {
     display: block;
     margin-top: -5px;
+    position: relative;
+    z-index: 201;
     background-color: var(--blue);
     color: var(--white);
     padding: 10px;
@@ -134,8 +136,10 @@ img {
     opacity: 0;
 }
 #squares #players .highlight span.show-highlight {
-    background-color: var(--yellow);
+    background-color: var(--green);
     opacity: 1;
+    margin-top: -10px;
+    z-index: 200;
 }
 
 #squares #battleground {
