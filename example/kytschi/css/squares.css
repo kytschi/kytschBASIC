@@ -1,10 +1,10 @@
 :root {
     --black: #000400;
-    --blue: #4A6797;
+    --blue: #57C3D7;
     --brown: #946539;
     --dark-blue: #327EDD;
     --green: #77af05;
-    --red: #e0020d;
+    --red: #ff5238;
     --white: #fff;
     --yellow: #FCDA67;
 
@@ -230,6 +230,15 @@ img {
 }
 #squares #battleground #grid .tile11 {
     background-image: url(../imgs/squares/tile11.png);
+}
+#squares #battleground #grid .tile12 {
+    background-image: url(../imgs/squares/tile12.png);
+}
+#squares #battleground #grid .tile13 {
+    background-image: url(../imgs/squares/tile13.png);
+}
+#squares #battleground #grid .tile14 {
+    background-image: url(../imgs/squares/tile14.png);
 }
 #squares #battleground #grid .col.dead {
     background-image: url(../imgs/squares/tile-dead.png) !important;

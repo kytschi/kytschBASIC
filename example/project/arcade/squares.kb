@@ -13,14 +13,14 @@ HEAD
 END HEAD
 
 DEF size%=5
-DEF tiles%=11
+DEF tiles%=14
 
 JDEF border_width$="4px"
 JDEF turn%=0
 JDEF cell_size%=128
 JDEF parent_offset#=null
-JDIM computer_army$=("swordsman1","swordsman2","swordsman3","swordsman4","archer1","archer2","archer3","archer4","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4")
-JDIM player_army$=("swordsman1","swordsman2","swordsman3","swordsman4","archer1","archer2","archer3","archer4","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4")
+JDIM computer_army$=("swordsman1","swordsman2","swordsman3","swordsman4","archer1","archer2","archer3","archer4","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4","axeman1","axeman2","axeman3","axeman4","pikeman1","pikeman2","pikeman3","pikeman4","knight1","knight2","knight3","knight4","horseman1","horseman2","horseman3","horseman4","peasant1","peasant2","peasant3","peasant4")
+JDIM player_army$=("swordsman1","swordsman2","swordsman3","swordsman4","archer1","archer2","archer3","archer4","catapult1","catapult2","catapult3","catapult4","catapult5","maseman1","maseman2","maseman3","maseman4","axeman1","axeman2","axeman3","axeman4","pikeman1","pikeman2","pikeman3","pikeman4","knight1","knight2","knight3","knight4","horseman1","horseman2","horseman3","horseman4","peasant1","peasant2","peasant3","peasant4")
 JDIM computer_squares$=()
 JDIM player_squares$=()
 
@@ -386,8 +386,8 @@ BODY
                     END DIV
                 END DIV
             END DIV
-            BUTTON "btnNewGame", "btn-new-game",, "new", "&nbsp;"
             BUTTON "btnFight", "btn-fight off",, "fight", "&nbsp;"
+            BUTTON "btnNewGame", "btn-new-game",, "new", "&nbsp;"
         END DIV
         DIV "", "battleground"
             DIV "", "grass"
