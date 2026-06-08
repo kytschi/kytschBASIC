@@ -9,6 +9,7 @@
     --yellow: #FCDA67;
 
     --col-size: 128px;
+    --border-size: 12px;
 }
 .jq-toast-single h2 {
     text-transform: capitalize;
@@ -133,8 +134,8 @@ img {
     background-color: var(--red);
 }
 #squares #players span.show-highlight {
-    height: 8px;
-    line-height: 8px;
+    height: var(--border-size);
+    line-height: var(--border-size);
     opacity: 0;
 }
 #squares #players .highlight span.show-highlight {
@@ -190,13 +191,13 @@ img {
 }
 #squares #battleground #grid .col {
     display: flex;
-    width: calc(var(--col-size) - 8px);
-    height: calc(var(--col-size) - 8px);
+    width: calc(var(--col-size) - var(--border-size));
+    height: calc(var(--col-size) - var(--border-size));
     cursor: pointer;
     background-color: var(--brown);
     background-size: 100%;
     background-repeat: no-repeat;
-    border: 4px solid var(--brown);
+    border: calc(var(--border-size) / 2) solid var(--brown);
     align-items: center;
     justify-content: center;
 }

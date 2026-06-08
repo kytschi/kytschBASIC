@@ -15,7 +15,7 @@ END HEAD
 DEF size%=5
 DEF tiles%=14
 
-JDEF border_width$="4px"
+JDEF border_width$="8px"
 JDEF turn%=0
 JDEF cell_size%=128
 JDEF grid_size%=(size%*size%)
