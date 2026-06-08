@@ -330,11 +330,9 @@ body {
   outline: 0;
   background-color: #000;
 }
-
 #solitaire .modal.fade {
   transition: opacity .15s linear;
 }
-
 #solitaire .modal.show .modal-dialog {
   transform: none;
 }
@@ -342,14 +340,12 @@ body {
   transition: transform .3s ease-out;
   transform: translate(0,-50px);
 }
-
 #solitaire .modal-dialog {
   position: relative;
   width: auto;
   margin: 3.75rem auto;
   pointer-events: none;
 }
-
 #solitaire .modal-content {
   position: relative;
   display: flex;
@@ -362,7 +358,6 @@ body {
   border-radius: .3rem;
   outline: 0;
 }
-
 #solitaire .modal-header {
   display: flex;
   flex-shrink: 0;
@@ -373,13 +368,11 @@ body {
   border-top-left-radius: calc(.3rem - 1px);
   border-top-right-radius: calc(.3rem - 1px);
 }
-
 #solitaire .modal-body {
   position: relative;
   flex: 1 1 auto;
   padding: 1rem;
 }
-
 #solitaire .modal-footer {
   display: flex;
   flex-wrap: wrap;

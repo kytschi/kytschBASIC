@@ -386,12 +386,15 @@ JAVASCRIPT
         window.location.reload();
     });
 
-    $("button[name=btnNewGame]").click(() => {
-        window.location.reload();
-    });
-
     $("button[name=btnFight]").click(() => {
         fight();
+    });
+
+    $("button[name=btnHowTo]").click(() => {
+        $("#modalRules").show();
+    });
+    $("button[name=btnCloseModal]").click(() => {
+        $("#modalRules").hide();
     });
 
     cell_size = $("#squares #grid .col").height();
@@ -430,6 +433,7 @@ BODY
             END DIV
             BUTTON "btnFight", "btn-fight off",, "fight", "&nbsp;"
             BUTTON "btnNewGame", "btn-new-game",, "new", "&nbsp;"
+            BUTTON "btnHowTo", "btn-howto",, "how to play", "&nbsp;"
         END DIV
         DIV "", "battleground"
             DIV "", "grass"
@@ -453,6 +457,38 @@ BODY
                     IMAGE "/kytschi/imgs/squares/banner-player-fight.png", "player fight", "player-fight"
                     IMAGE "/kytschi/imgs/squares/banner-player-won.png", "player won", "player-won"
                     IMAGE "/kytschi/imgs/squares/banner-draw.png", "draw", "draw"
+                END DIV
+            END DIV
+        END DIV
+        DIV "modal fade", "modalRules"
+            DIV "modal-dialog"
+                DIV "modal-content"
+                    DIV "modal-header"
+                        PRINT "Playing is simple!"
+                    END DIV
+                    DIV "modal-body"
+                        SWRITE
+                            PRINT "It's you verse the bad BOT!"
+                        END SWRITE
+                        SWRITE
+                            PRINT "When it's your turn, select a free side of a square and mark it as yours. As you hover over an available side it'll change to your colour if you can take it."
+                        END SWRITE
+                        SWRITE
+                            PRINT "Once you have take all four sides of the square it'll be conquered by you and a unit from your army will be placed to attack or defend the square."
+                            LINE BREAK
+                            PRINT "You can attack once you have and the BOT have one unit each that has conquered a square. You will learn fast what unit is capatible of fighting what other unit and winning."
+                            LINE BREAK
+                            PRINT "If you win the battle against that unit in the square, the sqaure becomes yours and is part of your territory."
+                            LINE BREAK
+                            PRINT "Fighting sqaures are first come first served, meaning that your first square goes against the BOTs first square and so."
+                        END SWRITE
+                        SWRITE
+                            PRINT "Once all territory has been conquered the game is over and the winner will be declared."
+                        END SWRITE
+                    END DIV
+                    DIV "modal-footer"
+                        BUTTON "btnCloseModal", "btn btn-close", "btnCloseModal", "close", "Close"
+                    END DIV
                 END DIV
             END DIV
         END DIV
