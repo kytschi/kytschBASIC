@@ -106,13 +106,6 @@ img {
 #squares #players .player-ui img {
     width: 100px;
 }
-#squares #players .player-ui .winner {
-    position: absolute;
-    margin-top: 75px;
-    margin-left: 100px;
-    width: 54px;
-    display: none;
-}
 #squares #players .player-ui span {
     display: block;
     margin-top: -5px;

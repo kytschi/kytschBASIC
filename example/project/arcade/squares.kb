@@ -71,12 +71,10 @@ END JFUNCTION
 
 JFUNCTION "endGame"
     if (player_squares.length > computer_squares.length) {
-        $("#squares #fight .player-won").show();
-        $("#squares #player-1 .winner").show();
+        $("#squares #fight .player-won").show();        
         gameover = 1;
     } else if (computer_squares.length > player_squares.length) {
         $("#squares #fight .computer-won").show();
-        $("#squares #player-0 .winner").show();
         gameover = 1;
     } else {
         $("#squares #fight .draw").show();
@@ -421,13 +419,11 @@ BODY
                         IMAGE "/kytschi/imgs/people/bot.png"
                         PRINT "Bot"
                         PRINT "&nbsp;", "show-highlight"
-                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                     END DIV
                     DIV "player-ui player", "player-1"
                         IMAGE "/kytschi/imgs/people/jason.png"
                         PRINT "You"
                         PRINT "&nbsp;", "show-highlight"
-                        IMAGE "/kytschi/imgs/cards/winner.png","winner","winner"
                     END DIV
                 END DIV
             END DIV
